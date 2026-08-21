@@ -9,6 +9,22 @@
     <title>Administración - En Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+/* Ocultar tabs no usadas */
+.admin-nav-link[data-tab="products"],
+.admin-nav-link[data-tab="jobs"],
+.admin-nav-link[data-tab="inmuebles"],
+.admin-nav-link[data-tab="bazar"],
+.admin-nav-link[data-tab="carousel"],
+li:has(> .admin-nav-link[data-tab="products"]),
+li:has(> .admin-nav-link[data-tab="jobs"]),
+li:has(> .admin-nav-link[data-tab="inmuebles"]),
+li:has(> .admin-nav-link[data-tab="bazar"]),
+li:has(> .admin-nav-link[data-tab="carousel"]) {
+  display: none !important;
+}
+</style>
 </head>
 <body>
     <!-- Navigation -->
