@@ -14,7 +14,7 @@ export async function onRequestGet(context) {
     // Auto-migrate: add banner_url column if missing (same as /api/categories)
     try { await env.DB.prepare('ALTER TABLE categories ADD COLUMN banner_url TEXT').run(); } catch(e) {}
 
-    const baseUrl = 'https://holax.com.ve';
+    const baseUrl = 'https://en-santiago.pages.dev';
 
     // Look up category by slug
     const category = await env.DB.prepare(
@@ -79,7 +79,7 @@ export async function onRequestGet(context) {
 
     const catName = category.name || 'Categoría';
     const catIcon = category.icon || 'fas fa-tag';
-    const catDescription = `Directorio de ${catName.toLowerCase()} en Venezuela. Encuentra los mejores negocios de ${catName.toLowerCase()} con información de contacto, ubicación, servicios y más.`;
+    const catDescription = `Directorio de ${catName.toLowerCase()} en Santiago de Chile. Encuentra los mejores negocios de ${catName.toLowerCase()} con información de contacto, ubicación, servicios y más.`;
     const canonicalUrl = `${baseUrl}/categoria/${category.slug}`;
     const totalBiz = businesses.results ? businesses.results.length : 0;
 
@@ -124,7 +124,7 @@ export async function onRequestGet(context) {
     const stateLinks = (stateCounts.results || []).map(s => {
       if (!s.state) return '';
       const stateSlug = s.state.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-      return `<a href="/estado/${stateSlug}" class="cat-state-chip"><i class="fas fa-map-marker-alt"></i> ${esc(s.state)} <span class="cat-state-count">${s.count}</span></a>`;
+      return `<a href="/comuna/${stateSlug}" class="cat-state-chip"><i class="fas fa-map-marker-alt"></i> ${esc(s.state)} <span class="cat-state-count">${s.count}</span></a>`;
     }).join('');
 
     const html = `<!DOCTYPE html>
@@ -149,46 +149,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
-    <title>${esc(catName)} en Venezuela - Directorio HolaX</title>
+    <title>${esc(catName)} en Santiago de Chile - Directorio En Santiago</title>
     <meta name="description" content="${esc(catDescription)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="${canonicalUrl}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="${esc(catName)} en Venezuela - HolaX">
+    <meta property="og:title" content="${esc(catName)} en Santiago de Chile - En Santiago">
     <meta property="og:description" content="${esc(catDescription)}">
     <meta property="og:url" content="${canonicalUrl}">
-    <meta property="og:site_name" content="HolaX">
-    <meta property="og:locale" content="es_VE">
+    <meta property="og:site_name" content="En Santiago">
+    <meta property="og:locale" content="es_CL">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="${esc(catName)} en Venezuela - HolaX">
+    <meta name="twitter:title" content="${esc(catName)} en Santiago de Chile - En Santiago">
     <meta name="twitter:description" content="${esc(catDescription)}">
 
     <!-- JSON-LD: CollectionPage + BreadcrumbList -->
     <script type="application/ld+json">${JSON.stringify({
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      "name": `${catName} en Venezuela`,
+      "name": `${catName} en Santiago de Chile`,
       "description": catDescription,
       "url": canonicalUrl,
       "isPartOf": {
         "@type": "WebSite",
-        "name": "HolaX",
-        "url": "https://holax.com.ve"
+        "name": "En Santiago",
+        "url": "https://en-santiago.pages.dev"
       }
     })}</script>
     <script type="application/ld+json">${JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://holax.com.ve/" },
-        { "@type": "ListItem", "position": 2, "name": "Negocios", "item": "https://holax.com.ve/search.html" },
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Negocios", "item": "https://en-santiago.pages.dev/search.html" },
         { "@type": "ListItem", "position": 3, "name": catName, "item": canonicalUrl }
       ]
     })}</script>
     <script type="application/ld+json">${JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "name": `${catName} en Venezuela`,
+      "name": `${catName} en Santiago de Chile`,
       "numberOfItems": totalBiz,
       "itemListElement": (businesses.results || []).slice(0, 20).map((b, i) => ({
         "@type": "ListItem",
@@ -254,14 +254,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="cat-nav">
         <div class="cat-nav-inner">
             <a href="/" class="cat-nav-logo">
-                <img src="/images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;">
-                HolaX
+                <img src="/images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;">
+                En Santiago
             </a>
         </div>
     </nav>
 
     <!-- H1 oculto visualmente, preservado para SEO -->
-    <h1 class="cat-sr-only">${esc(catName)} en Venezuela</h1>
+    <h1 class="cat-sr-only">${esc(catName)} en Santiago de Chile</h1>
 
     ${category.banner_url ? `
     <section class="cat-hero">
@@ -277,7 +277,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="cat-content">
         ${stateLinks ? `
-        <div class="cat-section-title"><i class="fas fa-map"></i> Filtrar por estado</div>
+        <div class="cat-section-title"><i class="fas fa-map"></i> Filtrar por comuna</div>
         <div class="cat-states">${stateLinks}</div>
         ` : ''}
 
@@ -294,7 +294,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <footer class="cat-footer">
-        <p>&copy; ${new Date().getFullYear()} <a href="/">HolaX</a> — Directorio de Negocios en Venezuela</p>
+        <p>&copy; ${new Date().getFullYear()} <a href="/">En Santiago</a> — Directorio de Negocios en Santiago de Chile</p>
       <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
       <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
     </footer>

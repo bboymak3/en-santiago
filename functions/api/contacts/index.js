@@ -49,7 +49,7 @@ export async function onRequestGet(context) {
       });
     }
 
-    const jwtSecret = env.JWT_SECRET || 'aunclick_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
 
     // Auth required
     const authHeader = request.headers.get('Authorization');

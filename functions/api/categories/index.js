@@ -42,7 +42,7 @@ async function requireAdmin(request, env) {
   const authHeader = request.headers.get('Authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
   const token = authHeader.substring(7);
-  const jwtSecret = env.JWT_SECRET || 'aunclick_default_secret_2024';
+  const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
   const user = await verifyJWT(token, jwtSecret);
   if (!user || user.role !== 'admin') return null;
   return user;

@@ -46,7 +46,7 @@ export async function onRequestPut(context) {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return new Response(JSON.stringify({ error: 'Token requerido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
-    const user = await verifyJWT(authHeader.substring(7), env.JWT_SECRET || 'aunclick_jwt_secret_2024');
+    const user = await verifyJWT(authHeader.substring(7), env.JWT_SECRET || 'en-santiago_jwt_secret_2024');
     if (!user) {
       return new Response(JSON.stringify({ error: 'Token inválido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }

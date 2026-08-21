@@ -325,7 +325,7 @@ function renderTable(servicios) {
   }
 
   let html = `<table><thead><tr>
-    <th>Orden</th><th>Servicio</th><th>Categoría</th><th>Precio</th><th>Duración</th><th>Origen</th><th>Estado</th><th>Acciones</th>
+    <th>Orden</th><th>Servicio</th><th>Categoría</th><th>Precio</th><th>Duración</th><th>Origen</th><th>Comuna</th><th>Acciones</th>
   </tr></thead><tbody>`;
 
   servicios.forEach((s, i) => {
@@ -333,7 +333,7 @@ function renderTable(servicios) {
     const catClass = {'Diagnóstico':'badge-blue','Mantenimiento':'badge-green','Reparación':'badge-orange','Servicio Especial':'badge-purple','General':'badge-gray'}[s.categoria] || 'badge-gray';
     const origLabel = {'citas':'Citas','globalprov2':'Globalprov2','manual':'Manual','base':'Base'}[s.origen] || s.origen;
     const origClass = {'base':'badge-gold','citas':'badge-green','globalprov2':'badge-blue','manual':'badge-gray'}[s.origen] || 'badge-gray';
-    const estadoBadge = s.activo === 1 ? '<span class="badge badge-green">Activo</span>' : '<span class="badge badge-gray">Inactivo</span>';
+    const comunaBadge = s.activo === 1 ? '<span class="badge badge-green">Activo</span>' : '<span class="badge badge-gray">Inactivo</span>';
     const isBase = BASE_SERVICES.some(b => b.nombre === s.nombre);
 
     html += `<tr style="${isBase ? 'border-left: 3px solid #16a34a;' : ''}">
@@ -343,7 +343,7 @@ function renderTable(servicios) {
       <td class="precio">${precio}</td>
       <td>${s.duracion_minutos} min</td>
       <td><span class="badge ${origClass}">${origLabel}</span></td>
-      <td>${estadoBadge}</td>
+      <td>${comunaBadge}</td>
       <td class="actions">
         <button class="btn btn-sm btn-edit" onclick="editServicio(${s.id})">Editar</button>
         <button class="btn btn-sm btn-toggle" onclick="toggleServicio(${s.id}, ${s.activo})">${s.activo === 1 ? 'Desactivar' : 'Activar'}</button>

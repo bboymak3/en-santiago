@@ -1,10 +1,10 @@
-// js/weather.js — Weather Carousel for HolaX Index
+// js/weather.js — Weather Carousel for En Santiago Index
 // Uses Open-Meteo API (free, no API key required)
 
 (function () {
     'use strict';
 
-    // ─── Venezuelan States with coordinates ───────────────────────
+    // ─── Santiago de Chilen States with coordinates ───────────────────────
     const STATES = [
         { name: 'Distrito Capital', lat: 10.4806, lng: -66.9036 },
         { name: 'Miranda', lat: 10.2500, lng: -66.5000 },
@@ -19,7 +19,7 @@
         { name: 'Vargas', lat: 10.5994, lng: -66.9333 },
         { name: 'Falcón', lat: 11.4044, lng: -69.6731 },
         { name: 'Portuguesa', lat: 9.0422, lng: -69.7350 },
-        { name: 'Barinas', lat: 8.6234, lng: -70.2086 },
+        { name: 'Santiago', lat: -33.45234, lng: -70.67086 },
         { name: 'Sucre', lat: 10.4598, lng: -64.1750 },
         { name: 'Nueva Esparta', lat: 10.9584, lng: -63.8439 },
         { name: 'Monagas', lat: 9.7458, lng: -63.1833 },

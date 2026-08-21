@@ -5,7 +5,7 @@
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Editar Negocio - Admin HolaX</title>
+    <title>Editar Negocio - Admin En Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -107,8 +107,8 @@
     <nav class="navbar navbar-admin" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name">HolaX</span> <span class="admin-badge">Admin</span>
+                <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name">En Santiago</span> <span class="admin-badge">Admin</span>
             </a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
@@ -157,7 +157,7 @@
     <script>
     (function() {
         'use strict';
-        const TOKEN_KEY = 'meridaunclick_token';
+        const TOKEN_KEY = 'meriden-santiago_token';
         const select = document.getElementById('ebBizSelect');
         const container = document.getElementById('ebFormContainer');
         let currentBiz = null;
@@ -238,7 +238,7 @@
                 "@context": "https://schema.org",
                 "@type": isMedical ? "MedicalBusiness" : "LocalBusiness",
                 "name": b.title || 'Negocio',
-                "url": "https://holax.com.ve/negocio/" + (b.slug || ''),
+                "url": "https://en-santiago.pages.dev/negocio/" + (b.slug || ''),
                 "description": b.description ? b.description.substring(0, 160) : ''
             };
             if (b.category_name) ld.category = b.category_name;
@@ -251,7 +251,7 @@
                     "streetAddress": b.address,
                     "addressLocality": b.city || undefined,
                     "addressRegion": b.state || undefined,
-                    "addressCountry": "VE"
+                    "addressCountry": "CL"
                 };
             }
             if (b.logo) ld.logo = b.logo;
@@ -355,7 +355,7 @@
                 '<div class="eb-grid">' +
                     '<div class="eb-field"><label>Dirección</label><input type="text" class="eb-input" id="ebAddress" value="' + escH(b.address||'') + '"></div>' +
                     '<div class="eb-field"><label>Ciudad</label><input type="text" class="eb-input" id="ebCity" value="' + escH(b.city||'') + '"></div>' +
-                    '<div class="eb-field"><label>Estado</label><input type="text" class="eb-input" id="ebState" value="' + escH(b.state||'') + '"></div>' +
+                    '<div class="eb-field"><label>Comuna</label><input type="text" class="eb-input" id="ebState" value="' + escH(b.state||'') + '"></div>' +
                     '<div class="eb-field"><label>Horario</label><input type="text" class="eb-input" id="ebSchedule" value="' + escH(b.schedule||'') + '" placeholder="Lun-Vie 8:00-17:00"></div>' +
                 '</div>' +
             '</div>' +
@@ -411,7 +411,7 @@
 
             /* ── Status ── */
             '<div class="eb-section">' +
-                '<h4 class="eb-section-title"><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Estado</h4>' +
+                '<h4 class="eb-section-title"><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Comuna</h4>' +
                 '<div class="eb-status-row">' +
                     '<button class="eb-status-btn' + (b.status==='approved'?' active-approved':'') + '" onclick="ebChangeStatus(' + b.id + ',\'approved\')"><i class="fas fa-check"></i> Aprobar</button>' +
                     '<button class="eb-status-btn' + (b.status==='pending'?' active-pending':'') + '" onclick="ebChangeStatus(' + b.id + ',\'pending\')"><i class="fas fa-clock"></i> Pendiente</button>' +
@@ -449,8 +449,8 @@
                         '</div>' +
                         '<div style="padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;">' +
                             '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
-                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - HolaX</div>' +
-                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">holax.com.ve › negocio › ' + escH(b.slug||'...') + '</div>' +
+                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - En Santiago</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.pages.dev › negocio › ' + escH(b.slug||'...') + '</div>' +
                             '<div style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.description ? b.description.substring(0,160) : 'Sin descripcion') + '</div>' +
                         '</div>' +
                     '</div>' +
@@ -461,13 +461,13 @@
                         '</div>' +
                         '<div id="ebSeoAfterBox" style="padding:12px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;">' +
                             '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
-                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - HolaX</div>' +
-                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">holax.com.ve › negocio › ' + escH(b.slug||'...') + '</div>' +
+                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - En Santiago</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.pages.dev › negocio › ' + escH(b.slug||'...') + '</div>' +
                             '<div id="ebSeoAfterText" style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.seo_description || (b.description ? b.description.substring(0,160) : 'Igual al actual')) + '</div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
-                '<textarea id="ebSeoDesc" class="eb-input" style="width:100%;min-height:70px;resize:vertical;font-size:0.9rem;padding:10px 14px;border:2px solid #e5e7eb;border-radius:10px;font-family:inherit;margin-top:12px;" placeholder="Ej: Tienda Pura Sangre - Ropa deportiva. Envios a todo Venezuela. Lun-Sab 9am-6pm" maxlength="200" oninput="updateSeoCompare()">' + escH(b.seo_description||'') + '</textarea>' +
+                '<textarea id="ebSeoDesc" class="eb-input" style="width:100%;min-height:70px;resize:vertical;font-size:0.9rem;padding:10px 14px;border:2px solid #e5e7eb;border-radius:10px;font-family:inherit;margin-top:12px;" placeholder="Ej: Tienda Pura Sangre - Ropa deportiva. Envios a todo Santiago de Chile. Lun-Sab 9am-6pm" maxlength="200" oninput="updateSeoCompare()">' + escH(b.seo_description||'') + '</textarea>' +
                 '<p style="font-size:0.72rem;color:#94a3b8;margin:4px 0 0;">Escribe aqui la nueva meta description. La columna derecha se actualiza en tiempo real.</p>' +
             '</div>' +
 
@@ -598,7 +598,7 @@
         window.ebChangeStatus = async function(id, status) {
             try {
                 await api.put('/businesses/' + id, { status: status });
-                showToast('Estado cambiado a ' + status, 'success');
+                showToast('Comuna cambiado a ' + status, 'success');
                 loadBusiness(id);
             } catch(e) { showToast('Error: ' + e.message, 'error'); }
         };
@@ -790,8 +790,8 @@
 
         // Logout
         document.getElementById('navLogout').addEventListener('click', function() {
-            localStorage.removeItem('meridaunclick_token');
-            localStorage.removeItem('meridaunclick_user');
+            localStorage.removeItem('meriden-santiago_token');
+            localStorage.removeItem('meriden-santiago_user');
             window.location.href = 'login.html';
         });
     })();

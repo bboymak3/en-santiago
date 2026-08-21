@@ -1,23 +1,23 @@
 /**
- * HolaX - Core Application Module
+ * En Santiago - Core Application Module
  * Common module loaded on ALL pages
- * Directorio Nacional de Negocios de Venezuela
+ * Directorio Metropolitano de Negocios de Santiago de Chile
  */
 
 // ─── API Configuration ──────────────────────────────────────────
 const API = '/api';
 
 // ─── Token Management ──────────────────────────────────────────
-const TOKEN_KEY = 'meridaunclick_token';
-const USER_KEY = 'meridaunclick_user';
+const TOKEN_KEY = 'meriden-santiago_token';
+const USER_KEY = 'meriden-santiago_user';
 
-// ─── Venezuela States ────────────────────────────────────────────
-const VENEZUELA_STATES = [
+// ─── Santiago de Chile States ────────────────────────────────────────────
+const CLNEZUELA_STATES = [
   { name: 'Amazonas', slug: 'amazonas' },
   { name: 'Anzoátegui', slug: 'anzoategui' },
   { name: 'Apure', slug: 'apure' },
   { name: 'Aragua', slug: 'aragua' },
-  { name: 'Barinas', slug: 'barinas' },
+  { name: 'Santiago', slug: 'santiago' },
   { name: 'Bolívar', slug: 'bolivar' },
   { name: 'Carabobo', slug: 'carabobo' },
   { name: 'Cojedes', slug: 'cojedes' },
@@ -26,7 +26,7 @@ const VENEZUELA_STATES = [
   { name: 'Falcón', slug: 'falcon' },
   { name: 'Guárico', slug: 'guarico' },
   { name: 'Lara', slug: 'lara' },
-  { name: 'Mérida', slug: 'merida' },
+  { name: 'Mérida', slug: 'santiago' },
   { name: 'Miranda', slug: 'miranda' },
   { name: 'Monagas', slug: 'monagas' },
   { name: 'Nueva Esparta', slug: 'nueva-esparta' },
@@ -39,7 +39,7 @@ const VENEZUELA_STATES = [
   { name: 'Zulia', slug: 'zulia' },
 ];
 
-const LOCATION_KEY = 'aunclick_selected_state';
+const LOCATION_KEY = 'en-santiago_selected_state';
 
 // ─── Location Selector System ───────────────────────────────────
 function getSelectedState() {
@@ -84,16 +84,16 @@ function updateBrandDisplay(stateName) {
   });
   // Update page title dynamically
   if (stateName) {
-    document.title = stateName + ' HolaX - Directorio de Negocios';
+    document.title = stateName + ' En Santiago - Directorio de Negocios';
   } else {
-    document.title = 'HolaX - Directorio de Negocios en Venezuela';
+    document.title = 'En Santiago - Directorio de Negocios en Santiago de Chile';
   }
 }
 
 function updateLocationLabel(stateName) {
   const label = document.getElementById('locationLabel');
   if (label) {
-    label.textContent = stateName || 'Todo Venezuela';
+    label.textContent = stateName || 'Todo Santiago de Chile';
   }
 }
 
@@ -107,7 +107,7 @@ function initLocationSelector() {
   if (!locationBtn || !locationDropdown || !locationList) return;
 
   // Populate states list
-  locationList.innerHTML = VENEZUELA_STATES.map(state => `
+  locationList.innerHTML = CLNEZUELA_STATES.map(state => `
     <div class="location-option" data-state="${state.name}">
       <i class="fas fa-map-marker-alt"></i>
       <span>${state.name}</span>
@@ -145,7 +145,7 @@ function initLocationSelector() {
     }
   });
 
-  // "Todo Venezuela" option click
+  // "Todo Santiago de Chile" option click
   const allVzlaOption = locationDropdown.querySelector('.location-option[data-state=""]');
   if (allVzlaOption) {
     allVzlaOption.addEventListener('click', () => {
@@ -369,7 +369,7 @@ function showWebPageSelector() {
     modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
 
     // Check if user is logged in
-    const token = localStorage.getItem('meridaunclick_token');
+    const token = localStorage.getItem('meriden-santiago_token');
     if (!token) {
         const body = document.getElementById('webPageSelectorBody');
         body.innerHTML = `
@@ -529,7 +529,7 @@ function showToast(message, type = 'info') {
 function formatPrice(price, currency = 'USD') {
     if (price == null || isNaN(price)) return '--';
 
-    const formatted = new Intl.NumberFormat('es-VE', {
+    const formatted = new Intl.NumberFormat('es-CL', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
     }).format(price);
@@ -548,7 +548,7 @@ function formatDate(dateStr) {
     if (!dateStr) return '--';
     try {
         const date = new Date(dateStr);
-        return date.toLocaleDateString('es-VE', {
+        return date.toLocaleDateString('es-CL', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
@@ -562,7 +562,7 @@ function formatDateTime(dateStr) {
     if (!dateStr) return '--';
     try {
         const date = new Date(dateStr);
-        return date.toLocaleDateString('es-VE', {
+        return date.toLocaleDateString('es-CL', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
@@ -676,14 +676,14 @@ function getBusinessUrl(business) {
 function shareBusinessWhatsApp(business) {
     if (!business) return;
     const type = getBusinessTypeLabel(business.business_type);
-    const url = 'https://holax.com.ve' + getBusinessUrl(business);
+    const url = 'https://en-santiago.pages.dev' + getBusinessUrl(business);
     const title = business.title || 'Negocio';
 
     let msg = `🏪 *${title}*\n`;
     msg += `📌 ${type}\n`;
     if (business.city) msg += `📍 ${business.city}${business.state ? ', ' + business.state : ''}\n`;
     msg += `\n🔗 ${url}`;
-    msg += `\n\n📌 Publicado en HolaX`;
+    msg += `\n\n📌 Publicado en En Santiago`;
 
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
 }
@@ -762,7 +762,7 @@ document.addEventListener('click', (e) => {
         shareBusinessWhatsApp(business);
     }).catch(() => {
         // Minimal share with just the link
-        window.open(`https://wa.me/?text=${encodeURIComponent('🏪 Mira este negocio en HolaX:\nhttps://holax.com.ve/negocio/' + businessId)}`, '_blank');
+        window.open(`https://wa.me/?text=${encodeURIComponent('🏪 Mira este negocio en En Santiago:\nhttps://en-santiago.pages.dev/negocio/' + businessId)}`, '_blank');
     });
 });
 
@@ -770,7 +770,7 @@ document.addEventListener('click', (e) => {
 function getSearchParams() {
     const params = new URLSearchParams(window.location.search);
     return {
-        estado: params.get('estado') || '',
+        comuna: params.get('comuna') || '',
         categoria: params.get('categoria') || '',
         city: params.get('ciudad') || params.get('city') || '',
         search: params.get('q') || params.get('search') || '',
@@ -1359,7 +1359,7 @@ function createPropertyCard(p) {
             <h3 class="business-card-title">${escapeHtml(p.title)}</h3>
             <div class="business-card-location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(p.city || '')}${p.state ? ', ' + escapeHtml(p.state) : ''}</div>
             ${statsHtml ? `<div class="business-card-stats">${statsHtml}</div>` : ''}
-            <div class="business-card-price">${currSymbol} ${Number(p.price).toLocaleString('es-VE')}</div>
+            <div class="business-card-price">${currSymbol} ${Number(p.price).toLocaleString('es-CL')}</div>
         </div>
     </a>`;
 }
@@ -1400,7 +1400,7 @@ async function loadSiteStats() {
 
         // Populate filter fields from URL params
         const params = getSearchParams();
-        if (params.estado && document.getElementById('sEstado')) document.getElementById('sEstado').value = params.estado;
+        if (params.comuna && document.getElementById('sComuna')) document.getElementById('sComuna').value = params.comuna;
         if (params.categoria && document.getElementById('sCategoria')) document.getElementById('sCategoria').value = params.categoria;
         if (params.city && document.getElementById('sCiudad')) document.getElementById('sCiudad').value = params.city;
         if (params.business_type && document.getElementById('sTipoNegocio')) document.getElementById('sTipoNegocio').value = params.business_type;
@@ -1498,7 +1498,7 @@ async function loadSiteStats() {
         if (paginationEl) paginationEl.classList.add('hidden');
 
         // Gather filter values
-        const estado = document.getElementById('sEstado')?.value || '';
+        const comuna = document.getElementById('sComuna')?.value || '';
         const categoria = document.getElementById('sCategoria')?.value || '';
         const ciudad = document.getElementById('sCiudad')?.value?.trim() || '';
         const tipoNegocio = document.getElementById('sTipoNegocio')?.value || '';
@@ -1528,7 +1528,7 @@ async function loadSiteStats() {
 
         // Build API endpoint
         let endpoint = `/businesses?status=approved&page=${page}&limit=12`;
-        if (estado) endpoint += `&state=${encodeURIComponent(estado)}`;
+        if (comuna) endpoint += `&state=${encodeURIComponent(comuna)}`;
         if (categoria) endpoint += `&categoria=${encodeURIComponent(categoria)}`;
         if (ciudad) endpoint += `&city=${encodeURIComponent(ciudad)}`;
         if (tipoNegocio) endpoint += `&business_type=${encodeURIComponent(tipoNegocio)}`;
@@ -1557,7 +1557,7 @@ async function loadSiteStats() {
             // Active filter tags
             if (activeFiltersEl) {
                 let tags = '';
-                if (estado) tags += `<span class="active-filter-tag"><i class="fas fa-map"></i> ${estado} <button onclick="this.parentElement.remove(); document.getElementById('sEstado').value=''; document.getElementById('searchBtn').click();">&times;</button></span>`;
+                if (comuna) tags += `<span class="active-filter-tag"><i class="fas fa-map"></i> ${comuna} <button onclick="this.parentElement.remove(); document.getElementById('sComuna').value=''; document.getElementById('searchBtn').click();">&times;</button></span>`;
                 if (categoria) tags += `<span class="active-filter-tag"><i class="fas fa-tag"></i> ${categoria} <button onclick="this.parentElement.remove(); document.getElementById('sCategoria').value=''; document.getElementById('searchBtn').click();">&times;</button></span>`;
                 if (ciudad) tags += `<span class="active-filter-tag"><i class="fas fa-map-marker-alt"></i> ${ciudad} <button onclick="this.parentElement.remove(); document.getElementById('sCiudad').value=''; document.getElementById('searchBtn').click();">&times;</button></span>`;
                 if (tipoNegocio) tags += `<span class="active-filter-tag">${getBusinessTypeLabel(tipoNegocio)} <button onclick="this.parentElement.remove(); document.getElementById('sTipoNegocio').value=''; document.getElementById('searchBtn').click();">&times;</button></span>`;
@@ -1582,7 +1582,7 @@ async function loadSiteStats() {
             renderPagination(paginationEl, paginationData, executeSearch);
 
             // Update URL without reload
-            updateSearchURL(estado, categoria, ciudad, tipoNegocio, especialidad, q, page);
+            updateSearchURL(comuna, categoria, ciudad, tipoNegocio, especialidad, q, page);
 
         } catch (error) {
             if (searchLoading) searchLoading.classList.add('hidden');
@@ -1591,9 +1591,9 @@ async function loadSiteStats() {
         }
     }
 
-    function updateSearchURL(estado, categoria, ciudad, tipoNegocio, especialidad, q, page) {
+    function updateSearchURL(comuna, categoria, ciudad, tipoNegocio, especialidad, q, page) {
         const url = new URL(window.location);
-        url.searchParams.delete('estado');
+        url.searchParams.delete('comuna');
         url.searchParams.delete('categoria');
         url.searchParams.delete('ciudad');
         url.searchParams.delete('tipo_negocio');
@@ -1601,7 +1601,7 @@ async function loadSiteStats() {
         url.searchParams.delete('q');
         url.searchParams.delete('page');
 
-        if (estado) url.searchParams.set('estado', estado);
+        if (comuna) url.searchParams.set('comuna', comuna);
         if (categoria) url.searchParams.set('categoria', categoria);
         if (ciudad) url.searchParams.set('ciudad', ciudad);
         if (tipoNegocio) url.searchParams.set('tipo_negocio', tipoNegocio);
@@ -1724,7 +1724,7 @@ async function loadFeaturedProducts() {
                 const parsed = JSON.parse(img);
                 if (Array.isArray(parsed) && parsed.length > 0) img = parsed[0];
             } catch(e) {}
-            const price = p.price > 0 ? '$' + Number(p.price).toLocaleString('es-VE') : 'Gratis';
+            const price = p.price > 0 ? '$' + Number(p.price).toLocaleString('es-CL') : 'Gratis';
             const bizName = p.business_name || '';
             const featuredBadge = p.featured ? '<span class="card-badge-featured"><i class="fas fa-star"></i></span>' : '';
             const slug = p.slug || p.id;
@@ -1795,7 +1795,7 @@ async function loadFeaturedJobs() {
 
         if (emptyState) emptyState.classList.add('hidden');
         grid.innerHTML = jobs.map(j => {
-            const salary = j.salary ? '$' + Number(j.salary).toLocaleString('es-VE') : '';
+            const salary = j.salary ? '$' + Number(j.salary).toLocaleString('es-CL') : '';
             const typeLabel = (j.job_type || '').replace('_', ' ');
             const featuredBadge = j.featured ? '<span class="card-badge-featured"><i class="fas fa-star"></i></span>' : '';
             const bizLogo = j.business_logo || '';
@@ -1826,7 +1826,7 @@ async function loadFeaturedJobs() {
     }
 }
 
-// ─── POPUP (VENTANA EMERGENTE) on INDEX ──────────────────────────
+// ─── POPUP (CLNTANA EMERGENTE) on INDEX ──────────────────────────
 // Shows once per hour (uses localStorage timestamp)
 (function initPopupOnIndex() {
     var HOUR_MS = 60 * 60 * 1000;

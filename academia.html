@@ -8,7 +8,7 @@
 <meta property="og:title" content="Academia de Agentes - AunClick">
 <meta property="og:description" content="Aprende y crece como agente digital. Clases, exámenes y certificaciones.">
 <meta property="og:site_name" content="AunClick">
-<meta property="og:locale" content="es_VE">
+<meta property="og:locale" content="es_CL">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -238,8 +238,8 @@ button:active{transform:scale(.97)}
 
   // ── Config ──
   const API = '/api';
-  let TOKEN = localStorage.getItem('meridaunclick_token') || localStorage.getItem('token');
-  let USER_ID = localStorage.getItem('meridaunclick_user') ? JSON.parse(localStorage.getItem('meridaunclick_user')).id : (localStorage.getItem('user_id') || '');
+  let TOKEN = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('token');
+  let USER_ID = localStorage.getItem('meriden-santiago_user') ? JSON.parse(localStorage.getItem('meriden-santiago_user')).id : (localStorage.getItem('user_id') || '');
   let userProfile = null;
   let agentProgress = null;
   let classes = [];
@@ -250,14 +250,14 @@ button:active{transform:scale(.97)}
 
   async function apiGet(path){
     const r = await fetch(API+path,{headers:apiHeaders()});
-    if(r.status===401){ localStorage.removeItem('meridaunclick_token'); localStorage.removeItem('meridaunclick_user'); window.location.href='/login.html?redirect=academia.html'; return null; }
+    if(r.status===401){ localStorage.removeItem('meriden-santiago_token'); localStorage.removeItem('meriden-santiago_user'); window.location.href='/login.html?redirect=academia.html'; return null; }
     if(!r.ok) throw await r.json();
     return r.json();
   }
 
   async function apiPost(path,body){
     const r = await fetch(API+path,{method:'POST',headers:apiHeaders(),body:JSON.stringify(body)});
-    if(r.status===401){ localStorage.removeItem('meridaunclick_token'); localStorage.removeItem('meridaunclick_user'); window.location.href='/login.html?redirect=academia.html'; return null; }
+    if(r.status===401){ localStorage.removeItem('meriden-santiago_token'); localStorage.removeItem('meriden-santiago_user'); window.location.href='/login.html?redirect=academia.html'; return null; }
     if(!r.ok){ const e=await r.json(); throw new Error(e.error||'Error'); }
     return r.json();
   }
@@ -286,8 +286,8 @@ button:active{transform:scale(.97)}
 
   // ── Header ──
   document.getElementById('logoutBtn').addEventListener('click',function(){
-    localStorage.removeItem('meridaunclick_token');
-    localStorage.removeItem('meridaunclick_user');
+    localStorage.removeItem('meriden-santiago_token');
+    localStorage.removeItem('meriden-santiago_user');
     localStorage.removeItem('token');
     localStorage.removeItem('user_id');
     window.location.href='/login.html';
@@ -302,7 +302,7 @@ button:active{transform:scale(.97)}
       fd.append('file',file);
       fd.append('product_type','avatar');
       const r=await fetch(API+'/upload',{method:'POST',headers:{'Authorization':'Bearer '+TOKEN},body:fd});
-      if(r.status===401){ localStorage.removeItem('meridaunclick_token'); localStorage.removeItem('meridaunclick_user'); window.location.href='/login.html?redirect=academia.html'; return; }
+      if(r.status===401){ localStorage.removeItem('meriden-santiago_token'); localStorage.removeItem('meriden-santiago_user'); window.location.href='/login.html?redirect=academia.html'; return; }
       const upData=await r.json();
       if(!upData.url) throw new Error('No URL returned');
       await fetch(API+'/user-profile',{method:'PUT',headers:apiHeaders(),body:JSON.stringify({avatar:upData.url})});
@@ -866,7 +866,7 @@ button:active{transform:scale(.97)}
     try{
       const d=new Date(dateStr+'Z');
       if(isNaN(d.getTime())) return dateStr;
-      return d.toLocaleDateString('es-VE',{day:'numeric',month:'short',year:'numeric'});
+      return d.toLocaleDateString('es-CL',{day:'numeric',month:'short',year:'numeric'});
     }catch(e){ return dateStr; }
   }
 

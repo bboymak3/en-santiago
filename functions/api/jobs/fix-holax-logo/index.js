@@ -35,7 +35,7 @@ async function verifyJWT(token, secret) {
 }
 
 async function requireAuth(request, env) {
-  const jwtSecret = env.JWT_SECRET || 'aunclick_jwt_secret_2024_secure';
+  const jwtSecret = env.JWT_SECRET || 'en-santiago_jwt_secret_2024_secure';
   const authHeader = request.headers.get('Authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
   const token = authHeader.substring(7);
@@ -53,11 +53,11 @@ export async function onRequestPost(context) {
     // Ensure column exists
     try { await env.DB.prepare(`ALTER TABLE job_listings ADD COLUMN business_logo TEXT`).run(); } catch(e) {}
 
-    const LOGO_URL = '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png';
+    const LOGO_URL = '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
 
     // Update all HOLAX jobs that have no logo, empty logo, or old default logo
     const result = await env.DB.prepare(
-      `UPDATE job_listings SET business_logo = ? WHERE company_name = 'HOLAX' AND (business_logo IS NULL OR business_logo = '' OR business_logo = '/images/Holax.png')`
+      `UPDATE job_listings SET business_logo = ? WHERE company_name = 'HOLAX' AND (business_logo IS NULL OR business_logo = '' OR business_logo = '/images/En Santiago.png')`
     ).bind(LOGO_URL).run();
 
     return new Response(JSON.stringify({

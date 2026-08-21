@@ -41,7 +41,7 @@ export async function onRequestDelete(context) {
       });
     }
 
-    const jwtSecret = env.JWT_SECRET || 'aunclick_jwt_secret_2024_secure';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_jwt_secret_2024_secure';
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return new Response(JSON.stringify({ error: 'Token de autorización requerido' }), {

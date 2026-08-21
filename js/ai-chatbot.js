@@ -1,5 +1,5 @@
 /**
- * HolaX - AI Chatbot Widget Module
+ * En Santiago - AI Chatbot Widget Module
  * Floating AI chatbot using z-ai-web-dev-sdk via a proxy API endpoint
  * Checks admin_settings for ai_chatbot_enabled before rendering
  */
@@ -15,8 +15,8 @@
   let settingsChecked = false;
 
   // ─── Constants ────────────────────────────────────────────
-  const STORAGE_KEY = 'aunclick_aichat_history';
-  const SETTINGS_CACHE_KEY = 'aunclick_aichat_settings_cache';
+  const STORAGE_KEY = 'en-santiago_aichat_history';
+  const SETTINGS_CACHE_KEY = 'en-santiago_aichat_settings_cache';
   const SETTINGS_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   // ─── XSS Prevention ───────────────────────────────────────
@@ -49,7 +49,7 @@
               <i class="fas fa-robot"></i>
             </div>
             <div>
-              <h3>Asistente HolaX</h3>
+              <h3>Asistente En Santiago</h3>
               <span class="ai-chat-status"><i class="fas fa-circle"></i> En línea</span>
             </div>
           </div>
@@ -781,7 +781,7 @@
     if (!settings.enabled) return;
 
     // Set welcome message
-    welcomeMessage = settings.welcome || '¡Hola! 👋 Soy el asistente de HolaX. Puedo ayudarte a encontrar negocios, eventos y ofertas en Venezuela. ¿En qué te puedo ayudar?';
+    welcomeMessage = settings.welcome || '¡Hola! 👋 Soy el asistente de En Santiago. Puedo ayudarte a encontrar negocios, eventos y ofertas en Santiago de Chile. ¿En qué te puedo ayudar?';
 
     // Load chat history
     loadChatHistory();

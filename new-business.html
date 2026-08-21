@@ -20,22 +20,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Registra un nuevo negocio en HolaX - El directorio comercial de Venezuela.">
-    <title>Registrar Negocio - HolaX</title>
+    <meta name="description" content="Registra un nuevo negocio en En Santiago - El directorio comercial de Santiago de Chile.">
+    <title>Registrar Negocio - En Santiago</title>
     <!-- Open Graph -->
-    <meta property="og:title" content="Registra tu Negocio Gratis - HolaX Venezuela">
-    <meta property="og:description" content="Publica tu negocio gratis en el directorio mas grande de Venezuela. Llega a miles de clientes buscando productos y servicios cerca de ti.">
-    <meta property="og:site_name" content="HolaX">
-    <meta property="og:locale" content="es_VE">
+    <meta property="og:title" content="Registra tu Negocio Gratis - En Santiago Santiago de Chile">
+    <meta property="og:description" content="Publica tu negocio gratis en el directorio mas grande de Santiago de Chile. Llega a miles de clientes buscando productos y servicios cerca de ti.">
+    <meta property="og:site_name" content="En Santiago">
+    <meta property="og:locale" content="es_CL">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://holax.com.ve/images/Holax.png">
+    <meta property="og:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://holax.com.ve/new-business.html">
-    <meta name="twitter:title" content="Registra tu Negocio Gratis - HolaX Venezuela">
-    <meta name="twitter:description" content="Publica tu negocio gratis en HolaX. Llega a miles de clientes en Venezuela.">
+    <meta property="og:url" content="https://en-santiago.pages.dev/new-business.html">
+    <meta name="twitter:title" content="Registra tu Negocio Gratis - En Santiago Santiago de Chile">
+    <meta name="twitter:description" content="Publica tu negocio gratis en En Santiago. Llega a miles de clientes en Santiago de Chile.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://holax.com.ve/images/Holax.png">
+    <meta name="twitter:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -48,22 +48,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+                <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> En Santiago</span>
             </a>
             <div class="location-selector" id="locationSelector">
                 <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <span class="location-label" id="locationLabel">Todo Santiago de Chile</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="location-dropdown hidden" id="locationDropdown">
                     <div class="location-search">
-                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar comuna..." autocomplete="off">
                     </div>
                     <div class="location-option" data-state="" data-city="">
                         <i class="fas fa-globe-americas"></i>
-                        <span>Todo Venezuela</span>
+                        <span>Todo Santiago de Chile</span>
                     </div>
                     <div class="location-divider"></div>
                     <div class="location-list" id="locationList">
@@ -344,17 +344,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <input type="text" id="propCiudad" name="ciudad" placeholder="Ej: Mérida" required>
                             </div>
                             <div class="pf-field">
-                                <label for="propEstado" class="pf-label">
-                                    <i class="fas fa-map"></i> Estado <span class="pf-required">*</span>
+                                <label for="propComuna" class="pf-label">
+                                    <i class="fas fa-map"></i> Comuna <span class="pf-required">*</span>
                                 </label>
                                 <div class="pf-select-wrapper">
-                                    <select id="propEstado" name="estado" required>
-                                        <option value="">Selecciona un estado</option>
+                                    <select id="propComuna" name="comuna" required>
+                                        <option value="">Selecciona un comuna</option>
                                         <option value="Amazonas">Amazonas</option>
                                         <option value="Anzoátegui">Anzoátegui</option>
                                         <option value="Apure">Apure</option>
                                         <option value="Aragua">Aragua</option>
-                                        <option value="Barinas">Barinas</option>
+                                        <option value="Santiago">Santiago</option>
                                         <option value="Bolívar">Bolívar</option>
                                         <option value="Carabobo">Carabobo</option>
                                         <option value="Cojedes">Cojedes</option>
@@ -395,13 +395,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </div>
                             <div id="locationMap" class="location-picker-map"></div>
                             <div id="locationMapCoords" class="pf-coords-display">
-                                <span><i class="fas fa-crosshairs"></i> Lat: <strong id="coordLatDisplay">8.63</strong></span>
+                                <span><i class="fas fa-crosshairs"></i> Lat: <strong id="coordLatDisplay">-33.453</strong></span>
                                 <span><i class="fas fa-crosshairs"></i> Lng: <strong id="coordLngDisplay">-66.59</strong></span>
                             </div>
                             <div class="pf-grid-2 pf-grid-collapse">
                                 <div class="pf-field">
                                     <label for="propLat" class="pf-label"><i class="fas fa-globe"></i> Latitud</label>
-                                    <input type="number" id="propLat" name="latitud" placeholder="8.63" step="any">
+                                    <input type="number" id="propLat" name="latitud" placeholder="-33.453" step="any">
                                 </div>
                                 <div class="pf-field">
                                     <label for="propLng" class="pf-label"><i class="fas fa-globe-americas"></i> Longitud</label>

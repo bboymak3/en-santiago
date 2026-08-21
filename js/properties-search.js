@@ -87,7 +87,7 @@
     /** Get the selected state from localStorage (set by the location selector) */
     function getSelectedState() {
         try {
-            return localStorage.getItem('aunclick_selected_state') || '';
+            return localStorage.getItem('en-santiago_selected_state') || '';
         } catch (e) {
             return '';
         }
@@ -118,7 +118,7 @@
         if (!price && price !== 0) return 'Precio no disponible';
         const symbols = { 'USD': '$', 'EUR': '€', 'Bs': 'Bs ' };
         const sym = symbols[currency] || '';
-        const num = Number(price).toLocaleString('es-VE');
+        const num = Number(price).toLocaleString('es-CL');
         return `${sym}${num}`;
     }
 
@@ -305,7 +305,7 @@
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // ACTIVE FILTER TAGS
+    // ACTICL FILTER TAGS
     // ═══════════════════════════════════════════════════════════════
 
     function renderActiveFilters(container, clearBtn, filters) {
@@ -381,7 +381,7 @@
                 break;
             case 'state':
                 // Remove selected state from localStorage
-                try { localStorage.removeItem('aunclick_selected_state'); } catch (e) { /* ignore */ }
+                try { localStorage.removeItem('en-santiago_selected_state'); } catch (e) { /* ignore */ }
                 break;
         }
         executeSearch(1);
@@ -479,7 +479,7 @@
 
         try {
             miniMap = L.map('searchMiniMap', {
-                center: [8.6233, -66.5897],  // Venezuela center
+                center: [-33.45233, -66.5897],  // Santiago de Chile center
                 zoom: 6,
                 zoomControl: true,
                 scrollWheelZoom: true,

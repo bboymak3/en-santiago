@@ -80,7 +80,7 @@ export async function onRequestPost(context) {
     }
 
     // ── Build system prompt ───────────────────────────────────────
-    const systemPrompt = `Eres un asistente virtual amigable del directorio de negocios "HolaX".
+    const systemPrompt = `Eres un asistente virtual amigable del directorio de negocios "En Santiago".
 ${welcomeContext ? `Contexto del admin: "${welcomeContext}"\n` : ''}
 Reglas:
 - Siempre responde en español
@@ -145,13 +145,13 @@ Reglas:
 function generateFallbackReply(msg) {
   const lower = msg.toLowerCase();
   if (lower.includes('hola') || lower.includes('buenas') || lower.includes('hey')) {
-    return 'Hola! Soy el asistente de HolaX. Puedo ayudarte a encontrar negocios, eventos y ofertas. Escribe lo que buscas.';
+    return 'Hola! Soy el asistente de En Santiago. Puedo ayudarte a encontrar negocios, eventos y ofertas. Escribe lo que buscas.';
   }
   if (lower.includes('restaurante') || lower.includes('comida') || lower.includes('comer')) {
     return 'Puedes encontrar restaurantes en nuestra sección de búsqueda. Visita la página principal y usa el buscador o filtra por la categoría "Restaurantes".';
   }
   if (lower.includes('negocio') || lower.includes('registrar') || lower.includes('publicar')) {
-    return 'Para publicar tu negocio en HolaX, haz clic en "Registrar" en el menú principal. Completa el formulario con los datos de tu negocio y será revisado por un administrador.';
+    return 'Para publicar tu negocio en En Santiago, haz clic en "Registrar" en el menú principal. Completa el formulario con los datos de tu negocio y será revisado por un administrador.';
   }
   if (lower.includes('evento') || lower.includes('actividad')) {
     return 'Visita nuestra sección de Eventos para ver las actividades más recientes. Allí encontrarás conciertos, ferias, talleres y más.';
@@ -160,10 +160,10 @@ function generateFallbackReply(msg) {
     return 'En la sección de Cupones encontrarás ofertas y descuentos exclusivos de negocios locales. Visítala desde el menú principal.';
   }
   if (lower.includes('empleo') || lower.includes('trabajo')) {
-    return 'La sección de Empleo te muestra ofertas de trabajo disponibles. Puedes filtrar por estado y tipo de empleo.';
+    return 'La sección de Empleo te muestra ofertas de trabajo disponibles. Puedes filtrar por comuna y tipo de empleo.';
   }
   if (lower.includes('emergencia') || lower.includes('hospital') || lower.includes('farmacia')) {
     return 'La sección de Emergencias tiene números de hospitales, farmacias de guardia, bomberos y policía. Accesible desde el menú principal.';
   }
-  return 'Gracias por tu mensaje. Puedo ayudarte a buscar negocios, eventos, cupones de descuento y más en HolaX. Escribe lo que necesitas y te guiaré.';
+  return 'Gracias por tu mensaje. Puedo ayudarte a buscar negocios, eventos, cupones de descuento y más en En Santiago. Escribe lo que necesitas y te guiaré.';
 }

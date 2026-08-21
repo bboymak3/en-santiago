@@ -20,22 +20,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Marketplace - Compra y vende en tu comunidad con HolaX. Encuentra vehículos, inmuebles, electrónica, servicios y más.">
-    <title>Marketplace - HolaX</title>
+    <meta name="description" content="Marketplace - Compra y vende en tu comunidad con En Santiago. Encuentra vehículos, inmuebles, electrónica, servicios y más.">
+    <title>Marketplace - En Santiago</title>
     <!-- Open Graph -->
-    <meta property="og:title" content="Marketplace - Compra y Vende en Venezuela | HolaX">
-    <meta property="og:description" content="Compra y vende en tu comunidad con HolaX. Vehiculos, inmuebles, electronica, servicios y mucho mas. Publica tu anuncio gratis.">
-    <meta property="og:site_name" content="HolaX">
-    <meta property="og:locale" content="es_VE">
+    <meta property="og:title" content="Marketplace - Compra y Vende en Santiago de Chile | En Santiago">
+    <meta property="og:description" content="Compra y vende en tu comunidad con En Santiago. Vehiculos, inmuebles, electronica, servicios y mucho mas. Publica tu anuncio gratis.">
+    <meta property="og:site_name" content="En Santiago">
+    <meta property="og:locale" content="es_CL">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://holax.com.ve/images/Holax.png">
+    <meta property="og:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://holax.com.ve/marketplace.html">
-    <meta name="twitter:title" content="Marketplace - Compra y Vende en Venezuela | HolaX">
-    <meta name="twitter:description" content="Compra y vende en tu comunidad con HolaX. Vehiculos, inmuebles, electronica y mas.">
+    <meta property="og:url" content="https://en-santiago.pages.dev/marketplace.html">
+    <meta name="twitter:title" content="Marketplace - Compra y Vende en Santiago de Chile | En Santiago">
+    <meta name="twitter:description" content="Compra y vende en tu comunidad con En Santiago. Vehiculos, inmuebles, electronica y mas.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://holax.com.ve/images/Holax.png">
+    <meta name="twitter:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -865,22 +865,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+                <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> En Santiago</span>
             </a>
             <div class="location-selector" id="locationSelector">
                 <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <span class="location-label" id="locationLabel">Todo Santiago de Chile</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="location-dropdown hidden" id="locationDropdown">
                     <div class="location-search">
-                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar comuna..." autocomplete="off">
                     </div>
                     <div class="location-option" data-state="" data-city="">
                         <i class="fas fa-globe-americas"></i>
-                        <span>Todo Venezuela</span>
+                        <span>Todo Santiago de Chile</span>
                     </div>
                     <div class="location-divider"></div>
                     <div class="location-list" id="locationList">
@@ -1064,7 +1064,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Footer -->
     <footer class="mp-footer">
         <div class="container">
-            <p>&copy; 2025 <a href="index.html">HolaX</a>. Todos los derechos reservados.</p>
+            <p>&copy; 2025 <a href="index.html">En Santiago</a>. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -1277,7 +1277,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (price === null || price === undefined) return 'Consultar';
                 const num = Number(price);
                 if (isNaN(num)) return 'Consultar';
-                return '$' + num.toLocaleString('es-VE');
+                return '$' + num.toLocaleString('es-CL');
             }
 
             // ─── Time Ago ──────────────────────────────────────
@@ -1335,7 +1335,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 // WhatsApp: use business WhatsApp if available
                 const waNumber = product.business_whatsapp ? product.business_whatsapp.replace(/[^0-9]/g, '') : '';
-                const whatsappMsg = encodeURIComponent('Hola, me interesa el producto: ' + product.name + '. Vi el anuncio en HolaX.');
+                const whatsappMsg = encodeURIComponent('Hola, me interesa el producto: ' + product.name + '. Vi el anuncio en En Santiago.');
                 const whatsappUrl = waNumber
                     ? 'https://wa.me/' + waNumber + '?text=' + whatsappMsg
                     : 'https://wa.me/?text=' + whatsappMsg;
@@ -1555,7 +1555,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (modal) modal.classList.remove('hidden');
             
             // Load user's businesses into selector (filtered by user_id)
-            const token = localStorage.getItem('meridaunclick_token') || sessionStorage.getItem('meridaunclick_token');
+            const token = localStorage.getItem('meriden-santiago_token') || sessionStorage.getItem('meriden-santiago_token');
             if (token) {
                 // Decode JWT to get user.id
                 try {
@@ -1622,7 +1622,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (publishBtn) publishBtn.addEventListener('click', openModal);
         
         // Auto-open modal if #publicar hash
-        if (window.location.hash === '#publicar' && localStorage.getItem('meridaunclick_token')) {
+        if (window.location.hash === '#publicar' && localStorage.getItem('meriden-santiago_token')) {
             setTimeout(openModal, 500);
         }
         if (closeBtn) closeBtn.addEventListener('click', closeModal);
@@ -1651,7 +1651,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             fd.append('file', file);
             fd.append('product_type', 'marketplace');
             
-            const token = localStorage.getItem('meridaunclick_token');
+            const token = localStorage.getItem('meriden-santiago_token');
             
             fetch('/api/upload', {
                 method: 'POST',
@@ -1700,7 +1700,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 business_id: parseInt(businessId)
             };
             
-            const token = localStorage.getItem('meridaunclick_token');
+            const token = localStorage.getItem('meriden-santiago_token');
             
             saveBtn.disabled = true;
             saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publicando...';

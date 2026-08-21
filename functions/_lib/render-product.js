@@ -57,12 +57,12 @@ export async function renderProductPage(env, product, options) {
   }
   const mainImage = productImages[0] || '';
 
-  const baseUrl = 'https://holax.com.ve';
+  const baseUrl = 'https://en-santiago.pages.dev';
   const title = product.name || 'Producto';
-  const price = product.price ? `$${Number(product.price).toLocaleString('es-VE')}` : '';
+  const price = product.price ? `$${Number(product.price).toLocaleString('es-CL')}` : '';
   const description = product.description
     ? product.description.substring(0, 160)
-    : `${title}${price ? ' - ' + price : ''} - Disponible en HolaX Marketplace, Venezuela.`;
+    : `${title}${price ? ' - ' + price : ''} - Disponible en En Santiago Marketplace, Santiago de Chile.`;
   const imageUrl = mainImage || `${baseUrl}/logo.png`;
 
   // Fetch 3 related products - try same category first, fallback to same business, then any
@@ -113,7 +113,7 @@ export async function renderProductPage(env, product, options) {
   let relatedHtml = '';
   if (relatedProducts.length > 0) {
     const cards = relatedProducts.map(rp => {
-      const rpPrice = rp.price ? `$${Number(rp.price).toLocaleString('es-VE')}` : '';
+      const rpPrice = rp.price ? `$${Number(rp.price).toLocaleString('es-CL')}` : '';
       const rpSlug = rp.slug || rp.id;
       const rpBadge = getCatBadge(rp.category);
       const rpIcon = getCatIcon(rp.category);
@@ -186,7 +186,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
-    <title>${esc(title)}${price ? ' - ' + price : ''} - HolaX Marketplace</title>
+    <title>${esc(title)}${price ? ' - ' + price : ''} - En Santiago Marketplace</title>
     <meta name="description" content="${esc(description)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="${canonicalUrl}">
@@ -195,12 +195,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:image" content="${imageUrl}">
     <meta property="og:url" content="${canonicalUrl}">
-    <meta property="og:site_name" content="HolaX Marketplace">
-    <meta property="og:locale" content="es_VE">
+    <meta property="og:site_name" content="En Santiago Marketplace">
+    <meta property="og:locale" content="es_CL">
     <meta property="product:price:amount" content="${product.price || '0'}">
     <meta property="product:price:currency" content="USD">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${esc(title)} - HolaX">
+    <meta name="twitter:title" content="${esc(title)} - En Santiago">
     <meta name="twitter:description" content="${esc(description)}">
     <meta name="twitter:image" content="${imageUrl}">
     <!-- JSON-LD: Product + BreadcrumbList -->
@@ -221,7 +221,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "itemCondition": "https://schema.org/NewCondition",
           "seller": {
             "@type": "Organization",
-            "name": product.business_name || "HolaX"
+            "name": product.business_name || "En Santiago"
           }
         }
       };
@@ -229,14 +229,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     })())}</script>
     <script type="application/ld+json">${(() => {
       const crumbs = [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://holax.com.ve/" },
-        { "@type": "ListItem", "position": 2, "name": "Marketplace", "item": "https://holax.com.ve/marketplace.html" }
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Marketplace", "item": "https://en-santiago.pages.dev/marketplace.html" }
       ];
       if (productTypeSlug) {
-        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": productTypeSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), "item": "https://holax.com.ve/tipo/" + encodeURIComponent(productTypeSlug) });
+        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": productTypeSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), "item": "https://en-santiago.pages.dev/tipo/" + encodeURIComponent(productTypeSlug) });
       }
       if (product.category) {
-        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": product.category, "item": "https://holax.com.ve/marketplace.html?categoria=" + encodeURIComponent(product.category) });
+        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": product.category, "item": "https://en-santiago.pages.dev/marketplace.html?categoria=" + encodeURIComponent(product.category) });
       }
       crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": title, "item": canonicalUrl });
       return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": crumbs });
@@ -435,7 +435,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo"><img src="/images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;"> <span class="brand-name">HolaX</span></a>
+            <a href="/" class="nav-logo"><img src="/images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;"> <span class="brand-name">En Santiago</span></a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir men\u00fa">
                 <i class="fas fa-bars"></i>
             </button>
@@ -484,7 +484,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ${product.business_logo ? `<img src="${esc(product.business_logo)}" alt="" style="width:32px;height:32px;border-radius:8px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">` : ''}
                     <div>
                         ${bizLink ? `<a href="${bizLink}" class="pd-biz-name" style="margin:0;display:block;"><i class="fas fa-store"></i> ${esc(product.business_name || 'Negocio')}${product.city ? ' · ' + esc(product.city) : ''}</a>` : (product.business_name ? `<div class="pd-biz-name" style="margin:0;display:block;"><i class="fas fa-store"></i> ${esc(product.business_name)}</div>` : '')}
-                        ${product.created_at ? (() => { try { var _ds = String(product.created_at).trim(); if (_ds.includes('T')) {} else if (_ds.includes(' ')) { _ds = _ds.replace(' ', 'T'); } else { _ds = _ds + 'T00:00:00'; } const pd = new Date(_ds); const pds = pd.toLocaleDateString('es-VE', { year:'numeric', month:'long', day:'numeric' }); if (!pds.includes('NaN')) return `<div style="font-size:.8rem;color:#94a3b8;margin-top:2px;"><i class="far fa-clock"></i> Publicado ${pds}</div>`; } catch(e){} return ''; })() : ''}
+                        ${product.created_at ? (() => { try { var _ds = String(product.created_at).trim(); if (_ds.includes('T')) {} else if (_ds.includes(' ')) { _ds = _ds.replace(' ', 'T'); } else { _ds = _ds + 'T00:00:00'; } const pd = new Date(_ds); const pds = pd.toLocaleDateString('es-CL', { year:'numeric', month:'long', day:'numeric' }); if (!pds.includes('NaN')) return `<div style="font-size:.8rem;color:#94a3b8;margin-top:2px;"><i class="far fa-clock"></i> Publicado ${pds}</div>`; } catch(e){} return ''; })() : ''}
                     </div>
                 </div>
                 <h1 class="pd-title">${esc(title)}</h1>
@@ -590,7 +590,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
     function shareProduct(){
         if(navigator.share){navigator.share({title:'${_escTitle}',text:'${_escDesc}',url:location.href}).catch(function(){});}
-        else{window.open('https://wa.me/?text='+encodeURIComponent('${_escTitle} - En HolaX Marketplace')+'%20'+encodeURIComponent(location.href),'_blank');}
+        else{window.open('https://wa.me/?text='+encodeURIComponent('${_escTitle} - En En Santiago Marketplace')+'%20'+encodeURIComponent(location.href),'_blank');}
     }
     // Navbar dropdown toggle
     document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn){
@@ -656,7 +656,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         pdCommentBtn.disabled = true;
         pdCommentBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
-        var token = localStorage.getItem('meridaunclick_token') || localStorage.getItem('authToken');
+        var token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken');
         var headers = { 'Content-Type': 'application/json' };
         if (token) headers['Authorization'] = 'Bearer ' + token;
 
@@ -726,7 +726,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; ${new Date().getFullYear()} HolaX. Todos los derechos reservados.</p>
+                <p>&copy; ${new Date().getFullYear()} En Santiago. Todos los derechos reservados.</p>
                 <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
                 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
             </div>

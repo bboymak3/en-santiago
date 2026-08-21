@@ -17,10 +17,10 @@ async function ensureTables(db) {
 }
 
 function calcLevel(xp) {
-  var LEVEL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
+  var LECLL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
   var level = 1;
-  for (var i = LEVEL_XP.length - 1; i >= 0; i--) {
-    if (xp >= LEVEL_XP[i]) { level = i + 1; break; }
+  for (var i = LECLL_XP.length - 1; i >= 0; i--) {
+    if (xp >= LECLL_XP[i]) { level = i + 1; break; }
   }
   return Math.min(level, 10);
 }

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'holax-v6';
+const CACHE_NAME = 'en-santiago-v6';
 const BASE = '';
 const OFFLINE_URL = '/index.html';
 

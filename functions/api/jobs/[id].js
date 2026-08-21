@@ -38,7 +38,7 @@ async function verifyJWT(token, secret) {
 }
 
 async function requireAuth(request, env) {
-  const jwtSecret = env.JWT_SECRET || 'aunclick_jwt_secret_2024_secure';
+  const jwtSecret = env.JWT_SECRET || 'en-santiago_jwt_secret_2024_secure';
   const authHeader = request.headers.get('Authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
   const token = authHeader.substring(7);
@@ -63,11 +63,11 @@ function renderJobHTML(job) {
   const typeColors = { 'tiempo_completo':'#4f46e5', 'medio_tiempo':'#0891b2', 'contrato':'#d97706', 'remoto':'#059669', 'freelance':'#7c3aed' };
   const typeLabel = typeLabels[job.job_type] || job.job_type || 'No especificado';
   const typeColor = typeColors[job.job_type] || '#4f46e5';
-  const location = [job.city, job.state].filter(Boolean).join(', ') || 'Venezuela';
-  const postedDate = job.created_at ? new Date(job.created_at + 'Z').toLocaleDateString('es-VE', { year:'numeric', month:'long', day:'numeric' }) : '';
+  const location = [job.city, job.state].filter(Boolean).join(', ') || 'Santiago de Chile';
+  const postedDate = job.created_at ? new Date(job.created_at + 'Z').toLocaleDateString('es-CL', { year:'numeric', month:'long', day:'numeric' }) : '';
   const salaryText = job.salary || 'No especificado';
   const companyInitials = (job.company_name || 'E').substring(0, 2).toUpperCase();
-  const whatsappMsg = encodeURIComponent(`Hola, vi la oferta de empleo "${job.title}" en HolaX y me interesa aplicar.`);
+  const whatsappMsg = encodeURIComponent(`Hola, vi la oferta de empleo "${job.title}" en En Santiago y me interesa aplicar.`);
   const whatsappLink = job.business_whatsapp ? `https://wa.me/${job.business_whatsapp.replace(/[^0-9]/g,'')}?text=${whatsappMsg}` : job.contact_phone ? `https://wa.me/${job.contact_phone.replace(/[^0-9]/g,'')}?text=${whatsappMsg}` : null;
   const businessLink = job.business_slug ? (() => {
     var tipo = (job.business_type || 'negocio').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -97,7 +97,7 @@ function renderJobHTML(job) {
 <head>
 <meta charset="UTF-8"><link rel="icon" type="image/jpeg" href="/images/favicon.jpeg"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="${esc((job.description||job.title).substring(0,160))}">
-<title>${esc(job.title)} - ${esc(job.company_name)} - HolaX</title>
+<title>${esc(job.title)} - ${esc(job.company_name)} - En Santiago</title>
 <link rel="stylesheet" href="/css/styles.css?v=4"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 .ej-wrap{max-width:800px;margin:0 auto;padding:calc(var(--navbar-height,64px)+32px) 20px 60px}
@@ -134,7 +134,7 @@ function renderJobHTML(job) {
 </style>
 </head>
 <body>
-<nav class="navbar" id="navbar"><div class="nav-container"><a href="/index.html" class="nav-logo"><img src="/images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px"><span class="brand-name">HolaX</span></a><button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button><ul class="nav-menu" id="navMenu"><li><a href="/index.html" class="nav-link">Inicio</a></li><li><a href="/search.html" class="nav-link">Negocios</a></li><li><a href="/properties.html" class="nav-link">Inmuebles</a></li><li><a href="/empleo" class="nav-link active">Empleo</a></li><li><a href="/marketplace.html" class="nav-link">Marketplace</a></li><li id="navLoginItem"><a href="/login.html" class="nav-link nav-btn">Login</a></li></ul></div></nav>
+<nav class="navbar" id="navbar"><div class="nav-container"><a href="/index.html" class="nav-logo"><img src="/images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px"><span class="brand-name">En Santiago</span></a><button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button><ul class="nav-menu" id="navMenu"><li><a href="/index.html" class="nav-link">Inicio</a></li><li><a href="/search.html" class="nav-link">Negocios</a></li><li><a href="/properties.html" class="nav-link">Inmuebles</a></li><li><a href="/empleo" class="nav-link active">Empleo</a></li><li><a href="/marketplace.html" class="nav-link">Marketplace</a></li><li id="navLoginItem"><a href="/login.html" class="nav-link nav-btn">Login</a></li></ul></div></nav>
 <div class="ej-wrap">
 <div class="ej-bc"><a href="/"><i class="fas fa-home"></i> Inicio</a><i class="fas fa-chevron-right" style="font-size:.65rem"></i><a href="/empleo">Empleo</a><i class="fas fa-chevron-right" style="font-size:.65rem"></i><span>${esc(job.title)}</span></div>
 ${galleryHtml}${videoHtml}
@@ -149,7 +149,7 @@ ${(whatsappLink||job.contact_email||job.contact_phone) ? `<div class="ej-cta">${
 </div></div>
 <div class="ej-lb" id="ejLb"><button class="ej-lb-x" onclick="closeEjLb()">&times;</button><button class="ej-lb-n ej-lb-p" onclick="event.stopPropagation();navEjLb(-1)"><i class="fas fa-chevron-left"></i></button><button class="ej-lb-n ej-lb-nx" onclick="event.stopPropagation();navEjLb(1)"><i class="fas fa-chevron-right"></i></button><div class="ej-lb-c" id="ejLbC"></div></div>
 <footer class="footer"><div class="container"><div class="footer-bottom">
-<p>&copy; ${new Date().getFullYear()} HolaX. Todos los derechos reservados.</p>
+<p>&copy; ${new Date().getFullYear()} En Santiago. Todos los derechos reservados.</p>
 <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
 </div></div></footer>

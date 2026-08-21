@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// NAVEGACIÓN
+// NACLGACIÓN
 // ============================================
 // NOTA: mostrarSeccion se define más abajo (línea ~1078) con todas las secciones
 // ============================================
@@ -304,7 +304,7 @@ function calcularMontoTotalDesdeServicios(serviciosSeleccionados) {
 }
 
 // ============================================
-// BUSCAR VEHÍCULO POR PATENTE
+// BUSCAR CLHÍCULO POR PATENTE
 // ============================================
 
 async function buscarVehiculoPorPatente(patente) {
@@ -706,7 +706,7 @@ async function guardarOrden() {
                 diagnostico_checks: ordenData.diagnostico_checks,
                 diagnostico_observaciones: ordenData.diagnostico_observaciones,
                 servicios_seleccionados: parsedServicios,
-                estado: 'Enviada',
+                comuna: 'Enviada',
                 check_paragolfe_delantero_der: ordenData.check_paragolfe_delantero_der,
                 check_puerta_delantera_der: ordenData.check_puerta_delantera_der,
                 check_puerta_trasera_der: ordenData.check_puerta_trasera_der,
@@ -934,7 +934,7 @@ function mostrarResultados(ordenes) {
                 <th style="width:75px;">Modelo</th>
                 <th style="width:65px;">Color</th>
                 <th style="width:80px;">Nombre</th>
-                <th style="width:80px;">Estado</th>
+                <th style="width:80px;">Comuna</th>
                 <th style="width:80px;">Técnico</th>
                 <th style="width:80px;" class="text-end">Total</th>
                 <th style="width:80px;" class="text-end">Comisión</th>
@@ -944,14 +944,14 @@ function mostrarResultados(ordenes) {
         <tbody>`;
 
     ordenes.forEach(orden => {
-        const estadoClass = obtenerClaseEstado(orden.estado);
-        const estadoIcon = obtenerIconoEstado(orden.estado);
+        const comunaClass = obtenerClaseComuna(orden.comuna);
+        const comunaIcon = obtenerIconoComuna(orden.comuna);
         const numeroFormateado = String(orden.numero_orden).padStart(6, '0');
         const montoFinal = Number(orden.monto_final || orden.monto_total || 0);
         const fecha = orden.fecha_creacion || orden.fecha_ingreso || 'N/A';
-        const esCerrada = orden.estado_trabajo === 'Cerrada';
-        const esCancelada = orden.estado === 'Cancelada';
-        const esAprobadaCerrada = orden.estado === 'Aprobada' && esCerrada;
+        const esCerrada = orden.comuna_trabajo === 'Cerrada';
+        const esCancelada = orden.comuna === 'Cancelada';
+        const esAprobadaCerrada = orden.comuna === 'Aprobada' && esCerrada;
         const esExpress = Number(orden.es_express || 0) === 1;
         const expressBadge = esExpress ? ' <span style="color:#ff6b00;font-size:0.8em;" title="Orden Express">⚡</span>' : '';
         const esWeb = orden.origen === 'web';
@@ -973,7 +973,7 @@ function mostrarResultados(ordenes) {
             <td>${orden.color ? `<span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:${orden.color.startsWith('#') ? orden.color : orden.color};vertical-align:middle;margin-right:4px;border:1px solid #ccc;"></span>${orden.color}` : ''}</td>
             <td>${orden.cliente_nombre || ''}</td>
             <td>
-                <span class="badge ${estadoClass}" style="font-size:0.65rem;">${estadoIcon} ${orden.estado || ''}</span>
+                <span class="badge ${comunaClass}" style="font-size:0.65rem;">${comunaIcon} ${orden.comuna || ''}</span>
                 ${esCerrada ? '<span class="badge bg-secondary ms-1" style="font-size:0.55rem;">CERRADA</span>' : ''}
             </td>
             <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${orden.tecnico_nombre || '-'}"><small>${orden.tecnico_nombre || '-'}</small></td>
@@ -1003,9 +1003,9 @@ function mostrarResultados(ordenes) {
     html += '</tbody></table></div>';
 
     // Botón de Cerrar TODAS las órdenes (doble confirmación)
-    const ordenesParaCerrar = ordenes.filter(o => !(o.estado === 'Aprobada' && o.estado_trabajo === 'Cerrada') && o.estado !== 'Cancelada');
+    const ordenesParaCerrar = ordenes.filter(o => !(o.comuna === 'Aprobada' && o.comuna_trabajo === 'Cerrada') && o.comuna !== 'Cancelada');
     html += `<div class="d-flex justify-content-between align-items-center mt-3 mb-2">
-        <div class="text-muted" style="font-size:0.82rem;"><i class="fas fa-info-circle me-1"></i>${ordenesParaCerrar.length} orden(es) pendientes de cierre | ${ordenes.filter(o => o.estado === 'Aprobada' && o.estado_trabajo === 'Cerrada').length} ya cerradas</div>
+        <div class="text-muted" style="font-size:0.82rem;"><i class="fas fa-info-circle me-1"></i>${ordenesParaCerrar.length} orden(es) pendientes de cierre | ${ordenes.filter(o => o.comuna === 'Aprobada' && o.comuna_trabajo === 'Cerrada').length} ya cerradas</div>
         <div class="d-flex gap-2">
             <button class="btn btn-warning btn-sm" onclick="fixSaldosCerradas()" title="Arreglar órdenes cerradas con saldo restante incorrecto o negativo"><i class="fas fa-wrench me-1"></i>Arreglar Saldos</button>
             ${ordenesParaCerrar.length > 0 ? `<button class="btn btn-danger" onclick="cerrarTodasLasOrdenes()" style="font-weight:700;"><i class="fas fa-check-double me-2"></i>CERRAR TODAS (${ordenesParaCerrar.length})</button>` : ''}
@@ -1018,7 +1018,7 @@ function mostrarResultados(ordenes) {
             <div class="d-flex align-items-center gap-2">
                 <i class="fas fa-check-double text-success fa-lg"></i>
                 <strong><span id="count-cierre-rapido">0</span> orden(es) seleccionada(s)</strong>
-                <span class="text-muted" style="font-size:0.82rem;">| Cierre: Estado→Aprobada + Trabajo→Cerrada + Abono Total + Pago→Efectivo</span>
+                <span class="text-muted" style="font-size:0.82rem;">| Cierre: Comuna→Aprobada + Trabajo→Cerrada + Abono Total + Pago→Efectivo</span>
             </div>
             <div class="d-flex gap-2">
                 <button class="btn btn-success" onclick="ejecutarCierreRapidoMasivo()"><i class="fas fa-check-double me-1"></i>Cerrar y Aprobar</button>
@@ -1064,17 +1064,17 @@ function eliminarOrdenDesdeLista(ordenId, numeroOrden) {
 // ============================================
 // ABRIR / CERRAR ORDEN DESDE LISTA (botones verde/rojo)
 // ============================================
-// Botón verde (Abrir): estado_trabajo → "Pendiente Visita", estado → "Aprobada"
-// Botón rojo (Cerrar): estado → "Aprobada", estado_trabajo → "Cerrada", abono = total
+// Botón verde (Abrir): comuna_trabajo → "Pendiente Visita", comuna → "Aprobada"
+// Botón rojo (Cerrar): comuna → "Aprobada", comuna_trabajo → "Cerrada", abono = total
 
 async function abrirOrdenDesdeLista(ordenId, numeroOrden) {
-    if (!confirm(`¿Abrir la orden #${String(numeroOrden).padStart(6,'0')}?\n\nLa orden pasará a:\n• Estado → Aprobada\n• Trabajo → Pendiente Visita`)) return;
+    if (!confirm(`¿Abrir la orden #${String(numeroOrden).padStart(6,'0')}?\n\nLa orden pasará a:\n• Comuna → Aprobada\n• Trabajo → Pendiente Visita`)) return;
     try {
         mostrarLoading(true);
         const resp = await fetch(API_BASE + '/editar-orden', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ orden_id: ordenId, estado: 'Aprobada', estado_trabajo: 'Pendiente Visita' })
+            body: JSON.stringify({ orden_id: ordenId, comuna: 'Aprobada', comuna_trabajo: 'Pendiente Visita' })
         });
         const data = await resp.json();
         if (data.success) {
@@ -1090,7 +1090,7 @@ async function abrirOrdenDesdeLista(ordenId, numeroOrden) {
 }
 
 async function cerrarOrdenDesdeLista(ordenId, numeroOrden) {
-    if (!confirm(`¿Cerrar la orden #${String(numeroOrden).padStart(6,'0')}?\n\nLa orden pasará a:\n• Estado → Aprobada\n• Trabajo → Cerrada\n• Abono = Total de la factura (pago completo)\n• Restante → $0 (SIN DEUDA)\n• Pagado → Sí\n• Método → Efectivo\n\n⚠️ El técnico, patente y datos NO se modifican.`)) return;
+    if (!confirm(`¿Cerrar la orden #${String(numeroOrden).padStart(6,'0')}?\n\nLa orden pasará a:\n• Comuna → Aprobada\n• Trabajo → Cerrada\n• Abono = Total de la factura (pago completo)\n• Restante → $0 (SIN DEUDA)\n• Pagado → Sí\n• Método → Efectivo\n\n⚠️ El técnico, patente y datos NO se modifican.`)) return;
     try {
         mostrarLoading(true);
         // Primero obtener el monto_total de la orden para forzar abono completo
@@ -1101,7 +1101,7 @@ async function cerrarOrdenDesdeLista(ordenId, numeroOrden) {
         const resp = await fetch(API_BASE + '/editar-orden', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ orden_id: ordenId, estado: 'Aprobada', estado_trabajo: 'Cerrada', monto_abono: montoTotal, metodo_pago: 'Efectivo' })
+            body: JSON.stringify({ orden_id: ordenId, comuna: 'Aprobada', comuna_trabajo: 'Cerrada', monto_abono: montoTotal, metodo_pago: 'Efectivo' })
         });
         const data = await resp.json();
         if (data.success) {
@@ -1119,8 +1119,8 @@ async function cerrarOrdenDesdeLista(ordenId, numeroOrden) {
 // CIERRE RÁPIDO - LA JUGADA MAESTRA
 // ============================================
 // Al marcar el checkbox y confirmar:
-// 1. estado_trabajo → "Cerrada"
-// 2. estado → "Aprobada"
+// 1. comuna_trabajo → "Cerrada"
+// 2. comuna → "Aprobada"
 // 3. monto_abono → monto_total (abono total = cancelado)
 // 4. monto_restante → 0
 // 5. metodo_pago → "Efectivo"
@@ -1154,7 +1154,7 @@ async function ejecutarCierreRapidoMasivo() {
     const cantidad = checks.length;
     const ordenesNombres = Array.from(checks).map(cb => `#${cb.dataset.numero}`).join(', ');
 
-    if (!confirm(`¿Cerrar y aprobar ${cantidad} orden(es)?\n\n${ordenesNombres}\n\nSe aplicará:\n• Estado → Aprobada\n• Trabajo → Cerrada\n• Abono = Total (pago completo)\n• Método → Efectivo`)) return;
+    if (!confirm(`¿Cerrar y aprobar ${cantidad} orden(es)?\n\n${ordenesNombres}\n\nSe aplicará:\n• Comuna → Aprobada\n• Trabajo → Cerrada\n• Abono = Total (pago completo)\n• Método → Efectivo`)) return;
 
     mostrarLoading(true);
     let exitosas = 0;
@@ -1170,8 +1170,8 @@ async function ejecutarCierreRapidoMasivo() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     orden_id: ordenId,
-                    estado: 'Aprobada',
-                    estado_trabajo: 'Cerrada',
+                    comuna: 'Aprobada',
+                    comuna_trabajo: 'Cerrada',
                     monto_abono: montoTotal,
                     metodo_pago: 'Efectivo'
                 })
@@ -1209,7 +1209,7 @@ async function ejecutarCierreRapidoMasivo() {
 
 // Arreglar saldos de órdenes cerradas - FORZAR todas sin deuda
 async function fixSaldosCerradas() {
-    if (!confirm('¿Forzar saldos de TODAS las órdenes cerradas?\n\nEsto aplicará a TODAS las órdenes con estado "Cerrada":\n• Saldo restante → 0\n• Abono → Total de la factura\n• Pagado → 1\n\nNinguna orden cerrada quedará con deuda.')) return;
+    if (!confirm('¿Forzar saldos de TODAS las órdenes cerradas?\n\nEsto aplicará a TODAS las órdenes con comuna "Cerrada":\n• Saldo restante → 0\n• Abono → Total de la factura\n• Pagado → 1\n\nNinguna orden cerrada quedará con deuda.')) return;
 
     mostrarLoading(true);
     try {
@@ -1240,7 +1240,7 @@ async function fixSaldosCerradas() {
 // Cerrar TODAS las órdenes con doble confirmación
 async function cerrarTodasLasOrdenes() {
     // Primera confirmación
-    if (!confirm('⚠️ ¿ESTÁS SEGURO de que deseas cerrar TODAS las órdenes pendientes?\n\nEsto cambiará todas las órdenes que NO estén cerradas+aprobadas a:\n• Estado → Aprobada\n• Trabajo → Cerrada\n• Abono = Total (pago completo)\n• Método → Efectivo\n\nEsta acción NO se puede deshacer fácilmente.')) return;
+    if (!confirm('⚠️ ¿ESTÁS SEGURO de que deseas cerrar TODAS las órdenes pendientes?\n\nEsto cambiará todas las órdenes que NO estén cerradas+aprobadas a:\n• Comuna → Aprobada\n• Trabajo → Cerrada\n• Abono = Total (pago completo)\n• Método → Efectivo\n\nEsta acción NO se puede deshacer fácilmente.')) return;
 
     // Segunda confirmación
     if (!confirm('🔴 CONFIRMACIÓN FINAL 🔴\n\n¿REALMENTE deseas proceder con el cierre masivo de TODAS las órdenes?\n\nEscribe OK mentalmente y presiona Aceptar para continuar.')) return;
@@ -1260,7 +1260,7 @@ async function cerrarTodasLasOrdenes() {
     }
 
     // Filtrar las que necesitan cierre
-    const pendientes = ordenes.filter(o => !(o.estado === 'Aprobada' && o.estado_trabajo === 'Cerrada') && o.estado !== 'Cancelada');
+    const pendientes = ordenes.filter(o => !(o.comuna === 'Aprobada' && o.comuna_trabajo === 'Cerrada') && o.comuna !== 'Cancelada');
 
     if (pendientes.length === 0) {
         mostrarLoading(false);
@@ -1279,8 +1279,8 @@ async function cerrarTodasLasOrdenes() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     orden_id: orden.id,
-                    estado: 'Aprobada',
-                    estado_trabajo: 'Cerrada',
+                    comuna: 'Aprobada',
+                    comuna_trabajo: 'Cerrada',
                     monto_abono: montoTotal,
                     metodo_pago: 'Efectivo'
                 })
@@ -1316,14 +1316,14 @@ async function cerrarTodasLasOrdenes() {
 
 // Variables de filtros activos
 let filtroExpressActivo = false;
-let filtroEstadoActivo = 'todas';
+let filtroComunaActivo = 'todas';
 let tecnicosParaFiltro = [];
 
-function filtrarOrdenes(estado) {
+function filtrarOrdenes(comuna) {
     // Actualizar botones de filtro
     document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
-    filtroEstadoActivo = estado;
+    filtroComunaActivo = comuna;
     aplicarFiltros();
 }
 
@@ -1343,9 +1343,9 @@ function toggleFiltroExpress() {
 function aplicarFiltros() {
     let filtradas = [...ordenesFiltradas];
 
-    // Filtro por estado
-    if (filtroEstadoActivo !== 'todas') {
-        filtradas = filtradas.filter(o => o.estado === filtroEstadoActivo);
+    // Filtro por comuna
+    if (filtroComunaActivo !== 'todas') {
+        filtradas = filtradas.filter(o => o.comuna === filtroComunaActivo);
     }
 
     // Filtro express
@@ -1363,7 +1363,7 @@ function aplicarFiltros() {
 }
 
 // ============================================
-// VER ORDEN
+// CLR ORDEN
 // ============================================
 
 async function verOrden(ordenId) {
@@ -1393,7 +1393,7 @@ async function verOrden(ordenId) {
 
 function mostrarOrdenEnModal(orden) {
     const numeroFormateado = String(orden.numero_orden).padStart(6, '0');
-    const estadoClass = obtenerClaseEstado(orden.estado);
+    const comunaClass = obtenerClaseComuna(orden.comuna);
     
     // Construir HTML de trabajos con precios del catálogo
     let trabajosHtml = '';
@@ -1463,7 +1463,7 @@ function mostrarOrdenEnModal(orden) {
     // Construir HTML de checklist
     let checklistHtml = `
         <p><strong>Nivel de Combustible:</strong> ${orden.nivel_combustible || 'No registrado'}</p>
-        <p><strong>Estado de Carrocería:</strong></p>
+        <p><strong>Comuna de Carrocería:</strong></p>
         <ul>
             ${orden.check_paragolfe_delantero_der ? '<li>✓ Parachoques delantero derecho</li>' : ''}
             ${orden.check_puerta_delantera_der ? '<li>✓ Puerta delantera derecha</li>' : ''}
@@ -1514,7 +1514,7 @@ function mostrarOrdenEnModal(orden) {
             </div>
             
             <div class="col-md-6">
-                <h6 class="fw-bold mb-2"><i class="fas fa-car me-2"></i>DATOS DEL VEHÍCULO</h6>
+                <h6 class="fw-bold mb-2"><i class="fas fa-car me-2"></i>DATOS DEL CLHÍCULO</h6>
                 <p class="mb-1"><strong>Patente:</strong> <span style="font-size: 1.1rem; font-weight: bold; color: var(--gp-red);">${orden.patente_placa}</span></p>
                 <p class="mb-1"><strong>Marca/Modelo:</strong> ${orden.marca || 'N/A'} ${orden.modelo || ''} (${orden.anio || 'N/A'})</p>
                 <p class="mb-1"><strong>Color:</strong> ${orden.color ? `<span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:${orden.color.startsWith('#') ? orden.color : orden.color};vertical-align:middle;margin-right:4px;border:1px solid #ccc;"></span>${orden.color}` : 'N/A'}</p>
@@ -1524,8 +1524,8 @@ function mostrarOrdenEnModal(orden) {
                 
                 <hr class="my-2">
                 
-                <h6 class="fw-bold mb-2"><i class="fas fa-info-circle me-2"></i>ESTADO DE LA ORDEN</h6>
-                <p class="mb-1"><span class="badge ${estadoClass} fs-6">${orden.estado}</span></p>
+                <h6 class="fw-bold mb-2"><i class="fas fa-info-circle me-2"></i>COMUNA DE LA ORDEN</h6>
+                <p class="mb-1"><span class="badge ${comunaClass} fs-6">${orden.comuna}</span></p>
             </div>
         </div>
         
@@ -1541,7 +1541,7 @@ function mostrarOrdenEnModal(orden) {
         
         <div class="row">
             <div class="col-12">
-                <h6 class="fw-bold mb-2"><i class="fas fa-clipboard-check me-2"></i>CHECKLIST DEL VEHÍCULO</h6>
+                <h6 class="fw-bold mb-2"><i class="fas fa-clipboard-check me-2"></i>CHECKLIST DEL CLHÍCULO</h6>
                 ${checklistHtml}
             </div>
         </div>
@@ -1818,7 +1818,7 @@ async function generarPDF(orden) {
     // Datos del Vehículo
     doc.setFontSize(9);
     doc.setFont(undefined, 'bold');
-    doc.text('3. DATOS DEL VEHÍCULO', leftMargin, yPos);
+    doc.text('3. DATOS DEL CLHÍCULO', leftMargin, yPos);
     yPos += 6;
 
     doc.setFont(undefined, 'normal');
@@ -1925,13 +1925,13 @@ async function generarPDF(orden) {
     // Checklist
     doc.setFontSize(9);
     doc.setFont(undefined, 'bold');
-    doc.text('5. CHECKLIST DEL VEHÍCULO', leftMargin, yPos);
+    doc.text('5. CHECKLIST DEL CLHÍCULO', leftMargin, yPos);
     yPos += 6;
 
     doc.setFont(undefined, 'normal');
     doc.setFontSize(7);
     doc.text(`Nivel de Combustible: ${orden.nivel_combustible || 'No registrado'}`, leftMargin, yPos); yPos += 4;
-    doc.text('Estado de Carrocería:', leftMargin, yPos); yPos += 4;
+    doc.text('Comuna de Carrocería:', leftMargin, yPos); yPos += 4;
 
     let checklistItems = [];
     if (orden.check_paragolfe_delantero_der) checklistItems.push('Parachoques delantero derecho');
@@ -2027,16 +2027,16 @@ async function generarPDF(orden) {
     }
     yPos += 8;
 
-    // Estado y Firma
+    // Comuna y Firma
     doc.setFontSize(9);
     doc.setFont(undefined, 'bold');
-    const secEstado = costosExtras > 0 ? '8. ESTADO Y FIRMA' : '7. ESTADO Y FIRMA';
-    doc.text(secEstado, leftMargin, yPos);
+    const secComuna = costosExtras > 0 ? '8. COMUNA Y FIRMA' : '7. COMUNA Y FIRMA';
+    doc.text(secComuna, leftMargin, yPos);
     yPos += 6;
 
     doc.setFont(undefined, 'normal');
     doc.setFontSize(7);
-    doc.text(`Estado: ${orden.estado}`, leftMargin, yPos); yPos += 4;
+    doc.text(`Comuna: ${orden.comuna}`, leftMargin, yPos); yPos += 4;
     if (orden.fecha_aprobacion) {
         doc.text(`Fecha de Aprobación: ${orden.fecha_aprobacion}`, leftMargin, yPos); yPos += 4;
     }
@@ -2129,17 +2129,17 @@ function copiarLink(link) {
 // UTILIDADES
 // ============================================
 
-function obtenerClaseEstado(estado) {
-    switch (estado) {
-        case 'Enviada': return 'estado-enviada';
-        case 'Aprobada': return 'estado-aprobada';
-        case 'Cancelada': return 'estado-cancelada';
+function obtenerClaseComuna(comuna) {
+    switch (comuna) {
+        case 'Enviada': return 'comuna-enviada';
+        case 'Aprobada': return 'comuna-aprobada';
+        case 'Cancelada': return 'comuna-cancelada';
         default: return 'bg-secondary';
     }
 }
 
-function obtenerIconoEstado(estado) {
-    switch (estado) {
+function obtenerIconoComuna(comuna) {
+    switch (comuna) {
         case 'Enviada': return '🟠';
         case 'Aprobada': return '🟢';
         case 'Cancelada': return '🔴';
@@ -2204,13 +2204,13 @@ let expressOrdenes = [];
 async function cargarOrdenesExpress() {
     try {
         mostrarLoading(true);
-        const estado = document.getElementById('express-filtro-estado')?.value || '';
+        const comuna = document.getElementById('express-filtro-comuna')?.value || '';
         const tecnicoId = document.getElementById('express-filtro-tecnico')?.value || '';
         const periodo = document.getElementById('express-filtro-periodo')?.value || '';
         const valor = document.getElementById('express-filtro-valor')?.value || '';
 
         let url = `${API_BASE}/admin/ordenes-express?`;
-        if (estado) url += `estado=${encodeURIComponent(estado)}&`;
+        if (comuna) url += `comuna=${encodeURIComponent(comuna)}&`;
         if (tecnicoId) url += `tecnico_id=${encodeURIComponent(tecnicoId)}&`;
         if (periodo) url += `periodo=${encodeURIComponent(periodo)}&`;
         if (valor) url += `valor=${encodeURIComponent(valor)}&`;
@@ -2313,11 +2313,11 @@ function renderizarListaExpress(ordenes) {
 
     ordenes.forEach(orden => {
         const num = String(orden.numero_orden).padStart(6, '0');
-        const estadoClass = obtenerClaseEstadoExpress(orden.estado_trabajo);
+        const comunaClass = obtenerClaseComunaExpress(orden.comuna_trabajo);
         const tieneTecnico = !!orden.tecnico_nombre;
         const tieneDomicilio = Number(orden.cargo_domicilio || 0) > 0;
         const esWeb = orden.origen === 'web';
-        const esCerrada = orden.estado_trabajo === 'Cerrada';
+        const esCerrada = orden.comuna_trabajo === 'Cerrada';
 
         html += `
             <div class="list-group-item list-group-item-action px-3 py-3" style="cursor:pointer;border-left:4px solid ${esWeb ? '#0d6efd' : 'var(--gp-orange)'};transition:background 0.2s;" onclick="verOrden(${orden.id})" onmouseover="this.style.background='#fff5eb'" onmouseout="this.style.background=''">
@@ -2329,7 +2329,7 @@ function renderizarListaExpress(ordenes) {
                         ${!tieneTecnico ? '<span class="badge bg-danger ms-1" style="font-size:0.6rem;"><i class="fas fa-user-slash me-1"></i>Sin asignar</span>' : ''}
                     </div>
                     <div class="d-flex gap-1 align-items-center">
-                        <span class="badge ${estadoClass}" style="font-size:0.75rem;border-radius:20px;padding:4px 10px;font-weight:700;">${orden.estado_trabajo || 'N/A'}</span>
+                        <span class="badge ${comunaClass}" style="font-size:0.75rem;border-radius:20px;padding:4px 10px;font-weight:700;">${orden.comuna_trabajo || 'N/A'}</span>
                         ${esCerrada ? `<button class="btn btn-outline-success btn-sm py-0 px-2" onclick="event.stopPropagation(); abrirOrdenDesdeLista(${orden.id}, ${orden.numero_orden})" title="Abrir Orden" style="font-size:0.75rem;"><i class="fas fa-lock-open"></i></button>` : `<button class="btn btn-outline-danger btn-sm py-0 px-2" onclick="event.stopPropagation(); cerrarOrdenDesdeLista(${orden.id}, ${orden.numero_orden})" title="Cerrar Orden" style="font-size:0.75rem;"><i class="fas fa-lock"></i></button>`}
                         <button class="btn btn-outline-warning btn-sm py-0 px-2" onclick="event.stopPropagation(); editarOrden(${orden.id})" title="Editar Orden" style="color:#ff6b00;border-color:#ff6b00;font-size:0.75rem;"><i class="fas fa-pen"></i></button>
                     </div>
@@ -2361,8 +2361,8 @@ function renderizarListaExpress(ordenes) {
     container.innerHTML = html;
 }
 
-function obtenerClaseEstadoExpress(estadoTrabajo) {
-    switch (estadoTrabajo) {
+function obtenerClaseComunaExpress(comunaTrabajo) {
+    switch (comunaTrabajo) {
         case 'Pendiente Visita': return 'bg-warning text-dark';
         case 'En Sitio': return 'bg-info text-dark';
         case 'En Progreso': return 'bg-primary text-white';
@@ -2550,10 +2550,10 @@ function renderizarListaTecnicos(tecnicos) {
     }
 
     let html = '<div class="table-responsive"><table class="table table-hover">';
-    html += '<thead><tr><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Email</th><th>Estado</th><th>Registro</th><th>Acción</th></tr></thead><tbody>';
+    html += '<thead><tr><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Email</th><th>Comuna</th><th>Registro</th><th>Acción</th></tr></thead><tbody>';
 
     tecnicos.forEach(tecnico => {
-        const estadoBadge = tecnico.activo
+        const comunaBadge = tecnico.activo
             ? '<span class="badge bg-success">Activo</span>'
             : '<span class="badge bg-secondary">Inactivo</span>';
 
@@ -2567,7 +2567,7 @@ function renderizarListaTecnicos(tecnicos) {
                 <td>${tecnico.apellido || ''}</td>
                 <td>${tecnico.telefono}</td>
                 <td>${tecnico.email || 'N/A'}</td>
-                <td>${estadoBadge}</td>
+                <td>${comunaBadge}</td>
                 <td>${fechaRegistro}</td>
                 <td><button class="btn btn-sm btn-outline-danger" onclick="confirmarEliminarTecnico(${tecnico.id}, '${tecnico.nombre.replace(/'/g, "\\'")}')" title="Eliminar técnico"><i class="fas fa-trash-alt"></i></button></td>
             </tr>
@@ -2804,9 +2804,9 @@ async function cargarOrdenesDeTecnico() {
                 const option = document.createElement('option');
                 option.value = orden.id;
                 const numOT = String(orden.numero_orden).padStart(6, '0');
-                const estado = orden.estado_trabajo || '';
+                const comuna = orden.comuna_trabajo || '';
                 const express = orden.es_express ? ' ⚡' : '';
-                option.textContent = `OT#${numOT} — ${orden.patente_placa} — ${estado}${express}`;
+                option.textContent = `OT#${numOT} — ${orden.patente_placa} — ${comuna}${express}`;
                 selectOrden.appendChild(option);
             });
         } else {
@@ -2834,7 +2834,7 @@ async function reasignarOrden() {
     }
 
     // Confirmar reasignación
-    if (!confirm('¿Está seguro de reasignar esta OT al nuevo técnico? La orden volverá a estado "Pendiente Visita".')) {
+    if (!confirm('¿Está seguro de reasignar esta OT al nuevo técnico? La orden volverá a comuna "Pendiente Visita".')) {
         return;
     }
 
@@ -2905,16 +2905,16 @@ function colorSwatch(color) {
     return `<span style="display:inline-block;width:20px;height:20px;border-radius:4px;background:${bgColor};vertical-align:middle;border:1px solid #999;box-shadow:0 1px 2px rgba(0,0,0,0.1);"></span>`;
 }
 
-// Genera badge HTML para el estado de una OT
-function obtenerBadgeEstado(estado, estadoTrabajo) {
-    const est = (estado || '').toLowerCase();
-    const estTrab = (estadoTrabajo || '').toLowerCase();
-    let bg = 'secondary', icon = 'circle', label = estado || 'N/A';
+// Genera badge HTML para el comuna de una OT
+function obtenerBadgeComuna(comuna, comunaTrabajo) {
+    const est = (comuna || '').toLowerCase();
+    const estTrab = (comunaTrabajo || '').toLowerCase();
+    let bg = 'secondary', icon = 'circle', label = comuna || 'N/A';
 
     if (est === 'aprobada' || estTrab === 'aprobada') {
-        bg = 'success'; icon = 'check-circle'; label = estadoTrabajo || estado || 'Aprobada';
+        bg = 'success'; icon = 'check-circle'; label = comunaTrabajo || comuna || 'Aprobada';
     } else if (est === 'enviada' || est === 'pendiente') {
-        bg = 'warning text-dark'; icon = 'clock'; label = estado || 'Pendiente';
+        bg = 'warning text-dark'; icon = 'clock'; label = comuna || 'Pendiente';
     } else if (est === 'en proceso' || estTrab === 'en proceso' || estTrab === 'en_proceso') {
         bg = 'primary'; icon = 'cog fa-spin'; label = 'En Proceso';
     } else if (est === 'cerrada' || estTrab === 'cerrada') {
@@ -2922,7 +2922,7 @@ function obtenerBadgeEstado(estado, estadoTrabajo) {
     } else if (est === 'cancelada' || estTrab === 'cancelada') {
         bg = 'danger'; icon = 'times-circle'; label = 'Cancelada';
     } else if (estTrab) {
-        label = estadoTrabajo;
+        label = comunaTrabajo;
     }
 
     return `<span class="badge bg-${bg} fs-6"><i class="fas fa-${icon} me-1"></i>${label}</span>`;
@@ -3456,12 +3456,12 @@ function renderizarLiquidacionOrdenes(ordenes) {
             ? '<span class="badge bg-warning text-dark" style="font-size:0.7rem;"><i class="fas fa-bolt me-1"></i>Express</span>'
             : '<span class="badge bg-secondary" style="font-size:0.7rem;">Normal</span>';
 
-        // Estado de cancelación persistido desde la BD
+        // Comuna de cancelación persistido desde la BD
         const yaCancelado = orden.cancelado_liquidacion === true;
         const rowClass = yaCancelado ? 'row-cancelado' : 'row-pendiente';
         const rowStyle = yaCancelado ? 'opacity:0.5;text-decoration:line-through;' : '';
         const checkChecked = yaCancelado ? 'checked' : '';
-        const badgeEstado = yaCancelado
+        const badgeComuna = yaCancelado
             ? '<span class="badge bg-danger">Cancelado</span>'
             : '<span class="badge bg-success">Pendiente</span>';
 
@@ -3488,7 +3488,7 @@ function renderizarLiquidacionOrdenes(ordenes) {
                         style="width: 3em; height: 1.5em; cursor: pointer;"
                         ${checkChecked}>
                     <label class="form-check-label ms-2" for="check-cancel-${index}" id="label-check-${index}" style="font-size: 0.8rem; white-space: nowrap;">
-                        ${badgeEstado}
+                        ${badgeComuna}
                     </label>
                 </div>
             </td>
@@ -3509,11 +3509,11 @@ function renderizarLiquidacionOrdenes(ordenes) {
     html += '<div id="liquidacion-totales-dinamicos"></div>';
     elResultados.innerHTML = html;
 
-    // Calcular totales iniciales (respetando estado cancelado persistido)
+    // Calcular totales iniciales (respetando comuna cancelado persistido)
     recalcularTotalesLiquidacion();
 }
 
-// Función para cambiar el estado de un check individual (con persistencia)
+// Función para cambiar el comuna de un check individual (con persistencia)
 async function liquidacionToggleCheck(checkbox, index) {
     const row = document.getElementById(`row-liquidacion-${index}`);
     const label = document.getElementById(`label-check-${index}`);
@@ -4818,7 +4818,7 @@ async function cargarCarteraClientes() {
         mostrarLoading(true);
         let whereExtra = '';
         if (filtro === 'pendientes') {
-            whereExtra = '&estado=Aprobada'; // Solo aprobadas con saldo
+            whereExtra = '&comuna=Aprobada'; // Solo aprobadas con saldo
         }
 
         const response = await fetch(`${API_BASE}/admin/todas-ordenes?limite=500${whereExtra}`);
@@ -5055,7 +5055,7 @@ function verInformeCliente(idx) {
                     <th>Abono</th>
                     <th>Saldo</th>
                     <th>Método Pago</th>
-                    <th>Estado</th>
+                    <th>Comuna</th>
                     <th>Acción</th>
                 </tr>
             </thead>
@@ -5091,10 +5091,10 @@ function verInformeCliente(idx) {
             <td style="color:#0d6efd;">$${formatMoney(abono)}</td>
             <td style="color:${restante > 0 ? '#dc3545' : '#28a745'};">$${formatMoney(restante)}</td>
             <td>${o.metodo_pago || '-'}</td>
-            <td>${obtenerBadgeEstado(o.estado, o.estado_trabajo)}</td>
+            <td>${obtenerBadgeComuna(o.comuna, o.comuna_trabajo)}</td>
             <td>
                 <div class="d-flex gap-1 justify-content-center">
-                    ${o.estado_trabajo === 'Cerrada' ? `<button class="btn btn-sm btn-outline-success" onclick="abrirOrdenDesdeLista(${o.id}, ${o.numero_orden || 0})" title="Abrir" style="padding:2px 6px;"><i class="fas fa-lock-open"></i></button>` : `<button class="btn btn-sm btn-outline-danger" onclick="cerrarOrdenDesdeLista(${o.id}, ${o.numero_orden || 0})" title="Cerrar" style="padding:2px 6px;"><i class="fas fa-lock"></i></button>`}
+                    ${o.comuna_trabajo === 'Cerrada' ? `<button class="btn btn-sm btn-outline-success" onclick="abrirOrdenDesdeLista(${o.id}, ${o.numero_orden || 0})" title="Abrir" style="padding:2px 6px;"><i class="fas fa-lock-open"></i></button>` : `<button class="btn btn-sm btn-outline-danger" onclick="cerrarOrdenDesdeLista(${o.id}, ${o.numero_orden || 0})" title="Cerrar" style="padding:2px 6px;"><i class="fas fa-lock"></i></button>`}
                     <button class="btn btn-sm btn-outline-primary" onclick="verOrden(${o.id})" title="Ver OT" style="padding:2px 6px;"><i class="fas fa-eye"></i></button>
                 </div>
             </td>
@@ -5239,7 +5239,7 @@ async function autocompletarMarca(query) {
 }
 
 // ============================================
-// AUTOCOMPLETE MODELO DE VEHÍCULO
+// AUTOCOMPLETE MODELO DE CLHÍCULO
 // ============================================
 
 async function autocompletarModelo(query) {
@@ -5445,7 +5445,7 @@ async function eliminarOrden() {
 }
 
 // ============================================
-// MODELOS DE VEHÍCULO
+// MODELOS DE CLHÍCULO
 // ============================================
 
 async function abrirModalModelos() {
@@ -5599,19 +5599,19 @@ function renderizarServiciosCheckboxes(servicios) {
     const container = document.getElementById('servicios-checks-container');
     if (!container) return;
 
-    // Preservar estados actuales de checkboxes y selectores antes de re-renderizar
-    const estadosPrevios = {};
+    // Preservar comunas actuales de checkboxes y selectores antes de re-renderizar
+    const comunasPrevios = {};
     container.querySelectorAll('input[type="checkbox"][id^="chk-serv-"]').forEach(chk => {
         const servId = chk.getAttribute('data-servicio-id');
-        estadosPrevios[servId] = {
+        comunasPrevios[servId] = {
             checked: chk.checked,
             tecnico: '',
             descripcion: ''
         };
         const tecSel = document.getElementById(`tec-serv-${servId}`);
-        if (tecSel) estadosPrevios[servId].tecnico = tecSel.value;
+        if (tecSel) comunasPrevios[servId].tecnico = tecSel.value;
         const descIn = document.getElementById(`desc-serv-${servId}`);
-        if (descIn) estadosPrevios[servId].descripcion = descIn.value;
+        if (descIn) comunasPrevios[servId].descripcion = descIn.value;
     });
 
     // Agrupar por categoría
@@ -5649,7 +5649,7 @@ function renderizarServiciosCheckboxes(servicios) {
         const precioDisplay = precio > 0 ? `$${precio.toLocaleString('es-CL', {maximumFractionDigits: 0})}` : '$0';
 
         // Construir opciones de técnico, preservando selección previa si existe
-        const prev = estadosPrevios[s.id];
+        const prev = comunasPrevios[s.id];
         let tecOptions = '<option value="">Sin asignar</option>';
         tecnicosGlobal.forEach(t => {
             const selected = (prev && prev.tecnico && String(t.id) === String(prev.tecnico)) ? ' selected' : '';
@@ -5689,7 +5689,7 @@ function renderizarServiciosCheckboxes(servicios) {
 }
 
 function onServicioCheckChange(checkbox) {
-    // Mostrar/ocultar campos de técnico y descripción según estado del checkbox
+    // Mostrar/ocultar campos de técnico y descripción según comuna del checkbox
     const servId = checkbox.getAttribute('data-servicio-id');
     const extraDiv = document.getElementById(`serv-extra-${servId}`);
     if (extraDiv) {
@@ -5736,13 +5736,13 @@ function renderizarListaServiciosCatalogo(servicios) {
         return;
     }
 
-    let html = '<table class="table table-sm table-hover"><thead class="table-light"><tr><th>Servicio</th><th>Precio</th><th>Categoría</th><th>Comisión</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>';
+    let html = '<table class="table table-sm table-hover"><thead class="table-light"><tr><th>Servicio</th><th>Precio</th><th>Categoría</th><th>Comisión</th><th>Comuna</th><th>Acciones</th></tr></thead><tbody>';
     servicios.forEach(s => {
         const precio = Number(s.precio_sugerido || 0);
         const tipoLabel = s.tipo_comision === 'mano_obra'
             ? '<span class="badge bg-warning text-dark">Mano de Obra</span>'
             : '<span class="badge bg-secondary">Repuestos</span>';
-        const estadoBadge = s.activo
+        const comunaBadge = s.activo
             ? '<span class="badge bg-success">Activo</span>'
             : '<span class="badge bg-danger">Inactivo</span>';
 
@@ -5752,7 +5752,7 @@ function renderizarListaServiciosCatalogo(servicios) {
                        onchange="actualizarPrecioServicio(${s.id}, this.value)" id="precio-cat-${s.id}" ${!s.activo ? 'disabled' : ''}></td>
             <td><span class="badge bg-light text-dark">${s.categoria}</span></td>
             <td>${tipoLabel}</td>
-            <td>${estadoBadge}</td>
+            <td>${comunaBadge}</td>
             <td>
                 ${s.activo ? `
                 <button class="btn btn-sm btn-outline-primary me-1" onclick="cambiarTipoComision(${s.id}, '${s.tipo_comision}')" title="Cambiar tipo comisión">
@@ -5907,10 +5907,10 @@ async function cargarComisionesTecnicos() {
             return;
         }
 
-        let html = '<table class="table table-hover"><thead class="table-warning"><tr><th>Técnico</th><th>Teléfono</th><th>Comisión %</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>';
+        let html = '<table class="table table-hover"><thead class="table-warning"><tr><th>Técnico</th><th>Teléfono</th><th>Comisión %</th><th>Comuna</th><th>Acciones</th></tr></thead><tbody>';
         tecnicos.forEach(t => {
             const comision = Number(t.comision_porcentaje || 40);
-            const estadoBadge = t.activo
+            const comunaBadge = t.activo
                 ? '<span class="badge bg-success">Activo</span>'
                 : '<span class="badge bg-danger">Inactivo</span>';
             html += `<tr>
@@ -5923,7 +5923,7 @@ async function cargarComisionesTecnicos() {
                         <span class="input-group-text">%</span>
                     </div>
                 </td>
-                <td>${estadoBadge}</td>
+                <td>${comunaBadge}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="guardarComisionTecnico(${t.id})">
                         <i class="fas fa-save"></i> Guardar
@@ -6150,7 +6150,7 @@ async function exportarOrdenesASheets() {
             return;
         }
 
-        const headers = ['N° Orden', 'Estado', 'Patente', 'Marca', 'Modelo', 'Color', 'Cliente', 'Teléfono', 'Fecha', 'Monto Total', 'Abono', 'Restante', 'Técnico', 'Servicios'];
+        const headers = ['N° Orden', 'Comuna', 'Patente', 'Marca', 'Modelo', 'Color', 'Cliente', 'Teléfono', 'Fecha', 'Monto Total', 'Abono', 'Restante', 'Técnico', 'Servicios'];
         const rows = ordenes.map(o => {
             let servicios = '';
             try {
@@ -6159,7 +6159,7 @@ async function exportarOrdenesASheets() {
             } catch(e) {}
             return [
                 String(o.numero_orden || '').padStart(6, '0'),
-                o.estado || '',
+                o.comuna || '',
                 o.patente_placa || '',
                 o.marca || '',
                 o.modelo || '',
@@ -6193,14 +6193,14 @@ async function exportarLiquidacionASheets() {
         return;
     }
 
-    // Obtener datos del DOM con estado cancelado/pendiente
+    // Obtener datos del DOM con comuna cancelado/pendiente
     const tabla = document.getElementById('tabla-liquidacion');
     if (!tabla) {
         mostrarNotificacion('warning', 'Sin datos', 'No hay tabla de liquidación');
         return;
     }
 
-    const headers = ['N° Orden', 'Tipo', 'Marca', 'Modelo', 'Color', 'Nombre', 'Total OT', 'MO Serv.', 'Rep. Serv.', 'MO Extra', 'Rep. Extra', 'Base Comis.', 'Comisión', 'Cancelar', 'Acción', 'Estado Pago'];
+    const headers = ['N° Orden', 'Tipo', 'Marca', 'Modelo', 'Color', 'Nombre', 'Total OT', 'MO Serv.', 'Rep. Serv.', 'MO Extra', 'Rep. Extra', 'Base Comis.', 'Comisión', 'Cancelar', 'Acción', 'Comuna Pago'];
     const rows = [];
     const filas = tabla.querySelectorAll('tbody tr');
     filas.forEach(fila => {
@@ -6399,32 +6399,32 @@ function renderizarReporteGeneral(data) {
 
     // === GRAFICOS ===
     html += `<div class="row g-3 mb-4">`;
-    html += `<div class="col-md-4"><div class="card h-100"><div class="card-header bg-dark text-white text-center"><i class="fas fa-chart-pie me-2"></i>Estados de OT</div><div class="card-body d-flex align-items-center justify-content-center"><canvas id="chart-estados" style="max-height:250px;"></canvas></div></div></div>`;
+    html += `<div class="col-md-4"><div class="card h-100"><div class="card-header bg-dark text-white text-center"><i class="fas fa-chart-pie me-2"></i>Comunas de OT</div><div class="card-body d-flex align-items-center justify-content-center"><canvas id="chart-comunas" style="max-height:250px;"></canvas></div></div></div>`;
     html += `<div class="col-md-4"><div class="card h-100"><div class="card-header text-white text-center" style="background:linear-gradient(135deg,#198754,#20c997);"><i class="fas fa-chart-bar me-2"></i>Flujo de Caja</div><div class="card-body d-flex align-items-center justify-content-center"><canvas id="chart-flujo" style="max-height:250px;"></canvas></div></div></div>`;
     if (data.tecnicos && data.tecnicos.length > 0) {
         html += `<div class="col-md-4"><div class="card h-100"><div class="card-header bg-primary text-white text-center"><i class="fas fa-users me-2"></i>Rendimiento por Técnico</div><div class="card-body d-flex align-items-center justify-content-center"><canvas id="chart-tecnicos" style="max-height:250px;"></canvas></div></div></div>`;
     }
     html += `</div>`;
 
-    // === ESTADO DE ÓRDENES (actualizado con TODOS los estados reales) ===
-    html += `<div class="card mb-4"><div class="card-header bg-dark text-white"><i class="fas fa-tasks me-2"></i>Estado de Órdenes</div><div class="card-body">`;
-    // Sub-título: Estado de la Orden
-    html += `<h6 class="text-muted fw-bold mb-2" style="font-size:0.85rem;"><i class="fas fa-tag me-1"></i>Estado de la Orden</h6>`;
+    // === COMUNA DE ÓRDENES (actualizado con TODOS los comunas reales) ===
+    html += `<div class="card mb-4"><div class="card-header bg-dark text-white"><i class="fas fa-tasks me-2"></i>Comuna de Órdenes</div><div class="card-body">`;
+    // Sub-título: Comuna de la Orden
+    html += `<h6 class="text-muted fw-bold mb-2" style="font-size:0.85rem;"><i class="fas fa-tag me-1"></i>Comuna de la Orden</h6>`;
     html += `<div class="row g-2 mb-3">`;
-    const estadosOrden = [
+    const comunasOrden = [
         ['Enviadas', r.enviadas, 'warning'],
         ['Aprobadas', r.aprobadas, 'success'],
         ['Pend. Asignación', r.pendientes_asignacion || 0, 'info'],
         ['Canceladas', r.canceladas, 'danger']
     ];
-    estadosOrden.forEach(([label, val, color]) => {
+    comunasOrden.forEach(([label, val, color]) => {
         html += `<div class="col-md-3 col-6"><div class="alert alert-${color} py-2 mb-0 text-center"><strong>${val || 0}</strong><br><small>${label}</small></div></div>`;
     });
     html += `</div>`;
-    // Sub-título: Estado del Trabajo
-    html += `<h6 class="text-muted fw-bold mb-2" style="font-size:0.85rem;"><i class="fas fa-wrench me-1"></i>Estado del Trabajo</h6>`;
+    // Sub-título: Comuna del Trabajo
+    html += `<h6 class="text-muted fw-bold mb-2" style="font-size:0.85rem;"><i class="fas fa-wrench me-1"></i>Comuna del Trabajo</h6>`;
     html += `<div class="row g-2">`;
-    const estadosTrabajo = [
+    const comunasTrabajo = [
         ['Pendientes', r.pendientes || 0, 'secondary'],
         ['Pend. Visita', r.pendientes_visita, 'info'],
         ['En Sitio', r.en_sitio, 'primary'],
@@ -6434,7 +6434,7 @@ function renderizarReporteGeneral(data) {
         ['No Completadas', r.no_completadas || 0, 'danger'],
         ['Cerradas', r.cerradas, 'dark']
     ];
-    estadosTrabajo.forEach(([label, val, color]) => {
+    comunasTrabajo.forEach(([label, val, color]) => {
         html += `<div class="col-md-3 col-6"><div class="alert alert-${color} py-2 mb-0 text-center"><strong>${val || 0}</strong><br><small>${label}</small></div></div>`;
     });
     html += `</div></div></div>`;
@@ -6501,15 +6501,15 @@ function renderizarReporteGeneral(data) {
     // === ÓRDENES DE TRABAJO ===
     if (data.ordenes && data.ordenes.length > 0) {
         html += `<div class="card mb-4"><div class="card-header bg-primary text-white"><i class="fas fa-clipboard-list me-2"></i>Órdenes de Trabajo (${data.ordenes.length})</div><div class="card-body"><div class="table-responsive" style="max-height:500px;overflow-y:auto"><table class="table table-sm table-hover table-bordered"><thead class="table-primary sticky-top"><tr>
-            <th>N°</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Nombre</th><th>Teléfono</th><th>Estado</th><th>Trabajo</th><th>Técnico</th><th>Monto</th><th>Abono</th><th>Restante</th><th>Costos Extra</th>
+            <th>N°</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Nombre</th><th>Teléfono</th><th>Comuna</th><th>Trabajo</th><th>Técnico</th><th>Monto</th><th>Abono</th><th>Restante</th><th>Costos Extra</th>
         </tr></thead><tbody>`;
         data.ordenes.forEach(o => {
-            const estTrabajo = o.estado_trabajo || '';
+            const estTrabajo = o.comuna_trabajo || '';
             const badgeTrabajo = estTrabajo === 'Cerrada' ? 'dark' : estTrabajo === 'Completada' ? 'success' : estTrabajo === 'En Progreso' ? 'primary' : estTrabajo === 'En Sitio' ? 'info' : estTrabajo === 'Pendiente Piezas' ? 'secondary' : estTrabajo === 'No Completada' ? 'danger' : 'warning';
             html += `<tr>
                 <td><a href="#" onclick="verOTenLinea(${o.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(o.numero_orden||'').padStart(6,'0')}</a></td>
                 <td>${o.patente_placa||''}</td><td>${o.marca||''}</td><td>${o.modelo||''}</td><td>${colorSwatch(o.color)}</td><td>${o.cliente_nombre||''}</td><td>${o.cliente_telefono||''}</td>
-                <td><span class="badge bg-${o.estado==='Aprobada'?'success':o.estado==='Cancelada'?'danger':'warning'}">${o.estado||''}</span></td>
+                <td><span class="badge bg-${o.comuna==='Aprobada'?'success':o.comuna==='Cancelada'?'danger':'warning'}">${o.comuna||''}</span></td>
                 <td><span class="badge bg-${badgeTrabajo}">${estTrabajo}</span></td>
                 <td>${o.tecnico_nombre||'Sin asignar'}</td>
                 <td class="fw-bold">$${formatMoney(o.monto_total)}</td><td>$${formatMoney(o.monto_abono)}</td><td class="${Number(o.monto_restante)>0?'text-danger':''}">$${formatMoney(o.monto_restante)}</td>
@@ -6570,13 +6570,13 @@ function renderizarReporteGeneral(data) {
     setTimeout(function() {
         destruirGraficosReporte();
 
-        // 1) Torta de estados de OT (actualizado con todos los estados reales)
-        var ctxEstados = document.getElementById('chart-estados');
-        if (ctxEstados) {
+        // 1) Torta de comunas de OT (actualizado con todos los comunas reales)
+        var ctxComunas = document.getElementById('chart-comunas');
+        if (ctxComunas) {
             var estLabels = ['Enviadas','Aprobadas','Pend.Asign.','Canceladas','Pendientes','Pend.Visita','En Sitio','En Progreso','Pend.Piezas','Completadas','No Compl.','Cerradas'];
             var estValues = [r.enviadas||0, r.aprobadas||0, r.pendientes_asignacion||0, r.canceladas||0, r.pendientes||0, r.pendientes_visita||0, r.en_sitio||0, r.en_progreso||0, r.pendientes_piezas||0, r.completadas||0, r.no_completadas||0, r.cerradas||0];
             var estColors = ['#ffc107','#198754','#17a2b8','#dc3545','#adb5bd','#0dcaf0','#6f42c1','#fd7e14','#6c757d','#20c997','#c82333','#343a40'];
-            _graficosReporte.push(new Chart(ctxEstados, {
+            _graficosReporte.push(new Chart(ctxComunas, {
                 type: 'doughnut',
                 data: { labels: estLabels, datasets: [{ data: estValues, backgroundColor: estColors, borderWidth: 2, borderColor: '#fff' }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 9 } } } } }
@@ -6658,9 +6658,9 @@ async function exportarReporteASheets() {
         await enviarASheets({ sheetName: 'Resumen', headers: ['Métrica','Valor'],
             rows: [
                 ['Periodo', d.periodo], ['Valor', d.valor],
-                ['--- ESTADO DE LA ORDEN ---', ''],
+                ['--- COMUNA DE LA ORDEN ---', ''],
                 ['Total Órdenes', r.total_ordenes], ['Enviadas', r.enviadas], ['Aprobadas', r.aprobadas], ['Pend. Asignación', r.pendientes_asignacion||0], ['Canceladas', r.canceladas],
-                ['--- ESTADO DEL TRABAJO ---', ''],
+                ['--- COMUNA DEL TRABAJO ---', ''],
                 ['Pendientes', r.pendientes||0], ['Pendientes Visita', r.pendientes_visita], ['En Sitio', r.en_sitio], ['En Progreso', r.en_progreso],
                 ['Pendientes Piezas', r.pendientes_piezas||0], ['Completadas', r.completadas], ['No Completadas', r.no_completadas||0], ['Cerradas', r.cerradas],
                 ['--- FLUJO DE CAJA ---', ''],
@@ -6683,10 +6683,10 @@ async function exportarReporteASheets() {
 
         // 2. Órdenes
         if (d.ordenes && d.ordenes.length > 0) {
-            await enviarASheets({ sheetName: 'Órdenes', headers: ['N° OT','Patente','Marca','Modelo','Color','Año','Cliente','RUT','Teléfono','Estado','Estado Trabajo','Técnico','Comisión Tec','Fecha','Hora','Recepcionista','Dirección','Monto Total','Abono','Restante','Método Pago','Costos Extra','MO','Rep'],
+            await enviarASheets({ sheetName: 'Órdenes', headers: ['N° OT','Patente','Marca','Modelo','Color','Año','Cliente','RUT','Teléfono','Comuna','Comuna Trabajo','Técnico','Comisión Tec','Fecha','Hora','Recepcionista','Dirección','Monto Total','Abono','Restante','Método Pago','Costos Extra','MO','Rep'],
                 rows: d.ordenes.map(o => [String(o.numero_orden||'').padStart(6,'0'), o.patente_placa||'', o.marca||'', o.modelo||'', o.color||'', o.anio||'',
                     o.cliente_nombre||'', o.cliente_rut||'', o.cliente_telefono||'',
-                    o.estado||'', o.estado_trabajo||'', o.tecnico_nombre||'', o.tecnico_comision||'',
+                    o.comuna||'', o.comuna_trabajo||'', o.tecnico_nombre||'', o.tecnico_comision||'',
                     o.fecha_ingreso||'', o.hora_ingreso||'', o.recepcionista||'', o.direccion||'',
                     valorNumerico(o.monto_total), valorNumerico(o.monto_abono), valorNumerico(o.monto_restante), o.metodo_pago||'',
                     valorNumerico(o.total_costos_extra), valorNumerico(o.costos_mo), valorNumerico(o.costos_rep)]) });
@@ -6732,7 +6732,7 @@ async function exportarReporteASheets() {
 // NOTIFICACIONES WHATSAPP
 // ============================================
 
-// Cargar estado de UltraMsg al entrar a la seccion
+// Cargar comuna de UltraMsg al entrar a la seccion
 async function cargarUltraMsgStatus() {
     try {
         var resp = await fetch(API_BASE + '/admin/ultramsg');
@@ -7068,9 +7068,9 @@ async function editarOrden(ordenId) {
         document.getElementById('edit-rut').value = o.cliente_rut || '';
         document.getElementById('edit-telefono').value = o.cliente_telefono || '';
         document.getElementById('edit-direccion').value = o.direccion || '';
-        document.getElementById('edit-estado').value = o.estado || 'Enviada';
-        // Nuevos campos de asignación y estado
-        document.getElementById('edit-estado-trabajo').value = o.estado_trabajo || 'Pendiente';
+        document.getElementById('edit-comuna').value = o.comuna || 'Enviada';
+        // Nuevos campos de asignación y comuna
+        document.getElementById('edit-comuna-trabajo').value = o.comuna_trabajo || 'Pendiente';
         document.getElementById('edit-fecha-programada').value = o.fecha_programada || '';
         document.getElementById('edit-hora-programada').value = o.hora_programada || '';
         // Cargar técnicos en el select de asignación
@@ -7628,8 +7628,8 @@ async function guardarEdicionOrden() {
     var ma = parseFloat(document.getElementById('edit-monto-abono').value) || 0;
     var d = { orden_id: parseInt(ordenId), cliente_id: parseInt(document.getElementById('edit-cliente-id').value)||null, vehiculo_id: parseInt(document.getElementById('edit-vehiculo-id').value)||null,
         cliente: cliente, cliente_apellido: document.getElementById('edit-cliente-apellido').value.trim(), rut: document.getElementById('edit-rut').value.trim(), telefono: document.getElementById('edit-telefono').value.trim(), direccion: document.getElementById('edit-direccion').value.trim(),
-        estado: document.getElementById('edit-estado').value,
-        estado_trabajo: document.getElementById('edit-estado-trabajo').value,
+        comuna: document.getElementById('edit-comuna').value,
+        comuna_trabajo: document.getElementById('edit-comuna-trabajo').value,
         tecnico_asignado_id: parseInt(document.getElementById('edit-tecnico-asignado').value) || null,
         fecha_programada: document.getElementById('edit-fecha-programada').value || null,
         hora_programada: document.getElementById('edit-hora-programada').value || null,
@@ -7748,7 +7748,7 @@ async function inicializarCalendario() {
             const placa = props.patentePlaca;
             const cliente = props.clienteNombre;
             const tecnico = props.tecnicoNombre;
-            const estado = props.estadoTrabajo || props.estado;
+            const comuna = props.comunaTrabajo || props.comuna;
 
             let tooltipHtml = '<div style="font-size:0.82rem; line-height:1.4;">';
             if (info.event.title) tooltipHtml += '<strong>' + info.event.title + '</strong><br>';
@@ -7761,7 +7761,7 @@ async function inicializarCalendario() {
             if (placa) tooltipHtml += '🏷️ ' + placa + '<br>';
             if (cliente) tooltipHtml += '👤 ' + cliente + '<br>';
             if (tecnico) tooltipHtml += '🔧 ' + tecnico + '<br>';
-            if (estado) tooltipHtml += '📋 ' + estado;
+            if (comuna) tooltipHtml += '📋 ' + comuna;
             tooltipHtml += '</div>';
 
             info.el.setAttribute('title', '');
@@ -7865,7 +7865,7 @@ async function cargarEventosCalendario(startStr, endStr) {
 
         const eventos = [];
 
-        // 1. Eventos de AgendaTecnicos (mostrar TODOS los estados)
+        // 1. Eventos de AgendaTecnicos (mostrar TODOS los comunas)
         (data.eventos || []).forEach(ev => {
             // Construir título descriptivo con datos del vehículo
             let tituloEvento = ev.titulo || '';
@@ -7889,7 +7889,7 @@ async function cargarEventosCalendario(startStr, endStr) {
                     ordenId: ev.orden_id,
                     tipoServicio: ev.tipo_servicio,
                     observaciones: ev.observaciones,
-                    estado: ev.estado,
+                    comuna: ev.comuna,
                     numeroOrden: ev.numero_orden,
                     marca: ev.marca || '',
                     modelo: ev.modelo || '',
@@ -7939,7 +7939,7 @@ async function cargarEventosCalendario(startStr, endStr) {
                     esExpress: esExpress,
                     clienteNombre: o.cliente_nombre,
                     direccion: o.direccion,
-                    estadoTrabajo: o.estado_trabajo,
+                    comunaTrabajo: o.comuna_trabajo,
                     marca: o.marca || '',
                     modelo: o.modelo || '',
                     colorVehiculo: o.color_vehiculo || '',
@@ -8113,7 +8113,7 @@ async function eliminarEventoCalendario() {
     const eventoId = document.getElementById('cal-evento-id').value;
     if (!eventoId) return;
 
-    if (!confirm('¿Eliminar este evento de la agenda? La OT asociada quedará libre para reasignar (se quitará el técnico y se reseteará el estado).')) return;
+    if (!confirm('¿Eliminar este evento de la agenda? La OT asociada quedará libre para reasignar (se quitará el técnico y se reseteará el comuna).')) return;
 
     try {
         const response = await fetch(`${API_BASE}/admin/calendario?id=${eventoId}`, {
@@ -8136,7 +8136,7 @@ async function eliminarEventoCalendario() {
 }
 
 // ============================================
-// VER OT desde modal de calendario
+// CLR OT desde modal de calendario
 // ============================================
 function verOrdenDesdeCalendario() {
     const ordenId = document.getElementById('cal-orden-id').value;
@@ -8223,7 +8223,7 @@ async function eliminarEventoPorDrag(event) {
     const titulo = event.title || 'este evento';
 
     if (props.tipo === 'orden') {
-        // OT programada sin agenda - liberar la OT (des-asignar técnico + resetear estado)
+        // OT programada sin agenda - liberar la OT (des-asignar técnico + resetear comuna)
         if (!confirm(`¿Quitar asignación de "${titulo}"? La OT quedará libre para reasignar.`)) {
             event.revert();
             return;

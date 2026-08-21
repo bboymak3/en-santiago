@@ -8,7 +8,7 @@
     'use strict';
 
     // ─── Configuration ──────────────────────────────────────────
-    const VENEZUELA_CENTER = [8.6233, -66.5897];
+    const CLNEZUELA_CENTER = [-33.45233, -66.5897];
     const DEFAULT_ZOOM = 6;
 
     // ─── State ──────────────────────────────────────────────────
@@ -32,7 +32,7 @@
 
     // Filter elements
     const mapTipo = document.getElementById('mapTipo');
-    const mapEstado = document.getElementById('mapEstado');
+    const mapComuna = document.getElementById('mapComuna');
     const mapCiudad = document.getElementById('mapCiudad');
     const mapSearchBtn = document.getElementById('mapSearchBtn');
     const mapResetBtn = document.getElementById('mapResetBtn');
@@ -62,7 +62,7 @@
 
         try {
             map = L.map('map', {
-                center: VENEZUELA_CENTER,
+                center: CLNEZUELA_CENTER,
                 zoom: DEFAULT_ZOOM,
                 zoomControl: false,
                 scrollWheelZoom: true,
@@ -153,7 +153,7 @@
     }
 
     // ─── Fix Corrupted Coordinates ───────────────────────────
-    // DB values like lng=-7021260663068742 missing decimal → -70.21260663068742
+    // DB values like lng=-7021260663068742 missing decimal → -70.671260663068742
     function fixCoord(val) {
         if (val === null || val === undefined || val === '') return null;
         var n = parseFloat(val);
@@ -162,7 +162,7 @@
             // Likely missing decimal point — insert after first 2-3 digits
             var s = String(Math.abs(n));
             var sign = n < 0 ? '-' : '';
-            // Try inserting at position 2 (e.g. -7021... → -70.21...)
+            // Try inserting at position 2 (e.g. -7021... → -70.671...)
             if (s.length > 3) {
                 var fixed = sign + s.substring(0, 2) + '.' + s.substring(2);
                 var fn = parseFloat(fixed);
@@ -488,7 +488,7 @@
         properties.forEach(function (p) {
             var coverImage = p.cover_image || '';
             var opLabel = (p.operation_type || '').replace('_', ' ');
-            var price = p.price ? '$' + Number(p.price).toLocaleString('es-VE') : '';
+            var price = p.price ? '$' + Number(p.price).toLocaleString('es-CL') : '';
             var address = p.city ? (p.state ? p.city + ', ' + p.state : p.city) : '--';
             fixItemCoords(p);
             html += '<div class="map-business-card" data-business-id="' + p.id + '" data-lat="' + (p._lat || '') + '" data-lng="' + (p._lng || '') + '">'
@@ -584,7 +584,7 @@
         if (mapResetBtn) {
             mapResetBtn.addEventListener('click', resetFilters);
         }
-        [mapCiudad, mapEstado].forEach(function (input) {
+        [mapCiudad, mapComuna].forEach(function (input) {
             if (input) {
                 input.addEventListener('keydown', function (e) {
                     if (e.key === 'Enter') {
@@ -604,14 +604,14 @@
     function getFilterValues() {
         return {
             categoria: mapTipo ? mapTipo.value : '',
-            state: mapEstado ? mapEstado.value : '',
+            state: mapComuna ? mapComuna.value : '',
             city: mapCiudad ? (mapCiudad.value || '').trim() : '',
         };
     }
 
     function resetFilters() {
         if (mapTipo) mapTipo.value = '';
-        if (mapEstado) mapEstado.value = '';
+        if (mapComuna) mapComuna.value = '';
         if (mapCiudad) mapCiudad.value = '';
         // Reload based on current type
         if (currentMapType === 'properties') {
@@ -752,7 +752,7 @@
 
         try {
             window._miniMap = L.map('searchMiniMap', {
-                center: VENEZUELA_CENTER,
+                center: CLNEZUELA_CENTER,
                 zoom: DEFAULT_ZOOM,
                 zoomControl: false,
                 scrollWheelZoom: true,
@@ -779,7 +779,7 @@
 
         var params = getSearchParams();
         var endpoint = '/businesses?status=approved&limit=50';
-        if (params.estado) endpoint += '&state=' + encodeURIComponent(params.estado);
+        if (params.comuna) endpoint += '&state=' + encodeURIComponent(params.comuna);
         if (params.categoria) endpoint += '&categoria=' + encodeURIComponent(params.categoria);
         if (params.city) endpoint += '&city=' + encodeURIComponent(params.city);
         if (params.search) endpoint += '&search=' + encodeURIComponent(params.search);
@@ -857,7 +857,7 @@
 
         var coverImage = property.cover_image || '';
         var title = property.title || 'Propiedad';
-        var price = property.price ? '$' + Number(property.price).toLocaleString('es-VE') : '';
+        var price = property.price ? '$' + Number(property.price).toLocaleString('es-CL') : '';
         var opLabel = (property.operation_type || '').replace('_', ' ');
 
         var icon = L.divIcon({
@@ -922,7 +922,7 @@
         mapBusinessList.innerHTML = properties.map(function (p) {
             var coverImage = p.cover_image || '';
             var opLabel = (p.operation_type || '').replace('_', ' ');
-            var price = p.price ? '$' + Number(p.price).toLocaleString('es-VE') : '';
+            var price = p.price ? '$' + Number(p.price).toLocaleString('es-CL') : '';
             var address = p.city ? (p.state ? p.city + ', ' + p.state : p.city) : '--';
 
             fixItemCoords(p);

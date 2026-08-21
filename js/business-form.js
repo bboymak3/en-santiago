@@ -7,7 +7,7 @@
     'use strict';
 
     // ─── Configuration ──────────────────────────────────────────
-    const VENEZUELA_CENTER = { lat: 8.6233, lng: -66.5897 };
+    const CLNEZUELA_CENTER = { lat: -33.45233, lng: -66.5897 };
     const MAX_PHOTOS = 10;
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
     const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
@@ -143,15 +143,15 @@
     let locationMap = null;
     let locationMarker = null;
     let geocoder = null;
-    let selectedLat = VENEZUELA_CENTER.lat;
-    let selectedLng = VENEZUELA_CENTER.lng;
+    let selectedLat = CLNEZUELA_CENTER.lat;
+    let selectedLng = CLNEZUELA_CENTER.lng;
 
     function initLocationPicker() {
         const mapEl = document.getElementById('locationMap');
         if (!mapEl || typeof L === 'undefined') return;
 
         try {
-            // Initialize map centered on Venezuela
+            // Initialize map centered on Santiago de Chile
             locationMap = L.map('locationMap', {
                 center: [selectedLat, selectedLng],
                 zoom: 6,
@@ -464,7 +464,7 @@
         }
         setValue('propDireccion', business.address);
         setValue('propCiudad', business.city);
-        setValue('propEstado', business.state);
+        setValue('propComuna', business.state);
         setValue('propLat', business.lat);
         setValue('propLng', business.lng);
 
@@ -771,7 +771,7 @@
         const schedule = getValue('propSchedule');
         const direccion = getValue('propDireccion');
         const ciudad = getValue('propCiudad');
-        const estado = getValue('propEstado');
+        const comuna = getValue('propComuna');
         let lat = getValueNum('propLat');
         let lng = getValueNum('propLng');
 
@@ -813,10 +813,10 @@
             return;
         }
 
-        // Default coordinates to Venezuela center if not provided
+        // Default coordinates to Santiago de Chile center if not provided
         if (isNaN(lat) || isNaN(lng)) {
-            lat = VENEZUELA_CENTER.lat;
-            lng = VENEZUELA_CENTER.lng;
+            lat = CLNEZUELA_CENTER.lat;
+            lng = CLNEZUELA_CENTER.lng;
         }
 
         // Gather features from checkboxes
@@ -833,8 +833,8 @@
             business_type: tipoNegocio?.toLowerCase() || 'negocio',
             address: direccion,
             city: ciudad,
-            state: estado || 'Mérida',
-            country: 'Venezuela',
+            state: comuna || 'Mérida',
+            country: 'Santiago de Chile',
             lat,
             lng,
             phone,
@@ -1106,7 +1106,7 @@
         videoFileInput.addEventListener('change', function() {
             var files = this.files;
             if (!files || !files.length) return;
-            var token = localStorage.getItem('meridaunclick_token') || localStorage.getItem('token');
+            var token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('token');
             var infoDiv = document.getElementById('bizFormVideoFileInfo');
 
             Array.from(files).forEach(function(file) {
@@ -1198,7 +1198,7 @@
 
             try {
                 var headers = { 'Content-Type': 'application/json' };
-                var token = localStorage.getItem('aunclick_token');
+                var token = localStorage.getItem('en-santiago_token');
                 if (token) headers['Authorization'] = 'Bearer ' + token;
 
                 var resp = await fetch('/api/category-suggestions', {
@@ -1256,7 +1256,7 @@
         if (cat && cat !== '__suggest__') urlParts.push(cat);
         urlParts.push(slugName);
 
-        slugPreviewText.textContent = 'https://holax.com.ve/' + urlParts.join('/');
+        slugPreviewText.textContent = 'https://en-santiago.pages.dev/' + urlParts.join('/');
         slugPreview.style.display = 'block';
     }
 

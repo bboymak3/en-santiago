@@ -1,5 +1,5 @@
 /**
- * HolaX - Dynamic Category & Tipo de Negocio Loader
+ * En Santiago - Dynamic Category & Tipo de Negocio Loader
  * Replaces hardcoded dropdowns with dynamic DB-loaded data.
  * Supports cascading: tipo → categoria with SEO slug preview.
  *

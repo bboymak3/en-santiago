@@ -977,7 +977,7 @@ window.closeEditBusinessModal = function() {
                                 <tr style="${isProdExpired ? 'opacity:0.65;' : ''}">
                                     <td><div class="dash-prop-name">${p.image ? `<img src="${p.image}" class="dash-thumb" onerror="this.style.display='none'">` : '<i class="fas fa-image dash-thumb-placeholder"></i>'}<span>${p.name || 'Sin nombre'}</span></div></td>
                                     <td>${p.category || 'General'}</td>
-                                    <td class="dash-price">$${Number(p.price || 0).toLocaleString('es-VE')}</td>
+                                    <td class="dash-price">$${Number(p.price || 0).toLocaleString('es-CL')}</td>
                                     <td>${statusLabel}${prodExpBadge}</td>
                                     <td>${formatDate(p.created_at)}</td>
                                     <td class="dash-actions">
@@ -1541,7 +1541,7 @@ window.closeEditBusinessModal = function() {
                     const fd = new FormData();
                     fd.append('file', file);
                     fd.append('product_type', 'job');
-                    const token = localStorage.getItem('meridaunclick_token') || localStorage.getItem('authToken');
+                    const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken');
                     fetch('/api/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token }, body: fd })
                     .then(r => r.json())
                     .then(data => {
@@ -1613,12 +1613,12 @@ window.closeEditBusinessModal = function() {
             const select = document.getElementById('jobBusiness');
             if (select) {
                 select.innerHTML = '<option value="" disabled selected>Selecciona un negocio</option>';
-                // Always add HOLAX as the first option (uses Holax.png logo)
-                const holaxOpt = document.createElement('option');
-                holaxOpt.value = 'holax';
-                holaxOpt.textContent = 'HOLAX';
-                holaxOpt.dataset.logo = '/images/Holax.png';
-                select.appendChild(holaxOpt);
+                // Always add HOLAX as the first option (uses En Santiago.png logo)
+                const en-santiagoOpt = document.createElement('option');
+                en-santiagoOpt.value = 'en-santiago';
+                en-santiagoOpt.textContent = 'HOLAX';
+                en-santiagoOpt.dataset.logo = '/images/En Santiago.png';
+                select.appendChild(en-santiagoOpt);
                 if (businesses.length > 0) {
                     businesses.forEach(b => {
                         const opt = document.createElement('option');
@@ -1992,7 +1992,7 @@ window.closeEditBusinessModal = function() {
                     ? `<div class="admin-user-avatar"><img src="${user.avatar}" alt=""></div>`
                     : `<div class="admin-user-avatar">${initials}</div>`;
                 const isSelf = myId && (user.id === myId || parseInt(user.id) === parseInt(myId));
-                const date = user.created_at ? new Date(user.created_at).toLocaleDateString('es-VE', { day: '2-digit', month: 'short', year: 'numeric' }) : '-';
+                const date = user.created_at ? new Date(user.created_at).toLocaleDateString('es-CL', { day: '2-digit', month: 'short', year: 'numeric' }) : '-';
                 const phone = user.phone || '<span style="color:#ccc">—</span>';
 
                 // Role toggle
@@ -3348,7 +3348,7 @@ window.closeEditBusinessModal = function() {
                 const now = new Date();
                 if (expDate > now) {
                     const daysLeft = Math.ceil((expDate - now) / (1000 * 60 * 60 * 24));
-                    planExpiryInfo.querySelector('span').textContent = `Tu plan Premium esta vigente. Expira en ${daysLeft} dias (${expDate.toLocaleDateString('es-VE')}). Tus publicaciones nunca caducan.`;
+                    planExpiryInfo.querySelector('span').textContent = `Tu plan Premium esta vigente. Expira en ${daysLeft} dias (${expDate.toLocaleDateString('es-CL')}). Tus publicaciones nunca caducan.`;
                     planExpiryInfo.style.display = 'block';
                     planExpiryInfo.style.color = '#006EE3';
                 } else {
@@ -3573,7 +3573,7 @@ window.closeEditBusinessModal = function() {
 
             adminPremiumBody.innerHTML = requests.map(r => {
                 const durationLabel = r.plan_duration === '1_year' ? '1 Anio ($90)' : '3 Meses ($30)';
-                const dateStr = r.created_at ? new Date(r.created_at).toLocaleDateString('es-VE') : '--';
+                const dateStr = r.created_at ? new Date(r.created_at).toLocaleDateString('es-CL') : '--';
                 return `
                     <tr>
                         <td><strong>${escapeHtml(r.user_name || 'Usuario')}</strong></td>
@@ -3943,7 +3943,7 @@ window.closeEditBusinessModal = function() {
             <div class="aeb-grid">
                 <div class="aeb-field"><label>Direccion</label><input type="text" class="eb-input" id="aebAddress" value="${escH(b.address||'')}"></div>
                 <div class="aeb-field"><label>Ciudad</label><input type="text" class="eb-input" id="aebCity" value="${escH(b.city||'')}"></div>
-                <div class="aeb-field"><label>Estado</label><input type="text" class="eb-input" id="aebState" value="${escH(b.state||'')}"></div>
+                <div class="aeb-field"><label>Comuna</label><input type="text" class="eb-input" id="aebState" value="${escH(b.state||'')}"></div>
                 <div class="aeb-field"><label>Horario</label><input type="text" class="eb-input" id="aebSchedule" value="${escH(b.schedule||'')}" placeholder="Lun-Vie 8:00-17:00"></div>
             </div>
         </div>
@@ -3968,7 +3968,7 @@ window.closeEditBusinessModal = function() {
 
         <!-- Status Change -->
         <div class="aeb-card">
-            <h4><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Estado</h4>
+            <h4><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Comuna</h4>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
                 <button class="btn btn-sm ${b.status==='approved'?'btn-primary':'btn-secondary'}" onclick="adminChangeStatus(${b.id},'approved')" style="${b.status==='approved'?'background:#006EE3;':''}"><i class="fas fa-check"></i> Aprobar</button>
                 <button class="btn btn-sm ${b.status==='pending'?'btn-primary':'btn-secondary'}" onclick="adminChangeStatus(${b.id},'pending')" style="${b.status==='pending'?'background:#d97706;':''}"><i class="fas fa-clock"></i> Pendiente</button>
@@ -4062,7 +4062,7 @@ window.closeEditBusinessModal = function() {
     window.adminChangeStatus = async function(id, status) {
         try {
             await api.put('/businesses/' + id, { status });
-            showToast('Estado actualizado','success');
+            showToast('Comuna actualizado','success');
             if (adminEditBizCurrent) loadAdminEditBizDetail(id);
             loadAdminEditBizList();
         } catch(e) { showToast('Error: '+e.message,'error'); }

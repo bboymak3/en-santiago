@@ -41,7 +41,7 @@ const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'mp4', 'webm', 
 const MAX_SIZE = 50 * 1024 * 1024; // 50MB (compression applied client-side)
 // Images are served through our own /api/serve/ endpoint (no public R2 access needed)
 // The key is stored in DB; the serve endpoint reads from R2 binding
-const R2_SERVE_BASE = '/api/serve';
+const R2_SERCL_BASE = '/api/serve';
 
 export async function onRequestPost(context) {
   try {
@@ -60,7 +60,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const jwtSecret = env.JWT_SECRET || 'aunclick_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
 
     // Auth required
     const authHeader = request.headers.get('Authorization');
@@ -171,7 +171,7 @@ export async function onRequestPost(context) {
     // Generate unique key
     const timestamp = Date.now();
     const sanitizedName = fileName.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const r2Folder = env.R2_FOLDER || 'merida';
+    const r2Folder = env.R2_FOLDER || 'santiago';
     let key;
     if (productType === 'marketplace') {
       key = `${r2Folder}/marketplace/${user.id}/${timestamp}_${sanitizedName}`;
@@ -204,7 +204,7 @@ export async function onRequestPost(context) {
     });
 
     // Use our own serve endpoint URL (works without public R2 access)
-    const publicUrl = `${R2_SERVE_BASE}?key=${encodeURIComponent(key)}`;
+    const publicUrl = `${R2_SERCL_BASE}?key=${encodeURIComponent(key)}`;
 
     return new Response(JSON.stringify({
       message: 'Imagen subida exitosamente',

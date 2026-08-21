@@ -490,7 +490,7 @@
 
       if (diff < 60000) return 'Ahora';
       if (diff < 3600000) return Math.floor(diff / 60000) + 'm';
-      if (diff < 86400000) return date.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+      if (diff < 86400000) return date.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
 
       // Different date
       if (diff < 604800000) {
@@ -498,7 +498,7 @@
         return days[date.getDay()];
       }
 
-      return date.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit' });
+      return date.toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit' });
     } catch {
       return '';
     }

@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "HOLAX - Directorio de Negocios de Venezuela",
+  "name": "HOLAX - Directorio de Negocios de Santiago de Chile",
   "short_name": "HOLAX",
-  "description": "Directorio Nacional de Negocios de Venezuela. Encuentra negocios, productos, empleos y servicios en tu ciudad.",
+  "description": "Directorio Metropolitano de Negocios de Santiago de Chile. Encuentra negocios, productos, empleos y servicios en tu ciudad.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -45,14 +45,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "HolaX - Directorio de Negocios en Venezuela (Desktop)"
+      "label": "En Santiago - Directorio de Negocios en Santiago de Chile (Desktop)"
     },
     {
       "src": "/images/screenshot-narrow.png",
       "sizes": "1170x1392",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "HolaX - Directorio de Negocios en Venezuela (Movil)"
+      "label": "En Santiago - Directorio de Negocios en Santiago de Chile (Movil)"
     }
   ],
   "shortcuts": [
@@ -98,7 +98,7 @@
   ],
   "protocol_handlers": [
     {
-      "protocol": "web+holax",
+      "protocol": "web+en-santiago",
       "url": "/search.html?q=%s"
     }
   ]

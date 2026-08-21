@@ -64,7 +64,7 @@ export async function onRequestGet(context) {
     }
 
     const token = authHeader.substring(7);
-    const user = await verifyJWT(token, env.JWT_SECRET || 'aunclick_default_secret_2024');
+    const user = await verifyJWT(token, env.JWT_SECRET || 'en-santiago_default_secret_2024');
     if (!user) {
       return new Response(JSON.stringify({ error: 'Token inválido o expirado' }), {
         status: 401,

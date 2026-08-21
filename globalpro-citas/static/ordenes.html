@@ -132,7 +132,7 @@ async function loadOrdenes(filter) {
   var titles = {'':'Todas las ordenes','pendiente':'Pendientes de aprobacion','aprobada':'Aprobadas','rechazada':'Rechazadas'};
   document.getElementById('filterTitle').textContent = titles[currentFilter] || titles[''];
   try {
-    var url = API + (currentFilter ? '?estado=' + currentFilter : '');
+    var url = API + (currentFilter ? '?comuna=' + currentFilter : '');
     var res = await fetch(url);
     var data = await res.json();
     if (!data.success) return;
@@ -168,20 +168,20 @@ function renderOrders(citas) {
   var html = '';
   for (var i = 0; i < citas.length; i++) {
     var c = citas[i];
-    var estado = c.estado_aprobacion || 'pendiente';
+    var comuna = c.comuna_aprobacion || 'pendiente';
     var tipo = c.tipo_atencion || 'taller';
     var vehiculo = [c.marca, c.modelo, c.anio, c.color ? '(' + c.color + ')' : ''].filter(Boolean).join(' ');
     var ordenNum = c.numero_orden_globalprov2 ? 'EXP' + String(c.numero_orden_globalprov2).padStart(6, '0') : '--';
     var tipoLabel = tipo === 'domicilio' ? '🏠 Domicilio' : '🔧 Taller';
-    var estadoLabel = estado === 'pendiente' ? '⏳ Pendiente' : estado === 'aprobada' ? '✅ Aprobada' : '❌ Rechazada';
+    var comunaLabel = comuna === 'pendiente' ? '⏳ Pendiente' : comuna === 'aprobada' ? '✅ Aprobada' : '❌ Rechazada';
     var fechaCita = fmtDate(c.fecha_cita) + ' ' + (c.hora_cita || '');
     var creada = c.created_at ? c.created_at.substring(0, 16) : '--';
 
-    html += '<div class="order-card ' + estado + '">';
+    html += '<div class="order-card ' + comuna + '">';
     html += '<div class="order-header"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">';
     html += '<span class="order-id">#' + c.id + '</span>';
     html += '<span class="order-type ' + tipo + '">' + tipoLabel + '</span>';
-    html += '<span class="order-status ' + estado + '">' + estadoLabel + '</span>';
+    html += '<span class="order-status ' + comuna + '">' + comunaLabel + '</span>';
     html += '</div><div class="order-date">' + fechaCita + ' | Creada: ' + creada + '</div></div>';
 
     html += '<div class="order-body">';
@@ -199,10 +199,10 @@ function renderOrders(citas) {
     if (c.motivo_rechazo) html += '<div class="order-reject-reason">Motivo: ' + c.motivo_rechazo + '</div>';
 
     html += '<div class="order-actions">';
-    if (estado === 'pendiente') {
+    if (comuna === 'pendiente') {
       html += '<button class="btn btn-sm btn-approve" onclick="aprobarCita(' + c.id + ')">✅ Aprobar</button>';
       html += '<button class="btn btn-sm btn-reject" onclick="openRejectModal(' + c.id + ')">❌ Rechazar</button>';
-    } else if (estado === 'aprobada') {
+    } else if (comuna === 'aprobada') {
       html += '<button class="btn btn-sm btn-disabled">✅ Aprobada</button>';
     } else {
       html += '<button class="btn btn-sm btn-disabled">❌ Rechazada</button>';

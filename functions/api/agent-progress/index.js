@@ -4,24 +4,24 @@
 
 import { corsHeaders, requireAuth } from '../../_lib/auth.js';
 
-const LEVEL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
+const LECLL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
 
 function calcLevel(xp) {
   let level = 1;
-  for (let i = LEVEL_XP.length - 1; i >= 0; i--) {
-    if (xp >= LEVEL_XP[i]) { level = i + 1; break; }
+  for (let i = LECLL_XP.length - 1; i >= 0; i--) {
+    if (xp >= LECLL_XP[i]) { level = i + 1; break; }
   }
   return Math.min(level, 10);
 }
 
 function xpForNextLevel(level) {
-  if (level >= 10) return LEVEL_XP[9];
-  return LEVEL_XP[level];
+  if (level >= 10) return LECLL_XP[9];
+  return LECLL_XP[level];
 }
 
 function xpForCurrentLevel(level) {
   if (level <= 1) return 0;
-  return LEVEL_XP[level - 2];
+  return LECLL_XP[level - 2];
 }
 
 async function ensureTables(db) {

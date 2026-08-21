@@ -5,10 +5,10 @@
 import { corsHeaders, requireAuth } from '../../_lib/auth.js';
 
 function calcLevel(xp) {
-  const LEVEL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
+  const LECLL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
   let level = 1;
-  for (let i = LEVEL_XP.length - 1; i >= 0; i--) {
-    if (xp >= LEVEL_XP[i]) { level = i + 1; break; }
+  for (let i = LECLL_XP.length - 1; i >= 0; i--) {
+    if (xp >= LECLL_XP[i]) { level = i + 1; break; }
   }
   return Math.min(level, 10);
 }
@@ -64,7 +64,7 @@ export async function onRequestGet(context) {
       status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Error al obtener estado del examen', details: error.message }), {
+    return new Response(JSON.stringify({ error: 'Error al obtener comuna del examen', details: error.message }), {
       status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }

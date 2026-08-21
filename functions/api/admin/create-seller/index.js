@@ -70,7 +70,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const jwtSecret = env.JWT_SECRET || 'aunclick_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return new Response(JSON.stringify({ error: 'Token requerido' }), {

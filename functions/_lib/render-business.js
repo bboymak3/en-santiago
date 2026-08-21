@@ -95,15 +95,15 @@ export function renderBusinessPage(env, business, options = {}) {
     reviewCount = 0,
   } = options;
 
-  const baseUrl = 'https://holax.com.ve';
+  const baseUrl = 'https://en-santiago.pages.dev';
   const title = business.title || 'Negocio';
   // Use custom SEO description if provided, otherwise auto-generate
   const description = business.seo_description
     ? business.seo_description.substring(0, 160)
     : business.description
       ? business.description.substring(0, 160)
-      : `Información sobre ${title} en ${business.city || 'Venezuela'}. Dirección, contacto, servicios y más.`;
-  const imageUrl = business.cover_image || `${baseUrl}/images/Holax.png`;
+      : `Información sobre ${title} en ${business.city || 'Santiago de Chile'}. Dirección, contacto, servicios y más.`;
+  const imageUrl = business.cover_image || `${baseUrl}/images/En Santiago.png`;
   const finalCanonical = canonicalUrl || `${baseUrl}${pathPrefix || '/negocio'}/${business.slug}`;
 
   // Breadcrumb helpers
@@ -136,22 +136,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="${escapeHtml(description)}">
-    <title>${escapeHtml(title)} - HolaX | Directorio de Negocios en Venezuela</title>
+    <title>${escapeHtml(title)} - En Santiago | Directorio de Negocios en Santiago de Chile</title>
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="${finalCanonical}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="business.business">
-    <meta property="og:title" content="${escapeHtml(title)} - HolaX">
+    <meta property="og:title" content="${escapeHtml(title)} - En Santiago">
     <meta property="og:description" content="${escapeHtml(description)}">
     <meta property="og:image" content="${imageUrl}">
     <meta property="og:url" content="${finalCanonical}">
-    <meta property="og:site_name" content="HolaX">
-    <meta property="og:locale" content="es_VE">
+    <meta property="og:site_name" content="En Santiago">
+    <meta property="og:locale" content="es_CL">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${escapeHtml(title)} - HolaX">
+    <meta name="twitter:title" content="${escapeHtml(title)} - En Santiago">
     <meta name="twitter:description" content="${escapeHtml(description)}">
     <meta name="twitter:image" content="${imageUrl}">
 
@@ -159,7 +159,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="business:contact_data:street_address" content="${escapeHtml(business.address || '')}">
     <meta property="business:contact_data:locality" content="${escapeHtml(business.city || '')}">
     <meta property="business:contact_data:region" content="${escapeHtml(business.state || '')}">
-    <meta property="business:contact_data:country_name" content="${escapeHtml(business.country || 'Venezuela')}">
+    <meta property="business:contact_data:country_name" content="${escapeHtml(business.country || 'Santiago de Chile')}">
 
     <!-- JSON-LD: Rich Snippets -->
     ${business.custom_jsonld
@@ -185,7 +185,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "streetAddress": business.address,
           "addressLocality": business.city || undefined,
           "addressRegion": business.state || undefined,
-          "addressCountry": "VE"
+          "addressCountry": "CL"
         };
       }
       if (business.lat || business.latitude) {
@@ -227,14 +227,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     <script type="application/ld+json">${(() => {
       const crumbs = [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://holax.com.ve/" },
-        { "@type": "ListItem", "position": 2, "name": sectionBreadcrumbText, "item": "https://holax.com.ve/search.html" }
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" },
+        { "@type": "ListItem", "position": 2, "name": sectionBreadcrumbText, "item": "https://en-santiago.pages.dev/search.html" }
       ];
       if (categoryBreadcrumb) {
-        crumbs.push({ "@type": "ListItem", "position": 3, "name": categoryBreadcrumb.name, "item": categoryBreadcrumb.url.startsWith('http') ? categoryBreadcrumb.url : "https://holax.com.ve" + categoryBreadcrumb.url });
+        crumbs.push({ "@type": "ListItem", "position": 3, "name": categoryBreadcrumb.name, "item": categoryBreadcrumb.url.startsWith('http') ? categoryBreadcrumb.url : "https://en-santiago.pages.dev" + categoryBreadcrumb.url });
       } else if (business.category_name) {
         const catSlug = (business.category_name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        crumbs.push({ "@type": "ListItem", "position": 3, "name": business.category_name, "item": "https://holax.com.ve/categoria/" + catSlug });
+        crumbs.push({ "@type": "ListItem", "position": 3, "name": business.category_name, "item": "https://en-santiago.pages.dev/categoria/" + catSlug });
       }
       crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": title, "item": finalCanonical });
       return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": crumbs });
@@ -554,22 +554,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/index.html" class="nav-logo">
-                <img src="/images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+                <img src="/images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> En Santiago</span>
             </a>
             <div class="location-selector" id="locationSelector">
                 <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <span class="location-label" id="locationLabel">Todo Santiago de Chile</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="location-dropdown hidden" id="locationDropdown">
                     <div class="location-search">
-                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar comuna..." autocomplete="off">
                     </div>
                     <div class="location-option" data-state="" data-city="">
                         <i class="fas fa-globe-americas"></i>
-                        <span>Todo Venezuela</span>
+                        <span>Todo Santiago de Chile</span>
                     </div>
                     <div class="location-divider"></div>
                     <div class="location-list" id="locationList"></div>
@@ -648,7 +648,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i class="fas fa-map-marker-alt"></i> <span>${escapeHtml(business.city || '')}${business.state ? ', ' + escapeHtml(business.state) : ''}</span>
                     </div>
                     <div class="feature-chips">
-                        <div class="feature-chip" id="statStateCityWrap" title="Estado / Ciudad"><i class="fas fa-map-marker-alt"></i> <span id="statStateCity">${escapeHtml((business.city || '') + (business.state ? ', ' + business.state : ''))}</span></div>
+                        <div class="feature-chip" id="statStateCityWrap" title="Comuna / Ciudad"><i class="fas fa-map-marker-alt"></i> <span id="statStateCity">${escapeHtml((business.city || '') + (business.state ? ', ' + business.state : ''))}</span></div>
                         <div class="feature-chip" id="statCategoriaWrap" title="Categoría"><i class="fas fa-tag"></i> <span id="statCategoria">${escapeHtml(business.category_name || '--')}</span></div>
                         ${reviewCount > 0 ? `<div class="feature-chip" style="background:linear-gradient(135deg,#fff8e1,#fff3cd);color:#f57f17;border:1px solid #ffd54f;" title="Calificación"><i class="fas fa-star" style="color:#ffc107;"></i> <span>${Math.round(avgRating * 10) / 10} (${reviewCount} reseña${reviewCount !== 1 ? 's' : ''})</span></div>` : ''}
                         ${business.especialidad ? `<div class="feature-chip" style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;" title="Especialidad"><i class="fas fa-stethoscope"></i> <span>${escapeHtml(business.especialidad)}</span></div>` : ''}
@@ -791,7 +791,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; ${new Date().getFullYear()} HolaX. Todos los derechos reservados.</p>
+                <p>&copy; ${new Date().getFullYear()} En Santiago. Todos los derechos reservados.</p>
                 <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
                 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
             </div>

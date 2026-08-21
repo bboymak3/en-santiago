@@ -5,8 +5,8 @@
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Panel de Administración - HolaX">
-    <title>Administración - HolaX</title>
+    <meta name="description" content="Panel de Administración - En Santiago">
+    <title>Administración - En Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -15,8 +15,8 @@
     <nav class="navbar navbar-admin" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name">HolaX</span> <span class="admin-badge">Admin</span>
+                <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name">En Santiago</span> <span class="admin-badge">Admin</span>
             </a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
@@ -239,7 +239,7 @@
                                             <th>Negocio</th>
                                             <th>Categoría</th>
                                             <th>Usuario</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Fecha</th>
                                         </tr>
                                     </thead>
@@ -269,7 +269,7 @@
                                             <th>Usuario</th>
                                             <th>Email</th>
                                             <th>Rol</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Fecha</th>
                                         </tr>
                                     </thead>
@@ -294,7 +294,7 @@
                             <div class="admin-card-actions">
                                 <a href="new-business.html" class="btn btn-primary btn-sm" style="background:linear-gradient(135deg,#006EE3,#3B9AFF);text-decoration:none;"><i class="fas fa-plus"></i> Crear Negocio</a>
                                 <select id="adminPropStatusFilter" class="form-select-sm">
-                                    <option value="">Todos los estados</option>
+                                    <option value="">Todos los comunas</option>
                                     <option value="approved">Aprobados</option>
                                     <option value="pending">Pendientes</option>
                                     <option value="rejected">Rechazados</option>
@@ -369,7 +369,7 @@
                                             <th>Email</th>
                                             <th>Teléfono</th>
                                             <th>Rol</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Negocios</th>
                                             <th>Fecha Registro</th>
                                             <th>Acciones</th>
@@ -518,7 +518,7 @@
                                             <th>Negocio</th>
                                             <th>Mensaje</th>
                                             <th>Teléfono</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -563,7 +563,7 @@
                                             <th>ID</th>
                                             <th>Título</th>
                                             <th>Empresa</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Tipo</th>
                                             <th>Estatus</th>
                                             <th>Acciones</th>
@@ -625,7 +625,7 @@
                                             <th>Precio</th>
                                             <th>Ciudad</th>
                                             <th>Propietario</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -667,7 +667,7 @@
                                             <th>Categoría</th>
                                             <th>Precio</th>
                                             <th>Vendedor</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Fecha</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -793,7 +793,7 @@
                                         <th>XP</th>
                                         <th>Completados</th>
                                         <th>Orden</th>
-                                        <th>Estado</th>
+                                        <th>Comuna</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -1153,29 +1153,29 @@
                                 <p style="font-size:0.85rem;color:#6b7280;margin-bottom:12px;">Logo que se usa para las ofertas de empleo que no tienen un negocio asociado (seleccionan HOLAX).</p>
                                 <div style="display:flex;align-items:flex-start;gap:16px;">
                                     <div>
-                                        <div id="holaxLogoPreview" style="width:80px;height:80px;border-radius:12px;border:2px dashed #d1d5db;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f9fafb;">
-                                            <i class="fas fa-image" style="color:#9ca3af;font-size:1.5rem;" id="holaxLogoPlaceholder"></i>
-                                            <img id="holaxLogoImg" src="" alt="Logo HOLAX" style="width:100%;height:100%;object-fit:cover;display:none;">
+                                        <div id="en-santiagoLogoPreview" style="width:80px;height:80px;border-radius:12px;border:2px dashed #d1d5db;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f9fafb;">
+                                            <i class="fas fa-image" style="color:#9ca3af;font-size:1.5rem;" id="en-santiagoLogoPlaceholder"></i>
+                                            <img id="en-santiagoLogoImg" src="" alt="Logo HOLAX" style="width:100%;height:100%;object-fit:cover;display:none;">
                                         </div>
                                     </div>
                                     <div style="flex:1;">
                                         <div style="display:flex;gap:8px;margin-bottom:8px;">
-                                            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('holaxLogoInput').click()">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('en-santiagoLogoInput').click()">
                                                 <i class="fas fa-upload"></i> Subir Logo
                                             </button>
-                                            <button type="button" class="btn btn-secondary btn-sm" id="holaxLogoRemoveBtn" onclick="removeHolaxLogo()" style="display:none;">
+                                            <button type="button" class="btn btn-secondary btn-sm" id="en-santiagoLogoRemoveBtn" onclick="removeEn SantiagoLogo()" style="display:none;">
                                                 <i class="fas fa-trash"></i> Quitar
                                             </button>
                                         </div>
                                         <div class="form-group" style="margin-bottom:6px;">
-                                            <input type="url" id="setting_holax_logo_url" data-key="holax_logo_url" class="form-control" value="api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png" placeholder="O pega una URL de imagen aquí..." oninput="previewHolaxLogo(this.value)">
+                                            <input type="url" id="setting_en-santiago_logo_url" data-key="en-santiago_logo_url" class="form-control" value="api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png" placeholder="O pega una URL de imagen aquí..." oninput="previewEn SantiagoLogo(this.value)">
                                         </div>
                                         <p style="font-size:0.72rem;color:#94a3af8;margin:0;">PNG, JPG o WebP. Al guardar se aplicará el logo a todos los empleos HOLAX existentes.</p>
-                                        <input type="file" id="holaxLogoInput" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleHolaxLogoSelect(this)">
+                                        <input type="file" id="en-santiagoLogoInput" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleEn SantiagoLogoSelect(this)">
                                     </div>
                                 </div>
                                 <div style="margin-top:12px;text-align:right;">
-                                    <button type="button" class="btn btn-primary" onclick="saveHolaxLogoSettings()">
+                                    <button type="button" class="btn btn-primary" onclick="saveEn SantiagoLogoSettings()">
                                         <i class="fas fa-save"></i> Guardar Cambios
                                     </button>
                                 </div>
@@ -1364,7 +1364,7 @@
                     </div>
                 </div>
 
-                <!-- ==================== POPUP (VENTANA EMERGENTE) TAB ==================== -->
+                <!-- ==================== POPUP (CLNTANA EMERGENTE) TAB ==================== -->
                 <div class="admin-tab hidden" id="tabPopup">
                     <div class="admin-card" style="padding:24px;">
                         <div class="admin-card-header" style="margin-bottom:20px;">
@@ -1997,7 +1997,7 @@
                                 </div>
                             </div>
                             <div class="profile-input-group">
-                                <label>Estado</label>
+                                <label>Comuna</label>
                                 <div class="profile-input-wrapper"><i class="fas fa-map"></i>
                                 <input type="text" id="bizEditState" name="state" placeholder="Mérida">
                                 </div>
@@ -2148,7 +2148,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="editUserStatus">Estado</label>
+                                <label for="editUserStatus">Comuna</label>
                                 <select id="editUserStatus" name="status" class="form-control">
                                     <option value="activo">Activo</option>
                                     <option value="inactivo">Inactivo</option>
@@ -2276,7 +2276,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="jobState">Estado</label>
+                        <label for="jobState">Comuna</label>
                         <input type="text" id="jobState" name="state" placeholder="Ej: Mérida">
                     </div>
                     <div class="form-group">
@@ -2384,8 +2384,8 @@
                         <input type="text" id="eiCiudad" required placeholder="Mérida">
                     </div>
                     <div class="form-group">
-                        <label for="eiEstado">Estado</label>
-                        <input type="text" id="eiEstado" placeholder="Mérida">
+                        <label for="eiComuna">Comuna</label>
+                        <input type="text" id="eiComuna" placeholder="Mérida">
                     </div>
                 </div>
                 <div class="form-row">
@@ -2791,7 +2791,7 @@
                         <small class="profile-input-hint" style="display:block;margin-bottom:8px;">Adjunta videos desde tu teléfono o pega URLs (YouTube, TikTok, .mp4)</small>
                     </div>
                     <div class="profile-form-section">
-                        <div class="profile-form-section-title"><i class="fas fa-flag"></i> <span>Estado</span></div>
+                        <div class="profile-form-section-title"><i class="fas fa-flag"></i> <span>Comuna</span></div>
                         <div class="profile-input-group">
                             <label>Estatus</label>
                             <div class="profile-input-wrapper"><i class="fas fa-flag"></i>

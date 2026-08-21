@@ -227,19 +227,19 @@
             filter: invert(1) grayscale(100%) brightness(200%);
         }
 
-        [data-theme="dark"] .estado-enviada {
+        [data-theme="dark"] .comuna-enviada {
             background-color: #332701;
             color: #ffda6a;
             border-color: #665200;
         }
 
-        [data-theme="dark"] .estado-aprobada {
+        [data-theme="dark"] .comuna-aprobada {
             background-color: #051b11;
             color: #75b798;
             border-color: #0f5132;
         }
 
-        [data-theme="dark"] .estado-cancelada {
+        [data-theme="dark"] .comuna-cancelada {
             background-color: #2c0b0e;
             color: #f1aeb5;
             border-color: #6b2025;
@@ -340,7 +340,7 @@
             padding-bottom: 40px;
         }
 
-        /* ===== SIDEBAR VERTICAL IZQUIERDO ===== */
+        /* ===== SIDEBAR CLRTICAL IZQUIERDO ===== */
         .gp-sidebar {
             position: fixed;
             left: 0;
@@ -677,20 +677,20 @@
             margin-bottom: 15px;
         }
 
-        /* Estados de orden */
-        .estado-enviada {
+        /* Comunas de orden */
+        .comuna-enviada {
             background-color: #fff3cd;
             color: #856404;
             border: 2px solid #ffc107;
         }
 
-        .estado-aprobada {
+        .comuna-aprobada {
             background-color: #d4edda;
             color: #155724;
             border: 2px solid #28a745;
         }
 
-        .estado-cancelada {
+        .comuna-cancelada {
             background-color: #f8d7da;
             color: #721c24;
             border: 2px solid #dc3545;
@@ -1163,8 +1163,8 @@
         .table-gp tbody tr:hover {
             background-color: #fff5f5;
         }
-        /* Estado badges mejorados */
-        .badge-estado {
+        /* Comuna badges mejorados */
+        .badge-comuna {
             font-size: 0.75rem;
             padding: 4px 10px;
             border-radius: 20px;
@@ -1332,7 +1332,7 @@
     </style>
 </head>
 <body>
-    <!-- LOGIN OVERLAY -->
+    <!-- LOGIN OCLRLAY -->
     <div id="login-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);z-index:999999;display:flex;align-items:center;justify-content:center;">
         <div style="background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.4);max-width:400px;width:90%;padding:40px;">
             <div style="text-align:center;margin-bottom:30px;">
@@ -1397,7 +1397,7 @@
                 <!-- Datos del Vehículo (PRIMERA SECCIÓN) -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fas fa-car me-2"></i>DATOS DEL VEHÍCULO
+                        <i class="fas fa-car me-2"></i>DATOS DEL CLHÍCULO
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-center mb-4">
@@ -1577,7 +1577,7 @@
                 <!-- Checklist del Vehículo -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fas fa-clipboard-check me-2"></i>CHECKLIST DEL VEHÍCULO
+                        <i class="fas fa-clipboard-check me-2"></i>CHECKLIST DEL CLHÍCULO
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
@@ -1610,7 +1610,7 @@
 
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label class="form-label fw-bold">Estado de Carrocería:</label>
+                                <label class="form-label fw-bold">Comuna de Carrocería:</label>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-check">
@@ -1784,7 +1784,7 @@
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-outline-danger btn-lg w-100" onclick="cargarTodasLasOrdenes()">
-                                <i class="fas fa-list me-2"></i>VER TODAS LAS OT
+                                <i class="fas fa-list me-2"></i>CLR TODAS LAS OT
                             </button>
                         </div>
                         <div class="col-md-2">
@@ -1801,7 +1801,7 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-5">
-                            <h5 class="mb-3">Filtrar por Estado:</h5>
+                            <h5 class="mb-3">Filtrar por Comuna:</h5>
                             <div class="d-flex flex-wrap">
                                 <button class="btn filtro-btn active" onclick="filtrarOrdenes('todas')">Todas</button>
                                 <button class="btn filtro-btn btn-outline-warning" onclick="filtrarOrdenes('Enviada')">En Firma</button>
@@ -1956,7 +1956,7 @@
                             <i class="fas fa-exchange-alt me-2"></i>Reasignar OT de Técnico
                         </div>
                         <div class="card-body">
-                            <p class="text-muted small mb-3">Quítale una OT a un técnico y asígnasela a otro. La orden vuelve a estado "Pendiente Visita".</p>
+                            <p class="text-muted small mb-3">Quítale una OT a un técnico y asígnasela a otro. La orden vuelve a comuna "Pendiente Visita".</p>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-bold">Técnico Actual</label>
@@ -2060,8 +2060,8 @@
                 <div class="card-body">
                     <div class="row g-3 align-items-end">
                         <div class="col-md-3">
-                            <label class="form-label">Estado</label>
-                            <select class="form-select" id="express-filtro-estado" onchange="cargarOrdenesExpress()">
+                            <label class="form-label">Comuna</label>
+                            <select class="form-select" id="express-filtro-comuna" onchange="cargarOrdenesExpress()">
                                 <option value="">Todos</option>
                                 <option value="Pendiente Visita">Pendiente Visita</option>
                                 <option value="En Sitio">En Sitio</option>
@@ -2204,7 +2204,7 @@
             <div class="row mb-4">
                 <div class="col-12 text-center">
                     <h1 class="display-4 fw-bold" style="color: var(--gp-red);">Panel de Gestión</h1>
-                    <p class="text-muted">Reportes, liquidación de técnicos y estado del negocio</p>
+                    <p class="text-muted">Reportes, liquidación de técnicos y comuna del negocio</p>
                 </div>
             </div>
 
@@ -2413,7 +2413,7 @@
                         <div class="card-body">
                             <div class="row g-3 align-items-end">
                                 <div class="col-md-6">
-                                    <label class="form-label">Filtrar por estado de pago</label>
+                                    <label class="form-label">Filtrar por comuna de pago</label>
                                     <select class="form-select" id="clientes-filtro" onchange="cargarCarteraClientes()">
                                         <option value="pendientes">Con saldo pendiente</option>
                                         <option value="todos">Todos los clientes</option>
@@ -3014,11 +3014,11 @@ function doGet(e) {
                                 </div>
                             </div>
 
-                            <!-- 5. DATOS DEL VEHÍCULO -->
+                            <!-- 5. DATOS DEL CLHÍCULO -->
                             <div class="accordion-item border-0 mb-2">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#edit-collapse-vehiculo" style="background:linear-gradient(135deg,#dc3545,#a71d2a);color:white;font-weight:700;border-radius:10px;">
-                                        <i class="fas fa-car me-2"></i>DATOS DEL VEHÍCULO
+                                        <i class="fas fa-car me-2"></i>DATOS DEL CLHÍCULO
                                     </button>
                                 </h2>
                                 <div id="edit-collapse-vehiculo" class="accordion-collapse collapse" data-bs-parent="#editOrdenAccordion">
@@ -3052,18 +3052,18 @@ function doGet(e) {
                                 </div>
                             </div>
 
-                            <!-- 7. ASIGNACIÓN Y ESTADO -->
+                            <!-- 7. ASIGNACIÓN Y COMUNA -->
                             <div class="accordion-item border-0 mb-2">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#edit-collapse-asignacion" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;font-weight:700;border-radius:10px;">
-                                        <i class="fas fa-user-cog me-2"></i>ASIGNACIÓN Y ESTADO
+                                        <i class="fas fa-user-cog me-2"></i>ASIGNACIÓN Y COMUNA
                                     </button>
                                 </h2>
                                 <div id="edit-collapse-asignacion" class="accordion-collapse collapse" data-bs-parent="#editOrdenAccordion">
                                     <div class="accordion-body p-3"><div class="row g-3">
                                         <div class="col-md-4"><label class="form-label fw-bold">Técnico Asignado</label><select class="form-select" id="edit-tecnico-asignado"><option value="">Sin asignar</option></select></div>
-                                        <div class="col-md-4"><label class="form-label fw-bold">Estado del Trabajo</label><select class="form-select" id="edit-estado-trabajo"><option value="Pendiente">Pendiente</option><option value="Pendiente Visita">Pendiente Visita</option><option value="En Sitio">En Sitio</option><option value="En Progreso">En Progreso</option><option value="Completada">Completada</option><option value="Cerrada">Cerrada</option><option value="Pendiente Piezas">Pendiente Piezas</option><option value="No Completada">No Completada</option></select></div>
-                                        <div class="col-md-4"><label class="form-label fw-bold">Estado de la Orden</label><select class="form-select" id="edit-estado"><option value="Enviada">Enviada</option><option value="Aprobada">Aprobada</option><option value="En Proceso">En Proceso</option><option value="Completada">Completada</option><option value="Cerrada">Cerrada</option><option value="Cancelada">Cancelada</option></select></div>
+                                        <div class="col-md-4"><label class="form-label fw-bold">Comuna del Trabajo</label><select class="form-select" id="edit-comuna-trabajo"><option value="Pendiente">Pendiente</option><option value="Pendiente Visita">Pendiente Visita</option><option value="En Sitio">En Sitio</option><option value="En Progreso">En Progreso</option><option value="Completada">Completada</option><option value="Cerrada">Cerrada</option><option value="Pendiente Piezas">Pendiente Piezas</option><option value="No Completada">No Completada</option></select></div>
+                                        <div class="col-md-4"><label class="form-label fw-bold">Comuna de la Orden</label><select class="form-select" id="edit-comuna"><option value="Enviada">Enviada</option><option value="Aprobada">Aprobada</option><option value="En Proceso">En Proceso</option><option value="Completada">Completada</option><option value="Cerrada">Cerrada</option><option value="Cancelada">Cancelada</option></select></div>
                                         <div class="col-md-6"><label class="form-label fw-bold">Fecha Programada</label><input type="date" class="form-control" id="edit-fecha-programada"></div>
                                         <div class="col-md-6"><label class="form-label fw-bold">Hora Programada</label><input type="time" class="form-control" id="edit-hora-programada"></div>
                                     </div></div>
@@ -3152,7 +3152,7 @@ function doGet(e) {
                     <h1 class="display-4 fw-bold" style="color: #25D366;">
                         <i class="fab fa-whatsapp me-2"></i>Notificaciones WhatsApp
                     </h1>
-                    <p class="text-muted">Notificaciones automaticas generadas al cambiar estado de ordenes</p>
+                    <p class="text-muted">Notificaciones automaticas generadas al cambiar comuna de ordenes</p>
                 </div>
             </div>
 

@@ -4,7 +4,7 @@
 
 import { renderProductPage } from '../../_lib/render-product.js';
 
-const SITE_URL = 'https://holax.com.ve';
+const SITE_URL = 'https://en-santiago.pages.dev';
 
 function slugify(text) {
   if (!text) return '';

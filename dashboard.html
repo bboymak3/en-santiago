@@ -20,8 +20,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Panel de usuario de HolaX - Gestiona tus negocios y mensajes.">
-    <title>Mi Panel - HolaX</title>
+    <meta name="description" content="Panel de usuario de En Santiago - Gestiona tus negocios y mensajes.">
+    <title>Mi Panel - En Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -245,22 +245,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+                <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> En Santiago</span>
             </a>
             <div class="location-selector" id="locationSelector">
                 <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <span class="location-label" id="locationLabel">Todo Santiago de Chile</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="location-dropdown hidden" id="locationDropdown">
                     <div class="location-search">
-                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar comuna..." autocomplete="off">
                     </div>
                     <div class="location-option" data-state="" data-city="">
                         <i class="fas fa-globe-americas"></i>
-                        <span>Todo Venezuela</span>
+                        <span>Todo Santiago de Chile</span>
                     </div>
                     <div class="location-divider"></div>
                     <div class="location-list" id="locationList">
@@ -520,7 +520,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     <tr>
                                         <th>Negocio</th>
                                         <th>Categoría</th>
-                                        <th>Estado</th>
+                                        <th>Comuna</th>
                                         <th>Estatus</th>
                                         <th>Vistas</th>
                                         <th>Acciones</th>
@@ -566,7 +566,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         <th></th>
                                         <th>Título</th>
                                         <th>Categoría</th>
-                                        <th>Estado</th>
+                                        <th>Comuna</th>
                                         <th>Estatus</th>
                                         <th>Vistas</th>
                                         <th>Acciones</th>
@@ -834,7 +834,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div id="adminPanelPending">
                             <div class="dash-info-banner">
                                 <i class="fas fa-info-circle"></i>
-                                <p>Los negocios nuevos aparecen aquí con estado <strong>Pendiente</strong>. Debes aprobarlos para que sean visibles públicamente en la plataforma.</p>
+                                <p>Los negocios nuevos aparecen aquí con comuna <strong>Pendiente</strong>. Debes aprobarlos para que sean visibles públicamente en la plataforma.</p>
                             </div>
                             <div class="dash-table-responsive">
                                 <table class="dash-table">
@@ -870,7 +870,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         <tr>
                                             <th>Negocio</th>
                                             <th>Categoría</th>
-                                            <th>Estado</th>
+                                            <th>Comuna</th>
                                             <th>Estatus</th>
                                             <th>Propietario</th>
                                             <th>Fecha</th>
@@ -1011,7 +1011,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     <i class="fas fa-sliders-h" style="color:#006EE3;"></i> Configuracion General
                                 </h3>
                                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
-                                    <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre del Sitio</label><input type="text" class="eb-input" data-key="site_name" placeholder="HolaX"></div>
+                                    <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre del Sitio</label><input type="text" class="eb-input" data-key="site_name" placeholder="En Santiago"></div>
                                     <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">Email de Contacto</label><input type="email" class="eb-input" data-key="contact_email" placeholder="admin@ejemplo.com"></div>
                                     <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">WhatsApp</label><input type="text" class="eb-input" data-key="whatsapp_number" placeholder="+58-414-000-0000"></div>
                                     <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">Max negocios por usuario</label><input type="number" class="eb-input" data-key="max_businesses_per_user" placeholder="10"></div>
@@ -1426,7 +1426,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                         <div class="form-row">
                             <div class="profile-input-group">
-                                <label for="jobState">Estado *</label>
+                                <label for="jobState">Comuna *</label>
                                 <div class="profile-input-wrapper"><i class="fas fa-map-marker-alt"></i>
                                 <input type="text" id="jobState" name="state" required placeholder="Ej: Mérida">
                                 </div>
@@ -1770,12 +1770,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <input type="text" id="editBizCity" class="eb-input" placeholder="Merida">
                             </div>
                             <div class="eb-field">
-                                <label for="editBizState">Estado</label>
+                                <label for="editBizState">Comuna</label>
                                 <select id="editBizState" class="eb-input eb-select">
                                     <option value="">Selecciona</option>
                                     <option value="Amazonas">Amazonas</option><option value="Anzoategui">Anzoategui</option>
                                     <option value="Apure">Apure</option><option value="Aragua">Aragua</option>
-                                    <option value="Barinas">Barinas</option><option value="Bolivar">Bolivar</option>
+                                    <option value="Santiago">Santiago</option><option value="Bolivar">Bolivar</option>
                                     <option value="Carabobo">Carabobo</option><option value="Cojedes">Cojedes</option>
                                     <option value="Delta Amacuro">Delta Amacuro</option><option value="Distrito Capital">Distrito Capital</option>
                                     <option value="Falcon">Falcon</option><option value="Guarico">Guarico</option>
@@ -1791,7 +1791,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="eb-grid-2">
                             <div class="eb-field">
                                 <label for="editBizLat">Latitud</label>
-                                <input type="number" id="editBizLat" class="eb-input" step="any" placeholder="8.63">
+                                <input type="number" id="editBizLat" class="eb-input" step="any" placeholder="-33.453">
                             </div>
                             <div class="eb-field">
                                 <label for="editBizLng">Longitud</label>
@@ -1856,7 +1856,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:16px;margin-bottom:20px;text-align:center;">
                     <p style="margin:0 0 6px;font-size:0.78rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Numero de Pago Movil</p>
                     <p style="margin:0;font-size:1.5rem;font-weight:800;color:#006EE3;letter-spacing:1px;" id="paymentPhoneDisplay">0414-000-0000</p>
-                    <p style="margin:6px 0 0;font-size:0.78rem;color:#94a3b8;">Banco: Venezuela / Cedula: V-00000000 / Telf: 0414-000-0000</p>
+                    <p style="margin:6px 0 0;font-size:0.78rem;color:#94a3b8;">Banco: Santiago de Chile / Cedula: V-00000000 / Telf: 0414-000-0000</p>
                 </div>
 
                 <div style="margin-bottom:16px;">

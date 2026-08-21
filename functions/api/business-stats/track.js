@@ -12,7 +12,7 @@ export async function onRequestOptions() {
   return new Response(null, { headers: corsHeaders });
 }
 
-const VALID_EVENT_TYPES = ['view', 'whatsapp_click', 'website_click', 'phone_click', 'share'];
+const VALID_ECLNT_TYPES = ['view', 'whatsapp_click', 'website_click', 'phone_click', 'share'];
 const VALID_SOURCES = ['ficha', 'landing', 'product'];
 const RATE_LIMIT_PER_MINUTE = 10;
 
@@ -48,7 +48,7 @@ export async function onRequestPost(context) {
     const { business_id, event_type, source } = body;
 
     // Validate
-    if (!business_id || !VALID_EVENT_TYPES.includes(event_type)) {
+    if (!business_id || !VALID_ECLNT_TYPES.includes(event_type)) {
       return new Response(JSON.stringify({ ok: true }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -56,7 +56,7 @@ export async function onRequestPost(context) {
     }
 
     const validatedSource = VALID_SOURCES.includes(source) ? source : null;
-    const jwtSecret = env.JWT_SECRET || 'aunclick_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
 
     // Get client IP
     const clientIP = request.headers.get('CF-Connecting-IP')

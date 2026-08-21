@@ -120,7 +120,7 @@ export async function onRequestPatch(context) {
     const newStatus = action || status;
 
     if (!newStatus) {
-      return new Response(JSON.stringify({ error: 'Se requiere una acción o estado para actualizar la reserva' }), {
+      return new Response(JSON.stringify({ error: 'Se requiere una acción o comuna para actualizar la reserva' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
@@ -128,7 +128,7 @@ export async function onRequestPatch(context) {
 
     const validStatuses = ['confirmed', 'cancelled', 'completed'];
     if (!validStatuses.includes(newStatus)) {
-      return new Response(JSON.stringify({ error: 'Estado no válido', validStatuses }), {
+      return new Response(JSON.stringify({ error: 'Comuna no válido', validStatuses }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });

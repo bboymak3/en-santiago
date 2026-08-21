@@ -232,7 +232,7 @@ export async function onRequestPost(context) {
     try { await env.DB.prepare("ALTER TABLE businesses ADD COLUMN banner TEXT").run(); } catch(e) { /* column may exist */ }
     try { await env.DB.prepare("ALTER TABLE businesses ADD COLUMN especialidad TEXT").run(); } catch(e) { /* column may exist */ }
 
-    const jwtSecret = env.JWT_SECRET || 'aunclick_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
 
     // Auth required
     const authHeader = request.headers.get('Authorization');
@@ -379,7 +379,7 @@ export async function onRequestPost(context) {
       body.address || null,
       body.city || 'Mérida',
       body.state || 'Mérida',
-      body.country || 'Venezuela',
+      body.country || 'Santiago de Chile',
       body.lat || null,
       body.lng || null,
       body.phone || null,

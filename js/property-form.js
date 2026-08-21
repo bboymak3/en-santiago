@@ -7,7 +7,7 @@
     'use strict';
 
     // ─── Configuration ──────────────────────────────────────────
-    const VENEZUELA_CENTER = { lat: 8.6233, lng: -66.5897 };
+    const CLNEZUELA_CENTER = { lat: -33.45233, lng: -66.5897 };
     const MAX_PHOTOS = 10;
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
     const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
@@ -45,14 +45,14 @@
     };
 
     // Reverse maps for edit mode
-    const TIPO_MAP_REVERSE = {};
-    for (const [k, v] of Object.entries(TIPO_MAP)) TIPO_MAP_REVERSE[v] = k;
+    const TIPO_MAP_RECLRSE = {};
+    for (const [k, v] of Object.entries(TIPO_MAP)) TIPO_MAP_RECLRSE[v] = k;
 
-    const OPERACION_MAP_REVERSE = {};
-    for (const [k, v] of Object.entries(OPERACION_MAP)) OPERACION_MAP_REVERSE[v] = k;
+    const OPERACION_MAP_RECLRSE = {};
+    for (const [k, v] of Object.entries(OPERACION_MAP)) OPERACION_MAP_RECLRSE[v] = k;
 
-    const FEATURE_MAP_REVERSE = {};
-    for (const [k, v] of Object.entries(FEATURE_MAP)) FEATURE_MAP_REVERSE[v] = k;
+    const FEATURE_MAP_RECLRSE = {};
+    for (const [k, v] of Object.entries(FEATURE_MAP)) FEATURE_MAP_RECLRSE[v] = k;
 
     // ─── State ──────────────────────────────────────────────────
     let editingPropertyId = null;
@@ -77,8 +77,8 @@
     let locationMap = null;
     let locationMarker = null;
     let geocoder = null;
-    let selectedLat = VENEZUELA_CENTER.lat;
-    let selectedLng = VENEZUELA_CENTER.lng;
+    let selectedLat = CLNEZUELA_CENTER.lat;
+    let selectedLng = CLNEZUELA_CENTER.lng;
 
     // ─── Map Initialization ─────────────────────────────────────
     function initLocationPicker() {
@@ -118,7 +118,7 @@
                 updateCoordinateFields();
             });
 
-            // Initialize Nominatim geocoder restricted to Venezuela
+            // Initialize Nominatim geocoder restricted to Santiago de Chile
             if (typeof L.Control.Geocoder !== 'undefined') {
                 geocoder = L.Control.Geocoder.nominatim({
                     geocodingQueryParams: { countrycodes: 've' },
@@ -714,7 +714,7 @@
         const moneda = getSelectedCurrency();
         const direccion = getValue('propDireccion');
         const ciudad = getValue('propCiudad');
-        const estado = getValue('propEstado');
+        const comuna = getValue('propComuna');
         let lat = getValueNum('propLat');
         let lng = getValueNum('propLng');
         const habitaciones = getValueNum('propHabitaciones');
@@ -780,10 +780,10 @@
             return;
         }
 
-        // Default coordinates to Venezuela center if not provided
+        // Default coordinates to Santiago de Chile center if not provided
         if (isNaN(lat) || isNaN(lng)) {
-            lat = VENEZUELA_CENTER.lat;
-            lng = VENEZUELA_CENTER.lng;
+            lat = CLNEZUELA_CENTER.lat;
+            lng = CLNEZUELA_CENTER.lng;
         }
 
         // Gather features
@@ -803,7 +803,7 @@
             currency: moneda || 'USD',
             address: direccion,
             city: ciudad,
-            state: estado || '',
+            state: comuna || '',
             lat,
             lng,
             whatsapp: (document.getElementById('propWhatsApp')?.value || '').trim() || null,
@@ -1006,7 +1006,7 @@
 
         setValue('propDireccion', property.address);
         setValue('propCiudad', property.city);
-        setValue('propEstado', property.state);
+        setValue('propComuna', property.state);
         setValue('propLat', property.lat);
         setValue('propLng', property.lng);
         setValue('propWhatsApp', property.whatsapp);
@@ -1035,19 +1035,19 @@
         // Property type
         const propTipo = document.getElementById('propTipo');
         if (propTipo && property.property_type) {
-            const displayType = TIPO_MAP_REVERSE[property.property_type.toLowerCase()] || TIPO_MAP_REVERSE[property.property_type] || '';
+            const displayType = TIPO_MAP_RECLRSE[property.property_type.toLowerCase()] || TIPO_MAP_RECLRSE[property.property_type] || '';
             if (displayType) propTipo.value = displayType;
         }
 
         // Operation type
         const propOperacion = document.getElementById('propOperacion');
         if (propOperacion && property.operation_type) {
-            const displayOp = OPERACION_MAP_REVERSE[property.operation_type.toLowerCase()] || OPERACION_MAP_REVERSE[property.operation_type] || '';
+            const displayOp = OPERACION_MAP_RECLRSE[property.operation_type.toLowerCase()] || OPERACION_MAP_RECLRSE[property.operation_type] || '';
             if (displayOp) propOperacion.value = displayOp;
         }
 
         // Features checkboxes
-        for (const [dbField, label] of Object.entries(FEATURE_MAP_REVERSE)) {
+        for (const [dbField, label] of Object.entries(FEATURE_MAP_RECLRSE)) {
             if (property[dbField]) {
                 const checkbox = propertyForm?.querySelector(`input[name="caracteristicas"][value="${label}"]`);
                 if (checkbox) checkbox.checked = true;

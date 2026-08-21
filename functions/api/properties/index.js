@@ -175,7 +175,7 @@ export async function onRequestPost(context) {
     // Auto-migrate: add whatsapp column if missing
     try { await env.DB.prepare('ALTER TABLE properties ADD COLUMN whatsapp TEXT').run(); } catch(e) {}
 
-    const jwtSecret = env.JWT_SECRET || 'aunclick_jwt_secret_2024';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_jwt_secret_2024';
 
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -234,7 +234,7 @@ export async function onRequestPost(context) {
       body.address || null,
       body.city || 'Mérida',
       body.state || 'Mérida',
-      body.country || 'Venezuela',
+      body.country || 'Santiago de Chile',
       body.lat || null,
       body.lng || null,
       body.whatsapp || null,

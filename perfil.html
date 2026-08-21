@@ -584,7 +584,7 @@
       margin: 0.75rem auto;
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ===== RESPONSICL ===== */
     @media (max-width: 640px) {
       .hero { padding: 2rem 1rem 1.5rem; }
       .hero-content {
@@ -745,7 +745,7 @@
         <div class="stat-card">
           <div class="stat-icon exam"><i class="fas fa-clipboard-check"></i></div>
           <div class="stat-status" id="stat-exam">—</div>
-          <div class="stat-label">Estado del Examen</div>
+          <div class="stat-label">Comuna del Examen</div>
         </div>
       </div>
 
@@ -910,9 +910,9 @@
       $('#level-text').textContent = `Nivel ${level}: ${getLevelName(level)}`;
 
       // XP bar - use correct level thresholds (non-linear)
-      const LEVEL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
-      const xpInLevel = xp - (level <= 1 ? 0 : LEVEL_XP[level - 2]);
-      const xpNeeded = level >= 10 ? LEVEL_XP[9] - LEVEL_XP[8] : LEVEL_XP[level - 1] - (level <= 1 ? 0 : LEVEL_XP[level - 2]);
+      const LECLL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
+      const xpInLevel = xp - (level <= 1 ? 0 : LECLL_XP[level - 2]);
+      const xpNeeded = level >= 10 ? LECLL_XP[9] - LECLL_XP[8] : LECLL_XP[level - 1] - (level <= 1 ? 0 : LECLL_XP[level - 2]);
       const xpPercent = level >= 10 ? 100 : Math.min((xpInLevel / xpNeeded) * 100, 100);
       $('#xp-text').textContent = `${xp} XP`;
       // Animate XP bar after a short delay

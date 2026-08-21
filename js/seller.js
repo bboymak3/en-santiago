@@ -123,7 +123,7 @@
     // ─── Referral Link ─────────────────────────────────────────
     function setReferralLink() {
         if (!currentUser) return;
-        const baseUrl = window.location.origin || 'https://holax.com.ve';
+        const baseUrl = window.location.origin || 'https://en-santiago.pages.dev';
         const link = `${baseUrl}/login.html?register=true&ref=${currentUser.id}`;
 
         const input1 = document.getElementById('referralLinkInput');
@@ -504,7 +504,7 @@
     function formatDate(dateStr) {
         if (!dateStr) return '--';
         try {
-            return new Date(dateStr + 'Z').toLocaleDateString('es-VE', {
+            return new Date(dateStr + 'Z').toLocaleDateString('es-CL', {
                 year: 'numeric', month: 'short', day: 'numeric'
             });
         } catch {

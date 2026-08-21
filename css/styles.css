@@ -1,6 +1,6 @@
 /* ============================================================
    Un Click - Comprehensive Stylesheet
-   Directorio Nacional de Negocios de Venezuela
+   Directorio Metropolitano de Negocios de Santiago de Chile
    ============================================================
    Table of Contents:
    1.  CSS Custom Properties
@@ -9393,7 +9393,7 @@ a.btn-icon {
 
 
 /* ============================================================
-   33. RESPONSIVE DESIGN (Tablet - max-width: 768px)
+   33. RESPONSICL DESIGN (Tablet - max-width: 768px)
    ============================================================ */
 @media (max-width: 768px) {
     :root {
@@ -9844,7 +9844,7 @@ a.btn-icon {
 
 
 /* ============================================================
-   34. RESPONSIVE DESIGN (Mobile - max-width: 480px)
+   34. RESPONSICL DESIGN (Mobile - max-width: 480px)
    ============================================================ */
 @media (max-width: 480px) {
     :root {

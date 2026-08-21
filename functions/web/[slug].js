@@ -43,21 +43,21 @@ export async function onRequestGet(context) {
       `SELECT url, is_cover FROM images WHERE business_id = ? ORDER BY is_cover DESC, id ASC LIMIT 10`
     ).bind(business.id).all();
 
-    const baseUrl = 'https://holax.com.ve';
+    const baseUrl = 'https://en-santiago.pages.dev';
     const bizTipo = (business.business_type || 'negocio').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     const bizCat = business.category_slug || 'otro';
     const title = business.title || 'Negocio';
     const fullDescription = business.description || '';
     const metaDescription = fullDescription
       ? fullDescription.substring(0, 160)
-      : `Visita ${title} - ${business.category_name || 'Negocio'} en ${business.city || 'Venezuela'}. ${fullDescription ? fullDescription.substring(0, 100) : ''}`;
+      : `Visita ${title} - ${business.category_name || 'Negocio'} en ${business.city || 'Santiago de Chile'}. ${fullDescription ? fullDescription.substring(0, 100) : ''}`;
     const imageUrl = business.cover_image || business.logo || `${baseUrl}/images/favicon.jpeg`;
     const whatsappNumber = (business.whatsapp || business.phone || '').replace(/[^0-9]/g, '');
     const whatsappLink = whatsappNumber
-      ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola, vi tu pagina web en HolaX y me interesa conocer mas sobre ' + title)}`
+      ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hola, vi tu pagina web en En Santiago y me interesa conocer mas sobre ' + title)}`
       : '#';
     const phoneClean = (business.phone || '').replace(/[^0-9]/g, '');
-    const mapQuery = encodeURIComponent(`${business.address || ''} ${business.city || ''} ${business.state || ''} Venezuela`);
+    const mapQuery = encodeURIComponent(`${business.address || ''} ${business.city || ''} ${business.state || ''} Santiago de Chile`);
     const socialUrls = {
       instagram: normalizeSocialUrl(business.instagram, 'instagram'),
       facebook: normalizeSocialUrl(business.facebook, 'facebook'),
@@ -69,7 +69,7 @@ export async function onRequestGet(context) {
     // Generate "Why choose us" points from business data
     const whyUs = [];
     if (business.category_name) whyUs.push({ icon: 'fas fa-award', title: `Expertos en ${business.category_name}`, desc: `Somos un negocio especializado en ${business.category_name.toLowerCase()} con compromiso de calidad.` });
-    if (business.city || business.state) whyUs.push({ icon: 'fas fa-map-marker-alt', title: `Ubicados en ${business.city || business.state || 'Venezuela'}`, desc: `Atendemos directamente en ${business.city || business.state || 'tu zona'} con atencion personalizada.` });
+    if (business.city || business.state) whyUs.push({ icon: 'fas fa-map-marker-alt', title: `Ubicados en ${business.city || business.state || 'Santiago de Chile'}`, desc: `Atendemos directamente en ${business.city || business.state || 'tu zona'} con atencion personalizada.` });
     if (business.has_delivery) whyUs.push({ icon: 'fas fa-motorcycle', title: 'Servicio de Delivery', desc: 'Te llevamos nuestros productos directamente a la puerta de tu casa.' });
     if (business.has_parking) whyUs.push({ icon: 'fas fa-car', title: 'Estacionamiento Disponible', desc: 'Contamos con parking para que visites con comodidad.' });
     if (business.has_wifi) whyUs.push({ icon: 'fas fa-wifi', title: 'WiFi Gratuito', desc: 'Disfruta de conexion WiFi gratis mientras nos visitas.' });
@@ -88,7 +88,7 @@ export async function onRequestGet(context) {
 
     // Generate FAQ from business data
     const faqs = [];
-    faqs.push({ q: `Que es ${title}?`, a: `${title} es un negocio de ${business.category_name ? business.category_name.toLowerCase() : 'servicios'}${business.city ? ' ubicado en ' + business.city + (business.state ? ', ' + business.state : '') : ' en Venezuela'}.${fullDescription ? ' ' + fullDescription : ''}` });
+    faqs.push({ q: `Que es ${title}?`, a: `${title} es un negocio de ${business.category_name ? business.category_name.toLowerCase() : 'servicios'}${business.city ? ' ubicado en ' + business.city + (business.state ? ', ' + business.state : '') : ' en Santiago de Chile'}.${fullDescription ? ' ' + fullDescription : ''}` });
     if (business.address) faqs.push({ q: `Cual es la direccion de ${title}?`, a: `${title} se encuentra en ${business.address}${business.city ? ', ' + business.city : ''}. Puedes visitarnos o contactarnos para mayor informacion.` });
     if (whatsappNumber) faqs.push({ q: `Como puedo contactar a ${title}?`, a: `Puedes contactarnos por WhatsApp al ${business.whatsapp || business.phone}${phoneClean ? ', o llamar al ' + business.phone : ''}. Tambien puedes escribirnos a traves del boton de WhatsApp en esta pagina.` });
     if (business.schedule) faqs.push({ q: `Cual es el horario de atencion?`, a: `Nuestro horario de atencion es: ${business.schedule}. Te recomendamos contactarnos por WhatsApp para confirmar disponibilidad.` });
@@ -122,7 +122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="description" content="${escapeHtml(metaDescription)}">
-    <title>${escapeHtml(title)} - ${escapeHtml(business.category_name || 'Negocio')} en ${escapeHtml(business.city || 'Venezuela')}</title>
+    <title>${escapeHtml(title)} - ${escapeHtml(business.category_name || 'Negocio')} en ${escapeHtml(business.city || 'Santiago de Chile')}</title>
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="${baseUrl}/${bizTipo}/${bizCat}/${business.slug}">
 
@@ -161,7 +161,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "streetAddress": business.address,
           "addressLocality": business.city || undefined,
           "addressRegion": business.state || undefined,
-          "addressCountry": "VE"
+          "addressCountry": "CL"
         };
       }
       if (business.lat || business.latitude) {
@@ -183,7 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://holax.com.ve/" },
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" },
         { "@type": "ListItem", "position": 2, "name": title, "item": `${baseUrl}/${bizTipo}/${bizCat}/${business.slug}` }
       ]
     })}</script>
@@ -649,7 +649,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- NAV -->
 <nav class="lp-nav" id="lpNav">
     <a href="${baseUrl}/" class="lp-nav-brand">
-        <img src="/images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:6px;"> HolaX
+        <img src="/images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:6px;"> En Santiago
     </a>
     <div class="lp-nav-links">
         <a href="#about">Nosotros</a>
@@ -685,7 +685,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ${business.category_name ? `<div class="lp-hero-stat"><div class="lp-hero-stat-value">${escapeHtml(business.category_name)}</div><div class="lp-hero-stat-label">Categoria</div></div>` : ''}
             ${business.product_count > 0 ? `<div class="lp-hero-stat"><div class="lp-hero-stat-value">${business.product_count}</div><div class="lp-hero-stat-label">Productos</div></div>` : ''}
             ${business.image_count > 1 ? `<div class="lp-hero-stat"><div class="lp-hero-stat-value">${business.image_count}</div><div class="lp-hero-stat-label">Fotos</div></div>` : ''}
-            <div class="lp-hero-stat"><div class="lp-hero-stat-value">${business.city || 'Venezuela'}</div><div class="lp-hero-stat-label">Ubicacion</div></div>
+            <div class="lp-hero-stat"><div class="lp-hero-stat-value">${business.city || 'Santiago de Chile'}</div><div class="lp-hero-stat-label">Ubicacion</div></div>
         </div>
     </div>
 </section>
@@ -697,7 +697,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ${business.logo ? `<img src="${escapeHtml(business.logo)}" alt="${escapeHtml(title)}" style="max-height:80px;max-width:200px;width:auto;border-radius:12px;object-fit:contain;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,0.08);">` : ''}
             <div class="lp-section-label">Quienes Somos</div>
             <h2 class="lp-section-title">Conoce ${escapeHtml(title)}</h2>
-            <p class="lp-section-desc">${fullDescription ? escapeHtml(fullDescription.substring(0, 120)) + '...' : 'Nos dedicamos a ofrecer los mejores servicios en ' + (business.city || 'Venezuela') + '.'}</p>
+            <p class="lp-section-desc">${fullDescription ? escapeHtml(fullDescription.substring(0, 120)) + '...' : 'Nos dedicamos a ofrecer los mejores servicios en ' + (business.city || 'Santiago de Chile') + '.'}</p>
         </div>
         ${fullDescription && business.cover_image ? `
         <div class="lp-about-grid">
@@ -715,7 +715,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         ` : `
         <div class="lp-about-grid" style="max-width:700px;margin:0 auto;">
             <div>
-                <p class="lp-about-text">${fullDescription ? escapeHtml(fullDescription) : escapeHtml(title) + ' es un negocio de ' + (business.category_name ? business.category_name.toLowerCase() : 'servicios generales') + ' ubicado en ' + (business.city || 'Venezuela') + '. Nos caracterizamos por ofrecer un servicio de calidad y atencion personalizada a cada uno de nuestros clientes.'}</p>
+                <p class="lp-about-text">${fullDescription ? escapeHtml(fullDescription) : escapeHtml(title) + ' es un negocio de ' + (business.category_name ? business.category_name.toLowerCase() : 'servicios generales') + ' ubicado en ' + (business.city || 'Santiago de Chile') + '. Nos caracterizamos por ofrecer un servicio de calidad y atencion personalizada a cada uno de nuestros clientes.'}</p>
                 <div class="lp-about-highlights">
                     ${business.category_name ? `<div class="lp-about-highlight"><i class="fas fa-check"></i> Especialistas en ${escapeHtml(business.category_name.toLowerCase())}</div>` : ''}
                     ${business.city ? `<div class="lp-about-highlight"><i class="fas fa-check"></i> Ubicados en ${escapeHtml(business.city + (business.state ? ', ' + business.state : ''))}</div>` : ''}
@@ -875,7 +875,7 @@ ${images.results.length > 1 ? `
             <h2 class="lp-section-title">Nuestras Fotos</h2>
         </div>
         <div class="lp-gallery-grid" data-gallery='${JSON.stringify(images.results.map(i => i.url))}'>
-            ${(() => { const galleryLabels = ['fachada del local','interior del negocio','nuestros productos','area de atencion','detalles del establecimiento','ambiente general','nuestro equipo','vista externa','instalaciones','galeria adicional']; return images.results.map((img, i) => `<img src="${escapeHtml(img.url)}" alt="${escapeHtml(title)} - ${galleryLabels[i % galleryLabels.length]} en ${escapeHtml(business.city || 'Venezuela')}" class="lp-gallery-img" loading="lazy" style="cursor:zoom-in;" onclick="openLpLightbox(this, this.closest('[data-gallery]'))">`).join(''); })()}
+            ${(() => { const galleryLabels = ['fachada del local','interior del negocio','nuestros productos','area de atencion','detalles del establecimiento','ambiente general','nuestro equipo','vista externa','instalaciones','galeria adicional']; return images.results.map((img, i) => `<img src="${escapeHtml(img.url)}" alt="${escapeHtml(title)} - ${galleryLabels[i % galleryLabels.length]} en ${escapeHtml(business.city || 'Santiago de Chile')}" class="lp-gallery-img" loading="lazy" style="cursor:zoom-in;" onclick="openLpLightbox(this, this.closest('[data-gallery]'))">`).join(''); })()}
         </div>
     </div>
 </section>
@@ -978,7 +978,7 @@ ${(business.lat || business.latitude || business.address) ? `
 <footer class="lp-footer">
     <p>La pagina web de <span class="lp-footer-brand">${escapeHtml(title)}</span> esta disponible gracias a <a href="https://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Grupo 360</a></p>
     <div class="lp-footer-links">
-        <a href="${baseUrl}/${bizTipo}/${bizCat}/${business.slug}" target="_blank">Ver en HolaX</a>
+        <a href="${baseUrl}/${bizTipo}/${bizCat}/${business.slug}" target="_blank">Ver en En Santiago</a>
         ${socialUrls.instagram ? `<a href="${escapeHtml(socialUrls.instagram)}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a>` : ''}
         ${socialUrls.facebook ? `<a href="${escapeHtml(socialUrls.facebook)}" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a>` : ''}
     </div>

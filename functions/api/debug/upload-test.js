@@ -1,6 +1,6 @@
 // functions/api/debug/upload-test.js
 // GET: Diagnóstico de R2 y D1 - abre con ?token=TU_TOKEN
-// Muestra estado de bindings, objetos R2, imágenes recientes, y prueba de escritura
+// Muestra comuna de bindings, objetos R2, imágenes recientes, y prueba de escritura
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -50,7 +50,7 @@ export async function onRequestGet(context) {
   }
 
   const report = {
-    _titulo: 'Diagnostic R2 + D1 - HolaX',
+    _titulo: 'Diagnostic R2 + D1 - En Santiago',
     _timestamp: new Date().toISOString(),
     _ejecucion_ms: 0,
   };
@@ -119,7 +119,7 @@ export async function onRequestGet(context) {
     if (!env.R2) {
       report.r2 = { status: 'ERROR', mensaje: 'Binding R2 no existe. Revisa wrangler.toml y Cloudflare Pages settings.' };
     } else {
-      const r2Folder = env.R2_FOLDER || 'merida';
+      const r2Folder = env.R2_FOLDER || 'santiago';
       report.r2 = {
         status: 'OK',
         mensaje: 'R2 conectado',
@@ -160,7 +160,7 @@ export async function onRequestGet(context) {
       // ─── Test de escritura R2 ───────────────────────────
       try {
         const testKey = `${r2Folder}/_debug/test_${Date.now()}.txt`;
-        const testData = 'HolaX R2 test - ' + new Date().toISOString();
+        const testData = 'En Santiago R2 test - ' + new Date().toISOString();
         await env.R2.put(testKey, testData, { httpMetadata: { contentType: 'text/plain' } });
 
         // Leer de vuelta
@@ -203,7 +203,7 @@ export async function onRequestGet(context) {
     // Buscar objetos R2 para este negocio
     if (env.R2) {
       try {
-        const r2Folder = env.R2_FOLDER || 'merida';
+        const r2Folder = env.R2_FOLDER || 'santiago';
         const prefix = `${r2Folder}/businesses/${businessId}/`;
         const listed = await env.R2.list({ prefix, limit: 50 });
         report.negocio.imagenes_en_r2 = listed.objects.map(o => ({ key: o.key, size: o.size }));
@@ -216,7 +216,7 @@ export async function onRequestGet(context) {
 
   // ─── Config del entorno ────────────────────────────────
   report.config = {
-    R2_FOLDER: env.R2_FOLDER || '(no set, default: merida)',
+    R2_FOLDER: env.R2_FOLDER || '(no set, default: santiago)',
     JWT_SECRET: env.JWT_SECRET ? '***configurado***' : '(NO CONFIGURADO - auth no funciona)',
     DB_binding: env.DB ? 'OK' : 'MISSING',
     R2_binding: env.R2 ? 'OK' : 'MISSING',
@@ -248,7 +248,7 @@ function generateHTMLReport(r) {
     return `<span style="color:#6b7280;">${status}</span>`;
   };
 
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HolaX Debug - R2 + D1</title>
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>En Santiago Debug - R2 + D1</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px;max-width:900px;margin:0 auto}
 h1{font-size:1.4rem;margin-bottom:4px;color:#38bdf8}h2{font-size:1.1rem;margin:20px 0 8px;color:#94a3b8;border-bottom:1px solid #1e293b;padding-bottom:6px}
@@ -259,12 +259,12 @@ h1{font-size:1.4rem;margin-bottom:4px;color:#38bdf8}h2{font-size:1.1rem;margin:2
 table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-top:6px}th{text-align:left;color:#94a3b8;padding:4px 8px;border-bottom:1px solid #334155}td{padding:4px 8px;border-bottom:1px solid #1e293b;word-break:break-all;max-width:400px}
 .meta{color:#475569;font-size:0.75rem;margin-top:20px;text-align:center}
 </style></head><body>
-<h1>HolaX - Diagnostico R2 + D1</h1>
+<h1>En Santiago - Diagnostico R2 + D1</h1>
 <p style="color:#64748b;font-size:0.85rem;margin-bottom:16px">${r._timestamp} | ${r._ejecucion_ms}ms</p>
 
 <h2>Auth</h2>
 <div class="card ${r.auth.status==='OK'?'ok':r.auth.status==='ERROR'||r.auth.status==='INVALID'?'err':''}">
-  <div class="row"><label>Estado</label><value>${icon(r.auth.status)}</value></div>
+  <div class="row"><label>Comuna</label><value>${icon(r.auth.status)}</value></div>
   ${r.auth.email ? `<div class="row"><label>Email</label><value>${r.auth.email}</value></div>` : ''}
   ${r.auth.role ? `<div class="row"><label>Rol</label><value>${r.auth.role}</value></div>` : ''}
   ${r.auth.mensaje ? `<div class="row"><label>Mensaje</label><value>${r.auth.mensaje}</value></div>` : ''}
@@ -272,14 +272,14 @@ table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-top:6px}th{tex
 
 <h2>D1 Database</h2>
 <div class="card ${r.d1.status==='OK'?'ok':'err'}">
-  <div class="row"><label>Estado</label><value>${icon(r.d1.status)}</value></div>
+  <div class="row"><label>Comuna</label><value>${icon(r.d1.status)}</value></div>
   <div class="row"><label>Database</label><value>${r.d1.database || '-'}</value></div>
   ${r.d1.tablas ? `<table><tr><th>Tabla</th><th>Registros</th></tr>${Object.entries(r.d1.tablas).map(([t,c])=>`<tr><td>${t}</td><td>${c}</td></tr>`).join('')}</table>` : ''}
 </div>
 
 <h2>R2 Storage</h2>
 <div class="card ${r.r2.status==='OK'?'ok':'err'}">
-  <div class="row"><label>Estado</label><value>${icon(r.r2.status)}</value></div>
+  <div class="row"><label>Comuna</label><value>${icon(r.r2.status)}</value></div>
   <div class="row"><label>Bucket</label><value>${r.r2.bucket || '-'}</value></div>
   <div class="row"><label>Carpeta</label><value>${r.r2.folder || '-'}</value></div>
   <div class="row"><label>Total objetos</label><value>${r.r2.total_objetos || 0}</value></div>
@@ -296,7 +296,7 @@ ${r.r2.ultimos_objetos.map(o=>`<tr><td>${o.key}</td><td>${(o.size/1024).toFixed(
 ${r.negocio ? `
 <h2>Negocio #${r.negocio.id || ''} ${r.negocio.title ? '- ' + r.negocio.title : ''}</h2>
 <div class="card">
-  <div class="row"><label>Estado</label><value>${r.negocio.status || '-'}</value></div>
+  <div class="row"><label>Comuna</label><value>${r.negocio.status || '-'}</value></div>
   <div class="row"><label>Logo</label><value>${r.negocio.logo || 'SIN LOGO'}</value></div>
   <div class="row"><label>Banner</label><value>${r.negocio.banner || 'SIN BANNER'}</value></div>
   <div class="row"><label>Imagenes en DB</label><value>${r.negocio.total_imagenes || 0}</value></div>
@@ -310,6 +310,6 @@ ${r.negocio ? `
   ${Object.entries(r.config).map(([k,v])=>`<div class="row"><label>${k}</label><value>${v}</value></div>`).join('')}
 </div>
 
-<p class="meta">HolaX Debug Endpoint - Eliminar despues de diagnosticar</p>
+<p class="meta">En Santiago Debug Endpoint - Eliminar despues de diagnosticar</p>
 </body></html>`;
 }

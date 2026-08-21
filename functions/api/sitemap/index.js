@@ -4,7 +4,7 @@
 export async function onRequestGet(context) {
   try {
     const { env } = context;
-    const baseUrl = 'https://holax.com.ve';
+    const baseUrl = 'https://en-santiago.pages.dev';
 
     // All public-facing pages (ordered by priority)
     const staticPages = [
@@ -127,7 +127,7 @@ export async function onRequestGet(context) {
              WHEN 'Carabobo' THEN 'carabobo'
              WHEN 'Falcón' THEN 'falcon'
              WHEN 'Guárico' THEN 'guarico'
-             WHEN 'Mérida' THEN 'merida'
+             WHEN 'Mérida' THEN 'santiago'
              WHEN 'Miranda' THEN 'miranda'
              WHEN 'Monagas' THEN 'monagas'
              WHEN 'Nueva Esparta' THEN 'nueva-esparta'
@@ -137,7 +137,7 @@ export async function onRequestGet(context) {
              WHEN 'Trujillo' THEN 'trujillo'
              WHEN 'Yaracuy' THEN 'yaracuy'
              WHEN 'Zulia' THEN 'zulia'
-             WHEN 'Barinas' THEN 'barinas'
+             WHEN 'Santiago' THEN 'santiago'
              WHEN 'Aragua' THEN 'aragua'
              WHEN 'Lara' THEN 'lara'
              WHEN 'Vargas' THEN 'vargas'
@@ -160,7 +160,7 @@ export async function onRequestGet(context) {
         if (!st.state_slug) continue;
         const lastmod = st.last_updated ? st.last_updated.substring(0, 10) : '';
         dynamicUrls += `  <url>
-    <loc>${baseUrl}/estado/${st.state_slug}</loc>
+    <loc>${baseUrl}/comuna/${st.state_slug}</loc>
     <lastmod>${lastmod}</lastmod>
     <priority>0.6</priority>
     <changefreq>weekly</changefreq>

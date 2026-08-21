@@ -10,7 +10,7 @@
   // ─── Constants ─────────────────────────────────────────────
   const STAR_FILLED = '#ffc107';
   const STAR_EMPTY = '#dee2e6';
-  const STAR_HOVER = '#ffdb70';
+  const STAR_HOCLR = '#ffdb70';
 
   // ─── State ────────────────────────────────────────────────
   let businessId = null;

@@ -54,7 +54,7 @@ if (!window._renderVideoList) {
     'use strict';
 
     // ═══════════════════════════════════════════════════════════
-    //  ESTADO GLOBAL - Variables compartidas entre secciones
+    //  COMUNA GLOBAL - Variables compartidas entre secciones
     // ═══════════════════════════════════════════════════════════
 
     // ─── State ──────────────────────────────────────────────────
@@ -242,7 +242,7 @@ if (!window._renderVideoList) {
 
         // Set current date
         if (adminDate) {
-            adminDate.textContent = new Date().toLocaleDateString('es-VE', {
+            adminDate.textContent = new Date().toLocaleDateString('es-CL', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
@@ -268,7 +268,7 @@ if (!window._renderVideoList) {
         loadDashboardTab();
 
         // One-time: fix HOLAX jobs logo in background
-        fetch('/api/jobs/fix-holax-logo', {
+        fetch('/api/jobs/fix-en-santiago-logo', {
             method: 'POST',
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN_KEY), 'Content-Type': 'application/json' }
         }).then(r => r.json()).then(d => {
@@ -301,7 +301,7 @@ if (!window._renderVideoList) {
     }
 
     // ═══════════════════════════════════════════════════════════
-    //  NAVEGACIÓN DE TABS - Sistema de pestañas del panel admin
+    //  NACLGACIÓN DE TABS - Sistema de pestañas del panel admin
     //  Cada case activa una sección del sidebar y carga su contenido
     // ═══════════════════════════════════════════════════════════
 
@@ -603,7 +603,7 @@ if (!window._renderVideoList) {
                             <div class="detail-row"><strong>Teléfono:</strong> ${business.phone || '--'}</div>
                             <div class="detail-row"><strong>WhatsApp:</strong> ${business.whatsapp || '--'}</div>
                             <div class="detail-row"><strong>Propietario:</strong> ${business.owner_name || '--'} (${business.owner_email || business.owner_phone || '--'})</div>
-                            <div class="detail-row"><strong>Estado:</strong> ${getStatusBadge(business.status)}</div>
+                            <div class="detail-row"><strong>Comuna:</strong> ${getStatusBadge(business.status)}</div>
                             <div class="detail-row"><strong>Vistas:</strong> ${business.views || 0}</div>
                             <div class="detail-row"><strong>Destacada:</strong> ${business.featured ? 'Sí' : 'No'}</div>
                             <div class="detail-row"><strong>Creada:</strong> ${formatDateTime(business.created_at)}</div>
@@ -870,7 +870,7 @@ if (!window._renderVideoList) {
                 const avatarHTML = user.avatar
                     ? `<div class="edit-user-avatar"><img src="${user.avatar}" alt=""></div>`
                     : `<div class="edit-user-avatar"><span>${initials}</span></div>`;
-                const date = user.created_at ? new Date(user.created_at).toLocaleDateString('es-VE', { day: '2-digit', month: 'long', year: 'numeric' }) : '—';
+                const date = user.created_at ? new Date(user.created_at).toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric' }) : '—';
 
                 modalBody.innerHTML = `
                     <!-- User Header -->
@@ -948,7 +948,7 @@ if (!window._renderVideoList) {
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="editUserStatus">Estado</label>
+                                    <label for="editUserStatus">Comuna</label>
                                     <select id="editUserStatus" name="status" class="form-control">
                                         <option value="activo" ${user.is_active ? 'selected' : ''}>Activo</option>
                                         <option value="inactivo" ${!user.is_active ? 'selected' : ''}>Inactivo</option>
@@ -1836,7 +1836,7 @@ if (!window._renderVideoList) {
             html += '</div>';
 
             html += '<div class="admin-table-responsive"><table class="admin-table" style="font-size:13px;">';
-            html += '<thead><tr><th>Fecha</th><th>Post</th><th>Propiedad</th><th>Estado</th></tr></thead><tbody>';
+            html += '<thead><tr><th>Fecha</th><th>Post</th><th>Propiedad</th><th>Comuna</th></tr></thead><tbody>';
 
             data.history.forEach(h => {
                 const statusHTML = h.business_id
@@ -2339,7 +2339,7 @@ if (!window._renderVideoList) {
     function formatPrice(price, currency) {
         if (!price && price !== 0) return '-';
         const curr = currency || 'USD';
-        const formatted = Number(price).toLocaleString('es-VE');
+        const formatted = Number(price).toLocaleString('es-CL');
         return `${formatted} ${curr}`;
     }
 
@@ -2597,7 +2597,7 @@ if (!window._renderVideoList) {
             if (currRadio) currRadio.checked = true;
             setV('eiDireccion', p.address);
             setV('eiCiudad', p.city);
-            setV('eiEstado', p.state);
+            setV('eiComuna', p.state);
             setV('eiLat', p.lat);
             setV('eiLng', p.lng);
             setV('eiWhatsApp', p.whatsapp);
@@ -2667,7 +2667,7 @@ if (!window._renderVideoList) {
             currency,
             address: document.getElementById('eiDireccion')?.value?.trim() || null,
             city: document.getElementById('eiCiudad')?.value?.trim() || null,
-            state: document.getElementById('eiEstado')?.value?.trim() || null,
+            state: document.getElementById('eiComuna')?.value?.trim() || null,
             lat: document.getElementById('eiLat')?.value || null,
             lng: document.getElementById('eiLng')?.value || null,
             whatsapp: document.getElementById('eiWhatsApp')?.value?.trim() || null,
@@ -2800,11 +2800,11 @@ if (!window._renderVideoList) {
         if (!select) return;
         try {
             // Always add HOLAX as the first option (default for jobs without a store)
-            const holaxOpt = document.createElement('option');
-            holaxOpt.value = 'HOLAX';
-            holaxOpt.textContent = 'HOLAX';
-            holaxOpt.dataset.logo = '/images/Holax.png';
-            select.appendChild(holaxOpt);
+            const en-santiagoOpt = document.createElement('option');
+            en-santiagoOpt.value = 'HOLAX';
+            en-santiagoOpt.textContent = 'HOLAX';
+            en-santiagoOpt.dataset.logo = '/images/En Santiago.png';
+            select.appendChild(en-santiagoOpt);
 
             const data = await api.get('/businesses?status=approved&limit=200');
             if (data.businesses) {
@@ -2846,9 +2846,9 @@ if (!window._renderVideoList) {
             const val = jobCompany.value;
             jobLogoGroup.style.display = val ? '' : 'none';
             if (val === 'HOLAX') {
-                const holaxLogo = document.getElementById('setting_holax_logo_url')?.value || '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png';
-                jobLogoInput.value = holaxLogo;
-                jobLogoPreview.src = holaxLogo;
+                const en-santiagoLogo = document.getElementById('setting_en-santiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+                jobLogoInput.value = en-santiagoLogo;
+                jobLogoPreview.src = en-santiagoLogo;
                 jobLogoPreview.style.display = '';
                 if (jobLogoClearBtn) jobLogoClearBtn.style.display = '';
             }
@@ -3279,7 +3279,7 @@ if (!window._renderVideoList) {
     //  Banners, logos, ajustes de visualización
     //  Funciones: loadSettings()
     //  Exporta: window.handleAdminBannerSelect, window.removeAdminBanner,
-    //            window.handleHolaxLogoSelect, window.removeHolaxLogo, etc.
+    //            window.handleEn SantiagoLogoSelect, window.removeEn SantiagoLogo, etc.
     // ═══════════════════════════════════════════════════════════
 
     async function loadSettings() {
@@ -3288,7 +3288,7 @@ if (!window._renderVideoList) {
             const settings = data.settings || data;
 
             // Save HOLAX logo default before settings loop might overwrite it
-            const holaxDefaultUrl = document.getElementById('setting_holax_logo_url')?.value || '';
+            const en-santiagoDefaultUrl = document.getElementById('setting_en-santiago_logo_url')?.value || '';
 
             // Populate toggle checkboxes and inputs
             document.querySelectorAll('[data-key]').forEach(el => {
@@ -3304,9 +3304,9 @@ if (!window._renderVideoList) {
             });
 
             // Restore HOLAX logo default if setting doesn't exist in DB
-            if (!settings.holax_logo_url && holaxDefaultUrl) {
-                const el = document.getElementById('setting_holax_logo_url');
-                if (el) el.value = holaxDefaultUrl;
+            if (!settings.en-santiago_logo_url && en-santiagoDefaultUrl) {
+                const el = document.getElementById('setting_en-santiago_logo_url');
+                if (el) el.value = en-santiagoDefaultUrl;
             }
 
             // Highlight active radio card (only if chat_mode radios exist on this page)
@@ -3428,7 +3428,7 @@ if (!window._renderVideoList) {
                 const statusClass = p.status === 'approved' ? 'admin-badge-green' : p.status === 'rejected' ? 'admin-badge-red' : 'admin-badge-yellow';
                 const statusLabel = p.status === 'approved' ? 'Aprobado' : p.status === 'rejected' ? 'Rechazado' : 'Pendiente';
                 const price = p.price ? `$${parseFloat(p.price).toFixed(2)}` : '$0.00';
-                const date = p.created_at ? new Date(p.created_at).toLocaleDateString('es-VE') : '-';
+                const date = p.created_at ? new Date(p.created_at).toLocaleDateString('es-CL') : '-';
                 
                 let actions = '';
                 if (p.status === 'pending') {
@@ -3647,7 +3647,7 @@ if (!window._renderVideoList) {
             html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Inmuebles actualmente destacados:</div>';
 
             properties.filter(p => featuredIds.has(p.id)).forEach(p => {
-                const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-VE')}` : '';
+                const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-CL')}` : '';
                 html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #006EE3;border-radius:10px;background:#EFF6FF;cursor:pointer;">
                     <input type="checkbox" class="featured-property-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#006EE3;">
                     <div style="flex:1;">
@@ -3661,7 +3661,7 @@ if (!window._renderVideoList) {
             if (nonFeatured.length > 0) {
                 html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros inmuebles (selecciona para destacar):</div>';
                 nonFeatured.slice(0, 30).forEach(p => {
-                    const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-VE')}` : '';
+                    const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-CL')}` : '';
                     html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
                         <input type="checkbox" class="featured-property-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#006EE3;">
                         <div style="flex:1;">
@@ -3913,7 +3913,7 @@ if (!window._renderVideoList) {
                 const userName = req.user_name || 'Usuario #' + req.user_id;
                 const userEmail = req.user_email || '';
                 const initials = userName.substring(0, 2).toUpperCase();
-                const dateCreated = req.created_at ? new Date(req.created_at).toLocaleDateString('es-VE') : '';
+                const dateCreated = req.created_at ? new Date(req.created_at).toLocaleDateString('es-CL') : '';
                 const paymentPhone = req.payment_phone || 'No indicado';
 
                 let actionsHtml = '';
@@ -4055,7 +4055,7 @@ if (!window._renderVideoList) {
 
             let html = '';
             users.forEach(u => {
-                const created = u.created_at ? new Date(u.created_at).toLocaleDateString('es-VE') : '';
+                const created = u.created_at ? new Date(u.created_at).toLocaleDateString('es-CL') : '';
                 const activateBtn = `<button class="btn btn-sm" onclick="window._adminOpenActivateModal(${u.id}, '${(u.name || '').replace(/'/g, "\\'")}', '${(u.email || '').replace(/'/g, "\\'")}')" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#333;font-weight:700;">
                         <i class="fas fa-crown"></i> Activar
                        </button>`;
@@ -4236,7 +4236,7 @@ if (!window._renderVideoList) {
                 const planBadge = s.plan_type === 'premium'
                     ? '<span style="background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;padding:2px 10px;border-radius:12px;font-size:0.72rem;font-weight:700;">Premium</span>'
                     : '<span style="background:#f1f5f9;color:#64748b;padding:2px 10px;border-radius:12px;font-size:0.72rem;">Básico</span>';
-                const date = s.created_at ? new Date(s.created_at).toLocaleDateString('es-VE') : '-';
+                const date = s.created_at ? new Date(s.created_at).toLocaleDateString('es-CL') : '-';
                 const isPremium = s.plan_type === 'premium';
 
                 return `<tr>
@@ -4446,7 +4446,7 @@ if (!window._renderVideoList) {
     };
 
     // ─── HOLAX Logo Management ─────────────────
-    window.handleHolaxLogoSelect = async function(input) {
+    window.handleEn SantiagoLogoSelect = async function(input) {
         const file = input.files[0];
         if (!file) return;
         if (file.size > 2 * 1024 * 1024) { showToast('Max 2MB para el logo', 'error'); input.value = ''; return; }
@@ -4457,10 +4457,10 @@ if (!window._renderVideoList) {
             fd.append('product_type', 'logo');
             const result = await api.postFormData('/upload', fd);
             if (result.url) {
-                document.getElementById('setting_holax_logo_url').value = result.url;
-                const img = document.getElementById('holaxLogoImg');
-                const icon = document.getElementById('holaxLogoPlaceholder');
-                const btn = document.getElementById('holaxLogoRemoveBtn');
+                document.getElementById('setting_en-santiago_logo_url').value = result.url;
+                const img = document.getElementById('en-santiagoLogoImg');
+                const icon = document.getElementById('en-santiagoLogoPlaceholder');
+                const btn = document.getElementById('en-santiagoLogoRemoveBtn');
                 if (img) { img.src = result.url; img.style.display = ''; }
                 if (icon) icon.style.display = 'none';
                 if (btn) btn.style.display = 'inline-flex';
@@ -4472,20 +4472,20 @@ if (!window._renderVideoList) {
         input.value = '';
     };
 
-    window.removeHolaxLogo = function() {
-        document.getElementById('setting_holax_logo_url').value = '';
-        const img = document.getElementById('holaxLogoImg');
-        const icon = document.getElementById('holaxLogoPlaceholder');
-        const btn = document.getElementById('holaxLogoRemoveBtn');
+    window.removeEn SantiagoLogo = function() {
+        document.getElementById('setting_en-santiago_logo_url').value = '';
+        const img = document.getElementById('en-santiagoLogoImg');
+        const icon = document.getElementById('en-santiagoLogoPlaceholder');
+        const btn = document.getElementById('en-santiagoLogoRemoveBtn');
         if (img) { img.src = ''; img.style.display = 'none'; }
         if (icon) icon.style.display = '';
         if (btn) btn.style.display = 'none';
     };
 
-    window.previewHolaxLogo = function(url) {
-        const img = document.getElementById('holaxLogoImg');
-        const icon = document.getElementById('holaxLogoPlaceholder');
-        const btn = document.getElementById('holaxLogoRemoveBtn');
+    window.previewEn SantiagoLogo = function(url) {
+        const img = document.getElementById('en-santiagoLogoImg');
+        const icon = document.getElementById('en-santiagoLogoPlaceholder');
+        const btn = document.getElementById('en-santiagoLogoRemoveBtn');
         if (url.trim()) {
             if (img) { img.src = url; img.style.display = ''; }
             if (icon) icon.style.display = 'none';
@@ -4497,18 +4497,18 @@ if (!window._renderVideoList) {
         }
     };
 
-    window.saveHolaxLogoSettings = async function() {
-        const url = document.getElementById('setting_holax_logo_url')?.value?.trim();
+    window.saveEn SantiagoLogoSettings = async function() {
+        const url = document.getElementById('setting_en-santiago_logo_url')?.value?.trim();
         if (!url) {
             showToast('Pega una URL o sube un logo primero', 'error');
             return;
         }
         try {
             showToast('Guardando logo HOLAX y actualizando empleos...', 'info');
-            const result = await api.put('/settings', { holax_logo_url: url });
+            const result = await api.put('/settings', { en-santiago_logo_url: url });
             let msg = 'Logo HOLAX guardado exitosamente';
-            if (result.holax_jobs_updated) {
-                msg += ` — ${result.holax_jobs_updated} empleo(s) HOLAX actualizado(s) con el nuevo logo`;
+            if (result.en-santiago_jobs_updated) {
+                msg += ` — ${result.en-santiago_jobs_updated} empleo(s) HOLAX actualizado(s) con el nuevo logo`;
             }
             showToast(msg, 'success');
         } catch (e) {
@@ -4634,12 +4634,12 @@ if (!window._renderVideoList) {
             if (btn) btn.style.display = 'inline-flex';
         }
         // HOLAX logo preview
-        const holaxLogoUrl = document.getElementById('setting_holax_logo_url')?.value || '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png';
-        if (holaxLogoUrl) {
-            const img = document.getElementById('holaxLogoImg');
-            const icon = document.getElementById('holaxLogoPlaceholder');
-            const btn = document.getElementById('holaxLogoRemoveBtn');
-            if (img) { img.src = holaxLogoUrl; img.style.display = ''; }
+        const en-santiagoLogoUrl = document.getElementById('setting_en-santiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+        if (en-santiagoLogoUrl) {
+            const img = document.getElementById('en-santiagoLogoImg');
+            const icon = document.getElementById('en-santiagoLogoPlaceholder');
+            const btn = document.getElementById('en-santiagoLogoRemoveBtn');
+            if (img) { img.src = en-santiagoLogoUrl; img.style.display = ''; }
             if (icon) icon.style.display = 'none';
             if (btn) btn.style.display = 'inline-flex';
         }
@@ -4786,7 +4786,7 @@ if (!window._renderVideoList) {
             <div class="aeb-grid">
                 <div class="aeb-field"><label>Direccion</label><input type="text" class="eb-input" id="aebAddress" value="${escH(b.address||'')}"></div>
                 <div class="aeb-field"><label>Ciudad</label><input type="text" class="eb-input" id="aebCity" value="${escH(b.city||'')}"></div>
-                <div class="aeb-field"><label>Estado</label><input type="text" class="eb-input" id="aebState" value="${escH(b.state||'')}"></div>
+                <div class="aeb-field"><label>Comuna</label><input type="text" class="eb-input" id="aebState" value="${escH(b.state||'')}"></div>
                 <div class="aeb-field"><label>Horario</label><input type="text" class="eb-input" id="aebSchedule" value="${escH(b.schedule||'')}" placeholder="Lun-Vie 8:00-17:00"></div>
             </div>
         </div>
@@ -4805,7 +4805,7 @@ if (!window._renderVideoList) {
             </div>
         </div>
         <div class="aeb-card">
-            <h4><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Estado</h4>
+            <h4><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Comuna</h4>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
                 <button class="btn btn-sm ${b.status==='approved'?'btn-primary':'btn-secondary'}" onclick="adminEditBizChangeStatus(${b.id},'approved')" style="${b.status==='approved'?'background:#006EE3;':''}"><i class="fas fa-check"></i> Aprobar</button>
                 <button class="btn btn-sm ${b.status==='pending'?'btn-primary':'btn-secondary'}" onclick="adminEditBizChangeStatus(${b.id},'pending')" style="${b.status==='pending'?'background:#d97706;':''}"><i class="fas fa-clock"></i> Pendiente</button>
@@ -4996,7 +4996,7 @@ if (!window._renderVideoList) {
     window.adminEditBizChangeStatus = async function(id, status) {
         try {
             await api.put('/businesses/' + id, { status });
-            showToast('Estado actualizado','success');
+            showToast('Comuna actualizado','success');
             if (editBizCurrent) loadEditBizDetail(id);
             loadEditBizList();
         } catch(e) { showToast('Error: '+e.message,'error'); }
@@ -5319,9 +5319,9 @@ if (!window._renderVideoList) {
         }
     });
 
-    // ─── POPUP (VENTANA EMERGENTE) TAB ──────────────────────────
+    // ─── POPUP (CLNTANA EMERGENTE) TAB ──────────────────────────
     // ═══════════════════════════════════════════════════════════
-    //  SECCIÓN: VENTANA EMERGENTE (POPUP) - Banner popup del sitio
+    //  SECCIÓN: CLNTANA EMERGENTE (POPUP) - Banner popup del sitio
     //  Funciones: loadPopupTab(), loadPopupLinkSelectors(), savePopupSettings()
     //  Exporta: window.savePopupSettings, window.handleAdminPopupImageSelect, window.removeAdminPopupImage
     // ═══════════════════════════════════════════════════════════
@@ -5385,7 +5385,7 @@ if (!window._renderVideoList) {
 
     // Load all 4 dropdowns (business, property, product, job)
     async function loadPopupLinkSelectors(s) {
-        const token = localStorage.getItem('meridaunclick_token') || localStorage.getItem('authToken') || '';
+        const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken') || '';
         const headers = { 'Authorization': 'Bearer ' + token };
         const currentLink = s.popup_link_url || '';
         const currentType = s.popup_link_type || '';
@@ -5605,7 +5605,7 @@ if (!window._renderVideoList) {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('product_type', 'popup');
-            const token = localStorage.getItem('meridaunclick_token') || localStorage.getItem('authToken') || '';
+            const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken') || '';
             const resp = await fetch('/api/upload', {
                 method: 'POST',
                 headers: { 'Authorization': 'Bearer ' + token },
@@ -5745,7 +5745,7 @@ if (!window._renderVideoList) {
             // Actually, let's use the settings API to toggle — but we need a proper endpoint.
             // For simplicity, we'll toggle by deleting and re-adding, or better: we add a PUT handler.
             // For now, use the raw SQL approach via a quick fetch:
-            const token = localStorage.getItem('meridaunclick_token') || localStorage.getItem('authToken');
+            const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken');
             await fetch(`/api/video-carousel?id=${id}&toggle=1`, {
                 method: 'PUT',
                 headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
@@ -5753,7 +5753,7 @@ if (!window._renderVideoList) {
             });
             loadCarouselTab();
         } catch (e) {
-            showToast('Error al cambiar estado', 'error');
+            showToast('Error al cambiar comuna', 'error');
         }
     };
 
@@ -5877,10 +5877,10 @@ if (!window._renderVideoList) {
                     const formData = new FormData();
                     formData.append('file', pendingVideoFile);
                     formData.append('product_type', 'video');
-                    formData.append('folder', 'merida/carousel');
+                    formData.append('folder', 'santiago/carousel');
                     const uploadResp = await fetch('/api/upload', {
                         method: 'POST',
-                        headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('meridaunclick_token') || localStorage.getItem('authToken')) },
+                        headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken')) },
                         body: formData
                     });
                     const uploadData = await uploadResp.json();
@@ -6094,7 +6094,7 @@ if (!window._renderVideoList) {
             document.getElementById('notifDetailTitle').textContent = n.title || 'Sin título';
             document.getElementById('notifDetailMessage').textContent = n.message || 'Sin mensaje';
             document.getElementById('notifDetailUser').textContent = userMap[n.user_id] || 'Usuario ' + n.user_id;
-            document.getElementById('notifDetailDate').textContent = n.created_at ? new Date(n.created_at).toLocaleDateString('es-VE', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-';
+            document.getElementById('notifDetailDate').textContent = n.created_at ? new Date(n.created_at).toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-';
 
             // Link
             const linkWrap = document.getElementById('notifDetailLinkWrap');
@@ -6163,7 +6163,7 @@ if (!window._renderVideoList) {
                 tableBody.innerHTML = notifs.map((n, idx) => {
                     const typeLabel = { new_business: 'Negocio', new_job: 'Empleo', new_property: 'Inmueble', new_product: 'Producto', review: 'Reseña', premium_request: 'Premium', announcement: 'Anuncio', alert: 'Alerta', custom: 'Personalizado', system: 'Sistema', premium: 'Premium' }[n.type] || n.type;
                     const typeColor = { new_business: '#059669', new_job: '#006EE3', new_property: '#8b5cf6', new_product: '#f59e0b', review: '#f59e0b', premium_request: '#8b5cf6', announcement: '#06b6d4', alert: '#ef4444', custom: '#64748b' }[n.type] || '#64748b';
-                    const date = n.created_at ? new Date(n.created_at).toLocaleDateString('es-VE', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-';
+                    const date = n.created_at ? new Date(n.created_at).toLocaleDateString('es-CL', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-';
                     return `<tr style="cursor:pointer;transition:background .15s;" onclick="openNotifDetail(${idx})" onmouseenter="this.style.background='#f0f4ff'" onmouseleave="this.style.background=''">
                         <td style="white-space:nowrap;">${date}</td>
                         <td><span style="background:${typeColor}15;color:${typeColor};padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;">${escapeHtml(typeLabel)}</span></td>
@@ -6622,9 +6622,9 @@ if (!window._renderVideoList) {
                 var lvl = p.level || 1;
                 var xp = p.xp || 0;
                 var grad = p.is_graduated || p.graduated || false;
-                var LEVEL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
-                var xpPrev = lvl <= 1 ? 0 : LEVEL_XP[lvl - 2];
-                var xpForNext = lvl >= 10 ? LEVEL_XP[9] : LEVEL_XP[lvl - 1];
+                var LECLL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
+                var xpPrev = lvl <= 1 ? 0 : LECLL_XP[lvl - 2];
+                var xpForNext = lvl >= 10 ? LECLL_XP[9] : LECLL_XP[lvl - 1];
                 var xpInLevel = xp - xpPrev;
                 var xpNeeded = xpForNext - xpPrev;
                 var pct = lvl >= 10 ? 100 : Math.min(100, Math.max(0, Math.round((xpInLevel / xpNeeded) * 100)));

@@ -4,10 +4,10 @@
 import { corsHeaders, requireAuth } from '../../_lib/auth.js';
 
 function calcLevel(xp) {
-  const LEVEL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
+  const LECLL_XP = [0, 100, 250, 450, 700, 1000, 1400, 1900, 2500, 3200];
   let level = 1;
-  for (let i = LEVEL_XP.length - 1; i >= 0; i--) {
-    if (xp >= LEVEL_XP[i]) { level = i + 1; break; }
+  for (let i = LECLL_XP.length - 1; i >= 0; i--) {
+    if (xp >= LECLL_XP[i]) { level = i + 1; break; }
   }
   return Math.min(level, 10);
 }

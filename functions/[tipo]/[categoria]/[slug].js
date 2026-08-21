@@ -12,7 +12,7 @@ function slugify(text) {
     .replace(/^-|-$/g, '');
 }
 
-const SITE_URL = 'https://holax.com.ve';
+const SITE_URL = 'https://en-santiago.pages.dev';
 
 // Simple query without tipos_negocio JOIN (safe fallback)
 const BIZ_SIMPLE = `SELECT

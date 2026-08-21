@@ -109,8 +109,8 @@ export async function onRequestGet(context) {
       };
       health.status = 'degraded';
     } else {
-      // List objects in the aunclick folder to verify access
-      const r2Prefix = env.R2_FOLDER || 'merida';
+      // List objects in the en-santiago folder to verify access
+      const r2Prefix = env.R2_FOLDER || 'santiago';
       const listed = await env.R2.list({ prefix: r2Prefix + '/', limit: 5 });
       health.services.r2 = {
         status: 'ok',
@@ -132,7 +132,7 @@ export async function onRequestGet(context) {
 
   // ─── Check Environment Config ────────────────────────────────
   health.config.has_jwt_secret = !!env.JWT_SECRET;
-  health.config.r2_folder = env.R2_FOLDER || 'aunclick';
+  health.config.r2_folder = env.R2_FOLDER || 'en-santiago';
 
   // ─── Check API Endpoints ────────────────────────────────────
   health.endpoints = {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Debug - Panel Vendedores | HolaX</title>
+    <title>Debug - Panel Vendedores | En Santiago</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -136,7 +136,7 @@
 <body>
     <div class="container">
         <h1>🔧 Debug - Panel de Vendedores</h1>
-        <p class="subtitle">Herramienta de diagnóstico para https://aunclick.pages.dev/admin-vendedores</p>
+        <p class="subtitle">Herramienta de diagnóstico para https://en-santiago.pages.dev/admin-vendedores</p>
 
         <div class="card">
             <h2><span id="authStatus" class="status pending">⟳ Verificando...</span> Autenticación</h2>
@@ -225,8 +225,8 @@
     // Cargar info del entorno
     document.getElementById('currentUrl').textContent = window.location.href;
 
-    const token = localStorage.getItem('meridaunclick_token');
-    const userStr = localStorage.getItem('meridaunclick_user');
+    const token = localStorage.getItem('meriden-santiago_token');
+    const userStr = localStorage.getItem('meriden-santiago_user');
 
     document.getElementById('tokenStatus').innerHTML = token
         ? '<span style="color:#4ade80;">✓ Presente (' + token.substring(0, 20) + '...)</span>'

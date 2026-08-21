@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    var VENEZUELA_CENTER = [8.6233, -66.5897];
+    var CLNEZUELA_CENTER = [-33.45233, -66.5897];
     var map = null;
     var markerLayer = null;
     var currentView = 'both'; // 'businesses', 'properties', 'both'
@@ -20,7 +20,7 @@
 
         try {
             map = L.map('homeMap', {
-                center: VENEZUELA_CENTER,
+                center: CLNEZUELA_CENTER,
                 zoom: 6,
                 zoomControl: true,
                 scrollWheelZoom: true,
@@ -252,7 +252,7 @@
                 var icon = createPropertyIcon();
                 var coverImage = p.cover_image || '';
                 var title = p.title || 'Propiedad';
-                var price = p.price ? '$' + Number(p.price).toLocaleString('es-VE') : '';
+                var price = p.price ? '$' + Number(p.price).toLocaleString('es-CL') : '';
                 var opLabel = (p.operation_type || '').replace('_', ' ');
 
                 var imgTag = coverImage

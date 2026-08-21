@@ -67,7 +67,7 @@ export async function onRequestGet(context) {
       return new Response(JSON.stringify({ error: 'Token requerido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
     const token = authHeader.substring(7);
-    const user = await verifyJWT(token, env.JWT_SECRET || 'aunclick_jwt_secret_2024_secure');
+    const user = await verifyJWT(token, env.JWT_SECRET || 'en-santiago_jwt_secret_2024_secure');
     if (!user) return new Response(JSON.stringify({ error: 'Token inválido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     if (user.role !== 'admin') return new Response(JSON.stringify({ error: 'Solo administradores' }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
 

@@ -181,7 +181,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const jwtSecret = env.JWT_SECRET || 'aunclick_jwt_secret_2024_secure';
+    const jwtSecret = env.JWT_SECRET || 'en-santiago_jwt_secret_2024_secure';
 
     // Auth required
     const authHeader = request.headers.get('Authorization');
@@ -238,31 +238,31 @@ export async function onRequestPost(context) {
 
     if (companyNameFinal === HOLAX_NAME) {
       // HOLAX is a virtual/placeholder company — auto-create if not exists
-      let holaxRow = await env.DB.prepare('SELECT id FROM businesses WHERE title = ? LIMIT 1')
+      let en-santiagoRow = await env.DB.prepare('SELECT id FROM businesses WHERE title = ? LIMIT 1')
         .bind(HOLAX_NAME).first();
-      if (!holaxRow) {
+      if (!en-santiagoRow) {
         // Ensure logo column exists
         try { await env.DB.prepare('ALTER TABLE businesses ADD COLUMN logo TEXT').run(); } catch(e) {}
         try { await env.DB.prepare('ALTER TABLE businesses ADD COLUMN banner TEXT').run(); } catch(e) {}
         // Find a valid category_id (look for 'General', fallback to first available)
-        let holaxCatId = await env.DB.prepare('SELECT id FROM categories WHERE slug = ? LIMIT 1')
+        let en-santiagoCatId = await env.DB.prepare('SELECT id FROM categories WHERE slug = ? LIMIT 1')
           .bind('general').first();
-        const catId = holaxCatId ? holaxCatId.id : (await env.DB.prepare('SELECT id FROM categories ORDER BY id LIMIT 1').first()).id;
-        const holaxInsert = await env.DB.prepare(`
+        const catId = en-santiagoCatId ? en-santiagoCatId.id : (await env.DB.prepare('SELECT id FROM categories ORDER BY id LIMIT 1').first()).id;
+        const en-santiagoInsert = await env.DB.prepare(`
           INSERT INTO businesses (user_id, title, slug, status, category_id, logo, description)
           VALUES (?, ?, ?, ?, ?, ?, ?)
         `).bind(
           payload.id,
           HOLAX_NAME,
-          'holax',
+          'en-santiago',
           'approved',
           catId,
-          '/images/Holax.png',
-          'Plataforma HolaX – Directorio comercial e inmobiliario de Venezuela'
+          '/images/En Santiago.png',
+          'Plataforma En Santiago – Directorio comercial e inmobiliario de Santiago de Chile'
         ).run();
-        businessId = holaxInsert.meta.last_row_id;
+        businessId = en-santiagoInsert.meta.last_row_id;
       } else {
-        businessId = holaxRow.id;
+        businessId = en-santiagoRow.id;
       }
     } else {
       // Verify that company_name exists in the businesses table
@@ -328,7 +328,7 @@ export async function onRequestPost(context) {
     try { await env.DB.prepare(`ALTER TABLE job_listings ADD COLUMN business_logo TEXT`).run(); } catch(e) {}
 
     // Set business_logo for the job (use provided or default for HOLAX)
-    const jobLogo = body.business_logo || (companyNameFinal === HOLAX_NAME ? '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png' : null);
+    const jobLogo = body.business_logo || (companyNameFinal === HOLAX_NAME ? '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png' : null);
     if (jobLogo) {
       try { await env.DB.prepare('UPDATE job_listings SET business_logo = ? WHERE id = ?').bind(jobLogo, jobId).run(); } catch(e) {}
     }

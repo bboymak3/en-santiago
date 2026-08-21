@@ -1,5 +1,5 @@
-// functions/estado/[slug].js
-// GET: SEO-indexable state page at /estado/:slug
+// functions/comuna/[slug].js
+// GET: SEO-indexable state page at /comuna/:slug
 // Lists all approved businesses, products, jobs, properties in a state
 
 export async function onRequestGet(context) {
@@ -11,16 +11,16 @@ export async function onRequestGet(context) {
       return new Response('Database unavailable', { status: 500 });
     }
 
-    const baseUrl = 'https://holax.com.ve';
+    const baseUrl = 'https://en-santiago.pages.dev';
 
-    // Venezuelan states map
+    // Santiago de Chilen states map
     const STATES = {
       'distrito-capital': 'Distrito Capital',
       'amazonas': 'Amazonas',
       'anzoategui': 'Anzoátegui',
       'apure': 'Apure',
       'aragua': 'Aragua',
-      'barinas': 'Barinas',
+      'santiago': 'Santiago',
       'bolivar': 'Bolívar',
       'carabobo': 'Carabobo',
       'cojedes': 'Cojedes',
@@ -28,7 +28,7 @@ export async function onRequestGet(context) {
       'falcon': 'Falcón',
       'guarico': 'Guárico',
       'lara': 'Lara',
-      'merida': 'Mérida',
+      'santiago': 'Mérida',
       'miranda': 'Miranda',
       'monagas': 'Monagas',
       'nueva-esparta': 'Nueva Esparta',
@@ -55,14 +55,14 @@ export async function onRequestGet(context) {
     }
 
     if (!stateName) {
-      return new Response('<h1>Estado no encontrado</h1><p>El estado que buscas no está disponible.</p>', {
+      return new Response('<h1>Comuna no encontrado</h1><p>El comuna que buscas no está disponible.</p>', {
         status: 404,
         headers: { 'Content-Type': 'text/html; charset=utf-8' },
       });
     }
 
-    const canonicalUrl = `${baseUrl}/estado/${decodedSlug}`;
-    const stateDesc = `Directorio completo de negocios, productos, inmuebles y empleos en ${stateName}, Venezuela. Encuentra todo lo que necesitas en ${stateName}.`;
+    const canonicalUrl = `${baseUrl}/comuna/${decodedSlug}`;
+    const stateDesc = `Directorio completo de negocios, productos, inmuebles y empleos en ${stateName}, Santiago de Chile. Encuentra todo lo que necesitas en ${stateName}.`;
 
     // Fetch businesses
     let businesses;
@@ -174,17 +174,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
-    <title>Negocios en ${esc(stateName)} - Directorio HolaX Venezuela</title>
+    <title>Negocios en ${esc(stateName)} - Directorio En Santiago Santiago de Chile</title>
     <meta name="description" content="${esc(stateDesc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="${canonicalUrl}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Negocios en ${esc(stateName)} - HolaX">
+    <meta property="og:title" content="Negocios en ${esc(stateName)} - En Santiago">
     <meta property="og:description" content="${esc(stateDesc)}">
     <meta property="og:url" content="${canonicalUrl}">
-    <meta property="og:site_name" content="HolaX">
+    <meta property="og:site_name" content="En Santiago">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Negocios en ${esc(stateName)} - HolaX">
+    <meta name="twitter:title" content="Negocios en ${esc(stateName)} - En Santiago">
 
     <!-- JSON-LD -->
     <script type="application/ld+json">${JSON.stringify({
@@ -193,13 +193,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "name": `Negocios en ${stateName}`,
       "description": stateDesc,
       "url": canonicalUrl,
-      "isPartOf": { "@type": "WebSite", "name": "HolaX", "url": "https://holax.com.ve" }
+      "isPartOf": { "@type": "WebSite", "name": "En Santiago", "url": "https://en-santiago.pages.dev" }
     })}</script>
     <script type="application/ld+json">${JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://holax.com.ve/" },
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" },
         { "@type": "ListItem", "position": 2, "name": stateName, "item": canonicalUrl }
       ]
     })}</script>
@@ -212,7 +212,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@type": "ListItem",
         "position": i + 1,
         "name": b.title,
-        "url": `https://holax.com.ve/${b.tipo_negocio_slug || (b.business_type || 'negocio').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-')}/${b.category_slug || 'otro'}/${b.slug}`
+        "url": `https://en-santiago.pages.dev/${b.tipo_negocio_slug || (b.business_type || 'negocio').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-')}/${b.category_slug || 'otro'}/${b.slug}`
       }))
     })}</script>
 
@@ -274,8 +274,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="est-nav">
         <div class="est-nav-inner">
             <a href="/" class="est-nav-logo">
-                <img src="/images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;">
-                HolaX
+                <img src="/images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;">
+                En Santiago
             </a>
         </div>
     </nav>
@@ -320,7 +320,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <footer class="est-footer">
-        <p>&copy; ${new Date().getFullYear()} <a href="/">HolaX</a> — Directorio de Negocios en Venezuela</p>
+        <p>&copy; ${new Date().getFullYear()} <a href="/">En Santiago</a> — Directorio de Negocios en Santiago de Chile</p>
       <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
       <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
     </footer>
@@ -336,7 +336,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       },
     });
   } catch (error) {
-    console.error('[estado] Error:', error);
+    console.error('[comuna] Error:', error);
     return new Response('Error interno del servidor', {
       status: 500,
       headers: { 'Content-Type': 'text/plain' },

@@ -1,5 +1,5 @@
 /**
- * HolaX - Property Detail Page Loader
+ * En Santiago - Property Detail Page Loader
  * Loads property data from API and populates property-detail.html
  *
  * NOTE: PROPERTY_TYPE_LABELS, OPERATION_TYPE_LABELS, CURRENCY_SYMBOLS,
@@ -68,7 +68,7 @@ function getPropertyStatusLabel(status) {
 
 function formatPropertyPrice(price, currency) {
     if (price == null || isNaN(price)) return '--';
-    const formatted = new Intl.NumberFormat('es-VE', {
+    const formatted = new Intl.NumberFormat('es-CL', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
     }).format(price);
@@ -154,7 +154,7 @@ function sharePropertyWhatsAppUrl(property) {
     const type = getPropertyTypeLabel(property.property_type);
     const op = getOperationTypeLabel(property.operation_type);
     const price = formatPropertyPrice(property.price, property.currency);
-    const url = `https://holax.com/property-detail.html?id=${property.id}`;
+    const url = `https://en-santiago.com/property-detail.html?id=${property.id}`;
     const title = property.title || 'Propiedad';
 
     let msg = `🏠 *${title}*\n`;
@@ -165,7 +165,7 @@ function sharePropertyWhatsAppUrl(property) {
     if (property.area) msg += `📐 ${property.area}${property.area_unit || 'm²'}\n`;
     if (property.city) msg += `📍 ${property.city}${property.address ? ', ' + property.address : ''}\n`;
     msg += `\n🔗 ${url}`;
-    msg += `\n\n📌 Publicado en HolaX`;
+    msg += `\n\n📌 Publicado en En Santiago`;
 
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
 }
@@ -312,7 +312,7 @@ const PropertyDetail = (function () {
             contentEl.classList.remove('hidden');
 
             // Update page title
-            document.title = `${property.title || 'Inmueble'} - HolaX`;
+            document.title = `${property.title || 'Inmueble'} - En Santiago`;
 
             // Load similar properties
             loadSimilarProperties(property);
@@ -677,7 +677,7 @@ const PropertyDetail = (function () {
             const waNumber = p.whatsapp || p.owner_whatsapp || p.phone || p.owner_phone || '';
             if (waNumber) {
                 const cleanNumber = waNumber.replace(/[^0-9+]/g, '');
-                const msg = encodeURIComponent(`Hola, vi tu propiedad "${p.title || ''}" en HolaX y me interesa saber más.`);
+                const msg = encodeURIComponent(`Hola, vi tu propiedad "${p.title || ''}" en En Santiago y me interesa saber más.`);
                 mainWhatsApp.href = `https://wa.me/${cleanNumber}?text=${msg}`;
                 mainWhatsApp.style.display = '';
             } else {
@@ -701,7 +701,7 @@ const PropertyDetail = (function () {
         if (openChatBtn) {
             openChatBtn.onclick = () => {
                 if (typeof UnClickChat !== 'undefined' && UnClickChat.openChatWith) {
-                    UnClickChat.openChatWith(p.owner_id || p.user_id, `Hola, vi tu propiedad "${p.title}" en HolaX`);
+                    UnClickChat.openChatWith(p.owner_id || p.user_id, `Hola, vi tu propiedad "${p.title}" en En Santiago`);
                 } else {
                     showToast('Chat no disponible', 'warning');
                 }
@@ -749,7 +749,7 @@ const PropertyDetail = (function () {
             const op = getOperationTypeLabel(p.operation_type);
             const price = p.price ? formatPropertyPrice(p.price, p.currency) : '';
             const desc = p.description ? p.description.substring(0, 150) : '';
-            metaDesc.content = `${p.title || 'Inmueble'} - ${type} en ${op}${price ? ' por ' + price : ''} en ${p.city || 'Venezuela'}. ${desc} Visita HolaX para más información.`;
+            metaDesc.content = `${p.title || 'Inmueble'} - ${type} en ${op}${price ? ' por ' + price : ''} en ${p.city || 'Santiago de Chile'}. ${desc} Visita En Santiago para más información.`;
         }
     }
 
@@ -878,7 +878,7 @@ const PropertyDetail = (function () {
             const property = await api.get(`/properties/${propertyId}`);
             sharePropertyWhatsAppUrl(property);
         } catch {
-            window.open(`https://wa.me/?text=${encodeURIComponent('🏠 Mira esta propiedad en HolaX:\nhttps://holax.com/property-detail.html?id=' + propertyId)}`, '_blank');
+            window.open(`https://wa.me/?text=${encodeURIComponent('🏠 Mira esta propiedad en En Santiago:\nhttps://en-santiago.com/property-detail.html?id=' + propertyId)}`, '_blank');
         }
     }
 

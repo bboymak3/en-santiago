@@ -166,7 +166,7 @@ export async function onRequestGet(context) {
 
         // Verify the regex worked
         if (newSQL.includes('CHECK')) {
-          results.push('ADVERTENCIA: no se pudo remover todo CHECK del SQL');
+          results.push('ADCLRTENCIA: no se pudo remover todo CHECK del SQL');
         }
 
         results.push('SQL modificado tiene ' + newSQL.length + ' caracteres');
