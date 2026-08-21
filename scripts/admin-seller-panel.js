@@ -96,7 +96,7 @@
                 <!-- Seller Profile Card -->
                 <div class="admin-card" style="margin-bottom:20px;">
                     <div class="admin-card-body" id="sellerProfileContent" style="padding:0;">
-                        <div style="text-align:center;padding:30px;color:#94a3b8;">
+                        <div style="text-align:center;padding:30px;color:#8B0000;">
                             <i class="fas fa-spinner fa-spin" style="font-size:24px;"></i>
                             <p style="margin-top:8px;">Cargando perfil del vendedor...</p>
                         </div>
@@ -109,7 +109,7 @@
                         <h3><i class="fas fa-list"></i> Publicaciones del Vendedor</h3>
                     </div>
                     <div class="admin-card-body" id="sellerPublicationsContent">
-                        <div style="text-align:center;padding:30px;color:#94a3b8;">
+                        <div style="text-align:center;padding:30px;color:#8B0000;">
                             <i class="fas fa-spinner fa-spin" style="font-size:24px;"></i>
                             <p style="margin-top:8px;">Cargando publicaciones...</p>
                         </div>
@@ -129,24 +129,24 @@
                         <form id="createSellerForm">
                             <div class="form-group" style="margin-bottom:14px;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre Completo *</label>
-                                <input type="text" id="newSellerName" required placeholder="Nombre del vendedor" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="text" id="newSellerName" required placeholder="Nombre del vendedor" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                             <div class="form-group" style="margin-bottom:14px;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Email *</label>
-                                <input type="email" id="newSellerEmail" required placeholder="vendedor@email.com" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="email" id="newSellerEmail" required placeholder="vendedor@email.com" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                             <div class="form-group" style="margin-bottom:14px;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Contraseña *</label>
-                                <input type="password" id="newSellerPassword" required minlength="6" placeholder="Mínimo 6 caracteres" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="password" id="newSellerPassword" required minlength="6" placeholder="Mínimo 6 caracteres" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                             <div style="display:flex;gap:12px;margin-bottom:14px;">
                                 <div class="form-group" style="flex:1;">
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Teléfono</label>
-                                    <input type="tel" id="newSellerPhone" placeholder="+58 414 0000000" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                    <input type="tel" id="newSellerPhone" placeholder="+58 414 0000000" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                                 </div>
                                 <div class="form-group" style="flex:1;">
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">WhatsApp</label>
-                                    <input type="tel" id="newSellerWhatsapp" placeholder="+58 414 0000000" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                    <input type="tel" id="newSellerWhatsapp" placeholder="+58 414 0000000" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                                 </div>
                             </div>
                         </form>
@@ -273,7 +273,7 @@
                 const avatarHTML = s.avatar
                     ? `<div style="width:36px;height:36px;border-radius:50%;overflow:hidden;"><img src="${s.avatar}" style="width:100%;height:100%;object-fit:cover;"></div>`
                     : `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#059669,#10b981);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;">${initials}</div>`;
-                const planLabel = s.plan === 'premium' ? '<span class="badge badge-warning">Premium</span>' : '<span class="badge" style="background:#e2e8f0;color:#64748b;">Free</span>';
+                const planLabel = s.plan === 'premium' ? '<span class="badge badge-warning">Premium</span>' : '<span class="badge" style="background:#8B0000;color:#8B0000;">Free</span>';
 
                 return `
                     <tr data-seller-id="${s.id}">
@@ -283,18 +283,18 @@
                                 ${avatarHTML}
                                 <div>
                                     <div style="font-weight:600;font-size:0.88rem;color:#1e293b;">${s.name || '--'}</div>
-                                    ${s.store_name ? `<div style="font-size:0.75rem;color:#64748b;">${s.store_name}</div>` : ''}
+                                    ${s.store_name ? `<div style="font-size:0.75rem;color:#8B0000;">${s.store_name}</div>` : ''}
                                 </div>
                             </div>
                         </td>
-                        <td style="font-size:0.83rem;color:#64748b;">${s.email || '--'}</td>
+                        <td style="font-size:0.83rem;color:#8B0000;">${s.email || '--'}</td>
                         <td style="font-size:0.83rem;">${s.phone || '<span style="color:#ccc">—</span>'}</td>
                         <td>${planLabel}</td>
                         <td>${s.is_active ? '<span class="badge badge-success">Activo</span>' : '<span class="badge badge-danger">Inactivo</span>'}</td>
                         <td style="text-align:center;">
                             <span style="font-weight:700;color:#059669;font-size:0.9rem;">${s.businesses_count || 0}</span>
                         </td>
-                        <td style="font-size:0.82rem;color:#94a3b8;">${formatDate(s.created_at)}</td>
+                        <td style="font-size:0.82rem;color:#8B0000;">${formatDate(s.created_at)}</td>
                         <td>
                             <div style="display:flex;gap:4px;">
                                 <button class="btn btn-xs btn-outline" onclick="window.adminSellerPanel.viewSeller(${s.id})" title="Ver vendedor">
@@ -364,7 +364,7 @@
 
             const socials = [];
             if (profile.instagram) socials.push(`<a href="https://instagram.com/${profile.instagram.replace('@','')}" target="_blank" style="color:#E1306C;font-size:1.1rem;"><i class="fab fa-instagram"></i></a>`);
-            if (profile.facebook) socials.push(`<a href="${profile.facebook}" target="_blank" style="color:#1877F2;font-size:1.1rem;"><i class="fab fa-facebook"></i></a>`);
+            if (profile.facebook) socials.push(`<a href="${profile.facebook}" target="_blank" style="color:#8B0000;font-size:1.1rem;"><i class="fab fa-facebook"></i></a>`);
             if (profile.tiktok) socials.push(`<a href="https://tiktok.com/@${profile.tiktok.replace('@','')}" target="_blank" style="color:#000;font-size:1.1rem;"><i class="fab fa-tiktok"></i></a>`);
             if (user.whatsapp || profile.whatsapp) {
                 const wa = profile.whatsapp || user.whatsapp;
@@ -376,15 +376,15 @@
                     ${avatarHTML}
                     <div style="flex:1;min-width:200px;">
                         <h3 style="margin:0 0 4px 0;font-size:1.2rem;color:#1e293b;">${profile.store_name || user.name || 'Vendedor'}</h3>
-                        <p style="margin:0 0 8px 0;color:#64748b;font-size:0.88rem;">${user.email || ''}</p>
+                        <p style="margin:0 0 8px 0;color:#8B0000;font-size:0.88rem;">${user.email || ''}</p>
                         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
                             <span style="background:#ecfdf5;color:#065f46;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">ID: ${sellerId}</span>
-                            ${user.phone ? `<span style="color:#64748b;font-size:0.82rem;"><i class="fas fa-phone"></i> ${user.phone}</span>` : ''}
+                            ${user.phone ? `<span style="color:#8B0000;font-size:0.82rem;"><i class="fas fa-phone"></i> ${user.phone}</span>` : ''}
                             ${socials.length ? `<span style="display:flex;gap:8px;margin-left:8px;">${socials.join(' ')}</span>` : ''}
                         </div>
                     </div>
                 </div>
-                ${profile.description ? `<div style="padding:0 24px 20px 24px;color:#475569;font-size:0.88rem;line-height:1.6;border-top:1px solid #f1f5f9;padding-top:16px;margin:0 24px 20px 24px;">${profile.description}</div>` : ''}
+                ${profile.description ? `<div style="padding:0 24px 20px 24px;color:#8B0000;font-size:0.88rem;line-height:1.6;border-top:1px solid #8B0000;padding-top:16px;margin:0 24px 20px 24px;">${profile.description}</div>` : ''}
                 <div style="display:flex;gap:12px;padding:0 24px 20px 24px;flex-wrap:wrap;">
                     <div style="background:#f0fdf4;padding:10px 16px;border-radius:10px;display:flex;align-items:center;gap:8px;">
                         <i class="fas fa-building" style="color:#059669;"></i>
@@ -394,13 +394,13 @@
                         <i class="fas fa-box" style="color:#d97706;"></i>
                         <span style="font-size:0.82rem;color:#92400e;font-weight:600;" id="sellerProdCount">—</span>
                     </div>
-                    <div style="background:#ede9fe;padding:10px 16px;border-radius:10px;display:flex;align-items:center;gap:8px;">
-                        <i class="fas fa-briefcase" style="color:#7c3aed;"></i>
-                        <span style="font-size:0.82rem;color:#5b21b6;font-weight:600;" id="sellerJobCount">—</span>
+                    <div style="background:#8B0000;padding:10px 16px;border-radius:10px;display:flex;align-items:center;gap:8px;">
+                        <i class="fas fa-briefcase" style="color:#8B0000;"></i>
+                        <span style="font-size:0.82rem;color:#8B0000;font-weight:600;" id="sellerJobCount">—</span>
                     </div>
-                    <div style="background:#dbeafe;padding:10px 16px;border-radius:10px;display:flex;align-items:center;gap:8px;">
-                        <i class="fas fa-home" style="color:#2563eb;"></i>
-                        <span style="font-size:0.82rem;color:#1e40af;font-weight:600;" id="sellerPropCount">—</span>
+                    <div style="background:#8B0000;padding:10px 16px;border-radius:10px;display:flex;align-items:center;gap:8px;">
+                        <i class="fas fa-home" style="color:#8B0000;"></i>
+                        <span style="font-size:0.82rem;color:#8B0000;font-weight:600;" id="sellerPropCount">—</span>
                     </div>
                 </div>
             `;
@@ -445,11 +445,11 @@
                             <tbody>${businesses.map(b => `
                                 <tr>
                                     <td style="font-weight:600;font-size:0.85rem;">${b.title || '--'}</td>
-                                    <td style="font-size:0.82rem;color:#64748b;">${b.category_name || '--'}</td>
+                                    <td style="font-size:0.82rem;color:#8B0000;">${b.category_name || '--'}</td>
                                     <td style="font-size:0.82rem;">${b.state || '--'}</td>
                                     <td><span class="badge ${b.status === 'approved' ? 'badge-success' : b.status === 'pending' ? 'badge-warning' : 'badge-danger'}">${b.status === 'approved' ? 'Publicado' : b.status === 'pending' ? 'Pendiente' : 'Rechazado'}</span></td>
                                     <td style="font-size:0.82rem;text-align:center;">${b.views || 0}</td>
-                                    <td style="font-size:0.8rem;color:#94a3b8;">${formatDate(b.created_at)}</td>
+                                    <td style="font-size:0.8rem;color:#8B0000;">${formatDate(b.created_at)}</td>
                                 </tr>
                             `).join('')}</tbody>
                         </table>
@@ -468,9 +468,9 @@
                                 <tr>
                                     <td style="font-weight:600;font-size:0.85rem;">${p.name || '--'}</td>
                                     <td style="font-size:0.85rem;font-weight:700;color:#059669;">$${Number(p.price || 0).toFixed(2)}</td>
-                                    <td style="font-size:0.82rem;color:#64748b;">${p.category || '--'}</td>
+                                    <td style="font-size:0.82rem;color:#8B0000;">${p.category || '--'}</td>
                                     <td><span class="badge ${p.status === 'approved' ? 'badge-success' : p.status === 'pending' ? 'badge-warning' : 'badge-danger'}">${p.status === 'approved' ? 'Publicado' : p.status === 'pending' ? 'Pendiente' : 'Rechazado'}</span></td>
-                                    <td style="font-size:0.8rem;color:#94a3b8;">${formatDate(p.created_at)}</td>
+                                    <td style="font-size:0.8rem;color:#8B0000;">${formatDate(p.created_at)}</td>
                                 </tr>
                             `).join('')}</tbody>
                         </table>
@@ -481,18 +481,18 @@
             // Jobs
             if (jobs.length > 0) {
                 html += `<div style="margin-bottom:20px;">
-                    <h4 style="margin:0 0 12px 0;font-size:0.95rem;color:#1e293b;"><i class="fas fa-briefcase" style="color:#7c3aed;"></i> Empleos (${jobs.length})</h4>
+                    <h4 style="margin:0 0 12px 0;font-size:0.95rem;color:#1e293b;"><i class="fas fa-briefcase" style="color:#8B0000;"></i> Empleos (${jobs.length})</h4>
                     <div class="admin-table-responsive">
                         <table class="admin-table">
                             <thead><tr><th>Título</th><th>Tipo</th><th>Estado</th><th>Estatus</th><th>Vistas</th><th>Fecha</th></tr></thead>
                             <tbody>${jobs.map(j => `
                                 <tr>
                                     <td style="font-weight:600;font-size:0.85rem;">${j.title || '--'}</td>
-                                    <td style="font-size:0.82rem;color:#64748b;">${j.job_type || '--'}</td>
+                                    <td style="font-size:0.82rem;color:#8B0000;">${j.job_type || '--'}</td>
                                     <td style="font-size:0.82rem;">${j.state || '--'}</td>
                                     <td><span class="badge ${j.status === 'approved' ? 'badge-success' : j.status === 'pending' ? 'badge-warning' : 'badge-danger'}">${j.status === 'approved' ? 'Publicado' : j.status === 'pending' ? 'Pendiente' : 'Rechazado'}</span></td>
                                     <td style="font-size:0.82rem;text-align:center;">${j.views || 0}</td>
-                                    <td style="font-size:0.8rem;color:#94a3b8;">${formatDate(j.created_at)}</td>
+                                    <td style="font-size:0.8rem;color:#8B0000;">${formatDate(j.created_at)}</td>
                                 </tr>
                             `).join('')}</tbody>
                         </table>
@@ -503,18 +503,18 @@
             // Properties
             if (properties.length > 0) {
                 html += `<div style="margin-bottom:20px;">
-                    <h4 style="margin:0 0 12px 0;font-size:0.95rem;color:#1e293b;"><i class="fas fa-home" style="color:#2563eb;"></i> Inmuebles (${properties.length})</h4>
+                    <h4 style="margin:0 0 12px 0;font-size:0.95rem;color:#1e293b;"><i class="fas fa-home" style="color:#8B0000;"></i> Inmuebles (${properties.length})</h4>
                     <div class="admin-table-responsive">
                         <table class="admin-table">
                             <thead><tr><th>Título</th><th>Tipo</th><th>Operación</th><th>Precio</th><th>Estatus</th><th>Fecha</th></tr></thead>
                             <tbody>${properties.map(p => `
                                 <tr>
                                     <td style="font-weight:600;font-size:0.85rem;">${p.title || '--'}</td>
-                                    <td style="font-size:0.82rem;color:#64748b;">${p.property_type || '--'}</td>
+                                    <td style="font-size:0.82rem;color:#8B0000;">${p.property_type || '--'}</td>
                                     <td style="font-size:0.82rem;">${p.operation_type || '--'}</td>
                                     <td style="font-size:0.85rem;font-weight:700;color:#059669;">$${Number(p.price || 0).toFixed(2)}</td>
                                     <td><span class="badge ${p.status === 'approved' ? 'badge-success' : p.status === 'pending' ? 'badge-warning' : 'badge-danger'}">${p.status === 'approved' ? 'Publicado' : p.status === 'pending' ? 'Pendiente' : 'Rechazado'}</span></td>
-                                    <td style="font-size:0.8rem;color:#94a3b8;">${formatDate(p.created_at)}</td>
+                                    <td style="font-size:0.8rem;color:#8B0000;">${formatDate(p.created_at)}</td>
                                 </tr>
                             `).join('')}</tbody>
                         </table>
@@ -524,7 +524,7 @@
 
             // Empty state
             if (!html) {
-                html = `<div style="text-align:center;padding:40px;color:#94a3b8;">
+                html = `<div style="text-align:center;padding:40px;color:#8B0000;">
                     <i class="fas fa-inbox" style="font-size:2rem;"></i>
                     <p style="margin-top:8px;">Este vendedor no tiene publicaciones aún.</p>
                 </div>`;

@@ -648,7 +648,7 @@
         // Show loading state
         const modalBody = adminUserModal.querySelector('.modal-body');
         if (modalBody) {
-            modalBody.innerHTML = '<div class="loading-spinner" style="padding:40px;text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:24px;color:#1a73e8;"></i><p style="margin-top:12px;color:#888;">Cargando datos del usuario...</p></div>';
+            modalBody.innerHTML = '<div class="loading-spinner" style="padding:40px;text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:24px;color:#8B0000;"></i><p style="margin-top:12px;color:#888;">Cargando datos del usuario...</p></div>';
         }
         adminUserModal.classList.remove('hidden');
 
@@ -1015,7 +1015,7 @@
 
             galleryEl.innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:8px;">' +
                 images.map(img => `
-                    <div style="position:relative;display:inline-block;border-radius:8px;overflow:hidden;border:2px solid ${img.is_cover ? '#f59e0b' : '#e5e7eb'};">
+                    <div style="position:relative;display:inline-block;border-radius:8px;overflow:hidden;border:2px solid ${img.is_cover ? '#f59e0b' : '#8B0000'};">
                         <img src="${img.url}" style="width:100px;height:80px;object-fit:cover;" onerror="this.style.display='none'">
                         ${img.is_cover ? '<span style="position:absolute;top:2px;left:2px;background:#f59e0b;color:#fff;font-size:0.6rem;padding:1px 4px;border-radius:4px;">Portada</span>' : ''}
                         <button type="button" onclick="window._adminDeleteBizImage(${businessId}, ${img.id})" style="position:absolute;top:2px;right:2px;background:rgba(220,53,69,0.9);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Eliminar">&times;</button>
@@ -1307,7 +1307,7 @@
         }
 
         const statusEl = document.getElementById('fbConfigStatus');
-        statusEl.innerHTML = '<div style="color:#1a73e8;"><i class="fas fa-spinner fa-spin"></i> Guardando...</div>';
+        statusEl.innerHTML = '<div style="color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Guardando...</div>';
 
         try {
             const data = await api.post('/facebook/config', {
@@ -1340,7 +1340,7 @@
         }
 
         const statusEl = document.getElementById('fbConfigStatus');
-        statusEl.innerHTML = '<div style="color:#1a73e8;"><i class="fas fa-spinner fa-spin"></i> Probando conexion con Facebook...</div>';
+        statusEl.innerHTML = '<div style="color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Probando conexion con Facebook...</div>';
 
         try {
             const resp = await fetch(`https://graph.facebook.com/v18.0/${pageId}?fields=name,fan_count&access_token=${accessToken}`);
@@ -1362,7 +1362,7 @@
 
     async function importFromFacebook() {
         const statusEl = document.getElementById('fbImportStatus');
-        statusEl.innerHTML = '<div style="color:#1a73e8;"><i class="fas fa-spinner fa-spin"></i> Importando posts desde Facebook... esto puede tomar unos segundos.</div>';
+        statusEl.innerHTML = '<div style="color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Importando posts desde Facebook... esto puede tomar unos segundos.</div>';
 
         try {
             const data = await api.post('/facebook/import', {});
@@ -2135,7 +2135,7 @@
             const businesses = data.businesses || [];
 
             if (businesses.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay negocios aprobados.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay negocios aprobados.</p>';
                 return;
             }
 
@@ -2147,7 +2147,7 @@
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
 
             // Show currently featured
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Negocios actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Negocios actualmente destacados:</div>';
 
             const featuredBusinesses = businesses.filter(b => featuredIds.has(b.id));
             featuredBusinesses.forEach(b => {
@@ -2156,7 +2156,7 @@
                     <img src="${b.cover_image || (b.images && b.images[0] && b.images[0].url) || ''}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.88rem;">${escapeHtml(b.title)}</div>
-                        <div style="font-size:0.78rem;color:#6b7280;">${escapeHtml(b.category_name || b.city || '')}</div>
+                        <div style="font-size:0.78rem;color:#8B0000;">${escapeHtml(b.category_name || b.city || '')}</div>
                     </div>
                 </label>`;
             });
@@ -2164,14 +2164,14 @@
             // Show non-featured
             const nonFeatured = businesses.filter(b => !featuredIds.has(b.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros negocios (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros negocios (selecciona para destacar):</div>';
 
                 nonFeatured.forEach(b => {
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
                         <input type="checkbox" class="featured-checkbox" value="${b.id}" style="width:18px;height:18px;accent-color:#f59e0b;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(b.title)}</div>
-                            <div style="font-size:0.78rem;color:#6b7280;">${escapeHtml(b.category_name || b.city || '')}</div>
+                            <div style="font-size:0.78rem;color:#8B0000;">${escapeHtml(b.category_name || b.city || '')}</div>
                         </div>
                     </label>`;
                 });
@@ -2328,11 +2328,11 @@
                     <td>${p.id}</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            ${p.image ? `<img src="${p.image}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">` : '<div style="width:40px;height:40px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;"><i class="fas fa-box" style="color:#94a3b8;font-size:0.8rem;"></i></div>'}
+                            ${p.image ? `<img src="${p.image}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">` : '<div style="width:40px;height:40px;border-radius:8px;background:#8B0000;display:flex;align-items:center;justify-content:center;"><i class="fas fa-box" style="color:#8B0000;font-size:0.8rem;"></i></div>'}
                             <div>
                                 <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.name)}</div>
-                                ${p.business_name ? `<div style="font-size:0.72rem;color:#6366f1;"><i class="fas fa-store" style="font-size:0.65rem;"></i> ${escapeHtml(p.business_name)}</div>` : ''}
-                                ${p.description ? `<div style="font-size:0.75rem;color:#94a3b8;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(p.description)}</div>` : ''}
+                                ${p.business_name ? `<div style="font-size:0.72rem;color:#8B0000;"><i class="fas fa-store" style="font-size:0.65rem;"></i> ${escapeHtml(p.business_name)}</div>` : ''}
+                                ${p.description ? `<div style="font-size:0.75rem;color:#8B0000;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(p.description)}</div>` : ''}
                             </div>
                         </div>
                     </td>
@@ -2340,10 +2340,10 @@
                     <td style="font-weight:600;color:#059669;">${price}</td>
                     <td style="font-size:0.8rem;">
                         <div>${escapeHtml(p.owner_name || 'Usuario')}</div>
-                        ${p.owner_email ? `<div style="font-size:0.7rem;color:#94a3b8;">${escapeHtml(p.owner_email)}</div>` : ''}
+                        ${p.owner_email ? `<div style="font-size:0.7rem;color:#8B0000;">${escapeHtml(p.owner_email)}</div>` : ''}
                     </td>
                     <td><span class="admin-status-badge ${statusClass}">${statusLabel}</span></td>
-                    <td style="font-size:0.78rem;color:#94a3b8;">${date}</td>
+                    <td style="font-size:0.78rem;color:#8B0000;">${date}</td>
                     <td><div style="display:flex;gap:6px;">${actions}</div></td>
                 </tr>`;
             }).join('');
@@ -2428,44 +2428,44 @@
             const featuredIds = new Set(featured.map(f => f.item_id));
 
             if (products.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay productos disponibles.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay productos disponibles.</p>';
                 return;
             }
 
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Productos actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Productos actualmente destacados:</div>';
 
             products.filter(p => featuredIds.has(p.id)).forEach(p => {
                 const price = p.price ? `$${parseFloat(p.price).toFixed(2)}` : '';
-                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #2563eb;border-radius:10px;background:#eff6ff;cursor:pointer;">
-                    <input type="checkbox" class="featured-product-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#2563eb;">
+                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #8B0000;border-radius:10px;background:#8B0000;cursor:pointer;">
+                    <input type="checkbox" class="featured-product-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#8B0000;">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.name)}</div>
-                        <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
                     </div>
                 </label>`;
             });
 
             const nonFeatured = products.filter(p => !featuredIds.has(p.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros productos (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros productos (selecciona para destacar):</div>';
                 nonFeatured.slice(0, 30).forEach(p => {
                     const price = p.price ? `$${parseFloat(p.price).toFixed(2)}` : '';
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
-                        <input type="checkbox" class="featured-product-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#2563eb;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
+                        <input type="checkbox" class="featured-product-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#8B0000;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.name)}</div>
-                            <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
+                            <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
                         </div>
                     </label>`;
                 });
                 if (nonFeatured.length > 30) {
-                    html += `<p style="font-size:0.78rem;color:#9ca3af;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de productos para ver todos.</p>`;
+                    html += `<p style="font-size:0.78rem;color:#8B0000;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de productos para ver todos.</p>`;
                 }
             }
 
             html += '</div>';
-            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#2563eb,#1d4ed8);" onclick="window._adminSaveFeaturedProducts()"><i class="fas fa-save"></i> Guardar Productos Destacados</button>';
+            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#8B0000,#8B0000);" onclick="window._adminSaveFeaturedProducts()"><i class="fas fa-save"></i> Guardar Productos Destacados</button>';
             container.innerHTML = html;
 
             container.querySelectorAll('.featured-product-checkbox').forEach(cb => {
@@ -2517,12 +2517,12 @@
             const featuredIds = new Set(featured.map(f => f.item_id));
 
             if (properties.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay inmuebles disponibles.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay inmuebles disponibles.</p>';
                 return;
             }
 
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Inmuebles actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Inmuebles actualmente destacados:</div>';
 
             properties.filter(p => featuredIds.has(p.id)).forEach(p => {
                 const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-VE')}` : '';
@@ -2530,26 +2530,26 @@
                     <input type="checkbox" class="featured-property-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#059669;">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.title)}</div>
-                        <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
                     </div>
                 </label>`;
             });
 
             const nonFeatured = properties.filter(p => !featuredIds.has(p.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros inmuebles (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros inmuebles (selecciona para destacar):</div>';
                 nonFeatured.slice(0, 30).forEach(p => {
                     const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-VE')}` : '';
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
                         <input type="checkbox" class="featured-property-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#059669;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.title)}</div>
-                            <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
+                            <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
                         </div>
                     </label>`;
                 });
                 if (nonFeatured.length > 30) {
-                    html += `<p style="font-size:0.78rem;color:#9ca3af;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de inmuebles para ver todos.</p>`;
+                    html += `<p style="font-size:0.78rem;color:#8B0000;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de inmuebles para ver todos.</p>`;
                 }
             }
 
@@ -2604,44 +2604,44 @@
             const featuredIds = new Set(featured.map(f => f.item_id));
 
             if (jobs.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay empleos disponibles.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay empleos disponibles.</p>';
                 return;
             }
 
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Empleos actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Empleos actualmente destacados:</div>';
 
             jobs.filter(j => featuredIds.has(j.id)).forEach(j => {
                 const salary = j.salary ? `$${j.salary}` : '';
-                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #8b5cf6;border-radius:10px;background:#f5f3ff;cursor:pointer;">
-                    <input type="checkbox" class="featured-job-checkbox" value="${j.id}" checked style="width:18px;height:18px;accent-color:#8b5cf6;">
+                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #8B0000;border-radius:10px;background:#8B0000;cursor:pointer;">
+                    <input type="checkbox" class="featured-job-checkbox" value="${j.id}" checked style="width:18px;height:18px;accent-color:#8B0000;">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(j.title)}</div>
-                        <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
                     </div>
                 </label>`;
             });
 
             const nonFeatured = jobs.filter(j => !featuredIds.has(j.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros empleos (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros empleos (selecciona para destacar):</div>';
                 nonFeatured.slice(0, 40).forEach(j => {
                     const salary = j.salary ? `$${j.salary}` : '';
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
-                        <input type="checkbox" class="featured-job-checkbox" value="${j.id}" style="width:18px;height:18px;accent-color:#8b5cf6;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
+                        <input type="checkbox" class="featured-job-checkbox" value="${j.id}" style="width:18px;height:18px;accent-color:#8B0000;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(j.title)}</div>
-                            <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
+                            <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
                         </div>
                     </label>`;
                 });
                 if (nonFeatured.length > 40) {
-                    html += `<p style="font-size:0.78rem;color:#9ca3af;text-align:center;">... y ${nonFeatured.length - 40} más.</p>`;
+                    html += `<p style="font-size:0.78rem;color:#8B0000;text-align:center;">... y ${nonFeatured.length - 40} más.</p>`;
                 }
             }
 
             html += '</div>';
-            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#8b5cf6,#7c3aed);" onclick="window._adminSaveFeaturedJobs()"><i class="fas fa-save"></i> Guardar Empleos Destacados</button>';
+            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#8B0000,#8B0000);" onclick="window._adminSaveFeaturedJobs()"><i class="fas fa-save"></i> Guardar Empleos Destacados</button>';
             container.innerHTML = html;
 
             container.querySelectorAll('.featured-job-checkbox').forEach(cb => {
@@ -2685,3 +2685,4 @@
     }
 
 })();
+

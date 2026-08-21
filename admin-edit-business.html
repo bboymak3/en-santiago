@@ -5,7 +5,7 @@
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Editar Negocio - Admin HolaX</title>
+    <title>Editar Negocio - Admin En-Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -13,65 +13,65 @@
         .edit-biz-page { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
         .edit-biz-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
         .edit-biz-header h2 { margin: 0; font-size: 1.3rem; color: var(--color-text, #1a1a2e); }
-        .edit-biz-back { display: inline-flex; align-items: center; gap: 6px; color: #006EE3; text-decoration: none; font-size: 0.88rem; font-weight: 600; padding: 8px 14px; border: 1.5px solid #006EE3; border-radius: 8px; transition: all 0.2s; }
-        .edit-biz-back:hover { background: #006EE3; color: #fff; }
+        .edit-biz-back { display: inline-flex; align-items: center; gap: 6px; color: #8B0000; text-decoration: none; font-size: 0.88rem; font-weight: 600; padding: 8px 14px; border: 1.5px solid #8B0000; border-radius: 8px; transition: all 0.2s; }
+        .edit-biz-back:hover { background: #8B0000; color: #fff; }
 
         /* Search area */
         .edit-biz-search { position: relative; margin-bottom: 20px; }
-        .edit-biz-search select { width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem; background: #fff; color: var(--color-text, #1a1a2e); outline: none; transition: border-color 0.2s; appearance: auto; cursor: pointer; }
-        .edit-biz-search select:focus { border-color: #006EE3; box-shadow: 0 0 0 3px rgba(0,110,227,0.1); }
+        .edit-biz-search select { width: 100%; padding: 12px 16px; border: 2px solid #8B0000; border-radius: 10px; font-size: 0.95rem; background: #fff; color: var(--color-text, #1a1a2e); outline: none; transition: border-color 0.2s; appearance: auto; cursor: pointer; }
+        .edit-biz-search select:focus { border-color: #8B0000; box-shadow: 0 0 0 3px rgba(0,110,227,0.1); }
 
         /* Section cards */
-        .eb-section { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        .eb-section { background: #fff; border: 1px solid #8B0000; border-radius: 14px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
         .eb-section-title { display: flex; align-items: center; gap: 8px; margin: 0 0 16px; font-size: 1rem; font-weight: 700; color: #1a1a2e; }
-        .eb-section-title i { color: #006EE3; }
+        .eb-section-title i { color: #8B0000; }
         .eb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
         @media (max-width: 600px) { .eb-grid { grid-template-columns: 1fr; } }
         .eb-field label { display: block; font-size: 0.82rem; font-weight: 600; color: #555; margin-bottom: 5px; }
         .eb-field-full { grid-column: 1 / -1; }
-        .eb-input { width: 100%; padding: 10px 14px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.9rem; color: var(--color-text, #1a1a2e); background: #fafbfc; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
-        .eb-input:focus { border-color: #006EE3; background: #fff; box-shadow: 0 0 0 3px rgba(0,110,227,0.08); }
+        .eb-input { width: 100%; padding: 10px 14px; border: 2px solid #8B0000; border-radius: 8px; font-size: 0.9rem; color: var(--color-text, #1a1a2e); background: #8B0000; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+        .eb-input:focus { border-color: #8B0000; background: #fff; box-shadow: 0 0 0 3px rgba(0,110,227,0.08); }
         .eb-input::placeholder { color: #bbb; }
         textarea.eb-input { resize: vertical; min-height: 80px; font-family: inherit; }
 
         /* Media section */
-        .eb-media-preview { width: 100%; height: 180px; border-radius: 10px; overflow: hidden; background: #f1f5f9; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #e5e7eb; }
+        .eb-media-preview { width: 100%; height: 180px; border-radius: 10px; overflow: hidden; background: #8B0000; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #8B0000; }
         .eb-media-preview img { width: 100%; height: 100%; object-fit: cover; }
-        .eb-media-placeholder { text-align: center; color: #94a3b8; }
+        .eb-media-placeholder { text-align: center; color: #8B0000; }
         .eb-media-placeholder i { font-size: 2rem; display: block; margin-bottom: 4px; }
         .eb-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-        .eb-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid #d1d5db; background: #fff; color: #374151; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .eb-btn:hover { border-color: #006EE3; color: #006EE3; }
-        .eb-btn-primary { background: #006EE3; border-color: #006EE3; color: #fff; }
-        .eb-btn-primary:hover { background: #005BB5; }
+        .eb-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid #8B0000; background: #fff; color: #374151; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .eb-btn:hover { border-color: #8B0000; color: #8B0000; }
+        .eb-btn-primary { background: #8B0000; border-color: #8B0000; color: #fff; }
+        .eb-btn-primary:hover { background: #8B0000; }
         .eb-btn-danger { border-color: #dc2626; color: #dc2626; }
         .eb-btn-danger:hover { background: #dc2626; color: #fff; }
 
         /* Feature checkboxes */
         .eb-features { display: flex; flex-wrap: wrap; gap: 12px; }
         .eb-feature-check { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #374151; }
-        .eb-feature-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: #006EE3; }
+        .eb-feature-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: #8B0000; }
 
         /* Status badges */
         .eb-status-row { display: flex; gap: 8px; flex-wrap: wrap; }
-        .eb-status-btn { padding: 8px 16px; border-radius: 8px; border: 1.5px solid #d1d5db; background: #fff; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .eb-status-btn { padding: 8px 16px; border-radius: 8px; border: 1.5px solid #8B0000; background: #fff; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         .eb-status-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .eb-status-btn.active-approved { background: #006EE3; border-color: #006EE3; color: #fff; }
+        .eb-status-btn.active-approved { background: #8B0000; border-color: #8B0000; color: #fff; }
         .eb-status-btn.active-pending { background: #d97706; border-color: #d97706; color: #fff; }
         .eb-status-btn.active-rejected { background: #dc2626; border-color: #dc2626; color: #fff; }
 
         /* Images grid */
         .eb-images-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
-        .eb-img-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1; border: 1px solid #e5e7eb; }
+        .eb-img-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1; border: 1px solid #8B0000; }
         .eb-img-item img { width: 100%; height: 100%; object-fit: cover; }
         .eb-img-actions { position: absolute; bottom: 0; left: 0; right: 0; display: flex; gap: 2px; background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.2s; }
         .eb-img-item:hover .eb-img-actions { opacity: 1; }
         .eb-img-action-btn { flex: 1; padding: 4px; border: none; background: transparent; color: #fff; font-size: 0.72rem; cursor: pointer; }
         .eb-img-action-btn:hover { background: rgba(255,255,255,0.2); }
-        .eb-img-cover-badge { position: absolute; top: 4px; left: 4px; background: #006EE3; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+        .eb-img-cover-badge { position: absolute; top: 4px; left: 4px; background: #8B0000; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
 
         /* Video list */
-        .eb-video-item { display: flex; align-items: center; gap: 8px; padding: 8px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 6px; background: #fafbfc; }
+        .eb-video-item { display: flex; align-items: center; gap: 8px; padding: 8px; border: 1px solid #8B0000; border-radius: 8px; margin-bottom: 6px; background: #8B0000; }
         .eb-video-item input { flex: 1; }
         .eb-video-remove { background: none; border: none; color: #dc2626; cursor: pointer; font-size: 1rem; padding: 4px; }
 
@@ -79,26 +79,26 @@
         .eb-html-area { width: 100%; min-height: 200px; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.5; resize: vertical; tab-size: 2; }
 
         /* Save bar */
-        .eb-save-bar { position: sticky; bottom: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 14px 0; margin-top: 8px; display: flex; justify-content: flex-end; gap: 10px; z-index: 100; box-shadow: 0 -4px 12px rgba(0,0,0,0.06); }
+        .eb-save-bar { position: sticky; bottom: 0; background: #fff; border-top: 1px solid #8B0000; padding: 14px 0; margin-top: 8px; display: flex; justify-content: flex-end; gap: 10px; z-index: 100; box-shadow: 0 -4px 12px rgba(0,0,0,0.06); }
 
         /* Loading */
-        .eb-loading { text-align: center; padding: 40px; color: #94a3b8; }
+        .eb-loading { text-align: center; padding: 40px; color: #8B0000; }
         .eb-loading i { font-size: 2rem; display: block; margin-bottom: 8px; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Empty state */
-        .eb-empty { text-align: center; padding: 60px 20px; color: #94a3b8; }
+        .eb-empty { text-align: center; padding: 60px 20px; color: #8B0000; }
         .eb-empty i { font-size: 3rem; display: block; margin-bottom: 12px; }
         .eb-empty p { font-size: 0.95rem; }
 
         /* Header info */
-        .eb-info-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px; background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px; }
+        .eb-info-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px; background: #8B0000; border: 1px solid #8B0000; border-radius: 10px; }
         .eb-info-badge { padding: 3px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: #fff; }
-        .eb-info-text { font-size: 0.78rem; color: #64748b; }
+        .eb-info-text { font-size: 0.78rem; color: #8B0000; }
 
         /* Logo area */
         .eb-logo-area { display: flex; align-items: center; gap: 16px; }
-        .eb-logo-preview { width: 80px; height: 80px; border-radius: 12px; overflow: hidden; background: #f1f5f9; display: flex; align-items: center; justify-content: center; border: 1px solid #e5e7eb; flex-shrink: 0; }
+        .eb-logo-preview { width: 80px; height: 80px; border-radius: 12px; overflow: hidden; background: #8B0000; display: flex; align-items: center; justify-content: center; border: 1px solid #8B0000; flex-shrink: 0; }
         .eb-logo-preview img { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
@@ -107,8 +107,8 @@
     <nav class="navbar navbar-admin" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name">HolaX</span> <span class="admin-badge">Admin</span>
+                <img src="images/favicon.jpeg" alt="En-Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name">En-Santiago</span> <span class="admin-badge">Admin</span>
             </a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
@@ -131,7 +131,7 @@
         <!-- Header -->
         <div class="edit-biz-header">
             <a href="admin.html" class="edit-biz-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
-            <h2><i class="fas fa-pen-to-square" style="color:#006EE3;"></i> Editar Negocio</h2>
+            <h2><i class="fas fa-pen-to-square" style="color:#8B0000;"></i> Editar Negocio</h2>
         </div>
 
         <!-- Business Selector -->
@@ -176,7 +176,7 @@
         // ─── Toast ──────────────────────────────────────────
         function showToast(msg, type) {
             type = type || 'info';
-            const colors = { success: '#22c55e', error: '#ef4444', info: '#006EE3' };
+            const colors = { success: '#22c55e', error: '#ef4444', info: '#8B0000' };
             const toast = document.createElement('div');
             toast.style.cssText = 'padding:12px 20px;border-radius:10px;color:#fff;font-size:0.88rem;font-weight:500;background:' + colors[type] + ';box-shadow:0 4px 20px rgba(0,0,0,0.2);margin-top:8px;max-width:360px;';
             toast.textContent = msg;
@@ -238,7 +238,7 @@
                 "@context": "https://schema.org",
                 "@type": isMedical ? "MedicalBusiness" : "LocalBusiness",
                 "name": b.title || 'Negocio',
-                "url": "https://holax.com.ve/negocio/" + (b.slug || ''),
+                "url": "https://en-santiago.com/negocio/" + (b.slug || ''),
                 "description": b.description ? b.description.substring(0, 160) : ''
             };
             if (b.category_name) ld.category = b.category_name;
@@ -266,7 +266,7 @@
 
         function renderForm(b) {
             currentBiz = b;
-            const statusColors = { approved: '#006EE3', pending: '#d97706', rejected: '#dc2626' };
+            const statusColors = { approved: '#8B0000', pending: '#d97706', rejected: '#dc2626' };
             const statusLabels = { approved: 'Aprobado', pending: 'Pendiente', rejected: 'Rechazado' };
             const images = b.images || [];
             const videos = b.video_url ? (typeof b.video_url === 'string' ? JSON.parse(b.video_url || '[]') : b.video_url) : [];
@@ -275,7 +275,7 @@
             /* ── Info Bar ── */
             '<div class="eb-info-bar">' +
                 '<strong>' + escH(b.title) + '</strong>' +
-                '<span class="eb-info-badge" style="background:' + (statusColors[b.status]||'#64748b') + ';">' + (statusLabels[b.status]||b.status) + '</span>' +
+                '<span class="eb-info-badge" style="background:' + (statusColors[b.status]||'#8B0000') + ';">' + (statusLabels[b.status]||b.status) + '</span>' +
                 '<a href="/negocio/' + (b.slug||b.id) + '" target="_blank" class="eb-btn" style="margin-left:auto;"><i class="fas fa-external-link-alt"></i> Ver Página</a>' +
                 '<button class="eb-btn eb-btn-danger" onclick="ebDeleteBiz(' + b.id + ')"><i class="fas fa-trash"></i> Eliminar</button>' +
             '</div>' +
@@ -286,7 +286,7 @@
                 '<h4 class="eb-section-title"><i class="fas fa-image"></i> Logo</h4>' +
                 '<div class="eb-logo-area">' +
                     '<div class="eb-logo-preview" id="ebLogoPreview">' +
-                        (b.logo ? '<img src="' + escH(b.logo) + '" alt="Logo" onerror="this.style.display=\'none\'">' : '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>') +
+                        (b.logo ? '<img src="' + escH(b.logo) + '" alt="Logo" onerror="this.style.display=\'none\'">' : '<i class="fas fa-store" style="font-size:1.5rem;color:#8B0000;"></i>') +
                     '</div>' +
                     '<div>' +
                         '<div class="eb-btn-row">' +
@@ -295,15 +295,15 @@
                         '</div>' +
                         '<input type="file" id="ebLogoInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="ebHandleLogo(this)">' +
                         '<input type="hidden" id="ebLogoUrl" value="' + escH(b.logo||'') + '">' +
-                        '<p style="font-size:0.72rem;color:#9ca3af;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>' +
+                        '<p style="font-size:0.72rem;color:#8B0000;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
 
             /* ── Banner ── */
             '<div class="eb-section">' +
-                '<h4 class="eb-section-title"><i class="fas fa-panorama" style="color:#7c3aed;"></i> Banner de Portada</h4>' +
-                '<p style="font-size:0.78rem;color:#6b7280;margin-bottom:10px;">Imagen de portada. Recomendado: 1200x400px.</p>' +
+                '<h4 class="eb-section-title"><i class="fas fa-panorama" style="color:#8B0000;"></i> Banner de Portada</h4>' +
+                '<p style="font-size:0.78rem;color:#8B0000;margin-bottom:10px;">Imagen de portada. Recomendado: 1200x400px.</p>' +
                 '<div class="eb-media-preview" id="ebBannerPreview">' +
                     (b.banner ? '<img src="' + escH(b.banner) + '" onerror="this.parentElement.innerHTML=\'<div class=eb-media-placeholder><i class=fas fa-panorama></i><span>Sin banner</span></div>\'">' : '<div class="eb-media-placeholder"><i class="fas fa-panorama"></i><span>Sin banner</span></div>') +
                 '</div>' +
@@ -374,7 +374,7 @@
 
             /* ── Images ── */
             '<div class="eb-section">' +
-                '<h4 class="eb-section-title"><i class="fas fa-images" style="color:#7c3aed;"></i> Imágenes (' + images.length + ')</h4>' +
+                '<h4 class="eb-section-title"><i class="fas fa-images" style="color:#8B0000;"></i> Imágenes (' + images.length + ')</h4>' +
                 (images.length > 0 ?
                     '<div class="eb-images-grid" id="ebImagesGrid">' +
                     images.map(function(img, i) {
@@ -387,7 +387,7 @@
                             '</div></div>';
                     }).join('') +
                     '</div>'
-                : '<p style="color:#94a3b8;font-size:0.85rem;">No hay imágenes.</p>') +
+                : '<p style="color:#8B0000;font-size:0.85rem;">No hay imágenes.</p>') +
                 '<div class="eb-btn-row" style="margin-top:10px;">' +
                     '<button type="button" class="eb-btn" onclick="document.getElementById(\'ebNewImageInput\').click()"><i class="fas fa-plus"></i> Agregar Imagen</button>' +
                 '</div>' +
@@ -422,13 +422,13 @@
             /* ── Custom HTML ── */
             '<div class="eb-section">' +
                 '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">' +
-                    '<h4 class="eb-section-title" style="margin:0;"><i class="fas fa-code" style="color:#8b5cf6;"></i> HTML Personalizado</h4>' +
+                    '<h4 class="eb-section-title" style="margin:0;"><i class="fas fa-code" style="color:#8B0000;"></i> HTML Personalizado</h4>' +
                     '<div style="display:flex;gap:6px;">' +
                         '<button type="button" class="eb-btn" onclick="ebPreviewHtml()"><i class="fas fa-eye"></i> Vista Previa</button>' +
                         '<button type="button" class="eb-btn eb-btn-danger" onclick="if(confirm(\'Eliminar HTML personalizado?\')){document.getElementById(\'ebCustomHtml\').value=\'\';showToast(\'HTML eliminado\',\'info\');}"><i class="fas fa-trash"></i> Resetear</button>' +
                     '</div>' +
                 '</div>' +
-                '<p style="font-size:0.82rem;color:#6b7280;margin:0 0 8px;">HTML que se mostrará en la página del negocio. Si se deja vacío se usa la plantilla por defecto.</p>' +
+                '<p style="font-size:0.82rem;color:#8B0000;margin:0 0 8px;">HTML que se mostrará en la página del negocio. Si se deja vacío se usa la plantilla por defecto.</p>' +
                 '<textarea id="ebCustomHtml" class="eb-input eb-html-area" placeholder="Escribe o pega aquí el HTML personalizado...">' + escH(b.custom_html||'') + '</textarea>' +
             '</div>' +
             /* ── SEO Meta Description (comparativo) ── */
@@ -436,21 +436,21 @@
                 '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">' +
                     '<h4 class="eb-section-title" style="margin:0;"><i class="fas fa-search" style="color:#059669;"></i> Meta Description SEO</h4>' +
                     '<div style="display:flex;gap:6px;align-items:center;">' +
-                        '<span id="ebSeoDescCount" style="font-size:0.78rem;color:#6b7280;">0/160</span>' +
+                        '<span id="ebSeoDescCount" style="font-size:0.78rem;color:#8B0000;">0/160</span>' +
                         '<button type="button" class="eb-btn eb-btn-danger" onclick="document.getElementById(\'ebSeoDesc\').value=\'\';updateSeoCompare();showToast(\'Meta description eliminada\',\'info\');"><i class="fas fa-trash"></i></button>' +
                     '</div>' +
                 '</div>' +
-                '<p style="font-size:0.82rem;color:#6b7280;margin:0 0 12px;">Texto que aparece en los resultados de Google. Si se deja vacio se genera automaticamente. Max 160 caracteres.</p>' +
+                '<p style="font-size:0.82rem;color:#8B0000;margin:0 0 12px;">Texto que aparece en los resultados de Google. Si se deja vacio se genera automaticamente. Max 160 caracteres.</p>' +
                 '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">' +
                     '<div>' +
                         '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
-                            '<span style="background:#dbeafe;color:#1d4ed8;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">ACTUAL (AUTO)</span>' +
-                            '<i class="fas fa-robot" style="color:#94a3b8;font-size:0.8rem;"></i>' +
+                            '<span style="background:#8B0000;color:#8B0000;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">ACTUAL (AUTO)</span>' +
+                            '<i class="fas fa-robot" style="color:#8B0000;font-size:0.8rem;"></i>' +
                         '</div>' +
-                        '<div style="padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;">' +
-                            '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
-                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - HolaX</div>' +
-                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">holax.com.ve › negocio › ' + escH(b.slug||'...') + '</div>' +
+                        '<div style="padding:12px 14px;background:#8B0000;border:1.5px solid #8B0000;border-radius:10px;">' +
+                            '<div style="font-size:0.68rem;color:#8B0000;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
+                            '<div style="color:#8B0000;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - En-Santiago</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.com › negocio › ' + escH(b.slug||'...') + '</div>' +
                             '<div style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.description ? b.description.substring(0,160) : 'Sin descripcion') + '</div>' +
                         '</div>' +
                     '</div>' +
@@ -460,15 +460,15 @@
                             '<i class="fas fa-pen" style="color:#059669;font-size:0.8rem;"></i>' +
                         '</div>' +
                         '<div id="ebSeoAfterBox" style="padding:12px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;">' +
-                            '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
-                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - HolaX</div>' +
-                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">holax.com.ve › negocio › ' + escH(b.slug||'...') + '</div>' +
+                            '<div style="font-size:0.68rem;color:#8B0000;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
+                            '<div style="color:#8B0000;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - En-Santiago</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.com › negocio › ' + escH(b.slug||'...') + '</div>' +
                             '<div id="ebSeoAfterText" style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.seo_description || (b.description ? b.description.substring(0,160) : 'Igual al actual')) + '</div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
-                '<textarea id="ebSeoDesc" class="eb-input" style="width:100%;min-height:70px;resize:vertical;font-size:0.9rem;padding:10px 14px;border:2px solid #e5e7eb;border-radius:10px;font-family:inherit;margin-top:12px;" placeholder="Ej: Tienda Pura Sangre - Ropa deportiva. Envios a todo Venezuela. Lun-Sab 9am-6pm" maxlength="200" oninput="updateSeoCompare()">' + escH(b.seo_description||'') + '</textarea>' +
-                '<p style="font-size:0.72rem;color:#94a3b8;margin:4px 0 0;">Escribe aqui la nueva meta description. La columna derecha se actualiza en tiempo real.</p>' +
+                '<textarea id="ebSeoDesc" class="eb-input" style="width:100%;min-height:70px;resize:vertical;font-size:0.9rem;padding:10px 14px;border:2px solid #8B0000;border-radius:10px;font-family:inherit;margin-top:12px;" placeholder="Ej: Tienda Pura Sangre - Ropa deportiva. Envios a todo Venezuela. Lun-Sab 9am-6pm" maxlength="200" oninput="updateSeoCompare()">' + escH(b.seo_description||'') + '</textarea>' +
+                '<p style="font-size:0.72rem;color:#8B0000;margin:4px 0 0;">Escribe aqui la nueva meta description. La columna derecha se actualiza en tiempo real.</p>' +
             '</div>' +
 
 
@@ -481,14 +481,14 @@
                         '<button type="button" class="eb-btn eb-btn-danger" onclick="if(confirm(\'Eliminar Rich Snippet personalizado? Se usara el automatico.\')){document.getElementById(\'ebCustomJsonLd\').value=\'\';updateJsonLdCompare();showToast(\'Rich Snippet eliminado\',\'info\');}"><i class="fas fa-trash"></i> Resetear</button>' +
                     '</div>' +
                 '</div>' +
-                '<p style="font-size:0.82rem;color:#6b7280;margin:0 0 12px;">JSON-LD personalizado para rich snippets de Google. Si se deja vacio se genera automaticamente. <a href="https://schema.org/LocalBusiness" target="_blank" style="color:#7c3aed;">Ver esquema LocalBusiness</a></p>' +
+                '<p style="font-size:0.82rem;color:#8B0000;margin:0 0 12px;">JSON-LD personalizado para rich snippets de Google. Si se deja vacio se genera automaticamente. <a href="https://schema.org/LocalBusiness" target="_blank" style="color:#8B0000;">Ver esquema LocalBusiness</a></p>' +
                 '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">' +
                     '<div>' +
                         '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
-                            '<span style="background:#dbeafe;color:#1d4ed8;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">ACTUAL (AUTO)</span>' +
-                            '<i class="fas fa-robot" style="color:#94a3b8;font-size:0.8rem;"></i>' +
+                            '<span style="background:#8B0000;color:#8B0000;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">ACTUAL (AUTO)</span>' +
+                            '<i class="fas fa-robot" style="color:#8B0000;font-size:0.8rem;"></i>' +
                         '</div>' +
-                        '<pre id="ebJsonLdAuto" style="margin:0;padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;font-size:0.78rem;color:#334155;white-space:pre-wrap;word-break:break-all;max-height:320px;overflow-y:auto;line-height:1.5;font-family:Monaco,Consolas,monospace;">' + escH(generateAutoJsonLd(b)) + '</pre>' +
+                        '<pre id="ebJsonLdAuto" style="margin:0;padding:12px 14px;background:#8B0000;border:1.5px solid #8B0000;border-radius:10px;font-size:0.78rem;color:#334155;white-space:pre-wrap;word-break:break-all;max-height:320px;overflow-y:auto;line-height:1.5;font-family:Monaco,Consolas,monospace;">' + escH(generateAutoJsonLd(b)) + '</pre>' +
                     '</div>' +
                     '<div>' +
                         '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
@@ -499,7 +499,7 @@
                     '</div>' +
                 '</div>' +
                 '<textarea id="ebCustomJsonLd" class="eb-input eb-html-area" style="margin-top:12px;" placeholder="{ ... }" oninput="updateJsonLdCompare()">' + escH(b.custom_jsonld||'') + '</textarea>' +
-                '<p style="font-size:0.72rem;color:#94a3b8;margin:4px 0 0;">Pega aqui el JSON-LD personalizado. La columna derecha se actualiza al escribir.</p>' +
+                '<p style="font-size:0.72rem;color:#8B0000;margin:4px 0 0;">Pega aqui el JSON-LD personalizado. La columna derecha se actualiza al escribir.</p>' +
                 '<div id="ebJsonLdStatus" style="margin-top:8px;font-size:0.82rem;display:none;padding:8px 12px;border-radius:8px;"></div>' +
             '</div>' +
             '</div>' +
@@ -632,7 +632,7 @@
         };
         window.ebRemoveLogo = function() {
             document.getElementById('ebLogoUrl').value = '';
-            document.getElementById('ebLogoPreview').innerHTML = '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>';
+            document.getElementById('ebLogoPreview').innerHTML = '<i class="fas fa-store" style="font-size:1.5rem;color:#8B0000;"></i>';
         };
 
         // ─── Banner ──────────────────────────────────────────
@@ -724,7 +724,7 @@
             var len = ta.value.length;
             if (countEl) {
                 countEl.textContent = len + '/160';
-                countEl.style.color = len > 160 ? '#dc2626' : (len > 140 ? '#d97706' : '#6b7280');
+                countEl.style.color = len > 160 ? '#dc2626' : (len > 140 ? '#d97706' : '#8B0000');
             }
             if (afterText) {
                 afterText.textContent = ta.value || (currentBiz && currentBiz.description ? currentBiz.description.substring(0,160) : '');
@@ -798,3 +798,4 @@
     </script>
 </body>
 </html>
+

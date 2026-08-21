@@ -50,7 +50,7 @@ export async function onRequestGet(context) {
   }
 
   const report = {
-    _titulo: 'Diagnostic R2 + D1 - HolaX',
+    _titulo: 'Diagnostic R2 + D1 - En-Santiago',
     _timestamp: new Date().toISOString(),
     _ejecucion_ms: 0,
   };
@@ -160,7 +160,7 @@ export async function onRequestGet(context) {
       // ─── Test de escritura R2 ───────────────────────────
       try {
         const testKey = `${r2Folder}/_debug/test_${Date.now()}.txt`;
-        const testData = 'HolaX R2 test - ' + new Date().toISOString();
+        const testData = 'En-Santiago R2 test - ' + new Date().toISOString();
         await env.R2.put(testKey, testData, { httpMetadata: { contentType: 'text/plain' } });
 
         // Leer de vuelta
@@ -245,22 +245,22 @@ function generateHTMLReport(r) {
     if (status === 'OK') return '<span style="color:#16a34a;font-weight:bold;">OK</span>';
     if (status === 'ERROR' || status === 'INVALID') return '<span style="color:#dc2626;font-weight:bold;">ERROR</span>';
     if (status === 'WARNING') return '<span style="color:#f59e0b;font-weight:bold;">WARN</span>';
-    return `<span style="color:#6b7280;">${status}</span>`;
+    return `<span style="color:#8B0000;">${status}</span>`;
   };
 
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HolaX Debug - R2 + D1</title>
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>En-Santiago Debug - R2 + D1</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px;max-width:900px;margin:0 auto}
-h1{font-size:1.4rem;margin-bottom:4px;color:#38bdf8}h2{font-size:1.1rem;margin:20px 0 8px;color:#94a3b8;border-bottom:1px solid #1e293b;padding-bottom:6px}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,-apple-system,sans-serif;background:#0f172a;color:#8B0000;padding:20px;max-width:900px;margin:0 auto}
+h1{font-size:1.4rem;margin-bottom:4px;color:#8B0000}h2{font-size:1.1rem;margin:20px 0 8px;color:#8B0000;border-bottom:1px solid #1e293b;padding-bottom:6px}
 .card{background:#1e293b;border-radius:10px;padding:14px 18px;margin-bottom:12px;border:1px solid #334155}
 .card.ok{border-color:#16a34a44}.card.err{border-color:#dc262644}
 .row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1e293b}
-.row:last-child{border-bottom:none}label{color:#94a3b8;font-size:0.85rem}value{color:#e2e8f0;font-size:0.85rem;font-family:monospace;max-width:60%;text-align:right;word-break:break-all}
-table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-top:6px}th{text-align:left;color:#94a3b8;padding:4px 8px;border-bottom:1px solid #334155}td{padding:4px 8px;border-bottom:1px solid #1e293b;word-break:break-all;max-width:400px}
-.meta{color:#475569;font-size:0.75rem;margin-top:20px;text-align:center}
+.row:last-child{border-bottom:none}label{color:#8B0000;font-size:0.85rem}value{color:#8B0000;font-size:0.85rem;font-family:monospace;max-width:60%;text-align:right;word-break:break-all}
+table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-top:6px}th{text-align:left;color:#8B0000;padding:4px 8px;border-bottom:1px solid #334155}td{padding:4px 8px;border-bottom:1px solid #1e293b;word-break:break-all;max-width:400px}
+.meta{color:#8B0000;font-size:0.75rem;margin-top:20px;text-align:center}
 </style></head><body>
-<h1>HolaX - Diagnostico R2 + D1</h1>
-<p style="color:#64748b;font-size:0.85rem;margin-bottom:16px">${r._timestamp} | ${r._ejecucion_ms}ms</p>
+<h1>En-Santiago - Diagnostico R2 + D1</h1>
+<p style="color:#8B0000;font-size:0.85rem;margin-bottom:16px">${r._timestamp} | ${r._ejecucion_ms}ms</p>
 
 <h2>Auth</h2>
 <div class="card ${r.auth.status==='OK'?'ok':r.auth.status==='ERROR'||r.auth.status==='INVALID'?'err':''}">
@@ -302,14 +302,14 @@ ${r.negocio ? `
   <div class="row"><label>Imagenes en DB</label><value>${r.negocio.total_imagenes || 0}</value></div>
   <div class="row"><label>Imagenes en R2</label><value>${r.negocio.total_en_r2 || 0}</value></div>
   ${r.negocio.imagenes_en_db && r.negocio.imagenes_en_db.length > 0 ? `<table style="margin-top:8px"><tr><th>ID</th><th>URL</th><th>Portada</th><th>Fecha</th></tr>${r.negocio.imagenes_en_db.map(i=>`<tr><td>${i.id}</td><td>${i.url}</td><td>${i.is_cover?'Si':'No'}</td><td>${i.created_at}</td></tr>`).join('')}</table>` : '<p style="color:#f59e0b;margin-top:8px;font-size:0.85rem">Sin imagenes en la base de datos</p>'}
-  ${r.negocio.imagenes_en_r2 && Array.isArray(r.negocio.imagenes_en_r2) && r.negocio.imagenes_en_r2.length > 0 ? `<p style="margin-top:8px;font-size:0.85rem;color:#94a3b8">Archivos R2 encontrados:</p><table>${r.negocio.imagenes_en_r2.map(i=>`<tr><td>${i.key}</td><td>${(i.size/1024).toFixed(1)} KB</td></tr>`).join('')}</table>` : r.negocio.total_en_r2 === 0 ? '<p style="color:#dc2626;margin-top:8px;font-size:0.85rem">NO hay archivos en R2 para este negocio</p>' : ''}
-</div>` : '<p style="color:#64748b;font-size:0.82rem;margin-top:10px">Tip: Agrega &business=ID para ver detalle de un negocio especifico</p>'}
+  ${r.negocio.imagenes_en_r2 && Array.isArray(r.negocio.imagenes_en_r2) && r.negocio.imagenes_en_r2.length > 0 ? `<p style="margin-top:8px;font-size:0.85rem;color:#8B0000">Archivos R2 encontrados:</p><table>${r.negocio.imagenes_en_r2.map(i=>`<tr><td>${i.key}</td><td>${(i.size/1024).toFixed(1)} KB</td></tr>`).join('')}</table>` : r.negocio.total_en_r2 === 0 ? '<p style="color:#dc2626;margin-top:8px;font-size:0.85rem">NO hay archivos en R2 para este negocio</p>' : ''}
+</div>` : '<p style="color:#8B0000;font-size:0.82rem;margin-top:10px">Tip: Agrega &business=ID para ver detalle de un negocio especifico</p>'}
 
 <h2>Configuracion</h2>
 <div class="card">
   ${Object.entries(r.config).map(([k,v])=>`<div class="row"><label>${k}</label><value>${v}</value></div>`).join('')}
 </div>
 
-<p class="meta">HolaX Debug Endpoint - Eliminar despues de diagnosticar</p>
+<p class="meta">En-Santiago Debug Endpoint - Eliminar despues de diagnosticar</p>
 </body></html>`;
 }

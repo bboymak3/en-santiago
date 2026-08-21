@@ -24,11 +24,11 @@ if (!window._renderVideoList) {
         container.innerHTML = '';
         window._editBizVideos.forEach(function(v, i) {
             var item = document.createElement('div');
-            item.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;font-size:0.82rem;';
+            item.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 12px;background:#8B0000;border:1px solid #8B0000;border-radius:10px;font-size:0.82rem;';
             var label = v.url.length > 60 ? v.url.substring(0, 60) + '...' : v.url;
             if (v.type === 'file') { var m = v.url.match(/([^/]+)$/); label = m ? m[1] : v.url; }
             var numSpan = document.createElement('span');
-            numSpan.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#e0e7ff;color:#4338ca;font-size:0.72rem;font-weight:700;flex-shrink:0;';
+            numSpan.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#8B0000;color:#8B0000;font-size:0.72rem;font-weight:700;flex-shrink:0;';
             numSpan.textContent = (i + 1);
             var textSpan = document.createElement('span');
             textSpan.style.cssText = 'flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#334155;font-family:monospace;';
@@ -194,7 +194,7 @@ if (!window._renderVideoList) {
         const header = document.querySelector('.admin-main') || document.querySelector('.admin-content');
         if (header) {
             const banner = document.createElement('div');
-            banner.style.cssText = 'background:linear-gradient(135deg,#eff6ff,#dbeafe);color:#1d4ed8;padding:10px 16px;border-radius:10px;margin-bottom:16px;font-size:0.88rem;font-weight:600;display:flex;align-items:center;gap:8px;';
+            banner.style.cssText = 'background:linear-gradient(135deg,#8B0000,#8B0000);color:#8B0000;padding:10px 16px;border-radius:10px;margin-bottom:16px;font-size:0.88rem;font-weight:600;display:flex;align-items:center;gap:8px;';
             banner.innerHTML = '<i class="fas fa-eye"></i> Modo Agente — Solo lectura. Puedes ver la información pero no modificarla. Usa "Mi Perfil" para editar tus datos.';
             header.insertBefore(banner, header.firstChild);
         }
@@ -267,12 +267,12 @@ if (!window._renderVideoList) {
         // Load initial data
         loadDashboardTab();
 
-        // One-time: fix HOLAX jobs logo in background
-        fetch('/api/jobs/fix-holax-logo', {
+        // One-time: fix En-Santiago jobs logo in background
+        fetch('/api/jobs/fix-En-Santiago-logo', {
             method: 'POST',
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN_KEY), 'Content-Type': 'application/json' }
         }).then(r => r.json()).then(d => {
-            if (d.updated > 0) console.log('HOLAX logo migration: ' + d.updated + ' jobs updated');
+            if (d.updated > 0) console.log('En-Santiago logo migration: ' + d.updated + ' jobs updated');
         }).catch(() => {});
     }
 
@@ -857,7 +857,7 @@ if (!window._renderVideoList) {
         // Show loading state
         const modalBody = adminUserModal.querySelector('.modal-body');
         if (modalBody) {
-            modalBody.innerHTML = '<div class="loading-spinner" style="padding:40px;text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:24px;color:#1a73e8;"></i><p style="margin-top:12px;color:#888;">Cargando datos del usuario...</p></div>';
+            modalBody.innerHTML = '<div class="loading-spinner" style="padding:40px;text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:24px;color:#8B0000;"></i><p style="margin-top:12px;color:#888;">Cargando datos del usuario...</p></div>';
         }
         adminUserModal.classList.remove('hidden');
 
@@ -1084,7 +1084,7 @@ if (!window._renderVideoList) {
                 Array.from(files).forEach(file => {
                     if (!file.type.startsWith('video/')) { showToast(file.name + ': Solo video', 'error'); return; }
                     if (file.size > 50 * 1024 * 1024) { showToast(file.name + ': Max 50MB', 'error'); return; }
-                    if (infoDiv) infoDiv.innerHTML += '<div style="padding:4px 8px;background:#EFF6FF;border-radius:6px;margin-top:4px;font-size:0.82rem;" id="adminUp_' + file.name.replace(/[^a-zA-Z0-9]/g, '_') + '"><i class="fas fa-spinner fa-spin"></i> ' + file.name + ' - Subiendo...</div>';
+                    if (infoDiv) infoDiv.innerHTML += '<div style="padding:4px 8px;background:#8B0000;border-radius:6px;margin-top:4px;font-size:0.82rem;" id="adminUp_' + file.name.replace(/[^a-zA-Z0-9]/g, '_') + '"><i class="fas fa-spinner fa-spin"></i> ' + file.name + ' - Subiendo...</div>';
                     const fd = new FormData();
                     fd.append('file', file);
                     fd.append('product_type', 'video');
@@ -1403,13 +1403,13 @@ if (!window._renderVideoList) {
             adminBizEditModal.dataset.imageCount = images.length;
 
             if (images.length === 0) {
-                galleryEl.innerHTML = '<div style="text-align:center;padding:16px;border:2px dashed #d1d5db;border-radius:10px;color:#94a3b8;font-size:0.85rem;"><i class="fas fa-images" style="font-size:1.5rem;display:block;margin-bottom:6px;"></i>Sin imágenes en la galería.<br><small>Usa los botones de abajo para agregar.</small></div>';
+                galleryEl.innerHTML = '<div style="text-align:center;padding:16px;border:2px dashed #8B0000;border-radius:10px;color:#8B0000;font-size:0.85rem;"><i class="fas fa-images" style="font-size:1.5rem;display:block;margin-bottom:6px;"></i>Sin imágenes en la galería.<br><small>Usa los botones de abajo para agregar.</small></div>';
                 return;
             }
 
             galleryEl.innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:8px;">' +
                 images.map(img => `
-                    <div style="position:relative;display:inline-block;border-radius:8px;overflow:hidden;border:2px solid ${img.is_cover ? '#f59e0b' : '#e5e7eb'};transition:border-color 0.2s;">
+                    <div style="position:relative;display:inline-block;border-radius:8px;overflow:hidden;border:2px solid ${img.is_cover ? '#f59e0b' : '#8B0000'};transition:border-color 0.2s;">
                         <img src="${img.url}" style="width:100px;height:80px;object-fit:cover;" onerror="this.style.display='none'" loading="lazy">
                         ${img.is_cover ? '<span style="position:absolute;top:2px;left:2px;background:#f59e0b;color:#fff;font-size:0.6rem;padding:1px 4px;border-radius:4px;">Portada</span>' : `<button type="button" onclick="window._adminSetCover(${businessId}, ${img.id})" style="position:absolute;top:2px;left:2px;background:rgba(0,110,227,0.85);color:#fff;border:none;border-radius:4px;font-size:0.55rem;padding:1px 4px;cursor:pointer;" title="Poner como portada"><i class="fas fa-star"></i></button>`}
                         <button type="button" onclick="window._adminDeleteBizImage(${businessId}, ${img.id})" style="position:absolute;bottom:2px;right:2px;background:rgba(220,53,69,0.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Eliminar"><i class="fas fa-trash"></i></button>
@@ -1731,7 +1731,7 @@ if (!window._renderVideoList) {
         }
 
         const statusEl = document.getElementById('fbConfigStatus');
-        statusEl.innerHTML = '<div style="color:#1a73e8;"><i class="fas fa-spinner fa-spin"></i> Guardando...</div>';
+        statusEl.innerHTML = '<div style="color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Guardando...</div>';
 
         try {
             const data = await api.post('/facebook/config', {
@@ -1764,7 +1764,7 @@ if (!window._renderVideoList) {
         }
 
         const statusEl = document.getElementById('fbConfigStatus');
-        statusEl.innerHTML = '<div style="color:#1a73e8;"><i class="fas fa-spinner fa-spin"></i> Probando conexion con Facebook...</div>';
+        statusEl.innerHTML = '<div style="color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Probando conexion con Facebook...</div>';
 
         try {
             const resp = await fetch(`https://graph.facebook.com/v18.0/${pageId}?fields=name,fan_count&access_token=${accessToken}`);
@@ -1786,7 +1786,7 @@ if (!window._renderVideoList) {
 
     async function importFromFacebook() {
         const statusEl = document.getElementById('fbImportStatus');
-        statusEl.innerHTML = '<div style="color:#1a73e8;"><i class="fas fa-spinner fa-spin"></i> Importando posts desde Facebook... esto puede tomar unos segundos.</div>';
+        statusEl.innerHTML = '<div style="color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Importando posts desde Facebook... esto puede tomar unos segundos.</div>';
 
         try {
             const data = await api.post('/facebook/import', {});
@@ -1979,8 +1979,8 @@ if (!window._renderVideoList) {
             if (preview) {
                 preview.innerHTML = images.map((img, i) => `
                     <div style="display:inline-block;position:relative;margin:4px;">
-                        <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#006EE3':'#e2e8f0'};" onerror="this.parentElement.remove()">
-                        ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#006EE3;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
+                        <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#8B0000':'#8B0000'};" onerror="this.parentElement.remove()">
+                        ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#8B0000;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
                         <button type="button" onclick="window._b2RemoveImage(${i})" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;line-height:20px;text-align:center;">&times;</button>
                     </div>
                 `).join('');
@@ -2024,7 +2024,7 @@ if (!window._renderVideoList) {
                         <td><div style="display:flex;align-items:center;gap:8px;">${imgHTML}<span style="font-weight:600;">${escapeHtml(p.name || 'Sin nombre')}</span></div></td>
                         <td>${escapeHtml(p.business_name || '—')}</td>
                         <td><span class="badge badge-default">${escapeHtml(p.category || 'general')}</span></td>
-                        <td style="font-weight:600;color:#006EE3;">$${parseFloat(p.price || 0).toFixed(2)}</td>
+                        <td style="font-weight:600;color:#8B0000;">$${parseFloat(p.price || 0).toFixed(2)}</td>
                         <td><div style="font-size:0.8rem;">${escapeHtml(p.owner_name || '—')}<br><span style="color:#999;">${escapeHtml(p.owner_email || '')}</span></div></td>
                         <td>${statusBadge}</td>
                         <td style="font-size:0.8rem;color:#888;">${formatDate(p.created_at)}</td>
@@ -2135,8 +2135,8 @@ if (!window._renderVideoList) {
                 if (preview && images.length > 0) {
                     preview.innerHTML = images.map((img, i) => `
                         <div style="display:inline-block;position:relative;margin:4px;">
-                            <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#006EE3':'#e2e8f0'};" onerror="this.parentElement.remove()">
-                            ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#006EE3;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
+                            <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#8B0000':'#8B0000'};" onerror="this.parentElement.remove()">
+                            ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#8B0000;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
                             <button type="button" onclick="window._b2RemoveImage(${i})" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;line-height:20px;text-align:center;">&times;</button>
                         </div>
                     `).join('');
@@ -2172,8 +2172,8 @@ if (!window._renderVideoList) {
             if (preview) {
                 preview.innerHTML = images.map((img, i) => `
                     <div style="display:inline-block;position:relative;margin:4px;">
-                        <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#006EE3':'#e2e8f0'};" onerror="this.parentElement.remove()">
-                        ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#006EE3;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
+                        <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#8B0000':'#8B0000'};" onerror="this.parentElement.remove()">
+                        ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#8B0000;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
                         <button type="button" onclick="window._b2RemoveImage(${i})" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;line-height:20px;text-align:center;">&times;</button>
                     </div>
                 `).join('');
@@ -2219,8 +2219,8 @@ if (!window._renderVideoList) {
                 if (preview) {
                     preview.innerHTML = images.map((img, i) => `
                         <div style="display:inline-block;position:relative;margin:4px;">
-                            <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#006EE3':'#e2e8f0'};" onerror="this.parentElement.remove()">
-                            ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#006EE3;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
+                            <img src="${escapeHtml(img)}" style="width:120px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#8B0000':'#8B0000'};" onerror="this.parentElement.remove()">
+                            ${i === 0 ? '<span style="position:absolute;top:2px;left:2px;background:#8B0000;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px;">Principal</span>' : ''}
                             <button type="button" onclick="window._b2RemoveImage(${i})" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;line-height:20px;text-align:center;">&times;</button>
                         </div>
                     `).join('');
@@ -2799,11 +2799,11 @@ if (!window._renderVideoList) {
         const select = document.getElementById('jobCompany');
         if (!select) return;
         try {
-            // Always add HOLAX as the first option (default for jobs without a store)
+            // Always add En-Santiago as the first option (default for jobs without a store)
             const holaxOpt = document.createElement('option');
-            holaxOpt.value = 'HOLAX';
-            holaxOpt.textContent = 'HOLAX';
-            holaxOpt.dataset.logo = '/images/Holax.png';
+            holaxOpt.value = 'En-Santiago';
+            holaxOpt.textContent = 'En-Santiago';
+            holaxOpt.dataset.logo = '/images/En-Santiago.png';
             select.appendChild(holaxOpt);
 
             const data = await api.get('/businesses?status=approved&limit=200');
@@ -2827,14 +2827,14 @@ if (!window._renderVideoList) {
         const cancelBtn = document.getElementById('adminJobCancel');
         const submitBtn = document.getElementById('adminJobSubmit');
 
-        if (createBtn) createBtn.addEventListener('click', () => { editingJobId = null; resetJobForm(); if (modal) { modal.querySelector('.modal-header h3').innerHTML = '<i class="fas fa-briefcase" style="color:#6366f1"></i> Publicar Oferta de Empleo'; submitBtn.textContent = 'Publicar Empleo'; modal.classList.remove('hidden'); } });
+        if (createBtn) createBtn.addEventListener('click', () => { editingJobId = null; resetJobForm(); if (modal) { modal.querySelector('.modal-header h3').innerHTML = '<i class="fas fa-briefcase" style="color:#8B0000"></i> Publicar Oferta de Empleo'; submitBtn.textContent = 'Publicar Empleo'; modal.classList.remove('hidden'); } });
         if (closeBtn) closeBtn.addEventListener('click', () => { if (modal) modal.classList.add('hidden'); editingJobId = null; });
         if (cancelBtn) cancelBtn.addEventListener('click', () => { if (modal) modal.classList.add('hidden'); editingJobId = null; });
         if (modal) modal.querySelector('.modal-overlay')?.addEventListener('click', () => { modal.classList.add('hidden'); editingJobId = null; });
 
         if (submitBtn) submitBtn.addEventListener('click', submitJob);
 
-        // Logo field: show/hide based on company selection, auto-set HOLAX
+        // Logo field: show/hide based on company selection, auto-set En-Santiago
         const jobCompany = document.getElementById('jobCompany');
         const jobLogoGroup = document.getElementById('jobLogoGroup');
         const jobLogoInput = document.getElementById('jobLogo');
@@ -2845,7 +2845,7 @@ if (!window._renderVideoList) {
             if (!jobCompany || !jobLogoGroup) return;
             const val = jobCompany.value;
             jobLogoGroup.style.display = val ? '' : 'none';
-            if (val === 'HOLAX') {
+            if (val === 'En-Santiago') {
                 const holaxLogo = document.getElementById('setting_holax_logo_url')?.value || '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png';
                 jobLogoInput.value = holaxLogo;
                 jobLogoPreview.src = holaxLogo;
@@ -2888,7 +2888,7 @@ if (!window._renderVideoList) {
             if (!modal) return;
 
             // Set title
-            modal.querySelector('.modal-header h3').innerHTML = '<i class="fas fa-edit" style="color:#6366f1"></i> Editar Oferta de Empleo #' + id;
+            modal.querySelector('.modal-header h3').innerHTML = '<i class="fas fa-edit" style="color:#8B0000"></i> Editar Oferta de Empleo #' + id;
             document.getElementById('adminJobSubmit').textContent = 'Guardar Cambios';
 
             // Populate fields
@@ -3072,7 +3072,7 @@ if (!window._renderVideoList) {
             const businesses = data.businesses || [];
 
             if (businesses.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay negocios aprobados.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay negocios aprobados.</p>';
                 return;
             }
 
@@ -3084,7 +3084,7 @@ if (!window._renderVideoList) {
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
 
             // Show currently featured
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Negocios actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Negocios actualmente destacados:</div>';
 
             const featuredBusinesses = businesses.filter(b => featuredIds.has(b.id));
             featuredBusinesses.forEach(b => {
@@ -3093,7 +3093,7 @@ if (!window._renderVideoList) {
                     <img src="${b.cover_image || (b.images && b.images[0] && b.images[0].url) || ''}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.88rem;">${escapeHtml(b.title)}</div>
-                        <div style="font-size:0.78rem;color:#6b7280;">${escapeHtml(b.category_name || b.city || '')}</div>
+                        <div style="font-size:0.78rem;color:#8B0000;">${escapeHtml(b.category_name || b.city || '')}</div>
                     </div>
                 </label>`;
             });
@@ -3101,14 +3101,14 @@ if (!window._renderVideoList) {
             // Show non-featured
             const nonFeatured = businesses.filter(b => !featuredIds.has(b.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros negocios (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros negocios (selecciona para destacar):</div>';
 
                 nonFeatured.forEach(b => {
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
                         <input type="checkbox" class="featured-checkbox" value="${b.id}" style="width:18px;height:18px;accent-color:#f59e0b;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(b.title)}</div>
-                            <div style="font-size:0.78rem;color:#6b7280;">${escapeHtml(b.category_name || b.city || '')}</div>
+                            <div style="font-size:0.78rem;color:#8B0000;">${escapeHtml(b.category_name || b.city || '')}</div>
                         </div>
                     </label>`;
                 });
@@ -3181,7 +3181,7 @@ if (!window._renderVideoList) {
             const businesses = data.businesses || [];
 
             if (businesses.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay negocios médicos aprobados.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay negocios médicos aprobados.</p>';
                 return;
             }
 
@@ -3192,7 +3192,7 @@ if (!window._renderVideoList) {
 
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
 
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Servicios médicos actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Servicios médicos actualmente destacados:</div>';
 
             const featuredBiz = businesses.filter(b => featuredIds.has(b.id));
             featuredBiz.forEach(b => {
@@ -3201,20 +3201,20 @@ if (!window._renderVideoList) {
                     <img src="${b.cover_image || (b.images && b.images[0] && b.images[0].url) || ''}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.88rem;">${escapeHtml(b.title)}</div>
-                        <div style="font-size:0.78rem;color:#6b7280;">${escapeHtml(b.category_name || b.city || '')}</div>
+                        <div style="font-size:0.78rem;color:#8B0000;">${escapeHtml(b.category_name || b.city || '')}</div>
                     </div>
                 </label>`;
             });
 
             const nonFeatured = businesses.filter(b => !featuredIds.has(b.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros servicios médicos (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros servicios médicos (selecciona para destacar):</div>';
                 nonFeatured.forEach(b => {
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
                         <input type="checkbox" class="featured-medical-checkbox" value="${b.id}" style="width:18px;height:18px;accent-color:#e74c3c;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(b.title)}</div>
-                            <div style="font-size:0.78rem;color:#6b7280;">${escapeHtml(b.category_name || b.city || '')}</div>
+                            <div style="font-size:0.78rem;color:#8B0000;">${escapeHtml(b.category_name || b.city || '')}</div>
                         </div>
                     </label>`;
                 });
@@ -3287,7 +3287,7 @@ if (!window._renderVideoList) {
             const data = await api.get('/settings');
             const settings = data.settings || data;
 
-            // Save HOLAX logo default before settings loop might overwrite it
+            // Save En-Santiago logo default before settings loop might overwrite it
             const holaxDefaultUrl = document.getElementById('setting_holax_logo_url')?.value || '';
 
             // Populate toggle checkboxes and inputs
@@ -3303,7 +3303,7 @@ if (!window._renderVideoList) {
                 }
             });
 
-            // Restore HOLAX logo default if setting doesn't exist in DB
+            // Restore En-Santiago logo default if setting doesn't exist in DB
             if (!settings.holax_logo_url && holaxDefaultUrl) {
                 const el = document.getElementById('setting_holax_logo_url');
                 if (el) el.value = holaxDefaultUrl;
@@ -3367,9 +3367,9 @@ if (!window._renderVideoList) {
             if (!card) return;
             if (radio.checked) {
                 card.style.borderColor = colors[radio.value] || '#25d366';
-                card.style.background = (radio.value === 'all' ? '#EFF6FF' : radio.value === 'premium_only' ? '#fffbeb' : '#fef2f2');
+                card.style.background = (radio.value === 'all' ? '#8B0000' : radio.value === 'premium_only' ? '#fffbeb' : '#fef2f2');
             } else {
-                card.style.borderColor = '#e5e7eb';
+                card.style.borderColor = '#8B0000';
                 card.style.background = 'transparent';
             }
         });
@@ -3380,7 +3380,7 @@ if (!window._renderVideoList) {
             const checked = document.querySelector('[name="chat_mode"]:checked');
             if (checked) {
                 const msgs = {
-                    all: { bg: '#EFF6FF', border: '#BFDBFE', color: '#006EE3', text: 'Chat activo para todos los usuarios registrados.' },
+                    all: { bg: '#8B0000', border: '#8B0000', color: '#8B0000', text: 'Chat activo para todos los usuarios registrados.' },
                     premium_only: { bg: '#fffbeb', border: '#fde68a', color: '#b45309', text: 'Chat restringido a usuarios Premium.' },
                     none: { bg: '#fef2f2', border: '#fecaca', color: '#dc2626', text: 'Chat completamente desactivado.' },
                 };
@@ -3450,22 +3450,22 @@ if (!window._renderVideoList) {
                     <td>${p.id}</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            ${p.image ? `<img src="${p.image}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">` : '<div style="width:40px;height:40px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;"><i class="fas fa-box" style="color:#94a3b8;font-size:0.8rem;"></i></div>'}
+                            ${p.image ? `<img src="${p.image}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'">` : '<div style="width:40px;height:40px;border-radius:8px;background:#8B0000;display:flex;align-items:center;justify-content:center;"><i class="fas fa-box" style="color:#8B0000;font-size:0.8rem;"></i></div>'}
                             <div>
                                 <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.name)}</div>
-                                ${p.business_name ? `<div style="font-size:0.72rem;color:#6366f1;"><i class="fas fa-store" style="font-size:0.65rem;"></i> ${escapeHtml(p.business_name)}</div>` : ''}
-                                ${p.description ? `<div style="font-size:0.75rem;color:#94a3b8;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(p.description)}</div>` : ''}
+                                ${p.business_name ? `<div style="font-size:0.72rem;color:#8B0000;"><i class="fas fa-store" style="font-size:0.65rem;"></i> ${escapeHtml(p.business_name)}</div>` : ''}
+                                ${p.description ? `<div style="font-size:0.75rem;color:#8B0000;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(p.description)}</div>` : ''}
                             </div>
                         </div>
                     </td>
                     <td><span style="font-size:0.8rem;">${escapeHtml(p.category || 'general')}</span></td>
-                    <td style="font-weight:600;color:#006EE3;">${price}</td>
+                    <td style="font-weight:600;color:#8B0000;">${price}</td>
                     <td style="font-size:0.8rem;">
                         <div>${escapeHtml(p.owner_name || 'Usuario')}</div>
-                        ${p.owner_email ? `<div style="font-size:0.7rem;color:#94a3b8;">${escapeHtml(p.owner_email)}</div>` : ''}
+                        ${p.owner_email ? `<div style="font-size:0.7rem;color:#8B0000;">${escapeHtml(p.owner_email)}</div>` : ''}
                     </td>
                     <td><span class="admin-status-badge ${statusClass}">${statusLabel}</span></td>
-                    <td style="font-size:0.78rem;color:#94a3b8;">${date}</td>
+                    <td style="font-size:0.78rem;color:#8B0000;">${date}</td>
                     <td><div style="display:flex;gap:6px;">${actions}</div></td>
                 </tr>`;
             }).join('');
@@ -3550,44 +3550,44 @@ if (!window._renderVideoList) {
             const featuredIds = new Set(featured.map(f => f.item_id));
 
             if (products.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay productos disponibles.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay productos disponibles.</p>';
                 return;
             }
 
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Productos actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Productos actualmente destacados:</div>';
 
             products.filter(p => featuredIds.has(p.id)).forEach(p => {
                 const price = p.price ? `$${parseFloat(p.price).toFixed(2)}` : '';
-                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #2563eb;border-radius:10px;background:#eff6ff;cursor:pointer;">
-                    <input type="checkbox" class="featured-product-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#2563eb;">
+                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #8B0000;border-radius:10px;background:#8B0000;cursor:pointer;">
+                    <input type="checkbox" class="featured-product-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#8B0000;">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.name)}</div>
-                        <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
                     </div>
                 </label>`;
             });
 
             const nonFeatured = products.filter(p => !featuredIds.has(p.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros productos (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros productos (selecciona para destacar):</div>';
                 nonFeatured.slice(0, 30).forEach(p => {
                     const price = p.price ? `$${parseFloat(p.price).toFixed(2)}` : '';
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
-                        <input type="checkbox" class="featured-product-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#2563eb;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
+                        <input type="checkbox" class="featured-product-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#8B0000;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.name)}</div>
-                            <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
+                            <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.category || '')} ${price ? '· ' + price : ''}</div>
                         </div>
                     </label>`;
                 });
                 if (nonFeatured.length > 30) {
-                    html += `<p style="font-size:0.78rem;color:#9ca3af;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de productos para ver todos.</p>`;
+                    html += `<p style="font-size:0.78rem;color:#8B0000;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de productos para ver todos.</p>`;
                 }
             }
 
             html += '</div>';
-            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#2563eb,#1d4ed8);" onclick="window._adminSaveFeaturedProducts()"><i class="fas fa-save"></i> Guardar Productos Destacados</button>';
+            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#8B0000,#8B0000);" onclick="window._adminSaveFeaturedProducts()"><i class="fas fa-save"></i> Guardar Productos Destacados</button>';
             container.innerHTML = html;
 
             container.querySelectorAll('.featured-product-checkbox').forEach(cb => {
@@ -3639,44 +3639,44 @@ if (!window._renderVideoList) {
             const featuredIds = new Set(featured.map(f => f.item_id));
 
             if (properties.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay inmuebles disponibles.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay inmuebles disponibles.</p>';
                 return;
             }
 
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Inmuebles actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Inmuebles actualmente destacados:</div>';
 
             properties.filter(p => featuredIds.has(p.id)).forEach(p => {
                 const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-VE')}` : '';
-                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #006EE3;border-radius:10px;background:#EFF6FF;cursor:pointer;">
-                    <input type="checkbox" class="featured-property-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#006EE3;">
+                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #8B0000;border-radius:10px;background:#8B0000;cursor:pointer;">
+                    <input type="checkbox" class="featured-property-checkbox" value="${p.id}" checked style="width:18px;height:18px;accent-color:#8B0000;">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.title)}</div>
-                        <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
                     </div>
                 </label>`;
             });
 
             const nonFeatured = properties.filter(p => !featuredIds.has(p.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros inmuebles (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros inmuebles (selecciona para destacar):</div>';
                 nonFeatured.slice(0, 30).forEach(p => {
                     const price = p.price ? `$${parseFloat(p.price).toLocaleString('es-VE')}` : '';
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
-                        <input type="checkbox" class="featured-property-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#006EE3;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
+                        <input type="checkbox" class="featured-property-checkbox" value="${p.id}" style="width:18px;height:18px;accent-color:#8B0000;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(p.title)}</div>
-                            <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
+                            <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(p.property_type || '')} · ${escapeHtml(p.city || '')} ${price ? '· ' + price : ''}</div>
                         </div>
                     </label>`;
                 });
                 if (nonFeatured.length > 30) {
-                    html += `<p style="font-size:0.78rem;color:#9ca3af;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de inmuebles para ver todos.</p>`;
+                    html += `<p style="font-size:0.78rem;color:#8B0000;text-align:center;">... y ${nonFeatured.length - 30} más. Usa la sección de inmuebles para ver todos.</p>`;
                 }
             }
 
             html += '</div>';
-            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#006EE3,#005BB5);" onclick="window._adminSaveFeaturedProperties()"><i class="fas fa-save"></i> Guardar Inmuebles Destacados</button>';
+            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#8B0000,#8B0000);" onclick="window._adminSaveFeaturedProperties()"><i class="fas fa-save"></i> Guardar Inmuebles Destacados</button>';
             container.innerHTML = html;
 
             container.querySelectorAll('.featured-property-checkbox').forEach(cb => {
@@ -3726,44 +3726,44 @@ if (!window._renderVideoList) {
             const featuredIds = new Set(featured.map(f => f.item_id));
 
             if (jobs.length === 0) {
-                container.innerHTML = '<p style="color:#9ca3af;font-size:0.85rem;">No hay empleos disponibles.</p>';
+                container.innerHTML = '<p style="color:#8B0000;font-size:0.85rem;">No hay empleos disponibles.</p>';
                 return;
             }
 
             let html = '<div style="display:flex;flex-direction:column;gap:8px;">';
-            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Empleos actualmente destacados:</div>';
+            html += '<div style="margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Empleos actualmente destacados:</div>';
 
             jobs.filter(j => featuredIds.has(j.id)).forEach(j => {
                 const salary = j.salary ? `$${j.salary}` : '';
-                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #8b5cf6;border-radius:10px;background:#f5f3ff;cursor:pointer;">
-                    <input type="checkbox" class="featured-job-checkbox" value="${j.id}" checked style="width:18px;height:18px;accent-color:#8b5cf6;">
+                html += `<label style="display:flex;align-items:center;gap:10px;padding:10px;border:2px solid #8B0000;border-radius:10px;background:#8B0000;cursor:pointer;">
+                    <input type="checkbox" class="featured-job-checkbox" value="${j.id}" checked style="width:18px;height:18px;accent-color:#8B0000;">
                     <div style="flex:1;">
                         <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(j.title)}</div>
-                        <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
                     </div>
                 </label>`;
             });
 
             const nonFeatured = jobs.filter(j => !featuredIds.has(j.id));
             if (nonFeatured.length > 0) {
-                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#6b7280;font-weight:600;">Otros empleos (selecciona para destacar):</div>';
+                html += '<div style="margin-top:12px;margin-bottom:8px;font-size:0.82rem;color:#8B0000;font-weight:600;">Otros empleos (selecciona para destacar):</div>';
                 nonFeatured.slice(0, 40).forEach(j => {
                     const salary = j.salary ? `$${j.salary}` : '';
-                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;">
-                        <input type="checkbox" class="featured-job-checkbox" value="${j.id}" style="width:18px;height:18px;accent-color:#8b5cf6;">
+                    html += `<label style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;">
+                        <input type="checkbox" class="featured-job-checkbox" value="${j.id}" style="width:18px;height:18px;accent-color:#8B0000;">
                         <div style="flex:1;">
                             <div style="font-weight:600;font-size:0.85rem;">${escapeHtml(j.title)}</div>
-                            <div style="font-size:0.75rem;color:#6b7280;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
+                            <div style="font-size:0.75rem;color:#8B0000;">${escapeHtml(j.company_name || '')} · ${escapeHtml(j.city || '')} ${salary ? '· ' + salary : ''}</div>
                         </div>
                     </label>`;
                 });
                 if (nonFeatured.length > 40) {
-                    html += `<p style="font-size:0.78rem;color:#9ca3af;text-align:center;">... y ${nonFeatured.length - 40} más.</p>`;
+                    html += `<p style="font-size:0.78rem;color:#8B0000;text-align:center;">... y ${nonFeatured.length - 40} más.</p>`;
                 }
             }
 
             html += '</div>';
-            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#8b5cf6,#7c3aed);" onclick="window._adminSaveFeaturedJobs()"><i class="fas fa-save"></i> Guardar Empleos Destacados</button>';
+            html += '<button class="btn btn-primary" style="margin-top:16px;background:linear-gradient(135deg,#8B0000,#8B0000);" onclick="window._adminSaveFeaturedJobs()"><i class="fas fa-save"></i> Guardar Empleos Destacados</button>';
             container.innerHTML = html;
 
             container.querySelectorAll('.featured-job-checkbox').forEach(cb => {
@@ -3977,12 +3977,12 @@ if (!window._renderVideoList) {
         const body = document.getElementById('premiumVoucherBody');
         if (!body) return;
         if (!voucherUrl) {
-            body.innerHTML = '<p style="color:#6b7280;"><i class="fas fa-exclamation-circle"></i> No hay comprobante adjunto.</p>';
+            body.innerHTML = '<p style="color:#8B0000;"><i class="fas fa-exclamation-circle"></i> No hay comprobante adjunto.</p>';
         } else {
             const fullUrl = voucherUrl.startsWith('http') ? voucherUrl : (window.location.origin + voucherUrl);
             body.innerHTML = `
-                <img src="${fullUrl}" alt="Comprobante de pago" style="max-width:100%;max-height:70vh;border-radius:8px;border:1px solid #e5e7eb;" onerror="this.outerHTML='<p style=\\'color:#dc3545;\\'>Error al cargar la imagen del comprobante.</p>'">
-                <p style="margin-top:12px;font-size:0.85rem;color:#6b7280;">Solicitud #${requestId}</p>
+                <img src="${fullUrl}" alt="Comprobante de pago" style="max-width:100%;max-height:70vh;border-radius:8px;border:1px solid #8B0000;" onerror="this.outerHTML='<p style=\\'color:#dc3545;\\'>Error al cargar la imagen del comprobante.</p>'">
+                <p style="margin-top:12px;font-size:0.85rem;color:#8B0000;">Solicitud #${requestId}</p>
             `;
         }
         toggleModal(premiumVoucherModal, true);
@@ -4063,7 +4063,7 @@ if (!window._renderVideoList) {
                 html += `<tr>
                     <td><strong>${u.name || 'Sin nombre'}</strong></td>
                     <td>${u.email || ''}</td>
-                    <td><span style="background:#f1f5f9;color:#64748b;padding:2px 10px;border-radius:12px;font-size:0.75rem;">Basico</span></td>
+                    <td><span style="background:#8B0000;color:#8B0000;padding:2px 10px;border-radius:12px;font-size:0.75rem;">Basico</span></td>
                     <td>${created}</td>
                     <td>${activateBtn}</td>
                 </tr>`;
@@ -4232,10 +4232,10 @@ if (!window._renderVideoList) {
             tbody.innerHTML = sellers.map(s => {
                 const avatarHTML = s.avatar
                     ? `<img src="${s.avatar}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'">`
-                    : `<div style="width:32px;height:32px;border-radius:50%;background:#e0e7ff;color:#4338ca;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">${(s.user_name || 'V')[0].toUpperCase()}</div>`;
+                    : `<div style="width:32px;height:32px;border-radius:50%;background:#8B0000;color:#8B0000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">${(s.user_name || 'V')[0].toUpperCase()}</div>`;
                 const planBadge = s.plan_type === 'premium'
                     ? '<span style="background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;padding:2px 10px;border-radius:12px;font-size:0.72rem;font-weight:700;">Premium</span>'
-                    : '<span style="background:#f1f5f9;color:#64748b;padding:2px 10px;border-radius:12px;font-size:0.72rem;">Básico</span>';
+                    : '<span style="background:#8B0000;color:#8B0000;padding:2px 10px;border-radius:12px;font-size:0.72rem;">Básico</span>';
                 const date = s.created_at ? new Date(s.created_at).toLocaleDateString('es-VE') : '-';
                 const isPremium = s.plan_type === 'premium';
 
@@ -4246,21 +4246,21 @@ if (!window._renderVideoList) {
                             ${avatarHTML}
                             <div>
                                 <div style="font-weight:600;font-size:0.85rem;">${escHtml(s.user_name || 'Sin nombre')}</div>
-                                <div style="font-size:0.72rem;color:#94a3b8;">${escHtml(s.user_email || '')}</div>
+                                <div style="font-size:0.72rem;color:#8B0000;">${escHtml(s.user_email || '')}</div>
                             </div>
                         </div>
                     </td>
                     <td style="font-weight:600;">${escHtml(s.store_name || '-')}</td>
                     <td>${escHtml(s.city || '')} / ${escHtml(s.state || '')}</td>
                     <td>${escHtml(s.phone || '-')}</td>
-                    <td>${s.whatsapp ? `<span style="color:#25D366;"><i class="fab fa-whatsapp"></i> ${escHtml(s.whatsapp)}</span>` : '<span style="color:#d1d5db;">-</span>'}</td>
+                    <td>${s.whatsapp ? `<span style="color:#25D366;"><i class="fab fa-whatsapp"></i> ${escHtml(s.whatsapp)}</span>` : '<span style="color:#8B0000;">-</span>'}</td>
                     <td>${s.business_count || 0}</td>
                     <td>${planBadge}</td>
-                    <td style="font-size:0.78rem;color:#94a3b8;">${date}</td>
+                    <td style="font-size:0.78rem;color:#8B0000;">${date}</td>
                     <td>
                         <div style="display:flex;gap:4px;flex-wrap:wrap;">
                             <button class="btn btn-xs btn-outline" onclick="window.admin.editUser(${s.user_id})" title="Editar agente"><i class="fas fa-edit"></i></button>
-                            ${!isPremium ? `<button class="btn btn-xs" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:600;" onclick="window.admin.activateSellerPremium(${s.user_id})" title="Activar Premium"><i class="fas fa-crown"></i> Premium</button>` : `<button class="btn btn-xs" style="background:#f1f5f9;color:#64748b;" onclick="window.admin.deactivateSellerPremium(${s.user_id})" title="Quitar Premium"><i class="fas fa-times-circle"></i> Quitar</button>`}
+                            ${!isPremium ? `<button class="btn btn-xs" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:600;" onclick="window.admin.activateSellerPremium(${s.user_id})" title="Activar Premium"><i class="fas fa-crown"></i> Premium</button>` : `<button class="btn btn-xs" style="background:#8B0000;color:#8B0000;" onclick="window.admin.deactivateSellerPremium(${s.user_id})" title="Quitar Premium"><i class="fas fa-times-circle"></i> Quitar</button>`}
                         </div>
                     </td>
                 </tr>`;
@@ -4445,13 +4445,13 @@ if (!window._renderVideoList) {
         if (btn) btn.style.display = 'none';
     };
 
-    // ─── HOLAX Logo Management ─────────────────
+    // ─── En-Santiago Logo Management ─────────────────
     window.handleHolaxLogoSelect = async function(input) {
         const file = input.files[0];
         if (!file) return;
         if (file.size > 2 * 1024 * 1024) { showToast('Max 2MB para el logo', 'error'); input.value = ''; return; }
         try {
-            showToast('Subiendo logo HOLAX...', 'info');
+            showToast('Subiendo logo En-Santiago...', 'info');
             const fd = new FormData();
             fd.append('file', file);
             fd.append('product_type', 'logo');
@@ -4464,7 +4464,7 @@ if (!window._renderVideoList) {
                 if (img) { img.src = result.url; img.style.display = ''; }
                 if (icon) icon.style.display = 'none';
                 if (btn) btn.style.display = 'inline-flex';
-                showToast('Logo HOLAX subido. Guarda la configuración para aplicarlo.', 'success');
+                showToast('Logo En-Santiago subido. Guarda la configuración para aplicarlo.', 'success');
             }
         } catch(e) {
             showToast('Error al subir logo: ' + e.message, 'error');
@@ -4504,15 +4504,15 @@ if (!window._renderVideoList) {
             return;
         }
         try {
-            showToast('Guardando logo HOLAX y actualizando empleos...', 'info');
+            showToast('Guardando logo En-Santiago y actualizando empleos...', 'info');
             const result = await api.put('/settings', { holax_logo_url: url });
-            let msg = 'Logo HOLAX guardado exitosamente';
+            let msg = 'Logo En-Santiago guardado exitosamente';
             if (result.holax_jobs_updated) {
-                msg += ` — ${result.holax_jobs_updated} empleo(s) HOLAX actualizado(s) con el nuevo logo`;
+                msg += ` — ${result.holax_jobs_updated} empleo(s) En-Santiago actualizado(s) con el nuevo logo`;
             }
             showToast(msg, 'success');
         } catch (e) {
-            console.error('Error saving HOLAX logo:', e);
+            console.error('Error saving En-Santiago logo:', e);
             showToast('Error al guardar: ' + e.message, 'error');
         }
     };
@@ -4633,7 +4633,7 @@ if (!window._renderVideoList) {
             if (icon) icon.style.display = 'none';
             if (btn) btn.style.display = 'inline-flex';
         }
-        // HOLAX logo preview
+        // En-Santiago logo preview
         const holaxLogoUrl = document.getElementById('setting_holax_logo_url')?.value || '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png';
         if (holaxLogoUrl) {
             const img = document.getElementById('holaxLogoImg');
@@ -4699,7 +4699,7 @@ if (!window._renderVideoList) {
         const container = document.getElementById('adminEditBizContainer');
         if (!container) return;
         container.style.display = 'block';
-        container.innerHTML = '<div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#006EE3;"></i><p style="margin-top:8px;color:#64748b;">Cargando datos...</p></div>';
+        container.innerHTML = '<div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#8B0000;"></i><p style="margin-top:8px;color:#8B0000;">Cargando datos...</p></div>';
         try {
             const data = await api.get('/businesses/' + id);
             editBizCurrent = data.business || data;
@@ -4714,52 +4714,52 @@ if (!window._renderVideoList) {
     function renderEditBizForm(b) {
         const container = document.getElementById('adminEditBizContainer');
         if (!container) return;
-        const statusColors = { approved: '#006EE3', pending: '#d97706', rejected: '#dc2626' };
+        const statusColors = { approved: '#8B0000', pending: '#d97706', rejected: '#dc2626' };
         const statusLabels = { approved: 'Aprobado', pending: 'Pendiente', rejected: 'Rechazado' };
         const images = b.images || [];
         container.innerHTML = `
         <div class="aeb-card">
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-                <h4 style="margin:0;"><i class="fas fa-building" style="color:#006EE3;"></i> ${escH(b.title)}</h4>
+                <h4 style="margin:0;"><i class="fas fa-building" style="color:#8B0000;"></i> ${escH(b.title)}</h4>
                 <div style="display:flex;gap:6px;align-items:center;">
-                    <span style="padding:3px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:${statusColors[b.status]||'#64748b'};color:#fff;">${statusLabels[b.status]||b.status}</span>
+                    <span style="padding:3px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:${statusColors[b.status]||'#8B0000'};color:#fff;">${statusLabels[b.status]||b.status}</span>
                     <a href="/negocio/${b.slug||b.id}" target="_blank" class="btn btn-secondary btn-sm"><i class="fas fa-external-link-alt"></i> Ver</a>
                     <button class="btn btn-danger btn-sm" onclick="adminDeleteBiz(${b.id})"><i class="fas fa-trash"></i> Eliminar</button>
                 </div>
             </div>
-            <p style="font-size:0.78rem;color:#94a3b8;margin:4px 0 0;">ID: ${b.id} | Dueño: ${escH(b.owner_name||b.user_id||'?')} | Vistas: ${b.views||0}</p>
+            <p style="font-size:0.78rem;color:#8B0000;margin:4px 0 0;">ID: ${b.id} | Dueño: ${escH(b.owner_name||b.user_id||'?')} | Vistas: ${b.views||0}</p>
         </div>
         <div class="aeb-card">
-            <h4><i class="fas fa-image" style="color:#006EE3;"></i> Logo</h4>
+            <h4><i class="fas fa-image" style="color:#8B0000;"></i> Logo</h4>
             <div class="aeb-logo-area">
                 <div class="aeb-logo-preview" id="aebLogoPreview">
-                    ${b.logo ? '<img src="'+escH(b.logo)+'" alt="Logo" onerror="this.style.display=\'none\'">' : '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>'}
+                    ${b.logo ? '<img src="'+escH(b.logo)+'" alt="Logo" onerror="this.style.display=\'none\'">' : '<i class="fas fa-store" style="font-size:1.5rem;color:#8B0000;"></i>'}
                 </div>
                 <div>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('aebLogoInput').click()"><i class="fas fa-upload"></i> Subir Logo</button>
                     ${b.logo ? '<button type="button" class="btn btn-secondary btn-sm" onclick="adminEditBizRemoveLogo()"><i class="fas fa-trash"></i> Quitar</button>' : ''}
                     <input type="file" id="aebLogoInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="adminEditBizHandleLogo(this)">
                     <input type="hidden" id="aebLogoUrl" value="${escH(b.logo||'')}">
-                    <p style="font-size:0.72rem;color:#9ca3af;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>
+                    <p style="font-size:0.72rem;color:#8B0000;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>
                 </div>
             </div>
         </div>
         <div class="aeb-card">
-            <h4><i class="fas fa-panorama" style="color:#7c3aed;"></i> Banner de Portada</h4>
-            <p style="font-size:0.78rem;color:#6b7280;margin-bottom:10px;">Imagen de portada tipo Facebook. Recomendado: 1200x400px.</p>
-            <div class="aeb-banner-preview" id="aebBannerPreview" style="width:100%;height:180px;border-radius:10px;overflow:hidden;background:#f1f5f9;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
-                ${b.banner ? '<img src="'+escH(b.banner)+'" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML=\'<span style=color:#94a3b8><i class=\\\'fas fa-panorama\\\' style=\\\'font-size:2rem\\\'></i><br>Sin banner</span>\'">' : '<span style="color:#94a3b8;text-align:center;"><i class="fas fa-panorama" style="font-size:2rem;"></i><br><span style="font-size:0.78rem;">Sin banner</span></span>'}
+            <h4><i class="fas fa-panorama" style="color:#8B0000;"></i> Banner de Portada</h4>
+            <p style="font-size:0.78rem;color:#8B0000;margin-bottom:10px;">Imagen de portada tipo Facebook. Recomendado: 1200x400px.</p>
+            <div class="aeb-banner-preview" id="aebBannerPreview" style="width:100%;height:180px;border-radius:10px;overflow:hidden;background:#8B0000;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+                ${b.banner ? '<img src="'+escH(b.banner)+'" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML=\'<span style=color:#8B0000><i class=\\\'fas fa-panorama\\\' style=\\\'font-size:2rem\\\'></i><br>Sin banner</span>\'">' : '<span style="color:#8B0000;text-align:center;"><i class="fas fa-panorama" style="font-size:2rem;"></i><br><span style="font-size:0.78rem;">Sin banner</span></span>'}
             </div>
             <div>
                 <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('aebBannerInput').click()"><i class="fas fa-upload"></i> Subir Banner</button>
                 ${b.banner ? '<button type="button" class="btn btn-secondary btn-sm" onclick="adminEditBizRemoveBanner()"><i class="fas fa-trash"></i> Quitar</button>' : ''}
                 <input type="file" id="aebBannerInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="adminEditBizHandleBanner(this)">
                 <input type="hidden" id="aebBannerUrl" value="${escH(b.banner||'')}">
-                <p style="font-size:0.72rem;color:#9ca3af;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>
+                <p style="font-size:0.72rem;color:#8B0000;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>
             </div>
         </div>
         <div class="aeb-card">
-            <h4><i class="fas fa-info-circle" style="color:#2563eb;"></i> Informacion Basica</h4>
+            <h4><i class="fas fa-info-circle" style="color:#8B0000;"></i> Informacion Basica</h4>
             <div class="aeb-grid">
                 <div class="aeb-field"><label>Nombre *</label><input type="text" class="eb-input" id="aebTitle" value="${escH(b.title||'')}" maxlength="150"></div>
                 <div class="aeb-field"><label>Categoria</label><input type="text" class="eb-input" id="aebCategory" value="${escH(b.category_name||'')}"></div>
@@ -4769,7 +4769,7 @@ if (!window._renderVideoList) {
             </div>
         </div>
         <div class="aeb-card">
-            <h4><i class="fas fa-phone" style="color:#006EE3;"></i> Contacto</h4>
+            <h4><i class="fas fa-phone" style="color:#8B0000;"></i> Contacto</h4>
             <div class="aeb-grid">
                 <div class="aeb-field"><label>Telefono</label><input type="tel" class="eb-input" id="aebPhone" value="${escH(b.phone||'')}"></div>
                 <div class="aeb-field"><label>WhatsApp</label><input type="tel" class="eb-input" id="aebWhatsapp" value="${escH(b.whatsapp||'')}"></div>
@@ -4791,14 +4791,14 @@ if (!window._renderVideoList) {
             </div>
         </div>
         <div class="aeb-card">
-            <h4><i class="fas fa-images" style="color:#7c3aed;"></i> Imagenes (${images.length})</h4>
+            <h4><i class="fas fa-images" style="color:#8B0000;"></i> Imagenes (${images.length})</h4>
             ${images.length > 0 ? '<div class="aeb-images-grid" id="aebImagesGrid">' +
                 images.map((img, i) => '<div class="aeb-img-thumb">' +
                     '<img src="'+escH(img.url)+'" alt="" onerror="this.parentElement.style.display=\'none\'">' +
                     '<button class="aeb-img-remove" onclick="adminEditBizRemoveImage('+(img.id||img.business_id)+',\''+escH(img.url).replace(/'/g,"\\'")+'\')" title="Eliminar">&times;</button>' +
                     (img.is_cover ? '<span class="aeb-img-cover">Portada</span>' : '<button class="aeb-img-cover" onclick="adminEditBizSetCover('+img.id+')" style="cursor:pointer;">Portada</button>') +
                     '</div>').join('') +
-                '</div>' : '<p style="color:#94a3b8;font-size:0.85rem;">No hay imagenes.</p>'}
+                '</div>' : '<p style="color:#8B0000;font-size:0.85rem;">No hay imagenes.</p>'}
             <div style="margin-top:12px;">
                 <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('aebNewImageInput').click()"><i class="fas fa-plus"></i> Agregar Imagen</button>
                 <input type="file" id="aebNewImageInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="adminEditBizAddImage(this)">
@@ -4807,7 +4807,7 @@ if (!window._renderVideoList) {
         <div class="aeb-card">
             <h4><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Estado</h4>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <button class="btn btn-sm ${b.status==='approved'?'btn-primary':'btn-secondary'}" onclick="adminEditBizChangeStatus(${b.id},'approved')" style="${b.status==='approved'?'background:#006EE3;':''}"><i class="fas fa-check"></i> Aprobar</button>
+                <button class="btn btn-sm ${b.status==='approved'?'btn-primary':'btn-secondary'}" onclick="adminEditBizChangeStatus(${b.id},'approved')" style="${b.status==='approved'?'background:#8B0000;':''}"><i class="fas fa-check"></i> Aprobar</button>
                 <button class="btn btn-sm ${b.status==='pending'?'btn-primary':'btn-secondary'}" onclick="adminEditBizChangeStatus(${b.id},'pending')" style="${b.status==='pending'?'background:#d97706;':''}"><i class="fas fa-clock"></i> Pendiente</button>
                 <button class="btn btn-sm ${b.status==='rejected'?'btn-primary':'btn-secondary'}" onclick="adminEditBizChangeStatus(${b.id},'rejected')" style="${b.status==='rejected'?'background:#dc2626;color:#fff;':''}"><i class="fas fa-times"></i> Rechazar</button>
             </div>
@@ -4816,20 +4816,20 @@ if (!window._renderVideoList) {
         <!-- HTML de Pagina Personalizada -->
         <div class="aeb-card">
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-                <h4 style="margin:0;"><i class="fas fa-code" style="color:#8b5cf6;"></i> HTML de Pagina del Negocio</h4>
+                <h4 style="margin:0;"><i class="fas fa-code" style="color:#8B0000;"></i> HTML de Pagina del Negocio</h4>
                 <div style="display:flex;gap:6px;">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="adminEditBizPreviewHtml()"><i class="fas fa-eye"></i> Vista Previa</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="adminEditBizLoadCurrentHtml()"><i class="fas fa-download"></i> Cargar HTML Actual</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="if(confirm('Eliminar el HTML personalizado? Se mostrara la pagina por defecto.')){document.getElementById('aebCustomHtml').value='';showToast('HTML personalizado eliminado','info');}" style="color:#dc2626;"><i class="fas fa-trash"></i> Resetear</button>
                 </div>
             </div>
-            <p style="font-size:0.82rem;color:#6b7280;margin:0 0 8px;">Edita el codigo HTML que se mostrara en la pagina de perfil de este negocio. Si se deja vacio, se usara la plantilla por defecto. Puedes usar CSS inline y JavaScript basico.</p>
+            <p style="font-size:0.82rem;color:#8B0000;margin:0 0 8px;">Edita el codigo HTML que se mostrara en la pagina de perfil de este negocio. Si se deja vacio, se usara la plantilla por defecto. Puedes usar CSS inline y JavaScript basico.</p>
             <textarea id="aebCustomHtml" class="eb-input" style="width:100%;min-height:300px;font-family:monospace;font-size:0.82rem;line-height:1.5;resize:vertical;tab-size:2;" placeholder="Escribe o pega aqui el HTML personalizado para la pagina de este negocio...">${escH(b.custom_html||'')}</textarea>
-            <p style="font-size:0.72rem;color:#9ca3af;margin:6px 0 0;">Nota: El HTML se guarda con el boton 'Guardar Cambios' de abajo. Para ver la pagina publicada, haz clic en 'Ver' arriba.</p>
+            <p style="font-size:0.72rem;color:#8B0000;margin:6px 0 0;">Nota: El HTML se guarda con el boton 'Guardar Cambios' de abajo. Para ver la pagina publicada, haz clic en 'Ver' arriba.</p>
         </div>
 
         <div style="text-align:right;margin-top:8px;">
-            <button class="btn" onclick="adminEditBizSave(${b.id})" style="background:linear-gradient(135deg,#006EE3,#005BB5);color:#fff;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;font-size:0.95rem;">
+            <button class="btn" onclick="adminEditBizSave(${b.id})" style="background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;font-size:0.95rem;">
                 <i class="fas fa-save"></i> Guardar Cambios
             </button>
         </div>`;
@@ -4853,7 +4853,7 @@ if (!window._renderVideoList) {
 
     window.adminEditBizRemoveLogo = function() {
         document.getElementById('aebLogoUrl').value = '';
-        document.getElementById('aebLogoPreview').innerHTML = '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>';
+        document.getElementById('aebLogoPreview').innerHTML = '<i class="fas fa-store" style="font-size:1.5rem;color:#8B0000;"></i>';
         if (editBizCurrent) editBizCurrent.logo = null;
     };
 
@@ -4879,7 +4879,7 @@ if (!window._renderVideoList) {
                         <button type="button" onclick="document.getElementById('aebBannerEditImg').style.transform='rotate(90deg)';" style="width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;" title="Rotar +90°">
                             <i class="fas fa-rotate-right"></i>
                         </button>
-                        <button type="button" id="aebBannerCropBtn" style="padding:0 14px;height:36px;border-radius:18px;background:linear-gradient(135deg,#006EE3,#0ea5e9);color:#fff;border:none;cursor:pointer;font-size:0.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;" title="Confirmar y subir">
+                        <button type="button" id="aebBannerCropBtn" style="padding:0 14px;height:36px;border-radius:18px;background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;border:none;cursor:pointer;font-size:0.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;" title="Confirmar y subir">
                             <i class="fas fa-check"></i> Subir
                         </button>
                     </div>
@@ -4945,7 +4945,7 @@ if (!window._renderVideoList) {
 
     window.adminEditBizRemoveBanner = function() {
         document.getElementById('aebBannerUrl').value = '';
-        document.getElementById('aebBannerPreview').innerHTML = '<span style="color:#94a3b8;text-align:center;"><i class="fas fa-panorama" style="font-size:2rem;"></i><br><span style="font-size:0.78rem;">Sin banner</span></span>';
+        document.getElementById('aebBannerPreview').innerHTML = '<span style="color:#8B0000;text-align:center;"><i class="fas fa-panorama" style="font-size:2rem;"></i><br><span style="font-size:0.78rem;">Sin banner</span></span>';
         if (editBizCurrent) editBizCurrent.banner = null;
     };
 
@@ -5107,21 +5107,21 @@ if (!window._renderVideoList) {
             const data = await api.get('/categories');
             const cats = data.categories || [];
             if (!cats.length) {
-                tbody.innerHTML = '<tr><td colspan="9"><div style="text-align:center;color:#94a3b8;padding:16px;"><i class="fas fa-tags"></i><p>No hay categorías</p></div></td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9"><div style="text-align:center;color:#8B0000;padding:16px;"><i class="fas fa-tags"></i><p>No hay categorías</p></div></td></tr>';
                 return;
             }
             let html = '';
             cats.forEach(c => {
                 var bannerThumb = c.banner_url
-                    ? '<img src="' + _esc(c.banner_url) + '" style="width:160px;height:61px;object-fit:cover;border-radius:6px;border:1px solid #e5e7eb;" onerror="this.style.display=\'none\'">'
-                    : '<span style="font-size:0.72rem;color:#94a3b8;">Sin banner</span>';
+                    ? '<img src="' + _esc(c.banner_url) + '" style="width:160px;height:61px;object-fit:cover;border-radius:6px;border:1px solid #8B0000;" onerror="this.style.display=\'none\'">'
+                    : '<span style="font-size:0.72rem;color:#8B0000;">Sin banner</span>';
                 html += '<tr>';
                 html += '<td>' + c.id + '</td>';
                 html += '<td><strong>' + _esc(c.name) + '</strong></td>';
-                html += '<td style="color:#6b7280;font-size:0.78rem;">' + _esc(c.slug) + '</td>';
-                html += '<td><i class="' + _esc(c.icon || 'fas fa-store') + '" style="color:' + _esc(c.color || '#607d8b') + ';"></i> <span style="font-size:0.75rem;color:#6b7280;">' + _esc(c.icon || '') + '</span></td>';
-                html += '<td><span style="display:inline-block;width:18px;height:18px;border-radius:4px;background:' + _esc(c.color || '#607d8b') + ';vertical-align:middle;border:1px solid #e5e7eb;"></span></td>';
-                html += '<td><div style="display:flex;align-items:center;gap:6px;">' + bannerThumb + '<input type="file" id="catBanner_' + c.id + '" accept="image/*" style="display:none;" onchange="admin2UploadCatBanner(' + c.id + ',this)"><button onclick="document.getElementById(\'catBanner_' + c.id + '\').click()" style="background:none;border:1px solid #d1d5db;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#374151;" title="Subir banner"><i class="fas fa-upload"></i></button>' + (c.banner_url ? '<button onclick="admin2RemoveCatBanner(' + c.id + ')" style="background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#dc2626;" title="Quitar banner"><i class="fas fa-times"></i></button>' : '') + '</div></td>';
+                html += '<td style="color:#8B0000;font-size:0.78rem;">' + _esc(c.slug) + '</td>';
+                html += '<td><i class="' + _esc(c.icon || 'fas fa-store') + '" style="color:' + _esc(c.color || '#8B0000') + ';"></i> <span style="font-size:0.75rem;color:#8B0000;">' + _esc(c.icon || '') + '</span></td>';
+                html += '<td><span style="display:inline-block;width:18px;height:18px;border-radius:4px;background:' + _esc(c.color || '#8B0000') + ';vertical-align:middle;border:1px solid #8B0000;"></span></td>';
+                html += '<td><div style="display:flex;align-items:center;gap:6px;">' + bannerThumb + '<input type="file" id="catBanner_' + c.id + '" accept="image/*" style="display:none;" onchange="admin2UploadCatBanner(' + c.id + ',this)"><button onclick="document.getElementById(\'catBanner_' + c.id + '\').click()" style="background:none;border:1px solid #8B0000;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#374151;" title="Subir banner"><i class="fas fa-upload"></i></button>' + (c.banner_url ? '<button onclick="admin2RemoveCatBanner(' + c.id + ')" style="background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#dc2626;" title="Quitar banner"><i class="fas fa-times"></i></button>' : '') + '</div></td>';
                 html += '<td>' + (c.business_count || 0) + '</td>';
                 html += '<td>' + c.sort_order + '</td>';
                 html += '<td><button onclick="admin2DeleteCat(' + c.id + ',\'' + _esc(c.name).replace(/'/g, "\\'") + '\')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.82rem;" title="Desactivar"><i class="fas fa-trash"></i></button></td>';
@@ -5180,7 +5180,7 @@ if (!window._renderVideoList) {
             }
 
             if (!suggestions.length) {
-                container.innerHTML = '<div style="text-align:center;color:#94a3b8;padding:16px;"><i class="fas fa-check-circle" style="font-size:1.5rem;color:#22c55e;"></i><p style="margin-top:8px;">No hay solicitudes pendientes</p></div>';
+                container.innerHTML = '<div style="text-align:center;color:#8B0000;padding:16px;"><i class="fas fa-check-circle" style="font-size:1.5rem;color:#22c55e;"></i><p style="margin-top:8px;">No hay solicitudes pendientes</p></div>';
                 return;
             }
 
@@ -5188,14 +5188,14 @@ if (!window._renderVideoList) {
             suggestions.forEach(s => {
                 const statusColor = s.status === 'pending' ? '#f59e0b' : (s.status === 'approved' ? '#22c55e' : '#ef4444');
                 const statusLabel = s.status === 'pending' ? 'Pendiente' : (s.status === 'approved' ? 'Aprobada' : 'Rechazada');
-                html += '<div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:8px;' + (s.status !== 'pending' ? 'opacity:0.6;' : '') + '">';
+                html += '<div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #8B0000;border-radius:10px;margin-bottom:8px;' + (s.status !== 'pending' ? 'opacity:0.6;' : '') + '">';
                 html += '<div style="flex:1;min-width:0;">';
                 html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">';
                 html += '<strong>' + _esc(s.category_name) + '</strong>';
                 html += '<span style="font-size:0.7rem;padding:2px 8px;border-radius:99px;background:' + statusColor + '20;color:' + statusColor + ';font-weight:600;">' + statusLabel + '</span>';
                 html += '</div>';
-                if (s.reason) html += '<p style="font-size:0.82rem;color:#6b7280;margin:0;">' + _esc(s.reason) + '</p>';
-                html += '<p style="font-size:0.75rem;color:#94a3b8;margin:4px 0 0;">' + (s.user_name ? 'Por ' + _esc(s.user_name) : 'Anónimo') + ' &middot; ' + (s.created_at || '') + '</p>';
+                if (s.reason) html += '<p style="font-size:0.82rem;color:#8B0000;margin:0;">' + _esc(s.reason) + '</p>';
+                html += '<p style="font-size:0.75rem;color:#8B0000;margin:4px 0 0;">' + (s.user_name ? 'Por ' + _esc(s.user_name) : 'Anónimo') + ' &middot; ' + (s.created_at || '') + '</p>';
                 html += '</div>';
                 if (s.status === 'pending') {
                     html += '<div style="display:flex;gap:6px;flex-shrink:0;">';
@@ -5207,7 +5207,7 @@ if (!window._renderVideoList) {
             });
             container.innerHTML = html;
         } catch(e) {
-            container.innerHTML = '<div style="text-align:center;color:#94a3b8;padding:16px;"><p style="font-size:0.82rem;">No se pudieron cargar las solicitudes.</p></div>';
+            container.innerHTML = '<div style="text-align:center;color:#8B0000;padding:16px;"><p style="font-size:0.82rem;">No se pudieron cargar las solicitudes.</p></div>';
         }
     }
 
@@ -5235,7 +5235,7 @@ if (!window._renderVideoList) {
         dialog.innerHTML = '<div style="background:#fff;border-radius:12px;padding:24px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">'
             + '<h3 style="margin:0 0 16px;font-size:1rem;"><i class="fas fa-check-circle" style="color:#22c55e;"></i> Aprobar Categoría</h3>'
             + '<label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:6px;">Tipo de Negocio (opcional)</label>'
-            + '<select id="suggApproveTipoSelect" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.88rem;margin-bottom:16px;">' + tipoOptions + '</select>'
+            + '<select id="suggApproveTipoSelect" style="width:100%;padding:8px 12px;border:1px solid #8B0000;border-radius:8px;font-size:0.88rem;margin-bottom:16px;">' + tipoOptions + '</select>'
             + '<div style="display:flex;gap:8px;justify-content:flex-end;">'
             + '<button id="suggApproveCancel" class="btn" style="padding:8px 16px;">Cancelar</button>'
             + '<button id="suggApproveConfirm" class="btn btn-primary" style="background:#22c55e;border-color:#22c55e;padding:8px 16px;"><i class="fas fa-check"></i> Aprobar</button>'
@@ -5302,7 +5302,7 @@ if (!window._renderVideoList) {
                     await api.post('/categories', {
                         name: name,
                         icon: iconInput ? iconInput.value.trim() : 'fas fa-store',
-                        color: colorVal ? colorVal.value : '#607d8b'
+                        color: colorVal ? colorVal.value : '#8B0000'
                     });
                     showToast('Categoría "' + name + '" creada', 'success');
                     if (nameInput) nameInput.value = '';
@@ -5671,7 +5671,7 @@ if (!window._renderVideoList) {
             if (statsNo) statsNo.textContent = `No: ${noCount}`;
 
             if (responses.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:#6b7280;">Sin respuestas aun.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:#8B0000;">Sin respuestas aun.</td></tr>';
                 return;
             }
 
@@ -5707,24 +5707,24 @@ if (!window._renderVideoList) {
             const data = await api.get('/video-carousel?admin=true');
             const videos = data.videos || [];
             if (videos.length === 0) {
-                list.innerHTML = '<p style="text-align:center;padding:40px;color:#6b7280;">No hay videos en el carrusel.</p>';
+                list.innerHTML = '<p style="text-align:center;padding:40px;color:#8B0000;">No hay videos en el carrusel.</p>';
                 return;
             }
             list.innerHTML = videos.map(v => `
-                <div style="display:flex;align-items:center;gap:16px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:8px;background:#fff;">
-                    <div style="width:120px;height:68px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#f3f4f6;">
+                <div style="display:flex;align-items:center;gap:16px;padding:12px;border:1px solid #8B0000;border-radius:10px;margin-bottom:8px;background:#fff;">
+                    <div style="width:120px;height:68px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#8B0000;">
                         ${v.thumbnail_url
-                            ? `<img src="${v.thumbnail_url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;\\' ><i class=\\'fas fa-video\\' style=\\'font-size:1.2rem;color:#9ca3af;\\'></i></div>'">`
-                            : `<div style="display:flex;align-items:center;justify-content:center;height:100%;"><i class="fas fa-play-circle" style="font-size:1.5rem;color:#9ca3af;"></i></div>`
+                            ? `<img src="${v.thumbnail_url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;\\' ><i class=\\'fas fa-video\\' style=\\'font-size:1.2rem;color:#8B0000;\\'></i></div>'">`
+                            : `<div style="display:flex;align-items:center;justify-content:center;height:100%;"><i class="fas fa-play-circle" style="font-size:1.5rem;color:#8B0000;"></i></div>`
                         }
                     </div>
                     <div style="flex:1;min-width:0;">
                         <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${v.title || 'Sin titulo'}</div>
-                        <div style="font-size:0.75rem;color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${v.url}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${v.url}</div>
                         <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;">
-                            <span style="font-size:0.7rem;padding:2px 6px;border-radius:4px;background:${v.is_active ? '#d1fae5;color:#059669' : '#f3f4f6;color:#6b7280'};">${v.is_active ? 'Activo' : 'Inactivo'}</span>
-                            <span style="font-size:0.7rem;color:#6b7280;">Orden: ${v.order_index}</span>
-                            ${v.business_title ? `<span style="font-size:0.7rem;padding:2px 6px;border-radius:4px;background:#EFF6FF;color:#006EE3;"><i class="fas fa-store" style="margin-right:3px;"></i>${v.business_title}</span>` : ''}
+                            <span style="font-size:0.7rem;padding:2px 6px;border-radius:4px;background:${v.is_active ? '#d1fae5;color:#059669' : '#8B0000;color:#8B0000'};">${v.is_active ? 'Activo' : 'Inactivo'}</span>
+                            <span style="font-size:0.7rem;color:#8B0000;">Orden: ${v.order_index}</span>
+                            ${v.business_title ? `<span style="font-size:0.7rem;padding:2px 6px;border-radius:4px;background:#8B0000;color:#8B0000;"><i class="fas fa-store" style="margin-right:3px;"></i>${v.business_title}</span>` : ''}
                         </div>
                     </div>
                     <div style="display:flex;gap:6px;flex-shrink:0;">
@@ -5975,12 +5975,12 @@ if (!window._renderVideoList) {
                     const users = await api.get('/users?search=' + encodeURIComponent(q) + '&limit=10');
                     const list = users.users || users || [];
                     if (list.length === 0) {
-                        userResults.innerHTML = '<div style="padding:12px;text-align:center;color:#94a3b8;font-size:0.82rem;">No se encontraron usuarios</div>';
+                        userResults.innerHTML = '<div style="padding:12px;text-align:center;color:#8B0000;font-size:0.82rem;">No se encontraron usuarios</div>';
                     } else {
                         userResults.innerHTML = list.slice(0, 10).map(u => `
-                            <div class="notif-user-item" data-uid="${u.id}" style="display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;transition:background .15s;border-bottom:1px solid #f1f5f9;">
-                                <div style="width:32px;height:32px;border-radius:50%;background:#e0e7ff;display:flex;align-items:center;justify-content:center;color:#4338ca;font-weight:700;font-size:0.75rem;">${(u.name || 'U').substring(0,1).toUpperCase()}</div>
-                                <div><div style="font-size:0.82rem;font-weight:600;color:#1e293b;">${escapeHtml(u.name || 'Sin nombre')}</div><div style="font-size:0.72rem;color:#64748b;">${escapeHtml(u.email || '')}</div></div>
+                            <div class="notif-user-item" data-uid="${u.id}" style="display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;transition:background .15s;border-bottom:1px solid #8B0000;">
+                                <div style="width:32px;height:32px;border-radius:50%;background:#8B0000;display:flex;align-items:center;justify-content:center;color:#8B0000;font-weight:700;font-size:0.75rem;">${(u.name || 'U').substring(0,1).toUpperCase()}</div>
+                                <div><div style="font-size:0.82rem;font-weight:600;color:#1e293b;">${escapeHtml(u.name || 'Sin nombre')}</div><div style="font-size:0.72rem;color:#8B0000;">${escapeHtml(u.email || '')}</div></div>
                             </div>
                         `).join('');
                         userResults.querySelectorAll('.notif-user-item').forEach(item => {
@@ -5989,7 +5989,7 @@ if (!window._renderVideoList) {
                                 userSearch.value = item.querySelector('div[style*="font-weight:600"]').textContent;
                                 userResults.style.display = 'none';
                             });
-                            item.addEventListener('mouseenter', () => item.style.background = '#f0f4ff');
+                            item.addEventListener('mouseenter', () => item.style.background = '#8B0000');
                             item.addEventListener('mouseleave', () => item.style.background = 'transparent');
                         });
                     }
@@ -6070,7 +6070,7 @@ if (!window._renderVideoList) {
             if (!n) return;
             const userMap = window._adminNotifUserMap || {};
             const typeLabel = { new_business: 'Negocio', new_job: 'Empleo', new_property: 'Inmueble', new_product: 'Producto', review: 'Reseña', premium_request: 'Premium', announcement: 'Anuncio', alert: 'Alerta', custom: 'Personalizado', system: 'Sistema', premium: 'Premium' }[n.type] || n.type;
-            const typeColor = { new_business: '#059669', new_job: '#006EE3', new_property: '#8b5cf6', new_product: '#f59e0b', review: '#f59e0b', premium_request: '#8b5cf6', announcement: '#06b6d4', alert: '#ef4444', custom: '#64748b', system: '#64748b', premium: '#8b5cf6' }[n.type] || '#64748b';
+            const typeColor = { new_business: '#059669', new_job: '#8B0000', new_property: '#8B0000', new_product: '#f59e0b', review: '#f59e0b', premium_request: '#8B0000', announcement: '#8B0000', alert: '#ef4444', custom: '#8B0000', system: '#8B0000', premium: '#8B0000' }[n.type] || '#8B0000';
 
             // Type badge
             const typeBadge = document.getElementById('notifDetailTypeBadge');
@@ -6082,12 +6082,12 @@ if (!window._renderVideoList) {
             const readBadge = document.getElementById('notifDetailReadBadge');
             if (n.is_read) {
                 readBadge.textContent = 'Leída';
-                readBadge.style.background = '#f1f5f9';
-                readBadge.style.color = '#94a3b8';
+                readBadge.style.background = '#8B0000';
+                readBadge.style.color = '#8B0000';
             } else {
                 readBadge.textContent = 'No leída';
-                readBadge.style.background = '#006EE315';
-                readBadge.style.color = '#006EE3';
+                readBadge.style.background = '#8B000015';
+                readBadge.style.color = '#8B0000';
             }
 
             // Content
@@ -6148,7 +6148,7 @@ if (!window._renderVideoList) {
                 const total = data.total || 0;
 
                 if (notifs.length === 0) {
-                    tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:#6b7280;"><i class="fas fa-bell-slash" style="font-size:1.5rem;display:block;margin-bottom:8px;"></i>No hay notificaciones</td></tr>';
+                    tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:#8B0000;"><i class="fas fa-bell-slash" style="font-size:1.5rem;display:block;margin-bottom:8px;"></i>No hay notificaciones</td></tr>';
                     paginationEl.innerHTML = '';
                     return;
                 }
@@ -6162,15 +6162,15 @@ if (!window._renderVideoList) {
 
                 tableBody.innerHTML = notifs.map((n, idx) => {
                     const typeLabel = { new_business: 'Negocio', new_job: 'Empleo', new_property: 'Inmueble', new_product: 'Producto', review: 'Reseña', premium_request: 'Premium', announcement: 'Anuncio', alert: 'Alerta', custom: 'Personalizado', system: 'Sistema', premium: 'Premium' }[n.type] || n.type;
-                    const typeColor = { new_business: '#059669', new_job: '#006EE3', new_property: '#8b5cf6', new_product: '#f59e0b', review: '#f59e0b', premium_request: '#8b5cf6', announcement: '#06b6d4', alert: '#ef4444', custom: '#64748b' }[n.type] || '#64748b';
+                    const typeColor = { new_business: '#059669', new_job: '#8B0000', new_property: '#8B0000', new_product: '#f59e0b', review: '#f59e0b', premium_request: '#8B0000', announcement: '#8B0000', alert: '#ef4444', custom: '#8B0000' }[n.type] || '#8B0000';
                     const date = n.created_at ? new Date(n.created_at).toLocaleDateString('es-VE', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-';
-                    return `<tr style="cursor:pointer;transition:background .15s;" onclick="openNotifDetail(${idx})" onmouseenter="this.style.background='#f0f4ff'" onmouseleave="this.style.background=''">
+                    return `<tr style="cursor:pointer;transition:background .15s;" onclick="openNotifDetail(${idx})" onmouseenter="this.style.background='#8B0000'" onmouseleave="this.style.background=''">
                         <td style="white-space:nowrap;">${date}</td>
                         <td><span style="background:${typeColor}15;color:${typeColor};padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;">${escapeHtml(typeLabel)}</span></td>
                         <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(n.title || '')}</td>
-                        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#64748b;">${escapeHtml(n.message || '-')}</td>
+                        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#8B0000;">${escapeHtml(n.message || '-')}</td>
                         <td style="font-size:0.8rem;">${escapeHtml(userMap[n.user_id] || 'Usuario ' + n.user_id)}</td>
-                        <td>${n.is_read ? '<span style="color:#94a3b8;">Sí</span>' : '<span style="color:#006EE3;font-weight:600;">No</span>'}</td>
+                        <td>${n.is_read ? '<span style="color:#8B0000;">Sí</span>' : '<span style="color:#8B0000;font-weight:600;">No</span>'}</td>
                         <td><button onclick="event.stopPropagation(); deleteAdminNotification(${n.id})" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:0.85rem;"><i class="fas fa-trash"></i></button></td>
                     </tr>`;
                 }).join('');
@@ -6187,8 +6187,8 @@ if (!window._renderVideoList) {
                         const btn = document.createElement('button');
                         btn.textContent = i;
                         btn.style.cssText = i === notifPage
-                            ? 'background:#006EE3;color:#fff;border:1px solid #006EE3;border-radius:6px;padding:4px 12px;font-size:0.8rem;cursor:pointer;font-weight:600;'
-                            : 'background:#fff;color:#475569;border:1px solid #e2e8f0;border-radius:6px;padding:4px 12px;font-size:0.8rem;cursor:pointer;';
+                            ? 'background:#8B0000;color:#fff;border:1px solid #8B0000;border-radius:6px;padding:4px 12px;font-size:0.8rem;cursor:pointer;font-weight:600;'
+                            : 'background:#fff;color:#8B0000;border:1px solid #8B0000;border-radius:6px;padding:4px 12px;font-size:0.8rem;cursor:pointer;';
                         btn.addEventListener('click', () => { notifPage = i; loadAdminNotifications(); });
                         paginationEl.appendChild(btn);
                     }
@@ -6257,7 +6257,7 @@ if (!window._renderVideoList) {
                 document.getElementById('academyClassActive').checked = true;
                 document.getElementById('academyClassModule').value = 'General';
                 document.getElementById('academyClassModuleOrder').value = '0';
-                document.getElementById('academyEditorTitle').innerHTML = '<i class="fas fa-plus-circle" style="color:#7c3aed;"></i> Nueva Clase';
+                document.getElementById('academyEditorTitle').innerHTML = '<i class="fas fa-plus-circle" style="color:#8B0000;"></i> Nueva Clase';
                 document.getElementById('academyClassEditor').classList.remove('hidden');
                 window._pendingQuestions = [];
                 renderPendingQuestionsPreview();
@@ -6344,21 +6344,21 @@ if (!window._renderVideoList) {
             var statsEl = document.getElementById('academyStats');
             if (statsEl) {
                 statsEl.innerHTML =
-                    '<div style="background:#f5f3ff;border-radius:10px;padding:14px;text-align:center;">' +
-                    '<div style="font-size:1.5rem;font-weight:700;color:#7c3aed;">' + classes.length + '</div>' +
-                    '<div style="font-size:0.78rem;color:#6b7280;">Total Clases</div></div>' +
-                    '<div style="background:#eff6ff;border-radius:10px;padding:14px;text-align:center;">' +
-                    '<div style="font-size:1.5rem;font-weight:700;color:#2563eb;">' + activeC + '</div>' +
-                    '<div style="font-size:0.78rem;color:#6b7280;">Activas</div></div>' +
+                    '<div style="background:#8B0000;border-radius:10px;padding:14px;text-align:center;">' +
+                    '<div style="font-size:1.5rem;font-weight:700;color:#8B0000;">' + classes.length + '</div>' +
+                    '<div style="font-size:0.78rem;color:#8B0000;">Total Clases</div></div>' +
+                    '<div style="background:#8B0000;border-radius:10px;padding:14px;text-align:center;">' +
+                    '<div style="font-size:1.5rem;font-weight:700;color:#8B0000;">' + activeC + '</div>' +
+                    '<div style="font-size:0.78rem;color:#8B0000;">Activas</div></div>' +
                     '<div style="background:#fef3c7;border-radius:10px;padding:14px;text-align:center;">' +
                     '<div style="font-size:1.5rem;font-weight:700;color:#d97706;">' + totalQ + '</div>' +
-                    '<div style="font-size:0.78rem;color:#6b7280;">Preguntas</div></div>' +
+                    '<div style="font-size:0.78rem;color:#8B0000;">Preguntas</div></div>' +
                     '<div style="background:#ecfdf5;border-radius:10px;padding:14px;text-align:center;">' +
                     '<div style="font-size:1.5rem;font-weight:700;color:#059669;">' + totalComp + '</div>' +
-                    '<div style="font-size:0.78rem;color:#6b7280;">Completados</div></div>';
+                    '<div style="font-size:0.78rem;color:#8B0000;">Completados</div></div>';
             }
             if (!classes.length) {
-                tbody.innerHTML = '<tr><td colspan="7"><div style="text-align:center;color:#94a3b8;padding:16px;"><i class="fas fa-graduation-cap"></i><p>No hay clases creadas. Haz clic en "Nueva Clase" para comenzar.</p></div></td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7"><div style="text-align:center;color:#8B0000;padding:16px;"><i class="fas fa-graduation-cap"></i><p>No hay clases creadas. Haz clic en "Nueva Clase" para comenzar.</p></div></td></tr>';
                 return;
             }
             var html = '';
@@ -6369,21 +6369,21 @@ if (!window._renderVideoList) {
                 if (!grouped[mod]) grouped[mod] = [];
                 grouped[mod].push(c);
             });
-            var modColors = {'General':'#6b7280','Fundamentos':'#059669','Intermedio':'#2563eb','Avanzado':'#d97706','Examen Final':'#dc2626'};
+            var modColors = {'General':'#8B0000','Fundamentos':'#059669','Intermedio':'#8B0000','Avanzado':'#d97706','Examen Final':'#dc2626'};
             Object.keys(grouped).sort().forEach(function(mod) {
-                var mColor = modColors[mod] || '#7c3aed';
+                var mColor = modColors[mod] || '#8B0000';
                 html += '<tr><td colspan="7" style="background:linear-gradient(90deg,' + mColor + '12,' + mColor + '06);padding:10px 12px;font-weight:700;font-size:0.85rem;color:' + mColor + ';"><i class="fas fa-book"></i> ' + _esc(mod) + ' (' + grouped[mod].length + ' clases)</td></tr>';
                 grouped[mod].forEach(function(c) {
                 html += '<tr>';
                 html += '<td><strong>' + _esc(c.title) + '</strong></td>';
-                html += '<td><button onclick="loadAcademyQuestions(' + c.id + ',\'' + _esc(c.title).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.75rem;color:#2563eb;"><i class="fas fa-question-circle"></i> ' + (c.question_count || 0) + '</button></td>';
+                html += '<td><button onclick="loadAcademyQuestions(' + c.id + ',\'' + _esc(c.title).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #8B0000;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.75rem;color:#8B0000;"><i class="fas fa-question-circle"></i> ' + (c.question_count || 0) + '</button></td>';
                 html += '<td><span style="background:#fef3c7;color:#d97706;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:600;">+' + (c.xp_reward || 0) + ' XP</span></td>';
                 html += '<td>' + (c.completions || 0) + '</td>';
                 html += '<td>' + c.sort_order + '</td>';
                 html += '<td>' + (c.is_active === 1 ? '<span style="color:#059669;font-size:0.8rem;"><i class="fas fa-check-circle"></i> Activa</span>' : '<span style="color:#dc2626;font-size:0.8rem;"><i class="fas fa-times-circle"></i> Inactiva</span>') + '</td>';
                 html += '<td><div style="display:flex;gap:4px;flex-wrap:wrap;">' +
-                    '<button onclick="academyEditClass(' + c.id + ')" style="background:none;border:1px solid #d1d5db;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.75rem;color:#374151;" title="Editar"><i class="fas fa-edit"></i></button>' +
-                    '<button onclick="loadAcademyQuestions(' + c.id + ',\'' + _esc(c.title).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.75rem;color:#2563eb;" title="Preguntas"><i class="fas fa-list"></i></button>' +
+                    '<button onclick="academyEditClass(' + c.id + ')" style="background:none;border:1px solid #8B0000;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.75rem;color:#374151;" title="Editar"><i class="fas fa-edit"></i></button>' +
+                    '<button onclick="loadAcademyQuestions(' + c.id + ',\'' + _esc(c.title).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #8B0000;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.75rem;color:#8B0000;" title="Preguntas"><i class="fas fa-list"></i></button>' +
                     '<button onclick="academyDeleteClass(' + c.id + ',\'' + _esc(c.title).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.75rem;color:#dc2626;" title="Eliminar"><i class="fas fa-trash"></i></button>' +
                     '</div></td>';
                 html += '</tr>';
@@ -6392,7 +6392,7 @@ if (!window._renderVideoList) {
             tbody.innerHTML = html;
         } catch(e) {
             console.error('loadAcademyClasses error:', e);
-            tbody.innerHTML = '<tr><td colspan="7"><div style="text-align:center;color:#f59e0b;padding:16px;"><i class="fas fa-exclamation-triangle"></i><p>Error al cargar clases</p><p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">' + _esc(e.message || 'Error desconocido') + '</p><p style="font-size:0.72rem;color:#94a3b8;margin-top:8px;"><button onclick="loadAcademyClasses()" style="background:#7c3aed;color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:0.8rem;">Reintentar</button></p></div></td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7"><div style="text-align:center;color:#f59e0b;padding:16px;"><i class="fas fa-exclamation-triangle"></i><p>Error al cargar clases</p><p style="font-size:0.75rem;color:#8B0000;margin-top:4px;">' + _esc(e.message || 'Error desconocido') + '</p><p style="font-size:0.72rem;color:#8B0000;margin-top:8px;"><button onclick="loadAcademyClasses()" style="background:#8B0000;color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:0.8rem;">Reintentar</button></p></div></td></tr>';
         }
     }
 
@@ -6452,7 +6452,7 @@ if (!window._renderVideoList) {
             document.getElementById('academyClassActive').checked = cls.is_active === 1;
             document.getElementById('academyClassModule').value = cls.module || 'General';
             document.getElementById('academyClassModuleOrder').value = cls.module_order || 0;
-            document.getElementById('academyEditorTitle').innerHTML = '<i class="fas fa-edit" style="color:#7c3aed;"></i> Editar Clase: ' + _esc(cls.title);
+            document.getElementById('academyEditorTitle').innerHTML = '<i class="fas fa-edit" style="color:#8B0000;"></i> Editar Clase: ' + _esc(cls.title);
             document.getElementById('academyClassEditor').classList.remove('hidden');
             try {
                 var qData = await api.get('/agent-classes/' + classId + '/questions');
@@ -6488,32 +6488,32 @@ if (!window._renderVideoList) {
         document.getElementById('academyQuestionsPanel').classList.remove('hidden');
         document.getElementById('academyInlineQForm').classList.add('hidden');
         var listEl = document.getElementById('academyQuestionsList');
-        listEl.innerHTML = '<div style="text-align:center;padding:20px;color:#6b7280;"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>';
+        listEl.innerHTML = '<div style="text-align:center;padding:20px;color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>';
         try {
             var data = await api.get('/agent-classes/' + classId + '/questions');
             var questions = data.questions || [];
             if (!questions.length) {
-                listEl.innerHTML = '<div style="text-align:center;color:#94a3b8;padding:20px;">No hay preguntas. Haz clic en "Agregar Pregunta".</div>';
+                listEl.innerHTML = '<div style="text-align:center;color:#8B0000;padding:20px;">No hay preguntas. Haz clic en "Agregar Pregunta".</div>';
                 return;
             }
             var html = '';
             questions.forEach(function(q, idx) {
                 var opts = { a: q.option_a, b: q.option_b, c: q.option_c, d: q.option_d };
-                html += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:8px;">';
+                html += '<div style="background:#fff;border:1px solid #8B0000;border-radius:8px;padding:12px;margin-bottom:8px;">';
                 html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">';
                 html += '<div style="flex:1;">';
                 html += '<div style="font-weight:600;font-size:0.85rem;margin-bottom:6px;">[Q' + (idx + 1) + '] ' + _esc(q.question) + '</div>';
                 var letters = ['a', 'b', 'c', 'd'];
                 letters.forEach(function(l) {
                     var isCorrect = q.correct_answer === l;
-                    var prefix = isCorrect ? '<span style="color:#059669;font-weight:700;">&#10003; ' + l.toUpperCase() + '</span>' : '<span style="color:#6b7280;">&nbsp;&nbsp;&nbsp;' + l.toUpperCase() + '</span>';
+                    var prefix = isCorrect ? '<span style="color:#059669;font-weight:700;">&#10003; ' + l.toUpperCase() + '</span>' : '<span style="color:#8B0000;">&nbsp;&nbsp;&nbsp;' + l.toUpperCase() + '</span>';
                     html += '<div style="font-size:0.82rem;padding:2px 0 2px 16px;">' + prefix + ') ' + _esc(opts[l] || '') + '</div>';
                 });
                 html += '</div>';
                 html += '<div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;">';
                 html += '<span style="background:#fef3c7;color:#d97706;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;white-space:nowrap;">' + (q.points || 10) + ' pts</span>';
                 html += '<div style="display:flex;gap:4px;">';
-                html += '<button onclick="editQuestionInline(' + q.id + ')" style="background:none;border:1px solid #d1d5db;border-radius:6px;padding:3px 6px;cursor:pointer;font-size:0.72rem;color:#374151;" title="Editar"><i class="fas fa-edit"></i></button>';
+                html += '<button onclick="editQuestionInline(' + q.id + ')" style="background:none;border:1px solid #8B0000;border-radius:6px;padding:3px 6px;cursor:pointer;font-size:0.72rem;color:#374151;" title="Editar"><i class="fas fa-edit"></i></button>';
                 html += '<button onclick="deleteQuestionInline(' + q.id + ')" style="background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 6px;cursor:pointer;font-size:0.72rem;color:#dc2626;" title="Eliminar"><i class="fas fa-trash"></i></button>';
                 html += '</div></div></div></div>';
             });
@@ -6601,7 +6601,7 @@ if (!window._renderVideoList) {
             var data = await resp.json();
             var users = data.users || data.results || [];
             if (!users.length) {
-                tbody.innerHTML = '<tr><td colspan="8"><div style="text-align:center;color:#94a3b8;padding:16px;">No hay agentes registrados</div></td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8"><div style="text-align:center;color:#8B0000;padding:16px;">No hay agentes registrados</div></td></tr>';
                 return;
             }
             var profiles = {};
@@ -6615,7 +6615,7 @@ if (!window._renderVideoList) {
                 } catch(ex) {}
             }
             var html = '';
-            var lvlColors = ['#6b7280','#7c3aed','#2563eb','#059669','#d97706','#dc2626','#8b5cf6','#0891b2','#65a30d','#ea580c'];
+            var lvlColors = ['#8B0000','#8B0000','#8B0000','#059669','#d97706','#dc2626','#8B0000','#8B0000','#65a30d','#ea580c'];
             for (var i = 0; i < users.length; i++) {
                 var u = users[i];
                 var p = profiles[u.id] || {};
@@ -6638,7 +6638,7 @@ if (!window._renderVideoList) {
                 }
                 html += '<strong>' + _esc(u.name) + '</strong></div></td>';
                 html += '<td><span style="background:' + lvlColor + '15;color:' + lvlColor + ';border:1px solid ' + lvlColor + '30;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;">Nivel ' + lvl + '</span></td>';
-                html += '<td style="min-width:120px;"><div style="font-size:0.72rem;color:#6b7280;margin-bottom:3px;">' + xp + ' XP</div><div style="background:#e5e7eb;border-radius:6px;height:6px;overflow:hidden;"><div style="background:' + lvlColor + ';height:100%;border-radius:6px;width:' + pct + '%;transition:width 0.3s;"></div></div></td>';
+                html += '<td style="min-width:120px;"><div style="font-size:0.72rem;color:#8B0000;margin-bottom:3px;">' + xp + ' XP</div><div style="background:#8B0000;border-radius:6px;height:6px;overflow:hidden;"><div style="background:' + lvlColor + ';height:100%;border-radius:6px;width:' + pct + '%;transition:width 0.3s;"></div></div></td>';
                 html += '<td>' + (p.total_classes_completed || 0) + '</td>';
                 html += '<td>' + (p.total_badges || 0) + '</td>';
                 html += '<td>';
@@ -6647,7 +6647,7 @@ if (!window._renderVideoList) {
                 } else if (p.exam_attempts > 0) {
                     html += '<span style="color:#dc2626;font-size:0.8rem;"><i class="fas fa-times-circle"></i> ' + p.exam_attempts + ' intentos</span>';
                 } else {
-                    html += '<span style="color:#94a3b8;font-size:0.8rem;">-</span>';
+                    html += '<span style="color:#8B0000;font-size:0.8rem;">-</span>';
                 }
                 html += '</td>';
                 html += '<td>';
@@ -6656,15 +6656,15 @@ if (!window._renderVideoList) {
                 } else if (grad) {
                     html += '<span style="background:#fef3c7;color:#d97706;padding:2px 8px;border-radius:12px;font-size:0.72rem;font-weight:600;">Graduado</span>';
                 } else {
-                    html += '<span style="color:#94a3b8;font-size:0.8rem;">-</span>';
+                    html += '<span style="color:#8B0000;font-size:0.8rem;">-</span>';
                 }
                 html += '</td>';
                 html += '<td><div style="display:flex;gap:4px;flex-wrap:wrap;">';
-                html += '<a href="/perfil.html?id=' + u.id + '" target="_blank" style="background:none;border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#2563eb;text-decoration:none;" title="Ver Perfil"><i class="fas fa-external-link-alt"></i></a>';
+                html += '<a href="/perfil.html?id=' + u.id + '" target="_blank" style="background:none;border:1px solid #8B0000;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#8B0000;text-decoration:none;" title="Ver Perfil"><i class="fas fa-external-link-alt"></i></a>';
                 if (!grad) {
                     html += '<button onclick="academyGraduateAgent(' + u.id + ',\'' + _esc(u.name).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #fde68a;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#d97706;" title="Graduar"><i class="fas fa-graduation-cap"></i></button>';
                 }
-                html += '<button onclick="academyAwardBadge(' + u.id + ',\'' + _esc(u.name).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #ddd6fe;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#7c3aed;" title="Dar Medalla"><i class="fas fa-medal"></i></button>';
+                html += '<button onclick="academyAwardBadge(' + u.id + ',\'' + _esc(u.name).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #8B0000;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#8B0000;" title="Dar Medalla"><i class="fas fa-medal"></i></button>';
                 html += '</div></td>';
                 html += '</tr>';
             }
@@ -6688,14 +6688,14 @@ if (!window._renderVideoList) {
         wrap.classList.remove('hidden');
         var html = '';
         questions.forEach(function(q, idx) {
-            html += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px;position:relative;">';
+            html += '<div style="background:#fff;border:1px solid #8B0000;border-radius:8px;padding:10px;position:relative;">';
             html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">';
             html += '<div style="flex:1;">';
             html += '<div style="font-weight:600;font-size:0.83rem;margin-bottom:4px;">[Q' + (idx + 1) + '] ' + _esc(q.question) + '</div>';
             var opts = { a: q.option_a, b: q.option_b, c: q.option_c, d: q.option_d };
             ['a','b','c','d'].forEach(function(l) {
                 var isCorrect = q.correct_answer === l;
-                var prefix = isCorrect ? '<span style="color:#059669;font-weight:700;">&#10003; ' + l.toUpperCase() + '</span>' : '<span style="color:#6b7280;">&nbsp;&nbsp;&nbsp;' + l.toUpperCase() + '</span>';
+                var prefix = isCorrect ? '<span style="color:#059669;font-weight:700;">&#10003; ' + l.toUpperCase() + '</span>' : '<span style="color:#8B0000;">&nbsp;&nbsp;&nbsp;' + l.toUpperCase() + '</span>';
                 html += '<div style="font-size:0.8rem;padding:1px 0 1px 14px;">' + prefix + ') ' + _esc(opts[l] || '') + '</div>';
             });
             html += '</div>';
@@ -6756,12 +6756,12 @@ if (!window._renderVideoList) {
         if (!td) return;
         var form = document.createElement('div');
         form.id = 'academyBadgeInline_' + userId;
-        form.style.cssText = 'position:absolute;right:0;top:100%;background:#fff;border:1px solid #ddd6fe;border-radius:10px;padding:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);z-index:50;width:240px;margin-top:4px;';
-        form.innerHTML = '<div style="font-weight:600;font-size:0.8rem;color:#7c3aed;margin-bottom:8px;"><i class="fas fa-medal"></i> Medalla para ' + _esc(name) + '</div>' +
-            '<input type="text" id="academyBadgeName_' + userId + '" placeholder="Nombre de la medalla" style="width:100%;padding:6px 10px;border:2px solid #e2e8f0;border-radius:6px;font-size:0.82rem;outline:none;margin-bottom:6px;">' +
-            '<input type="text" id="academyBadgeDesc_' + userId + '" placeholder="Descripcion (opcional)" style="width:100%;padding:6px 10px;border:2px solid #e2e8f0;border-radius:6px;font-size:0.82rem;outline:none;margin-bottom:8px;">' +
+        form.style.cssText = 'position:absolute;right:0;top:100%;background:#fff;border:1px solid #8B0000;border-radius:10px;padding:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);z-index:50;width:240px;margin-top:4px;';
+        form.innerHTML = '<div style="font-weight:600;font-size:0.8rem;color:#8B0000;margin-bottom:8px;"><i class="fas fa-medal"></i> Medalla para ' + _esc(name) + '</div>' +
+            '<input type="text" id="academyBadgeName_' + userId + '" placeholder="Nombre de la medalla" style="width:100%;padding:6px 10px;border:2px solid #8B0000;border-radius:6px;font-size:0.82rem;outline:none;margin-bottom:6px;">' +
+            '<input type="text" id="academyBadgeDesc_' + userId + '" placeholder="Descripcion (opcional)" style="width:100%;padding:6px 10px;border:2px solid #8B0000;border-radius:6px;font-size:0.82rem;outline:none;margin-bottom:8px;">' +
             '<div style="display:flex;gap:6px;">' +
-            '<button class="btn btn-primary btn-sm" style="background:#7c3aed;font-size:0.75rem;" id="academyBadgeSave_' + userId + '"><i class="fas fa-check"></i> Otorgar</button>' +
+            '<button class="btn btn-primary btn-sm" style="background:#8B0000;font-size:0.75rem;" id="academyBadgeSave_' + userId + '"><i class="fas fa-check"></i> Otorgar</button>' +
             '<button class="btn btn-secondary btn-sm" style="font-size:0.75rem;" id="academyBadgeCancel_' + userId + '"><i class="fas fa-times"></i></button>' +
             '</div>';
         td.style.position = 'relative';
@@ -6790,7 +6790,7 @@ if (!window._renderVideoList) {
         var content = document.getElementById('academyAnalyticsContent');
         if (!panel || !content) return;
         panel.classList.remove('hidden');
-        content.innerHTML = '<div style="text-align:center;padding:20px;color:#6b7280;"><i class="fas fa-spinner fa-spin"></i> Cargando analíticas...</div>';
+        content.innerHTML = '<div style="text-align:center;padding:20px;color:#8B0000;"><i class="fas fa-spinner fa-spin"></i> Cargando analíticas...</div>';
         try {
             var data = await api.post('/admin/academy-analytics', {});
             var o = data.overview;
@@ -6798,25 +6798,25 @@ if (!window._renderVideoList) {
             // Overview cards
             html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px;">';
             var cards = [
-                {label:'Clases', val:o.total_classes, icon:'fa-book', color:'#7c3aed'},
-                {label:'Preguntas', val:o.total_questions, icon:'fa-question-circle', color:'#2563eb'},
+                {label:'Clases', val:o.total_classes, icon:'fa-book', color:'#8B0000'},
+                {label:'Preguntas', val:o.total_questions, icon:'fa-question-circle', color:'#8B0000'},
                 {label:'Agentes', val:o.total_agents, icon:'fa-users', color:'#059669'},
                 {label:'Aprobación Clases', val:o.overall_pass_rate+'%', icon:'fa-check-double', color:o.overall_pass_rate >= 70 ? '#059669' : '#dc2626'},
                 {label:'Aprobación Examen', val:o.exam_pass_rate+'%', icon:'fa-trophy', color:o.exam_pass_rate >= 70 ? '#059669' : '#dc2626'},
                 {label:'Partners', val:o.total_partners, icon:'fa-certificate', color:'#d97706'},
             ];
             cards.forEach(function(c) {
-                html += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:1.3rem;font-weight:700;color:' + c.color + ';">' + c.val + '</div><div style="font-size:0.75rem;color:#6b7280;"><i class="fas ' + c.icon + '"></i> ' + c.label + '</div></div>';
+                html += '<div style="background:#fff;border:1px solid #8B0000;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:1.3rem;font-weight:700;color:' + c.color + ';">' + c.val + '</div><div style="font-size:0.75rem;color:#8B0000;"><i class="fas ' + c.icon + '"></i> ' + c.label + '</div></div>';
             });
             html += '</div>';
 
             // Class pass rates
             if (data.class_stats && data.class_stats.length > 0) {
-                html += '<h4 style="margin:16px 0 8px;font-size:0.95rem;color:#374151;"><i class="fas fa-chart-bar" style="color:#7c3aed;"></i> Tasa de Aprobación por Clase</h4>';
+                html += '<h4 style="margin:16px 0 8px;font-size:0.95rem;color:#374151;"><i class="fas fa-chart-bar" style="color:#8B0000;"></i> Tasa de Aprobación por Clase</h4>';
                 html += '<div style="overflow-x:auto;"><table class="admin-table" style="width:100%;font-size:0.82rem;"><thead><tr><th>Clase</th><th>Módulo</th><th>Intentos</th><th>Aprobados</th><th>Tasa</th></tr></thead><tbody>';
                 data.class_stats.forEach(function(c) {
                     var rateColor = c.pass_rate >= 70 ? '#059669' : c.pass_rate >= 50 ? '#d97706' : '#dc2626';
-                    html += '<tr><td>' + _esc(c.title) + '</td><td><span style="background:#f5f3ff;color:#7c3aed;padding:2px 8px;border-radius:10px;font-size:0.72rem;">' + _esc(c.module || 'General') + '</span></td><td>' + c.total_attempts + '</td><td>' + c.passed + '</td><td style="color:' + rateColor + ';font-weight:700;">' + c.pass_rate + '%</td></tr>';
+                    html += '<tr><td>' + _esc(c.title) + '</td><td><span style="background:#8B0000;color:#8B0000;padding:2px 8px;border-radius:10px;font-size:0.72rem;">' + _esc(c.module || 'General') + '</span></td><td>' + c.total_attempts + '</td><td>' + c.passed + '</td><td style="color:' + rateColor + ';font-weight:700;">' + c.pass_rate + '%</td></tr>';
                 });
                 html += '</tbody></table></div>';
             }
@@ -6825,18 +6825,18 @@ if (!window._renderVideoList) {
             if (data.failed_questions && data.failed_questions.length > 0) {
                 html += '<h4 style="margin:16px 0 8px;font-size:0.95rem;color:#374151;"><i class="fas fa-exclamation-triangle" style="color:#dc2626;"></i> Preguntas con Mayor Tasa de Fallo</h4>';
                 data.failed_questions.forEach(function(q) {
-                    html += '<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px;margin-bottom:8px;"><div style="font-size:0.82rem;"><strong>Q' + q.id + '</strong> (' + _esc(q.class_title) + ')</div><div style="font-size:0.78rem;color:#6b7280;margin-top:4px;">' + _esc(q.question) + '</div><div style="font-size:0.72rem;margin-top:4px;">' + q.times_answered + ' intentos, ' + q.times_correct + ' correctos (' + q.fail_rate + '% fallo)</div></div>';
+                    html += '<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px;margin-bottom:8px;"><div style="font-size:0.82rem;"><strong>Q' + q.id + '</strong> (' + _esc(q.class_title) + ')</div><div style="font-size:0.78rem;color:#8B0000;margin-top:4px;">' + _esc(q.question) + '</div><div style="font-size:0.72rem;margin-top:4px;">' + q.times_answered + ' intentos, ' + q.times_correct + ' correctos (' + q.fail_rate + '% fallo)</div></div>';
                 });
             }
 
             // Level distribution
             if (data.level_distribution && data.level_distribution.length > 0) {
-                html += '<h4 style="margin:16px 0 8px;font-size:0.95rem;color:#374151;"><i class="fas fa-layer-group" style="color:#2563eb;"></i> Distribución de Niveles</h4>';
+                html += '<h4 style="margin:16px 0 8px;font-size:0.95rem;color:#374151;"><i class="fas fa-layer-group" style="color:#8B0000;"></i> Distribución de Niveles</h4>';
                 html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
-                var lvlColors = ['#6b7280','#7c3aed','#2563eb','#059669','#d97706','#dc2626','#8b5cf6','#0891b2','#65a30d','#ea580c'];
+                var lvlColors = ['#8B0000','#8B0000','#8B0000','#059669','#d97706','#dc2626','#8B0000','#8B0000','#65a30d','#ea580c'];
                 data.level_distribution.forEach(function(l) {
                     var lc = lvlColors[Math.min(l.level - 1, 9)];
-                    html += '<div style="background:' + lc + '15;border:1px solid ' + lc + '30;border-radius:8px;padding:8px 14px;text-align:center;min-width:60px;"><div style="font-size:1.1rem;font-weight:700;color:' + lc + ';">' + l.count + '</div><div style="font-size:0.7rem;color:#6b7280;">Nivel ' + l.level + '</div></div>';
+                    html += '<div style="background:' + lc + '15;border:1px solid ' + lc + '30;border-radius:8px;padding:8px 14px;text-align:center;min-width:60px;"><div style="font-size:1.1rem;font-weight:700;color:' + lc + ';">' + l.count + '</div><div style="font-size:0.7rem;color:#8B0000;">Nivel ' + l.level + '</div></div>';
                 });
                 html += '</div>';
             }
@@ -6856,5 +6856,6 @@ if (!window._renderVideoList) {
     }
 
 })();
+
 
 

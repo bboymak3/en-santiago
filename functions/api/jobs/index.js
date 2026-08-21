@@ -231,13 +231,13 @@ export async function onRequestPost(context) {
       });
     }
 
-    // Special handling for HOLAX virtual company
-    const HOLAX_NAME = 'HOLAX';
+    // Special handling for En-Santiago virtual company
+    const HOLAX_NAME = 'En-Santiago';
     let businessId;
     let companyNameFinal = company_name.trim();
 
     if (companyNameFinal === HOLAX_NAME) {
-      // HOLAX is a virtual/placeholder company — auto-create if not exists
+      // En-Santiago is a virtual/placeholder company — auto-create if not exists
       let holaxRow = await env.DB.prepare('SELECT id FROM businesses WHERE title = ? LIMIT 1')
         .bind(HOLAX_NAME).first();
       if (!holaxRow) {
@@ -254,11 +254,11 @@ export async function onRequestPost(context) {
         `).bind(
           payload.id,
           HOLAX_NAME,
-          'holax',
+          'En-Santiago',
           'approved',
           catId,
-          '/images/Holax.png',
-          'Plataforma HolaX – Directorio comercial e inmobiliario de Venezuela'
+          '/images/En-Santiago.png',
+          'Plataforma En-Santiago – Directorio comercial e inmobiliario de Venezuela'
         ).run();
         businessId = holaxInsert.meta.last_row_id;
       } else {
@@ -327,7 +327,7 @@ export async function onRequestPost(context) {
     try { await env.DB.prepare(`ALTER TABLE job_listings ADD COLUMN video_url TEXT`).run(); } catch(e) {}
     try { await env.DB.prepare(`ALTER TABLE job_listings ADD COLUMN business_logo TEXT`).run(); } catch(e) {}
 
-    // Set business_logo for the job (use provided or default for HOLAX)
+    // Set business_logo for the job (use provided or default for En-Santiago)
     const jobLogo = body.business_logo || (companyNameFinal === HOLAX_NAME ? '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png' : null);
     if (jobLogo) {
       try { await env.DB.prepare('UPDATE job_listings SET business_logo = ? WHERE id = ?').bind(jobLogo, jobId).run(); } catch(e) {}
@@ -383,3 +383,4 @@ export async function onRequestPost(context) {
     });
   }
 }
+

@@ -3,7 +3,7 @@ import sys, re
 for page in ['new-business.html', 'registro-negocio.html', 'crear-negocio.html']:
     import urllib.request
     try:
-        resp = urllib.request.urlopen(f'https://holax.com.ve/{page}')
+        resp = urllib.request.urlopen(f'https://en-santiago.com/{page}')
         html = resp.read().decode()
         scripts = re.findall(r'<script[^>]*src="([^"]+)"', html)
         local = [s for s in scripts if 'js/' in s]

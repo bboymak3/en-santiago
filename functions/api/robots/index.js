@@ -3,8 +3,8 @@
 // Fallback: static robots.txt at root should also exist via _redirects
 
 export async function onRequestGet() {
-  const robotsTxt = `# HolaX - Directorio Nacional de Negocios de Venezuela
-# https://holax.com
+  const robotsTxt = `# En-Santiago - Directorio Nacional de Negocios de Venezuela
+# https://en-santiago.com
 
 User-agent: *
 Allow: /
@@ -33,3 +33,4 @@ Sitemap: /sitemap.xml`;
     },
   });
 }
+

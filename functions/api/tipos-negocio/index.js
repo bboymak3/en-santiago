@@ -143,7 +143,7 @@ export async function onRequestPost(context) {
     ).bind(
       name.trim(), slug,
       icon || 'fas fa-briefcase',
-      color || '#607d8b',
+      color || '#8B0000',
       description || null,
       sort_order !== undefined ? parseInt(sort_order) : 99
     ).run();

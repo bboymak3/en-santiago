@@ -2,7 +2,7 @@
 """Fix all OG/meta tags to use absolute URLs, fix PWA manifest, fix all pages."""
 import os, re, glob
 
-BASE = "https://holax.com.ve"
+BASE = "https://en-santiago.com"
 
 count = 0
 for f in glob.glob('/home/z/my-project/*.html'):
@@ -41,7 +41,7 @@ for f in glob.glob('/home/z/my-project/*.html'):
     if 'og:site_name' not in content:
         content = content.replace(
             '<meta property="og:type"',
-            '<meta property="og:site_name" content="HOLAX">\n    <meta property="og:type"'
+            '<meta property="og:site_name" content="En-Santiago">\n    <meta property="og:type"'
         , 1)
 
     # Ensure og:locale

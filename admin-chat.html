@@ -5,35 +5,35 @@
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Chat - Administración HolaX">
-    <title>Chat - Administración HolaX</title>
+    <meta name="description" content="Chat - Administración En-Santiago">
+    <title>Chat - Administración En-Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .chat-logs-view { display:none; }
         .chat-logs-view.active { display:block; }
         .chat-config-view.hidden { display:none; }
-        .chat-back-btn { display:inline-flex;align-items:center;gap:6px;color:#6b7280;font-size:0.9rem;cursor:pointer;border:none;background:none;padding:6px 0;transition:color 0.2s; }
-        .chat-back-btn:hover { color:#2563eb; }
-        .conv-row { display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;transition:all 0.15s;margin-bottom:8px; }
-        .conv-row:hover { border-color:#2563eb;background:#f8faff; }
+        .chat-back-btn { display:inline-flex;align-items:center;gap:6px;color:#8B0000;font-size:0.9rem;cursor:pointer;border:none;background:none;padding:6px 0;transition:color 0.2s; }
+        .chat-back-btn:hover { color:#8B0000; }
+        .conv-row { display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #8B0000;border-radius:10px;cursor:pointer;transition:all 0.15s;margin-bottom:8px; }
+        .conv-row:hover { border-color:#8B0000;background:#8B0000; }
         .conv-avatar { width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0; }
         .conv-info { flex:1;min-width:0; }
         .conv-names { font-weight:600;font-size:0.88rem;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-        .conv-meta { font-size:0.78rem;color:#94a3b8;margin-top:2px;display:flex;gap:8px;flex-wrap:wrap; }
-        .conv-last-msg { font-size:0.8rem;color:#6b7280;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px; }
+        .conv-meta { font-size:0.78rem;color:#8B0000;margin-top:2px;display:flex;gap:8px;flex-wrap:wrap; }
+        .conv-last-msg { font-size:0.8rem;color:#8B0000;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px; }
         .conv-stats { text-align:right;flex-shrink:0; }
-        .conv-msg-count { font-size:0.72rem;background:#e0e7ff;color:#4338ca;padding:2px 8px;border-radius:10px;font-weight:600; }
-        .conv-date { font-size:0.72rem;color:#94a3b8;margin-top:4px; }
+        .conv-msg-count { font-size:0.72rem;background:#8B0000;color:#8B0000;padding:2px 8px;border-radius:10px;font-weight:600; }
+        .conv-date { font-size:0.72rem;color:#8B0000;margin-top:4px; }
         .msg-bubble { max-width:75%;padding:10px 14px;border-radius:14px;font-size:0.88rem;line-height:1.5;margin-bottom:8px;word-wrap:break-word; }
-        .msg-mine { background:#2563eb;color:#fff;margin-left:auto;border-bottom-right-radius:4px; }
-        .msg-other { background:#f1f5f9;color:#111;border-bottom-left-radius:4px; }
-        .msg-time { font-size:0.68rem;color:#94a3b8;margin-top:2px; }
+        .msg-mine { background:#8B0000;color:#fff;margin-left:auto;border-bottom-right-radius:4px; }
+        .msg-other { background:#8B0000;color:#111;border-bottom-left-radius:4px; }
+        .msg-time { font-size:0.68rem;color:#8B0000;margin-top:2px; }
         .msg-sender { font-size:0.75rem;font-weight:600;margin-bottom:2px; }
-        .chat-messages-container { background:#fafbfc;border:1px solid #e5e7eb;border-radius:12px;padding:20px;max-height:500px;overflow-y:auto; }
-        .chat-conv-header { background:#fff;border:1px solid #e5e7eb;border-radius:12px 12px 0 0;padding:16px 20px;display:flex;align-items:center;justify-content:space-between; }
+        .chat-messages-container { background:#8B0000;border:1px solid #8B0000;border-radius:12px;padding:20px;max-height:500px;overflow-y:auto; }
+        .chat-conv-header { background:#fff;border:1px solid #8B0000;border-radius:12px 12px 0 0;padding:16px 20px;display:flex;align-items:center;justify-content:space-between; }
         .chat-conv-info h3 { margin:0;font-size:1rem;font-weight:700; }
-        .chat-conv-info p { margin:2px 0 0;font-size:0.8rem;color:#6b7280; }
+        .chat-conv-info p { margin:2px 0 0;font-size:0.8rem;color:#8B0000; }
     </style>
 </head>
 <body>
@@ -41,8 +41,8 @@
     <nav class="navbar navbar-admin" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name">HolaX</span> <span class="admin-badge">Admin</span>
+                <img src="images/favicon.jpeg" alt="En-Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name">En-Santiago</span> <span class="admin-badge">Admin</span>
             </a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
@@ -108,7 +108,7 @@
                     <!-- Stats cards -->
                     <div class="admin-stats-grid" style="margin-bottom:20px;">
                         <div class="admin-stat-card" style="border-left:4px solid #25d366;cursor:pointer;" onclick="showChatLogs()">
-                            <div class="admin-stat-icon" style="background:#EFF6FF;color:#25d366;">
+                            <div class="admin-stat-icon" style="background:#8B0000;color:#25d366;">
                                 <i class="fas fa-comments"></i>
                             </div>
                             <div class="admin-stat-info">
@@ -116,8 +116,8 @@
                                 <div class="admin-stat-label">Total Conversaciones</div>
                             </div>
                         </div>
-                        <div class="admin-stat-card" style="border-left:4px solid #8b5cf6;cursor:pointer;" onclick="showChatLogs('comment')">
-                            <div class="admin-stat-icon" style="background:#f5f3ff;color:#8b5cf6;">
+                        <div class="admin-stat-card" style="border-left:4px solid #8B0000;cursor:pointer;" onclick="showChatLogs('comment')">
+                            <div class="admin-stat-icon" style="background:#8B0000;color:#8B0000;">
                                 <i class="fas fa-comment-dots"></i>
                             </div>
                             <div class="admin-stat-info">
@@ -125,8 +125,8 @@
                                 <div class="admin-stat-label">Comentarios de Producto</div>
                             </div>
                         </div>
-                        <div class="admin-stat-card" style="border-left:4px solid #2563eb;cursor:pointer;" onclick="showChatLogs('business')">
-                            <div class="admin-stat-icon" style="background:#eff6ff;color:#2563eb;">
+                        <div class="admin-stat-card" style="border-left:4px solid #8B0000;cursor:pointer;" onclick="showChatLogs('business')">
+                            <div class="admin-stat-icon" style="background:#8B0000;color:#8B0000;">
                                 <i class="fas fa-store"></i>
                             </div>
                             <div class="admin-stat-info">
@@ -148,7 +148,7 @@
                     <!-- Quick access to chat logs -->
                     <div class="admin-card" style="margin-bottom:20px;">
                         <div class="admin-card-header">
-                            <h3><i class="fas fa-history" style="color:#2563eb;"></i> Registro de Conversaciones</h3>
+                            <h3><i class="fas fa-history" style="color:#8B0000;"></i> Registro de Conversaciones</h3>
                             <div class="admin-card-actions">
                                 <button class="btn btn-primary btn-sm" onclick="showChatLogs()">
                                     <i class="fas fa-search"></i> Ver Todos los Chats
@@ -156,7 +156,7 @@
                             </div>
                         </div>
                         <div class="admin-card-body">
-                            <p style="font-size:0.88rem;color:#6b7280;margin-bottom:12px;">
+                            <p style="font-size:0.88rem;color:#8B0000;margin-bottom:12px;">
                                 Todas las conversaciones entre usuarios y vendedores se almacenan como respaldo. Puedes buscar por nombre, email, negocio o contenido del mensaje. Ideal para resolver disputas o verificar acuerdos.
                             </p>
                             <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -171,21 +171,21 @@
                     <!-- Anonymous Comments Toggle -->
                     <div class="admin-card" style="margin-bottom:20px;">
                         <div class="admin-card-header">
-                            <h3><i class="fas fa-user-secret" style="color:#8b5cf6;"></i> Mensajes Anónimos en Productos</h3>
+                            <h3><i class="fas fa-user-secret" style="color:#8B0000;"></i> Mensajes Anónimos en Productos</h3>
                         </div>
                         <div class="admin-card-body">
-                            <p style="font-size:0.88rem;color:#6b7280;margin-bottom:14px;">
+                            <p style="font-size:0.88rem;color:#8B0000;margin-bottom:14px;">
                                 Controla si los usuarios no registrados pueden dejar comentarios en los productos. Los comentarios anónimos aparecerán etiquetados como "Anónimo" en el chat de admin.
                             </p>
                             <div style="display:flex;align-items:center;gap:14px;">
                                 <label class="toggle-switch" style="position:relative;display:inline-block;width:52px;height:28px;flex-shrink:0;">
                                     <input type="checkbox" id="anonCommentsToggle" data-key="anonymous_comments_enabled" style="opacity:0;width:0;height:0;">
-                                    <span style="position:absolute;cursor:pointer;inset:0;background:#cbd5e1;border-radius:28px;transition:all 0.3s;" id="anonToggleTrack"></span>
+                                    <span style="position:absolute;cursor:pointer;inset:0;background:#8B0000;border-radius:28px;transition:all 0.3s;" id="anonToggleTrack"></span>
                                     <span style="position:absolute;content:'';height:22px;width:22px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:all 0.3s;box-shadow:0 1px 3px rgba(0,0,0,0.2);" id="anonToggleThumb"></span>
                                 </label>
                                 <div>
                                     <div id="anonToggleLabel" style="font-weight:600;font-size:0.9rem;color:#111;">Activados</div>
-                                    <div style="font-size:0.78rem;color:#94a3b8;" id="anonToggleDesc">Cualquier persona puede comentar en productos</div>
+                                    <div style="font-size:0.78rem;color:#8B0000;" id="anonToggleDesc">Cualquier persona puede comentar en productos</div>
                                 </div>
                             </div>
                         </div>
@@ -203,25 +203,25 @@
                         </div>
                         <div class="admin-card-body">
                             <div style="display:flex;flex-direction:column;gap:12px;">
-                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:all 0.2s;">
+                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #8B0000;border-radius:14px;cursor:pointer;transition:all 0.2s;">
                                     <input type="radio" name="chat_mode" value="all" data-key="chat_mode" style="width:20px;height:20px;accent-color:#25d366;">
                                     <div style="flex:1;">
                                         <div style="font-weight:700;color:#111;font-size:0.95rem;"><i class="fas fa-globe" style="color:#25d366;margin-right:8px;"></i> Todos los usuarios</div>
-                                        <div style="font-size:0.82rem;color:#6b7280;margin-top:2px;">Cualquier usuario registrado puede chatear con vendedores.</div>
+                                        <div style="font-size:0.82rem;color:#8B0000;margin-top:2px;">Cualquier usuario registrado puede chatear con vendedores.</div>
                                     </div>
                                 </label>
-                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:all 0.2s;">
+                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #8B0000;border-radius:14px;cursor:pointer;transition:all 0.2s;">
                                     <input type="radio" name="chat_mode" value="premium_only" data-key="chat_mode" style="width:20px;height:20px;accent-color:#f59e0b;">
                                     <div style="flex:1;">
                                         <div style="font-weight:700;color:#111;font-size:0.95rem;"><i class="fas fa-crown" style="color:#f59e0b;margin-right:8px;"></i> Solo Premium</div>
-                                        <div style="font-size:0.82rem;color:#6b7280;margin-top:2px;">Ambas partes (comprador y vendedor) deben ser Premium.</div>
+                                        <div style="font-size:0.82rem;color:#8B0000;margin-top:2px;">Ambas partes (comprador y vendedor) deben ser Premium.</div>
                                     </div>
                                 </label>
-                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:all 0.2s;">
+                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #8B0000;border-radius:14px;cursor:pointer;transition:all 0.2s;">
                                     <input type="radio" name="chat_mode" value="none" data-key="chat_mode" style="width:20px;height:20px;accent-color:#dc2626;">
                                     <div style="flex:1;">
                                         <div style="font-weight:700;color:#111;font-size:0.95rem;"><i class="fas fa-ban" style="color:#dc2626;margin-right:8px;"></i> Desactivado</div>
-                                        <div style="font-size:0.82rem;color:#6b7280;margin-top:2px;">El chat entre usuarios está completamente desactivado.</div>
+                                        <div style="font-size:0.82rem;color:#8B0000;margin-top:2px;">El chat entre usuarios está completamente desactivado.</div>
                                     </div>
                                 </label>
                             </div>
@@ -253,7 +253,7 @@
                             </div>
                             <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
                                 <div style="position:relative;flex:1;min-width:220px;">
-                                    <i class="fas fa-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;"></i>
+                                    <i class="fas fa-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#8B0000;"></i>
                                     <input type="text" id="chatLogsSearch" class="form-control" placeholder="Buscar por nombre, email, negocio o mensaje..." style="padding-left:36px;">
                                 </div>
                                 <button class="btn btn-primary btn-sm" id="btnSearchLogs" style="min-width:100px;">
@@ -271,14 +271,14 @@
 
                     <!-- Conversation list -->
                     <div id="chatLogsListContainer">
-                        <div id="chatLogsLoading" style="text-align:center;padding:40px;color:#9ca3af;">
+                        <div id="chatLogsLoading" style="text-align:center;padding:40px;color:#8B0000;">
                             <i class="fas fa-spinner fa-spin fa-2x"></i>
                             <p style="margin-top:10px;">Cargando conversaciones...</p>
                         </div>
                         <div id="chatLogsList"></div>
                         <div id="chatLogsEmpty" class="empty-state-sm" style="display:none;padding:40px;">
-                            <i class="fas fa-comments" style="font-size:2.5rem;color:#d1d5db;"></i>
-                            <p style="margin-top:12px;font-size:0.95rem;color:#6b7280;">No se encontraron conversaciones.</p>
+                            <i class="fas fa-comments" style="font-size:2.5rem;color:#8B0000;"></i>
+                            <p style="margin-top:12px;font-size:0.95rem;color:#8B0000;">No se encontraron conversaciones.</p>
                         </div>
                         <div class="admin-pagination" id="chatLogsPagination"></div>
                     </div>
@@ -296,7 +296,7 @@
                             <div id="convDetailBadges" style="display:flex;gap:6px;flex-shrink:0;"></div>
                         </div>
                         <div class="chat-messages-container" id="convMessagesContainer" style="border-top:none;border-radius:0 0 12px 12px;margin-top:-1px;">
-                            <div id="convMessagesLoading" style="text-align:center;padding:40px;color:#9ca3af;">
+                            <div id="convMessagesLoading" style="text-align:center;padding:40px;color:#8B0000;">
                                 <i class="fas fa-spinner fa-spin fa-2x"></i>
                             </div>
                             <div id="convMessagesList"></div>
@@ -371,7 +371,7 @@
         function showToast(msg, type) {
             const c = document.getElementById('toastContainer');
             if (!c) return;
-            const colors = { success:'#006EE3', error:'#dc2626', info:'#2563eb' };
+            const colors = { success:'#8B0000', error:'#dc2626', info:'#8B0000' };
             const icons = { success:'fa-check-circle', error:'fa-exclamation-circle', info:'fa-info-circle' };
             const el = document.createElement('div');
             el.style.cssText = `padding:12px 20px;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 4px 12px rgba(0,0,0,0.15);background:${colors[type]||colors.info};`;
@@ -432,17 +432,17 @@
         function updateAnonToggleUI(isEnabled) {
             if (isEnabled) {
                 anonToggle.checked = true;
-                anonTrack.style.background = '#8b5cf6';
+                anonTrack.style.background = '#8B0000';
                 anonThumb.style.transform = 'translateX(24px)';
                 anonLabel.textContent = 'Activados';
                 anonLabel.style.color = '#111';
                 anonDesc.textContent = 'Cualquier persona puede comentar en productos';
             } else {
                 anonToggle.checked = false;
-                anonTrack.style.background = '#cbd5e1';
+                anonTrack.style.background = '#8B0000';
                 anonThumb.style.transform = 'translateX(0)';
                 anonLabel.textContent = 'Desactivados';
-                anonLabel.style.color = '#94a3b8';
+                anonLabel.style.color = '#8B0000';
                 anonDesc.textContent = 'Solo usuarios registrados pueden comentar';
             }
         }
@@ -506,14 +506,14 @@
                 if (!card) return;
                 if (r.checked) {
                     card.style.borderColor = colors[r.value]||'#25d366';
-                    card.style.background = r.value==='all'?'#EFF6FF':r.value==='premium_only'?'#fffbeb':'#fef2f2';
-                } else { card.style.borderColor='#e5e7eb'; card.style.background='transparent'; }
+                    card.style.background = r.value==='all'?'#8B0000':r.value==='premium_only'?'#fffbeb':'#fef2f2';
+                } else { card.style.borderColor='#8B0000'; card.style.background='transparent'; }
             });
             const st = document.getElementById('chatModeStatus');
             if (st) {
                 const ch = document.querySelector('[name="chat_mode"]:checked');
                 if (ch) {
-                    const m = { all:{bg:'#EFF6FF',border:'#BFDBFE',color:'#006EE3',text:'Chat activo para todos los usuarios.'}, premium_only:{bg:'#fffbeb',border:'#fde68a',color:'#b45309',text:'Chat restringido a usuarios Premium.'}, none:{bg:'#fef2f2',border:'#fecaca',color:'#dc2626',text:'Chat desactivado.'} };
+                    const m = { all:{bg:'#8B0000',border:'#8B0000',color:'#8B0000',text:'Chat activo para todos los usuarios.'}, premium_only:{bg:'#fffbeb',border:'#fde68a',color:'#b45309',text:'Chat restringido a usuarios Premium.'}, none:{bg:'#fef2f2',border:'#fecaca',color:'#dc2626',text:'Chat desactivado.'} };
                     const s = m[ch.value]||m.all;
                     st.style.display='block'; st.style.background=s.bg; st.style.border='1px solid '+s.border; st.style.color=s.color;
                     st.innerHTML='<i class="fas fa-info-circle"></i> '+s.text;
@@ -595,20 +595,20 @@
                     const date = formatDate(c.last_message_at || c.created_at);
                     const buyerDisplay = c.buyer_id === 0 ? 'Anónimo' : (c.buyer_name || 'Anónimo');
                     const typeBadge = isComment
-                        ? '<span style="display:inline-flex;align-items:center;gap:4px;background:#f5f3ff;color:#8b5cf6;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:600;"><i class="fas fa-comment-dots"></i> Comentario</span>'
-                        : '<span style="display:inline-flex;align-items:center;gap:4px;background:#eff6ff;color:#2563eb;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:600;"><i class="fas fa-store"></i> Negocio</span>';
+                        ? '<span style="display:inline-flex;align-items:center;gap:4px;background:#8B0000;color:#8B0000;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:600;"><i class="fas fa-comment-dots"></i> Comentario</span>'
+                        : '<span style="display:inline-flex;align-items:center;gap:4px;background:#8B0000;color:#8B0000;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:600;"><i class="fas fa-store"></i> Negocio</span>';
                     const cleanMsg = (c.last_message || '').replace(/^\[COMENTARIO[^\]]*\]\s*/, '').replace(/^\[COMENTARIO en [^\]]*\]\s*[^\s]*:\s*/, '');
                     return `
                     <div class="conv-row" onclick="openConversation(${c.id})">
-                        <div class="conv-avatar" style="background:${isComment ? '#f5f3ff' : '#e0e7ff'};color:${isComment ? '#8b5cf6' : '#4338ca'};">${(buyerDisplay||'?')[0].toUpperCase()}</div>
+                        <div class="conv-avatar" style="background:${isComment ? '#8B0000' : '#8B0000'};color:${isComment ? '#8B0000' : '#8B0000'};">${(buyerDisplay||'?')[0].toUpperCase()}</div>
                         <div class="conv-info">
-                            <div class="conv-names">${esc(buyerDisplay)} <i class="fas fa-exchange-alt" style="font-size:0.7rem;color:#d1d5db;margin:0 4px;"></i> ${esc(c.seller_name||'Vendedor')} ${typeBadge}</div>
+                            <div class="conv-names">${esc(buyerDisplay)} <i class="fas fa-exchange-alt" style="font-size:0.7rem;color:#8B0000;margin:0 4px;"></i> ${esc(c.seller_name||'Vendedor')} ${typeBadge}</div>
                             <div class="conv-meta">
-                                <span style="color:${isComment ? '#8b5cf6' : '#2563eb'};"><i class="fas ${isComment ? 'fa-comment-dots' : 'fa-user'}"></i> ${isComment ? (c.buyer_id === 0 ? 'Anónimo' : 'Comprador') : 'Comprador'}</span>
-                                <span style="color:#006EE3;"><i class="fas fa-store"></i> Vendedor</span>
+                                <span style="color:${isComment ? '#8B0000' : '#8B0000'};"><i class="fas ${isComment ? 'fa-comment-dots' : 'fa-user'}"></i> ${isComment ? (c.buyer_id === 0 ? 'Anónimo' : 'Comprador') : 'Comprador'}</span>
+                                <span style="color:#8B0000;"><i class="fas fa-store"></i> Vendedor</span>
                                 ${c.business_title ? `<span><i class="fas fa-building"></i> ${esc(c.business_title)}</span>` : ''}
                             </div>
-                            ${c.last_message ? `<div class="conv-last-msg"><i class="fas fa-comment-dots" style="color:#d1d5db;margin-right:4px;"></i>${esc(cleanMsg || c.last_message)}</div>` : ''}
+                            ${c.last_message ? `<div class="conv-last-msg"><i class="fas fa-comment-dots" style="color:#8B0000;margin-right:4px;"></i>${esc(cleanMsg || c.last_message)}</div>` : ''}
                         </div>
                         <div class="conv-stats">
                             <span class="conv-msg-count">${c.message_count || 0} msgs</span>
@@ -622,7 +622,7 @@
                     const p = data.pagination;
                     let html = '';
                     if (p.page > 1) html += `<button class="btn btn-xs btn-outline" onclick="loadChatLogs(${p.page-1})"><i class="fas fa-chevron-left"></i></button>`;
-                    html += `<span style="padding:0 12px;font-size:0.82rem;color:#6b7280;">Página ${p.page} de ${p.totalPages} (${p.total} total)</span>`;
+                    html += `<span style="padding:0 12px;font-size:0.82rem;color:#8B0000;">Página ${p.page} de ${p.totalPages} (${p.total} total)</span>`;
                     if (p.page < p.totalPages) html += `<button class="btn btn-xs btn-outline" onclick="loadChatLogs(${p.page+1})"><i class="fas fa-chevron-right"></i></button>`;
                     pagination.innerHTML = html;
                 }
@@ -659,10 +659,10 @@
                 if (!conv) { titleEl.textContent = 'No encontrada'; return; }
 
                 titleEl.textContent = (conv.buyer.name||'Anónimo') + ' ↔ ' + (conv.seller.name||'Vendedor');
-                const commentBadge = conv.is_comment ? ' <span style="background:#f5f3ff;color:#8b5cf6;padding:2px 10px;border-radius:8px;font-size:0.75rem;font-weight:600;"><i class="fas fa-comment-dots"></i> Comentario de Producto</span>' : '';
+                const commentBadge = conv.is_comment ? ' <span style="background:#8B0000;color:#8B0000;padding:2px 10px;border-radius:8px;font-size:0.75rem;font-weight:600;"><i class="fas fa-comment-dots"></i> Comentario de Producto</span>' : '';
                 metaEl.innerHTML = `
                     ${commentBadge}
-                    ${conv.business_title ? `<br><i class="fas fa-building"></i> <a href="/negocio/${conv.business_slug||conv.business_id}" target="_blank" style="color:#2563eb;">${esc(conv.business_title)}</a> &nbsp;|&nbsp; ` : '<br>'}
+                    ${conv.business_title ? `<br><i class="fas fa-building"></i> <a href="/negocio/${conv.business_slug||conv.business_id}" target="_blank" style="color:#8B0000;">${esc(conv.business_title)}</a> &nbsp;|&nbsp; ` : '<br>'}
                     <i class="fas fa-user"></i> ${esc(conv.buyer.name||'Anónimo')} (${esc(conv.buyer.email||'N/A')}) &nbsp;|&nbsp;
                     <i class="fas fa-store"></i> ${esc(conv.seller.name||'Vendedor')} (${esc(conv.seller.email||'')}) &nbsp;|&nbsp;
                     <i class="fas fa-calendar"></i> ${formatDate(conv.created_at)} &nbsp;|&nbsp;
@@ -675,7 +675,7 @@
                 if (msgsLoading) msgsLoading.style.display = 'none';
 
                 if (messages.length === 0) {
-                    msgsList.innerHTML = '<p style="text-align:center;color:#94a3b8;padding:30px;">No hay mensajes en esta conversación.</p>';
+                    msgsList.innerHTML = '<p style="text-align:center;color:#8B0000;padding:30px;">No hay mensajes en esta conversación.</p>';
                     return;
                 }
 
@@ -684,13 +684,13 @@
                 messages.forEach(m => {
                     const msgDate = m.created_at ? m.created_at.substring(0,10) : '';
                     if (msgDate && msgDate !== lastDate) {
-                        html += `<div style="text-align:center;margin:16px 0 8px;"><span style="background:#e5e7eb;color:#6b7280;padding:3px 12px;border-radius:10px;font-size:0.72rem;">${formatDate(m.created_at).substring(0,12)}</span></div>`;
+                        html += `<div style="text-align:center;margin:16px 0 8px;"><span style="background:#8B0000;color:#8B0000;padding:3px 12px;border-radius:10px;font-size:0.72rem;">${formatDate(m.created_at).substring(0,12)}</span></div>`;
                         lastDate = msgDate;
                     }
                     const isMine = false; // Admin view: show both sides
                     const senderLabel = m.sender_id === conv.buyer.id
-                        ? `<span style="color:#2563eb;"><i class="fas fa-user"></i> ${esc(m.sender_name||'Comprador')}</span>`
-                        : `<span style="color:#006EE3;"><i class="fas fa-store"></i> ${esc(m.sender_name||'Vendedor')}</span>`;
+                        ? `<span style="color:#8B0000;"><i class="fas fa-user"></i> ${esc(m.sender_name||'Comprador')}</span>`
+                        : `<span style="color:#8B0000;"><i class="fas fa-store"></i> ${esc(m.sender_name||'Vendedor')}</span>`;
                     const bubbleClass = m.sender_id === conv.seller.id ? 'msg-other' : 'msg-mine';
                     html += `
                         <div style="display:flex;flex-direction:column;${m.sender_id === conv.seller.id ? '' : 'align-items:flex-end;'}">

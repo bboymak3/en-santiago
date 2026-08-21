@@ -264,18 +264,18 @@ export async function onRequestPut(context) {
       }
     }
 
-    // If holax_logo_url was updated, bulk-update all HOLAX jobs
+    // If holax_logo_url was updated, bulk-update all En-Santiago jobs
     let holaxJobsUpdated = 0;
     if (updates.holax_logo_url !== undefined && updates.holax_logo_url) {
       try {
         // Ensure business_logo column exists
         try { await env.DB.prepare(`ALTER TABLE job_listings ADD COLUMN business_logo TEXT`).run(); } catch(e) {}
         const upd = await env.DB.prepare(
-          `UPDATE job_listings SET business_logo = ? WHERE company_name = 'HOLAX'`
+          `UPDATE job_listings SET business_logo = ? WHERE company_name = 'En-Santiago'`
         ).bind(updates.holax_logo_url).run();
         holaxJobsUpdated = upd.meta.changes || 0;
       } catch (e) {
-        console.error('Error updating HOLAX jobs logo:', e);
+        console.error('Error updating En-Santiago jobs logo:', e);
       }
     }
 
@@ -285,7 +285,7 @@ export async function onRequestPut(context) {
     };
     if (holaxJobsUpdated > 0) {
       response.holax_jobs_updated = holaxJobsUpdated;
-      response.message += ` (${holaxJobsUpdated} empleo(s) HOLAX actualizado(s) con el nuevo logo)`;
+      response.message += ` (${holaxJobsUpdated} empleo(s) En-Santiago actualizado(s) con el nuevo logo)`;
     }
 
     if (rejected.length > 0) {
@@ -368,3 +368,4 @@ export async function onRequestPost(context) {
     });
   }
 }
+

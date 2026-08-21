@@ -15,12 +15,12 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --primary:#7c3aed;--primary-light:#ede9fe;--primary-dark:#5b21b6;
+  --primary:#8B0000;--primary-light:#8B0000;--primary-dark:#8B0000;
   --success:#10b981;--success-light:#d1fae5;
   --danger:#ef4444;--danger-light:#fee2e2;
   --warning:#f59e0b;--warning-light:#fef3c7;
-  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
-  --gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;
+  --gray-50:#8B0000;--gray-100:#8B0000;--gray-200:#8B0000;
+  --gray-300:#8B0000;--gray-400:#8B0000;--gray-500:#8B0000;
   --gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
   --radius:12px;--radius-sm:8px;--radius-lg:16px;
   --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
@@ -28,7 +28,7 @@
   --shadow-lg:0 10px 15px rgba(0,0,0,.08),0 4px 6px rgba(0,0,0,.05);
   --header-h:60px;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f0f5;color:var(--gray-800);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#8B0000;color:var(--gray-800);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
 button{cursor:pointer;font-family:inherit;border:none;outline:none}
@@ -79,9 +79,9 @@ button:active{transform:scale(.97)}
 /* Level badge */
 .level-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}
 .level-1{background:#fee2e2;color:#dc2626}.level-2{background:#fef3c7;color:#d97706}
-.level-3{background:#fef3c7;color:#d97706}.level-4{background:#e0e7ff;color:#4f46e5}
-.level-5{background:#e0e7ff;color:#4f46e5}.level-6{background:#ede9fe;color:#7c3aed}
-.level-7{background:#ede9fe;color:#7c3aed}.level-8{background:#fce7f3;color:#db2777}
+.level-3{background:#fef3c7;color:#d97706}.level-4{background:#8B0000;color:#8B0000}
+.level-5{background:#8B0000;color:#8B0000}.level-6{background:#8B0000;color:#8B0000}
+.level-7{background:#8B0000;color:#8B0000}.level-8{background:#fce7f3;color:#db2777}
 .level-9{background:#fce7f3;color:#db2777}.level-10{background:#fef3c7;color:#b45309}
 
 /* XP bar */
@@ -728,12 +728,12 @@ button:active{transform:scale(.97)}
 
     document.getElementById('examPanel').innerHTML=`
     <div class="quiz-panel">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:8px 12px;background:linear-gradient(90deg,#f5f3ff,#ede9fe);border-radius:8px;">
-        <span style="font-weight:600;font-size:0.9rem;color:#7c3aed;"><i class="fas fa-file-alt"></i> Pregunta ${idx + 1} de ${examQuestions.length}</span>
-        <span id="exam-timer" style="font-weight:700;font-size:0.95rem;color:#7c3aed;"><i class="fas fa-clock"></i> 30:00</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:8px 12px;background:linear-gradient(90deg,#8B0000,#8B0000);border-radius:8px;">
+        <span style="font-weight:600;font-size:0.9rem;color:#8B0000;"><i class="fas fa-file-alt"></i> Pregunta ${idx + 1} de ${examQuestions.length}</span>
+        <span id="exam-timer" style="font-weight:700;font-size:0.95rem;color:#8B0000;"><i class="fas fa-clock"></i> 30:00</span>
       </div>
-      <div style="height:6px;background:#e5e7eb;border-radius:3px;margin-bottom:16px;overflow:hidden;">
-        <div style="height:100%;background:linear-gradient(90deg,#7c3aed,#3b82f6);border-radius:3px;width:${((idx + 1) / examQuestions.length * 100)}%;transition:width 0.3s;"></div>
+      <div style="height:6px;background:#8B0000;border-radius:3px;margin-bottom:16px;overflow:hidden;">
+        <div style="height:100%;background:linear-gradient(90deg,#8B0000,#8B0000);border-radius:3px;width:${((idx + 1) / examQuestions.length * 100)}%;transition:width 0.3s;"></div>
       </div>
       <div class="quiz-question">${current}. ${escapeHTML(q.question)}</div>
       ${q.class_name?'<div style="font-size:11px;color:var(--gray-400);margin-bottom:12px"><i class="fas fa-book"></i> '+escapeHTML(q.class_name)+'</div>':''}
@@ -877,3 +877,4 @@ button:active{transform:scale(.97)}
 </script>
 </body>
 </html>
+

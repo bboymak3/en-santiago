@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Debug - Panel Vendedores | HolaX</title>
+    <title>Debug - Panel Vendedores | En-Santiago</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0f172a;
-            color: #e2e8f0;
+            color: #8B0000;
             padding: 20px;
             line-height: 1.6;
         }
         .container { max-width: 1200px; margin: 0 auto; }
-        h1 { color: #00d4ff; margin-bottom: 8px; font-size: 1.5rem; }
-        .subtitle { color: #94a3b8; margin-bottom: 24px; font-size: 0.9rem; }
+        h1 { color: #8B0000; margin-bottom: 8px; font-size: 1.5rem; }
+        .subtitle { color: #8B0000; margin-bottom: 24px; font-size: 0.9rem; }
         .card {
             background: #1e293b;
             border: 1px solid #334155;
@@ -25,7 +25,7 @@
             margin-bottom: 16px;
         }
         .card h2 {
-            color: #00d4ff;
+            color: #8B0000;
             font-size: 1.1rem;
             margin-bottom: 12px;
             display: flex;
@@ -42,7 +42,7 @@
         .status.ok { background: #16a34a; color: #fff; }
         .status.error { background: #dc2626; color: #fff; }
         .status.warning { background: #f59e0b; color: #000; }
-        .status.pending { background: #64748b; color: #fff; }
+        .status.pending { background: #8B0000; color: #fff; }
         pre {
             background: #0f172a;
             border: 1px solid #334155;
@@ -51,17 +51,17 @@
             overflow-x: auto;
             font-family: 'Courier New', monospace;
             font-size: 0.85rem;
-            color: #cbd5e1;
+            color: #8B0000;
             max-height: 400px;
             overflow-y: auto;
         }
-        .json-key { color: #00d4ff; }
+        .json-key { color: #8B0000; }
         .json-string { color: #4ade80; }
         .json-number { color: #fbbf24; }
         .json-boolean { color: #f87171; }
-        .json-null { color: #94a3b8; }
+        .json-null { color: #8B0000; }
         button {
-            background: #00d4ff;
+            background: #8B0000;
             color: #0f172a;
             border: none;
             padding: 10px 20px;
@@ -72,12 +72,12 @@
             margin-bottom: 8px;
             transition: background 0.2s;
         }
-        button:hover { background: #00a8cc; }
+        button:hover { background: #8B0000; }
         button.secondary {
             background: #334155;
-            color: #e2e8f0;
+            color: #8B0000;
         }
-        button.secondary:hover { background: #475569; }
+        button.secondary:hover { background: #8B0000; }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -89,8 +89,8 @@
             border-bottom: 1px solid #334155;
             font-size: 0.85rem;
         }
-        th { color: #00d4ff; font-weight: 600; }
-        td { color: #cbd5e1; }
+        th { color: #8B0000; font-weight: 600; }
+        td { color: #8B0000; }
         .badge {
             display: inline-block;
             padding: 2px 8px;
@@ -99,8 +99,8 @@
             font-weight: 600;
         }
         .badge-premium { background: #fef3c7; color: #92400e; }
-        .badge-basic { background: #f1f5f9; color: #64748b; }
-        .badge-admin { background: #dbeafe; color: #1e40af; }
+        .badge-basic { background: #8B0000; color: #8B0000; }
+        .badge-admin { background: #8B0000; color: #8B0000; }
         .badge-agent { background: #dcfce7; color: #166534; }
         .badge-user { background: #fce7f3; color: #9d174d; }
         .info-grid {
@@ -115,13 +115,13 @@
             border-radius: 6px;
             border: 1px solid #334155;
         }
-        .info-label { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; }
-        .info-value { color: #e2e8f0; font-weight: 600; font-size: 0.95rem; }
+        .info-label { color: #8B0000; font-size: 0.75rem; text-transform: uppercase; }
+        .info-value { color: #8B0000; font-weight: 600; font-size: 0.95rem; }
         .actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
         .token-input {
             background: #0f172a;
             border: 1px solid #334155;
-            color: #e2e8f0;
+            color: #8B0000;
             padding: 8px 12px;
             border-radius: 6px;
             font-family: monospace;
@@ -129,8 +129,8 @@
             width: 100%;
             margin-bottom: 12px;
         }
-        .token-input:focus { outline: none; border-color: #00d4ff; }
-        .empty { color: #64748b; text-align: center; padding: 20px; }
+        .token-input:focus { outline: none; border-color: #8B0000; }
+        .empty { color: #8B0000; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
@@ -141,27 +141,27 @@
         <div class="card">
             <h2><span id="authStatus" class="status pending">⟳ Verificando...</span> Autenticación</h2>
             <div id="authInfo">
-                <p style="color:#94a3b8;font-size:0.85rem;">Verificando si hay sesión activa...</p>
+                <p style="color:#8B0000;font-size:0.85rem;">Verificando si hay sesión activa...</p>
             </div>
         </div>
 
         <div class="card">
             <h2><span id="apiStatus" class="status pending">⟳ Verificando...</span> API /admin/sellers</h2>
             <div id="apiResult">
-                <p style="color:#94a3b8;font-size:0.85rem;">Probando endpoint...</p>
+                <p style="color:#8B0000;font-size:0.85rem;">Probando endpoint...</p>
             </div>
         </div>
 
         <div class="card">
             <h2>📊 Datos de vendedores</h2>
             <div id="sellersData">
-                <p style="color:#94a3b8;font-size:0.85rem;">Esperando autenticación...</p>
+                <p style="color:#8B0000;font-size:0.85rem;">Esperando autenticación...</p>
             </div>
         </div>
 
         <div class="card">
             <h2>🧪 Probar manualmente</h2>
-            <p style="color:#94a3b8;font-size:0.85rem;margin-bottom:12px;">
+            <p style="color:#8B0000;font-size:0.85rem;margin-bottom:12px;">
                 Pega un token JWT válido (de localStorage del navegador logueado) para probar la API:
             </p>
             <input type="text" id="manualToken" class="token-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
@@ -244,14 +244,14 @@
         if (!window.isAuthenticated) {
             statusEl.textContent = '⚠ app.js no cargó';
             statusEl.className = 'status error';
-            infoEl.innerHTML = '<p style="color:#f87171;">El módulo app.js no está cargado. Esto indica un problema con el cache del navegador.</p><p><button onclick="location.reload()" style="background:#00d4ff;color:#0f172a;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;">Recargar página</button></p>';
+            infoEl.innerHTML = '<p style="color:#f87171;">El módulo app.js no está cargado. Esto indica un problema con el cache del navegador.</p><p><button onclick="location.reload()" style="background:#8B0000;color:#0f172a;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;">Recargar página</button></p>';
             return;
         }
 
         if (!isAuthenticated()) {
             statusEl.textContent = '✗ No autenticado';
             statusEl.className = 'status error';
-            infoEl.innerHTML = '<p style="color:#f87171;">No hay sesión activa. Debes iniciar sesión en <a href="/login.html" style="color:#00d4ff;">/login.html</a> con una cuenta admin.</p>';
+            infoEl.innerHTML = '<p style="color:#f87171;">No hay sesión activa. Debes iniciar sesión en <a href="/login.html" style="color:#8B0000;">/login.html</a> con una cuenta admin.</p>';
             return;
         }
 
@@ -306,7 +306,7 @@
         if (!isAuthenticated()) {
             statusEl.textContent = '⏭ Saltado';
             statusEl.className = 'status warning';
-            resultEl.innerHTML = '<p style="color:#94a3b8;">No autenticado, no se puede probar la API.</p>';
+            resultEl.innerHTML = '<p style="color:#8B0000;">No autenticado, no se puede probar la API.</p>';
             return;
         }
 
@@ -324,9 +324,9 @@
             const sellers = data.sellers || [];
             resultEl.innerHTML = `
                 <p style="color:#4ade80;margin-bottom:8px;">✓ La API respondió correctamente en ${duration}ms</p>
-                <p style="color:#94a3b8;font-size:0.85rem;">Vendedores encontrados: <strong style="color:#00d4ff;">${sellers.length}</strong></p>
+                <p style="color:#8B0000;font-size:0.85rem;">Vendedores encontrados: <strong style="color:#8B0000;">${sellers.length}</strong></p>
                 <details style="margin-top:12px;">
-                    <summary style="cursor:pointer;color:#00d4ff;font-size:0.85rem;">Ver respuesta JSON completa</summary>
+                    <summary style="cursor:pointer;color:#8B0000;font-size:0.85rem;">Ver respuesta JSON completa</summary>
                     <pre>${syntaxHighlight(data)}</pre>
                 </details>
             `;
@@ -367,8 +367,8 @@
             resultEl.innerHTML = `
                 <p style="color:#f87171;margin-bottom:8px;">✗ Error al llamar la API:</p>
                 <pre style="color:#f87171;">${escHtml(err.message || err.toString())}</pre>
-                <p style="color:#94a3b8;font-size:0.85rem;margin-top:12px;">Esto es lo mismo que ve el panel real. Revisa el tipo de error:</p>
-                <ul style="color:#94a3b8;font-size:0.85rem;margin-left:20px;margin-top:8px;">
+                <p style="color:#8B0000;font-size:0.85rem;margin-top:12px;">Esto es lo mismo que ve el panel real. Revisa el tipo de error:</p>
+                <ul style="color:#8B0000;font-size:0.85rem;margin-left:20px;margin-top:8px;">
                     <li><strong>401</strong>: Token inválido o expirado. Cierra sesión y vuelve a iniciar.</li>
                     <li><strong>403</strong>: Tu usuario no es admin. Necesitas rol admin.</li>
                     <li><strong>500</strong>: Error del servidor. Revisa los logs de Cloudflare.</li>
@@ -389,7 +389,7 @@
             return;
         }
 
-        resultEl.innerHTML = '<p style="color:#94a3b8;">Probando...</p>';
+        resultEl.innerHTML = '<p style="color:#8B0000;">Probando...</p>';
 
         try {
             const response = await fetch('/api/admin/sellers', {
@@ -404,7 +404,7 @@
                 resultEl.innerHTML = `
                     <p style="color:#4ade80;margin-bottom:8px;">✓ HTTP ${response.status} - ${sellers.length} vendedores encontrados</p>
                     <details>
-                        <summary style="cursor:pointer;color:#00d4ff;font-size:0.85rem;">Ver JSON</summary>
+                        <summary style="cursor:pointer;color:#8B0000;font-size:0.85rem;">Ver JSON</summary>
                         <pre>${syntaxHighlight(data)}</pre>
                     </details>
                 `;
@@ -429,3 +429,4 @@
     </script>
 </body>
 </html>
+

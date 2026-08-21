@@ -123,7 +123,7 @@
     // ─── Referral Link ─────────────────────────────────────────
     function setReferralLink() {
         if (!currentUser) return;
-        const baseUrl = window.location.origin || 'https://holax.com.ve';
+        const baseUrl = window.location.origin || 'https://en-santiago.com';
         const link = `${baseUrl}/login.html?register=true&ref=${currentUser.id}`;
 
         const input1 = document.getElementById('referralLinkInput');

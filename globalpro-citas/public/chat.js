@@ -184,7 +184,7 @@
       <input type="date" id="citaFecha" min="${getMinDate()}">
       <h4 style="margin-top:8px;">Horarios disponibles</h4>
       <div class="time-slots" id="timeSlots">
-        <div style="color:#9ca3af;font-size:0.82rem;">Selecciona una fecha primero</div>
+        <div style="color:#8B0000;font-size:0.82rem;">Selecciona una fecha primero</div>
       </div>
     `;
     container.insertBefore(wrapper, typing);
@@ -390,7 +390,7 @@
   async function loadTimeSlots(fecha) {
     const slotsContainer = document.getElementById('timeSlots');
     if (!slotsContainer) return;
-    slotsContainer.innerHTML = '<div style="color:#9ca3af;font-size:0.82rem;">Cargando horarios...</div>';
+    slotsContainer.innerHTML = '<div style="color:#8B0000;font-size:0.82rem;">Cargando horarios...</div>';
 
     try {
       const response = await fetch(`/api/disponibilidad?fecha=${fecha}`);
@@ -731,3 +731,4 @@
   init();
 
 })();
+

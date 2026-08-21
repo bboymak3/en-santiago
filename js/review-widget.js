@@ -9,7 +9,7 @@
 
   // ─── Constants ─────────────────────────────────────────────
   const STAR_FILLED = '#ffc107';
-  const STAR_EMPTY = '#dee2e6';
+  const STAR_EMPTY = '#8B0000';
   const STAR_HOVER = '#ffdb70';
 
   // ─── State ────────────────────────────────────────────────
@@ -98,8 +98,8 @@
   // ─── Generate color from string for avatar ─────────────────
   function stringToColor(str) {
     const colors = [
-      '#1a73e8', '#28a745', '#dc3545', '#ff6b35', '#6f42c1',
-      '#17a2b8', '#e83e8c', '#fd7e14', '#20c997', '#6610f2'
+      '#8B0000', '#28a745', '#dc3545', '#ff6b35', '#8B0000',
+      '#8B0000', '#e83e8c', '#fd7e14', '#20c997', '#8B0000'
     ];
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -234,7 +234,7 @@
         background: #fff;
         border-radius: 12px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e9ecef;
+        border: 1px solid #8B0000;
       }
 
       .reviews-container {
@@ -248,7 +248,7 @@
         align-items: center;
         padding-bottom: 24px;
         margin-bottom: 24px;
-        border-bottom: 1px solid #e9ecef;
+        border-bottom: 1px solid #8B0000;
         flex-wrap: wrap;
       }
 
@@ -327,7 +327,7 @@
       .reviews-dist-bar-wrap {
         flex: 1;
         height: 8px;
-        background: #e9ecef;
+        background: #8B0000;
         border-radius: 4px;
         overflow: hidden;
       }
@@ -351,7 +351,7 @@
       .reviews-form-section {
         margin-bottom: 28px;
         padding-bottom: 24px;
-        border-bottom: 1px solid #e9ecef;
+        border-bottom: 1px solid #8B0000;
       }
 
       .reviews-form-title {
@@ -365,7 +365,7 @@
       }
 
       .reviews-form-title i {
-        color: #1a73e8;
+        color: #8B0000;
         font-size: 0.95rem;
       }
 
@@ -416,7 +416,7 @@
       .review-textarea {
         width: 100%;
         padding: 12px 14px;
-        border: 2px solid #e9ecef;
+        border: 2px solid #8B0000;
         border-radius: 8px;
         font-size: 0.9rem;
         font-family: inherit;
@@ -429,7 +429,7 @@
       }
 
       .review-textarea:focus {
-        border-color: #1a73e8;
+        border-color: #8B0000;
         box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
       }
 
@@ -449,7 +449,7 @@
         align-items: center;
         gap: 8px;
         padding: 10px 24px;
-        background: linear-gradient(135deg, #1a73e8, #4a90e8);
+        background: linear-gradient(135deg, #8B0000, #8B0000);
         border: none;
         border-radius: 8px;
         font-size: 0.9rem;
@@ -493,14 +493,14 @@
         align-items: center;
         gap: 12px;
         padding: 16px;
-        background: #f8f9fa;
+        background: #8B0000;
         border-radius: 8px;
-        border: 1px dashed #dee2e6;
+        border: 1px dashed #8B0000;
       }
 
       .review-login-prompt i {
         font-size: 1.3rem;
-        color: #1a73e8;
+        color: #8B0000;
       }
 
       .review-login-prompt p {
@@ -510,7 +510,7 @@
       }
 
       .review-login-prompt a {
-        color: #1a73e8;
+        color: #8B0000;
         font-weight: 600;
         text-decoration: underline;
       }
@@ -531,7 +531,7 @@
       }
 
       .reviews-list-title i {
-        color: #1a73e8;
+        color: #8B0000;
         font-size: 0.95rem;
       }
 
@@ -552,19 +552,19 @@
         background: transparent;
       }
       .reviews-list::-webkit-scrollbar-thumb {
-        background: #dee2e6;
+        background: #8B0000;
         border-radius: 3px;
       }
       .reviews-list::-webkit-scrollbar-thumb:hover {
-        background: #adb5bd;
+        background: #8B0000;
       }
 
       /* Review Card */
       .review-card {
         padding: 16px;
-        background: #fafbfc;
+        background: #8B0000;
         border-radius: 10px;
-        border: 1px solid #eef0f2;
+        border: 1px solid #8B0000;
         transition: box-shadow 0.2s ease;
       }
 
@@ -910,3 +910,4 @@
     init();
   }
 })();
+

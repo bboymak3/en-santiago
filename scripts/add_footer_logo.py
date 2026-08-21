@@ -2,7 +2,7 @@
 """Add logo image to footer in all HTML files, replacing the fa-store icon in footer-logo."""
 import os, re, glob
 
-LOGO_HTML = '<img src="images/logoprincipal.jpeg" alt="HOLAX" style="height:28px;width:auto;border-radius:6px;margin-right:6px;">'
+LOGO_HTML = '<img src="images/logoprincipal.jpeg" alt="En-Santiago" style="height:28px;width:auto;border-radius:6px;margin-right:6px;">'
 
 # Pattern: footer-logo with fa-store
 pattern = re.compile(

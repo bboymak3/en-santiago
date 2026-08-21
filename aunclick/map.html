@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Mapa de negocios de HOLAX - Encuentra negocios en el mapa.">
-    <title>Mapa de Negocios - HOLAX</title>
+    <meta name="description" content="Mapa de negocios de En-Santiago - Encuentra negocios en el mapa.">
+    <title>Mapa de Negocios - En-Santiago</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Leaflet CSS -->
@@ -66,7 +66,7 @@
         .map-filters {
             padding: 12px;
             border-bottom: 1px solid #e0e0e0;
-            background: #f8f9fa;
+            background: #8B0000;
             position: relative;
         }
         .map-filters h3 { margin: 0 0 8px 0; font-size: 15px; color: #1a1a2e; }
@@ -80,11 +80,11 @@
         .map-result-count { padding: 8px 12px; font-size: 12px; color: #666; border-bottom: 1px solid #e0e0e0; background: #fff; }
         .map-business-list { padding: 6px; }
         .map-business-card { display: flex; gap: 8px; padding: 8px; border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; margin-bottom: 4px; }
-        .map-business-card:hover { background: #f0f4ff; }
-        .map-business-card.active { background: #e8f0fe; border-color: #1a73e8; }
+        .map-business-card:hover { background: #8B0000; }
+        .map-business-card.active { background: #8B0000; border-color: #8B0000; }
         .map-business-card img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
         .map-business-card .card-info { flex: 1; min-width: 0; }
-        .map-business-card .card-price { font-weight: 700; color: #1a73e8; font-size: 14px; }
+        .map-business-card .card-price { font-weight: 700; color: #8B0000; font-size: 14px; }
         .map-business-card .card-title { font-size: 12px; font-weight: 600; color: #1a1a2e; margin: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .map-business-card .card-location { font-size: 11px; color: #888; }
         .map-business-card .card-badges { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
@@ -135,7 +135,7 @@
         .map-ctrl-center a:hover,
         .map-ctrl-back a:hover {
             background: #f0f0f0 !important;
-            color: #1a73e8 !important;
+            color: #8B0000 !important;
         }
 
         /* --- HIDE LEAFLET DEBUG / ATTRIBUTION --- */
@@ -285,7 +285,7 @@
                 justify-content: center;
                 font-size: 16px;
                 box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-                background: #1a73e8;
+                background: #8B0000;
                 color: #fff;
                 border: none;
             }
@@ -360,7 +360,7 @@
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <i class="fas fa-store"></i>
-                <span class="brand-name"><i class="fas fa-map-marker-alt brand-location-icon" style="font-size:0.7em;opacity:0.6;"></i> <span id="brandCity"></span> HOLAX</span>
+                <span class="brand-name"><i class="fas fa-map-marker-alt brand-location-icon" style="font-size:0.7em;opacity:0.6;"></i> <span id="brandCity"></span> En-Santiago</span>
             </a>
             <div class="location-selector" id="locationSelector">
                 <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
@@ -432,7 +432,7 @@
                     <!-- Toggle Negocios / Propiedades -->
                     <div class="map-type-toggle" style="display:flex;gap:6px;margin-bottom:10px;">
                         <button class="btn btn-primary btn-sm" id="mapToggleNegocios" style="flex:1;"><i class="fas fa-store"></i> Negocios</button>
-                        <button class="btn btn-primary btn-sm" id="mapToggleTodos" style="flex:1;background:linear-gradient(135deg,#1a73e8,#059669);"><i class="fas fa-layer-group"></i> Todos</button>
+                        <button class="btn btn-primary btn-sm" id="mapToggleTodos" style="flex:1;background:linear-gradient(135deg,#8B0000,#059669);"><i class="fas fa-layer-group"></i> Todos</button>
                         <button class="btn btn-secondary btn-sm" id="mapTogglePropiedades" style="flex:1;"><i class="fas fa-home"></i> Propiedades</button>
                     </div>
                     <div class="form-group">
@@ -515,3 +515,4 @@
     <script src="js/chat.js"></script>
 </body>
 </html>
+

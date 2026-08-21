@@ -1,5 +1,5 @@
-# HolaX - Directorio Nacional de Negocios de Venezuela
-# https://holax.com.ve
+# En-Santiago - Directorio Nacional de Negocios de Venezuela
+# https://en-santiago.com
 
 User-agent: *
 Allow: /
@@ -18,4 +18,4 @@ Disallow: /*?page=
 Disallow: /*?sort=
 
 # Sitemap dinámico
-Sitemap: https://holax.com.ve/sitemap.xml
+Sitemap: https://en-santiago.com/sitemap.xml

@@ -152,7 +152,7 @@ export async function onRequestPost(context) {
       name.trim(),
       slug,
       icon || 'fas fa-store',
-      color || '#607d8b',
+      color || '#8B0000',
       sort_order !== undefined ? parseInt(sort_order) : 99,
       tipo_negocio_id ? parseInt(tipo_negocio_id) : null
     ).run();

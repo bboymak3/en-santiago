@@ -48,7 +48,7 @@
     const topbarRight = document.querySelector('.admin-topbar-right');
     if (topbarRight && !document.getElementById('adminNotifBell')) {
       topbarRight.insertAdjacentHTML('afterbegin', `
-        <button class="admin-notif-bell" id="adminNotifBell" title="Notificaciones" style="position:relative;background:none;border:none;font-size:1.2rem;cursor:pointer;color:#64748b;margin-right:12px;">
+        <button class="admin-notif-bell" id="adminNotifBell" title="Notificaciones" style="position:relative;background:none;border:none;font-size:1.2rem;cursor:pointer;color:#8B0000;margin-right:12px;">
           <i class="fas fa-bell"></i>
           <span id="adminNotifCount" style="position:absolute;top:-6px;right:-8px;background:#e91e63;color:#fff;font-size:0.65rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:700;">0</span>
         </button>
@@ -150,7 +150,7 @@
       <div class="modal-overlay"></div>
       <div class="modal-content" style="max-width:500px;">
         <div class="modal-header">
-          <h3><i class="fas fa-user-plus" style="color:#1a73e8;"></i> Crear Nuevo Vendedor</h3>
+          <h3><i class="fas fa-user-plus" style="color:#8B0000;"></i> Crear Nuevo Vendedor</h3>
           <button class="modal-close" id="createSellerModalClose">&times;</button>
         </div>
         <div class="modal-body">
@@ -288,19 +288,19 @@
       const s = data.seller;
       body.innerHTML = `
         <div style="text-align:center;margin-bottom:16px;">
-          ${s.avatar ? `<img src="${s.avatar}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">` : '<i class="fas fa-user-tie" style="font-size:3rem;color:#64748b;"></i>'}
+          ${s.avatar ? `<img src="${s.avatar}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">` : '<i class="fas fa-user-tie" style="font-size:3rem;color:#8B0000;"></i>'}
           <h3 style="margin:8px 0 4px;">${esc(s.name)}</h3>
-          <p style="color:#64748b;">${esc(s.email)} | ${esc(s.phone || 'Sin teléfono')}</p>
+          <p style="color:#8B0000;">${esc(s.email)} | ${esc(s.phone || 'Sin teléfono')}</p>
           <p>Plan: <strong>${s.plan || 'Gratis'}</strong> | Estado: <strong>${s.is_active ? 'Activo' : 'Inactivo'}</strong></p>
         </div>
         <h4 style="margin:16px 0 8px;"><i class="fas fa-users"></i> Usuarios Gestionados (${data.managed_users?.length || 0})</h4>
-        ${data.managed_users?.length ? `<div style="max-height:150px;overflow-y:auto;">${data.managed_users.map(u => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>${esc(u.name)}</span><span style="color:#64748b;">${u.role} - ${u.account_type || 'free'}</span></div>`).join('')}</div>` : '<p style="color:#999;">Sin usuarios gestionados</p>'}
+        ${data.managed_users?.length ? `<div style="max-height:150px;overflow-y:auto;">${data.managed_users.map(u => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>${esc(u.name)}</span><span style="color:#8B0000;">${u.role} - ${u.account_type || 'free'}</span></div>`).join('')}</div>` : '<p style="color:#999;">Sin usuarios gestionados</p>'}
         <h4 style="margin:16px 0 8px;"><i class="fas fa-building"></i> Negocios (${data.businesses?.length || 0})</h4>
         ${data.businesses?.length ? `<div style="max-height:150px;overflow-y:auto;">${data.businesses.map(b => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0f0f0;"><span>${esc(b.title)}</span><span class="badge" style="background:${b.status==='approved'?'#e8f5e9':'#fff3e0'}">${b.status}</span></div>`).join('')}</div>` : '<p style="color:#999;">Sin negocios</p>'}
       `;
       footer.innerHTML = `<button class="btn btn-secondary" onclick="document.getElementById('adminPaymentDetailModal').classList.add('hidden')">Cerrar</button>`;
       document.getElementById('adminPaymentDetailModal').classList.remove('hidden');
-      document.getElementById('adminPaymentDetailModal').querySelector('.modal-header h3').innerHTML = '<i class="fas fa-user-tie" style="color:#1a73e8;"></i> Detalle del Vendedor';
+      document.getElementById('adminPaymentDetailModal').querySelector('.modal-header h3').innerHTML = '<i class="fas fa-user-tie" style="color:#8B0000;"></i> Detalle del Vendedor';
     } catch (e) { showToast('Error al cargar detalle', 'error'); }
   }
 
@@ -366,7 +366,7 @@
       tbody.innerHTML = data.payments.map(p => `
         <tr>
           <td>#${p.id}</td>
-          <td><strong>${esc(p.user_name || 'N/A')}</strong><br><small style="color:#64748b;">${esc(p.user_email || '')}</small></td>
+          <td><strong>${esc(p.user_name || 'N/A')}</strong><br><small style="color:#8B0000;">${esc(p.user_email || '')}</small></td>
           <td>${typeLabels[p.payment_type] || p.payment_type}</td>
           <td><strong>$${p.amount}</strong></td>
           <td>${p.proof_url ? `<a href="${p.proof_url}" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-image"></i> Ver</a>` : '-'}</td>

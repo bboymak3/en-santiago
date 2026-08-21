@@ -653,8 +653,8 @@
             if (products.length === 0) {
                 container.innerHTML = `
                     <div class="dash-card">
-                        <div style="text-align:center;padding:32px 0;color:#94a3b8;">
-                            <i class="fas fa-box-open" style="font-size:2.5rem;color:#cbd5e1;"></i>
+                        <div style="text-align:center;padding:32px 0;color:#8B0000;">
+                            <i class="fas fa-box-open" style="font-size:2.5rem;color:#8B0000;"></i>
                             <p style="margin-top:12px;">No tienes productos publicados.</p>
                             <button class="btn btn-primary btn-sm" onclick="openProductModal()" style="display:inline-block;margin-top:12px;"><i class="fas fa-plus"></i> Publicar Producto</button>
                         </div>
@@ -712,7 +712,7 @@
                         </div>
                         ${slug ? `<a href="/negocio/${slug}" style="color:#059669;text-decoration:none;font-weight:700;">${title}</a>` : `<span style="color:#059669;font-weight:700;">${title}</span>`}
                     </h3>
-                    <span style="font-size:0.75rem;color:#94a3b8;background:#f1f5f9;padding:4px 10px;border-radius:12px;">${products.length} producto${products.length > 1 ? 's' : ''}</span>
+                    <span style="font-size:0.75rem;color:#8B0000;background:#8B0000;padding:4px 10px;border-radius:12px;">${products.length} producto${products.length > 1 ? 's' : ''}</span>
                 </div>
                 <div class="dash-table-responsive">
                     <table class="dash-table">
@@ -1012,7 +1012,7 @@
                         <div style="font-size:0.85rem;color:#666;margin-top:3px;">${escapeHtml_service(s.description || 'Sin descripción')}</div>
                     </div>
                     <div style="display:flex;gap:6px;">
-                        <button class="btn-icon" onclick="editService(${s.id}, '${escapeAttr(s.title)}', '${escapeAttr(s.description || '')}')" title="Editar"><i class="fas fa-edit" style="color:#3b82f6;"></i></button>
+                        <button class="btn-icon" onclick="editService(${s.id}, '${escapeAttr(s.title)}', '${escapeAttr(s.description || '')}')" title="Editar"><i class="fas fa-edit" style="color:#8B0000;"></i></button>
                         <button class="btn-icon" onclick="deleteService(${s.id})" title="Eliminar"><i class="fas fa-trash" style="color:#e74c3c;"></i></button>
                     </div>
                 </div>
@@ -1245,7 +1245,7 @@
 
                 const planBadge = user.plan_type === 'premium'
                     ? '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:700;background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border:1px solid #fbbf24;"><i class="fas fa-crown"></i> Premium</span>'
-                    : '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;background:#f1f5f9;color:#64748b;border:1px solid #e2e8f0;"><i class="fas fa-user"></i> Regular</span>';
+                    : '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;background:#8B0000;color:#8B0000;border:1px solid #8B0000;"><i class="fas fa-user"></i> Regular</span>';
 
                 const activateBtn = (!isSelf && user.plan_type !== 'premium')
                     ? `<button class="btn-approve-premium" style="margin-top:4px;" onclick="window._openManualPremium(${user.id}, '${(user.name||'').replace(/'/g, "'")}', '${user.email||''}')"><i class="fas fa-crown"></i> Premium</button>`
@@ -1514,7 +1514,7 @@
 
             if (businesses.length === 0) {
                 const body = document.getElementById('statsPerBusinessBody');
-                if (body) body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#94a3b8;padding:24px;">No tienes negocios registrados.</td></tr>';
+                if (body) body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#8B0000;padding:24px;">No tienes negocios registrados.</td></tr>';
                 return;
             }
 
@@ -1535,15 +1535,15 @@
                             <td><a href="/negocio/${biz.slug || biz.id}" style="color:#059669;font-weight:600;text-decoration:none;">${biz.title || 'Sin título'}</a></td>
                             <td><span style="font-weight:700;color:#1e293b;">${(stats.total_views || 0).toLocaleString()}</span></td>
                             <td><span style="font-weight:700;color:#25d366;">${(stats.total_whatsapp_clicks || 0).toLocaleString()}</span></td>
-                            <td><span style="font-weight:700;color:#0ea5e9;">${(stats.total_website_clicks || 0).toLocaleString()}</span></td>
-                            <td><span style="font-weight:700;color:#8b5cf6;">${(stats.total_shares || 0).toLocaleString()}</span></td>
+                            <td><span style="font-weight:700;color:#8B0000;">${(stats.total_website_clicks || 0).toLocaleString()}</span></td>
+                            <td><span style="font-weight:700;color:#8B0000;">${(stats.total_shares || 0).toLocaleString()}</span></td>
                         </tr>
                     `);
                 } catch(e) {
                     rows.push(`
                         <tr>
                             <td>${biz.title || 'Sin título'}</td>
-                            <td colspan="4" style="color:#94a3b8;">Sin datos</td>
+                            <td colspan="4" style="color:#8B0000;">Sin datos</td>
                         </tr>
                     `);
                 }
@@ -1561,7 +1561,7 @@
 
             // Update table
             const body = document.getElementById('statsPerBusinessBody');
-            if (body) body.innerHTML = rows.length > 0 ? rows.join('') : '<tr><td colspan="5" style="text-align:center;color:#94a3b8;padding:24px;">Sin datos para este período.</td></tr>';
+            if (body) body.innerHTML = rows.length > 0 ? rows.join('') : '<tr><td colspan="5" style="text-align:center;color:#8B0000;padding:24px;">Sin datos para este período.</td></tr>';
 
         } catch (error) {
             console.error('Stats error:', error);
@@ -1577,7 +1577,7 @@
                 b.style.background = '#fff';
                 b.classList.remove('active');
             });
-            e.target.style.background = '#f1f5f9';
+            e.target.style.background = '#8B0000';
             e.target.classList.add('active');
             loadBusinessStats();
         }
@@ -1818,7 +1818,7 @@
 
     function getPropertyStatusColor(status) {
         const colors = { approved: '#059669', pending: '#d97706', rejected: '#dc2626' };
-        return colors[status] || '#64748b';
+        return colors[status] || '#8B0000';
     }
 
     async function loadMyInmuebles(statusFilter) {
@@ -1865,7 +1865,7 @@
                             <img src="${imgSrc}" alt="${escapeAttr(p.title)}" loading="lazy" onerror="this.src='${placeholderImg}'">
                             <div class="business-card-badges">
                                 <span class="card-badge badge-type">${typeLabel}</span>
-                                <span class="card-badge" style="background:#6366f1;color:#fff;">${opLabel}</span>
+                                <span class="card-badge" style="background:#8B0000;color:#fff;">${opLabel}</span>
                                 <span class="card-badge" style="background:${statusColor};color:#fff;">${getStatusLabel(p.status)}</span>
                             </div>
                         </div>
@@ -1873,7 +1873,7 @@
                             <h3 class="business-card-title">${truncateText(p.title, 40)}</h3>
                             <p class="business-card-location"><i class="fas fa-map-marker-alt"></i> ${city}</p>
                             <p style="font-size:0.9rem;font-weight:700;color:#059669;margin:4px 0;">${price}</p>
-                            <p style="font-size:0.72rem;color:#94a3b8;margin-bottom:8px;"><i class="fas fa-eye"></i> ${p.views || 0} vistas</p>
+                            <p style="font-size:0.72rem;color:#8B0000;margin-bottom:8px;"><i class="fas fa-eye"></i> ${p.views || 0} vistas</p>
                             <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;">
                                 <a href="property-detail.html?id=${p.id}" class="btn btn-sm btn-secondary" title="Ver"><i class="fas fa-eye"></i> Ver</a>
                                 <a href="new-property.html?id=${p.id}" class="btn btn-sm btn-secondary" title="Editar"><i class="fas fa-edit"></i> Editar</a>
@@ -1966,7 +1966,7 @@
                     <button class="btn" id="btnUpgradePremium" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#333;font-weight:700;font-size:0.85rem;padding:8px 18px;border-radius:8px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
                         <i class="fas fa-crown"></i> Solicitar Premium
                     </button>
-                    <a href="planes.html" class="btn" style="background:#f1f5f9;color:#475569;font-weight:600;font-size:0.85rem;padding:8px 18px;border-radius:8px;border:1px solid #e2e8f0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+                    <a href="planes.html" class="btn" style="background:#8B0000;color:#8B0000;font-weight:600;font-size:0.85rem;padding:8px 18px;border-radius:8px;border:1px solid #8B0000;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
                         <i class="fas fa-star"></i> Ver Ventajas Premium
                     </a>`;
                 // Re-bind the premium button
@@ -2003,7 +2003,7 @@
             } else if (!isPremium) {
                 planExpiryInfo.querySelector('span').textContent = 'Con el plan Basico, tus publicaciones caducan a los 20 dias. Mejora a Premium para que nunca caduquen.';
                 planExpiryInfo.style.display = 'block';
-                planExpiryInfo.style.color = '#64748b';
+                planExpiryInfo.style.color = '#8B0000';
             }
         }
     }
@@ -2065,11 +2065,11 @@
                 premiumVoucherDrop.style.borderColor = '#059669';
             });
             premiumVoucherDrop.addEventListener('dragleave', () => {
-                premiumVoucherDrop.style.borderColor = '#d1d5db';
+                premiumVoucherDrop.style.borderColor = '#8B0000';
             });
             premiumVoucherDrop.addEventListener('drop', (e) => {
                 e.preventDefault();
-                premiumVoucherDrop.style.borderColor = '#d1d5db';
+                premiumVoucherDrop.style.borderColor = '#8B0000';
                 const file = e.dataTransfer.files[0];
                 if (file) handleVoucherFile(file);
             });
@@ -2221,10 +2221,10 @@
                 return `
                     <tr>
                         <td><strong>${escapeHtml(r.user_name || 'Usuario')}</strong></td>
-                        <td style="font-size:0.82rem;color:#64748b;">${escapeHtml(r.user_email || '')}</td>
+                        <td style="font-size:0.82rem;color:#8B0000;">${escapeHtml(r.user_email || '')}</td>
                         <td><span class="badge" style="background:#fef3c7;color:#92400e;">${durationLabel}</span></td>
                         <td>
-                            ${r.voucher_url ? `<img src="${r.voucher_url}" class="voucher-thumb" onclick="window._openVoucherLightbox('${r.voucher_url}')" alt="Voucher" onerror="this.style.display='none'">` : '<span style="color:#94a3b8;">Sin voucher</span>'}
+                            ${r.voucher_url ? `<img src="${r.voucher_url}" class="voucher-thumb" onclick="window._openVoucherLightbox('${r.voucher_url}')" alt="Voucher" onerror="this.style.display='none'">` : '<span style="color:#8B0000;">Sin voucher</span>'}
                         </td>
                         <td style="font-size:0.82rem;">${dateStr}</td>
                         <td style="display:flex;gap:6px;flex-wrap:wrap;">
@@ -2295,7 +2295,7 @@
             searchInput.value = userEmail || userName || '';
             manualPremiumSelectedUser = { id: userId, name: userName, email: userEmail };
             resultDiv.style.display = 'block';
-            resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#059669;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(userName||'U')[0].toUpperCase()}</div><div><strong>${userName}</strong><br><span style="font-size:0.82rem;color:#64748b;">${userEmail}</span></div></div>`;
+            resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#059669;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(userName||'U')[0].toUpperCase()}</div><div><strong>${userName}</strong><br><span style="font-size:0.82rem;color:#8B0000;">${userEmail}</span></div></div>`;
             actionsDiv.style.display = 'block';
             activateBtn.disabled = false;
         } else {
@@ -2351,7 +2351,7 @@
                 manualPremiumSelectedUser = { id: u.id, name: u.name, email: u.email };
                 resultDiv.style.display = 'block';
                 const planInfo = u.plan_type === 'premium' ? ' <span style="color:#f59e0b;font-weight:700;">(YA ES PREMIUM)</span>' : '';
-                resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#059669;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(u.name||'U')[0].toUpperCase()}</div><div><strong>${u.name}</strong>${planInfo}<br><span style="font-size:0.82rem;color:#64748b;">${u.email}</span></div></div>`;
+                resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#059669;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(u.name||'U')[0].toUpperCase()}</div><div><strong>${u.name}</strong>${planInfo}<br><span style="font-size:0.82rem;color:#8B0000;">${u.email}</span></div></div>`;
                 actionsDiv.style.display = u.plan_type !== 'premium' ? 'block' : 'none';
                 activateBtn.disabled = u.plan_type === 'premium';
             } catch (e) {
@@ -2394,3 +2394,4 @@
 
 
 })();
+

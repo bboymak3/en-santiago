@@ -1,8 +1,8 @@
-# HolaX - Directorio Nacional de Negocios de Venezuela
+# En-Santiago - Directorio Nacional de Negocios de Venezuela
 
 > Plataforma web progresiva (PWA) para descubrir, registrar y gestionar negocios en Venezuela. Incluye directorio con mapa interactivo, marketplace de productos, bolsa de empleo, gestion de inmuebles, reservas, cupones, chat en tiempo real, IA chatbot, seccion dedicada de servicios medicos y mas.
 
-**URL en produccion:** [https://holax.com.ve](https://holax.com.ve)
+**URL en produccion:** [https://en-santiago.com](https://en-santiago.com)
 
 ---
 
@@ -12,7 +12,7 @@
 - **URLs SEO Canonicas** — Cada negocio tiene URL amigable: `/:tipo/:categoria/:slug` (ej: `/salud-bienestar/medicina-servicio-medico/dr-mario-leon`). Rutas antiguas redirigen con 301.
 - **Seccion de Servicios Medicos** — Categoria dedicada "Medicina / Servicio Medico" con seccion propia en la homepage y selector de destacados independiente en el panel admin.
 - **Tipos de Negocio** — Clasificacion en 10 tipos (Salud, Comida, Belleza, Automotriz, Hogar, Profesionales, Tiendas, Educacion, Turismo, Servicios Varios) con paginas de categoria dedicadas y filtro en el formulario de registro.
-- **Paginas Web Automaticas** — Cada negocio aprobado genera automaticamente una landing page profesional en `/web/:slug` con banner, logo, productos, FAQ, galeria, mapa y contacto. Marca HolaX.
+- **Paginas Web Automaticas** — Cada negocio aprobado genera automaticamente una landing page profesional en `/web/:slug` con banner, logo, productos, FAQ, galeria, mapa y contacto. Marca En-Santiago.
 - **Paginas de Estado** — Directorio por estado: `/estado/merida` muestra todos los negocios de ese estado.
 - **Mapa Interactivo** — Visualizacion geolocalizada de negocios con Leaflet/OpenStreetMap.
 - **Marketplace** — Publicacion y busqueda de productos con multiples fotos, videos (URL y archivo adjunto), filtros por categoria/precio. Contacto directo por WhatsApp. Banner configurable desde el panel admin con recorte optimizado.
@@ -49,7 +49,7 @@
 | Autenticacion | JWT (HMAC-SHA256) | Configurado via variable de entorno |
 | Cache | Service Worker | cache-first + stale-while-revalidate |
 | Despliegue | Cloudflare Pages | CI/CD automatico desde GitHub (`git push origin main`) |
-| Dominio | `holax.com.ve` | Custom domain en Cloudflare Pages |
+| Dominio | `en-santiago.com` | Custom domain en Cloudflare Pages |
 | Fonts | Google Fonts (Inter) | Cargado desde CDN |
 | Iconos | Font Awesome 6.5.1 | Cargado desde cdnjs |
 | PWA | manifest.json + sw.js | Instalable, cache offline |
@@ -62,7 +62,7 @@ git push origin main
     → Cloudflare Pages detecta el cambio
       → Build automatico (no requiere build step)
         → Deploy a produccion
-          → URL: https://holax.com.ve
+          → URL: https://en-santiago.com
 ```
 
 No hay paso de build. Los archivos HTML/CSS/JS se sirven directamente. Las `functions/` se ejecutan como Workers serverless en el edge.
@@ -125,7 +125,7 @@ meridaunclick/
 │   └── map.js                  # Pagina de mapa completo
 │
 ├── images/
-│   ├── Holax.png               # Logo principal HolaX (Open Graph)
+│   ├── En-Santiago.png               # Logo principal En-Santiago (Open Graph)
 │   ├── favicon.jpeg            # Logo/Favicon principal
 │   ├── logoprincipal.jpeg      # Logo principal
 │   ├── PWA.jpeg                # Icono PWA (512x512)
@@ -139,7 +139,7 @@ meridaunclick/
 │   ├── medicina-servicio-medico/[slug].js  # Ficha medica (legacy, 301 → URL canonica)
 │   ├── producto/[tipo]/[slug].js     # Ficha de producto SSR (URL canonica: /producto/:tipo/:slug)
 │   ├── producto/[slug].js            # Ficha de producto (legacy, 301 → URL canonica)
-│   ├── web/[slug].js                 # Landing page automatica por negocio (SSR, marca HolaX)
+│   ├── web/[slug].js                 # Landing page automatica por negocio (SSR, marca En-Santiago)
 │   │
 │   ├── _lib/
 │   │   ├── render-business.js        # Motor de renderizado de fichas de negocio (HTML, JSON-LD, galeria, mapa, negocios similares)
@@ -262,7 +262,7 @@ meridaunclick/
 
 | Key | Default | Descripcion |
 |---|---|---|
-| `site_name` | `HolaX` | Nombre del sitio |
+| `site_name` | `En-Santiago` | Nombre del sitio |
 | `site_description` | `Directorio de negocios y servicios en Venezuela` | Descripcion del sitio |
 | `contact_email` | `""` | Email de contacto |
 | `whatsapp_number` | `""` | Numero de WhatsApp |
@@ -333,8 +333,8 @@ meridaunclick/
 
 - `/negocio/:slug` → 301 a `/:tipo/:categoria/:slug`
 - `/medicina-servicio-medico/:slug` → 301 a `/:tipo/:categoria/:slug`
-- `aunclick.pages.dev/*` → 301 a `holax.com.ve/*`
-- `www.holax.com.ve/*` → 301 a `holax.com.ve/*`
+- `aunclick.pages.dev/*` → 301 a `en-santiago.com/*`
+- `www.en-santiago.com/*` → 301 a `en-santiago.com/*`
 
 ---
 
@@ -472,9 +472,9 @@ Todas las paginas SSR se generan en el servidor (Cloudflare Pages Functions) con
 - **Pagina de categoria** (`/categoria/:slug`) — Lista de negocios del tipo, banner, contador, grid de fichas.
 - **Pagina de estado** (`/estado/:slug`) — Lista de negocios del estado, grid de fichas.
 - **Ficha de producto** (`/producto/:tipo/:slug`) — Imagenes, videos, descripcion, negocio vinculado.
-- **Landing page** (`/web/:slug`) — Pagina web automatica del negocio con marca HolaX, CTA WhatsApp, FAQ, galeria, mapa.
+- **Landing page** (`/web/:slug`) — Pagina web automatica del negocio con marca En-Santiago, CTA WhatsApp, FAQ, galeria, mapa.
 
-Todas incluyen: `<title>`, `<meta description>`, Open Graph (`og:image` con Holax.png), Twitter Cards, canonical URL (`holax.com.ve`), y datos estructurados (JSON-LD).
+Todas incluyen: `<title>`, `<meta description>`, Open Graph (`og:image` con En-Santiago.png), Twitter Cards, canonical URL (`en-santiago.com`), y datos estructurados (JSON-LD).
 
 ---
 
@@ -516,10 +516,10 @@ El endpoint `/api/upload` acepta archivos via `FormData`:
 
 ## Sitemap y SEO
 
-- **Sitemap dinamico:** `/sitemap.xml` → `/api/sitemap` — incluye paginas estaticas, negocios aprobados, productos aprobados, categorias, estados. Dominio: `holax.com.ve`.
+- **Sitemap dinamico:** `/sitemap.xml` → `/api/sitemap` — incluye paginas estaticas, negocios aprobados, productos aprobados, categorias, estados. Dominio: `en-santiago.com`.
 - **Robots.txt dinamico:** `/robots.txt` → `/api/robots`
 - **Google Search Console:** Meta tag de verificacion en `index.html`.
-- **Open Graph:** Todas las paginas incluyen `og:title`, `og:description`, `og:image` (Holax.png), `og:url`, `og:type`.
+- **Open Graph:** Todas las paginas incluyen `og:title`, `og:description`, `og:image` (En-Santiago.png), `og:url`, `og:type`.
 - **Twitter Cards:** Todas las paginas incluyen `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`.
 - **JSON-LD:** Fichas de negocio incluyen `LocalBusiness` o `MedicalBusiness` schema.
 - **Canonical:** Todas las paginas tienen `<link rel="canonical">`.
@@ -585,7 +585,7 @@ Las migraciones se ejecutan via GET al endpoint correspondiente (requieren auten
 1. **D1 Database:** Binding name `DB` → base de datos creada en el dashboard de Cloudflare
 2. **R2 Bucket:** Binding name `R2` (y/o `MEDIA_BUCKET`) → bucket creado en el dashboard
 3. **Pages Project:** Conectado al repositorio de GitHub, rama `main`
-4. **Custom Domain:** `holax.com.ve` configurado en Pages > Custom domains
+4. **Custom Domain:** `en-santiago.com` configurado en Pages > Custom domains
 
 ### Flujo
 
@@ -594,7 +594,7 @@ git add -A
 git commit -m "descripcion del cambio"
 git push origin main
 # Cloudflare Pages detecta el push y despliega automaticamente
-# Verificar: https://holax.com.ve
+# Verificar: https://en-santiago.com
 ```
 
 ---
@@ -635,7 +635,7 @@ git push origin main
 
 - **`api.patch()` faltante en `js/app.js`** — El objeto `api` solo tenia `get`, `post`, `put`, `delete` y `postFormData`. El metodo `patch` no existia, lo que causaba que las notificaciones nunca se marcaran como leidas al hacer clic. Se agrego el metodo `patch(url, data)` que usa `method: 'PATCH'` con body JSON.
 - **Variable duplicada `window._adminNotifList` en seccion Bazar de `admin.js`** — Un script de reemplazo automatico inserto una segunda asignacion de `window._adminNotifList = notifs` en la seccion equivocada del archivo admin.js, donde la variable `notifs` no estaba definida. Esto causaba un `ReferenceError` que colapsaba toda la funcion IIFE (5,919 lineas en un solo scope), impidiendo que se renderizaran las estadisticas del panel. Se elimino la linea duplicada.
-- **Error de sintaxis: comilla de cierre faltante** — Un script Python de reemplazo de strings elimino accidentalmente una comilla simple en `'#64748b;` (falta la `'` de cierre). Esto causaba error de sintaxis y rompia la ejecucion de todo el archivo JavaScript. Corregido a `'#64748b';`.
+- **Error de sintaxis: comilla de cierre faltante** — Un script Python de reemplazo de strings elimino accidentalmente una comilla simple en `'#8B0000;` (falta la `'` de cierre). Esto causaba error de sintaxis y rompia la ejecucion de todo el archivo JavaScript. Corregido a `'#8B0000';`.
 
 **Mejoras de mantenibilidad:**
 

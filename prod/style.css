@@ -69,7 +69,7 @@ img{
     font-size: 0.9rem;
     display: inline-block;
     margin-bottom: 0.5rem;
-    background: #256eff;
+    background: #8B0000;
     color: #fff;
     padding: 0 0.3rem;
     transition: all 0.5s ease;
@@ -97,7 +97,7 @@ img{
     text-decoration: line-through;
 }
 .new-price span{
-    color: #256eff;
+    color: #8B0000;
 }
 .product-detail h2{
     text-transform: capitalize;
@@ -147,7 +147,7 @@ img{
     color: #fff;
 }
 .purchase-info .btn:first-of-type{
-    background: #256eff;
+    background: #8B0000;
 }
 .purchase-info .btn:last-of-type{
     background: #f64749;

@@ -185,7 +185,7 @@
             titleInput.addEventListener('input', () => {
                 const len = titleInput.value.length;
                 titleCount.textContent = len + '/150';
-                titleCount.style.color = len > 140 ? '#ef4444' : len > 100 ? '#f59e0b' : '#9ca3af';
+                titleCount.style.color = len > 140 ? '#ef4444' : len > 100 ? '#f59e0b' : '#8B0000';
             });
         }
 
@@ -193,7 +193,7 @@
             descInput.addEventListener('input', () => {
                 const len = descInput.value.length;
                 descCount.textContent = len + '/2000';
-                descCount.style.color = len > 1800 ? '#ef4444' : len > 1500 ? '#f59e0b' : '#9ca3af';
+                descCount.style.color = len > 1800 ? '#ef4444' : len > 1500 ? '#f59e0b' : '#8B0000';
             });
         }
     }
@@ -825,3 +825,4 @@
     }
 
 })();
+

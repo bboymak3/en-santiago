@@ -1,5 +1,5 @@
 /**
- * HolaX - Dynamic Category & Tipo de Negocio Loader
+ * En-Santiago - Dynamic Category & Tipo de Negocio Loader
  * Replaces hardcoded dropdowns with dynamic DB-loaded data.
  * Supports cascading: tipo → categoria with SEO slug preview.
  *
@@ -107,7 +107,7 @@
             var suggestOpt = document.createElement('option');
             suggestOpt.value = '__suggest__';
             suggestOpt.textContent = '+ Agregar nueva categoria';
-            suggestOpt.style.color = '#006EE3';
+            suggestOpt.style.color = '#8B0000';
             suggestOpt.style.fontWeight = '600';
             el.appendChild(suggestOpt);
         }
@@ -147,7 +147,7 @@
                 var suggestOpt = document.createElement('option');
                 suggestOpt.value = '__suggest__';
                 suggestOpt.textContent = '+ Agregar nueva categoria';
-                suggestOpt.style.color = '#006EE3';
+                suggestOpt.style.color = '#8B0000';
                 suggestOpt.style.fontWeight = '600';
                 el.appendChild(suggestOpt);
             }
@@ -250,7 +250,7 @@
             var suggestOpt = document.createElement('option');
             suggestOpt.value = '__suggest__';
             suggestOpt.textContent = '+ Agregar nueva categoría';
-            suggestOpt.style.color = '#006EE3';
+            suggestOpt.style.color = '#8B0000';
             suggestOpt.style.fontWeight = '600';
             catEl.appendChild(suggestOpt);
 
@@ -370,7 +370,7 @@
             var suggestOpt = document.createElement('option');
             suggestOpt.value = '__suggest__';
             suggestOpt.textContent = '+ Agregar nueva categoria';
-            suggestOpt.style.color = '#006EE3';
+            suggestOpt.style.color = '#8B0000';
             suggestOpt.style.fontWeight = '600';
             el.appendChild(suggestOpt);
         }

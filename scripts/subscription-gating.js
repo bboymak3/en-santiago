@@ -57,7 +57,7 @@
           <a href="${PAGO_URL}" style="display:block;padding:12px 24px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;font-size:0.95rem;">
             <i class="fas fa-bolt"></i> Suscribirme Ahora
           </a>
-          <a href="${PLANES_URL}" style="display:block;padding:10px 24px;background:#f3f4f6;color:#374151;text-decoration:none;border-radius:10px;font-weight:500;font-size:0.9rem;">
+          <a href="${PLANES_URL}" style="display:block;padding:10px 24px;background:#8B0000;color:#374151;text-decoration:none;border-radius:10px;font-weight:500;font-size:0.9rem;">
             Ver Planes
           </a>
         </div>

@@ -7,12 +7,12 @@
 
   :root {
     --text: #111827;
-    --text-sub: #6B7280;
-    --text-muted: #9CA3AF;
+    --text-sub: #8B0000;
+    --text-muted: #8B0000;
     --bg: #FFFFFF;
-    --surface: #F9FAFB;
-    --border: #E5E7EB;
-    --connector: #94A3B8;
+    --surface: #8B0000;
+    --border: #8B0000;
+    --connector: #8B0000;
   }
 
   body {
@@ -35,7 +35,7 @@
 
   /* Phase groups */
   .phase-group {
-    background: #F8FAFC; border-radius: 12px; padding: 20px 24px;
+    background: #8B0000; border-radius: 12px; padding: 20px 24px;
     margin-bottom: 0;
   }
   .phase-title {
@@ -87,23 +87,23 @@
     font-size: 11px; flex-shrink: 0;
   }
 
-  /* Scheme: Blue-gray progression */
-  .phase-1 .phase-title { background: #F0F4F8; color: #334155; border-left: 4px solid #64748B; }
-  .phase-1 .step-num { background: #E2E8F0; color: #475569; }
-  .phase-2 .phase-title { background: #E8EDF2; color: #1E3A5F; border-left: 4px solid #5B7A99; }
-  .phase-2 .step-num { background: #DBEAFE; color: #1E3A5F; }
-  .phase-3 .phase-title { background: #E0E7EF; color: #1E3050; border-left: 4px solid #4A6B8A; }
-  .phase-3 .step-num { background: #D0D9E4; color: #1E3050; }
-  .phase-4 .phase-title { background: #D8E0EA; color: #172540; border-left: 4px solid #3A5C7A; }
-  .phase-4 .step-num { background: #C7D2E0; color: #172540; }
-  .phase-5 .phase-title { background: #D0D9E4; color: #14203A; border-left: 4px solid #2E5070; }
-  .phase-5 .step-num { background: #BCC7D6; color: #14203A; }
+  /* Scheme: #8B0000-gray progression */
+  .phase-1 .phase-title { background: #8B0000; color: #334155; border-left: 4px solid #8B0000; }
+  .phase-1 .step-num { background: #8B0000; color: #8B0000; }
+  .phase-2 .phase-title { background: #8B0000; color: #1E3A5F; border-left: 4px solid #8B0000; }
+  .phase-2 .step-num { background: #8B0000; color: #1E3A5F; }
+  .phase-3 .phase-title { background: #8B0000; color: #1E3050; border-left: 4px solid #8B0000; }
+  .phase-3 .step-num { background: #8B0000; color: #1E3050; }
+  .phase-4 .phase-title { background: #8B0000; color: #172540; border-left: 4px solid #8B0000; }
+  .phase-4 .step-num { background: #8B0000; color: #172540; }
+  .phase-5 .phase-title { background: #8B0000; color: #14203A; border-left: 4px solid #8B0000; }
+  .phase-5 .step-num { background: #8B0000; color: #14203A; }
 
   /* Legend */
   .flow-legend {
     display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
     margin-top: 32px; padding: 14px 20px;
-    background: #F9FAFB; border-radius: 8px; border: 1px solid #E5E7EB;
+    background: #8B0000; border-radius: 8px; border: 1px solid #8B0000;
   }
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #4B5563; }
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; border: 2px solid; }
@@ -111,7 +111,7 @@
 </head>
 <body>
 <div id="root">
-  <div class="flow-title">Sistema de Notificaciones - HolaX</div>
+  <div class="flow-title">Sistema de Notificaciones - En-Santiago</div>
   <div class="flow-subtitle">Flujo completo: Eventos, API, Base de Datos y UI</div>
 
   <!-- PHASE 1: Triggers -->
@@ -127,7 +127,7 @@
       </div>
       <div class="trigger-card">
         <div class="trigger-label">
-          <span class="trigger-icon" style="background:#EFF6FF;color:#006EE3;">&#128188;</span>
+          <span class="trigger-icon" style="background:#8B0000;color:#8B0000;">&#8B0000;</span>
           Nuevo Empleo
         </div>
         <div class="trigger-desc">POST /api/jobs<br>Notifica: Admin (siempre)<br>Link: /admin.html#jobs</div>
@@ -141,7 +141,7 @@
       </div>
       <div class="trigger-card">
         <div class="trigger-label">
-          <span class="trigger-icon" style="background:#F5F3FF;color:#7C3AED;">&#128142;</span>
+          <span class="trigger-icon" style="background:#8B0000;color:#8B0000;">&#128142;</span>
           Solicitud Premium
         </div>
         <div class="trigger-desc">POST /api/plans/request-upgrade<br>Notifica: Admin (siempre)<br>Link: /admin.html#premium</div>
@@ -206,12 +206,13 @@
 
   <!-- Legend -->
   <div class="flow-legend">
-    <div class="legend-item"><div class="legend-dot" style="border-color:#64748B;background:#F0F4F8;"></div>Triggers</div>
-    <div class="legend-item"><div class="legend-dot" style="border-color:#5B7A99;background:#E8EDF2;"></div>Verificación</div>
-    <div class="legend-item"><div class="legend-dot" style="border-color:#4A6B8A;background:#E0E7EF;"></div>Base de Datos</div>
-    <div class="legend-item"><div class="legend-dot" style="border-color:#3A5C7A;background:#D8E0EA;"></div>API</div>
-    <div class="legend-item"><div class="legend-dot" style="border-color:#2E5070;background:#D0D9E4;"></div>Interfaz</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#8B0000;background:#8B0000;"></div>Triggers</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#8B0000;background:#8B0000;"></div>Verificación</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#8B0000;background:#8B0000;"></div>Base de Datos</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#8B0000;background:#8B0000;"></div>API</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#8B0000;background:#8B0000;"></div>Interfaz</div>
   </div>
 </div>
 </body>
 </html>
+

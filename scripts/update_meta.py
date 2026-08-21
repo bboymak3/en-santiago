@@ -2,7 +2,7 @@
 """Update meta tags and favicon in all HTML files."""
 import os, re, glob
 
-DOMAIN = "https://holax.com"
+DOMAIN = "https://en-santiago.com"
 
 # Common replacements
 replacements = [
@@ -11,7 +11,7 @@ replacements = [
     # Apple touch icon
     (r'<link\s+rel="apple-touch-icon"[^>]*>', '<link rel="apple-touch-icon" href="/images/PWA.jpeg">'),
     # Theme color
-    (r'<meta\s+name="theme-color"\s+content="[^"]*">', '<meta name="theme-color" content="#006EE3">'),
+    (r'<meta\s+name="theme-color"\s+content="[^"]*">', '<meta name="theme-color" content="#8B0000">'),
     # OG image - add after og:url or og:type
     # We'll handle this separately
 ]
@@ -43,7 +43,7 @@ for f in glob.glob('/home/z/my-project/*.html'):
     # Update theme-color
     content = re.sub(
         r'<meta\s+name="theme-color"\s+content="[^"]*">',
-        '<meta name="theme-color" content="#006EE3">',
+        '<meta name="theme-color" content="#8B0000">',
         content
     )
     

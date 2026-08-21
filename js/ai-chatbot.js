@@ -1,5 +1,5 @@
 /**
- * HolaX - AI Chatbot Widget Module
+ * En-Santiago - AI Chatbot Widget Module
  * Floating AI chatbot using z-ai-web-dev-sdk via a proxy API endpoint
  * Checks admin_settings for ai_chatbot_enabled before rendering
  */
@@ -49,7 +49,7 @@
               <i class="fas fa-robot"></i>
             </div>
             <div>
-              <h3>Asistente HolaX</h3>
+              <h3>Asistente En-Santiago</h3>
               <span class="ai-chat-status"><i class="fas fa-circle"></i> En línea</span>
             </div>
           </div>
@@ -380,7 +380,7 @@
         width: 58px;
         height: 58px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #1a73e8, #4a90e8);
+        background: linear-gradient(135deg, #8B0000, #8B0000);
         color: #fff;
         border: none;
         box-shadow: 0 4px 18px rgba(26, 115, 232, 0.45);
@@ -457,7 +457,7 @@
 
       /* Header */
       .ai-chat-header {
-        background: linear-gradient(135deg, #1a73e8, #1565c0);
+        background: linear-gradient(135deg, #8B0000, #8B0000);
         color: #fff;
         padding: 14px 18px;
         display: flex;
@@ -536,7 +536,7 @@
         flex: 1;
         overflow-y: auto;
         padding: 16px;
-        background: #f8f9fb;
+        background: #8B0000;
         display: flex;
         flex-direction: column;
         gap: 12px;
@@ -550,11 +550,11 @@
         background: transparent;
       }
       .ai-chat-body::-webkit-scrollbar-thumb {
-        background: #dee2e6;
+        background: #8B0000;
         border-radius: 3px;
       }
       .ai-chat-body::-webkit-scrollbar-thumb:hover {
-        background: #adb5bd;
+        background: #8B0000;
       }
 
       /* Message Bubbles */
@@ -598,13 +598,13 @@
       }
 
       .ai-msg-user .ai-msg-icon {
-        background: linear-gradient(135deg, #1a73e8, #4a90e8);
+        background: linear-gradient(135deg, #8B0000, #8B0000);
         color: #fff;
       }
 
       .ai-msg-bot .ai-msg-icon {
-        background: linear-gradient(135deg, #e8f0fe, #d2e3fc);
-        color: #1a73e8;
+        background: linear-gradient(135deg, #8B0000, #8B0000);
+        color: #8B0000;
       }
 
       .ai-msg-content {
@@ -616,7 +616,7 @@
       }
 
       .ai-msg-user .ai-msg-content {
-        background: linear-gradient(135deg, #1a73e8, #4a90e8);
+        background: linear-gradient(135deg, #8B0000, #8B0000);
         color: #fff;
         border-bottom-right-radius: 4px;
       }
@@ -643,7 +643,7 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #adb5bd;
+        background: #8B0000;
         animation: ai-typing-bounce 1.4s ease-in-out infinite;
       }
 
@@ -663,7 +663,7 @@
       /* Input Area */
       .ai-chat-input-area {
         padding: 12px 16px;
-        border-top: 1px solid #e9ecef;
+        border-top: 1px solid #8B0000;
         background: #fff;
         flex-shrink: 0;
       }
@@ -672,7 +672,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        background: #f1f3f5;
+        background: #8B0000;
         border-radius: 24px;
         padding: 4px 4px 4px 16px;
         transition: all 0.2s ease;
@@ -681,7 +681,7 @@
 
       .ai-chat-input-wrap:focus-within {
         background: #fff;
-        border-color: #1a73e8;
+        border-color: #8B0000;
         box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
       }
 
@@ -704,7 +704,7 @@
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #1a73e8, #4a90e8);
+        background: linear-gradient(135deg, #8B0000, #8B0000);
         color: #fff;
         border: none;
         display: flex;
@@ -717,7 +717,7 @@
       }
 
       .ai-chat-send-btn:hover {
-        background: linear-gradient(135deg, #1557b0, #1a73e8);
+        background: linear-gradient(135deg, #8B0000, #8B0000);
         transform: scale(1.05);
       }
 
@@ -781,7 +781,7 @@
     if (!settings.enabled) return;
 
     // Set welcome message
-    welcomeMessage = settings.welcome || '¡Hola! 👋 Soy el asistente de HolaX. Puedo ayudarte a encontrar negocios, eventos y ofertas en Venezuela. ¿En qué te puedo ayudar?';
+    welcomeMessage = settings.welcome || '¡Hola! 👋 Soy el asistente de En-Santiago. Puedo ayudarte a encontrar negocios, eventos y ofertas en Venezuela. ¿En qué te puedo ayudar?';
 
     // Load chat history
     loadChatHistory();
@@ -797,3 +797,4 @@
     init();
   }
 })();
+

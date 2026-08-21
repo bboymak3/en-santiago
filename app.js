@@ -808,12 +808,12 @@ async function guardarOrden() {
                     .gp-btn-whatsapp:hover { border-color: #075E54; }
                     .gp-btn-copiar-token { background: linear-gradient(135deg, #a80000, #800000); border-color: #800000; }
                     .gp-btn-copiar-token:hover { border-color: #600000; }
-                    .gp-btn-copiar-link { background: linear-gradient(135deg, #0d6efd, #0b5ed7); border-color: #0b5ed7; }
-                    .gp-btn-copiar-link:hover { border-color: #0a58ca; }
+                    .gp-btn-copiar-link { background: linear-gradient(135deg, #8B0000, #8B0000); border-color: #8B0000; }
+                    .gp-btn-copiar-link:hover { border-color: #8B0000; }
                     .gp-btn-pdf { background: linear-gradient(135deg, #ff6b00, #cc5500); border-color: #cc5500; }
                     .gp-btn-pdf:hover { border-color: #aa4400; }
-                    .gp-btn-ver-online { background: linear-gradient(135deg, #6f42c1, #5a32a3); border-color: #5a32a3; }
-                    .gp-btn-ver-online:hover { border-color: #4a2580; }
+                    .gp-btn-ver-online { background: linear-gradient(135deg, #8B0000, #8B0000); border-color: #8B0000; }
+                    .gp-btn-ver-online:hover { border-color: #8B0000; }
                     .gp-btn-compartir { background: linear-gradient(135deg, #121212, #333); border-color: #333; }
                     .gp-btn-compartir:hover { border-color: #555; }
                     .gp-token-copied {
@@ -955,7 +955,7 @@ function mostrarResultados(ordenes) {
         const esExpress = Number(orden.es_express || 0) === 1;
         const expressBadge = esExpress ? ' <span style="color:#ff6b00;font-size:0.8em;" title="Orden Express">⚡</span>' : '';
         const esWeb = orden.origen === 'web';
-        const webBadge = esWeb ? ' <span style="background:#0d6efd;color:#fff;padding:1px 6px;border-radius:4px;font-size:0.65rem;font-weight:700;">WEB</span>' : '';
+        const webBadge = esWeb ? ' <span style="background:#8B0000;color:#fff;padding:1px 6px;border-radius:4px;font-size:0.65rem;font-weight:700;">WEB</span>' : '';
         const gananciaTecnico = Number(orden.ganancia_tecnico || 0);
         const comisionPct = Number(orden.comision_aplicada || 0);
 
@@ -966,7 +966,7 @@ function mostrarResultados(ordenes) {
             <td class="text-center">
                 ${puedeCerrar ? `<input type="checkbox" class="orden-check-cierre form-check-input" data-orden-id="${orden.id}" data-numero="${numeroFormateado}" data-monto-total="${montoFinal}" title="Marcar para cierre rápido" style="width:1.2em;height:1.2em;cursor:pointer;accent-color:#198754;">` : `<i class="fas fa-check-circle text-success" title="Ya cerrada y aprobada"></i>`}
             </td>
-            <td class="fw-bold" style="white-space:nowrap;"><a href="#" onclick="event.stopPropagation(); verOTenLinea(${orden.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${numeroFormateado}</a>${expressBadge}${webBadge}</td>
+            <td class="fw-bold" style="white-space:nowrap;"><a href="#" onclick="event.stopPropagation(); verOTenLinea(${orden.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${numeroFormateado}</a>${expressBadge}${webBadge}</td>
             <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${orden.patente_placa || ''}"><strong>${orden.patente_placa || ''}</strong></td>
             <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${orden.marca || ''}">${orden.marca || ''}</td>
             <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${orden.modelo || ''}">${orden.modelo || ''}</td>
@@ -978,7 +978,7 @@ function mostrarResultados(ordenes) {
             </td>
             <td style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${orden.tecnico_nombre || '-'}"><small>${orden.tecnico_nombre || '-'}</small></td>
             <td class="text-end fw-bold" style="color:var(--gp-red);white-space:nowrap;">$${montoFinal.toLocaleString('es-CL', {maximumFractionDigits: 0})}</td>
-            <td class="text-end" style="white-space:nowrap;"><small class="text-muted" style="font-size:0.6rem;">${comisionPct}%</small> <span class="fw-bold" style="color:#0d6efd;">$${gananciaTecnico.toLocaleString('es-CL', {maximumFractionDigits: 0})}</span></td>
+            <td class="text-end" style="white-space:nowrap;"><small class="text-muted" style="font-size:0.6rem;">${comisionPct}%</small> <span class="fw-bold" style="color:#8B0000;">$${gananciaTecnico.toLocaleString('es-CL', {maximumFractionDigits: 0})}</span></td>
             <td class="text-center">
                 <div class="btn-group btn-group-sm">
                     ${esCerrada ? `<button class="btn btn-outline-success" onclick="event.stopPropagation(); abrirOrdenDesdeLista(${orden.id}, ${orden.numero_orden})" title="Abrir Orden"><i class="fas fa-lock-open"></i></button>` : `<button class="btn btn-outline-danger" onclick="event.stopPropagation(); cerrarOrdenDesdeLista(${orden.id}, ${orden.numero_orden})" title="Cerrar Orden"><i class="fas fa-lock"></i></button>`}
@@ -1588,7 +1588,7 @@ function mostrarOrdenEnModal(orden) {
                 ${costosDetalleHtml}
 
                 <div class="mt-2 alert ${Number(orden.distancia_km || 0) > 0 ? 'alert-info' : 'alert-secondary'} py-2 px-3 mb-0">
-                    <h6 class="fw-bold mb-1" style="font-size:0.85rem;color:${Number(orden.cargo_domicilio || 0) > 0 ? '#0066cc' : '#6c757d'};"><i class="fas fa-truck me-2"></i>DOMICILIO${Number(orden.distancia_km || 0) === 0 ? ' (No calculado)' : ''}</h6>
+                    <h6 class="fw-bold mb-1" style="font-size:0.85rem;color:${Number(orden.cargo_domicilio || 0) > 0 ? '#8B0000' : '#8B0000'};"><i class="fas fa-truck me-2"></i>DOMICILIO${Number(orden.distancia_km || 0) === 0 ? ' (No calculado)' : ''}</h6>
                     <div class="row text-center">
                         <div class="col-6">
                             <small class="text-muted" style="font-size:0.7rem;">Distancia recorrida</small>
@@ -1640,7 +1640,7 @@ function mostrarOrdenEnModal(orden) {
                 var clr = colores[f.tipo_foto] || 'secondary';
                 var desc = f.descripcion ? '<br><small class="text-muted" style="font-size:0.7rem;">' + f.descripcion + '</small>' : '';
                 fHtml += '<div class="col-6 col-md-4 col-lg-3">'
-                    + '<div class="card" style="cursor:pointer;border:1px solid #dee2e6;" data-foto-idx="' + i + '">'
+                    + '<div class="card" style="cursor:pointer;border:1px solid #8B0000;" data-foto-idx="' + i + '">'
                     + '<img src="' + f.url_imagen + '" style="width:100%;height:120px;object-fit:cover;border-radius:4px 4px 0 0;">'
                     + '<div class="card-body p-1"><small><span class="badge bg-' + clr + '" style="font-size:0.6rem;"><i class="fas ' + ico + ' me-1"></i>' + lbl + '</span></small>' + desc + '</div>'
                     + '</div></div>';
@@ -2320,11 +2320,11 @@ function renderizarListaExpress(ordenes) {
         const esCerrada = orden.estado_trabajo === 'Cerrada';
 
         html += `
-            <div class="list-group-item list-group-item-action px-3 py-3" style="cursor:pointer;border-left:4px solid ${esWeb ? '#0d6efd' : 'var(--gp-orange)'};transition:background 0.2s;" onclick="verOrden(${orden.id})" onmouseover="this.style.background='#fff5eb'" onmouseout="this.style.background=''">
+            <div class="list-group-item list-group-item-action px-3 py-3" style="cursor:pointer;border-left:4px solid ${esWeb ? '#8B0000' : 'var(--gp-orange)'};transition:background 0.2s;" onclick="verOrden(${orden.id})" onmouseover="this.style.background='#fff5eb'" onmouseout="this.style.background=''">
                 <div class="d-flex justify-content-between align-items-start mb-1">
                     <div>
                         <a href="#" onclick="event.stopPropagation(); verOTenLinea(${orden.id}); return false;" style="color:var(--gp-orange);text-decoration:none;font-weight:700;font-size:1.1rem;" title="Ver orden en línea"><i class="fas fa-bolt me-1"></i>EXP${num}</a>
-                        ${esWeb ? '<span class="badge ms-1" style="background:#0d6efd;color:#fff;font-size:0.6rem;"><i class="fas fa-globe me-1"></i>WEB</span>' : ''}
+                        ${esWeb ? '<span class="badge ms-1" style="background:#8B0000;color:#fff;font-size:0.6rem;"><i class="fas fa-globe me-1"></i>WEB</span>' : ''}
                         ${tieneDomicilio ? '<span class="badge ms-1" style="background:#d90429;font-size:0.6rem;"><i class="fas fa-truck me-1"></i>$' + Number(orden.cargo_domicilio).toLocaleString('es-CL') + '</span>' : ''}
                         ${!tieneTecnico ? '<span class="badge bg-danger ms-1" style="font-size:0.6rem;"><i class="fas fa-user-slash me-1"></i>Sin asignar</span>' : ''}
                     </div>
@@ -2690,7 +2690,7 @@ function renderizarListaOrdenesDisponibles(ordenes) {
         const esExpress = Number(orden.es_express || 0) === 1;
         const expressBadge = esExpress ? ' <span style="color:#ff6b00;font-size:0.8em;" title="Orden Express">⚡</span>' : '';
         const esWeb = orden.origen === 'web';
-        const webBadge = esWeb ? ' <span style="background:#0d6efd;color:#fff;padding:1px 6px;border-radius:4px;font-size:0.65rem;font-weight:700;">WEB</span>' : '';
+        const webBadge = esWeb ? ' <span style="background:#8B0000;color:#fff;padding:1px 6px;border-radius:4px;font-size:0.65rem;font-weight:700;">WEB</span>' : '';
         const vehiculo = (orden.patente_placa ? '<strong>' + orden.patente_placa + '</strong>' : '') + (orden.marca ? ' ' + orden.marca : '') + (orden.modelo ? ' ' + orden.modelo : '');
         html += `<tr>
             <td><strong class="text-primary">${numeroFormateado}${expressBadge}${webBadge}</strong></td>
@@ -3056,8 +3056,8 @@ function renderizarResumenLiquidacion(data) {
         .slice(0, 5);
 
     // Colores para gráficos
-    const colores = ['#a80000','#ff6b00','#28a745','#0d6efd','#ffc107','#6f42c1','#17a2b8','#fd7e14','#e83e8c','#20c997'];
-    const coloresPastel = ['#f4c2c2','#ffd699','#b8e6b8','#b8d4f0','#fff3b0','#d4b8e6','#b8e6e6','#ffc2a3'];
+    const colores = ['#a80000','#ff6b00','#28a745','#8B0000','#ffc107','#8B0000','#8B0000','#fd7e14','#e83e8c','#20c997'];
+    const coloresPastel = ['#f4c2c2','#ffd699','#b8e6b8','#8B0000','#fff3b0','#8B0000','#b8e6e6','#ffc2a3'];
 
     // Calcular valor promedio por OT
     const promedioOT = ordenes.length > 0 ? (data.totalGenerado || 0) / ordenes.length : 0;
@@ -3101,15 +3101,15 @@ function renderizarResumenLiquidacion(data) {
             </div>
         </div>
         <div class="col-6 col-md">
-            <div class="card border-0 shadow-sm p-2 text-center" style="border-top: 4px solid #0d6efd !important;">
+            <div class="card border-0 shadow-sm p-2 text-center" style="border-top: 4px solid #8B0000 !important;">
                 <div class="text-muted" style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em;">Comision ${comisionPct}%</div>
-                <div class="fw-bold" style="font-size:1.3rem; color:#0d6efd;">$${formatMoney(comision)}</div>
+                <div class="fw-bold" style="font-size:1.3rem; color:#8B0000;">$${formatMoney(comision)}</div>
             </div>
         </div>
         <div class="col-6 col-md">
-            <div class="card border-0 shadow-sm p-2 text-center" style="border-top: 4px solid #6f42c1 !important;">
+            <div class="card border-0 shadow-sm p-2 text-center" style="border-top: 4px solid #8B0000 !important;">
                 <div class="text-muted" style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em;">Trabajos Distintos</div>
-                <div class="fw-bold" style="font-size:1.3rem; color:#6f42c1;">${Object.keys(tiposTrabajo).length}</div>
+                <div class="fw-bold" style="font-size:1.3rem; color:#8B0000;">${Object.keys(tiposTrabajo).length}</div>
             </div>
         </div>
     </div>
@@ -3129,12 +3129,12 @@ function renderizarResumenLiquidacion(data) {
             </div>
         </div>
         <div class="col-6">
-            <div class="card border-0 shadow-sm p-2" style="border-left: 4px solid #0d6efd !important; background: linear-gradient(135deg, #f0f5ff, #fff);">
+            <div class="card border-0 shadow-sm p-2" style="border-left: 4px solid #8B0000 !important; background: linear-gradient(135deg, #8B0000, #fff);">
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-wrench me-2" style="color:#0d6efd; font-size:1.2rem;"></i>
+                    <i class="fas fa-wrench me-2" style="color:#8B0000; font-size:1.2rem;"></i>
                     <div>
                         <div class="text-muted" style="font-size:0.7rem; text-transform:uppercase;">Normal</div>
-                        <div class="fw-bold" style="font-size:1rem; color:#0d6efd;">${data.desgloseTipo.normal.cantidad} OT &bull; $${formatMoney(data.desgloseTipo.normal.total)} &bull; Comisi&oacute;n: $${formatMoney(data.desgloseTipo.normal.comision)}</div>
+                        <div class="fw-bold" style="font-size:1rem; color:#8B0000;">${data.desgloseTipo.normal.cantidad} OT &bull; $${formatMoney(data.desgloseTipo.normal.total)} &bull; Comisi&oacute;n: $${formatMoney(data.desgloseTipo.normal.comision)}</div>
                     </div>
                 </div>
             </div>
@@ -3250,16 +3250,16 @@ function renderizarResumenLiquidacion(data) {
                         <div class="progress-bar" style="width:${(totalMO + totalExtraMO) > 0 || totalRep > 0 ? ((totalMO + totalExtraMO) / ((totalMO + totalExtraMO) + totalRep + totalExtraRep) * 100) : 50}%; background: linear-gradient(90deg, #ffc107, #ff9800);"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-1">
-                        <span style="font-size:0.78rem;"><i class="fas fa-cog me-1" style="color:#6c757d;"></i>Repuestos</span>
-                        <strong style="font-size:0.85rem; color:#6c757d;">$${formatMoney(totalRep + totalExtraRep)}</strong>
+                        <span style="font-size:0.78rem;"><i class="fas fa-cog me-1" style="color:#8B0000;"></i>Repuestos</span>
+                        <strong style="font-size:0.85rem; color:#8B0000;">$${formatMoney(totalRep + totalExtraRep)}</strong>
                     </div>
                     <div class="progress" style="height:10px;">
-                        <div class="progress-bar" style="width:${(totalMO + totalExtraMO) > 0 || totalRep > 0 ? ((totalRep + totalExtraRep) / ((totalMO + totalExtraMO) + totalRep + totalExtraRep) * 100) : 50}%; background: linear-gradient(90deg, #6c757d, #495057);"></div>
+                        <div class="progress-bar" style="width:${(totalMO + totalExtraMO) > 0 || totalRep > 0 ? ((totalRep + totalExtraRep) / ((totalMO + totalExtraMO) + totalRep + totalExtraRep) * 100) : 50}%; background: linear-gradient(90deg, #8B0000, #495057);"></div>
                     </div>
                 </div>
             </div>
             <div class="card border-0 shadow-sm">
-                <div class="card-header text-white py-2" style="background: linear-gradient(135deg, #6f42c1, #e83e8c); font-size:0.8rem;">
+                <div class="card-header text-white py-2" style="background: linear-gradient(135deg, #8B0000, #e83e8c); font-size:0.8rem;">
                     <i class="fas fa-tags me-1"></i>Top Categorías
                 </div>
                 <div class="card-body p-2" style="max-height:130px; overflow-y:auto;">
@@ -3281,7 +3281,7 @@ function renderizarResumenLiquidacion(data) {
         <!-- Clientes recurrentes -->
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header text-white py-2" style="background: linear-gradient(135deg, #0d6efd, #17a2b8); font-size:0.8rem;">
+                <div class="card-header text-white py-2" style="background: linear-gradient(135deg, #8B0000, #8B0000); font-size:0.8rem;">
                     <i class="fas fa-user-friends me-1"></i>Clientes Recurrentes
                 </div>
                 <div class="card-body p-2">
@@ -3331,7 +3331,7 @@ function renderizarResumenLiquidacion(data) {
                         <tr><td class="text-muted py-1">Tipos de trabajo</td><td class="text-end fw-bold">${Object.keys(tiposTrabajo).length}</td></tr>
                         <tr><td class="text-muted py-1">Clientes únicos</td><td class="text-end fw-bold">${Object.keys(clientes).length}</td></tr>
                         <tr><td class="text-muted py-1">Vehículos distintos</td><td class="text-end fw-bold">${Object.keys(patentes).length}</td></tr>
-                        <tr style="border-top: 2px solid #dee2e6;"><td class="text-muted py-1"><strong>Ticket promedio</strong></td><td class="text-end fw-bold text-success">$${formatMoney(promedioOT)}</td></tr>
+                        <tr style="border-top: 2px solid #8B0000;"><td class="text-muted py-1"><strong>Ticket promedio</strong></td><td class="text-end fw-bold text-success">$${formatMoney(promedioOT)}</td></tr>
                         <tr><td class="text-muted py-1"><strong>Ganancia técnica/OT</strong></td><td class="text-end fw-bold text-primary">$${formatMoney(ordenes.length > 0 ? comision / ordenes.length : 0)}</td></tr>
                     </table>
                 </div>
@@ -3466,7 +3466,7 @@ function renderizarLiquidacionOrdenes(ordenes) {
             : '<span class="badge bg-success">Pendiente</span>';
 
         html += `<tr id="row-liquidacion-${index}" class="${rowClass}" data-comision="${ganancia}" data-base="${baseCom}" data-total="${orden.monto_total || 0}" data-orden-id="${orden.id}" data-tecnico-id="${_liquidacionTecnicoData ? _liquidacionTecnicoData.id : ''}" style="${rowStyle}">
-            <td><a href="#" onclick="verOTenLinea(${orden.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">#${String(orden.numero_orden || 0).padStart(6, '0')}</a></td>
+            <td><a href="#" onclick="verOTenLinea(${orden.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">#${String(orden.numero_orden || 0).padStart(6, '0')}</a></td>
             <td>${tipoBadge}</td>
             <td>${orden.marca || 'N/A'}</td>
             <td>${orden.modelo || 'N/A'}</td>
@@ -3696,7 +3696,7 @@ function recalcularTotalesLiquidacion() {
                     </div>
                     <!-- Columna 4: NETO A PAGAR -->
                     <div class="col-md-3">
-                        <div class="card ${_liquidacionTotalAdelantos > 0 ? 'border-warning' : 'border-primary'}" style="background: ${_liquidacionTotalAdelantos > 0 ? 'linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%)' : 'linear-gradient(135deg, #e8f4fd 0%, #f0e6ff 100%)'};">
+                        <div class="card ${_liquidacionTotalAdelantos > 0 ? 'border-warning' : 'border-primary'}" style="background: ${_liquidacionTotalAdelantos > 0 ? 'linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%)' : 'linear-gradient(135deg, #8B0000 0%, #8B0000 100%)'};">
                             <div class="card-body text-center p-3">
                                 <h6 class="${_liquidacionTotalAdelantos > 0 ? 'text-warning' : 'text-primary'} mb-1"><i class="fas fa-hand-holding-usd me-1"></i>NETO A PAGAR</h6>
                                 <div class="fw-bold text-muted">${totalOtPendiente} de ${totalOtGeneral} OTs</div>
@@ -3922,7 +3922,7 @@ function actualizarHintTipoCosto() {
         hint.style.color = '#ffc107';
     } else {
         hint.textContent = 'NO afecta comisión';
-        hint.style.color = '#6c757d';
+        hint.style.color = '#8B0000';
     }
 }
 
@@ -4266,8 +4266,8 @@ function renderizarFlujoCaja(data) {
             <div class="kpi-val" style="color:#198754;">$${formatMoney(data.entradas.total_entradas || 0)}</div>
             <div class="kpi-lbl">Entradas (Pagos Recibidos)</div>
         </div></div>
-        <div class="col"><div class="gp-kpi-xl" style="border-left:5px solid #0d6efd;">
-            <div class="kpi-val" style="color:#0d6efd;">$${formatMoney(data.entradas.total_ingresos_con_extras)}</div>
+        <div class="col"><div class="gp-kpi-xl" style="border-left:5px solid #8B0000;">
+            <div class="kpi-val" style="color:#8B0000;">$${formatMoney(data.entradas.total_ingresos_con_extras)}</div>
             <div class="kpi-lbl">Total Ingresos</div>
         </div></div>
         <div class="col"><div class="gp-kpi-xl" style="border-left:5px solid #dc3545;">
@@ -4278,12 +4278,12 @@ function renderizarFlujoCaja(data) {
             <div class="kpi-val" style="color:${balancePositivo ? '#198754' : '#dc3545'};">$${formatMoney(data.balance_neto)}</div>
             <div class="kpi-lbl">BALANCE NETO</div>
         </div></div>
-        <div class="col"><div class="gp-kpi-xl" style="border-left:5px solid ${totalAdelantos > 0 ? '#fd7e14' : '#6c757d'};">
-            <div class="kpi-val" style="color:${totalAdelantos > 0 ? '#fd7e14' : '#6c757d'};">$${formatMoney(totalAdelantos)}</div>
+        <div class="col"><div class="gp-kpi-xl" style="border-left:5px solid ${totalAdelantos > 0 ? '#fd7e14' : '#8B0000'};">
+            <div class="kpi-val" style="color:${totalAdelantos > 0 ? '#fd7e14' : '#8B0000'};">$${formatMoney(totalAdelantos)}</div>
             <div class="kpi-lbl">Adelantos Técnicos</div>
         </div></div>
-        <div class="col"><div class="gp-kpi-xl" style="border-left:5px solid #6f42c1;">
-            <div class="kpi-val" style="color:#6f42c1;">$${formatMoney(data.saldo_pendiente_cobrar)}</div>
+        <div class="col"><div class="gp-kpi-xl" style="border-left:5px solid #8B0000;">
+            <div class="kpi-val" style="color:#8B0000;">$${formatMoney(data.saldo_pendiente_cobrar)}</div>
             <div class="kpi-lbl">Por Cobrar</div>
         </div></div>
     </div>
@@ -4303,34 +4303,34 @@ function renderizarFlujoCaja(data) {
             </div>
         </div>
         <div class="col-md-4">
-            <div class="gp-type-card" style="border-color:#0d6efd;">
+            <div class="gp-type-card" style="border-color:#8B0000;">
                 <div style="font-size:2rem;">🔧</div>
-                <div style="font-size:1.8rem;font-weight:800;color:#0d6efd;">${normalData.cantidad}</div>
-                <div style="font-weight:700;color:#0d6efd;font-size:0.9rem;">Órdenes NORMALES</div>
+                <div style="font-size:1.8rem;font-weight:800;color:#8B0000;">${normalData.cantidad}</div>
+                <div style="font-weight:700;color:#8B0000;font-size:0.9rem;">Órdenes NORMALES</div>
                 <div class="mt-2" style="font-size:0.82rem;color:#666;">
                     <div>Total: <strong>$${formatMoney(normalData.total)}</strong></div>
                     <div>Abonos: <strong class="text-success">$${formatMoney(normalData.abonos)}</strong></div>
                 </div>
-                <div class="mt-2"><div class="gp-bar-sm" style="width:${normalPct}%;background:linear-gradient(90deg,#0d6efd,#4d9fff);">${normalPct}%</div></div>
+                <div class="mt-2"><div class="gp-bar-sm" style="width:${normalPct}%;background:linear-gradient(90deg,#8B0000,#8B0000);">${normalPct}%</div></div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="gp-type-card" style="border-color:#6f42c1;">
+            <div class="gp-type-card" style="border-color:#8B0000;">
                 <div style="font-size:2rem;">📋</div>
-                <div style="font-size:1.8rem;font-weight:800;color:#6f42c1;">${resumenLiq.cantidad_ordenes}</div>
-                <div style="font-weight:700;color:#6f42c1;font-size:0.9rem;">Órdenes LIQUIDADAS</div>
+                <div style="font-size:1.8rem;font-weight:800;color:#8B0000;">${resumenLiq.cantidad_ordenes}</div>
+                <div style="font-weight:700;color:#8B0000;font-size:0.9rem;">Órdenes LIQUIDADAS</div>
                 <div class="mt-2" style="font-size:0.82rem;color:#666;">
-                    <div>Comisión: <strong style="color:#6f42c1;">$${formatMoney(resumenLiq.total_comision)}</strong></div>
+                    <div>Comisión: <strong style="color:#8B0000;">$${formatMoney(resumenLiq.total_comision)}</strong></div>
                     <div>Domicilio: <strong>$${formatMoney(resumenLiq.total_domicilio)}</strong></div>
                 </div>
-                <div class="mt-2"><div class="gp-bar-sm" style="width:${resumenLiq.cantidad_ordenes > 0 ? Math.round((resumenLiq.cantidad_ordenes / Math.max(totalOrdCount,1)) * 100) : 0}%;background:linear-gradient(90deg,#6f42c1,#9b6fe0);">${resumenLiq.cantidad_ordenes}</div></div>
+                <div class="mt-2"><div class="gp-bar-sm" style="width:${resumenLiq.cantidad_ordenes > 0 ? Math.round((resumenLiq.cantidad_ordenes / Math.max(totalOrdCount,1)) * 100) : 0}%;background:linear-gradient(90deg,#8B0000,#8B0000);">${resumenLiq.cantidad_ordenes}</div></div>
             </div>
         </div>
     </div>
 
     <!-- ========== GRÁFICO BARRAS: Ingresos vs Salidas ========== -->
     <div class="card shadow-sm mb-4"><div class="card-body">
-        <div class="gp-section-title"><i class="fas fa-chart-bar" style="color:#0d6efd;"></i> Ingresos vs Salidas</div>
+        <div class="gp-section-title"><i class="fas fa-chart-bar" style="color:#8B0000;"></i> Ingresos vs Salidas</div>
         <div class="mb-3">
             <div class="d-flex align-items-center gap-2 mb-2">
                 <span style="width:80px;font-size:0.82rem;font-weight:600;">Ingresos</span>
@@ -4358,8 +4358,8 @@ function renderizarFlujoCaja(data) {
             ${comisionDetalle.map((d, idx) => {
                 const techOrdenes = d.ordenes || [];
                 const totalGenerado = techOrdenes.reduce((s, o) => s + Number(o.total || 0), 0);
-                const rankColors = ['#ffc107','#adb5bd','#cd7f32','#6f42c1','#0d6efd','#28a745','#dc3545','#fd7e14'];
-                const rankColor = rankColors[idx] || '#6f42c1';
+                const rankColors = ['#ffc107','#8B0000','#cd7f32','#8B0000','#8B0000','#28a745','#dc3545','#fd7e14'];
+                const rankColor = rankColors[idx] || '#8B0000';
                 const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `<span style="font-weight:800;color:#666;font-size:0.9rem;">${idx + 1}</span>`;
                 return `<div class="list-group-item list-group-item-action p-3 mb-2" style="border-radius:10px;border-left:5px solid ${rankColor};">
                     <div class="d-flex align-items-center gap-3 mb-2">
@@ -4381,7 +4381,7 @@ function renderizarFlujoCaja(data) {
                         <div class="col"><span class="text-muted">Órdenes:</span> <strong>${techOrdenes.length}</strong></div>
                         <div class="col"><span class="text-muted">Generado:</span> <strong style="color:#28a745;">$${formatMoney(totalGenerado)}</strong></div>
                         <div class="col"><span class="text-muted">Comisionado:</span> <strong style="color:#dc3545;">$${formatMoney(d.comision)}</strong></div>
-                        <div class="col"><span class="text-muted">Base:</span> <strong style="color:#0d6efd;">$${formatMoney(d.base_comisionable)}</strong></div>
+                        <div class="col"><span class="text-muted">Base:</span> <strong style="color:#8B0000;">$${formatMoney(d.base_comisionable)}</strong></div>
                         <div class="col"><span class="text-muted">Adelantos:</span> <strong style="color:#fd7e14;">$${formatMoney(d.adelantos || 0)}</strong></div>
                         <div class="col"><span class="text-muted">Neto:</span> <strong style="color:#198754;">$${formatMoney(d.neto_pagar || d.comision)}</strong></div>
                     </div>
@@ -4390,7 +4390,7 @@ function renderizarFlujoCaja(data) {
                         <table class="table table-sm mb-0" style="font-size:0.72rem;">
                             <thead><tr><th>#OT</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Nombre</th><th>Total</th><th>Comisión</th></tr></thead>
                             <tbody>${techOrdenes.map(o => `<tr>
-                                <td><a href="#" onclick="verOTenLinea(${o.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(o.numero_orden || 0).padStart(6, '0')}</a>${o.es_express ? ' ⚡' : ''}</td>
+                                <td><a href="#" onclick="verOTenLinea(${o.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(o.numero_orden || 0).padStart(6, '0')}</a>${o.es_express ? ' ⚡' : ''}</td>
                                 <td>${o.patente || '-'}</td>
                                 <td>${o.marca || '-'}</td>
                                 <td>${o.modelo || '-'}</td>
@@ -4407,17 +4407,17 @@ function renderizarFlujoCaja(data) {
 
         ${liqOrdPorTecnico.length > 0 ? `
         <hr class="my-3">
-        <div class="gp-section-title"><i class="fas fa-file-invoice-dollar" style="color:#6f42c1;"></i> Liquidación de Órdenes en Conjunto por Técnico</div>
+        <div class="gp-section-title"><i class="fas fa-file-invoice-dollar" style="color:#8B0000;"></i> Liquidación de Órdenes en Conjunto por Técnico</div>
         <div class="row g-3">
             ${liqOrdPorTecnico.map(d => {
                 const totalLiqTec = Number(d.total_comision || 0) + Number(d.total_domicilio || 0);
                 const liqOrdenes = d.ordenes || [];
                 return `<div class="col-md-6 col-lg-4">
-                    <div class="gp-tech-card" style="border-left:5px solid #9b6fe0;">
-                        <div class="tech-name"><i class="fas fa-file-invoice-dollar me-2" style="color:#9b6fe0;"></i>${d.tecnico_nombre}</div>
+                    <div class="gp-tech-card" style="border-left:5px solid #8B0000;">
+                        <div class="tech-name"><i class="fas fa-file-invoice-dollar me-2" style="color:#8B0000;"></i>${d.tecnico_nombre}</div>
                         <div class="tech-row" style="border-bottom:1px solid #f0f0f0;padding-bottom:6px;">
                             <span class="tech-label">Total liquidado</span>
-                            <span class="tech-value" style="color:#6f42c1;">$${formatMoney(totalLiqTec)}</span>
+                            <span class="tech-value" style="color:#8B0000;">$${formatMoney(totalLiqTec)}</span>
                         </div>
                         <div class="tech-row" style="border-bottom:1px solid #f0f0f0;padding-bottom:6px;">
                             <span class="tech-label">Comisión</span>
@@ -4425,11 +4425,11 @@ function renderizarFlujoCaja(data) {
                         </div>
                         <div class="tech-row" style="border-bottom:1px solid #f0f0f0;padding-bottom:6px;">
                             <span class="tech-label">Domicilios</span>
-                            <span class="tech-value" style="color:#17a2b8;">$${formatMoney(d.total_domicilio)}</span>
+                            <span class="tech-value" style="color:#8B0000;">$${formatMoney(d.total_domicilio)}</span>
                         </div>
                         <div class="tech-row" style="border-bottom:1px solid #f0f0f0;padding-bottom:6px;">
                             <span class="tech-label">Base</span>
-                            <span class="tech-value" style="color:#0d6efd;">$${formatMoney(d.total_base)}</span>
+                            <span class="tech-value" style="color:#8B0000;">$${formatMoney(d.total_base)}</span>
                         </div>
                         <div class="tech-row">
                             <span class="tech-label">Órdenes</span>
@@ -4440,7 +4440,7 @@ function renderizarFlujoCaja(data) {
                             <table class="table table-sm mb-0" style="font-size:0.72rem;">
                                 <thead><tr><th>#OT</th><th>Placa</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Nombre</th><th>Comisión</th></tr></thead>
                                 <tbody>${liqOrdenes.map(lo => `<tr>
-                                    <td><a href="#" onclick="verOTenLinea(${lo.orden_id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(lo.numero_orden || 0).padStart(6, '0')}</a>${Number(lo.es_express || 0) === 1 ? ' ⚡' : ''}</td>
+                                    <td><a href="#" onclick="verOTenLinea(${lo.orden_id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(lo.numero_orden || 0).padStart(6, '0')}</a>${Number(lo.es_express || 0) === 1 ? ' ⚡' : ''}</td>
                                     <td>${lo.patente_placa || '-'}</td>
                                     <td>${lo.marca || '-'}</td>
                                     <td>${lo.modelo || '-'}</td>
@@ -4506,7 +4506,7 @@ function renderizarFlujoCaja(data) {
                             <tr><th>#OT</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Monto</th><th>Método</th></tr>
                         </thead>
                         <tbody>${(data.abonos_detalle || []).map(a => `<tr>
-                            <td><a href="#" onclick="verOTenLinea(${a.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(a.numero_orden || 0).padStart(6, '0')}</a>${Number(a.es_express || 0) === 1 ? ' ⚡' : ''}</td>
+                            <td><a href="#" onclick="verOTenLinea(${a.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(a.numero_orden || 0).padStart(6, '0')}</a>${Number(a.es_express || 0) === 1 ? ' ⚡' : ''}</td>
                             <td>${a.patente_placa || '-'}</td>
                             <td>${a.marca || '-'}</td>
                             <td>${a.modelo || '-'}</td>
@@ -4525,7 +4525,7 @@ function renderizarFlujoCaja(data) {
                 ${comisionDetalle.map(d => `
                     <div class="mb-1 ps-3">
                         <div class="d-flex justify-content-between">
-                            <small><i class="fas fa-user me-1" style="color:#6f42c1;"></i>${d.tecnico} (${d.comision_porcentaje}%)</small>
+                            <small><i class="fas fa-user me-1" style="color:#8B0000;"></i>${d.tecnico} (${d.comision_porcentaje}%)</small>
                             <small class="text-danger"><strong>$${formatMoney(d.comision)}</strong></small>
                         </div>
                         <div class="d-flex justify-content-between">
@@ -4535,12 +4535,12 @@ function renderizarFlujoCaja(data) {
                 `).join('')}
                 ${liqOrdPorTecnico.length > 0 ? `
                 <hr class="my-2">
-                <div class="mb-2 d-flex justify-content-between"><span>Liquidación de Órdenes en Conjunto:</span><strong style="color:#6f42c1;">$${formatMoney(liqOrdTotalComision + liqOrdTotalDomicilio)}</strong></div>
+                <div class="mb-2 d-flex justify-content-between"><span>Liquidación de Órdenes en Conjunto:</span><strong style="color:#8B0000;">$${formatMoney(liqOrdTotalComision + liqOrdTotalDomicilio)}</strong></div>
                 ${liqOrdPorTecnico.map(d => `
                     <div class="mb-1 ps-3">
                         <div class="d-flex justify-content-between">
-                            <small><i class="fas fa-file-invoice-dollar me-1" style="color:#6f42c1;"></i>${d.tecnico_nombre}</small>
-                            <small style="color:#6f42c1;"><strong>$${formatMoney(Number(d.total_comision || 0))}</strong></small>
+                            <small><i class="fas fa-file-invoice-dollar me-1" style="color:#8B0000;"></i>${d.tecnico_nombre}</small>
+                            <small style="color:#8B0000;"><strong>$${formatMoney(Number(d.total_comision || 0))}</strong></small>
                         </div>
                         <div class="d-flex justify-content-between">
                             <small class="text-muted ms-4">Comisión: $${formatMoney(d.total_comision)} | ${d.total_ordenes} OT</small>
@@ -4572,7 +4572,7 @@ function renderizarFlujoCaja(data) {
             <span class="mx-2 font-weight-bold">−</span>
             <span style="color:#dc3545;font-weight:700;">Gastos ($${formatMoney(data.salidas.gastos_operativos)})</span>
             <span class="mx-2 font-weight-bold">−</span>
-            <span style="color:#6f42c1;font-weight:700;">Liq.Órdenes ($${formatMoney(liqOrdTotalComision + liqOrdTotalDomicilio)})</span>
+            <span style="color:#8B0000;font-weight:700;">Liq.Órdenes ($${formatMoney(liqOrdTotalComision + liqOrdTotalDomicilio)})</span>
             <span class="mx-2 font-weight-bold">−</span>
             <span style="color:#fd7e14;font-weight:700;">Adelantos ($${formatMoney(totalAdelantos)})</span>
             <span class="mx-2 font-weight-bold">=</span>
@@ -4584,7 +4584,7 @@ function renderizarFlujoCaja(data) {
     <div class="row g-4 mb-4">
         <div class="col-md-6">
             <div class="card shadow-sm" style="border:2px solid #000;"><div class="card-body">
-                <div class="gp-section-title"><i class="fas fa-credit-card" style="color:#0d6efd;"></i> Pagos por Método</div>
+                <div class="gp-section-title"><i class="fas fa-credit-card" style="color:#8B0000;"></i> Pagos por Método</div>
                 ${data.por_metodo_pago.length === 0 ? '<p class="text-muted">Sin datos</p>' : `
                 <!-- Resumen rápido por método -->
                 <div class="d-flex flex-wrap gap-2 mb-2">
@@ -4603,7 +4603,7 @@ function renderizarFlujoCaja(data) {
                             const comision = Math.round(Number(p.monto_abono || 0) * comisionPct / 100);
                             return `<tr>
                                 <td><span class="badge bg-secondary" style="font-size:0.6rem;">${p.metodo_pago}</span></td>
-                                <td><a href="#" onclick="verOTenLinea(${p.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(p.numero_orden || 0).padStart(6, '0')}</a>${Number(p.es_express || 0) === 1 ? ' ⚡' : ''}</td>
+                                <td><a href="#" onclick="verOTenLinea(${p.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(p.numero_orden || 0).padStart(6, '0')}</a>${Number(p.es_express || 0) === 1 ? ' ⚡' : ''}</td>
                                 <td>${p.patente_placa || '-'}</td>
                                 <td>${p.marca || '-'}</td>
                                 <td>${p.modelo || '-'}</td>
@@ -4638,7 +4638,7 @@ function renderizarFlujoCaja(data) {
                 </div>
                 <div class="col-12">
                     <div class="card shadow-sm" style="border:2px solid #000;"><div class="card-body">
-                        <div class="gp-section-title"><i class="fas fa-clock" style="color:#6f42c1;"></i> Cuentas por Cobrar</div>
+                        <div class="gp-section-title"><i class="fas fa-clock" style="color:#8B0000;"></i> Cuentas por Cobrar</div>
                         <div class="text-center p-2 bg-light rounded mb-2">
                             <div style="font-size:1.4rem;font-weight:800;color:#dc3545;">$${formatMoney(data.saldo_pendiente_cobrar)}</div>
                             <div class="text-muted" style="font-size:0.75rem;">${data.total_pendientes_cobrar} órdenes con saldo pendiente</div>
@@ -4939,7 +4939,7 @@ function renderizarCarteraClientes(ordenes, filtro) {
         </tr>
         <tr id="${clientId}-detalle" style="display:none;">
             <td colspan="11" style="padding:0;">
-                <div id="${clientId}-contenido" style="padding:12px;background:#f8f9fa;border-radius:8px;"></div>
+                <div id="${clientId}-contenido" style="padding:12px;background:#8B0000;border-radius:8px;"></div>
             </td>
         </tr>`;
     });
@@ -4996,7 +4996,7 @@ function verInformeCliente(idx) {
     let html = `
     <div class="row g-3 mb-3">
         <div class="col-md-3">
-            <div style="background:linear-gradient(135deg,#6f42c1,#9b6fe0);color:#fff;border-radius:10px;padding:14px;">
+            <div style="background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;border-radius:10px;padding:14px;">
                 <div style="font-size:0.75rem;opacity:0.8;">Cliente</div>
                 <div style="font-size:1.1rem;font-weight:700;">${nombreCompleto}</div>
                 ${c.rut ? `<div style="font-size:0.8rem;opacity:0.9;">RUT: ${c.rut}</div>` : ''}
@@ -5005,7 +5005,7 @@ function verInformeCliente(idx) {
         </div>
         <div class="col-md-2">
             <div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid #e0e0e0;">
-                <div style="font-size:1.5rem;font-weight:800;color:#6f42c1;">${c.total_ordenes}</div>
+                <div style="font-size:1.5rem;font-weight:800;color:#8B0000;">${c.total_ordenes}</div>
                 <div style="font-size:0.72rem;color:#888;">Visitas</div>
             </div>
         </div>
@@ -5017,7 +5017,7 @@ function verInformeCliente(idx) {
         </div>
         <div class="col-md-2">
             <div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid #e0e0e0;">
-                <div style="font-size:1.1rem;font-weight:700;color:#0d6efd;">$${formatMoney(c.total_abonos)}</div>
+                <div style="font-size:1.1rem;font-weight:700;color:#8B0000;">$${formatMoney(c.total_abonos)}</div>
                 <div style="font-size:0.72rem;color:#888;">Abonos</div>
             </div>
         </div>
@@ -5032,7 +5032,7 @@ function verInformeCliente(idx) {
     // Vehículos del cliente
     const vehiculosArr = Object.entries(vehiculos);
     if (vehiculosArr.length > 0) {
-        html += `<div class="mb-3" style="font-size:0.82rem;"><strong><i class="fas fa-car me-1" style="color:#6f42c1;"></i>Vehículos:</strong> `;
+        html += `<div class="mb-3" style="font-size:0.82rem;"><strong><i class="fas fa-car me-1" style="color:#8B0000;"></i>Vehículos:</strong> `;
         vehiculosArr.forEach(([key, val], i) => {
             html += `<span class="badge bg-light text-dark border me-1" style="font-size:0.75rem;">${key} — ${val.count} OT ($${formatMoney(val.total)})</span>`;
         });
@@ -5041,7 +5041,7 @@ function verInformeCliente(idx) {
 
     // Tabla de todas las visitas
     html += `
-    <div style="font-size:0.82rem;font-weight:700;color:#6f42c1;margin-bottom:6px;"><i class="fas fa-history me-1"></i>Historial de Visitas (${ordenesSorted.length})</div>
+    <div style="font-size:0.82rem;font-weight:700;color:#8B0000;margin-bottom:6px;"><i class="fas fa-history me-1"></i>Historial de Visitas (${ordenesSorted.length})</div>
     <div class="table-responsive" style="max-height:350px;overflow-y:auto;">
         <table class="table table-sm table-hover mb-0" style="font-size:0.75rem;">
             <thead style="position:sticky;top:0;background:#fff;z-index:1;">
@@ -5082,13 +5082,13 @@ function verInformeCliente(idx) {
         const tipoBadge = esExpress ? ' <span class="badge bg-warning text-dark" style="font-size:0.6rem;">Express</span>' : '';
 
         html += `<tr>
-            <td><a href="#" onclick="verOTenLinea(${o.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(o.numero_orden || 0).padStart(6, '0')}</a>${tipoBadge}</td>
+            <td><a href="#" onclick="verOTenLinea(${o.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(o.numero_orden || 0).padStart(6, '0')}</a>${tipoBadge}</td>
             <td>${fecha}<br><small class="text-muted">${hora}</small></td>
             <td>${o.marca || '-'} ${o.modelo || '-'}</td>
             <td>${o.patente_placa || '-'}</td>
             <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${servicios}">${servicios || '-'}</td>
             <td>$${formatMoney(total)}</td>
-            <td style="color:#0d6efd;">$${formatMoney(abono)}</td>
+            <td style="color:#8B0000;">$${formatMoney(abono)}</td>
             <td style="color:${restante > 0 ? '#dc3545' : '#28a745'};">$${formatMoney(restante)}</td>
             <td>${o.metodo_pago || '-'}</td>
             <td>${obtenerBadgeEstado(o.estado, o.estado_trabajo)}</td>
@@ -6324,7 +6324,7 @@ async function generarReporteGeneral() {
     }
 
     const container = document.getElementById('reporte-contenido');
-    container.innerHTML = '<div class="text-center py-5"><i class="fas fa-spinner fa-spin fa-3x" style="color:#0d6efd;"></i><p class="mt-3">Consultando base de datos...</p></div>';
+    container.innerHTML = '<div class="text-center py-5"><i class="fas fa-spinner fa-spin fa-3x" style="color:#8B0000;"></i><p class="mt-3">Consultando base de datos...</p></div>';
 
     try {
         const response = await fetch(`${API_BASE}/admin/exportar-datos?periodo=${periodo}&valor=${encodeURIComponent(valor)}`);
@@ -6451,7 +6451,7 @@ function renderizarReporteGeneral(data) {
 
     // === COMISIONES POR TÉCNICO (con marca/modelo + adelantos) ===
     if (r.comision_detalle && r.comision_detalle.length > 0) {
-        html += `<div class="card mb-4"><div class="card-header" style="background:linear-gradient(135deg,#6f42c1,#e83e8c);color:white;"><i class="fas fa-user-tie me-2"></i>Comisiones por Técnico</div><div class="card-body"><div class="table-responsive"><table class="table table-sm table-hover"><thead style="background:#6f42c1;color:white;"><tr><th>Técnico</th><th>Comisión %</th><th>Base Comisionable</th><th>Comisión</th><th>Adelantos</th><th>Neto a Pagar</th></tr></thead><tbody>`;
+        html += `<div class="card mb-4"><div class="card-header" style="background:linear-gradient(135deg,#8B0000,#e83e8c);color:white;"><i class="fas fa-user-tie me-2"></i>Comisiones por Técnico</div><div class="card-body"><div class="table-responsive"><table class="table table-sm table-hover"><thead style="background:#8B0000;color:white;"><tr><th>Técnico</th><th>Comisión %</th><th>Base Comisionable</th><th>Comisión</th><th>Adelantos</th><th>Neto a Pagar</th></tr></thead><tbody>`;
         r.comision_detalle.forEach(cd => {
             html += `<tr><td class="fw-bold">${cd.tecnico}</td><td>${cd.comision_porcentaje}%</td><td>$${formatMoney(cd.base_comisionable)}</td><td class="fw-bold text-danger">$${formatMoney(cd.comision)}</td><td class="text-warning fw-bold">$${formatMoney(cd.adelantos || 0)}</td><td class="fw-bold text-success">$${formatMoney(cd.neto_pagar || cd.comision)}</td></tr>`;
         });
@@ -6507,7 +6507,7 @@ function renderizarReporteGeneral(data) {
             const estTrabajo = o.estado_trabajo || '';
             const badgeTrabajo = estTrabajo === 'Cerrada' ? 'dark' : estTrabajo === 'Completada' ? 'success' : estTrabajo === 'En Progreso' ? 'primary' : estTrabajo === 'En Sitio' ? 'info' : estTrabajo === 'Pendiente Piezas' ? 'secondary' : estTrabajo === 'No Completada' ? 'danger' : 'warning';
             html += `<tr>
-                <td><a href="#" onclick="verOTenLinea(${o.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(o.numero_orden||'').padStart(6,'0')}</a></td>
+                <td><a href="#" onclick="verOTenLinea(${o.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(o.numero_orden||'').padStart(6,'0')}</a></td>
                 <td>${o.patente_placa||''}</td><td>${o.marca||''}</td><td>${o.modelo||''}</td><td>${colorSwatch(o.color)}</td><td>${o.cliente_nombre||''}</td><td>${o.cliente_telefono||''}</td>
                 <td><span class="badge bg-${o.estado==='Aprobada'?'success':o.estado==='Cancelada'?'danger':'warning'}">${o.estado||''}</span></td>
                 <td><span class="badge bg-${badgeTrabajo}">${estTrabajo}</span></td>
@@ -6532,7 +6532,7 @@ function renderizarReporteGeneral(data) {
     if (data.costos_adicionales && data.costos_adicionales.length > 0) {
         html += `<div class="card mb-4"><div class="card-header bg-warning text-dark"><i class="fas fa-coins me-2"></i>Costos Adicionales Detalle (${data.costos_adicionales.length})</div><div class="card-body"><div class="table-responsive" style="max-height:400px;overflow-y:auto"><table class="table table-sm table-hover"><thead class="table-warning"><tr><th>OT</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Concepto</th><th>Monto</th><th>Categoría</th></tr></thead><tbody>`;
         data.costos_adicionales.forEach(c => {
-            html += `<tr><td><a href="#" onclick="verOTenLinea(${c.orden_id || c.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(c.numero_orden||'').padStart(6,'0')}</a></td><td>${c.patente_placa||''}</td><td>${c.marca||''}</td><td>${c.modelo||''}</td><td>${colorSwatch(c.color)}</td><td>${c.concepto}</td><td class="fw-bold">$${formatMoney(c.monto)}</td><td>${c.categoria}</td></tr>`;
+            html += `<tr><td><a href="#" onclick="verOTenLinea(${c.orden_id || c.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(c.numero_orden||'').padStart(6,'0')}</a></td><td>${c.patente_placa||''}</td><td>${c.marca||''}</td><td>${c.modelo||''}</td><td>${colorSwatch(c.color)}</td><td>${c.concepto}</td><td class="fw-bold">$${formatMoney(c.monto)}</td><td>${c.categoria}</td></tr>`;
         });
         html += `</tbody></table></div></div></div>`;
     }
@@ -6550,7 +6550,7 @@ function renderizarReporteGeneral(data) {
     if (data.pagos && data.pagos.length > 0) {
         html += `<div class="card mb-4"><div class="card-header bg-success text-white"><i class="fas fa-money-check me-2"></i>Pagos Registrados (${data.pagos.length})</div><div class="card-body"><div class="table-responsive"><table class="table table-sm table-hover"><thead class="table-success"><tr><th>OT</th><th>Patente</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Cliente</th><th>Monto</th><th>Método</th><th>Observaciones</th></tr></thead><tbody>`;
         data.pagos.forEach(p => {
-            html += `<tr><td><a href="#" onclick="verOTenLinea(${p.orden_id || p.id}); return false;" style="color:#0d6efd;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(p.numero_orden||'').padStart(6,'0')}</a></td><td>${p.patente_placa||''}</td><td>${p.marca||''}</td><td>${p.modelo||''}</td><td>${colorSwatch(p.color)}</td><td>${p.cliente_nombre||''}</td><td class="fw-bold">$${formatMoney(p.monto)}</td><td>${p.metodo_pago||''}</td><td><small>${p.observaciones||''}</small></td></tr>`;
+            html += `<tr><td><a href="#" onclick="verOTenLinea(${p.orden_id || p.id}); return false;" style="color:#8B0000;text-decoration:none;font-weight:700;" title="Ver orden en línea">${String(p.numero_orden||'').padStart(6,'0')}</a></td><td>${p.patente_placa||''}</td><td>${p.marca||''}</td><td>${p.modelo||''}</td><td>${colorSwatch(p.color)}</td><td>${p.cliente_nombre||''}</td><td class="fw-bold">$${formatMoney(p.monto)}</td><td>${p.metodo_pago||''}</td><td><small>${p.observaciones||''}</small></td></tr>`;
         });
         html += `</tbody></table></div></div></div>`;
     }
@@ -6575,7 +6575,7 @@ function renderizarReporteGeneral(data) {
         if (ctxEstados) {
             var estLabels = ['Enviadas','Aprobadas','Pend.Asign.','Canceladas','Pendientes','Pend.Visita','En Sitio','En Progreso','Pend.Piezas','Completadas','No Compl.','Cerradas'];
             var estValues = [r.enviadas||0, r.aprobadas||0, r.pendientes_asignacion||0, r.canceladas||0, r.pendientes||0, r.pendientes_visita||0, r.en_sitio||0, r.en_progreso||0, r.pendientes_piezas||0, r.completadas||0, r.no_completadas||0, r.cerradas||0];
-            var estColors = ['#ffc107','#198754','#17a2b8','#dc3545','#adb5bd','#0dcaf0','#6f42c1','#fd7e14','#6c757d','#20c997','#c82333','#343a40'];
+            var estColors = ['#ffc107','#198754','#8B0000','#dc3545','#8B0000','#8B0000','#8B0000','#fd7e14','#8B0000','#20c997','#c82333','#343a40'];
             _graficosReporte.push(new Chart(ctxEstados, {
                 type: 'doughnut',
                 data: { labels: estLabels, datasets: [{ data: estValues, backgroundColor: estColors, borderWidth: 2, borderColor: '#fff' }] },
@@ -6600,7 +6600,7 @@ function renderizarReporteGeneral(data) {
                     datasets: [{
                         label: 'Monto ($)',
                         data: [abonos, pagosReg, -comisiones, -gastos, -liqCom, -liqDom, balanceNeto],
-                        backgroundColor: ['#198754','#20c997','#dc3545','#fd7e14','#6f42c1','#e83e8c', balanceNeto >= 0 ? '#0d6efd' : '#dc3545'],
+                        backgroundColor: ['#198754','#20c997','#dc3545','#fd7e14','#8B0000','#e83e8c', balanceNeto >= 0 ? '#8B0000' : '#dc3545'],
                         borderRadius: 6
                     }]
                 },
@@ -6619,7 +6619,7 @@ function renderizarReporteGeneral(data) {
                 data: {
                     labels: tecLabels,
                     datasets: [
-                        { label: 'OT Cerradas', data: tecCerradas, backgroundColor: '#0d6efd', borderRadius: 4 },
+                        { label: 'OT Cerradas', data: tecCerradas, backgroundColor: '#8B0000', borderRadius: 4 },
                         { label: 'Generado ($)', data: tecGenerado, backgroundColor: '#198754', borderRadius: 4 }
                     ]
                 },
@@ -7579,7 +7579,7 @@ function toggleAutoTotalEditar() {
         // Modo automático: recalcular y marcar como auto
         campoTotal.removeAttribute('data-manual');
         campoTotal.readOnly = true;
-        campoTotal.style.backgroundColor = '#e9ecef';
+        campoTotal.style.backgroundColor = '#8B0000';
         if (label) label.textContent = 'Auto';
         if (hint) hint.textContent = 'Auto = Servicios + Costos Adicionales';
         recalcularTotalEditar();
@@ -7880,7 +7880,7 @@ async function cargarEventosCalendario(startStr, endStr) {
                 title: tituloEvento,
                 start: ev.fecha_inicio,
                 end: ev.fecha_fin,
-                color: ev.color || '#0d6efd',
+                color: ev.color || '#8B0000',
                 extendedProps: {
                     tipo: 'agenda',
                     agendaId: ev.id,
@@ -7929,8 +7929,8 @@ async function cargarEventosCalendario(startStr, endStr) {
                 title: tituloOT,
                 start: inicio,
                 end: fin,
-                color: esExpress ? '#a80000' : '#0d6efd',
-                borderColor: esExpress ? '#ff6b00' : '#0d6efd',
+                color: esExpress ? '#a80000' : '#8B0000',
+                borderColor: esExpress ? '#ff6b00' : '#8B0000',
                 extendedProps: {
                     tipo: 'orden',
                     ordenId: o.id,
@@ -8275,3 +8275,4 @@ async function eliminarEventoPorDrag(event) {
         event.revert();
     }
 }
+

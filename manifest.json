@@ -1,13 +1,13 @@
 {
   "id": "/",
-  "name": "HOLAX - Directorio de Negocios de Venezuela",
-  "short_name": "HOLAX",
+  "name": "En-Santiago - Directorio de Negocios de Venezuela",
+  "short_name": "En-Santiago",
   "description": "Directorio Nacional de Negocios de Venezuela. Encuentra negocios, productos, empleos y servicios en tu ciudad.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#006EE3",
+  "theme_color": "#8B0000",
   "orientation": "portrait-primary",
   "lang": "es",
   "dir": "ltr",
@@ -45,14 +45,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "HolaX - Directorio de Negocios en Venezuela (Desktop)"
+      "label": "En-Santiago - Directorio de Negocios en Venezuela (Desktop)"
     },
     {
       "src": "/images/screenshot-narrow.png",
       "sizes": "1170x1392",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "HolaX - Directorio de Negocios en Venezuela (Movil)"
+      "label": "En-Santiago - Directorio de Negocios en Venezuela (Movil)"
     }
   ],
   "shortcuts": [
@@ -98,7 +98,7 @@
   ],
   "protocol_handlers": [
     {
-      "protocol": "web+holax",
+      "protocol": "web+En-Santiago",
       "url": "/search.html?q=%s"
     }
   ]

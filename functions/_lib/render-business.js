@@ -95,7 +95,7 @@ export function renderBusinessPage(env, business, options = {}) {
     reviewCount = 0,
   } = options;
 
-  const baseUrl = 'https://holax.com.ve';
+  const baseUrl = 'https://en-santiago.com';
   const title = business.title || 'Negocio';
   // Use custom SEO description if provided, otherwise auto-generate
   const description = business.seo_description
@@ -103,7 +103,7 @@ export function renderBusinessPage(env, business, options = {}) {
     : business.description
       ? business.description.substring(0, 160)
       : `Información sobre ${title} en ${business.city || 'Venezuela'}. Dirección, contacto, servicios y más.`;
-  const imageUrl = business.cover_image || `${baseUrl}/images/Holax.png`;
+  const imageUrl = business.cover_image || `${baseUrl}/images/En-Santiago.png`;
   const finalCanonical = canonicalUrl || `${baseUrl}${pathPrefix || '/negocio'}/${business.slug}`;
 
   // Breadcrumb helpers
@@ -136,22 +136,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="${escapeHtml(description)}">
-    <title>${escapeHtml(title)} - HolaX | Directorio de Negocios en Venezuela</title>
+    <title>${escapeHtml(title)} - En-Santiago | Directorio de Negocios en Venezuela</title>
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="${finalCanonical}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="business.business">
-    <meta property="og:title" content="${escapeHtml(title)} - HolaX">
+    <meta property="og:title" content="${escapeHtml(title)} - En-Santiago">
     <meta property="og:description" content="${escapeHtml(description)}">
     <meta property="og:image" content="${imageUrl}">
     <meta property="og:url" content="${finalCanonical}">
-    <meta property="og:site_name" content="HolaX">
+    <meta property="og:site_name" content="En-Santiago">
     <meta property="og:locale" content="es_VE">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${escapeHtml(title)} - HolaX">
+    <meta name="twitter:title" content="${escapeHtml(title)} - En-Santiago">
     <meta name="twitter:description" content="${escapeHtml(description)}">
     <meta name="twitter:image" content="${imageUrl}">
 
@@ -227,14 +227,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     <script type="application/ld+json">${(() => {
       const crumbs = [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://holax.com.ve/" },
-        { "@type": "ListItem", "position": 2, "name": sectionBreadcrumbText, "item": "https://holax.com.ve/search.html" }
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.com/" },
+        { "@type": "ListItem", "position": 2, "name": sectionBreadcrumbText, "item": "https://en-santiago.com/search.html" }
       ];
       if (categoryBreadcrumb) {
-        crumbs.push({ "@type": "ListItem", "position": 3, "name": categoryBreadcrumb.name, "item": categoryBreadcrumb.url.startsWith('http') ? categoryBreadcrumb.url : "https://holax.com.ve" + categoryBreadcrumb.url });
+        crumbs.push({ "@type": "ListItem", "position": 3, "name": categoryBreadcrumb.name, "item": categoryBreadcrumb.url.startsWith('http') ? categoryBreadcrumb.url : "https://en-santiago.com" + categoryBreadcrumb.url });
       } else if (business.category_name) {
         const catSlug = (business.category_name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        crumbs.push({ "@type": "ListItem", "position": 3, "name": business.category_name, "item": "https://holax.com.ve/categoria/" + catSlug });
+        crumbs.push({ "@type": "ListItem", "position": 3, "name": business.category_name, "item": "https://en-santiago.com/categoria/" + catSlug });
       }
       crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": title, "item": finalCanonical });
       return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": crumbs });
@@ -321,7 +321,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #8B0000;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -333,7 +333,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     height: 110px;
     overflow: hidden;
     position: relative;
-    background: #f3f4f6;
+    background: #8B0000;
 }
 .business-detail-page .business-card-image img {
     width: 100%;
@@ -370,7 +370,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .business-detail-page .business-card-location {
     font-size: 0.6rem;
-    color: #94a3b8;
+    color: #8B0000;
     margin: 0 auto 2px;
     display: inline-flex;
     align-items: center;
@@ -379,7 +379,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .business-detail-page .business-card-location i { font-size: 0.52rem; }
 .business-detail-page .business-card-desc {
     font-size: 0.6rem;
-    color: #b0b8c4;
+    color: #8B0000;
     line-height: 1.35;
     margin: 0;
     display: -webkit-box;
@@ -404,7 +404,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #8B0000;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     transition: transform 0.2s, box-shadow 0.2s;
     text-decoration: none;
@@ -413,7 +413,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .product-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    border-color: #006EE3;
+    border-color: #8B0000;
 }
 .product-card img {
     width: 100%;
@@ -433,7 +433,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color: #1e293b;
 }
 .product-card-price {
-    color: #006EE3;
+    color: #8B0000;
     font-weight: 700;
     font-size: 0.82rem;
 }
@@ -481,7 +481,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .jobs-list .job-item {
     background: #fff;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #8B0000;
     border-radius: 10px;
     padding: 16px;
     margin-bottom: 12px;
@@ -493,8 +493,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: #eff6ff;
-    color: #1a73e8;
+    background: #8B0000;
+    color: #8B0000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -512,11 +512,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .job-item-meta {
     font-size: 0.8rem;
-    color: #6b7280;
+    color: #8B0000;
 }
 .services-list .service-item {
     background: #fff;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #8B0000;
     border-radius: 10px;
     padding: 16px 20px;
     margin-bottom: 12px;
@@ -530,13 +530,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .service-item p {
     font-size: 0.88rem;
-    color: #6b7280;
+    color: #8B0000;
     line-height: 1.5;
     margin: 0;
 }
 .section-link {
     font-size: 0.85rem;
-    color: #1a73e8;
+    color: #8B0000;
     text-decoration: none;
     font-weight: 600;
 }
@@ -554,8 +554,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/index.html" class="nav-logo">
-                <img src="/images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
-                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+                <img src="/images/favicon.jpeg" alt="En-Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> En-Santiago</span>
             </a>
             <div class="location-selector" id="locationSelector">
                 <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
@@ -628,7 +628,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="business-content hidden" id="businessContent">
                 <!-- Banner de Portada (tipo Facebook) -->
-                <div id="businessBannerWrap" style="display:none;margin:-22px -22px 0;border-radius:16px 16px 0 0;overflow:hidden;position:relative;max-height:420px;min-height:220px;background:linear-gradient(135deg,#1e3a5f,#2563eb,#7c3aed);">
+                <div id="businessBannerWrap" style="display:none;margin:-22px -22px 0;border-radius:16px 16px 0 0;overflow:hidden;position:relative;max-height:420px;min-height:220px;background:linear-gradient(135deg,#1e3a5f,#8B0000,#8B0000);">
                     <img id="businessBanner" src="" alt="Portada" style="width:100%;height:100%;object-fit:cover;display:block;">
                 </div>
 
@@ -694,7 +694,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <h2 class="business-section-title">Contactar al Negocio</h2>
                     <div class="contact-actions" id="contactActions">
                         <a href="#" class="btn btn-whatsapp btn-full btn-lg" id="mainWhatsApp" style="display:none;" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</a>
-                        <a href="#" class="btn btn-full btn-lg" id="emailContactBtn" style="display:none;background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-weight:600;border-radius:12px;text-align:center;text-decoration:none;padding:14px 24px;font-size:1rem;"><i class="fas fa-envelope"></i> Contactar por Email</a>
+                        <a href="#" class="btn btn-full btn-lg" id="emailContactBtn" style="display:none;background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;font-weight:600;border-radius:12px;text-align:center;text-decoration:none;padding:14px 24px;font-size:1rem;"><i class="fas fa-envelope"></i> Contactar por Email</a>
                         <button class="btn btn-primary btn-full btn-lg" id="openChatBtn" style="margin-top:8px;"><i class="fas fa-comment-dots"></i> Enviar Mensaje</button>
                         <button class="btn btn-full btn-lg" id="shareWhatsAppBtn" style="display:none;margin-top:8px;background:#fff;color:#111;border:2px solid #111;font-weight:600;border-radius:12px;text-align:center;padding:14px 24px;font-size:1rem;cursor:pointer;"><i class="fab fa-whatsapp" style="color:#25d366;"></i> Compartir por WhatsApp</button>
                     </div>
@@ -703,12 +703,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 ${(() => { const instagram = normalizeSocialUrl(business.instagram, 'instagram'); const facebook = normalizeSocialUrl(business.facebook, 'facebook'); const twitter = normalizeSocialUrl(business.twitter, 'twitter'); const tiktok = normalizeSocialUrl(business.tiktok, 'tiktok'); const youtube = normalizeSocialUrl(business.youtube, 'youtube'); const hasSocial = instagram || facebook || twitter || tiktok || youtube; if (!hasSocial && !business.slug) return ''; return `
                 <div class="pd-social-section" style="padding:20px 24px;">
                   <div style="font-size:1.1rem;font-weight:700;color:#0f172a;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
-                    <i class="fas fa-share-nodes" style="color:#006EE3;"></i> Redes Sociales y Web
+                    <i class="fas fa-share-nodes" style="color:#8B0000;"></i> Redes Sociales y Web
                   </div>
                   <div style="display:flex;gap:15px;flex-wrap:wrap;">
-                    ${business.slug ? `<a href="/web/${escapeHtml(business.slug)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:linear-gradient(135deg,#006EE3,#0ea5e9);color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fas fa-globe" style="font-size:1.5rem;"></i> Sitio Web</a>` : ''}
-                    ${instagram ? `<a href="${escapeHtml(instagram)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fab fa-instagram" style="font-size:1.5rem;"></i> Instagram</a>` : ''}
-                    ${facebook ? `<a href="${escapeHtml(facebook)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:#1877f2;color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fab fa-facebook-f" style="font-size:1.5rem;"></i> Facebook</a>` : ''}
+                    ${business.slug ? `<a href="/web/${escapeHtml(business.slug)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fas fa-globe" style="font-size:1.5rem;"></i> Sitio Web</a>` : ''}
+                    ${instagram ? `<a href="${escapeHtml(instagram)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:linear-gradient(135deg,#8B0000,#fd1d1d,#fcb045);color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fab fa-instagram" style="font-size:1.5rem;"></i> Instagram</a>` : ''}
+                    ${facebook ? `<a href="${escapeHtml(facebook)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:#8B0000;color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fab fa-facebook-f" style="font-size:1.5rem;"></i> Facebook</a>` : ''}
                     ${twitter ? `<a href="${escapeHtml(twitter)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:#000;color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fab fa-x-twitter" style="font-size:1.5rem;"></i> X (Twitter)</a>` : ''}
                     ${tiktok ? `<a href="${escapeHtml(tiktok)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:#010101;color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fab fa-tiktok" style="font-size:1.5rem;"></i> TikTok</a>` : ''}
                     ${youtube ? `<a href="${escapeHtml(youtube)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:18px;background:#ff0000;color:#fff;text-decoration:none;font-size:1.35rem;font-weight:700;"><i class="fab fa-youtube" style="font-size:1.5rem;"></i> YouTube</a>` : ''}
@@ -726,7 +726,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     return `
                 <div style="padding:16px 20px;">
                   <div style="font-size:0.85rem;font-weight:700;color:#0f172a;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
-                    <i class="fas fa-play-circle" style="color:#006EE3;"></i> Video${urls.length > 1 ? 's' : ''} (${urls.length})
+                    <i class="fas fa-play-circle" style="color:#8B0000;"></i> Video${urls.length > 1 ? 's' : ''} (${urls.length})
                   </div>
                   <div style="display:${urls.length > 1 ? 'grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;' : 'block;max-width:320px;margin:0 auto;'}border-radius:16px;overflow:hidden;">
                     ${urls.map(u => '<div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);">' + getVideoEmbed(u) + '</div>').join('')}
@@ -736,7 +736,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <section class="business-section" id="productsSection" style="display:none;">
                     <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                        <h2 class="business-section-title"><i class="fas fa-boxes-stacked" style="color:#006EE3;"></i> Productos</h2>
+                        <h2 class="business-section-title"><i class="fas fa-boxes-stacked" style="color:#8B0000;"></i> Productos</h2>
                         <a href="/marketplace.html" class="section-link" id="viewAllProducts">Ver más <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="products-grid" id="businessProductsGrid"></div>
@@ -744,7 +744,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <section class="business-section" id="jobsSection" style="display:none;">
                     <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                        <h2 class="business-section-title"><i class="fas fa-briefcase" style="color:#1a73e8;"></i> Empleo</h2>
+                        <h2 class="business-section-title"><i class="fas fa-briefcase" style="color:#8B0000;"></i> Empleo</h2>
                         <a href="/empleo.html" class="section-link" id="viewAllJobs" style="display:none;">Ver más <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="jobs-list" id="businessJobsList"></div>
@@ -763,7 +763,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <section class="section hidden" id="similarSection" style="margin-top:28px;">
                 <div class="section-header">
-                    <h2 class="section-title" style="display:flex;align-items:center;gap:8px;"><i class="fas fa-store" style="color:#006EE3;font-size:0.9rem;"></i> Negocios Similares</h2>
+                    <h2 class="section-title" style="display:flex;align-items:center;gap:8px;"><i class="fas fa-store" style="color:#8B0000;font-size:0.9rem;"></i> Negocios Similares</h2>
                     <a href="/search.html" class="section-link" style="font-size:0.8rem;">Ver más <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="business-grid" id="similarGrid"></div>
@@ -791,7 +791,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; ${new Date().getFullYear()} HolaX. Todos los derechos reservados.</p>
+                <p>&copy; ${new Date().getFullYear()} En-Santiago. Todos los derechos reservados.</p>
                 <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
                 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
             </div>

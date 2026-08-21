@@ -14,7 +14,7 @@ generate_fn = '''        // Generate auto JSON-LD for comparison preview
                 "@context": "https://schema.org",
                 "@type": isMedical ? "MedicalBusiness" : "LocalBusiness",
                 "name": b.title || 'Negocio',
-                "url": "https://holax.com.ve/negocio/" + (b.slug || ''),
+                "url": "https://en-santiago.com/negocio/" + (b.slug || ''),
                 "description": b.description ? b.description.substring(0, 160) : ''
             };
             if (b.category_name) ld.category = b.category_name;
@@ -60,7 +60,7 @@ old_seo_fn = '''        // ─── SEO Description counter + preview ───
             var len = ta.value.length;
             if (countEl) {
                 countEl.textContent = len + '/160';
-                countEl.style.color = len > 160 ? '#dc2626' : (len > 140 ? '#d97706' : '#6b7280');
+                countEl.style.color = len > 160 ? '#dc2626' : (len > 140 ? '#d97706' : '#8B0000');
             }
             if (preview && previewText) {
                 preview.style.display = ta.value.trim() ? '' : 'none';
@@ -77,7 +77,7 @@ new_seo_fn = '''        // ─── SEO Description comparison ─────�
             var len = ta.value.length;
             if (countEl) {
                 countEl.textContent = len + '/160';
-                countEl.style.color = len > 160 ? '#dc2626' : (len > 140 ? '#d97706' : '#6b7280');
+                countEl.style.color = len > 160 ? '#dc2626' : (len > 140 ? '#d97706' : '#8B0000');
             }
             if (afterText) {
                 afterText.textContent = ta.value || (currentBiz && currentBiz.description ? currentBiz.description.substring(0,160) : '');
@@ -164,3 +164,4 @@ with open(filepath, 'w', encoding='utf-8') as f:
     f.write(content)
 
 print('Done!')
+

@@ -1,4 +1,4 @@
-// js/weather.js — Weather Carousel for HolaX Index
+// js/weather.js — Weather Carousel for En-Santiago Index
 // Uses Open-Meteo API (free, no API key required)
 
 (function () {
@@ -38,53 +38,53 @@
         if (code === 0) {
             return isDay
                 ? { icon: 'fas fa-sun', cls: 'w-sunny', desc: 'Despejado', accent: '#fbbf24' }
-                : { icon: 'fas fa-moon', cls: 'w-clear-night', desc: 'Despejado', accent: '#94a3b8' };
+                : { icon: 'fas fa-moon', cls: 'w-clear-night', desc: 'Despejado', accent: '#8B0000' };
         }
         if (code === 1) {
             return isDay
                 ? { icon: 'fas fa-cloud-sun', cls: 'w-partly-cloudy', desc: 'Principalmente despejado', accent: '#fbbf24' }
-                : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Principalmente despejado', accent: '#94a3b8' };
+                : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Principalmente despejado', accent: '#8B0000' };
         }
         if (code === 2) {
             return isDay
-                ? { icon: 'fas fa-cloud-sun', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#cbd5e1' }
-                : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#cbd5e1' };
+                ? { icon: 'fas fa-cloud-sun', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#8B0000' }
+                : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#8B0000' };
         }
         if (code === 3) {
-            return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#94a3b8' };
+            return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#8B0000' };
         }
         if (code === 45 || code === 48) {
-            return { icon: 'fas fa-smog', cls: 'w-fog', desc: 'Niebla', accent: '#64748b' };
+            return { icon: 'fas fa-smog', cls: 'w-fog', desc: 'Niebla', accent: '#8B0000' };
         }
         if (code >= 51 && code <= 55) {
-            return { icon: 'fas fa-cloud-rain', cls: 'w-drizzle', desc: 'Llovizna', accent: '#7dd3fc' };
+            return { icon: 'fas fa-cloud-rain', cls: 'w-drizzle', desc: 'Llovizna', accent: '#8B0000' };
         }
         if (code >= 56 && code <= 57) {
-            return { icon: 'fas fa-cloud-rain', cls: 'w-drizzle', desc: 'Llovizna congelante', accent: '#7dd3fc' };
+            return { icon: 'fas fa-cloud-rain', cls: 'w-drizzle', desc: 'Llovizna congelante', accent: '#8B0000' };
         }
         if (code >= 61 && code <= 63) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia', accent: '#38bdf8' };
+            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia', accent: '#8B0000' };
         }
         if (code === 65) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-heavy-rain', desc: 'Lluvia fuerte', accent: '#0284c7' };
+            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-heavy-rain', desc: 'Lluvia fuerte', accent: '#8B0000' };
         }
         if (code >= 66 && code <= 67) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia congelante', accent: '#38bdf8' };
+            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia congelante', accent: '#8B0000' };
         }
         if (code >= 71 && code <= 75) {
-            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Nieve', accent: '#e0f2fe' };
+            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Nieve', accent: '#8B0000' };
         }
         if (code === 77) {
-            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Granizo', accent: '#e0f2fe' };
+            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Granizo', accent: '#8B0000' };
         }
         if (code >= 80 && code <= 81) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Chubascos', accent: '#38bdf8' };
+            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Chubascos', accent: '#8B0000' };
         }
         if (code === 82) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-heavy-rain', desc: 'Chubascos fuertes', accent: '#0284c7' };
+            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-heavy-rain', desc: 'Chubascos fuertes', accent: '#8B0000' };
         }
         if (code === 85 || code === 86) {
-            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Copos de nieve', accent: '#e0f2fe' };
+            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Copos de nieve', accent: '#8B0000' };
         }
         if (code === 95) {
             return { icon: 'fas fa-bolt', cls: 'w-thunder', desc: 'Tormenta', accent: '#fde047' };
@@ -93,7 +93,7 @@
             return { icon: 'fas fa-bolt', cls: 'w-thunder', desc: 'Tormenta con granizo', accent: '#fde047' };
         }
         // Fallback
-        return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#94a3b8' };
+        return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#8B0000' };
     }
 
     // ─── Format temperature ───────────────────────────────────────

@@ -2,7 +2,7 @@
 """Add logo image to navbar in all HTML files, replacing the fa-store icon."""
 import os, re, glob
 
-LOGO_HTML = '<img src="images/logoprincipal.jpeg" alt="HOLAX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">'
+LOGO_HTML = '<img src="images/logoprincipal.jpeg" alt="En-Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">'
 
 # Pattern: inside nav-logo, replace <i class="fas fa-store"></i> with logo img
 pattern = re.compile(

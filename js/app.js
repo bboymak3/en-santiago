@@ -1,5 +1,5 @@
 /**
- * HolaX - Core Application Module
+ * En-Santiago - Core Application Module
  * Common module loaded on ALL pages
  * Directorio Nacional de Negocios de Venezuela
  */
@@ -84,9 +84,9 @@ function updateBrandDisplay(stateName) {
   });
   // Update page title dynamically
   if (stateName) {
-    document.title = stateName + ' HolaX - Directorio de Negocios';
+    document.title = stateName + ' En-Santiago - Directorio de Negocios';
   } else {
-    document.title = 'HolaX - Directorio de Negocios en Venezuela';
+    document.title = 'En-Santiago - Directorio de Negocios en Venezuela';
   }
 }
 
@@ -350,12 +350,12 @@ function showWebPageSelector() {
     modal.style.cssText = 'position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;padding:20px;';
     modal.innerHTML = `
         <div style="background:#fff;border-radius:16px;max-width:420px;width:100%;max-height:80vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
-            <div style="padding:20px 24px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;">
-                <h3 style="margin:0;font-size:1.1rem;font-weight:700;color:#0f172a;"><i class="fas fa-globe" style="color:#0ea5e9;margin-right:8px;"></i>Mis Paginas Web</h3>
-                <button id="webPageSelectorClose" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:#64748b;padding:4px;"><i class="fas fa-times"></i></button>
+            <div style="padding:20px 24px;border-bottom:1px solid #8B0000;display:flex;align-items:center;justify-content:space-between;">
+                <h3 style="margin:0;font-size:1.1rem;font-weight:700;color:#0f172a;"><i class="fas fa-globe" style="color:#8B0000;margin-right:8px;"></i>Mis Paginas Web</h3>
+                <button id="webPageSelectorClose" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:#8B0000;padding:4px;"><i class="fas fa-times"></i></button>
             </div>
             <div id="webPageSelectorBody" style="padding:16px 24px 24px;overflow-y:auto;max-height:60vh;">
-                <div style="text-align:center;padding:30px 0;color:#94a3b8;">
+                <div style="text-align:center;padding:30px 0;color:#8B0000;">
                     <i class="fas fa-spinner fa-spin fa-2x"></i>
                     <p style="margin-top:12px;font-size:0.9rem;">Cargando tus negocios...</p>
                 </div>
@@ -373,11 +373,11 @@ function showWebPageSelector() {
     if (!token) {
         const body = document.getElementById('webPageSelectorBody');
         body.innerHTML = `
-            <div style="text-align:center;padding:20px 0;color:#64748b;">
-                <i class="fas fa-user-lock" style="font-size:2.5rem;color:#cbd5e1;margin-bottom:12px;"></i>
+            <div style="text-align:center;padding:20px 0;color:#8B0000;">
+                <i class="fas fa-user-lock" style="font-size:2.5rem;color:#8B0000;margin-bottom:12px;"></i>
                 <p style="font-size:0.95rem;font-weight:600;">Inicia sesion para ver tus paginas web</p>
                 <p style="font-size:0.85rem;margin-top:4px;">Necesitas tener una cuenta y al menos un negocio registrado.</p>
-                <a href="/login.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#006EE3;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Iniciar Sesion</a>
+                <a href="/login.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#8B0000;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Iniciar Sesion</a>
             </div>`;
         return;
     }
@@ -388,28 +388,28 @@ function showWebPageSelector() {
         const businesses = res.data || [];
         if (businesses.length === 0) {
             body.innerHTML = `
-                <div style="text-align:center;padding:20px 0;color:#64748b;">
-                    <i class="fas fa-store" style="font-size:2.5rem;color:#cbd5e1;margin-bottom:12px;"></i>
+                <div style="text-align:center;padding:20px 0;color:#8B0000;">
+                    <i class="fas fa-store" style="font-size:2.5rem;color:#8B0000;margin-bottom:12px;"></i>
                     <p style="font-size:0.95rem;font-weight:600;">No tienes negocios registrados</p>
                     <p style="font-size:0.85rem;margin-top:4px;">Primero crea un negocio para generar su pagina web.</p>
-                    <a href="/new-business.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#006EE3;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Crear Negocio</a>
+                    <a href="/new-business.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#8B0000;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Crear Negocio</a>
                 </div>`;
             return;
         }
 
-        let html = '<p style="font-size:0.82rem;color:#94a3b8;margin-bottom:14px;">Selecciona a que negocio le quieres generar la pagina web:</p>';
+        let html = '<p style="font-size:0.82rem;color:#8B0000;margin-bottom:14px;">Selecciona a que negocio le quieres generar la pagina web:</p>';
         businesses.forEach(b => {
             const coverImg = b.cover_image || '';
             html += `
-                <a href="/web/${b.slug}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:10px;text-decoration:none;color:inherit;transition:all 0.2s;background:#fff;" onmouseover="this.style.borderColor='#0ea5e9';this.style.boxShadow='0 4px 12px rgba(14,165,233,0.1)';" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none';">
-                    <div style="width:52px;height:52px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">
-                        ${coverImg ? `<img src="${coverImg}" alt="" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fas fa-store" style="font-size:1.2rem;color:#94a3b8;"></i>'}
+                <a href="/web/${b.slug}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #8B0000;border-radius:12px;margin-bottom:10px;text-decoration:none;color:inherit;transition:all 0.2s;background:#fff;" onmouseover="this.style.borderColor='#8B0000';this.style.boxShadow='0 4px 12px rgba(14,165,233,0.1)';" onmouseout="this.style.borderColor='#8B0000';this.style.boxShadow='none';">
+                    <div style="width:52px;height:52px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#8B0000;display:flex;align-items:center;justify-content:center;">
+                        ${coverImg ? `<img src="${coverImg}" alt="" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fas fa-store" style="font-size:1.2rem;color:#8B0000;"></i>'}
                     </div>
                     <div style="flex:1;min-width:0;">
                         <div style="font-size:0.95rem;font-weight:700;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${b.title || 'Sin nombre'}</div>
-                        <div style="font-size:0.78rem;color:#64748b;margin-top:2px;">${b.city || ''}${b.state ? ', ' + b.state : ''} ${b.category_name ? ' · ' + b.category_name : ''}</div>
+                        <div style="font-size:0.78rem;color:#8B0000;margin-top:2px;">${b.city || ''}${b.state ? ', ' + b.state : ''} ${b.category_name ? ' · ' + b.category_name : ''}</div>
                     </div>
-                    <div style="flex-shrink:0;color:#0ea5e9;font-size:0.8rem;font-weight:600;display:flex;align-items:center;gap:4px;">
+                    <div style="flex-shrink:0;color:#8B0000;font-size:0.8rem;font-weight:600;display:flex;align-items:center;gap:4px;">
                         Ver <i class="fas fa-external-link-alt" style="font-size:0.7rem;"></i>
                     </div>
                 </a>`;
@@ -676,14 +676,14 @@ function getBusinessUrl(business) {
 function shareBusinessWhatsApp(business) {
     if (!business) return;
     const type = getBusinessTypeLabel(business.business_type);
-    const url = 'https://holax.com.ve' + getBusinessUrl(business);
+    const url = 'https://en-santiago.com' + getBusinessUrl(business);
     const title = business.title || 'Negocio';
 
     let msg = `🏪 *${title}*\n`;
     msg += `📌 ${type}\n`;
     if (business.city) msg += `📍 ${business.city}${business.state ? ', ' + business.state : ''}\n`;
     msg += `\n🔗 ${url}`;
-    msg += `\n\n📌 Publicado en HolaX`;
+    msg += `\n\n📌 Publicado en En-Santiago`;
 
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
 }
@@ -762,7 +762,7 @@ document.addEventListener('click', (e) => {
         shareBusinessWhatsApp(business);
     }).catch(() => {
         // Minimal share with just the link
-        window.open(`https://wa.me/?text=${encodeURIComponent('🏪 Mira este negocio en HolaX:\nhttps://holax.com.ve/negocio/' + businessId)}`, '_blank');
+        window.open(`https://wa.me/?text=${encodeURIComponent('🏪 Mira este negocio en En-Santiago:\nhttps://en-santiago.com/negocio/' + businessId)}`, '_blank');
     });
 });
 
@@ -911,7 +911,7 @@ async function loadVideoCarousel() {
                 <div style="flex:0 0 280px;scroll-snap-align:start;border-radius:14px;overflow:hidden;background:#111;position:relative;cursor:pointer;aspect-ratio:16/9;" onclick="this.innerHTML='<iframe src=\\'${embedUrl}&autoplay=1\\' style=\\'width:100%;height:100%;border:none;\\' allow=\\'autoplay;encrypted-media\\' allowfullscreen></iframe>'">
                     ${thumb
                         ? `<img src="${thumb}" style="width:100%;height:100%;object-fit:cover;" alt="${v.title || 'Video'}" loading="lazy">`
-                        : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6b7280;"><i class="fas fa-video" style="font-size:2rem;"></i></div>`
+                        : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8B0000;"><i class="fas fa-video" style="font-size:2rem;"></i></div>`
                     }
                     <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);">
                         <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;">
@@ -1805,7 +1805,7 @@ async function loadFeaturedJobs() {
                 ${featuredBadge}
                 <div class="business-card-img">
                     ${bizLogo ? `<img src="${escapeHtml(bizLogo)}" alt="${escapeHtml(j.company_name || '')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}
-                    <div class="card-img-placeholder" style="${bizLogo ? 'display:none;' : ''}background:linear-gradient(135deg,#17a2b8,#20c997);">
+                    <div class="card-img-placeholder" style="${bizLogo ? 'display:none;' : ''}background:linear-gradient(135deg,#8B0000,#20c997);">
                         <i class="fas fa-briefcase" style="color:#fff;font-size:2rem;"></i>
                     </div>
                     <div class="card-badges">
@@ -1897,7 +1897,7 @@ async function loadFeaturedJobs() {
                 if (clickUrl) {
                     const cta = document.createElement('button');
                     cta.textContent = ctaText;
-                    cta.style.cssText = 'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:none;padding:12px 32px;border-radius:50px;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(124,58,237,0.5);z-index:3;white-space:nowrap;letter-spacing:0.3px;transition:transform 0.2s,box-shadow 0.2s;';
+                    cta.style.cssText = 'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;border:none;padding:12px 32px;border-radius:50px;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(124,58,237,0.5);z-index:3;white-space:nowrap;letter-spacing:0.3px;transition:transform 0.2s,box-shadow 0.2s;';
                     cta.onmouseenter = function() { cta.style.transform = 'translateX(-50%) scale(1.05)'; cta.style.boxShadow = '0 6px 20px rgba(124,58,237,0.7)'; };
                     cta.onmouseleave = function() { cta.style.transform = 'translateX(-50%) scale(1)'; cta.style.boxShadow = '0 4px 15px rgba(124,58,237,0.5)'; };
                     cta.addEventListener('click', function(e) {
@@ -1942,4 +1942,5 @@ async function loadFeaturedJobs() {
         show();
     }
 })();
+
 

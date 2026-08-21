@@ -50,10 +50,10 @@
                 <a href="new-business.html" class="btn btn-sm" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-weight:700;border:none;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.82rem;box-shadow:0 3px 10px rgba(5,150,105,0.3);">
                     <i class="fas fa-building"></i> Publicar Negocio
                 </a>
-                <button class="btn btn-sm" onclick="window.sellerPanel.openJobForm()" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff;font-weight:700;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:0.82rem;box-shadow:0 3px 10px rgba(124,58,237,0.3);">
+                <button class="btn btn-sm" onclick="window.sellerPanel.openJobForm()" style="background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;font-weight:700;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:0.82rem;box-shadow:0 3px 10px rgba(124,58,237,0.3);">
                     <i class="fas fa-briefcase"></i> Publicar Empleo
                 </button>
-                <a href="new-property.html" class="btn btn-sm" style="background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-weight:700;border:none;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.82rem;box-shadow:0 3px 10px rgba(37,99,235,0.3);">
+                <a href="new-property.html" class="btn btn-sm" style="background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;font-weight:700;border:none;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.82rem;box-shadow:0 3px 10px rgba(37,99,235,0.3);">
                     <i class="fas fa-home"></i> Publicar Propiedad
                 </a>
             </div>
@@ -159,7 +159,7 @@
     // ─── Load Seller Products (by user_id, no business filter) ──
     async function loadSellerProducts(container) {
         if (!container) return;
-        container.innerHTML = '<div style="text-align:center;padding:24px;color:#94a3b8;"><i class="fas fa-spinner fa-spin" style="font-size:24px;color:#f59e0b;"></i><p style="margin-top:8px;">Cargando productos...</p></div>';
+        container.innerHTML = '<div style="text-align:center;padding:24px;color:#8B0000;"><i class="fas fa-spinner fa-spin" style="font-size:24px;color:#f59e0b;"></i><p style="margin-top:8px;">Cargando productos...</p></div>';
 
         try {
             const cachedUser = getCachedUser();
@@ -172,8 +172,8 @@
             if (products.length === 0) {
                 container.innerHTML = `
                     <div class="dash-card">
-                        <div style="text-align:center;padding:32px 0;color:#94a3b8;">
-                            <i class="fas fa-box-open" style="font-size:2.5rem;color:#cbd5e1;"></i>
+                        <div style="text-align:center;padding:32px 0;color:#8B0000;">
+                            <i class="fas fa-box-open" style="font-size:2.5rem;color:#8B0000;"></i>
                             <p style="margin-top:12px;">No tienes productos publicados.</p>
                             <button class="btn btn-primary btn-sm" onclick="window.sellerPanel.openProductModal()" style="display:inline-block;margin-top:12px;"><i class="fas fa-plus"></i> Publicar Producto</button>
                         </div>
@@ -185,7 +185,7 @@
                 <div class="dash-card">
                     <div class="dash-card-header">
                         <h3><i class="fas fa-box" style="color:#d97706;"></i> Mis Productos</h3>
-                        <span style="font-size:0.75rem;color:#94a3b8;background:#f1f5f9;padding:4px 10px;border-radius:12px;">${products.length} producto${products.length > 1 ? 's' : ''}</span>
+                        <span style="font-size:0.75rem;color:#8B0000;background:#8B0000;padding:4px 10px;border-radius:12px;">${products.length} producto${products.length > 1 ? 's' : ''}</span>
                     </div>
                     <div class="dash-table-responsive">
                         <table class="dash-table">
@@ -203,14 +203,14 @@
 
             products.forEach(p => {
                 const statusLabel = p.status === 'approved' ? '<span class="status-badge status-approved">Activo</span>' : p.status === 'pending' ? '<span class="status-badge status-pending">Pendiente</span>' : p.status === 'rejected' ? '<span class="status-badge status-rejected">Rechazado</span>' : '<span class="status-badge">' + (p.status || '-') + '</span>';
-                const bizLabel = p.business_name ? `<div style="font-size:0.72rem;color:#94a3b8;margin-top:2px;"><i class="fas fa-store"></i> ${p.business_name}</div>` : '';
+                const bizLabel = p.business_name ? `<div style="font-size:0.72rem;color:#8B0000;margin-top:2px;"><i class="fas fa-store"></i> ${p.business_name}</div>` : '';
                 html += `
                     <tr>
                         <td><div class="dash-prop-name">${p.image ? `<img src="${p.image}" class="dash-thumb" onerror="this.style.display='none'">` : '<i class="fas fa-image dash-thumb-placeholder"></i>'}<div><span>${p.name || 'Sin nombre'}</span>${bizLabel}</div></div></td>
                         <td>${p.category || 'General'}</td>
                         <td class="dash-price">$${Number(p.price || 0).toLocaleString('es-VE')}</td>
                         <td>${statusLabel}</td>
-                        <td style="font-size:0.8rem;color:#94a3b8;">${formatDateShort(p.created_at)}</td>
+                        <td style="font-size:0.8rem;color:#8B0000;">${formatDateShort(p.created_at)}</td>
                         <td class="dash-actions">
                             <button class="btn-icon btn-icon-danger" onclick="deleteProduct(${p.id})" title="Eliminar"><i class="fas fa-trash"></i></button>
                         </td>
@@ -317,15 +317,15 @@
                         <i class="fas fa-camera"></i> Foto de Perfil del Vendedor
                     </h4>
                     <p style="margin:0 0 16px 0;font-size:0.82rem;color:#047857;">Esta foto se mostrará en tu perfil público de vendedor</p>
-                    <div id="sellerAvatarPreview" style="width:100px;height:100px;border-radius:50%;border:3px solid #a7f3d0;margin:0 auto 12px auto;overflow:hidden;background:#e2e8f0;display:flex;align-items:center;justify-content:center;">
-                        <i class="fas fa-user" style="font-size:36px;color:#94a3b8;"></i>
+                    <div id="sellerAvatarPreview" style="width:100px;height:100px;border-radius:50%;border:3px solid #a7f3d0;margin:0 auto 12px auto;overflow:hidden;background:#8B0000;display:flex;align-items:center;justify-content:center;">
+                        <i class="fas fa-user" style="font-size:36px;color:#8B0000;"></i>
                     </div>
                     <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
                         <label for="sellerAvatarInput" class="btn btn-sm" style="background:#059669;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:600;">
                             <i class="fas fa-camera"></i> Subir Foto
                         </label>
                         <input type="file" id="sellerAvatarInput" accept="image/*" style="display:none;">
-                        <input type="url" id="sellerAvatarUrl" class="form-control" placeholder="O pega URL de imagen" style="flex:1;min-width:180px;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.82rem;max-width:280px;">
+                        <input type="url" id="sellerAvatarUrl" class="form-control" placeholder="O pega URL de imagen" style="flex:1;min-width:180px;padding:8px 12px;border:1px solid #8B0000;border-radius:8px;font-size:0.82rem;max-width:280px;">
                     </div>
                     <div id="sellerAvatarProgress" style="display:none;margin-top:8px;color:#059669;font-size:0.82rem;">
                         <i class="fas fa-spinner fa-spin"></i> Subiendo foto...
@@ -380,7 +380,7 @@
                             </div>
                         </div>
                         <div class="profile-input-group">
-                            <label for="sellerFacebook"><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook</label>
+                            <label for="sellerFacebook"><i class="fab fa-facebook" style="color:#8B0000"></i> Facebook</label>
                             <div class="profile-input-wrapper">
                                 <i class="fab fa-facebook"></i>
                                 <input type="text" id="sellerFacebook" name="facebook" placeholder="facebook.com/tu_pagina">
@@ -558,25 +558,25 @@
         modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);';
         modal.innerHTML = `
             <div style="background:#fff;border-radius:16px;width:90%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-                <div style="padding:20px 24px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;">
-                    <h3 style="margin:0;font-size:1.1rem;color:#1e293b;"><i class="fas fa-briefcase" style="color:#7c3aed;"></i> Publicar Empleo</h3>
-                    <button onclick="document.getElementById('sellerJobModal').remove()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#94a3b8;">&times;</button>
+                <div style="padding:20px 24px;border-bottom:1px solid #8B0000;display:flex;align-items:center;justify-content:space-between;">
+                    <h3 style="margin:0;font-size:1.1rem;color:#1e293b;"><i class="fas fa-briefcase" style="color:#8B0000;"></i> Publicar Empleo</h3>
+                    <button onclick="document.getElementById('sellerJobModal').remove()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#8B0000;">&times;</button>
                 </div>
                 <div style="padding:24px;">
                     <form id="sellerJobForm">
                         <div style="margin-bottom:16px;">
                             <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Título del Empleo *</label>
-                            <input type="text" id="sellerJobTitle" required placeholder="Ej: Vendedor de tienda" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                            <input type="text" id="sellerJobTitle" required placeholder="Ej: Vendedor de tienda" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                         </div>
                         <div style="margin-bottom:16px;">
                             <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre de la Empresa / Vendedor</label>
-                            <input type="text" id="sellerJobCompany" value="${userName.replace(/"/g, '&quot;')}" placeholder="Tu nombre o empresa" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
-                            <small style="font-size:0.75rem;color:#94a3b8;">No necesitas tener un negocio registrado. Usa tu nombre o el de tu empresa.</small>
+                            <input type="text" id="sellerJobCompany" value="${userName.replace(/"/g, '&quot;')}" placeholder="Tu nombre o empresa" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
+                            <small style="font-size:0.75rem;color:#8B0000;">No necesitas tener un negocio registrado. Usa tu nombre o el de tu empresa.</small>
                         </div>
                         <div style="display:flex;gap:12px;margin-bottom:16px;">
                             <div style="flex:1;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Tipo de Empleo</label>
-                                <select id="sellerJobType" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <select id="sellerJobType" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                                     <option value="tiempo_completo">Tiempo Completo</option>
                                     <option value="medio_tiempo">Medio Tiempo</option>
                                     <option value="freelance">Freelance</option>
@@ -587,40 +587,40 @@
                             </div>
                             <div style="flex:1;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Salario</label>
-                                <input type="text" id="sellerJobSalary" placeholder="Ej: $500 - $800" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="text" id="sellerJobSalary" placeholder="Ej: $500 - $800" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                         </div>
                         <div style="display:flex;gap:12px;margin-bottom:16px;">
                             <div style="flex:1;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Estado</label>
-                                <input type="text" id="sellerJobState" value="Mérida" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="text" id="sellerJobState" value="Mérida" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                             <div style="flex:1;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Ciudad</label>
-                                <input type="text" id="sellerJobCity" value="Mérida" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="text" id="sellerJobCity" value="Mérida" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                         </div>
                         <div style="margin-bottom:16px;">
                             <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Descripción del Empleo</label>
-                            <textarea id="sellerJobDesc" rows="4" placeholder="Describe el puesto, responsabilidades..." style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;resize:vertical;"></textarea>
+                            <textarea id="sellerJobDesc" rows="4" placeholder="Describe el puesto, responsabilidades..." style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;resize:vertical;"></textarea>
                         </div>
                         <div style="margin-bottom:16px;">
                             <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Requisitos</label>
-                            <textarea id="sellerJobReqs" rows="2" placeholder="Requisitos mínimos..." style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;resize:vertical;"></textarea>
+                            <textarea id="sellerJobReqs" rows="2" placeholder="Requisitos mínimos..." style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;resize:vertical;"></textarea>
                         </div>
                         <div style="display:flex;gap:12px;margin-bottom:16px;">
                             <div style="flex:1;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Email de Contacto</label>
-                                <input type="email" id="sellerJobEmail" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="email" id="sellerJobEmail" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                             <div style="flex:1;">
                                 <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Teléfono / WhatsApp</label>
-                                <input type="tel" id="sellerJobPhone" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                <input type="tel" id="sellerJobPhone" style="width:100%;padding:10px 14px;border:1px solid #8B0000;border-radius:8px;font-size:0.9rem;">
                             </div>
                         </div>
                         <div style="display:flex;gap:12px;justify-content:flex-end;">
-                            <button type="button" onclick="document.getElementById('sellerJobModal').remove()" style="padding:10px 20px;border:1px solid #d1d5db;border-radius:8px;background:#fff;cursor:pointer;font-size:0.9rem;font-weight:600;color:#64748b;">Cancelar</button>
-                            <button type="submit" style="padding:10px 20px;border:none;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff;cursor:pointer;font-size:0.9rem;font-weight:700;box-shadow:0 3px 10px rgba(124,58,237,0.3);">
+                            <button type="button" onclick="document.getElementById('sellerJobModal').remove()" style="padding:10px 20px;border:1px solid #8B0000;border-radius:8px;background:#fff;cursor:pointer;font-size:0.9rem;font-weight:600;color:#8B0000;">Cancelar</button>
+                            <button type="submit" style="padding:10px 20px;border:none;border-radius:8px;background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;cursor:pointer;font-size:0.9rem;font-weight:700;box-shadow:0 3px 10px rgba(124,58,237,0.3);">
                                 <i class="fas fa-paper-plane"></i> Publicar Empleo
                             </button>
                         </div>
@@ -670,7 +670,7 @@
     function showToast(msg, type) {
         if (window.showToast) { window.showToast(msg, type); return; }
         const t = document.createElement('div');
-        t.style.cssText = `position:fixed;top:20px;right:20px;z-index:99999;padding:12px 20px;border-radius:10px;color:#fff;font-size:0.85rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.2);background:${type === 'success' ? '#059669' : type === 'error' ? '#dc2626' : '#2563eb'};transition:opacity 0.3s;`;
+        t.style.cssText = `position:fixed;top:20px;right:20px;z-index:99999;padding:12px 20px;border-radius:10px;color:#fff;font-size:0.85rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.2);background:${type === 'success' ? '#059669' : type === 'error' ? '#dc2626' : '#8B0000'};transition:opacity 0.3s;`;
         t.textContent = msg;
         document.body.appendChild(t);
         setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3000);

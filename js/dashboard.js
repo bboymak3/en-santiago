@@ -449,8 +449,8 @@ window.closeEditBusinessModal = function() {
                 // If multiple businesses, show a small selector
                 if (userProperties.length > 1) {
                     const selectorWrap = document.createElement('div');
-                    selectorWrap.style.cssText = 'margin-top:12px;padding-top:12px;border-top:1px solid #e2e8f0;';
-                    selectorWrap.innerHTML = '<p style="margin:0 0 8px;font-size:0.8rem;color:#64748b;font-weight:600;">Tambien puedes editar:</p><div style="display:flex;gap:8px;flex-wrap:wrap;" id="editProfileOtherBiz"></div>';
+                    selectorWrap.style.cssText = 'margin-top:12px;padding-top:12px;border-top:1px solid #8B0000;';
+                    selectorWrap.innerHTML = '<p style="margin:0 0 8px;font-size:0.8rem;color:#8B0000;font-weight:600;">Tambien puedes editar:</p><div style="display:flex;gap:8px;flex-wrap:wrap;" id="editProfileOtherBiz"></div>';
                     editProfileCTA.appendChild(selectorWrap);
                     const otherWrap = document.getElementById('editProfileOtherBiz');
                     userProperties.forEach(b => {
@@ -894,8 +894,8 @@ window.closeEditBusinessModal = function() {
             if (products.length === 0) {
                 container.innerHTML = `
                     <div class="dash-card">
-                        <div style="text-align:center;padding:32px 0;color:#94a3b8;">
-                            <i class="fas fa-box-open" style="font-size:2.5rem;color:#cbd5e1;"></i>
+                        <div style="text-align:center;padding:32px 0;color:#8B0000;">
+                            <i class="fas fa-box-open" style="font-size:2.5rem;color:#8B0000;"></i>
                             <p style="margin-top:12px;">No tienes productos publicados.</p>
                             <button class="btn btn-primary btn-sm" onclick="openProductModal()" style="display:inline-block;margin-top:12px;"><i class="fas fa-plus"></i> Publicar Producto</button>
                         </div>
@@ -948,12 +948,12 @@ window.closeEditBusinessModal = function() {
             <div class="dash-card" style="margin-bottom:16px;">
                 <div class="dash-card-header">
                     <h3 style="display:flex;align-items:center;gap:8px;">
-                        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#006EE3,#3B9AFF);display:flex;align-items:center;justify-content:center;">
+                        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#8B0000,#8B0000);display:flex;align-items:center;justify-content:center;">
                             <i class="fas fa-store" style="color:#fff;font-size:0.8rem;"></i>
                         </div>
-                        ${slug ? `<a href="/negocio/${slug}" style="color:#006EE3;text-decoration:none;font-weight:700;">${title}</a>` : `<span style="color:#006EE3;font-weight:700;">${title}</span>`}
+                        ${slug ? `<a href="/negocio/${slug}" style="color:#8B0000;text-decoration:none;font-weight:700;">${title}</a>` : `<span style="color:#8B0000;font-weight:700;">${title}</span>`}
                     </h3>
-                    <span style="font-size:0.75rem;color:#94a3b8;background:#f1f5f9;padding:4px 10px;border-radius:12px;">${products.length} producto${products.length > 1 ? 's' : ''}</span>
+                    <span style="font-size:0.75rem;color:#8B0000;background:#8B0000;padding:4px 10px;border-radius:12px;">${products.length} producto${products.length > 1 ? 's' : ''}</span>
                 </div>
                 <div class="dash-table-responsive">
                     <table class="dash-table">
@@ -982,7 +982,7 @@ window.closeEditBusinessModal = function() {
                                     <td>${formatDate(p.created_at)}</td>
                                     <td class="dash-actions">
                                         ${isProdExpired && (p.status === 'approved' || !p.status) ? `<button class="btn-icon" onclick="republishProduct(${p.id})" title="Republicar" style="color:#059669;"><i class="fas fa-redo"></i></button>` : ''}
-                                        <button class="btn-icon" onclick="editProduct(${p.id})" title="Editar" style="color:#006EE3;"><i class="fas fa-pen"></i></button>
+                                        <button class="btn-icon" onclick="editProduct(${p.id})" title="Editar" style="color:#8B0000;"><i class="fas fa-pen"></i></button>
                                         <button class="btn-icon btn-icon-danger" onclick="deleteProduct(${p.id})" title="Eliminar"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>`;
@@ -1118,7 +1118,7 @@ window.closeEditBusinessModal = function() {
                     const div = document.createElement('div');
                     div.className = 'prod-upload-preview';
                     div.style.cssText = 'display:inline-block;position:relative;margin:4px;';
-                    div.innerHTML = `<img src="${e.target.result}" alt="Preview" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid #006EE3;">
+                    div.innerHTML = `<img src="${e.target.result}" alt="Preview" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid #8B0000;">
                         <button type="button" onclick="this.parentElement.remove()" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;">&times;</button>`;
                     up.appendChild(div);
                 }
@@ -1175,7 +1175,7 @@ window.closeEditBusinessModal = function() {
                         const div = document.createElement('div');
                         div.className = 'prod-upload-preview';
                         div.style.cssText = 'display:inline-block;position:relative;margin:4px;';
-                        div.innerHTML = `<img src="${e.target.result}" alt="Preview" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid #e2e8f0;">
+                        div.innerHTML = `<img src="${e.target.result}" alt="Preview" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid #8B0000;">
                             <button type="button" onclick="this.parentElement.remove()" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;">&times;</button>`;
                         up.appendChild(div);
                     }
@@ -1371,8 +1371,8 @@ window.closeEditBusinessModal = function() {
                     div.className = 'prod-upload-preview';
                     div.style.cssText = 'display:inline-block;position:relative;margin:4px;';
                     div.dataset.imgIndex = idx;
-                    div.innerHTML = `<img src="${url}" alt="Foto ${idx+1}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${idx===0?'#006EE3':'#e2e8f0'};" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23e2e8f0%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2254%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-size=%2212%22>Sin imagen</text></svg>'">
-                        ${idx===0?'<span style="position:absolute;top:2px;left:2px;background:#006EE3;color:#fff;font-size:0.65rem;padding:1px 6px;border-radius:4px;">Principal</span>':''}
+                    div.innerHTML = `<img src="${url}" alt="Foto ${idx+1}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${idx===0?'#8B0000':'#8B0000'};" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23e2e8f0%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2254%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-size=%2212%22>Sin imagen</text></svg>'">
+                        ${idx===0?'<span style="position:absolute;top:2px;left:2px;background:#8B0000;color:#fff;font-size:0.65rem;padding:1px 6px;border-radius:4px;">Principal</span>':''}
                         <button type="button" onclick="removeProductImage(${idx})" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;">&times;</button>`;
                     preview.appendChild(div);
                 });
@@ -1420,8 +1420,8 @@ window.closeEditBusinessModal = function() {
                     const div = document.createElement('div');
                     div.className = 'prod-upload-preview';
                     div.style.cssText = 'display:inline-block;position:relative;margin:4px;';
-                    div.innerHTML = `<img src="${url}" alt="Foto ${i+1}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#006EE3':'#e2e8f0'};" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23e2e8f0%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2254%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-size=%2212%22>Sin imagen</text></svg>'">
-                        ${i===0?'<span style="position:absolute;top:2px;left:2px;background:#006EE3;color:#fff;font-size:0.65rem;padding:1px 6px;border-radius:4px;">Principal</span>':''}
+                    div.innerHTML = `<img src="${url}" alt="Foto ${i+1}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:2px solid ${i===0?'#8B0000':'#8B0000'};" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23e2e8f0%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2254%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-size=%2212%22>Sin imagen</text></svg>'">
+                        ${i===0?'<span style="position:absolute;top:2px;left:2px;background:#8B0000;color:#fff;font-size:0.65rem;padding:1px 6px;border-radius:4px;">Principal</span>':''}
                         <button type="button" onclick="removeProductImage(${i})" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;">&times;</button>`;
                     preview.appendChild(div);
                 });
@@ -1531,8 +1531,8 @@ window.closeEditBusinessModal = function() {
                         if (preview) {
                             const d = document.createElement('div');
                             d.style.cssText = 'position:relative;display:inline-block;';
-                            d.innerHTML = `<img src="${ev.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid ${idx===0?'#006EE3':'#e2e8f0'};">
-                                ${idx===0?'<span style="position:absolute;top:2px;left:2px;background:#006EE3;color:#fff;font-size:0.6rem;padding:1px 5px;border-radius:4px;">Principal</span>':''}
+                            d.innerHTML = `<img src="${ev.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid ${idx===0?'#8B0000':'#8B0000'};">
+                                ${idx===0?'<span style="position:absolute;top:2px;left:2px;background:#8B0000;color:#fff;font-size:0.6rem;padding:1px 5px;border-radius:4px;">Principal</span>':''}
                                 <button type="button" onclick="this.parentElement.remove()" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:0.65rem;cursor:pointer;">&times;</button>`;
                             preview.appendChild(d);
                         }
@@ -1613,11 +1613,11 @@ window.closeEditBusinessModal = function() {
             const select = document.getElementById('jobBusiness');
             if (select) {
                 select.innerHTML = '<option value="" disabled selected>Selecciona un negocio</option>';
-                // Always add HOLAX as the first option (uses Holax.png logo)
+                // Always add En-Santiago as the first option (uses En-Santiago.png logo)
                 const holaxOpt = document.createElement('option');
-                holaxOpt.value = 'holax';
-                holaxOpt.textContent = 'HOLAX';
-                holaxOpt.dataset.logo = '/images/Holax.png';
+                holaxOpt.value = 'En-Santiago';
+                holaxOpt.textContent = 'En-Santiago';
+                holaxOpt.dataset.logo = '/images/En-Santiago.png';
                 select.appendChild(holaxOpt);
                 if (businesses.length > 0) {
                     businesses.forEach(b => {
@@ -1774,7 +1774,7 @@ window.closeEditBusinessModal = function() {
                         <div style="font-size:0.85rem;color:#666;margin-top:3px;">${escapeHtml_service(s.description || 'Sin descripción')}</div>
                     </div>
                     <div style="display:flex;gap:6px;">
-                        <button class="btn-icon" onclick="editService(${s.id}, '${escapeAttr(s.title)}', '${escapeAttr(s.description || '')}')" title="Editar"><i class="fas fa-edit" style="color:#3b82f6;"></i></button>
+                        <button class="btn-icon" onclick="editService(${s.id}, '${escapeAttr(s.title)}', '${escapeAttr(s.description || '')}')" title="Editar"><i class="fas fa-edit" style="color:#8B0000;"></i></button>
                         <button class="btn-icon" onclick="deleteService(${s.id})" title="Eliminar"><i class="fas fa-trash" style="color:#e74c3c;"></i></button>
                     </div>
                 </div>
@@ -2007,7 +2007,7 @@ window.closeEditBusinessModal = function() {
 
                 const planBadge = user.plan_type === 'premium'
                     ? '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:700;background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border:1px solid #fbbf24;"><i class="fas fa-crown"></i> Premium</span>'
-                    : '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;background:#f1f5f9;color:#64748b;border:1px solid #e2e8f0;"><i class="fas fa-user"></i> Regular</span>';
+                    : '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;background:#8B0000;color:#8B0000;border:1px solid #8B0000;"><i class="fas fa-user"></i> Regular</span>';
 
                 const activateBtn = (!isSelf && user.plan_type !== 'premium')
                     ? `<button class="btn-approve-premium" style="margin-top:4px;" onclick="window._openManualPremium(${user.id}, '${(user.name||'').replace(/'/g, "'")}', '${user.email||''}')"><i class="fas fa-crown"></i> Premium</button>`
@@ -2309,12 +2309,12 @@ window.closeEditBusinessModal = function() {
         ctx.clearRect(0, 0, W, H);
 
         // Grid lines
-        ctx.strokeStyle = '#e2e8f0';
+        ctx.strokeStyle = '#8B0000';
         ctx.lineWidth = 0.5;
         for (let i = 0; i <= 4; i++) {
             const y = padT + (chartH / 4) * i;
             ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
-            ctx.fillStyle = '#94a3b8';
+            ctx.fillStyle = '#8B0000';
             ctx.font = '10px sans-serif';
             ctx.textAlign = 'right';
             ctx.fillText(Math.round(maxVal - (maxVal / 4) * i), padL - 6, y + 3);
@@ -2326,7 +2326,7 @@ window.closeEditBusinessModal = function() {
             if (i % step === 0) {
                 const x = padL + (chartW / Math.max(1, allDates.length - 1)) * i;
                 const label = date.substring(5); // MM-DD
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#8B0000';
                 ctx.font = '10px sans-serif';
                 ctx.textAlign = 'center';
                 ctx.fillText(label, x, H - 8);
@@ -2343,7 +2343,7 @@ window.closeEditBusinessModal = function() {
         }
 
         // Draw views line
-        ctx.strokeStyle = '#3b82f6';
+        ctx.strokeStyle = '#8B0000';
         ctx.lineWidth = 2;
         ctx.beginPath();
         views.forEach((v, i) => {
@@ -2353,7 +2353,7 @@ window.closeEditBusinessModal = function() {
         ctx.stroke();
 
         // Views dots
-        ctx.fillStyle = '#3b82f6';
+        ctx.fillStyle = '#8B0000';
         views.forEach(v => {
             const p = getXY(views, v.date);
             if (p) { ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI * 2); ctx.fill(); }
@@ -2378,7 +2378,7 @@ window.closeEditBusinessModal = function() {
 
         // Legend
         ctx.font = '11px sans-serif';
-        ctx.fillStyle = '#3b82f6'; ctx.fillRect(padL, H - 6, 12, 3); ctx.fillText('Vistas', padL + 16, H - 2);
+        ctx.fillStyle = '#8B0000'; ctx.fillRect(padL, H - 6, 12, 3); ctx.fillText('Vistas', padL + 16, H - 2);
         ctx.fillStyle = '#25d366'; ctx.fillRect(padL + 60, H - 6, 12, 3); ctx.fillText('WhatsApp', padL + 76, H - 2);
     }
 
@@ -2390,7 +2390,7 @@ window.closeEditBusinessModal = function() {
 
             if (businesses.length === 0) {
                 const body = document.getElementById('statsPerBusinessBody');
-                if (body) body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:24px;">No tienes negocios registrados.</td></tr>';
+                if (body) body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#8B0000;padding:24px;">No tienes negocios registrados.</td></tr>';
                 drawSimpleChart([], []);
                 return;
             }
@@ -2399,7 +2399,7 @@ window.closeEditBusinessModal = function() {
             const selectorEl = document.getElementById('statsBusinessSelector');
             if (selectorEl && !selectorEl.dataset.init) {
                 selectorEl.dataset.init = '1';
-                let selHtml = '<select id="statsBizSelect" style="padding:8px 12px;border-radius:8px;border:1px solid #e2e8f0;font-size:0.85rem;font-weight:600;cursor:pointer;background:#fff;">';
+                let selHtml = '<select id="statsBizSelect" style="padding:8px 12px;border-radius:8px;border:1px solid #8B0000;font-size:0.85rem;font-weight:600;cursor:pointer;background:#fff;">';
                 selHtml += '<option value="">Todos mis negocios</option>';
                 businesses.forEach(b => { selHtml += '<option value="' + b.id + '">' + (b.title || 'Sin título') + '</option>'; });
                 selHtml += '</select>';
@@ -2445,13 +2445,13 @@ window.closeEditBusinessModal = function() {
 
                     rows.push(`
                         <tr>
-                            <td><a href="/negocio/${biz.slug || biz.id}" style="color:#006EE3;font-weight:600;text-decoration:none;">${biz.title || 'Sin título'}</a></td>
-                            <td><span style="color:#64748b;font-size:0.85rem;">${biz.category_name || '--'}</span></td>
+                            <td><a href="/negocio/${biz.slug || biz.id}" style="color:#8B0000;font-weight:600;text-decoration:none;">${biz.title || 'Sin título'}</a></td>
+                            <td><span style="color:#8B0000;font-size:0.85rem;">${biz.category_name || '--'}</span></td>
                             <td><span style="font-weight:700;color:#1e293b;">${(stats.total_views || 0).toLocaleString()}</span></td>
                             <td><span style="font-weight:700;color:#25d366;">${(stats.total_whatsapp_clicks || 0).toLocaleString()}</span></td>
                             <td><span style="font-weight:700;color:#f59e0b;">${(stats.total_phone_clicks || 0).toLocaleString()}</span></td>
-                            <td><span style="font-weight:700;color:#0ea5e9;">${(stats.total_website_clicks || 0).toLocaleString()}</span></td>
-                            <td><span style="font-weight:700;color:#8b5cf6;">${(stats.total_shares || 0).toLocaleString()}</span></td>
+                            <td><span style="font-weight:700;color:#8B0000;">${(stats.total_website_clicks || 0).toLocaleString()}</span></td>
+                            <td><span style="font-weight:700;color:#8B0000;">${(stats.total_shares || 0).toLocaleString()}</span></td>
                         </tr>
                     `);
                 } catch(e) {
@@ -2459,7 +2459,7 @@ window.closeEditBusinessModal = function() {
                         <tr>
                             <td>${biz.title || 'Sin título'}</td>
                             <td>${biz.category_name || '--'}</td>
-                            <td colspan="5" style="color:#94a3b8;">Sin datos</td>
+                            <td colspan="5" style="color:#8B0000;">Sin datos</td>
                         </tr>
                     `);
                 }
@@ -2479,7 +2479,7 @@ window.closeEditBusinessModal = function() {
 
             // Update table
             const body = document.getElementById('statsPerBusinessBody');
-            if (body) body.innerHTML = rows.length > 0 ? rows.join('') : '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:24px;">Sin datos para este período.</td></tr>';
+            if (body) body.innerHTML = rows.length > 0 ? rows.join('') : '<tr><td colspan="7" style="text-align:center;color:#8B0000;padding:24px;">Sin datos para este período.</td></tr>';
 
             // Draw chart
             drawSimpleChart(allDailyViews, allDailyWa);
@@ -2536,7 +2536,7 @@ window.closeEditBusinessModal = function() {
                 b.style.background = '#fff';
                 b.classList.remove('active');
             });
-            e.target.style.background = '#f1f5f9';
+            e.target.style.background = '#8B0000';
             e.target.classList.add('active');
             loadBusinessStats();
         }
@@ -2565,8 +2565,8 @@ window.closeEditBusinessModal = function() {
             logoDiv.innerHTML = `
                 <label>Logo del Negocio</label>
                 <div style="display:flex;align-items:center;gap:12px;margin-top:6px;">
-                    <div class="edit-biz-logo-preview" style="width:64px;height:64px;border-radius:10px;border:2px dashed #d1d5db;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f9fafb;flex-shrink:0;">
-                        <i class="fas fa-building edit-biz-logo-icon" style="font-size:1.2rem;color:#94a3b8;"></i>
+                    <div class="edit-biz-logo-preview" style="width:64px;height:64px;border-radius:10px;border:2px dashed #8B0000;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#8B0000;flex-shrink:0;">
+                        <i class="fas fa-building edit-biz-logo-icon" style="font-size:1.2rem;color:#8B0000;"></i>
                         <img class="edit-biz-logo-img" src="" alt="Logo" style="width:100%;height:100%;object-fit:contain;display:none;">
                     </div>
                     <div>
@@ -2620,9 +2620,9 @@ window.closeEditBusinessModal = function() {
             bannerDiv.style.marginBottom = '16px';
             bannerDiv.innerHTML = `
                 <label>Imagen de Portada (Banner)</label>
-                <p style="font-size:0.78rem;color:#6b7280;margin:4px 0 8px;">Se muestra como portada tipo Facebook. Recomendado: 1200x400px.</p>
-                <div class="edit-biz-banner-preview" style="width:100%;height:140px;border-radius:10px;overflow:hidden;background:#f1f5f9;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-                    <span style="color:#94a3b8;font-size:0.85rem;"><i class="fas fa-panorama"></i> Sin banner</span>
+                <p style="font-size:0.78rem;color:#8B0000;margin:4px 0 8px;">Se muestra como portada tipo Facebook. Recomendado: 1200x400px.</p>
+                <div class="edit-biz-banner-preview" style="width:100%;height:140px;border-radius:10px;overflow:hidden;background:#8B0000;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+                    <span style="color:#8B0000;font-size:0.85rem;"><i class="fas fa-panorama"></i> Sin banner</span>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
                     <button type="button" class="btn btn-secondary btn-sm edit-biz-banner-upload-btn">
@@ -2632,7 +2632,7 @@ window.closeEditBusinessModal = function() {
                         <i class="fas fa-times"></i> Quitar
                     </button>
                     <input type="file" class="edit-biz-banner-input" accept="image/jpeg,image/png,image/webp" style="display:none;">
-                    <span class="edit-biz-banner-status" style="font-size:0.8rem;color:#6b7280;"></span>
+                    <span class="edit-biz-banner-status" style="font-size:0.8rem;color:#8B0000;"></span>
                 </div>
                 <input type="hidden" class="edit-biz-banner-url">
             `;
@@ -2686,7 +2686,7 @@ window.closeEditBusinessModal = function() {
                 editBizBannerFile = null;
                 bSection._bannerImgSrc = null;
                 bSection._bannerFile = null;
-                bSection.querySelector('.edit-biz-banner-preview').innerHTML = '<span style="color:#94a3b8;font-size:0.85rem;"><i class="fas fa-panorama"></i> Sin banner</span>';
+                bSection.querySelector('.edit-biz-banner-preview').innerHTML = '<span style="color:#8B0000;font-size:0.85rem;"><i class="fas fa-panorama"></i> Sin banner</span>';
                 this.style.display = 'none';
                 bSection.querySelector('.edit-biz-banner-input').value = '';
                 bSection.querySelector('.edit-biz-banner-url').value = '';
@@ -2804,7 +2804,7 @@ window.closeEditBusinessModal = function() {
                 bannerSection.querySelector('.edit-biz-banner-remove-btn').style.display = 'inline-flex';
                 bannerSection.querySelector('.edit-biz-banner-url').value = biz.banner;
             } else {
-                bannerSection.querySelector('.edit-biz-banner-preview').innerHTML = '<span style="color:#94a3b8;font-size:0.85rem;"><i class="fas fa-panorama"></i> Sin banner</span>';
+                bannerSection.querySelector('.edit-biz-banner-preview').innerHTML = '<span style="color:#8B0000;font-size:0.85rem;"><i class="fas fa-panorama"></i> Sin banner</span>';
                 bannerSection.querySelector('.edit-biz-banner-remove-btn').style.display = 'none';
                 bannerSection.querySelector('.edit-biz-banner-url').value = '';
                 bannerSection.querySelector('.edit-biz-banner-input').value = '';
@@ -2898,12 +2898,12 @@ window.closeEditBusinessModal = function() {
             const biz = await res.json();
             const images = biz.images || [];
             if (images.length === 0) {
-                galleryEl.innerHTML = '<div style="text-align:center;padding:16px;border:2px dashed #d1d5db;border-radius:10px;color:#94a3b8;font-size:0.85rem;"><i class="fas fa-images" style="font-size:1.5rem;display:block;margin-bottom:6px;"></i>Sin imágenes.<br><small>Usa los botones de abajo para agregar.</small></div>';
+                galleryEl.innerHTML = '<div style="text-align:center;padding:16px;border:2px dashed #8B0000;border-radius:10px;color:#8B0000;font-size:0.85rem;"><i class="fas fa-images" style="font-size:1.5rem;display:block;margin-bottom:6px;"></i>Sin imágenes.<br><small>Usa los botones de abajo para agregar.</small></div>';
                 return;
             }
             galleryEl.innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:8px;">' +
                 images.map(function(img) {
-                    return '<div style="position:relative;display:inline-block;border-radius:8px;overflow:hidden;border:2px solid ' + (img.is_cover ? '#f59e0b' : '#e5e7eb') + ';">' +
+                    return '<div style="position:relative;display:inline-block;border-radius:8px;overflow:hidden;border:2px solid ' + (img.is_cover ? '#f59e0b' : '#8B0000') + ';">' +
                         '<img src="' + img.url + '" style="width:90px;height:72px;object-fit:cover;" loading="lazy" onerror="this.style.display=\'none\'">' +
                         (img.is_cover ? '<span style="position:absolute;top:2px;left:2px;background:#f59e0b;color:#fff;font-size:0.6rem;padding:1px 4px;border-radius:4px;">Portada</span>' : '<button type="button" class="eb-gallery-cover-btn" data-biz="' + businessId + '" data-img="' + img.id + '" style="position:absolute;top:2px;left:2px;background:rgba(0,110,227,0.85);color:#fff;border:none;border-radius:4px;font-size:0.55rem;padding:1px 4px;cursor:pointer;" title="Portada"><i class="fas fa-star"></i></button>') +
                         '<button type="button" class="eb-gallery-del-btn" data-biz="' + businessId + '" data-img="' + img.id + '" style="position:absolute;bottom:2px;right:2px;background:rgba(220,53,69,0.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Eliminar"><i class="fas fa-trash"></i></button>' +
@@ -3157,8 +3157,8 @@ window.closeEditBusinessModal = function() {
     }
 
     function getPropertyStatusColor(status) {
-        const colors = { approved: '#006EE3', pending: '#d97706', rejected: '#dc2626' };
-        return colors[status] || '#64748b';
+        const colors = { approved: '#8B0000', pending: '#d97706', rejected: '#dc2626' };
+        return colors[status] || '#8B0000';
     }
 
     async function loadMyInmuebles(statusFilter) {
@@ -3205,15 +3205,15 @@ window.closeEditBusinessModal = function() {
                             <img src="${imgSrc}" alt="${escapeAttr(p.title)}" loading="lazy" onerror="this.src='${placeholderImg}'">
                             <div class="business-card-badges">
                                 <span class="card-badge badge-type">${typeLabel}</span>
-                                <span class="card-badge" style="background:#6366f1;color:#fff;">${opLabel}</span>
+                                <span class="card-badge" style="background:#8B0000;color:#fff;">${opLabel}</span>
                                 <span class="card-badge" style="background:${statusColor};color:#fff;">${getStatusLabel(p.status)}</span>
                             </div>
                         </div>
                         <div class="business-card-body" style="flex:1;display:flex;flex-direction:column;">
                             <h3 class="business-card-title">${truncateText(p.title, 40)}</h3>
                             <p class="business-card-location"><i class="fas fa-map-marker-alt"></i> ${city}</p>
-                            <p style="font-size:0.9rem;font-weight:700;color:#006EE3;margin:4px 0;">${price}</p>
-                            <p style="font-size:0.72rem;color:#94a3b8;margin-bottom:8px;"><i class="fas fa-eye"></i> ${p.views || 0} vistas</p>
+                            <p style="font-size:0.9rem;font-weight:700;color:#8B0000;margin:4px 0;">${price}</p>
+                            <p style="font-size:0.72rem;color:#8B0000;margin-bottom:8px;"><i class="fas fa-eye"></i> ${p.views || 0} vistas</p>
                             <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;">
                                 <a href="property-detail.html?id=${p.id}" class="btn btn-sm btn-secondary" title="Ver"><i class="fas fa-eye"></i> Ver</a>
                                 <a href="new-property.html?id=${p.id}" class="btn btn-sm btn-secondary" title="Editar"><i class="fas fa-edit"></i> Editar</a>
@@ -3322,7 +3322,7 @@ window.closeEditBusinessModal = function() {
                     <button class="btn" id="btnUpgradePremium" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#333;font-weight:700;font-size:0.85rem;padding:8px 18px;border-radius:8px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
                         <i class="fas fa-crown"></i> Solicitar Premium
                     </button>
-                    <a href="planes.html" class="btn" style="background:#f1f5f9;color:#475569;font-weight:600;font-size:0.85rem;padding:8px 18px;border-radius:8px;border:1px solid #e2e8f0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+                    <a href="planes.html" class="btn" style="background:#8B0000;color:#8B0000;font-weight:600;font-size:0.85rem;padding:8px 18px;border-radius:8px;border:1px solid #8B0000;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
                         <i class="fas fa-star"></i> Ver Ventajas Premium
                     </a>`;
                 // Re-bind the premium button
@@ -3350,7 +3350,7 @@ window.closeEditBusinessModal = function() {
                     const daysLeft = Math.ceil((expDate - now) / (1000 * 60 * 60 * 24));
                     planExpiryInfo.querySelector('span').textContent = `Tu plan Premium esta vigente. Expira en ${daysLeft} dias (${expDate.toLocaleDateString('es-VE')}). Tus publicaciones nunca caducan.`;
                     planExpiryInfo.style.display = 'block';
-                    planExpiryInfo.style.color = '#006EE3';
+                    planExpiryInfo.style.color = '#8B0000';
                 } else {
                     planExpiryInfo.querySelector('span').textContent = 'Tu plan Premium ha expirado. Tus proximas publicaciones caducaran a los 20 dias.';
                     planExpiryInfo.style.display = 'block';
@@ -3359,7 +3359,7 @@ window.closeEditBusinessModal = function() {
             } else if (!isPremium) {
                 planExpiryInfo.querySelector('span').textContent = 'Con el plan Basico, tus publicaciones caducan a los 20 dias. Mejora a Premium para que nunca caduquen.';
                 planExpiryInfo.style.display = 'block';
-                planExpiryInfo.style.color = '#64748b';
+                planExpiryInfo.style.color = '#8B0000';
             }
         }
     }
@@ -3418,14 +3418,14 @@ window.closeEditBusinessModal = function() {
             premiumVoucherDrop.addEventListener('click', () => premiumVoucherInput.click());
             premiumVoucherDrop.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                premiumVoucherDrop.style.borderColor = '#006EE3';
+                premiumVoucherDrop.style.borderColor = '#8B0000';
             });
             premiumVoucherDrop.addEventListener('dragleave', () => {
-                premiumVoucherDrop.style.borderColor = '#d1d5db';
+                premiumVoucherDrop.style.borderColor = '#8B0000';
             });
             premiumVoucherDrop.addEventListener('drop', (e) => {
                 e.preventDefault();
-                premiumVoucherDrop.style.borderColor = '#d1d5db';
+                premiumVoucherDrop.style.borderColor = '#8B0000';
                 const file = e.dataTransfer.files[0];
                 if (file) handleVoucherFile(file);
             });
@@ -3577,10 +3577,10 @@ window.closeEditBusinessModal = function() {
                 return `
                     <tr>
                         <td><strong>${escapeHtml(r.user_name || 'Usuario')}</strong></td>
-                        <td style="font-size:0.82rem;color:#64748b;">${escapeHtml(r.user_email || '')}</td>
+                        <td style="font-size:0.82rem;color:#8B0000;">${escapeHtml(r.user_email || '')}</td>
                         <td><span class="badge" style="background:#fef3c7;color:#92400e;">${durationLabel}</span></td>
                         <td>
-                            ${r.voucher_url ? `<img src="${r.voucher_url}" class="voucher-thumb" onclick="window._openVoucherLightbox('${r.voucher_url}')" alt="Voucher" onerror="this.style.display='none'">` : '<span style="color:#94a3b8;">Sin voucher</span>'}
+                            ${r.voucher_url ? `<img src="${r.voucher_url}" class="voucher-thumb" onclick="window._openVoucherLightbox('${r.voucher_url}')" alt="Voucher" onerror="this.style.display='none'">` : '<span style="color:#8B0000;">Sin voucher</span>'}
                         </td>
                         <td style="font-size:0.82rem;">${dateStr}</td>
                         <td style="display:flex;gap:6px;flex-wrap:wrap;">
@@ -3651,7 +3651,7 @@ window.closeEditBusinessModal = function() {
             searchInput.value = userEmail || userName || '';
             manualPremiumSelectedUser = { id: userId, name: userName, email: userEmail };
             resultDiv.style.display = 'block';
-            resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#006EE3;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(userName||'U')[0].toUpperCase()}</div><div><strong>${userName}</strong><br><span style="font-size:0.82rem;color:#64748b;">${userEmail}</span></div></div>`;
+            resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#8B0000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(userName||'U')[0].toUpperCase()}</div><div><strong>${userName}</strong><br><span style="font-size:0.82rem;color:#8B0000;">${userEmail}</span></div></div>`;
             actionsDiv.style.display = 'block';
             activateBtn.disabled = false;
         } else {
@@ -3707,7 +3707,7 @@ window.closeEditBusinessModal = function() {
                 manualPremiumSelectedUser = { id: u.id, name: u.name, email: u.email };
                 resultDiv.style.display = 'block';
                 const planInfo = u.plan_type === 'premium' ? ' <span style="color:#f59e0b;font-weight:700;">(YA ES PREMIUM)</span>' : '';
-                resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#006EE3;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(u.name||'U')[0].toUpperCase()}</div><div><strong>${u.name}</strong>${planInfo}<br><span style="font-size:0.82rem;color:#64748b;">${u.email}</span></div></div>`;
+                resultDiv.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:50%;background:#8B0000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">${(u.name||'U')[0].toUpperCase()}</div><div><strong>${u.name}</strong>${planInfo}<br><span style="font-size:0.82rem;color:#8B0000;">${u.email}</span></div></div>`;
                 actionsDiv.style.display = u.plan_type !== 'premium' ? 'block' : 'none';
                 activateBtn.disabled = u.plan_type === 'premium';
             } catch (e) {
@@ -3865,7 +3865,7 @@ window.closeEditBusinessModal = function() {
         const container = document.getElementById('adminEditBizContainer');
         if (!container) return;
         container.style.display = 'block';
-        container.innerHTML = '<div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#006EE3;"></i><p style="margin-top:8px;color:#64748b;">Cargando datos...</p></div>';
+        container.innerHTML = '<div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#8B0000;"></i><p style="margin-top:8px;color:#8B0000;">Cargando datos...</p></div>';
         try {
             const data = await api.get('/businesses/' + id);
             adminEditBizCurrent = data.business || data;
@@ -3878,42 +3878,42 @@ window.closeEditBusinessModal = function() {
     function renderAdminEditBizForm(b) {
         const container = document.getElementById('adminEditBizContainer');
         if (!container) return;
-        const statusColors = { approved: '#006EE3', pending: '#d97706', rejected: '#dc2626' };
+        const statusColors = { approved: '#8B0000', pending: '#d97706', rejected: '#dc2626' };
         const statusLabels = { approved: 'Aprobado', pending: 'Pendiente', rejected: 'Rechazado' };
         const images = b.images || [];
         container.innerHTML = `
         <div class="aeb-card">
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-                <h4 style="margin:0;"><i class="fas fa-building" style="color:#006EE3;"></i> ${escH(b.title)}</h4>
+                <h4 style="margin:0;"><i class="fas fa-building" style="color:#8B0000;"></i> ${escH(b.title)}</h4>
                 <div style="display:flex;gap:6px;align-items:center;">
-                    <span style="padding:3px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:${statusColors[b.status]||'#64748b'};color:#fff;">${statusLabels[b.status]||b.status}</span>
+                    <span style="padding:3px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:${statusColors[b.status]||'#8B0000'};color:#fff;">${statusLabels[b.status]||b.status}</span>
                     <a href="/negocio/${b.slug||b.id}" target="_blank" class="btn btn-secondary btn-sm"><i class="fas fa-external-link-alt"></i> Ver</a>
                     <button class="btn btn-danger btn-sm" onclick="adminDeleteBiz(${b.id})"><i class="fas fa-trash"></i> Eliminar</button>
                 </div>
             </div>
-            <p style="font-size:0.78rem;color:#94a3b8;margin:4px 0 0;">ID: ${b.id} | Dueño: ${b.owner_name||b.user_id||'?'} | Vistas: ${b.views||0}</p>
+            <p style="font-size:0.78rem;color:#8B0000;margin:4px 0 0;">ID: ${b.id} | Dueño: ${b.owner_name||b.user_id||'?'} | Vistas: ${b.views||0}</p>
         </div>
 
         <!-- Logo -->
         <div class="aeb-card">
-            <h4><i class="fas fa-image" style="color:#006EE3;"></i> Logo</h4>
+            <h4><i class="fas fa-image" style="color:#8B0000;"></i> Logo</h4>
             <div class="aeb-logo-area">
                 <div class="aeb-logo-preview" id="aebLogoPreview">
-                    ${b.logo ? `<img src="${escH(b.logo)}" alt="Logo" onerror="this.style.display='none'">` : '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>'}
+                    ${b.logo ? `<img src="${escH(b.logo)}" alt="Logo" onerror="this.style.display='none'">` : '<i class="fas fa-store" style="font-size:1.5rem;color:#8B0000;"></i>'}
                 </div>
                 <div>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('aebLogoInput').click()"><i class="fas fa-upload"></i> Subir Logo</button>
                     ${b.logo ? `<button type="button" class="btn btn-secondary btn-sm" onclick="adminRemoveLogo()"><i class="fas fa-trash"></i> Quitar</button>` : ''}
                     <input type="file" id="aebLogoInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="adminHandleLogoSelect(this)">
                     <input type="hidden" id="aebLogoUrl" value="${escH(b.logo||'')}">
-                    <p style="font-size:0.72rem;color:#9ca3af;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>
+                    <p style="font-size:0.72rem;color:#8B0000;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>
                 </div>
             </div>
         </div>
 
         <!-- Info -->
         <div class="aeb-card">
-            <h4><i class="fas fa-info-circle" style="color:#2563eb;"></i> Informacion Basica</h4>
+            <h4><i class="fas fa-info-circle" style="color:#8B0000;"></i> Informacion Basica</h4>
             <div class="aeb-grid">
                 <div class="aeb-field"><label>Nombre *</label><input type="text" class="eb-input" id="aebTitle" value="${escH(b.title||'')}" maxlength="150"></div>
                 <div class="aeb-field"><label>Categoria</label><input type="text" class="eb-input" id="aebCategory" value="${escH(b.category_name||b.category||'')}"></div>
@@ -3924,7 +3924,7 @@ window.closeEditBusinessModal = function() {
 
         <!-- Contact -->
         <div class="aeb-card">
-            <h4><i class="fas fa-phone" style="color:#006EE3;"></i> Contacto</h4>
+            <h4><i class="fas fa-phone" style="color:#8B0000;"></i> Contacto</h4>
             <div class="aeb-grid">
                 <div class="aeb-field"><label>Telefono</label><input type="tel" class="eb-input" id="aebPhone" value="${escH(b.phone||'')}"></div>
                 <div class="aeb-field"><label>WhatsApp</label><input type="tel" class="eb-input" id="aebWhatsapp" value="${escH(b.whatsapp||'')}"></div>
@@ -3950,7 +3950,7 @@ window.closeEditBusinessModal = function() {
 
         <!-- Images -->
         <div class="aeb-card">
-            <h4><i class="fas fa-images" style="color:#7c3aed;"></i> Imagenes (${images.length})</h4>
+            <h4><i class="fas fa-images" style="color:#8B0000;"></i> Imagenes (${images.length})</h4>
             ${images.length > 0 ? `<div class="aeb-images-grid" id="aebImagesGrid">
                 ${images.map((img, i) => `
                     <div class="aeb-img-thumb">
@@ -3959,7 +3959,7 @@ window.closeEditBusinessModal = function() {
                         ${img.is_cover ? '<span class="aeb-img-cover">Portada</span>' : `<button class="aeb-img-cover" onclick="adminSetCover(${img.id})" style="cursor:pointer;">Portada</button>`}
                     </div>
                 `).join('')}
-            </div>` : '<p style="color:#94a3b8;font-size:0.85rem;">No hay imagenes.</p>'}
+            </div>` : '<p style="color:#8B0000;font-size:0.85rem;">No hay imagenes.</p>'}
             <div style="margin-top:12px;">
                 <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('aebNewImageInput').click()"><i class="fas fa-plus"></i> Agregar Imagen</button>
                 <input type="file" id="aebNewImageInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="adminAddImage(this)">
@@ -3970,7 +3970,7 @@ window.closeEditBusinessModal = function() {
         <div class="aeb-card">
             <h4><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Estado</h4>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <button class="btn btn-sm ${b.status==='approved'?'btn-primary':'btn-secondary'}" onclick="adminChangeStatus(${b.id},'approved')" style="${b.status==='approved'?'background:#006EE3;':''}"><i class="fas fa-check"></i> Aprobar</button>
+                <button class="btn btn-sm ${b.status==='approved'?'btn-primary':'btn-secondary'}" onclick="adminChangeStatus(${b.id},'approved')" style="${b.status==='approved'?'background:#8B0000;':''}"><i class="fas fa-check"></i> Aprobar</button>
                 <button class="btn btn-sm ${b.status==='pending'?'btn-primary':'btn-secondary'}" onclick="adminChangeStatus(${b.id},'pending')" style="${b.status==='pending'?'background:#d97706;':''}"><i class="fas fa-clock"></i> Pendiente</button>
                 <button class="btn btn-sm ${b.status==='rejected'?'btn-primary':'btn-secondary'}" onclick="adminChangeStatus(${b.id},'rejected')" style="${b.status==='rejected'?'background:#dc2626;color:#fff;':''}"><i class="fas fa-times"></i> Rechazar</button>
             </div>
@@ -3978,7 +3978,7 @@ window.closeEditBusinessModal = function() {
 
         <!-- Save Button -->
         <div style="text-align:right;margin-top:8px;">
-            <button class="btn" onclick="adminSaveBizEdit(${b.id})" style="background:linear-gradient(135deg,#006EE3,#005BB5);color:#fff;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;font-size:0.95rem;">
+            <button class="btn" onclick="adminSaveBizEdit(${b.id})" style="background:linear-gradient(135deg,#8B0000,#8B0000);color:#fff;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;font-size:0.95rem;">
                 <i class="fas fa-save"></i> Guardar Cambios
             </button>
         </div>`;
@@ -4006,7 +4006,7 @@ window.closeEditBusinessModal = function() {
 
     window.adminRemoveLogo = function() {
         document.getElementById('aebLogoUrl').value = '';
-        document.getElementById('aebLogoPreview').innerHTML = '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>';
+        document.getElementById('aebLogoPreview').innerHTML = '<i class="fas fa-store" style="font-size:1.5rem;color:#8B0000;"></i>';
         if (adminEditBizCurrent) { adminEditBizCurrent.logo = null; }
     };
 
@@ -4158,9 +4158,9 @@ window.closeEditBusinessModal = function() {
                 html += '<tr style="font-size:0.85rem;">';
                 html += '<td>' + c.id + '</td>';
                 html += '<td><strong>' + escapeHtml(c.name) + '</strong></td>';
-                html += '<td style="color:#6b7280;font-size:0.78rem;">' + escapeHtml(c.slug) + '</td>';
-                html += '<td><i class="' + escapeHtml(c.icon || 'fas fa-store') + '" style="color:' + escapeHtml(c.color || '#607d8b') + ';"></i> <span style="font-size:0.75rem;color:#6b7280;">' + escapeHtml(c.icon || '') + '</span></td>';
-                html += '<td><span style="display:inline-block;width:18px;height:18px;border-radius:4px;background:' + escapeHtml(c.color || '#607d8b') + ';vertical-align:middle;border:1px solid #e5e7eb;"></span></td>';
+                html += '<td style="color:#8B0000;font-size:0.78rem;">' + escapeHtml(c.slug) + '</td>';
+                html += '<td><i class="' + escapeHtml(c.icon || 'fas fa-store') + '" style="color:' + escapeHtml(c.color || '#8B0000') + ';"></i> <span style="font-size:0.75rem;color:#8B0000;">' + escapeHtml(c.icon || '') + '</span></td>';
+                html += '<td><span style="display:inline-block;width:18px;height:18px;border-radius:4px;background:' + escapeHtml(c.color || '#8B0000') + ';vertical-align:middle;border:1px solid #8B0000;"></span></td>';
                 html += '<td>' + (c.business_count || 0) + '</td>';
                 html += '<td>' + c.sort_order + '</td>';
                 html += '<td>';
@@ -4195,7 +4195,7 @@ window.closeEditBusinessModal = function() {
             var result = await api.post('/categories', {
                 name: name,
                 icon: iconInput ? iconInput.value.trim() : 'fas fa-store',
-                color: colorInput ? colorInput.value : '#607d8b'
+                color: colorInput ? colorInput.value : '#8B0000'
             });
             showToast('Categoria "' + name + '" creada exitosamente', 'success');
             if (nameInput) nameInput.value = '';
@@ -4241,7 +4241,7 @@ window.closeEditBusinessModal = function() {
             }
 
             if (!suggestions.length) {
-                container.innerHTML = '<div style="text-align:center;color:#94a3b8;padding:16px;"><i class="fas fa-check-circle" style="font-size:1.5rem;color:#22c55e;"></i><p style="margin-top:8px;">No hay solicitudes pendientes</p></div>';
+                container.innerHTML = '<div style="text-align:center;color:#8B0000;padding:16px;"><i class="fas fa-check-circle" style="font-size:1.5rem;color:#22c55e;"></i><p style="margin-top:8px;">No hay solicitudes pendientes</p></div>';
                 return;
             }
 
@@ -4249,14 +4249,14 @@ window.closeEditBusinessModal = function() {
             suggestions.forEach(function(s) {
                 var statusColor = s.status === 'pending' ? '#f59e0b' : (s.status === 'approved' ? '#22c55e' : '#ef4444');
                 var statusLabel = s.status === 'pending' ? 'Pendiente' : (s.status === 'approved' ? 'Aprobada' : 'Rechazada');
-                html += '<div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:8px;background:#fff;' + (s.status !== 'pending' ? 'opacity:0.6;' : '') + '">';
+                html += '<div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #8B0000;border-radius:10px;margin-bottom:8px;background:#fff;' + (s.status !== 'pending' ? 'opacity:0.6;' : '') + '">';
                 html += '<div style="flex:1;min-width:0;">';
                 html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">';
                 html += '<strong style="font-size:0.9rem;">' + escapeHtml(s.category_name) + '</strong>';
                 html += '<span style="font-size:0.7rem;padding:2px 8px;border-radius:99px;background:' + statusColor + '20;color:' + statusColor + ';font-weight:600;">' + statusLabel + '</span>';
                 html += '</div>';
-                if (s.reason) html += '<p style="font-size:0.82rem;color:#6b7280;margin:0;">' + escapeHtml(s.reason) + '</p>';
-                html += '<p style="font-size:0.75rem;color:#94a3b8;margin:4px 0 0;">' + (s.user_name ? 'Por ' + escapeHtml(s.user_name) : 'Usuario no registrado') + ' &middot; ' + (s.created_at || '') + '</p>';
+                if (s.reason) html += '<p style="font-size:0.82rem;color:#8B0000;margin:0;">' + escapeHtml(s.reason) + '</p>';
+                html += '<p style="font-size:0.75rem;color:#8B0000;margin:4px 0 0;">' + (s.user_name ? 'Por ' + escapeHtml(s.user_name) : 'Usuario no registrado') + ' &middot; ' + (s.created_at || '') + '</p>';
                 html += '</div>';
                 if (s.status === 'pending') {
                     html += '<div style="display:flex;gap:6px;flex-shrink:0;">';
@@ -4269,7 +4269,7 @@ window.closeEditBusinessModal = function() {
             container.innerHTML = html;
         } catch(e) {
             // Table might not exist yet
-            container.innerHTML = '<div style="text-align:center;color:#94a3b8;padding:16px;"><i class="fas fa-info-circle"></i><p style="margin-top:8px;font-size:0.82rem;">No se pudieron cargar las solicitudes. Es posible que la tabla no exista aun en D1.</p></div>';
+            container.innerHTML = '<div style="text-align:center;color:#8B0000;padding:16px;"><i class="fas fa-info-circle"></i><p style="margin-top:8px;font-size:0.82rem;">No se pudieron cargar las solicitudes. Es posible que la tabla no exista aun en D1.</p></div>';
         }
     }
 
@@ -4400,24 +4400,24 @@ window.closeEditBusinessModal = function() {
             const data = await api.get('/notifications?limit=30');
             const notifs = data.notifications || [];
             if (notifs.length === 0) {
-                list.innerHTML = '<div style="text-align:center;padding:40px 16px;color:#94a3b8;"><i class="fas fa-bell-slash" style="font-size:28px;margin-bottom:8px;display:block;"></i><p style="font-size:0.85rem;">No hay notificaciones</p></div>';
+                list.innerHTML = '<div style="text-align:center;padding:40px 16px;color:#8B0000;"><i class="fas fa-bell-slash" style="font-size:28px;margin-bottom:8px;display:block;"></i><p style="font-size:0.85rem;">No hay notificaciones</p></div>';
                 return;
             }
             list.innerHTML = notifs.map(n => {
                 const icon = n.type === 'new_business' ? 'fa-store' : n.type === 'new_job' ? 'fa-briefcase' : n.type === 'new_property' ? 'fa-house' : n.type === 'new_product' ? 'fa-box' : n.type === 'review' ? 'fa-star' : n.type === 'premium_request' ? 'fa-crown' : n.type === 'announcement' ? 'fa-bullhorn' : n.type === 'alert' ? 'fa-exclamation-triangle' : 'fa-bell';
-                const iconBg = n.is_read ? '#f1f5f9' : '#eff6ff';
-                const iconColor = n.is_read ? '#94a3b8' : '#006EE3';
-                const bg = n.is_read ? '#fff' : '#f8faff';
+                const iconBg = n.is_read ? '#8B0000' : '#8B0000';
+                const iconColor = n.is_read ? '#8B0000' : '#8B0000';
+                const bg = n.is_read ? '#fff' : '#8B0000';
                 const timeAgo = getNotifTimeAgo(n.created_at);
                 const linkAttr = n.link ? `data-link="${n.link}"` : '';
-                return `<div class="notif-item" data-id="${n.id}" ${linkAttr} style="display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:${bg};border-bottom:1px solid #f1f5f9;cursor:pointer;transition:background .15s;">
+                return `<div class="notif-item" data-id="${n.id}" ${linkAttr} style="display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:${bg};border-bottom:1px solid #8B0000;cursor:pointer;transition:background .15s;">
                     <div style="width:34px;height:34px;border-radius:9px;background:${iconBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas ${icon}" style="font-size:0.8rem;color:${iconColor};"></i></div>
                     <div style="flex:1;min-width:0;">
                         <div style="font-size:0.82rem;font-weight:${n.is_read ? '400' : '600'};color:#1e293b;line-height:1.4;margin-bottom:2px;">${escapeNotifHtml(n.title)}</div>
-                        <div style="font-size:0.75rem;color:#64748b;line-height:1.4;">${escapeNotifHtml(n.message || '')}</div>
-                        <div style="font-size:0.68rem;color:#94a3b8;margin-top:4px;">${timeAgo}</div>
+                        <div style="font-size:0.75rem;color:#8B0000;line-height:1.4;">${escapeNotifHtml(n.message || '')}</div>
+                        <div style="font-size:0.68rem;color:#8B0000;margin-top:4px;">${timeAgo}</div>
                     </div>
-                    ${n.is_read ? '' : '<div style="width:8px;height:8px;border-radius:50%;background:#006EE3;flex-shrink:0;margin-top:6px;"></div>'}
+                    ${n.is_read ? '' : '<div style="width:8px;height:8px;border-radius:50%;background:#8B0000;flex-shrink:0;margin-top:6px;"></div>'}
                 </div>`;
             }).join('');
 
@@ -4426,7 +4426,7 @@ window.closeEditBusinessModal = function() {
                 item.addEventListener('click', async () => {
                     const id = item.dataset.id;
                     const link = item.dataset.link;
-                    const hasDot = item.querySelector('div[style*="background:#006EE3"]');
+                    const hasDot = item.querySelector('div[style*="background:#8B0000"]');
 
                     // Visual feedback immediately
                     item.style.opacity = '0.6';
@@ -4455,7 +4455,7 @@ window.closeEditBusinessModal = function() {
                         const title = item.querySelector('div[style*="font-weight"]')?.textContent || 'Notificación';
                         // Show brief inline feedback
                         const feedback = document.createElement('div');
-                        feedback.style.cssText = 'position:absolute;bottom:4px;right:12px;font-size:0.7rem;color:#006EE3;font-weight:600;';
+                        feedback.style.cssText = 'position:absolute;bottom:4px;right:12px;font-size:0.7rem;color:#8B0000;font-weight:600;';
                         feedback.textContent = '✓ Leída';
                         item.style.position = 'relative';
                         item.appendChild(feedback);
@@ -4505,8 +4505,8 @@ window.closeEditBusinessModal = function() {
         try { await api.patch('/notifications', { action: 'mark_all_read' }); loadNotifications(); pollUnreadCount(); } catch(e) {}
     });
 
-    bellBtn.addEventListener('mouseenter', () => { bellBtn.style.borderColor = '#006EE3'; bellBtn.style.color = '#006EE3'; });
-    bellBtn.addEventListener('mouseleave', () => { bellBtn.style.borderColor = '#e2e8f0'; bellBtn.style.color = '#475569'; });
+    bellBtn.addEventListener('mouseenter', () => { bellBtn.style.borderColor = '#8B0000'; bellBtn.style.color = '#8B0000'; });
+    bellBtn.addEventListener('mouseleave', () => { bellBtn.style.borderColor = '#8B0000'; bellBtn.style.color = '#8B0000'; });
 
     // Start polling
     pollUnreadCount();
@@ -4589,3 +4589,4 @@ window.closeEditBusinessModal = function() {
     }, 20000);
 
 })();
+

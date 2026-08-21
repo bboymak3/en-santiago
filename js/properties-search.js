@@ -506,10 +506,10 @@
     /** Color by operation type for markers */
     function getMarkerColor(operationType) {
         switch ((operationType || '').toLowerCase()) {
-            case 'venta': return '#2563eb';     // blue
+            case 'venta': return '#8B0000';     // #8B0000
             case 'alquiler': return '#16a34a';   // green
             case 'venta_alquiler': return '#ea580c'; // orange
-            default: return '#6b7280';           // gray
+            default: return '#8B0000';           // gray
         }
     }
 

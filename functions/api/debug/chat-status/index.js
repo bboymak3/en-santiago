@@ -87,17 +87,17 @@ export async function onRequestGet(context) {
     }
 
     const html = `<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Chat Debug - HolaX</title>
+<html><head><meta charset="UTF-8"><title>Chat Debug - En-Santiago</title>
 <style>
 body{font-family:monospace;background:#1a1a2e;color:#e0e0e0;padding:20px;max-width:900px;margin:auto;}
-h1{color:#00d4ff;border-bottom:2px solid #00d4ff;padding-bottom:10px;}
+h1{color:#8B0000;border-bottom:2px solid #8B0000;padding-bottom:10px;}
 h2{color:#f59e0b;margin-top:24px;}
 pre{background:#0d1117;border:1px solid #333;border-radius:8px;padding:14px;overflow-x:auto;font-size:0.85rem;line-height:1.6;}
 .ok{color:#25d366;font-weight:bold;}
 .err{color:#dc2626;font-weight:bold;}
 .warn{color:#f59e0b;}
 </style></head><body>
-<h1>Chat Debug - HolaX</h1>
+<h1>Chat Debug - En-Santiago</h1>
 <p>Estado de tablas y datos de chat en la base de datos</p>
 
 <h2>1. Tablas</h2>

@@ -132,7 +132,7 @@
         const btn = document.getElementById('removeBannerBtn');
         const input = document.getElementById('bannerInput');
         if (container) {
-            container.innerHTML = '<span id="bannerPlaceholderText" style="color:#94a3b8;font-size:0.9rem;"><i class="fas fa-panorama" style="font-size:1.5rem;display:block;margin-bottom:6px;"></i>Sin imagen de portada</span><img id="bannerPreviewImg" src="" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:none;">';
+            container.innerHTML = '<span id="bannerPlaceholderText" style="color:#8B0000;font-size:0.9rem;"><i class="fas fa-panorama" style="font-size:1.5rem;display:block;margin-bottom:6px;"></i>Sin imagen de portada</span><img id="bannerPreviewImg" src="" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:none;">';
         }
         if (placeholder) placeholder.style.display = '';
         if (btn) btn.style.display = 'none';
@@ -296,7 +296,7 @@
             titleInput.addEventListener('input', () => {
                 const len = titleInput.value.length;
                 titleCount.textContent = len + '/150';
-                titleCount.style.color = len > 140 ? '#ef4444' : len > 100 ? '#f59e0b' : '#9ca3af';
+                titleCount.style.color = len > 140 ? '#ef4444' : len > 100 ? '#f59e0b' : '#8B0000';
             });
         }
 
@@ -304,7 +304,7 @@
             descInput.addEventListener('input', () => {
                 const len = descInput.value.length;
                 descCount.textContent = len + '/2000';
-                descCount.style.color = len > 1800 ? '#ef4444' : len > 1500 ? '#f59e0b' : '#9ca3af';
+                descCount.style.color = len > 1800 ? '#ef4444' : len > 1500 ? '#f59e0b' : '#8B0000';
             });
         }
     }
@@ -1112,7 +1112,7 @@
             Array.from(files).forEach(function(file) {
                 if (!file.type.startsWith('video/')) { showToast(file.name + ': Solo video', 'error'); return; }
                 if (file.size > 50 * 1024 * 1024) { showToast(file.name + ': Max 50MB', 'error'); return; }
-                if (infoDiv) infoDiv.innerHTML += '<div style="padding:4px 8px;background:#EFF6FF;border-radius:6px;margin-top:4px;font-size:0.82rem;" id="bfUpload_' + file.name.replace(/[^a-zA-Z0-9]/g, '_') + '"><i class="fas fa-spinner fa-spin"></i> ' + file.name + ' - Subiendo...</div>';
+                if (infoDiv) infoDiv.innerHTML += '<div style="padding:4px 8px;background:#8B0000;border-radius:6px;margin-top:4px;font-size:0.82rem;" id="bfUpload_' + file.name.replace(/[^a-zA-Z0-9]/g, '_') + '"><i class="fas fa-spinner fa-spin"></i> ' + file.name + ' - Subiendo...</div>';
 
                 var fd = new FormData();
                 fd.append('file', file);
@@ -1256,7 +1256,7 @@
         if (cat && cat !== '__suggest__') urlParts.push(cat);
         urlParts.push(slugName);
 
-        slugPreviewText.textContent = 'https://holax.com.ve/' + urlParts.join('/');
+        slugPreviewText.textContent = 'https://en-santiago.com/' + urlParts.join('/');
         slugPreview.style.display = 'block';
     }
 
@@ -1272,3 +1272,4 @@
     }
 
 })();
+

@@ -15,34 +15,34 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0f1
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
 .stat-card{background:#141b2d;border:1px solid #1e293b;border-radius:12px;padding:18px;text-align:center}
 .stat-card .num{font-size:28px;font-weight:700;color:#16a34a}
-.stat-card .label{font-size:13px;color:#8892a4;margin-top:4px}
+.stat-card .label{font-size:13px;color:#8B0000;margin-top:4px}
 .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
 .toolbar h2{font-size:18px;color:#fff}
 .btn{padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:6px}
 .btn-primary{background:#16a34a;color:#fff}.btn-primary:hover{background:#15803d}
 .btn-warning{background:#f59e0b;color:#fff}.btn-warning:hover{background:#d97706}
 .btn-sm{padding:6px 12px;font-size:12px;border-radius:6px}
-.btn-edit{background:#2563eb;color:#fff}.btn-edit:hover{background:#1d4ed8}
+.btn-edit{background:#8B0000;color:#fff}.btn-edit:hover{background:#8B0000}
 .btn-delete{background:#dc2626;color:#fff}.btn-delete:hover{background:#b91c1c}
-.btn-toggle{background:#6b7280;color:#fff}.btn-toggle:hover{background:#4b5563}
-.btn-cancel{background:#6b7280;color:#fff}.btn-cancel:hover{background:#4b5563}
+.btn-toggle{background:#8B0000;color:#fff}.btn-toggle:hover{background:#4b5563}
+.btn-cancel{background:#8B0000;color:#fff}.btn-cancel:hover{background:#4b5563}
 .filter-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
 .filter-bar select,.filter-bar input{background:#141b2d;border:1px solid #1e293b;color:#e0e0e0;padding:8px 14px;border-radius:8px;font-size:14px}
 table{width:100%;border-collapse:collapse;background:#141b2d;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
 thead{background:#1e293b}
-th{padding:12px 14px;text-align:left;font-size:13px;color:#8892a4;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+th{padding:12px 14px;text-align:left;font-size:13px;color:#8B0000;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 td{padding:12px 14px;font-size:14px;border-top:1px solid #1e293b}
 tr:hover td{background:#1a2438}
 .badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600}
 .badge-green{background:#16a34a22;color:#16a34a}
-.badge-gray{background:#6b728022;color:#9ca3af}
-.badge-blue{background:#2563eb22;color:#60a5fa}
+.badge-gray{background:#8B000022;color:#8B0000}
+.badge-#8B0000{background:#8B000022;color:#8B0000}
 .badge-orange{background:#f59e0b22;color:#fbbf24}
-.badge-purple{background:#8b5cf622;color:#a78bfa}
+.badge-purple{background:#8B000022;color:#8B0000}
 .badge-gold{background:#eab30822;color:#facc15}
 .precio{font-weight:700;color:#16a34a}
 .actions{display:flex;gap:6px;flex-wrap:wrap}
-.empty{text-align:center;padding:40px;color:#6b7280;font-size:15px}
+.empty{text-align:center;padding:40px;color:#8B0000;font-size:15px}
 .numero-orden{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#16a34a;color:#fff;font-weight:700;font-size:12px;margin-right:4px}
 
 /* Modal */
@@ -51,7 +51,7 @@ tr:hover td{background:#1a2438}
 .modal{background:#1a2332;border:1px solid #1e293b;border-radius:16px;width:95%;max-width:520px;padding:28px;max-height:90vh;overflow-y:auto}
 .modal h2{color:#fff;font-size:20px;margin-bottom:20px}
 .form-group{margin-bottom:16px}
-.form-group label{display:block;color:#8892a4;font-size:13px;margin-bottom:6px;font-weight:600}
+.form-group label{display:block;color:#8B0000;font-size:13px;margin-bottom:6px;font-weight:600}
 .form-group input,.form-group select,.form-group textarea{width:100%;background:#0a0f1a;border:1px solid #1e293b;color:#e0e0e0;padding:10px 14px;border-radius:8px;font-size:14px}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#16a34a}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -329,16 +329,16 @@ function renderTable(servicios) {
   </tr></thead><tbody>`;
 
   servicios.forEach((s, i) => {
-    const precio = s.precio > 0 ? `$${Number(s.precio).toLocaleString('es-CL')}` : '<span style="color:#6b7280">Sin precio</span>';
-    const catClass = {'Diagnóstico':'badge-blue','Mantenimiento':'badge-green','Reparación':'badge-orange','Servicio Especial':'badge-purple','General':'badge-gray'}[s.categoria] || 'badge-gray';
+    const precio = s.precio > 0 ? `$${Number(s.precio).toLocaleString('es-CL')}` : '<span style="color:#8B0000">Sin precio</span>';
+    const catClass = {'Diagnóstico':'badge-#8B0000','Mantenimiento':'badge-green','Reparación':'badge-orange','Servicio Especial':'badge-purple','General':'badge-gray'}[s.categoria] || 'badge-gray';
     const origLabel = {'citas':'Citas','globalprov2':'Globalprov2','manual':'Manual','base':'Base'}[s.origen] || s.origen;
-    const origClass = {'base':'badge-gold','citas':'badge-green','globalprov2':'badge-blue','manual':'badge-gray'}[s.origen] || 'badge-gray';
+    const origClass = {'base':'badge-gold','citas':'badge-green','globalprov2':'badge-#8B0000','manual':'badge-gray'}[s.origen] || 'badge-gray';
     const estadoBadge = s.activo === 1 ? '<span class="badge badge-green">Activo</span>' : '<span class="badge badge-gray">Inactivo</span>';
     const isBase = BASE_SERVICES.some(b => b.nombre === s.nombre);
 
     html += `<tr style="${isBase ? 'border-left: 3px solid #16a34a;' : ''}">
       <td><span class="numero-orden">${s.orden || i+1}</span></td>
-      <td><strong>${s.nombre}</strong><br><small style="color:#6b7280">${s.descripcion || '—'}</small></td>
+      <td><strong>${s.nombre}</strong><br><small style="color:#8B0000">${s.descripcion || '—'}</small></td>
       <td><span class="badge ${catClass}">${s.categoria}</span></td>
       <td class="precio">${precio}</td>
       <td>${s.duracion_minutos} min</td>
@@ -461,3 +461,4 @@ loadServicios();
 </script>
 </body>
 </html>
+

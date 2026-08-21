@@ -6,7 +6,7 @@
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#1a73e8",
+  "theme_color": "#8B0000",
   "orientation": "portrait-primary",
   "lang": "es",
   "dir": "ltr",
@@ -60,3 +60,4 @@
     }
   ]
 }
+

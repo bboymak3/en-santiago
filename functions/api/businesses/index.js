@@ -300,7 +300,7 @@ export async function onRequestPost(context) {
           const slugName = catInput.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
           const insertResult = await env.DB.prepare(
             'INSERT INTO categories (name, slug, icon, color, sort_order) VALUES (?, ?, ?, ?, 99)'
-          ).bind(slugName, catInput, 'fas fa-store', '#607d8b').run();
+          ).bind(slugName, catInput, 'fas fa-store', '#8B0000').run();
           resolvedCategoryId = insertResult.meta.last_row_id;
         } catch (insertErr) {
           // If still can't insert, default to first category
@@ -478,3 +478,4 @@ export async function onRequestPost(context) {
     });
   }
 }
+

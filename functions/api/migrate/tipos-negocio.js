@@ -21,7 +21,7 @@ export async function onRequestGet(context) {
         name TEXT NOT NULL UNIQUE,
         slug TEXT NOT NULL UNIQUE,
         icon TEXT DEFAULT 'fas fa-briefcase',
-        color TEXT DEFAULT '#607d8b',
+        color TEXT DEFAULT '#8B0000',
         description TEXT,
         sort_order INTEGER DEFAULT 99,
         is_active INTEGER DEFAULT 1,
@@ -43,14 +43,14 @@ export async function onRequestGet(context) {
     const tipos = [
       { name: 'Salud y Bienestar', slug: 'salud-bienestar', icon: 'fas fa-heartbeat', color: '#e74c3c', description: 'Farmacias, clinicas, medicos, gimnasios y relacionados', sort_order: 1 },
       { name: 'Comida y Bebidas', slug: 'comida-bebidas', icon: 'fas fa-utensils', color: '#e91e63', description: 'Restaurantes, bares, cafeterias, panaderias y relacionados', sort_order: 2 },
-      { name: 'Belleza y Cuidado Personal', slug: 'belleza-cuidado-personal', icon: 'fas fa-spa', color: '#9c27b0', description: 'Barberias, salones, joyerias, perfumerias y relacionados', sort_order: 3 },
+      { name: 'Belleza y Cuidado Personal', slug: 'belleza-cuidado-personal', icon: 'fas fa-spa', color: '#8B0000', description: 'Barberias, salones, joyerias, perfumerias y relacionados', sort_order: 3 },
       { name: 'Automotriz', slug: 'automotriz', icon: 'fas fa-car', color: '#ff9800', description: 'Talleres, repuestos, lavados, concesionarios y relacionados', sort_order: 4 },
       { name: 'Hogar y Construccion', slug: 'hogar-construccion', icon: 'fas fa-home', color: '#795548', description: 'Ferreterias, mueblerias, electricos, pinturas y relacionados', sort_order: 5 },
-      { name: 'Servicios Profesionales', slug: 'servicios-profesionales', icon: 'fas fa-briefcase', color: '#2196f3', description: 'Inmobiliarias, juridicos, publicidad, fotografia y relacionados', sort_order: 6 },
+      { name: 'Servicios Profesionales', slug: 'servicios-profesionales', icon: 'fas fa-briefcase', color: '#8B0000', description: 'Inmobiliarias, juridicos, publicidad, fotografia y relacionados', sort_order: 6 },
       { name: 'Tiendas y Comercio', slug: 'tiendas-comercio', icon: 'fas fa-shopping-bag', color: '#4caf50', description: 'Ropas, zapaterias, tecnologia, celulares y relacionados', sort_order: 7 },
-      { name: 'Educacion', slug: 'educacion', icon: 'fas fa-graduation-cap', color: '#3f51b5', description: 'Academias, colegios, librerias, universidades y relacionados', sort_order: 8 },
-      { name: 'Turismo y Hospedaje', slug: 'turismo-hospedaje', icon: 'fas fa-plane', color: '#00bcd4', description: 'Hoteles, agencias de viaje, artesanias y relacionados', sort_order: 9 },
-      { name: 'Servicios Varios', slug: 'servicios-varios', icon: 'fas fa-concierge-bell', color: '#607d8b', description: 'Encomiendas, domicilios, lavanderias, bicicletas y relacionados', sort_order: 10 },
+      { name: 'Educacion', slug: 'educacion', icon: 'fas fa-graduation-cap', color: '#8B0000', description: 'Academias, colegios, librerias, universidades y relacionados', sort_order: 8 },
+      { name: 'Turismo y Hospedaje', slug: 'turismo-hospedaje', icon: 'fas fa-plane', color: '#8B0000', description: 'Hoteles, agencias de viaje, artesanias y relacionados', sort_order: 9 },
+      { name: 'Servicios Varios', slug: 'servicios-varios', icon: 'fas fa-concierge-bell', color: '#8B0000', description: 'Encomiendas, domicilios, lavanderias, bicicletas y relacionados', sort_order: 10 },
     ];
 
     // Build a map of slug -> id for backfill

@@ -1,4 +1,4 @@
-// One-time migration: update all HOLAX jobs with the correct logo
+// One-time migration: update all En-Santiago jobs with the correct logo
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -55,16 +55,17 @@ export async function onRequestPost(context) {
 
     const LOGO_URL = '/api/serve?key=merida%2Flogos%2F6%2F1783998320478_Logo_Holax.png';
 
-    // Update all HOLAX jobs that have no logo, empty logo, or old default logo
+    // Update all En-Santiago jobs that have no logo, empty logo, or old default logo
     const result = await env.DB.prepare(
-      `UPDATE job_listings SET business_logo = ? WHERE company_name = 'HOLAX' AND (business_logo IS NULL OR business_logo = '' OR business_logo = '/images/Holax.png')`
+      `UPDATE job_listings SET business_logo = ? WHERE company_name = 'En-Santiago' AND (business_logo IS NULL OR business_logo = '' OR business_logo = '/images/En-Santiago.png')`
     ).bind(LOGO_URL).run();
 
     return new Response(JSON.stringify({
-      message: 'Logo HOLAX actualizado',
+      message: 'Logo En-Santiago actualizado',
       updated: result.meta.changes
     }), { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   }
 }
+

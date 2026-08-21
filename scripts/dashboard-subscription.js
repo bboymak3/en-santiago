@@ -76,7 +76,7 @@
           <div class="form-group">
             <label>Comprobante de Pago (imagen) *</label>
             <input type="file" id="subPayProof" accept="image/*" class="form-control" style="max-width:400px;">
-            <small style="color:#6b7280;">Sube la captura del pago realizado</small>
+            <small style="color:#8B0000;">Sube la captura del pago realizado</small>
           </div>
           <div id="subPayProofPreview" style="margin:8px 0;max-width:300px;"></div>
           <div class="form-group">
@@ -93,7 +93,7 @@
       <!-- Payment History -->
       <div class="dash-card" style="margin-top:16px;">
         <div class="dash-card-header">
-          <h3><i class="fas fa-history" style="color:#64748b;"></i> Historial de Pagos</h3>
+          <h3><i class="fas fa-history" style="color:#8B0000;"></i> Historial de Pagos</h3>
         </div>
         <div class="dash-card-body">
           <div id="subPayHistory">
@@ -133,46 +133,46 @@
           <div style="text-align:center;padding:20px;">
             <i class="fas fa-shield-alt" style="font-size:3rem;color:#f59e0b;"></i>
             <h3 style="margin:12px 0 4px;color:#f59e0b;">Cuenta Administrador</h3>
-            <p style="color:#64748b;">Tienes acceso completo a todas las funciones.</p>
+            <p style="color:#8B0000;">Tienes acceso completo a todas las funciones.</p>
           </div>`;
       } else if (sub.plan_status === 'active') {
         statusHtml = `
           <div style="text-align:center;padding:20px;">
             <i class="fas fa-crown" style="font-size:3rem;color:#f59e0b;"></i>
             <h3 style="margin:12px 0 4px;color:#059669;">Plan ${sub.plan === 'quarterly' ? 'Trimestral' : 'Anual'} Activo</h3>
-            <p style="color:#64748b;">Quedan <strong style="color:#059669;">${sub.days_remaining} días</strong> de suscripción.</p>
-            <p style="color:#9ca3af;font-size:0.85rem;margin-top:4px;">Vence: ${sub.plan_expires_at ? new Date(sub.plan_expires_at).toLocaleDateString('es-VE') : '-'}</p>
+            <p style="color:#8B0000;">Quedan <strong style="color:#059669;">${sub.days_remaining} días</strong> de suscripción.</p>
+            <p style="color:#8B0000;font-size:0.85rem;margin-top:4px;">Vence: ${sub.plan_expires_at ? new Date(sub.plan_expires_at).toLocaleDateString('es-VE') : '-'}</p>
           </div>`;
       } else if (sub.plan_status === 'expired') {
         statusHtml = `
           <div style="text-align:center;padding:20px;">
             <i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#e91e63;"></i>
             <h3 style="margin:12px 0 4px;color:#e91e63;">Plan Expirado</h3>
-            <p style="color:#64748b;">Tu suscripción ha vencido. Renueva para seguir disfrutando de los beneficios premium.</p>
+            <p style="color:#8B0000;">Tu suscripción ha vencido. Renueva para seguir disfrutando de los beneficios premium.</p>
           </div>`;
       } else {
         statusHtml = `
           <div style="text-align:center;padding:20px;">
-            <i class="fas fa-user" style="font-size:3rem;color:#64748b;"></i>
+            <i class="fas fa-user" style="font-size:3rem;color:#8B0000;"></i>
             <h3 style="margin:12px 0 4px;">Cuenta Gratuita</h3>
-            <p style="color:#64748b;">Tus productos expiran en 7 días y no tienes acceso a WhatsApp directo.</p>
+            <p style="color:#8B0000;">Tus productos expiran en 7 días y no tienes acceso a WhatsApp directo.</p>
           </div>`;
       }
 
       // Product stats
       const statsHtml = `
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;">
-          <div style="text-align:center;padding:12px;background:#f8fafc;border-radius:8px;">
-            <div style="font-size:1.5rem;font-weight:700;color:#1a73e8;">${stats.total_products || 0}</div>
-            <div style="font-size:0.8rem;color:#64748b;">Total</div>
+          <div style="text-align:center;padding:12px;background:#8B0000;border-radius:8px;">
+            <div style="font-size:1.5rem;font-weight:700;color:#8B0000;">${stats.total_products || 0}</div>
+            <div style="font-size:0.8rem;color:#8B0000;">Total</div>
           </div>
           <div style="text-align:center;padding:12px;background:#f0fdf4;border-radius:8px;">
             <div style="font-size:1.5rem;font-weight:700;color:#28a745;">${stats.active_products || 0}</div>
-            <div style="font-size:0.8rem;color:#64748b;">Activos</div>
+            <div style="font-size:0.8rem;color:#8B0000;">Activos</div>
           </div>
           <div style="text-align:center;padding:12px;background:#fef2f2;border-radius:8px;">
             <div style="font-size:1.5rem;font-weight:700;color:#e91e63;">${stats.expired_products || 0}</div>
-            <div style="font-size:0.8rem;color:#64748b;">Expirados</div>
+            <div style="font-size:0.8rem;color:#8B0000;">Expirados</div>
           </div>
         </div>`;
 
@@ -184,10 +184,10 @@
             <h4 style="margin-bottom:12px;text-align:center;"><i class="fas fa-star" style="color:#f59e0b;"></i> Planes Disponibles</h4>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px;margin:0 auto;">
               ${plans.map(p => `
-                <div style="border:2px solid ${p.id === 'annual' ? '#f59e0b' : '#d1d5db'};border-radius:12px;padding:20px;text-align:center;${p.id === 'annual' ? 'background:#fffbeb;' : ''}">
+                <div style="border:2px solid ${p.id === 'annual' ? '#f59e0b' : '#8B0000'};border-radius:12px;padding:20px;text-align:center;${p.id === 'annual' ? 'background:#fffbeb;' : ''}">
                   <h4 style="color:${p.id === 'annual' ? '#f59e0b' : '#374151'};">${p.name}</h4>
-                  <div style="font-size:2rem;font-weight:800;margin:8px 0;">$${p.price}<small style="font-size:0.9rem;color:#64748b;">/${p.duration}</small></div>
-                  <ul style="text-align:left;font-size:0.85rem;color:#475569;padding-left:18px;">
+                  <div style="font-size:2rem;font-weight:800;margin:8px 0;">$${p.price}<small style="font-size:0.9rem;color:#8B0000;">/${p.duration}</small></div>
+                  <ul style="text-align:left;font-size:0.85rem;color:#8B0000;padding-left:18px;">
                     ${p.features.map(f => `<li style="margin:4px 0;"><i class="fas fa-check" style="color:#28a745;margin-right:4px;"></i>${f}</li>`).join('')}
                   </ul>
                   <button class="btn btn-primary btn-sm" style="margin-top:12px;${p.id === 'annual' ? 'background:#f59e0b;' : ''}" onclick="document.getElementById('subPayType').value='${p.payment_type || p.id}';document.getElementById('subPayType').dispatchEvent(new Event('change'));document.getElementById('subPayType').scrollIntoView({behavior:'smooth'});">
@@ -238,7 +238,7 @@
       container.innerHTML = `
         <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
           <thead>
-            <tr style="border-bottom:2px solid #e5e7eb;">
+            <tr style="border-bottom:2px solid #8B0000;">
               <th style="text-align:left;padding:8px;">Tipo</th>
               <th style="text-align:left;padding:8px;">Monto</th>
               <th style="text-align:left;padding:8px;">Estado</th>
@@ -251,12 +251,12 @@
                 <td style="padding:8px;">${typeLabels[p.payment_type] || p.payment_type}</td>
                 <td style="padding:8px;font-weight:600;">$${p.amount}</td>
                 <td style="padding:8px;">
-                  <span style="color:${statusColors[p.status] || '#64748b'};font-weight:600;">
+                  <span style="color:${statusColors[p.status] || '#8B0000'};font-weight:600;">
                     ${p.status === 'pending' ? 'Pendiente' : p.status === 'approved' ? 'Aprobado' : 'Rechazado'}
                   </span>
-                  ${p.admin_notes ? `<br><small style="color:#9ca3af;">${p.admin_notes}</small>` : ''}
+                  ${p.admin_notes ? `<br><small style="color:#8B0000;">${p.admin_notes}</small>` : ''}
                 </td>
-                <td style="padding:8px;color:#64748b;">${new Date(p.created_at).toLocaleDateString('es-VE')}</td>
+                <td style="padding:8px;color:#8B0000;">${new Date(p.created_at).toLocaleDateString('es-VE')}</td>
               </tr>
             `).join('')}
           </tbody>
@@ -333,8 +333,8 @@
   function showStatus(msg, type) {
     const el = document.getElementById('subPayStatus');
     if (!el) return;
-    const colors = { success: '#28a745', error: '#e91e63', info: '#1a73e8' };
-    el.innerHTML = `<p style="color:${colors[type] || '#64748b'};font-weight:600;">${msg}</p>`;
+    const colors = { success: '#28a745', error: '#e91e63', info: '#8B0000' };
+    el.innerHTML = `<p style="color:${colors[type] || '#8B0000'};font-weight:600;">${msg}</p>`;
   }
 
   // ─── 6. EVENT BINDING ─────────────────────────────────────────
@@ -371,7 +371,7 @@
       if (file && preview) {
         const reader = new FileReader();
         reader.onload = (ev) => {
-          preview.innerHTML = `<img src="${ev.target.result}" style="max-width:280px;max-height:200px;border-radius:8px;border:1px solid #e5e7eb;">`;
+          preview.innerHTML = `<img src="${ev.target.result}" style="max-width:280px;max-height:200px;border-radius:8px;border:1px solid #8B0000;">`;
         };
         reader.readAsDataURL(file);
       }
