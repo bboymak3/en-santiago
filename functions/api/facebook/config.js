@@ -106,7 +106,7 @@ export async function onRequestPost(context) {
       upsert.bind('page_id', page_id),
       upsert.bind('page_access_token', page_access_token),
       upsert.bind('auto_approve', auto_approve === true ? '1' : '0'),
-      upsert.bind('default_city', default_city || 'Mérida'),
+      upsert.bind('default_city', default_city || 'Santiago'),
     ]);
 
     // Verify the token by making a test call to Facebook

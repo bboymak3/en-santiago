@@ -656,7 +656,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         pdCommentBtn.disabled = true;
         pdCommentBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
-        var token = localStorage.getItem('merida_token') || localStorage.getItem('authToken');
+        var token = localStorage.getItem('santiago_token') || localStorage.getItem('authToken');
         var headers = { 'Content-Type': 'application/json' };
         if (token) headers['Authorization'] = 'Bearer ' + token;
 

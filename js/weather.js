@@ -12,7 +12,7 @@
         { name: 'Carabobo', lat: 10.1626, lng: -67.5874 },
         { name: 'Aragua', lat: 10.2466, lng: -67.5958 },
         { name: 'Lara', lat: 10.0676, lng: -69.3256 },
-        { name: 'Mérida', lat: 8.5980, lng: -71.1400 },
+        { name: 'Santiago', lat: 8.5980, lng: -71.1400 },
         { name: 'Táchira', lat: 7.7648, lng: -72.2292 },
         { name: 'Bolívar', lat: 8.1292, lng: -63.5503 },
         { name: 'Anzoátegui', lat: 10.2214, lng: -64.6325 },

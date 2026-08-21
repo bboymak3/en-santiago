@@ -26,7 +26,7 @@ const CLNEZUELA_STATES = [
   { name: 'Falcón', slug: 'falcon' },
   { name: 'Guárico', slug: 'guarico' },
   { name: 'Lara', slug: 'lara' },
-  { name: 'Mérida', slug: 'santiago' },
+  { name: 'Santiago', slug: 'santiago' },
   { name: 'Miranda', slug: 'miranda' },
   { name: 'Monagas', slug: 'monagas' },
   { name: 'Nueva Esparta', slug: 'nueva-esparta' },

@@ -833,7 +833,7 @@
             business_type: tipoNegocio?.toLowerCase() || 'negocio',
             address: direccion,
             city: ciudad,
-            state: comuna || 'Mérida',
+            state: comuna || 'Santiago',
             country: 'Santiago de Chile',
             lat,
             lng,

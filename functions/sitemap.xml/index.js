@@ -131,7 +131,7 @@ export async function onRequestGet(context) {
              WHEN 'Carabobo' THEN 'carabobo'
              WHEN 'Falcón' THEN 'falcon'
              WHEN 'Guárico' THEN 'guarico'
-             WHEN 'Mérida' THEN 'santiago'
+             WHEN 'Santiago' THEN 'santiago'
              WHEN 'Miranda' THEN 'miranda'
              WHEN 'Monagas' THEN 'monagas'
              WHEN 'Nueva Esparta' THEN 'nueva-esparta'

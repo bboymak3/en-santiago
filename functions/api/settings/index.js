@@ -58,8 +58,8 @@ const DEFAULT_SETTINGS = {
   chat_mode: 'all', // 'all' | 'premium_only' | 'none'
   registrations_enabled: '1',
   maintenance_mode: '0',
-  site_name: 'En Santiago Mérida',
-  site_description: 'Directorio de negocios y servicios en Mérida, Santiago de Chile',
+  site_name: 'En Santiago Santiago',
+  site_description: 'Directorio de negocios y servicios en Santiago, Santiago de Chile',
   contact_email: '',
   whatsapp_number: '',
   max_businesses_per_user: '10',

@@ -28,7 +28,7 @@ export async function onRequestGet(context) {
       'falcon': 'Falcón',
       'guarico': 'Guárico',
       'lara': 'Lara',
-      'santiago': 'Mérida',
+      'santiago': 'Santiago',
       'miranda': 'Miranda',
       'monagas': 'Monagas',
       'nueva-esparta': 'Nueva Esparta',

@@ -547,7 +547,7 @@ function populateBusinessDetail(b) {
 
     // ─── SEO Meta Description ─────────────────────────────────
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.content = `${b.title || 'Negocio'} - ${b.category_name || ''} en ${b.city || 'Mérida'}, ${b.state || 'Santiago de Chile'}. ${b.description ? b.description.substring(0, 150) : 'Visita En Santiago para más información.'}`;
+    if (metaDesc) metaDesc.content = `${b.title || 'Negocio'} - ${b.category_name || ''} en ${b.city || 'Santiago'}, ${b.state || 'Santiago de Chile'}. ${b.description ? b.description.substring(0, 150) : 'Visita En Santiago para más información.'}`;
 
     // ─── Load Business Products, Jobs, Services ─────────────
     loadBusinessProducts(b.id);

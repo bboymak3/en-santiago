@@ -1722,7 +1722,7 @@ if (!window._renderVideoList) {
     async function saveFacebookConfig() {
         const pageId = document.getElementById('fbPageId')?.value?.trim();
         const accessToken = document.getElementById('fbAccessToken')?.value?.trim();
-        const city = document.getElementById('fbCity')?.value?.trim() || 'Mérida';
+        const city = document.getElementById('fbCity')?.value?.trim() || 'Santiago';
         const autoApprove = document.getElementById('fbAutoApprove')?.checked;
 
         if (!pageId || !accessToken) {

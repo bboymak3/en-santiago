@@ -2148,7 +2148,7 @@ window.closeEditBusinessModal = function() {
                         </td>
                         <td>${getBusinessTypeLabel(p.business_type)}</td>
                         <td class="dash-price">${formatPrice(p.price, p.currency)}</td>
-                        <td><i class="fas fa-map-marker-alt"></i> ${p.city || 'Mérida'}</td>
+                        <td><i class="fas fa-map-marker-alt"></i> ${p.city || 'Santiago'}</td>
                         <td>${formatDate(p.created_at)}</td>
                         <td>${p.owner_name || 'Usuario'}</td>
                         <td class="dash-actions">

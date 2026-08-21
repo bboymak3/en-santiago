@@ -186,7 +186,7 @@ async function runImport(env) {
   const pageId = config.page_id;
   const pageAccessToken = config.page_access_token;
   const autoApprove = config.auto_approve === '1';
-  const defaultCity = config.default_city || 'Mérida';
+  const defaultCity = config.default_city || 'Santiago';
 
   if (!pageId || !pageAccessToken) {
     return { success: false, error: 'Facebook no está configurado. Ve a Configuración > Facebook para conectar tu página.' };
@@ -298,7 +298,7 @@ async function runImport(env) {
           parsed.currency,
           defaultCity,
           defaultCity,
-          'Mérida',
+          'Santiago',
           parsed.bedrooms || null,
           parsed.bathrooms || null,
           parsed.area || null,
