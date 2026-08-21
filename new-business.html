@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registra un nuevo negocio en HolaX - El directorio comercial de Venezuela.">
+    <title>Registrar Negocio - HolaX</title>
+    <!-- Open Graph -->
+    <meta property="og:title" content="Registra tu Negocio Gratis - HolaX Venezuela">
+    <meta property="og:description" content="Publica tu negocio gratis en el directorio mas grande de Venezuela. Llega a miles de clientes buscando productos y servicios cerca de ti.">
+    <meta property="og:site_name" content="HolaX">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://holax.com.ve/images/Holax.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://holax.com.ve/new-business.html">
+    <meta name="twitter:title" content="Registra tu Negocio Gratis - HolaX Venezuela">
+    <meta name="twitter:description" content="Publica tu negocio gratis en HolaX. Llega a miles de clientes en Venezuela.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://holax.com.ve/images/Holax.png">
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList">
+                        <!-- States loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Business Form -->
+    <main class="business-form-page">
+        <!-- Hero Header -->
+        <div class="pf-hero">
+            <div class="pf-hero-bg"></div>
+            <div class="pf-hero-content">
+                <div class="pf-hero-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h1 id="formTitle">Registrar Nuevo Negocio</h1>
+                <p class="pf-hero-subtitle">Completa los datos de tu negocio para publicarlo en el portal</p>
+                <!-- Step Progress -->
+                <div class="pf-steps">
+                    <div class="pf-step active" data-step="1">
+                        <div class="pf-step-circle"><i class="fas fa-info-circle"></i></div>
+                        <span>Info</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="2">
+                        <div class="pf-step-circle"><i class="fas fa-phone"></i></div>
+                        <span>Contacto</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="3">
+                        <div class="pf-step-circle"><i class="fas fa-map-marker-alt"></i></div>
+                        <span>Ubicación</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="4">
+                        <div class="pf-step-circle"><i class="fas fa-clipboard-list"></i></div>
+                        <span>Detalles</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="5">
+                        <div class="pf-step-circle"><i class="fas fa-camera"></i></div>
+                        <span>Fotos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <form class="business-form" id="businessForm" enctype="multipart/form-data">
+
+                <!-- Section 1: Basic Info -->
+                <div class="pf-section" data-section="1">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #1a73e8, #4a90e8);">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Información Básica</h2>
+                            <p>Describe tu negocio con un título atractivo</p>
+                        </div>
+                        <span class="pf-section-badge">Paso 1</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-field">
+                            <label for="propTitle" class="pf-label">
+                                <i class="fas fa-heading"></i> Nombre del Negocio <span class="pf-required">*</span>
+                            </label>
+                            <input type="text" id="propTitle" name="titulo" placeholder="Ej: Restaurante El Buen Sabor de Mérida" required maxlength="150">
+                            <div class="pf-field-footer">
+                                <small class="form-hint"><i class="fas fa-lightbulb"></i> Usa un nombre descriptivo que atraiga clientes</small>
+                                <span class="pf-char-count" id="titleCharCount">0/150</span>
+                            </div>
+                        </div>
+
+                        <div class="pf-field">
+                            <label for="propDescription" class="pf-label">
+                                <i class="fas fa-align-left"></i> Descripción <span class="pf-required">*</span>
+                            </label>
+                            <textarea id="propDescription" name="descripcion" rows="5" placeholder="Describe tu negocio en detalle: qué ofreces, qué te hace especial, horarios, productos o servicios destacados..." required></textarea>
+                            <div class="pf-field-footer">
+                                <small class="form-hint"><i class="fas fa-lightbulb"></i> Mientras más detallada sea la descripción, más interés generarás</small>
+                                <span class="pf-char-count" id="descCharCount">0/2000</span>
+                            </div>
+                        </div>
+
+                        <div class="pf-grid-2">
+                            <div class="pf-field">
+                                <label for="propTipoNegocio" class="pf-label">
+                                    <i class="fas fa-briefcase"></i> Tipo de Negocio <span class="pf-required">*</span>
+                                </label>
+                                <div class="pf-select-wrapper">
+                                    <select id="propTipoNegocio" name="tipo_negocio" required>
+                                        <option value="">Cargando tipos...</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down pf-select-arrow"></i>
+                                </div>
+                            </div>
+                            <div class="pf-field">
+                                <label for="propCategoria" class="pf-label">
+                                    <i class="fas fa-th-large"></i> Categoría <span class="pf-required">*</span>
+                                </label>
+                                <div class="pf-select-wrapper">
+                                    <select id="propCategoria" name="categoria" required>
+                                        <option value="">Selecciona una categoría...</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down pf-select-arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Especialidad (solo para Servicios Varios + Medicina) -->
+                    <div class="pf-field" id="propEspecialidadWrap" style="display:none;margin-top:12px;">
+                        <label for="propEspecialidad" class="pf-label">
+                            <i class="fas fa-stethoscope" style="color:#e74c3c;"></i> Especialidad <span class="pf-required">*</span>
+                        </label>
+                        <input type="text" id="propEspecialidad" name="especialidad" placeholder="Ej: Cardiología, Dermatología, Pediatría...">
+                        <p style="font-size:0.78rem;color:#6b7280;margin:4px 0 0;">Escribe tu especialidad médica. Aparecerá en tu ficha de negocio y en los resultados de búsqueda.</p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Contact -->
+                <div class="pf-section" data-section="2">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #28a745, #5cb85c);">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Contacto</h2>
+                            <p>Datos de contacto del negocio</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #e8f5e9; color: #28a745;">Paso 2</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-grid-2">
+                            <div class="pf-field">
+                                <label for="propTelefono" class="pf-label">
+                                    <i class="fas fa-phone"></i> Teléfono <span class="pf-required">*</span>
+                                </label>
+                                <input type="tel" id="propPhone" name="telefono" placeholder="+58 414 000-0000" required>
+                            </div>
+                            <div class="pf-field">
+                                <label for="propWhatsApp" class="pf-label">
+                                    <i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp
+                                </label>
+                                <input type="tel" id="propWhatsapp" name="whatsapp" placeholder="+58 414 000-0000">
+                            </div>
+                        </div>
+                        <div class="pf-field">
+                            <label for="propEmail" class="pf-label">
+                                <i class="fas fa-envelope"></i> Email de contacto
+                            </label>
+                            <input type="email" id="propEmail" name="email_contacto" placeholder="contacto@negocio.com">
+                        </div>
+                        <div class="pf-grid-3">
+                            <div class="pf-field">
+                                <label for="propWebsite" class="pf-label">
+                                    <i class="fas fa-globe"></i> Website
+                                </label>
+                                <input type="url" id="propWebsite" name="website" placeholder="www.tunegocio.com">
+                            </div>
+                            <div class="pf-field">
+                                <label for="propInstagram" class="pf-label">
+                                    <i class="fab fa-instagram" style="color:#e4405f"></i> Instagram
+                                </label>
+                                <input type="text" id="propInstagram" name="instagram" placeholder="@tunegocio">
+                            </div>
+                            <div class="pf-field">
+                                <label for="propFacebook" class="pf-label">
+                                    <i class="fab fa-facebook" style="color:#1877f2"></i> Facebook
+                                </label>
+                                <input type="text" id="propFacebook" name="facebook" placeholder="facebook.com/tunegocio">
+                            </div>
+                        </div>
+                        <div class="pf-grid-3">
+                            <div class="pf-field">
+                                <label for="propTwitter" class="pf-label">
+                                    <i class="fab fa-x-twitter"></i> Twitter/X
+                                </label>
+                                <input type="text" id="propTwitter" name="twitter" placeholder="https://x.com/tu-negocio">
+                            </div>
+                            <div class="pf-field">
+                                <label for="propTiktok" class="pf-label">
+                                    <i class="fab fa-tiktok"></i> TikTok
+                                </label>
+                                <input type="text" id="propTiktok" name="tiktok" placeholder="https://tiktok.com/@tunegocio">
+                            </div>
+                            <div class="pf-field">
+                                <label for="propYoutube" class="pf-label">
+                                    <i class="fab fa-youtube" style="color:#ff0000"></i> YouTube
+                                </label>
+                                <input type="text" id="propYoutube" name="youtube" placeholder="https://youtube.com/@tunegocio">
+                            </div>
+                        </div>
+                        <div class="pf-grid-3">
+                            <div class="pf-field" style="grid-column: 1 / -1;">
+                                <label class="pf-label">
+                                    <i class="fas fa-video" style="color:#6366f1"></i> Videos (YouTube/TikTok URLs o subir archivos)
+                                </label>
+                                <div id="bizFormVideosList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px;"></div>
+                                <div style="display:flex;gap:8px;margin-bottom:8px;">
+                                    <input type="url" id="propVideo" name="video_url" placeholder="https://youtube.com/watch?v=... o tiktok.com/..." style="flex:1;">
+                                    <button type="button" id="bizFormVideoAddBtn" class="btn btn-secondary" style="padding:8px 16px;font-size:0.85rem;white-space:nowrap;"><i class="fas fa-plus"></i> Agregar URL</button>
+                                    <button type="button" id="bizFormVideoUploadBtn" class="btn btn-secondary" style="padding:8px 16px;font-size:0.85rem;white-space:nowrap;"><i class="fas fa-upload"></i> Subir Video</button>
+                                </div>
+                                <input type="file" id="bizFormVideoFileInput" accept="video/*" multiple style="display:none;">
+                                <div id="bizFormVideoFileInfo" style="font-size:0.82rem;color:#004899;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Location -->
+                <div class="pf-section" data-section="3">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #ff6b35, #ff8c5a);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Ubicación</h2>
+                            <p>Indica dónde se encuentra tu negocio</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #fff3e0; color: #ff6b35;">Paso 3</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-field">
+                            <label for="propDireccion" class="pf-label">
+                                <i class="fas fa-map-pin"></i> Dirección <span class="pf-required">*</span>
+                            </label>
+                            <input type="text" id="propDireccion" name="direccion" placeholder="Ej: Av. 3 Milagros, Centro, Mérida" required>
+                        </div>
+
+                        <div class="pf-grid-2">
+                            <div class="pf-field">
+                                <label for="propCiudad" class="pf-label">
+                                    <i class="fas fa-city"></i> Ciudad <span class="pf-required">*</span>
+                                </label>
+                                <input type="text" id="propCiudad" name="ciudad" placeholder="Ej: Mérida" required>
+                            </div>
+                            <div class="pf-field">
+                                <label for="propEstado" class="pf-label">
+                                    <i class="fas fa-map"></i> Estado <span class="pf-required">*</span>
+                                </label>
+                                <div class="pf-select-wrapper">
+                                    <select id="propEstado" name="estado" required>
+                                        <option value="">Selecciona un estado</option>
+                                        <option value="Amazonas">Amazonas</option>
+                                        <option value="Anzoátegui">Anzoátegui</option>
+                                        <option value="Apure">Apure</option>
+                                        <option value="Aragua">Aragua</option>
+                                        <option value="Barinas">Barinas</option>
+                                        <option value="Bolívar">Bolívar</option>
+                                        <option value="Carabobo">Carabobo</option>
+                                        <option value="Cojedes">Cojedes</option>
+                                        <option value="Delta Amacuro">Delta Amacuro</option>
+                                        <option value="Distrito Capital">Distrito Capital</option>
+                                        <option value="Falcón">Falcón</option>
+                                        <option value="Guárico">Guárico</option>
+                                        <option value="Lara">Lara</option>
+                                        <option value="Mérida" selected>Mérida</option>
+                                        <option value="Miranda">Miranda</option>
+                                        <option value="Monagas">Monagas</option>
+                                        <option value="Nueva Esparta">Nueva Esparta</option>
+                                        <option value="Portuguesa">Portuguesa</option>
+                                        <option value="Sucre">Sucre</option>
+                                        <option value="Táchira">Táchira</option>
+                                        <option value="Trujillo">Trujillo</option>
+                                        <option value="Vargas">Vargas</option>
+                                        <option value="Yaracuy">Yaracuy</option>
+                                        <option value="Zulia">Zulia</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down pf-select-arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Map -->
+                        <div class="pf-map-container">
+                            <div class="pf-map-header">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span>Selecciona la ubicación en el mapa</span>
+                            </div>
+                            <p class="pf-map-hint">Haz clic en el mapa o busca una dirección para marcar la ubicación exacta.</p>
+                            <div class="location-map-search">
+                                <input type="text" id="locationSearchInput" placeholder="Buscar dirección o lugar..." autocomplete="off">
+                                <button type="button" class="btn btn-primary btn-sm" id="locationSearchBtn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div id="locationMap" class="location-picker-map"></div>
+                            <div id="locationMapCoords" class="pf-coords-display">
+                                <span><i class="fas fa-crosshairs"></i> Lat: <strong id="coordLatDisplay">8.63</strong></span>
+                                <span><i class="fas fa-crosshairs"></i> Lng: <strong id="coordLngDisplay">-66.59</strong></span>
+                            </div>
+                            <div class="pf-grid-2 pf-grid-collapse">
+                                <div class="pf-field">
+                                    <label for="propLat" class="pf-label"><i class="fas fa-globe"></i> Latitud</label>
+                                    <input type="number" id="propLat" name="latitud" placeholder="8.63" step="any">
+                                </div>
+                                <div class="pf-field">
+                                    <label for="propLng" class="pf-label"><i class="fas fa-globe-americas"></i> Longitud</label>
+                                    <input type="number" id="propLng" name="longitud" placeholder="-66.59" step="any">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Business Details -->
+                <div class="pf-section" data-section="4">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #6f42c1, #8b5cf6);">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Detalles del Negocio</h2>
+                            <p>Horarios, servicios y características</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #f3e8ff; color: #6f42c1;">Paso 4</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <!-- Schedule -->
+                        <div class="pf-field">
+                            <label for="propHorario" class="pf-label">
+                                <i class="fas fa-clock"></i> Horario de Atención
+                            </label>
+                            <textarea id="propSchedule" name="horario" rows="3" placeholder="Lun-Vie 8:00-17:00, Sáb 8:00-12:00"></textarea>
+                        </div>
+
+                        <!-- Feature Chips -->
+                        <div class="pf-features-section">
+                            <label class="pf-label"><i class="fas fa-star"></i> Características del Negocio</label>
+                            <div class="pf-features-grid">
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Estacionamiento">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-parking"></i></span>
+                                    <span class="pf-feature-chip-text">Estacionamiento</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Wi-Fi">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-wifi"></i></span>
+                                    <span class="pf-feature-chip-text">WiFi</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Tarjeta">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-credit-card"></i></span>
+                                    <span class="pf-feature-chip-text">Acepta tarjetas</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Delivery">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-motorcycle"></i></span>
+                                    <span class="pf-feature-chip-text">Delivery</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Terraza">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-umbrella-beach"></i></span>
+                                    <span class="pf-feature-chip-text">Área al aire libre</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4.5: Logo -->
+                <div class="pf-section" data-section="4.5">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #0ea5e9, #38bdf8);">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Logo del Negocio</h2>
+                            <p>La imagen que representa tu marca</p>
+                        </div>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-field">
+                            <label class="pf-label"><i class="fas fa-image"></i> Logo del negocio</label>
+                            <div style="display:flex;align-items:center;gap:16px;margin-top:8px;">
+                                <div id="logoPreviewContainer" style="width:100px;height:100px;border-radius:12px;border:2px dashed #d1d5db;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f9fafb;flex-shrink:0;">
+                                    <i class="fas fa-building" id="logoPlaceholderIcon" style="font-size:1.8rem;color:#94a3b8;"></i>
+                                    <img id="logoPreviewImg" src="" alt="Logo" style="width:100%;height:100%;object-fit:contain;display:none;">
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('logoInput').click()" style="margin-bottom:6px;">
+                                        <i class="fas fa-upload"></i> Seleccionar Logo
+                                    </button>
+                                    <button type="button" class="btn btn-secondary btn-sm" id="removeLogoBtn" onclick="removeLogo()" style="display:none;">
+                                        <i class="fas fa-times"></i> Quitar
+                                    </button>
+                                    <input type="file" id="logoInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="handleLogoSelect(this)">
+                                    <p style="font-size:0.75rem;color:#94a3b8;margin:4px 0 0;">JPG, PNG, WebP - Max 2MB</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4.6: Banner de Portada -->
+                <div class="pf-section" data-section="4.6">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">
+                            <i class="fas fa-panorama"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Imagen de Portada (Banner)</h2>
+                            <p>Se muestra como portada tipo Facebook en tu perfil</p>
+                        </div>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-field">
+                            <label class="pf-label"><i class="fas fa-panorama"></i> Banner del negocio</label>
+                            <p style="font-size:0.8rem;color:#6b7280;margin:4px 0 10px;">Recomendado: 1200x400px. Se mostrara en la parte superior de tu perfil.</p>
+                            <div id="bannerPreviewContainer" style="width:100%;height:160px;border-radius:12px;border:2px dashed #d1d5db;overflow:hidden;background:#f9fafb;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+                                <span id="bannerPlaceholderText" style="color:#94a3b8;font-size:0.9rem;"><i class="fas fa-panorama" style="font-size:1.5rem;display:block;margin-bottom:6px;"></i>Sin imagen de portada</span>
+                                <img id="bannerPreviewImg" src="" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:none;">
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('bannerInput').click()" style="margin-bottom:6px;">
+                                    <i class="fas fa-upload"></i> Seleccionar Banner
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" id="removeBannerBtn" onclick="removeBanner()" style="display:none;">
+                                    <i class="fas fa-times"></i> Quitar
+                                </button>
+                                <input type="file" id="bannerInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="handleBannerSelect(this)">
+                                <p style="font-size:0.75rem;color:#94a3b8;margin:4px 0 0;">JPG, PNG, WebP - Max 5MB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Photos -->
+                <div class="pf-section" data-section="5">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #e91e63, #f06292);">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Fotografías</h2>
+                            <p>Sube imágenes para mostrar tu negocio</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #fce4ec; color: #e91e63;">Paso 5</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-upload-zone" id="uploadArea">
+                            <div class="pf-upload-glow"></div>
+                            <div class="pf-upload-content" id="uploadPlaceholder">
+                                <div class="pf-upload-icon-ring">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <h3>Arrastra y suelta tus imágenes aquí</h3>
+                                <p>o haz clic para seleccionar archivos</p>
+                                <div class="pf-upload-meta">
+                                    <span><i class="fas fa-image"></i> JPG, PNG, WebP</span>
+                                    <span><i class="fas fa-weight-hanging"></i> Máx 5MB</span>
+                                    <span><i class="fas fa-images"></i> Máx 10 fotos</span>
+                                </div>
+                            </div>
+                            <input type="file" id="photoInput" name="fotos" accept="image/*" multiple hidden>
+                        </div>
+
+                        <div class="pf-upload-buttons">
+                            <button type="button" class="pf-upload-btn pf-upload-btn-gallery" id="galleryBtn">
+                                <i class="fas fa-images"></i>
+                                <span>Galería</span>
+                            </button>
+                            <button type="button" class="pf-upload-btn pf-upload-btn-camera" id="cameraBtn">
+                                <i class="fas fa-camera"></i>
+                                <span>Cámara</span>
+                            </button>
+                            <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+                        </div>
+
+                        <div class="photos-preview" id="photosPreview">
+                            <!-- Preview thumbnails added dynamically -->
+                        </div>
+                        <div class="pf-upload-hint">
+                            <i class="fas fa-star"></i> La primera imagen será la foto principal. Arrastra para reordenar.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="pf-actions">
+                    <a href="dashboard.html" class="pf-btn pf-btn-cancel">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="pf-btn pf-btn-publish" id="submitBusinessBtn">
+                        <span class="pf-btn-publish-bg"></span>
+                        <i class="fas fa-paper-plane"></i> <span id="submitBtnText">Registrar Negocio</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Suggest Category Modal -->
+    <div class="modal hidden" id="suggestCatModal">
+        <div class="modal-overlay" id="suggestCatOverlay"></div>
+        <div class="modal-content" style="max-width:480px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-lightbulb" style="color:#f59e0b;"></i> Sugerir Nueva Categoria</h3>
+                <button class="modal-close" id="suggestCatClose">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:20px;">
+                <p style="font-size:0.9rem;color:#4b5563;margin-bottom:16px;">No encuentras tu categoria? Sugiere una nueva y el administrador la revisara para agregarla al directorio.</p>
+                <div style="margin-bottom:14px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre de la categoria *</label>
+                    <input type="text" id="suggestCatName" placeholder="Ej: Clinicas Dentales, Gasolineras, Spa..." style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;box-sizing:border-box;">
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:4px;">Razon (opcional)</label>
+                    <textarea id="suggestCatReason" rows="3" placeholder="Explica brevemente por que necesitas esta categoria..." style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;box-sizing:border-box;resize:vertical;"></textarea>
+                </div>
+                <div id="suggestCatError" style="color:#dc2626;font-size:0.82rem;margin-bottom:8px;display:none;"></div>
+                <div style="display:flex;gap:10px;justify-content:flex-end;">
+                    <button type="button" class="btn btn-secondary btn-sm" id="suggestCatCancel">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="suggestCatSubmit" style="background:#006EE3;">
+                        <i class="fas fa-paper-plane"></i> Enviar Solicitud
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slug Preview -->
+    <div id="slugPreview" style="display:none;position:fixed;top:16px;right:16px;background:#1e293b;color:#e2e8f0;padding:10px 16px;border-radius:10px;font-size:0.82rem;max-width:420px;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+        <div style="font-size:0.72rem;color:#94a3b8;margin-bottom:4px;">URL preview:</div>
+        <div id="slugPreviewText" style="word-break:break-all;font-family:monospace;color:#38bdf8;">/tipo/categoria/mi-negocio</div>
+    </div>
+
+    <!-- Leaflet CSS & JS for location picker map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css">
+    <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/dynamic-categories.js?v=2"></script>
+    <script src="js/business-form.js?v=3"></script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

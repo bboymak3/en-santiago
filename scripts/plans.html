@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Planes de suscripción Un Click - Mejora tu visibilidad y obtén más clientes.">
+    <title>Planes - Un Click</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .plans-hero {
+            text-align:center;padding:60px 20px 40px;
+            background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);
+            color:#fff;
+        }
+        .plans-hero h1 { font-size:2rem;margin-bottom:8px; }
+        .plans-hero p { color:#94a3b8;max-width:500px;margin:0 auto;font-size:1rem; }
+        .plans-comparison {
+            display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;
+            max-width:900px;margin:40px auto;padding:0 20px;
+        }
+        .plan-card {
+            border:2px solid #e5e7eb;border-radius:16px;padding:28px 24px;
+            text-align:center;position:relative;transition:all 0.3s;
+            background:#fff;
+        }
+        .plan-card:hover { transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.1); }
+        .plan-card.popular {
+            border-color:#f59e0b;box-shadow:0 0 0 1px #f59e0b;
+        }
+        .plan-card.popular::before {
+            content:'POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+            background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;
+            font-size:0.7rem;font-weight:700;padding:4px 16px;border-radius:12px;
+        }
+        .plan-card .plan-icon { font-size:2.5rem;margin-bottom:12px; }
+        .plan-card .plan-name { font-size:1.2rem;font-weight:700;margin-bottom:8px; }
+        .plan-card .plan-price { font-size:2.5rem;font-weight:800;margin-bottom:4px; }
+        .plan-card .plan-price small { font-size:0.9rem;font-weight:400;color:#64748b; }
+        .plan-card .plan-duration { color:#64748b;font-size:0.85rem;margin-bottom:20px; }
+        .plan-card ul { text-align:left;list-style:none;padding:0;margin:0 0 24px; }
+        .plan-card ul li { padding:6px 0;font-size:0.9rem;color:#475569;border-bottom:1px solid #f0f0f0; }
+        .plan-card ul li:last-child { border-bottom:none; }
+        .plan-card ul li i { color:#28a745;margin-right:8px;width:16px; }
+        .plan-card .plan-btn {
+            display:inline-block;padding:12px 32px;border-radius:10px;font-weight:700;
+            text-decoration:none;font-size:0.95rem;transition:all 0.2s;
+        }
+        .plan-btn-free { background:#f1f5f9;color:#475569; }
+        .plan-btn-free:hover { background:#e2e8f0; }
+        .plan-btn-quarterly { background:linear-gradient(135deg,#059669,#10b981);color:#fff; }
+        .plan-btn-quarterly:hover { opacity:0.9;transform:scale(1.02); }
+        .plan-btn-annual { background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff; }
+        .plan-btn-annual:hover { opacity:0.9;transform:scale(1.02); }
+        .plan-features-section {
+            max-width:700px;margin:0 auto 60px;padding:0 20px;
+        }
+        .plan-features-section h2 { text-align:center;margin-bottom:24px;font-size:1.3rem; }
+        .feature-compare-table { width:100%;border-collapse:collapse;font-size:0.85rem; }
+        .feature-compare-table th, .feature-compare-table td {
+            padding:12px;border-bottom:1px solid #e5e7eb;text-align:center;
+        }
+        .feature-compare-table th { background:#f8fafc;font-weight:600;color:#374151; }
+        .feature-compare-table td:first-child { text-align:left;font-weight:500; }
+        .check { color:#28a745; }
+        .cross { color:#e91e63; }
+        @media (max-width:768px) {
+            .plans-comparison { grid-template-columns:1fr;max-width:400px; }
+            .plan-card.popular::before { top:-10px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-store"></i>
+                <span class="brand-name">Un Click</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="marketplace.html" class="nav-link">Marketplace</a></li>
+                <li><a href="planes.html" class="nav-link active">Planes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="plans-hero">
+        <h1><i class="fas fa-crown" style="color:#f59e0b;"></i> Elige tu Plan</h1>
+        <p>Impulsa tu negocio o productos con mayor visibilidad y herramientas exclusivas.</p>
+    </div>
+
+    <div class="plans-comparison">
+        <!-- FREE -->
+        <div class="plan-card">
+            <div class="plan-icon" style="color:#64748b;"><i class="fas fa-user"></i></div>
+            <div class="plan-name">Gratuito</div>
+            <div class="plan-price">$0 <small>USD</small></div>
+            <div class="plan-duration">Siempre gratis</div>
+            <ul>
+                <li><i class="fas fa-check check"></i> Hasta 5 publicaciones</li>
+                <li><i class="fas fa-check check"></i> Productos expiran en 7 días</li>
+                <li><i class="fas fa-times cross"></i> Sin botón WhatsApp directo</li>
+                <li><i class="fas fa-times cross"></i> Perfil limitado</li>
+            </ul>
+            <span class="plan-btn plan-btn-free">Plan Actual</span>
+        </div>
+        <!-- QUARTERLY -->
+        <div class="plan-card popular">
+            <div class="plan-icon" style="color:#059669;"><i class="fas fa-star"></i></div>
+            <div class="plan-name">Trimestral</div>
+            <div class="plan-price">$30 <small>USD</small></div>
+            <div class="plan-duration">3 meses de acceso</div>
+            <ul>
+                <li><i class="fas fa-check check"></i> Publicaciones ilimitadas</li>
+                <li><i class="fas fa-check check"></i> Sin expiración de productos</li>
+                <li><i class="fas fa-check check"></i> Botón WhatsApp activo</li>
+                <li><i class="fas fa-check check"></i> Perfil completo visible</li>
+            </ul>
+            <a href="pago.html?plan=quarterly" class="plan-btn plan-btn-quarterly">Elegir Plan</a>
+        </div>
+        <!-- ANNUAL -->
+        <div class="plan-card">
+            <div class="plan-icon" style="color:#f59e0b;"><i class="fas fa-gem"></i></div>
+            <div class="plan-name">Anual</div>
+            <div class="plan-price">$100 <small>USD</small></div>
+            <div class="plan-duration">12 meses de acceso</div>
+            <ul>
+                <li><i class="fas fa-check check"></i> Todo del Plan Trimestral</li>
+                <li><i class="fas fa-check check"></i> Perfil Google integrado</li>
+                <li><i class="fas fa-check check"></i> Prioridad en resultados</li>
+                <li><i class="fas fa-check check"></i> Soporte prioritario</li>
+            </ul>
+            <a href="pago.html?plan=annual" class="plan-btn plan-btn-annual">Elegir Plan</a>
+        </div>
+    </div>
+
+    <div class="plan-features-section">
+        <h2>Comparación de Funciones</h2>
+        <table class="feature-compare-table">
+            <thead>
+                <tr><th>Función</th><th>Gratuito</th><th>Trimestral</th><th>Anual</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Publicaciones</td><td>5</td><td>Ilimitadas</td><td>Ilimitadas</td></tr>
+                <tr><td>Expiración productos</td><td>7 días</td><td>Ninguna</td><td>Ninguna</td></tr>
+                <tr><td>Botón WhatsApp</td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-check check"></i></td><td><i class="fas fa-check check"></i></td></tr>
+                <tr><td>Perfil completo</td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-check check"></i></td><td><i class="fas fa-check check"></i></td></tr>
+                <tr><td>Perfil Google</td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-check check"></i></td></tr>
+                <tr><td>Prioridad en búsquedas</td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-check check"></i></td></tr>
+                <tr><td>Soporte prioritario</td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-times cross"></i></td><td><i class="fas fa-check check"></i></td></tr>
+                <tr><td><strong>Precio</strong></td><td>Gratis</td><td><strong>$30</strong></td><td><strong>$100</strong></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="text-align:center;padding:20px 20px 60px;">
+        <p style="color:#64748b;font-size:0.85rem;">¿Dudas? Contáctanos por WhatsApp o email.</p>
+        <p style="color:#9ca3af;font-size:0.8rem;margin-top:8px;">Los pagos se verifican manualmente. Recibirás acceso una vez aprobado tu comprobante.</p>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

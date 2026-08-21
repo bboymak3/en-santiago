@@ -1,0 +1,31 @@
+name = "globalpro-citas"
+main = "src/index.ts"
+compatibility_date = "2025-10-08"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+binding = "ASSETS"
+directory = "./static"
+
+[observability]
+enabled = true
+
+[ai]
+binding = "AI"
+
+# DB propia del chat + agendamiento (citas)
+[[d1_databases]]
+binding = "DB"
+database_name = "globalpro_citas"
+database_id = "678b4adc-232d-43db-86ec-230828268161"
+
+# tallerv2_db — SOLO LECTURA para consultar vehículos, clientes, servicios del taller
+[[d1_databases]]
+binding = "TALLER_DB"
+database_name = "tallerv2_db"
+database_id = "cd96d426-3002-4ac0-9d9b-fef5c964313b"
+
+[vars]
+BUSINESS_PHONE = "56939026185"
+BUSINESS_NAME = "Global Pro Automotriz"
+GLOBALPROV2_URL = "https://globalprov2.pages.dev"

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partners Digitales — AunClick Academy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #7c3aed;
+      --primary-dark: #6d28d9;
+      --primary-light: #a78bfa;
+      --blue: #3b82f6;
+      --gold: #f59e0b;
+      --gold-dark: #d97706;
+      --green: #10b981;
+      --orange: #f97316;
+      --text: #1e1b4b;
+      --text-light: #6b7280;
+      --bg: #f5f3ff;
+      --white: #ffffff;
+      --shadow: 0 4px 24px rgba(124, 58, 237, .10);
+      --shadow-hover: 0 12px 40px rgba(124, 58, 237, .18);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Hero ─────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--blue) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 64px 24px 56px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.75rem, 5vw, 2.75rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -.02em;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      opacity: .88;
+      margin-bottom: 20px;
+    }
+
+    .hero .count-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.18);
+      backdrop-filter: blur(6px);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .hero .count-badge i {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    /* ── Grid ─────────────────────────────────── */
+    .grid-section {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 20px 56px;
+      flex: 1;
+    }
+
+    .grid-section h2 {
+      text-align: center;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--primary-dark);
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 960px) {
+      .partners-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ── Card ─────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .avatar-ring {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-light), var(--blue));
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .avatar-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .avatar-ring .initials {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.35rem;
+      user-select: none;
+    }
+
+    .card .name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .badges-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 12px;
+      border-radius: 50px;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .badge--level-1, .badge--level-2, .badge--level-3 { background: var(--green); }
+    .badge--level-4, .badge--level-5, .badge--level-6 { background: var(--blue); }
+    .badge--level-7, .badge--level-8, .badge--level-9 { background: var(--orange); }
+    .badge--level-10 { background: var(--gold); }
+
+    .badge--xp {
+      background: var(--primary-light);
+    }
+
+    .card .stats {
+      font-size: .85rem;
+      color: var(--text-light);
+      margin-bottom: 18px;
+    }
+
+    .card .stats i {
+      margin-right: 3px;
+    }
+
+    .btn-profile {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--blue));
+      color: var(--white);
+      font-size: .88rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity .2s ease, transform .2s ease;
+      margin-top: auto;
+    }
+
+    .btn-profile:hover {
+      opacity: .92;
+      transform: translateY(-1px);
+    }
+
+    /* ── Empty state ──────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--text-light);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: var(--primary-light);
+      margin-bottom: 16px;
+    }
+
+    .empty-state p {
+      font-size: 1.1rem;
+    }
+
+    /* ── Loading ──────────────────────────────── */
+    .loading-state {
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--text-light);
+    }
+
+    .loading-state i {
+      font-size: 2rem;
+      color: var(--primary);
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── CTA ──────────────────────────────────── */
+    .cta {
+      background: var(--white);
+      text-align: center;
+      padding: 56px 24px;
+      border-top: 1px solid #ede9fe;
+    }
+
+    .cta h2 {
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      max-width: 520px;
+      margin: 0 auto 24px;
+      color: var(--text-light);
+      font-size: .98rem;
+    }
+
+    .cta .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--blue));
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .cta .btn-cta:hover {
+      opacity: .92;
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ───────────────────────────────── */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: .82rem;
+      color: var(--text-light);
+      border-top: 1px solid #ede9fe;
+    }
+
+    .footer span {
+      font-weight: 700;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Partners Digitales Certificados</h1>
+    <p>Agentes certificados por AunClick Academy</p>
+    <div class="count-badge">
+      <i class="fa-solid fa-certificate"></i>
+      <span id="hero-count">0 Partners Certificados</span>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <main class="grid-section">
+    <h2><i class="fa-solid fa-users" style="margin-right:8px;"></i>Nuestro Equipo de Partners</h2>
+    <div id="partners-container" class="partners-grid">
+      <div class="loading-state"><i class="fa-solid fa-spinner"></i><p style="margin-top:12px;">Cargando partners...</p></div>
+    </div>
+  </main>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2><i class="fa-solid fa-rocket" style="margin-right:8px;"></i>¿Quieres ser Partner?</h2>
+    <p>Únete a AunClick Academy, certifica tus habilidades y forma parte de nuestra red de agentes digitales profesionales.</p>
+    <a href="/academia.html" class="btn-cta">
+      <i class="fa-solid fa-graduation-cap"></i> Ir a la Academia
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>AunClick Academy</span> &mdash; Todos los derechos reservados
+    <div><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></div>
+    <div><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></div>
+  </footer>
+
+  <script>
+    (function () {
+      const container = document.getElementById('partners-container');
+      const heroCount = document.getElementById('hero-count');
+
+      function getLevelColorClass(level) {
+        if (level <= 3) return 'badge--level-1';
+        if (level <= 6) return 'badge--level-4';
+        if (level <= 9) return 'badge--level-7';
+        return 'badge--level-10';
+      }
+
+      function getInitials(name) {
+        if (!name) return '?';
+        const parts = name.trim().split(/\s+/);
+        if (parts.length >= 2) {
+          return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+        return name.slice(0, 2).toUpperCase();
+      }
+
+      function renderPartners(partners) {
+        heroCount.textContent = partners.length + ' Partners Certificados';
+
+        if (!partners.length) {
+          container.innerHTML =
+            '<div class="empty-state">' +
+              '<i class="fa-solid fa-user-slash"></i>' +
+              '<p>Aún no hay partners certificados</p>' +
+            '</div>';
+          return;
+        }
+
+        container.innerHTML = partners.map(function (p) {
+          const levelClass = getLevelColorClass(p.level || 1);
+          const initials = getInitials(p.name);
+          const avatarHtml = p.avatar
+            ? '<img src="' + escapeAttr(p.avatar) + '" alt="' + escapeAttr(p.name) + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+              '<span class="initials" style="display:none">' + escapeHtml(initials) + '</span>'
+            : '<span class="initials">' + escapeHtml(initials) + '</span>';
+
+          return (
+            '<div class="card">' +
+              '<div class="avatar-ring">' + avatarHtml + '</div>' +
+              '<div class="name">' + escapeHtml(p.name) + '</div>' +
+              '<div class="badges-row">' +
+                '<span class="badge ' + levelClass + '"><i class="fa-solid fa-shield-halved"></i> Nivel ' + (p.level || 1) + '</span>' +
+                '<span class="badge badge--xp"><i class="fa-solid fa-bolt"></i> ' + (p.xp || 0) + ' XP</span>' +
+              '</div>' +
+              '<div class="stats">' +
+                '<i class="fa-solid fa-chalkboard-user"></i> ' + (p.total_classes_completed || 0) + ' clases' +
+                ' &nbsp;|&nbsp; ' +
+                '<i class="fa-solid fa-medal"></i> ' + (p.total_badges || 0) + ' medallas' +
+              '</div>' +
+              '<a href="/perfil.html?id=' + p.id + '" class="btn-profile">' +
+                '<i class="fa-solid fa-arrow-right"></i> Ver Perfil' +
+              '</a>' +
+            '</div>'
+          );
+        }).join('');
+      }
+
+      function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+      }
+
+      function escapeAttr(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      }
+
+      fetch(window.location.origin + '/api/partners?detailed=1')
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          renderPartners(data.partners || []);
+        })
+        .catch(function () {
+          container.innerHTML =
+            '<div class="empty-state">' +
+              '<i class="fa-solid fa-triangle-exclamation"></i>' +
+              '<p>Error al cargar los partners. Intenta de nuevo más tarde.</p>' +
+            '</div>';
+        });
+    })();
+  </script>
+</body>
+</html>

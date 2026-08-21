@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Servicios de Emergencia en Venezuela - Números de emergencia, hospitales, farmacias, policía, bomberos y más con HOLAX.">
+    <title>Emergencias - HOLAX</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ─── Emergency Hero (RED gradient) ───────────────────── */
+        .emg-hero {
+            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 25%, #dc2626 55%, #ef4444 100%);
+            padding-top: calc(var(--navbar-height) + 48px);
+            padding-bottom: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emg-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(239, 68, 68, 0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, rgba(220, 38, 38, 0.25) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .emg-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 75% 65%, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        .emg-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .emg-hero-content {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .emg-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 18px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            border-radius: 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fca5a5;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+            animation: emgBadgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes emgBadgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+        }
+
+        .emg-hero-badge i {
+            color: #fbbf24;
+            font-size: 0.72rem;
+        }
+
+        .emg-hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .emg-hero-title .highlight {
+            background: linear-gradient(135deg, #fecaca, #fca5a5, #f87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .emg-hero-subtitle {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        /* ─── Quick-Dial Buttons in Hero ─────────────────────── */
+        .emg-quick-dial {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .emg-quick-dial-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .emg-quick-dial-btn:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            color: #fff;
+        }
+
+        .emg-quick-dial-btn i {
+            font-size: 1.2rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            flex-shrink: 0;
+        }
+
+        .emg-quick-dial-btn .dial-label {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .emg-quick-dial-btn .dial-label small {
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ─── Category Tabs ──────────────────────────────────── */
+        .emg-tabs-wrapper {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: var(--navbar-height);
+            z-index: 20;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .emg-tabs {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 0;
+        }
+
+        .emg-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .emg-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 16px 22px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+            font-family: inherit;
+            position: relative;
+        }
+
+        .emg-tab:hover {
+            color: #dc2626;
+            background: rgba(220, 38, 38, 0.03);
+        }
+
+        .emg-tab.active {
+            color: #dc2626;
+            border-bottom-color: #dc2626;
+            background: rgba(220, 38, 38, 0.04);
+        }
+
+        .emg-tab i {
+            font-size: 0.9rem;
+        }
+
+        .emg-tab .tab-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 10px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            background: #f1f5f9;
+            color: #94a3b8;
+        }
+
+        .emg-tab.active .tab-count {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        /* ─── Main Content ──────────────────────────────────── */
+        .emg-main {
+            padding: 28px 0 64px;
+            background: #fafafa;
+            min-height: 60vh;
+        }
+
+        .emg-results-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 0 20px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .emg-results-count {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .emg-results-count strong {
+            color: #991b1b;
+            font-weight: 700;
+        }
+
+        /* ─── Emergency Cards Grid ──────────────────────────── */
+        .emg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 18px;
+        }
+
+        /* ─── Emergency Card ────────────────────────────────── */
+        .emg-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1.5px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .emg-card:hover {
+            border-color: #dc2626;
+            box-shadow: 0 12px 36px rgba(220, 38, 38, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .emg-card-top-strip {
+            height: 4px;
+            background: linear-gradient(90deg, #dc2626, #ef4444, #f87171);
+        }
+
+        .emg-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 20px 22px 0;
+            gap: 12px;
+        }
+
+        .emg-card-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .emg-card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .emg-card-icon.cat-hospital { background: linear-gradient(135deg, #dc2626, #ef4444); }
+        .emg-card-icon.cat-farmacia { background: linear-gradient(135deg, #059669, #10b981); }
+        .emg-card-icon.cat-policia { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+        .emg-card-icon.cat-bomberos { background: linear-gradient(135deg, #ea580c, #f97316); }
+        .emg-card-icon.cat-ambulancia { background: linear-gradient(135deg, #dc2626, #f87171); }
+        .emg-card-icon.cat-defensa_civil { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+        .emg-card-icon.cat-proteccion_civil { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+        .emg-card-icon.cat-cruz_roja { background: linear-gradient(135deg, #dc2626, #fca5a5); }
+        .emg-card-icon.cat-centro_salud { background: linear-gradient(135deg, #0d9488, #2dd4bf); }
+        .emg-card-icon.cat-urgencias { background: linear-gradient(135deg, #b91c1c, #ef4444); }
+        .emg-card-icon.cat-default { background: linear-gradient(135deg, #64748b, #94a3b8); }
+
+        .emg-card-text {
+            min-width: 0;
+        }
+
+        .emg-card-category {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #dc2626;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .emg-card-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2px;
+            line-height: 1.35;
+        }
+
+        .emg-card-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .emg-card-24h {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            flex-shrink: 0;
+            align-self: flex-start;
+        }
+
+        .emg-card-24h i {
+            font-size: 0.62rem;
+            animation: emg24Pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes emg24Pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .emg-card-body {
+            padding: 16px 22px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .emg-card-phone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .emg-card-phone a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.25s;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+        }
+
+        .emg-card-phone a:hover {
+            background: linear-gradient(135deg, #b91c1c, #dc2626);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .emg-card-phone a i {
+            font-size: 0.85rem;
+        }
+
+        .emg-card-address {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .emg-card-address i {
+            color: #dc2626;
+            font-size: 0.78rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .emg-card-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        .emg-card-location i {
+            font-size: 0.72rem;
+            color: #f97316;
+        }
+
+        .emg-card-website {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #1d4ed8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .emg-card-website:hover {
+            color: #1e40af;
+            text-decoration: underline;
+        }
+
+        .emg-card-website i {
+            font-size: 0.72rem;
+        }
+
+        .emg-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 22px;
+            border-top: 1px solid #f1f5f9;
+            background: #fef2f2;
+        }
+
+        .emg-card-footer .emg-card-notes {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ─── Loading / Empty States ────────────────────────────── */
+        .emg-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            gap: 16px;
+        }
+
+        .emg-loading i {
+            font-size: 2.5rem;
+            color: #f87171;
+            animation: emgSpin 1s linear infinite;
+        }
+
+        .emg-loading p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        @keyframes emgSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .emg-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .emg-empty-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #dc2626;
+            margin-bottom: 24px;
+        }
+
+        .emg-empty h2 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .emg-empty p {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            max-width: 420px;
+        }
+
+        .emg-empty-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ─── Pagination ────────────────────────────────────────── */
+        .emg-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 32px 0 16px;
+        }
+
+        .emg-pagination button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+        }
+
+        .emg-pagination button:hover:not(:disabled) {
+            border-color: #dc2626;
+            color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .emg-pagination button.active {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .emg-pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .emg-pagination-info {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            padding: 0 8px;
+        }
+
+        /* ─── Footer Override ──────────────────────────────────── */
+        .emg-footer {
+            background: #450a0a;
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .emg-footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.82rem;
+        }
+
+        .emg-footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+
+        .emg-footer a:hover {
+            color: #fff;
+        }
+
+        /* ─── Responsive ───────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .emg-hero {
+                padding-top: calc(var(--navbar-height) + 28px);
+                padding-bottom: 36px;
+            }
+
+            .emg-hero-title {
+                font-size: 1.8rem;
+            }
+
+            .emg-hero-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 24px;
+            }
+
+            .emg-quick-dial {
+                gap: 10px;
+            }
+
+            .emg-quick-dial-btn {
+                padding: 12px 18px;
+                font-size: 0.95rem;
+            }
+
+            .emg-quick-dial-btn i {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .emg-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .emg-results-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .emg-tab {
+                padding: 14px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .emg-hero-title {
+                font-size: 1.5rem;
+            }
+
+            .emg-quick-dial-btn .dial-label small {
+                font-size: 0.62rem;
+            }
+
+            .emg-quick-dial-btn {
+                flex-direction: column;
+                text-align: center;
+                padding: 14px 20px;
+                gap: 6px;
+            }
+
+            .emg-card-header {
+                padding: 16px 18px 0;
+            }
+
+            .emg-card-body {
+                padding: 14px 18px 18px;
+            }
+
+            .emg-card-phone a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .emg-pagination button {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-store"></i>
+                <span class="brand-name"><i class="fas fa-map-marker-alt brand-location-icon" style="font-size:0.7em;opacity:0.6;"></i> <span id="brandCity"></span> HOLAX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList">
+                        <!-- States loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="emg-hero">
+        <div class="container">
+            <div class="emg-hero-content">
+                <div class="emg-hero-badge">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Servicios Esenciales
+                </div>
+                <h1 class="emg-hero-title">
+                    Servicios de <span class="highlight">Emergencia</span>
+                </h1>
+                <p class="emg-hero-subtitle">
+                    Números de emergencia y servicios esenciales. Encuentra hospitales, farmacias, policía, bomberos y más cerca de ti.
+                </p>
+
+                <!-- Quick Dial Buttons -->
+                <div class="emg-quick-dial">
+                    <a href="tel:171" class="emg-quick-dial-btn">
+                        <i class="fas fa-phone-alt"></i>
+                        <span class="dial-label">
+                            <small>Emergencia</small>
+                            171
+                        </span>
+                    </a>
+                    <a href="tel:911" class="emg-quick-dial-btn">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="dial-label">
+                            <small>Urgencias</small>
+                            911
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Tabs -->
+    <div class="emg-tabs-wrapper">
+        <div class="container">
+            <div class="emg-tabs" id="emgTabs" role="tablist">
+                <button class="emg-tab active" data-category="" role="tab" aria-selected="true">
+                    <i class="fas fa-th-large"></i> Todos
+                    <span class="tab-count" id="countAll">0</span>
+                </button>
+                <button class="emg-tab" data-category="hospital" role="tab" aria-selected="false">
+                    <i class="fas fa-hospital"></i> Hospitales
+                    <span class="tab-count" id="countHospital">0</span>
+                </button>
+                <button class="emg-tab" data-category="centro_salud" role="tab" aria-selected="false">
+                    <i class="fas fa-pills"></i> Farmacias
+                    <span class="tab-count" id="countCentroSalud">0</span>
+                </button>
+                <button class="emg-tab" data-category="policia" role="tab" aria-selected="false">
+                    <i class="fas fa-shield-alt"></i> Policía
+                    <span class="tab-count" id="countPolicia">0</span>
+                </button>
+                <button class="emg-tab" data-category="bomberos" role="tab" aria-selected="false">
+                    <i class="fas fa-fire-extinguisher"></i> Bomberos
+                    <span class="tab-count" id="countBomberos">0</span>
+                </button>
+                <button class="emg-tab" data-category="ambulancia" role="tab" aria-selected="false">
+                    <i class="fas fa-ambulance"></i> Ambulancia
+                    <span class="tab-count" id="countAmbulancia">0</span>
+                </button>
+                <button class="emg-tab" data-category="defensa_civil" role="tab" aria-selected="false">
+                    <i class="fas fa-hard-hat"></i> Defensa Civil
+                    <span class="tab-count" id="countDefensaCivil">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="emg-main">
+        <div class="container">
+            <!-- Results Bar -->
+            <div class="emg-results-bar">
+                <div class="emg-results-count" id="emgResultsCount">
+                    <strong>0</strong> servicios encontrados
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="emg-loading" id="emgLoading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Cargando servicios de emergencia...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div class="emg-empty hidden" id="emgEmpty">
+                <div class="emg-empty-icon">
+                    <i class="fas fa-first-aid"></i>
+                </div>
+                <h2>No hay servicios disponibles</h2>
+                <p>No se encontraron servicios de emergencia para esta categoría o ubicación. Intenta con otros filtros.</p>
+                <div class="emg-empty-actions">
+                    <a href="index.html" class="btn-outline"><i class="fas fa-home"></i> Volver al inicio</a>
+                    <button class="btn-primary" id="emgClearFilter"><i class="fas fa-list"></i> Ver todos</button>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="emg-grid hidden" id="emgGrid">
+                <!-- Emergency cards rendered dynamically -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="emg-pagination hidden" id="emgPagination">
+                <button id="emgPrevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </button>
+                <div id="emgPaginationPages"></div>
+                <button id="emgNextBtn" disabled>
+                    Siguiente <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="emg-footer">
+        <div class="container">
+            <p>&copy; 2025 <a href="index.html">HOLAX</a>. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        (function () {
+            'use strict';
+
+            // ─── Elements ───────────────────────────────────────
+            const grid = document.getElementById('emgGrid');
+            const loading = document.getElementById('emgLoading');
+            const emptyState = document.getElementById('emgEmpty');
+            const resultsCount = document.getElementById('emgResultsCount');
+            const paginationEl = document.getElementById('emgPagination');
+            const paginationPages = document.getElementById('emgPaginationPages');
+            const prevBtn = document.getElementById('emgPrevBtn');
+            const nextBtn = document.getElementById('emgNextBtn');
+            const tabsContainer = document.getElementById('emgTabs');
+
+            let currentPage = 1;
+            const limit = 12;
+            let activeCategory = '';
+            let allServices = [];
+
+            // ─── Category Labels & Icons ───────────────────────
+            const CATEGORY_LABELS = {
+                'hospital': 'Hospital',
+                'centro_salud': 'Farmacia / Centro de Salud',
+                'policia': 'Policía',
+                'bomberos': 'Bomberos',
+                'ambulancia': 'Ambulancia',
+                'defensa_civil': 'Defensa Civil',
+                'proteccion_civil': 'Protección Civil',
+                'cruz_roja': 'Cruz Roja',
+                'urgencias': 'Urgencias',
+                'gas_natual': 'Gas Natural',
+                'electricidad': 'Electricidad',
+                'agua': 'Agua',
+                'otro': 'Otro',
+            };
+
+            const CATEGORY_ICONS = {
+                'hospital': 'fa-hospital',
+                'centro_salud': 'fa-pills',
+                'policia': 'fa-shield-alt',
+                'bomberos': 'fa-fire-extinguisher',
+                'ambulancia': 'fa-ambulance',
+                'defensa_civil': 'fa-hard-hat',
+                'proteccion_civil': 'fa-hard-hat',
+                'cruz_roja': 'fa-first-aid',
+                'urgencias': 'fa-heartbeat',
+                'gas_natual': 'fa-fire',
+                'electricidad': 'fa-bolt',
+                'agua': 'fa-tint',
+                'otro': 'fa-question-circle',
+            };
+
+            function getCategoryLabel(cat) {
+                return CATEGORY_LABELS[cat] || cat || 'Servicio';
+            }
+
+            function getCategoryIcon(cat) {
+                return CATEGORY_ICONS[cat] || 'fa-question-circle';
+            }
+
+            function getIconClass(cat) {
+                const mapping = {
+                    'hospital': 'cat-hospital',
+                    'centro_salud': 'cat-farmacia',
+                    'policia': 'cat-policia',
+                    'bomberos': 'cat-bomberos',
+                    'ambulancia': 'cat-ambulancia',
+                    'defensa_civil': 'cat-defensa_civil',
+                    'proteccion_civil': 'cat-defensa_civil',
+                    'cruz_roja': 'cat-cruz_roja',
+                    'centro_salud': 'cat-centro_salud',
+                    'urgencias': 'cat-urgencias',
+                };
+                return mapping[cat] || 'cat-default';
+            }
+
+            // ─── Escape HTML ───────────────────────────────────
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // ─── Format Phone ──────────────────────────────────
+            function formatPhone(phone) {
+                if (!phone) return 'No disponible';
+                return phone;
+            }
+
+            // ─── Update Tab Counts ──────────────────────────────
+            function updateTabCounts(services) {
+                document.getElementById('countAll').textContent = services.length;
+                document.getElementById('countHospital').textContent = services.filter(function (s) { return s.category === 'hospital'; }).length;
+                document.getElementById('countCentroSalud').textContent = services.filter(function (s) { return s.category === 'centro_salud'; }).length;
+                document.getElementById('countPolicia').textContent = services.filter(function (s) { return s.category === 'policia'; }).length;
+                document.getElementById('countBomberos').textContent = services.filter(function (s) { return s.category === 'bomberos'; }).length;
+                document.getElementById('countAmbulancia').textContent = services.filter(function (s) { return s.category === 'ambulancia'; }).length;
+                document.getElementById('countDefensaCivil').textContent = services.filter(function (s) { return s.category === 'defensa_civil' || s.category === 'proteccion_civil'; }).length;
+            }
+
+            // ─── Render Emergency Card ────────────────────────
+            function renderCard(service) {
+                if (!service) return '';
+
+                var catLabel = getCategoryLabel(service.category);
+                var catIcon = getCategoryIcon(service.category);
+                var iconClass = getIconClass(service.category);
+                var phone = formatPhone(service.phone);
+                var address = service.address || 'Dirección no disponible';
+                var location = (service.city && service.state) ? service.city + ', ' + service.state : service.state || service.city || 'Venezuela';
+
+                var phoneHtml = service.phone
+                    ? '<a href="tel:' + escapeHtml(service.phone.replace(/\s/g, '')) + '"><i class="fas fa-phone-alt"></i> ' + escapeHtml(phone) + '</a>'
+                    : '<span style="color:#94a3b8;font-size:0.85rem;"><i class="fas fa-phone-slash"></i> Sin teléfono</span>';
+
+                var h24Badge = service.is_24h ? '<span class="emg-card-24h"><i class="fas fa-circle"></i> 24 horas</span>' : '';
+
+                var websiteHtml = service.website
+                    ? '<a href="' + escapeHtml(service.website) + '" target="_blank" rel="noopener noreferrer" class="emg-card-website"><i class="fas fa-external-link-alt"></i> Sitio web</a>'
+                    : '';
+
+                var notesHtml = service.notes ? '<span class="emg-card-notes">' + escapeHtml(service.notes) + '</span>' : '<span class="emg-card-notes"></span>';
+
+                return '' +
+                    '<article class="emg-card">' +
+                        '<div class="emg-card-top-strip"></div>' +
+                        '<div class="emg-card-header">' +
+                            '<div class="emg-card-info">' +
+                                '<div class="emg-card-icon ' + iconClass + '">' +
+                                    '<i class="fas ' + catIcon + '"></i>' +
+                                '</div>' +
+                                '<div class="emg-card-text">' +
+                                    '<div class="emg-card-category">' + escapeHtml(catLabel) + '</div>' +
+                                    '<h3 class="emg-card-name">' + escapeHtml(service.name) + '</h3>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="emg-card-badges">' +
+                                h24Badge +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="emg-card-body">' +
+                            '<div class="emg-card-phone">' + phoneHtml + '</div>' +
+                            '<div class="emg-card-address">' +
+                                '<i class="fas fa-map-marker-alt"></i>' +
+                                '<span>' + escapeHtml(address) + '</span>' +
+                            '</div>' +
+                            '<div class="emg-card-location">' +
+                                '<i class="fas fa-map-pin"></i> ' + escapeHtml(location) +
+                            '</div>' +
+                            websiteHtml +
+                        '</div>' +
+                        '<div class="emg-card-footer">' +
+                            notesHtml +
+                        '</div>' +
+                    '</article>';
+            }
+
+            // ─── Render Pagination ──────────────────────────────
+            function renderPagination(pagination) {
+                if (!pagination || pagination.totalPages <= 1) {
+                    paginationEl.classList.add('hidden');
+                    return;
+                }
+
+                paginationEl.classList.remove('hidden');
+                prevBtn.disabled = currentPage <= 1;
+                nextBtn.disabled = currentPage >= pagination.totalPages;
+
+                paginationPages.innerHTML = '';
+
+                var maxVisible = 5;
+                var startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+                var endPage = Math.min(pagination.totalPages, startPage + maxVisible - 1);
+                if (endPage - startPage + 1 < maxVisible) {
+                    startPage = Math.max(1, endPage - maxVisible + 1);
+                }
+
+                for (var i = startPage; i <= endPage; i++) {
+                    var btn = document.createElement('button');
+                    btn.textContent = i;
+                    if (i === currentPage) btn.classList.add('active');
+                    btn.setAttribute('data-page', i);
+                    (function (pg) {
+                        btn.addEventListener('click', function () {
+                            currentPage = pg;
+                            renderServices();
+                        });
+                    })(i);
+                    paginationPages.appendChild(btn);
+                }
+            }
+
+            // ─── Render Services from allServices ──────────────
+            function renderServices() {
+                loading.classList.add('hidden');
+
+                // Filter by active category
+                var filtered = activeCategory
+                    ? allServices.filter(function (s) { return s.category === activeCategory; })
+                    : allServices.slice();
+
+                // If activeCategory is defensa_civil, also include proteccion_civil
+                if (activeCategory === 'defensa_civil') {
+                    filtered = allServices.filter(function (s) { return s.category === 'defensa_civil' || s.category === 'proteccion_civil'; });
+                }
+
+                var total = filtered.length;
+
+                resultsCount.innerHTML = '<strong>' + total + '</strong> servicios encontrados';
+
+                if (total === 0) {
+                    emptyState.classList.remove('hidden');
+                    grid.classList.add('hidden');
+                    paginationEl.classList.add('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    grid.classList.remove('hidden');
+
+                    // Pagination
+                    var totalPages = Math.ceil(total / limit);
+                    var offset = (currentPage - 1) * limit;
+                    var pageItems = filtered.slice(offset, offset + limit);
+
+                    grid.innerHTML = pageItems.map(renderCard).join('');
+
+                    renderPagination({
+                        page: currentPage,
+                        limit: limit,
+                        total: total,
+                        totalPages: totalPages
+                    });
+                }
+            }
+
+            // ─── Fetch & Render Emergency Services ──────────────
+            async function fetchServices() {
+                loading.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                grid.classList.add('hidden');
+                paginationEl.classList.add('hidden');
+
+                let endpoint = '/api/emergency?limit=100';
+
+                try {
+                    var response = await fetch(endpoint);
+                    var data = await response.json();
+
+                    allServices = data.services || [];
+
+                    // Update tab counts
+                    updateTabCounts(allServices);
+
+                    // Reset page and render
+                    currentPage = 1;
+                    renderServices();
+                } catch (err) {
+                    console.error('Error fetching emergency services:', err);
+                    loading.classList.add('hidden');
+                    emptyState.classList.remove('hidden');
+                }
+            }
+
+            // ─── Tab Click Handler ─────────────────────────────
+            tabsContainer.addEventListener('click', function (e) {
+                var tab = e.target.closest('.emg-tab');
+                if (!tab) return;
+
+                // Update active tab
+                var tabs = tabsContainer.querySelectorAll('.emg-tab');
+                tabs.forEach(function (t) {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+
+                activeCategory = tab.getAttribute('data-category');
+                currentPage = 1;
+                renderServices();
+            });
+
+            // ─── Clear Filter Button ──────────────────────────
+            var clearFilterBtn = document.getElementById('emgClearFilter');
+            if (clearFilterBtn) {
+                clearFilterBtn.addEventListener('click', function () {
+                    activeCategory = '';
+                    currentPage = 1;
+                    var tabs = tabsContainer.querySelectorAll('.emg-tab');
+                    tabs.forEach(function (t) {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+                    tabs[0].classList.add('active');
+                    tabs[0].setAttribute('aria-selected', 'true');
+                    renderServices();
+                });
+            }
+
+            // ─── Pagination Buttons ────────────────────────────
+            prevBtn.addEventListener('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderServices();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            nextBtn.addEventListener('click', function () {
+                currentPage++;
+                renderServices();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ─── Init ─────────────────────────────────────────
+            fetchServices();
+        })();
+    </script>
+</body>
+</html>

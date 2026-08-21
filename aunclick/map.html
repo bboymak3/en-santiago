@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Mapa de negocios de HOLAX - Encuentra negocios en el mapa.">
+    <title>Mapa de Negocios - HOLAX</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <style>
+        /* ========================================
+           MAP PAGE LAYOUT
+           ======================================== */
+        .map-page {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 70px);
+            margin-top: 70px;
+        }
+        .map-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- SIDEBAR (Desktop) --- */
+        .map-sidebar {
+            width: 320px;
+            min-width: 320px;
+            background: #fff;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            z-index: 400;
+            transition: width 0.3s ease, min-width 0.3s ease;
+        }
+        .map-sidebar.collapsed {
+            width: 0;
+            min-width: 0;
+            overflow: hidden;
+            border-right: none;
+        }
+        .map-sidebar-toggle {
+            position: absolute;
+            top: 10px;
+            left: 330px;
+            z-index: 500;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: left 0.3s ease;
+            font-size: 14px;
+        }
+        .map-sidebar-toggle.shifted {
+            left: 10px;
+        }
+        .map-sidebar-close {
+            display: none;
+        }
+        .map-filters {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            background: #f8f9fa;
+            position: relative;
+        }
+        .map-filters h3 { margin: 0 0 8px 0; font-size: 15px; color: #1a1a2e; }
+        .map-filters .form-group { margin-bottom: 6px; }
+        .map-filters .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; color: #555; }
+        .map-filters .form-select, .map-filters input { width: 100%; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+        .map-filters .filter-row { display: flex; gap: 8px; }
+        .map-filters .filter-row .form-group { flex: 1; }
+        .map-filters .btn { width: 100%; margin-top: 8px; }
+        .map-results { flex: 1; overflow-y: auto; }
+        .map-result-count { padding: 8px 12px; font-size: 12px; color: #666; border-bottom: 1px solid #e0e0e0; background: #fff; }
+        .map-business-list { padding: 6px; }
+        .map-business-card { display: flex; gap: 8px; padding: 8px; border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; margin-bottom: 4px; }
+        .map-business-card:hover { background: #f0f4ff; }
+        .map-business-card.active { background: #e8f0fe; border-color: #1a73e8; }
+        .map-business-card img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+        .map-business-card .card-info { flex: 1; min-width: 0; }
+        .map-business-card .card-price { font-weight: 700; color: #1a73e8; font-size: 14px; }
+        .map-business-card .card-title { font-size: 12px; font-weight: 600; color: #1a1a2e; margin: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .map-business-card .card-location { font-size: 11px; color: #888; }
+        .map-business-card .card-badges { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+        .map-business-card .card-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; }
+
+        /* --- MAP CONTAINER --- */
+        #map {
+            flex: 1;
+            height: 100%;
+            z-index: 1;
+        }
+        .map-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 600;
+            background: rgba(255,255,255,0.9);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .map-no-results { text-align: center; padding: 40px 20px; color: #888; }
+        .map-no-results i { font-size: 48px; color: #ddd; margin-bottom: 12px; display: block; }
+
+        /* --- CUSTOM MAP CONTROLS --- */
+        .map-ctrl-center,
+        .map-ctrl-back {
+            border: none !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+            margin-bottom: 4px !important;
+        }
+        .map-ctrl-center a,
+        .map-ctrl-back a {
+            width: 34px !important;
+            height: 34px !important;
+            line-height: 34px !important;
+            font-size: 16px !important;
+            color: #333 !important;
+            background: #fff !important;
+            border-radius: 4px !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important;
+        }
+        .map-ctrl-center a:hover,
+        .map-ctrl-back a:hover {
+            background: #f0f0f0 !important;
+            color: #1a73e8 !important;
+        }
+
+        /* --- HIDE LEAFLET DEBUG / ATTRIBUTION --- */
+        .leaflet-control-attribution,
+        .leaflet-control-attribution.leaflet-control {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            overflow: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* ========================================
+           MOBILE - Full screen map
+           ======================================== */
+        @media (max-width: 768px) {
+            .map-page {
+                margin-top: 0;
+                height: 100vh;
+                height: 100dvh;
+            }
+
+            /* Hide navbar on map page for full screen */
+            .navbar { display: none; }
+
+            /* FORCE hide Leaflet attribution/debug on mobile */
+            .leaflet-control-attribution,
+            .leaflet-control-attribution.leaflet-control,
+            .leaflet-bottom.leaflet-left,
+            #map .leaflet-control-container .leaflet-bottom.leaflet-left {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                height: 0 !important;
+                width: 0 !important;
+                overflow: hidden !important;
+                pointer-events: none !important;
+                position: absolute !important;
+                z-index: -9999 !important;
+            }
+
+            .map-layout {
+                flex-direction: column;
+                position: relative;
+            }
+
+            /* Map takes FULL screen */
+            #map {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+            }
+
+            /* Sidebar: becomes a slide-up panel from bottom */
+            .map-sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                min-width: 100%;
+                max-height: 70vh;
+                height: auto;
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+                background: #fff;
+                border-right: none;
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -4px 30px rgba(0,0,0,0.2);
+                transform: translateY(100%);
+                transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+                overflow: hidden;
+                pointer-events: none;
+            }
+
+            /* Close button inside sidebar */
+            .map-sidebar-close {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 32px;
+                height: 32px;
+                background: rgba(0,0,0,0.08);
+                border-radius: 50%;
+                color: #555;
+                font-size: 16px;
+                cursor: pointer;
+                z-index: 10;
+                border: none;
+                padding: 0;
+                transition: background 0.2s;
+            }
+            .map-sidebar-close:hover {
+                background: rgba(0,0,0,0.15);
+                color: #333;
+            }
+
+            /* When sidebar is opened (no collapsed class) */
+            .map-sidebar:not(.collapsed) {
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            /* When sidebar is collapsed (hidden) */
+            .map-sidebar.collapsed {
+                transform: translateY(100%);
+                pointer-events: none;
+            }
+
+            /* Handle bar */
+            .map-sidebar::before {
+                content: '';
+                display: block;
+                width: 36px;
+                height: 4px;
+                background: #ccc;
+                border-radius: 4px;
+                margin: 10px auto 0;
+                flex-shrink: 0;
+            }
+
+            /* Toggle button: top-right, first position */
+            .map-sidebar-toggle {
+                position: fixed;
+                top: 16px;
+                bottom: auto;
+                right: 76px;
+                left: auto;
+                transform: none;
+                z-index: 1001;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+                background: #1a73e8;
+                color: #fff;
+                border: none;
+            }
+            .map-sidebar-toggle.shifted {
+                left: auto;
+                right: 76px;
+                top: 16px;
+            }
+            .map-sidebar-toggle i { color: #fff; }
+
+            /* Chat button: top-right, second position (next to toggle) */
+            .cb-chat-btn {
+                top: 16px;
+                bottom: auto;
+                right: 16px;
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                z-index: 1001;
+            }
+            .cb-chat-panel {
+                bottom: 0 !important;
+                top: auto !important;
+                right: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                max-height: 100vh !important;
+                border-radius: 0 !important;
+            }
+
+            /* Ensure Leaflet popups are ABOVE everything on mobile */
+            .leaflet-popup-pane {
+                z-index: 2000 !important;
+            }
+            .leaflet-popup {
+                z-index: 2001 !important;
+            }
+
+            /* Bigger close button for touch */
+            .leaflet-popup-close-button {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 22px !important;
+                line-height: 36px !important;
+                top: 2px !important;
+                right: 4px !important;
+                color: #fff !important;
+                background: rgba(0,0,0,0.3);
+                border-radius: 50%;
+            }
+
+            /* Mobile popup sizing */
+            .leaflet-popup-content-wrapper {
+                border-radius: 12px !important;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.25) !important;
+            }
+            .leaflet-popup-content {
+                margin: 0 !important;
+                width: 260px !important;
+                max-width: calc(100vw - 40px) !important;
+            }
+            .leaflet-popup-tip {
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-store"></i>
+                <span class="brand-name"><i class="fas fa-map-marker-alt brand-location-icon" style="font-size:0.7em;opacity:0.6;"></i> <span id="brandCity"></span> HOLAX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList">
+                        <!-- States loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link active">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Map Page -->
+    <main class="map-page">
+        <div class="map-layout">
+            <!-- Sidebar -->
+            <aside class="map-sidebar collapsed" id="mapSidebar">
+                <button class="map-sidebar-close" id="mapSidebarClose" aria-label="Cerrar">&times;</button>
+                <div class="map-filters">
+                    <h3><i class="fas fa-filter"></i> Filtros</h3>
+                    <!-- Toggle Negocios / Propiedades -->
+                    <div class="map-type-toggle" style="display:flex;gap:6px;margin-bottom:10px;">
+                        <button class="btn btn-primary btn-sm" id="mapToggleNegocios" style="flex:1;"><i class="fas fa-store"></i> Negocios</button>
+                        <button class="btn btn-primary btn-sm" id="mapToggleTodos" style="flex:1;background:linear-gradient(135deg,#1a73e8,#059669);"><i class="fas fa-layer-group"></i> Todos</button>
+                        <button class="btn btn-secondary btn-sm" id="mapTogglePropiedades" style="flex:1;"><i class="fas fa-home"></i> Propiedades</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="mapTipo">Categorías</label>
+                        <select id="mapTipo" class="form-select">
+                            <option value="">Todas</option>
+                            <option value="restaurantes">Restaurantes</option>
+                            <option value="farmacias">Farmacias</option>
+                            <option value="clinicas-hospitales">Clínicas y Hospitales</option>
+                            <option value="supermercados">Supermercados</option>
+                            <option value="ropas">Ropas</option>
+                            <option value="barberias">Barberías y Salones</option>
+                            <option value="auto-talleres">Auto Talleres</option>
+                            <option value="cafeterias">Cafeterías</option>
+                            <option value="bares-discotecas">Bares y Discotecas</option>
+                            <option value="ferreterias">Ferreterías</option>
+                            <option value="tecnologia">Tecnología</option>
+                            <option value="hoteles-posadas">Hoteles y Posadas</option>
+                            <option value="gimnasios">Gimnasios</option>
+                            <option value="dentistas">Dentistas</option>
+                            <option value="celulares">Celulares</option>
+                            <option value="mueblerias">Mueblerías</option>
+                            <option value="juridicos">Jurídicos</option>
+                            <option value="academias">Academias</option>
+                            <option value="veterinarias">Veterinarias</option>
+                            <option value="electricos">Eléctricos</option>
+                            <option value="perfumerias">Perfumerías</option>
+                            <option value="joyerias">Joyerías</option>
+                            <option value="zapaterias">Zapaterías</option>
+                            <option value="panaderias">Panaderías</option>
+                            <option value="heladerias">Heladerías</option>
+                            <option value="pizzerias">Pizzerías</option>
+                            <option value="bicicletas">Bicicletas</option>
+                            <option value="encomiendas">Encomiendas</option>
+                            <option value="lavanderias">Lavanderías</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mapCiudad">Ciudad</label>
+                        <input type="text" id="mapCiudad" placeholder="Mérida">
+                    </div>
+                    <button class="btn btn-primary" id="mapSearchBtn">
+                        <i class="fas fa-search"></i> Explorar en el Mapa
+                    </button>
+                    <button class="btn btn-secondary btn-sm" id="mapResetBtn" style="margin-top:4px;">
+                        <i class="fas fa-undo"></i> Limpiar Filtros
+                    </button>
+                </div>
+
+                <!-- Results List -->
+                <div class="map-result-count" id="mapResultCount">
+                    <span id="mapCountText">0 resultados</span>
+                </div>
+                <div class="map-results">
+                    <div class="map-business-list" id="mapBusinessList">
+                        <div class="map-loading" id="mapLoading">
+                            <i class="fas fa-spinner fa-spin fa-2x"></i>
+                            <p>Cargando negocios...</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Toggle Sidebar Button -->
+            <button class="map-sidebar-toggle shifted" id="mapSidebarToggle" aria-label="Mostrar/Ocultar filtros">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+
+            <!-- Map Container -->
+            <div id="map"></div>
+        </div>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

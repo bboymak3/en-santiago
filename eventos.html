@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eventos y actividades en Venezuela - Descubre lo que pasa en tu ciudad con HolaX.">
+    <title>Eventos y Actividades - HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ─── Eventos Hero ───────────────────────────────────── */
+        .eventos-hero {
+            background: linear-gradient(135deg, #064e3b 0%, #004899 25%, #005BB5 50%, #006EE3 75%, #3B9AFF 100%);
+            padding-top: calc(var(--navbar-height) + 48px);
+            padding-bottom: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eventos-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(52, 211, 153, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, rgba(5, 150, 105, 0.25) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .eventos-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 75% 65%, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        .eventos-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eventos-hero-content {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .eventos-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 18px;
+            background: rgba(52, 211, 153, 0.2);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            border-radius: 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #a7f3d0;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .eventos-hero-badge i {
+            color: #fbbf24;
+            font-size: 0.72rem;
+        }
+
+        .eventos-hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .eventos-hero-title .highlight {
+            background: linear-gradient(135deg, #a7f3d0, #6ee7b7, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .eventos-hero-subtitle {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        /* ─── Filter Bar ─────────────────────────────────────── */
+        .eventos-filters {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            padding: 20px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .eventos-filters-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .eventos-filter-group {
+            flex: 1;
+            min-width: 160px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .eventos-filter-group label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .eventos-filter-group label i {
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+
+        .eventos-filter-wrap {
+            position: relative;
+        }
+
+        .eventos-filter-wrap select,
+        .eventos-filter-wrap input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            font-family: inherit;
+            transition: all 0.25s;
+        }
+
+        .eventos-filter-wrap input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .eventos-filter-wrap select:focus,
+        .eventos-filter-wrap input:focus {
+            border-color: rgba(16, 185, 129, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .eventos-filter-wrap select option {
+            background: #1f2937;
+            color: #fff;
+        }
+
+        .eventos-filter-arrow {
+            position: absolute;
+            right: 12px;
+            bottom: 13px;
+            font-size: 0.68rem;
+            color: rgba(255, 255, 255, 0.45);
+            pointer-events: none;
+        }
+
+        .eventos-search-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 28px;
+            background: linear-gradient(135deg, #006EE3, #34d399);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-family: inherit;
+            box-shadow: 0 4px 16px rgba(5, 150, 105, 0.4);
+        }
+
+        .eventos-search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(5, 150, 105, 0.55);
+        }
+
+        .eventos-clear-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .eventos-clear-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        /* ─── Results Info Bar ───────────────────────────────── */
+        .eventos-results-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .eventos-results-count {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .eventos-results-count strong {
+            color: #004899;
+            font-weight: 700;
+        }
+
+        /* ─── Main Content ────────────────────────────────────── */
+        .eventos-main {
+            padding: 32px 0 64px;
+            background: #f8fafc;
+            min-height: 60vh;
+        }
+
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        /* ─── Event Card ────────────────────────────────────── */
+        .event-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1.5px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover {
+            border-color: #3B9AFF;
+            box-shadow: 0 12px 36px rgba(16, 185, 129, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .event-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 22px 22px 0;
+            gap: 12px;
+        }
+
+        .event-card-date-box {
+            width: 60px;
+            text-align: center;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #EFF6FF, #d1fae5);
+            border-radius: 14px;
+            padding: 10px 8px;
+            border: 2px solid #a7f3d0;
+        }
+
+        .event-card-date-day {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #006EE3;
+            line-height: 1;
+        }
+
+        .event-card-date-month {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #005BB5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .event-card-title-wrap {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .event-card-category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+        }
+
+        .event-card-category-badge.musica {
+            background: #ede9fe;
+            color: #7c3aed;
+            border: 1px solid #c4b5fd;
+        }
+
+        .event-card-category-badge.deporte {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+
+        .event-card-category-badge.cultura {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+        }
+
+        .event-card-category-badge.gastronomia {
+            background: #fce7f3;
+            color: #be185d;
+            border: 1px solid #fbcfe8;
+        }
+
+        .event-card-category-badge.arte {
+            background: #fff7ed;
+            color: #ea580c;
+            border: 1px solid #fed7aa;
+        }
+
+        .event-card-category-badge.tecnologia {
+            background: #EFF6FF;
+            color: #006EE3;
+            border: 1px solid #a7f3d0;
+        }
+
+        .event-card-category-badge.otros {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .event-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0;
+            line-height: 1.35;
+            letter-spacing: -0.2px;
+        }
+
+        .event-card-body {
+            padding: 16px 22px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .event-card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .event-card-meta-item i {
+            font-size: 0.78rem;
+            color: #3B9AFF;
+            width: 16px;
+            text-align: center;
+        }
+
+        .event-card-description {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.65;
+            margin-bottom: 14px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Expandable Detail Section */
+        .event-card-details {
+            display: none;
+            padding: 16px 22px 20px;
+            border-top: 1px solid #f1f5f9;
+            background: #f8fafc;
+            animation: eventosSlideDown 0.3s ease;
+        }
+
+        .event-card-details.expanded {
+            display: block;
+        }
+
+        @keyframes eventosSlideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+
+        .event-card-details p {
+            font-size: 0.88rem;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .event-card-details-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .event-card-details-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        .event-card-details-meta-item i {
+            font-size: 0.72rem;
+            color: #3B9AFF;
+        }
+
+        .event-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px;
+            border-top: 1px solid #f1f5f9;
+            background: #fafbfd;
+        }
+
+        .event-card-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .event-card-views i {
+            font-size: 0.72rem;
+        }
+
+        .event-card-detail-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 20px;
+            background: linear-gradient(135deg, #006EE3, #3B9AFF);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .event-card-detail-btn:hover {
+            background: linear-gradient(135deg, #005BB5, #006EE3);
+            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .event-card-detail-btn i {
+            font-size: 0.72rem;
+            transition: transform 0.25s;
+        }
+
+        .event-card-detail-btn.active i {
+            transform: rotate(180deg);
+        }
+
+        /* ─── Loading / Empty States ──────────────────────────── */
+        .eventos-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            gap: 16px;
+        }
+
+        .eventos-loading i {
+            font-size: 2.5rem;
+            color: #34d399;
+            animation: spin 1s linear infinite;
+        }
+
+        .eventos-loading p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .eventos-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .eventos-empty-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #EFF6FF, #d1fae5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #006EE3;
+            margin-bottom: 24px;
+        }
+
+        .eventos-empty h2 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .eventos-empty p {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            max-width: 420px;
+        }
+
+        .eventos-empty-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .eventos-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .eventos-btn-outline:hover {
+            border-color: #3B9AFF;
+            color: #3B9AFF;
+            background: #EFF6FF;
+        }
+
+        .eventos-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #006EE3, #3B9AFF);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+        }
+
+        .eventos-btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.45);
+            color: #fff;
+        }
+
+        /* ─── Pagination ──────────────────────────────────────── */
+        .eventos-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 32px 0 16px;
+        }
+
+        .eventos-pagination button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+        }
+
+        .eventos-pagination button:hover:not(:disabled) {
+            border-color: #3B9AFF;
+            color: #3B9AFF;
+            background: #EFF6FF;
+        }
+
+        .eventos-pagination button.active {
+            background: linear-gradient(135deg, #006EE3, #3B9AFF);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+
+        .eventos-pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ─── Footer ─────────────────────────────────────────── */
+        .eventos-footer {
+            background: #022c22;
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .eventos-footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.82rem;
+        }
+
+        .eventos-footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+
+        .eventos-footer a:hover {
+            color: #fff;
+        }
+
+        /* ─── Responsive ──────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .eventos-hero {
+                padding-top: calc(var(--navbar-height) + 28px);
+                padding-bottom: 36px;
+            }
+
+            .eventos-hero-title {
+                font-size: 1.8rem;
+            }
+
+            .eventos-hero-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 24px;
+            }
+
+            .eventos-filters {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+            .eventos-filters-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .eventos-filter-group {
+                min-width: 100%;
+            }
+
+            .eventos-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .eventos-results-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .eventos-hero-title {
+                font-size: 1.5rem;
+            }
+
+            .event-card-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .event-card-footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .eventos-pagination button {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList"></div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="eventos.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
+                        <li><a href="reservas.html" class="nav-link"><i class="fas fa-calendar-check"></i> Reservas</a></li>
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="eventos-hero">
+        <div class="container">
+            <div class="eventos-hero-content">
+                <div class="eventos-hero-badge">
+                    <i class="fas fa-calendar-star"></i>
+                    Agenda Local
+                </div>
+                <h1 class="eventos-hero-title">
+                    Eventos y <span class="highlight">Actividades</span>
+                </h1>
+                <p class="eventos-hero-subtitle">
+                    Descubre lo que pasa en tu ciudad. Conciertos, deportes, cultura, gastronomía y mucho más cerca de ti.
+                </p>
+
+                <!-- How it works - quick guide -->
+                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+                    <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:12px;backdrop-filter:blur(8px);">
+                        <div style="width:32px;height:32px;border-radius:50%;background:rgba(167,243,208,0.2);display:flex;align-items:center;justify-content:center;"><i class="fas fa-search" style="color:#a7f3d0;font-size:0.8rem;"></i></div>
+                        <span style="font-size:0.8rem;color:rgba(255,255,255,0.8);font-weight:500;">Busca por categoría o fecha</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:12px;backdrop-filter:blur(8px);">
+                        <div style="width:32px;height:32px;border-radius:50%;background:rgba(167,243,208,0.2);display:flex;align-items:center;justify-content:center;"><i class="fas fa-hand-pointer" style="color:#a7f3d0;font-size:0.8rem;"></i></div>
+                        <span style="font-size:0.8rem;color:rgba(255,255,255,0.8);font-weight:500;">Toca "Ver Detalles" para más info</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:12px;backdrop-filter:blur(8px);">
+                        <div style="width:32px;height:32px;border-radius:50%;background:rgba(167,243,208,0.2);display:flex;align-items:center;justify-content:center;"><i class="fas fa-share-alt" style="color:#a7f3d0;font-size:0.8rem;"></i></div>
+                        <span style="font-size:0.8rem;color:rgba(255,255,255,0.8);font-weight:500;">Comparte eventos con amigos</span>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="eventos-filters">
+                    <div class="eventos-filters-row">
+                        <div class="eventos-filter-group">
+                            <label><i class="fas fa-search"></i> Buscar</label>
+                            <div class="eventos-filter-wrap">
+                                <input type="text" id="eventSearchInput" placeholder="Nombre, lugar...">
+                            </div>
+                        </div>
+                        <div class="eventos-filter-group">
+                            <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+                            <div class="eventos-filter-wrap">
+                                <select id="eventDateFilter">
+                                    <option value="">Todas las fechas</option>
+                                    <option value="today">Hoy</option>
+                                    <option value="this_week">Esta semana</option>
+                                    <option value="this_month">Este mes</option>
+                                    <option value="next_month">Próximo mes</option>
+                                </select>
+                                <i class="fas fa-chevron-down eventos-filter-arrow"></i>
+                            </div>
+                        </div>
+                        <div class="eventos-filter-group">
+                            <label><i class="fas fa-tag"></i> Categoría</label>
+                            <div class="eventos-filter-wrap">
+                                <select id="eventCategoryFilter">
+                                    <option value="">Todas las categorías</option>
+                                    <option value="musica">Música</option>
+                                    <option value="deporte">Deporte</option>
+                                    <option value="cultura">Cultura</option>
+                                    <option value="gastronomia">Gastronomía</option>
+                                    <option value="arte">Arte</option>
+                                    <option value="tecnologia">Tecnología</option>
+                                    <option value="otros">Otros</option>
+                                </select>
+                                <i class="fas fa-chevron-down eventos-filter-arrow"></i>
+                            </div>
+                        </div>
+                        <div class="eventos-filter-group" style="flex: 0; min-width: auto;">
+                            <label>&nbsp;</label>
+                            <button class="eventos-search-btn" id="eventSearchBtn">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                        <div class="eventos-filter-group" style="flex: 0; min-width: auto;">
+                            <label>&nbsp;</label>
+                            <button class="eventos-clear-btn" id="eventClearBtn">
+                                <i class="fas fa-times"></i> Todos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="eventos-main">
+        <div class="container">
+            <!-- Results Bar -->
+            <div class="eventos-results-bar">
+                <div class="eventos-results-count" id="eventosResultsCount">
+                    <strong>0</strong> eventos encontrados
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="eventos-loading" id="eventosLoading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Buscando eventos y actividades...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div class="eventos-empty hidden" id="eventosEmpty">
+                <div class="eventos-empty-icon">
+                    <i class="fas fa-calendar-times"></i>
+                </div>
+                <h2>No hay eventos disponibles</h2>
+                <p>No se encontraron eventos activos. ¡Vuelve pronto para descubrir actividades en tu ciudad!</p>
+                <div class="eventos-empty-actions">
+                    <a href="index.html" class="eventos-btn-outline"><i class="fas fa-home"></i> Volver al inicio</a>
+                    <a href="search.html" class="eventos-btn-primary"><i class="fas fa-compass"></i> Explorar negocios</a>
+                </div>
+            </div>
+
+            <!-- Events Grid -->
+            <div class="eventos-grid hidden" id="eventosGrid">
+                <!-- Event cards rendered dynamically -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="eventos-pagination hidden" id="eventosPagination">
+                <button id="eventosPrevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </button>
+                <div id="eventosPaginationPages"></div>
+                <button id="eventosNextBtn" disabled>
+                    Siguiente <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="eventos-footer">
+        <div class="container">
+            <p>&copy; 2025 <a href="index.html">HolaX</a>. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        (function () {
+            'use strict';
+
+            // ─── Elements ───────────────────────────────────────
+            const grid = document.getElementById('eventosGrid');
+            const loading = document.getElementById('eventosLoading');
+            const emptyState = document.getElementById('eventosEmpty');
+            const resultsCount = document.getElementById('eventosResultsCount');
+            const paginationEl = document.getElementById('eventosPagination');
+            const paginationPages = document.getElementById('eventosPaginationPages');
+            const prevBtn = document.getElementById('eventosPrevBtn');
+            const nextBtn = document.getElementById('eventosNextBtn');
+
+            const searchInput = document.getElementById('eventSearchInput');
+            const dateFilter = document.getElementById('eventDateFilter');
+            const categoryFilter = document.getElementById('eventCategoryFilter');
+            const searchBtn = document.getElementById('eventSearchBtn');
+            const clearBtn = document.getElementById('eventClearBtn');
+
+            let currentPage = 1;
+            const limit = 12;
+
+            // ─── Category Helpers ────────────────────────────────
+            const CATEGORY_LABELS = {
+                'música': 'Música',
+                'musica': 'Música',
+                'deporte': 'Deporte',
+                'cultura': 'Cultura',
+                'gastronomía': 'Gastronomía',
+                'gastronomia': 'Gastronomía',
+                'arte': 'Arte',
+                'tecnología': 'Tecnología',
+                'tecnologia': 'Tecnología',
+            };
+
+            const CATEGORY_ICONS = {
+                'música': 'fa-music',
+                'musica': 'fa-music',
+                'deporte': 'fa-futbol',
+                'cultura': 'fa-theater-masks',
+                'gastronomía': 'fa-utensils',
+                'gastronomia': 'fa-utensils',
+                'arte': 'fa-palette',
+                'tecnología': 'fa-laptop-code',
+                'tecnologia': 'fa-laptop-code',
+            };
+
+            const CATEGORY_BADGE_CLASS = {
+                'música': 'musica',
+                'musica': 'musica',
+                'deporte': 'deporte',
+                'cultura': 'cultura',
+                'gastronomía': 'gastronomia',
+                'gastronomia': 'gastronomia',
+                'arte': 'arte',
+                'tecnología': 'tecnologia',
+                'tecnologia': 'tecnologia',
+            };
+
+            function getCategoryLabel(cat) {
+                if (!cat) return 'Otros';
+                return CATEGORY_LABELS[cat.toLowerCase()] || cat;
+            }
+
+            function getCategoryIcon(cat) {
+                return CATEGORY_ICONS[cat?.toLowerCase()] || 'fa-calendar-alt';
+            }
+
+            function getCategoryBadgeClass(cat) {
+                return CATEGORY_BADGE_CLASS[cat?.toLowerCase()] || 'otros';
+            }
+
+            // ─── Detect Category from event name/description ──
+            function detectCategory(event) {
+                if (event.category) return event.category;
+                const text = ((event.name || '') + ' ' + (event.description || '')).toLowerCase();
+                if (/música|musica|concierto|canto|orquesta|banda|dj|fiesta|baile|salsa|merengue/.test(text)) return 'musica';
+                if (/deporte|futbol|fútbol|baloncesto|beisbol|béisbol|torneo|partido|maratón|competencia/.test(text)) return 'deporte';
+                if (/cultura|teatro|exposición|exposicion|museo|biblioteca|literatura|poesía|feria|tradicional/.test(text)) return 'cultura';
+                if (/gastronom|comida|restaurante|cocina|chef|sabores|degustación|degustacion|food/.test(text)) return 'gastronomia';
+                if (/arte|pintura|exposici|escultura|galería|diseño|fotografía|fotografia/.test(text)) return 'arte';
+                if (/tecno|digital|tech|robotica|hackathon|startup|innovación|innovacion/.test(text)) return 'tecnologia';
+                return 'otros';
+            }
+
+            // ─── Escape HTML ───────────────────────────────────
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // ─── Date Helpers ──────────────────────────────────
+            function getEventDateParts(dateStr) {
+                if (!dateStr) return { day: '?', month: '?' };
+                try {
+                    const date = new Date(dateStr);
+                    return {
+                        day: date.getDate().toString(),
+                        month: date.toLocaleDateString('es-VE', { month: 'short' }).toUpperCase()
+                    };
+                } catch {
+                    return { day: '?', month: '?' };
+                }
+            }
+
+            function formatEventDateTime(dateStr) {
+                if (!dateStr) return 'Fecha por confirmar';
+                try {
+                    const date = new Date(dateStr);
+                    return date.toLocaleDateString('es-VE', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                } catch {
+                    return dateStr;
+                }
+            }
+
+            function formatEventDate(dateStr) {
+                if (!dateStr) return 'Fecha por confirmar';
+                try {
+                    const date = new Date(dateStr);
+                    return date.toLocaleDateString('es-VE', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+                } catch {
+                    return dateStr;
+                }
+            }
+
+            // ─── Render Event Card ─────────────────────────────
+            function renderEventCard(event) {
+                if (!event) return '';
+
+                const category = detectCategory(event);
+                const catLabel = getCategoryLabel(category);
+                const catIcon = getCategoryIcon(category);
+                const catBadgeClass = getCategoryBadgeClass(category);
+                const dateParts = getEventDateParts(event.event_date);
+                const desc = event.description || '';
+                const location = event.location || 'Ubicación por confirmar';
+                const views = event.views || 0;
+
+                const fullDateTime = formatEventDateTime(event.event_date);
+                const fullDate = formatEventDate(event.event_date);
+
+                return `
+                    <article class="event-card" data-event-id="${event.id || ''}" data-category="${catBadgeClass}" data-date="${event.event_date || ''}">
+                        <div class="event-card-header">
+                            <div class="event-card-date-box">
+                                <div class="event-card-date-day">${dateParts.day}</div>
+                                <div class="event-card-date-month">${dateParts.month}</div>
+                            </div>
+                            <div class="event-card-title-wrap">
+                                <span class="event-card-category-badge ${catBadgeClass}">
+                                    <i class="fas ${catIcon}"></i> ${escapeHtml(catLabel)}
+                                </span>
+                                <h3 class="event-card-title">${escapeHtml(event.name || 'Evento')}</h3>
+                            </div>
+                        </div>
+                        <div class="event-card-body">
+                            <div class="event-card-meta">
+                                <span class="event-card-meta-item">
+                                    <i class="far fa-clock"></i> ${fullDateTime}
+                                </span>
+                                <span class="event-card-meta-item">
+                                    <i class="fas fa-map-marker-alt"></i> ${escapeHtml(location)}
+                                </span>
+                            </div>
+                            ${desc ? `<p class="event-card-description">${escapeHtml(desc)}</p>` : ''}
+                        </div>
+                        <div class="event-card-details" id="details-${event.id || ''}">
+                            <p>${desc ? escapeHtml(desc) : 'Sin descripción adicional disponible.'}</p>
+                            <div class="event-card-details-meta">
+                                <span class="event-card-details-meta-item">
+                                    <i class="far fa-calendar-alt"></i> ${escapeHtml(fullDateTime)}
+                                </span>
+                                <span class="event-card-details-meta-item">
+                                    <i class="fas fa-map-marker-alt"></i> ${escapeHtml(location)}
+                                </span>
+                                ${views > 0 ? `<span class="event-card-details-meta-item"><i class="far fa-eye"></i> ${views} vistas</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="event-card-footer">
+                            <div class="event-card-views">
+                                <i class="far fa-eye"></i> ${views} vistas
+                            </div>
+                            <button class="event-card-detail-btn" onclick="toggleEventDetails(${event.id || ''}, this)">
+                                Ver Detalles <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }
+
+            // ─── Toggle Details ────────────────────────────────
+            window.toggleEventDetails = function (eventId, btn) {
+                const details = document.getElementById('details-' + eventId);
+                if (!details) return;
+
+                const isExpanded = details.classList.contains('expanded');
+
+                if (isExpanded) {
+                    details.classList.remove('expanded');
+                    btn.classList.remove('active');
+                    btn.innerHTML = 'Ver Detalles <i class="fas fa-chevron-down"></i>';
+                } else {
+                    details.classList.add('expanded');
+                    btn.classList.add('active');
+                    btn.innerHTML = 'Ocultar <i class="fas fa-chevron-down"></i>';
+
+                    // Increment views via API
+                    if (eventId) {
+                        api.get('/events?id=' + eventId).catch(function () {});
+                    }
+                }
+            };
+
+            // ─── Date Filter Helper ────────────────────────────
+            function isInDateRange(dateStr, filter) {
+                if (!dateStr || !filter) return true;
+                const date = new Date(dateStr);
+                const now = new Date();
+                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+                switch (filter) {
+                    case 'today':
+                        return date.toDateString() === today.toDateString();
+                    case 'this_week': {
+                        const weekEnd = new Date(today);
+                        weekEnd.setDate(weekEnd.getDate() + (7 - weekEnd.getDay()));
+                        return date >= today && date <= weekEnd;
+                    }
+                    case 'this_month':
+                        return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+                    case 'next_month': {
+                        const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+                        return date.getMonth() === nextMonth.getMonth() && date.getFullYear() === nextMonth.getFullYear();
+                    }
+                    default:
+                        return true;
+                }
+            }
+
+            // ─── Fetch & Render Events ─────────────────────────
+            async function fetchEvents(page) {
+                currentPage = page || 1;
+
+                loading.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                grid.classList.add('hidden');
+                paginationEl.classList.add('hidden');
+
+                try {
+                    const search = searchInput ? searchInput.value.trim() : '';
+                    let endpoint = `/events?status=active&page=${currentPage}&limit=${limit}`;
+                    if (search) endpoint += `&search=${encodeURIComponent(search)}`;
+
+                    const data = await api.get(endpoint);
+                    const events = data.events || [];
+                    const pagination = data.pagination || {};
+                    const total = pagination.total || 0;
+
+                    loading.classList.add('hidden');
+                    resultsCount.innerHTML = `<strong>${total}</strong> eventos encontrados`;
+
+                    if (events.length === 0) {
+                        emptyState.classList.remove('hidden');
+                        return;
+                    }
+
+                    grid.innerHTML = events.map(e => renderEventCard(e)).join('');
+                    grid.classList.remove('hidden');
+
+                    // Apply client-side filters for date & category
+                    applyClientFilters();
+
+                    // Pagination
+                    const totalPages = pagination.totalPages || 1;
+                    if (totalPages > 1) {
+                        paginationEl.classList.remove('hidden');
+                        prevBtn.disabled = currentPage <= 1;
+                        nextBtn.disabled = currentPage >= totalPages;
+
+                        let pagesHtml = '';
+                        const maxVisible = 5;
+                        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+                        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+                        if (endPage - startPage + 1 < maxVisible) {
+                            startPage = Math.max(1, endPage - maxVisible + 1);
+                        }
+
+                        if (startPage > 1) {
+                            pagesHtml += `<button onclick="goToEventPage(1)" style="padding:10px 14px;">1</button>`;
+                            if (startPage > 2) pagesHtml += `<span style="color:#94a3b8;padding:0 4px;">...</span>`;
+                        }
+                        for (let i = startPage; i <= endPage; i++) {
+                            pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToEventPage(${i})">${i}</button>`;
+                        }
+                        if (endPage < totalPages) {
+                            if (endPage < totalPages - 1) pagesHtml += `<span style="color:#94a3b8;padding:0 4px;">...</span>`;
+                            pagesHtml += `<button onclick="goToEventPage(${totalPages})" style="padding:10px 14px;">${totalPages}</button>`;
+                        }
+                        paginationPages.innerHTML = pagesHtml;
+                    } else {
+                        paginationEl.classList.add('hidden');
+                    }
+                } catch (error) {
+                    loading.classList.add('hidden');
+                    showToast('Error al cargar los eventos. Intenta nuevamente.', 'error');
+                    console.error('Events fetch error:', error);
+                }
+            }
+
+            // ─── Client-side Filters ──────────────────────────
+            function applyClientFilters() {
+                const dateVal = dateFilter ? dateFilter.value : '';
+                const catVal = categoryFilter ? categoryFilter.value.toLowerCase() : '';
+
+                const cards = grid.querySelectorAll('.event-card');
+                let visible = 0;
+
+                cards.forEach(card => {
+                    const cardDate = card.dataset.date || '';
+                    const cardCategory = (card.dataset.category || '').toLowerCase();
+                    const text = card.textContent.toLowerCase();
+                    const search = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+                    const matchSearch = !search || text.includes(search);
+                    const matchDate = !dateVal || isInDateRange(cardDate, dateVal);
+                    const matchCategory = !catVal || cardCategory === catVal;
+
+                    if (matchSearch && matchDate && matchCategory) {
+                        card.style.display = '';
+                        visible++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                resultsCount.innerHTML = `<strong>${visible}</strong> eventos encontrados`;
+            }
+
+            // ─── Event Listeners ──────────────────────────────
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    fetchEvents(1);
+                });
+            }
+
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    searchInput.value = '';
+                    dateFilter.value = '';
+                    categoryFilter.value = '';
+                    applyClientFilters();
+                    // Restore original count
+                    const allCards = grid.querySelectorAll('.event-card');
+                    let totalVisible = 0;
+                    allCards.forEach(c => { c.style.display = ''; totalVisible++; });
+                    resultsCount.innerHTML = `<strong>${totalVisible}</strong> eventos encontrados`;
+                });
+            }
+
+            if (searchInput) {
+                let debounceTimer;
+                searchInput.addEventListener('input', function () {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(function () {
+                        applyClientFilters();
+                    }, 300);
+                });
+            }
+
+            if (dateFilter) {
+                dateFilter.addEventListener('change', applyClientFilters);
+            }
+
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', applyClientFilters);
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function () {
+                    if (currentPage > 1) fetchEvents(currentPage - 1);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function () {
+                    fetchEvents(currentPage + 1);
+                });
+            }
+
+            window.goToEventPage = function (page) {
+                fetchEvents(page);
+                window.scrollTo({ top: grid.offsetTop - 120, behavior: 'smooth' });
+            };
+
+            // ─── Initialize ──────────────────────────────────────
+            fetchEvents(1);
+        })();
+    </script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

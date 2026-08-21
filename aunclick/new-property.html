@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Publica un nuevo inmueble en HOLAX - El directorio comercial e inmobiliario de Venezuela.">
+    <title>Publicar Inmueble - HOLAX</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-store"></i>
+                <span class="brand-name"><i class="fas fa-map-marker-alt brand-location-icon" style="font-size:0.7em;opacity:0.6;"></i> <span id="brandCity"></span> HOLAX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList">
+                        <!-- States loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="inmuebles.html" class="nav-link active">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="marketplace.html" class="nav-link">Marketplace</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="entretenimiento.html" class="nav-link"><i class="fas fa-theater-masks"></i> Entretenimiento</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Property Form -->
+    <main class="property-form-page">
+        <!-- Hero Header -->
+        <div class="pf-hero">
+            <div class="pf-hero-bg"></div>
+            <div class="pf-hero-content">
+                <div class="pf-hero-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h1 id="formTitle">Publicar Nuevo Inmueble</h1>
+                <p class="pf-hero-subtitle">Completa los datos de tu inmueble para publicarlo en el portal</p>
+                <!-- Step Progress -->
+                <div class="pf-steps">
+                    <div class="pf-step active" data-step="1">
+                        <div class="pf-step-circle"><i class="fas fa-info-circle"></i></div>
+                        <span>Info</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="2">
+                        <div class="pf-step-circle"><i class="fas fa-dollar-sign"></i></div>
+                        <span>Precio</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="3">
+                        <div class="pf-step-circle"><i class="fas fa-map-marker-alt"></i></div>
+                        <span>Ubicación</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="4">
+                        <div class="pf-step-circle"><i class="fas fa-bed"></i></div>
+                        <span>Detalle</span>
+                    </div>
+                    <div class="pf-step-line"></div>
+                    <div class="pf-step" data-step="5">
+                        <div class="pf-step-circle"><i class="fas fa-camera"></i></div>
+                        <span>Fotos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <form class="property-form" id="propertyForm" enctype="multipart/form-data">
+
+                <!-- Section 1: Basic Info -->
+                <div class="pf-section active-section" data-section="1">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #1a73e8, #4a90e8);">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Información Básica</h2>
+                            <p>Describe tu inmueble con un título atractivo</p>
+                        </div>
+                        <span class="pf-section-badge">Paso 1</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-field">
+                            <label for="propTitle" class="pf-label">
+                                <i class="fas fa-heading"></i> Título del Inmueble <span class="pf-required">*</span>
+                            </label>
+                            <input type="text" id="propTitle" name="titulo" placeholder="Ej: Casa moderna en Caracas con 3 habitaciones" required maxlength="150">
+                            <div class="form-error" id="propTitleError"></div>
+                            <div class="pf-field-footer">
+                                <small class="form-hint"><i class="fas fa-lightbulb"></i> Usa un título descriptivo que atraiga compradores</small>
+                                <span class="pf-char-count" id="titleCharCount">0/150</span>
+                            </div>
+                        </div>
+
+                        <div class="pf-field">
+                            <label for="propDescription" class="pf-label">
+                                <i class="fas fa-align-left"></i> Descripción <span class="pf-required">*</span>
+                            </label>
+                            <textarea id="propDescription" name="descripcion" rows="5" placeholder="Describe tu inmueble en detalle: características, estado, vecinos, servicios cercanos..." required></textarea>
+                            <div class="form-error" id="propDescriptionError"></div>
+                            <div class="pf-field-footer">
+                                <small class="form-hint"><i class="fas fa-lightbulb"></i> Mientras más detallada sea la descripción, más interés generarás</small>
+                                <span class="pf-char-count" id="descCharCount">0/2000</span>
+                            </div>
+                        </div>
+
+                        <div class="pf-grid-2">
+                            <div class="pf-field">
+                                <label for="propTipo" class="pf-label">
+                                    <i class="fas fa-home"></i> Tipo de Inmueble <span class="pf-required">*</span>
+                                </label>
+                                <div class="pf-select-wrapper">
+                                    <select id="propTipo" name="tipo" required>
+                                        <option value="">Selecciona un tipo</option>
+                                        <option value="Casa">Casa</option>
+                                        <option value="Apartamento">Apartamento</option>
+                                        <option value="Terreno">Terreno</option>
+                                        <option value="Local Comercial">Local Comercial</option>
+                                        <option value="Oficina">Oficina</option>
+                                        <option value="Hotel">Hotel</option>
+                                        <option value="Finca">Finca</option>
+                                        <option value="Galpón">Galpón</option>
+                                        <option value="Estacionamiento">Estacionamiento</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down pf-select-arrow"></i>
+                                </div>
+                                <div class="form-error" id="propTipoError"></div>
+                            </div>
+                            <div class="pf-field">
+                                <label for="propOperacion" class="pf-label">
+                                    <i class="fas fa-exchange-alt"></i> Tipo de Operación <span class="pf-required">*</span>
+                                </label>
+                                <div class="pf-select-wrapper">
+                                    <select id="propOperacion" name="operacion" required>
+                                        <option value="">Selecciona operación</option>
+                                        <option value="Venta">Venta</option>
+                                        <option value="Alquiler">Alquiler</option>
+                                        <option value="Venta y Alquiler">Venta y Alquiler</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down pf-select-arrow"></i>
+                                </div>
+                                <div class="form-error" id="propOperacionError"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Price -->
+                <div class="pf-section" data-section="2" style="display:none;">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #28a745, #5cb85c);">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Precio</h2>
+                            <p>Establece el precio de tu inmueble</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #e8f5e9; color: #28a745;">Paso 2</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-price-card">
+                            <div class="pf-price-main">
+                                <div class="pf-field">
+                                    <label for="propPrecio" class="pf-label">
+                                        <i class="fas fa-tag"></i> Precio <span class="pf-required">*</span>
+                                    </label>
+                                    <div class="pf-price-input-wrapper">
+                                        <span class="pf-price-symbol" id="priceSymbol">$</span>
+                                        <input type="number" id="propPrecio" name="precio" placeholder="0.00" required min="0" step="0.01">
+                                    </div>
+                                    <div class="form-error" id="propPrecioError"></div>
+                                </div>
+                            </div>
+                            <div class="pf-currency-selector">
+                                <label class="pf-currency-option">
+                                    <input type="radio" name="moneda" value="USD" checked>
+                                    <div class="pf-currency-card">
+                                        <span class="pf-currency-flag">🇺🇸</span>
+                                        <span class="pf-currency-code">USD</span>
+                                        <span class="pf-currency-name">Dólar</span>
+                                    </div>
+                                </label>
+                                <label class="pf-currency-option">
+                                    <input type="radio" name="moneda" value="EUR">
+                                    <div class="pf-currency-card">
+                                        <span class="pf-currency-flag">🇪🇺</span>
+                                        <span class="pf-currency-code">EUR</span>
+                                        <span class="pf-currency-name">Euro</span>
+                                    </div>
+                                </label>
+                                <label class="pf-currency-option">
+                                    <input type="radio" name="moneda" value="Bs">
+                                    <div class="pf-currency-card">
+                                        <span class="pf-currency-flag">🇻🇪</span>
+                                        <span class="pf-currency-code">Bs</span>
+                                        <span class="pf-currency-name">Bolívares</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Location -->
+                <div class="pf-section" data-section="3" style="display:none;">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #ff6b35, #ff8c5a);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Ubicación</h2>
+                            <p>Indica dónde se encuentra tu inmueble</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #fff3e0; color: #ff6b35;">Paso 3</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-field">
+                            <label for="propDireccion" class="pf-label">
+                                <i class="fas fa-map-pin"></i> Dirección <span class="pf-required">*</span>
+                            </label>
+                            <input type="text" id="propDireccion" name="direccion" placeholder="Ej: Av. Libertador, Centro, Caracas" required>
+                            <div class="form-error" id="propDireccionError"></div>
+                        </div>
+
+                        <div class="pf-grid-2">
+                            <div class="pf-field">
+                                <label for="propCiudad" class="pf-label">
+                                    <i class="fas fa-city"></i> Ciudad <span class="pf-required">*</span>
+                                </label>
+                                <input type="text" id="propCiudad" name="ciudad" placeholder="Ej: Caracas" required>
+                                <div class="form-error" id="propCiudadError"></div>
+                            </div>
+                            <div class="pf-field">
+                                <label for="propEstado" class="pf-label">
+                                    <i class="fas fa-map"></i> Estado
+                                </label>
+                                <input type="text" id="propEstado" name="estado" placeholder="Ej: Distrito Capital">
+                            </div>
+                        </div>
+
+                        <!-- Interactive Map -->
+                        <div class="pf-map-container">
+                            <div class="pf-map-header">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span>Selecciona la ubicación en el mapa</span>
+                            </div>
+                            <p class="pf-map-hint">Haz clic en el mapa o busca una dirección para marcar la ubicación exacta.</p>
+                            <div class="location-map-search">
+                                <input type="text" id="locationSearchInput" placeholder="Buscar dirección o lugar en Venezuela..." autocomplete="off">
+                                <button type="button" class="btn btn-primary btn-sm" id="locationSearchBtn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div id="locationMap" class="location-picker-map"></div>
+                            <div id="locationMapCoords" class="pf-coords-display">
+                                <span><i class="fas fa-crosshairs"></i> Lat: <strong id="coordLatDisplay">8.6233</strong></span>
+                                <span><i class="fas fa-crosshairs"></i> Lng: <strong id="coordLngDisplay">-66.5897</strong></span>
+                            </div>
+                            <div class="pf-grid-2 pf-grid-collapse">
+                                <div class="pf-field">
+                                    <label for="propLat" class="pf-label"><i class="fas fa-globe"></i> Latitud</label>
+                                    <input type="number" id="propLat" name="latitud" placeholder="8.6233" step="any">
+                                </div>
+                                <div class="pf-field">
+                                    <label for="propLng" class="pf-label"><i class="fas fa-globe-americas"></i> Longitud</label>
+                                    <input type="number" id="propLng" name="longitud" placeholder="-66.5897" step="any">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Features -->
+                <div class="pf-section" data-section="4" style="display:none;">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #6f42c1, #8b5cf6);">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Características</h2>
+                            <p>Especifica los detalles y amenidades de tu inmueble</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #f3e8ff; color: #6f42c1;">Paso 4</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <!-- Quick Stats -->
+                        <div class="pf-quick-stats">
+                            <div class="pf-stat-card">
+                                <div class="pf-stat-icon"><i class="fas fa-bed"></i></div>
+                                <label for="propHabitaciones">Habitaciones</label>
+                                <input type="number" id="propHabitaciones" name="habitaciones" min="0" max="50" value="0">
+                            </div>
+                            <div class="pf-stat-card">
+                                <div class="pf-stat-icon"><i class="fas fa-bath"></i></div>
+                                <label for="propBanos">Baños</label>
+                                <input type="number" id="propBanos" name="banos" min="0" max="50" value="0">
+                            </div>
+                            <div class="pf-stat-card">
+                                <div class="pf-stat-icon"><i class="fas fa-car"></i></div>
+                                <label for="propEstacionamientos">Estacionamientos</label>
+                                <input type="number" id="propEstacionamientos" name="estacionamientos" min="0" max="50" value="0">
+                            </div>
+                            <div class="pf-stat-card">
+                                <div class="pf-stat-icon"><i class="fas fa-layer-group"></i></div>
+                                <label for="propPisos">Pisos</label>
+                                <input type="number" id="propPisos" name="pisos" min="0" max="100" value="0">
+                            </div>
+                        </div>
+
+                        <!-- Area & Year -->
+                        <div class="pf-grid-3">
+                            <div class="pf-field">
+                                <label for="propArea" class="pf-label">
+                                    <i class="fas fa-expand"></i> Área <span class="pf-required">*</span>
+                                </label>
+                                <input type="number" id="propArea" name="area" placeholder="0" required min="0" step="0.01">
+                                <div class="form-error" id="propAreaError"></div>
+                            </div>
+                            <div class="pf-field">
+                                <label for="propAreaUnidad" class="pf-label">
+                                    <i class="fas fa-ruler-combined"></i> Unidad
+                                </label>
+                                <div class="pf-select-wrapper">
+                                    <select id="propAreaUnidad" name="area_unidad">
+                                        <option value="m2">m²</option>
+                                        <option value="ha">Hectáreas</option>
+                                        <option value="ft2">ft²</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down pf-select-arrow"></i>
+                                </div>
+                            </div>
+                            <div class="pf-field">
+                                <label for="propAno" class="pf-label">
+                                    <i class="fas fa-calendar-alt"></i> Año
+                                </label>
+                                <input type="number" id="propAno" name="ano_construccion" placeholder="2000" min="1800" max="2030">
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="pf-features-section">
+                            <label class="pf-label"><i class="fas fa-star"></i> Características Adicionales</label>
+                            <div class="pf-features-grid">
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Piscina">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-swimming-pool"></i></span>
+                                    <span class="pf-feature-chip-text">Piscina</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Jardín">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-leaf"></i></span>
+                                    <span class="pf-feature-chip-text">Jardín</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Aire Acondicionado">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-snowflake"></i></span>
+                                    <span class="pf-feature-chip-text">Aire Acondicionado</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Cocina Equipada">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-utensils"></i></span>
+                                    <span class="pf-feature-chip-text">Cocina Equipada</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Amueblado">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-couch"></i></span>
+                                    <span class="pf-feature-chip-text">Amueblado</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Seguridad">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-shield-alt"></i></span>
+                                    <span class="pf-feature-chip-text">Seguridad</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                                <label class="pf-feature-chip">
+                                    <input type="checkbox" name="caracteristicas" value="Ascensor">
+                                    <span class="pf-feature-chip-icon"><i class="fas fa-elevator"></i></span>
+                                    <span class="pf-feature-chip-text">Ascensor</span>
+                                    <span class="pf-feature-check"><i class="fas fa-check"></i></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Photos -->
+                <div class="pf-section" data-section="5" style="display:none;">
+                    <div class="pf-section-header">
+                        <div class="pf-section-icon" style="background: linear-gradient(135deg, #e91e63, #f06292);">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="pf-section-text">
+                            <h2>Fotografías</h2>
+                            <p>Sube imágenes para mostrar tu inmueble</p>
+                        </div>
+                        <span class="pf-section-badge" style="background: #fce4ec; color: #e91e63;">Paso 5</span>
+                    </div>
+                    <div class="pf-section-body">
+                        <div class="pf-upload-zone" id="uploadArea">
+                            <div class="pf-upload-glow"></div>
+                            <div class="pf-upload-content" id="uploadPlaceholder">
+                                <div class="pf-upload-icon-ring">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <h3>Arrastra y suelta tus imágenes aquí</h3>
+                                <p>o haz clic para seleccionar archivos</p>
+                                <div class="pf-upload-meta">
+                                    <span><i class="fas fa-image"></i> JPG, PNG, WebP</span>
+                                    <span><i class="fas fa-weight-hanging"></i> Máx 5MB</span>
+                                    <span><i class="fas fa-images"></i> Máx 10 fotos</span>
+                                </div>
+                            </div>
+                            <input type="file" id="photoInput" name="fotos" accept="image/*" multiple hidden>
+                        </div>
+
+                        <div class="pf-upload-buttons">
+                            <button type="button" class="pf-upload-btn pf-upload-btn-gallery" id="galleryBtn">
+                                <i class="fas fa-images"></i>
+                                <span>Galería</span>
+                            </button>
+                            <button type="button" class="pf-upload-btn pf-upload-btn-camera" id="cameraBtn">
+                                <i class="fas fa-camera"></i>
+                                <span>Cámara</span>
+                            </button>
+                            <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+                        </div>
+
+                        <!-- URL Input -->
+                        <div class="pf-url-input-row" id="urlInputRow">
+                            <div class="pf-url-input-wrapper">
+                                <i class="fas fa-link"></i>
+                                <input type="url" id="photoUrlInput" placeholder="Pega una URL de imagen (https://...)" autocomplete="off">
+                            </div>
+                            <button type="button" class="pf-btn pf-btn-add-url" id="addUrlBtn">
+                                <i class="fas fa-plus"></i> Agregar
+                            </button>
+                        </div>
+
+                        <div class="photos-preview" id="photosPreview">
+                            <!-- Preview thumbnails added dynamically -->
+                        </div>
+                        <div class="pf-upload-hint">
+                            <i class="fas fa-star"></i> La primera imagen será la foto principal. Arrastra para reordenar.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step Navigation -->
+                <div class="pf-step-nav">
+                    <button type="button" class="pf-btn pf-btn-prev" id="prevStepBtn" style="display:none;">
+                        <i class="fas fa-arrow-left"></i> Anterior
+                    </button>
+                    <button type="button" class="pf-btn pf-btn-next" id="nextStepBtn">
+                        Siguiente <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="pf-actions">
+                    <a href="dashboard.html" class="pf-btn pf-btn-cancel">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="pf-btn pf-btn-publish" id="submitPropertyBtn" style="display:none;">
+                        <span class="pf-btn-publish-bg"></span>
+                        <i class="fas fa-paper-plane"></i> <span id="submitBtnText">Publicar Inmueble</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Leaflet CSS & JS for location picker map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css">
+    <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/property-form.js"></script>
+</body>
+</html>

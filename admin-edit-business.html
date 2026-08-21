@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Editar Negocio - Admin HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Page layout */
+        .edit-biz-page { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+        .edit-biz-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .edit-biz-header h2 { margin: 0; font-size: 1.3rem; color: var(--color-text, #1a1a2e); }
+        .edit-biz-back { display: inline-flex; align-items: center; gap: 6px; color: #006EE3; text-decoration: none; font-size: 0.88rem; font-weight: 600; padding: 8px 14px; border: 1.5px solid #006EE3; border-radius: 8px; transition: all 0.2s; }
+        .edit-biz-back:hover { background: #006EE3; color: #fff; }
+
+        /* Search area */
+        .edit-biz-search { position: relative; margin-bottom: 20px; }
+        .edit-biz-search select { width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem; background: #fff; color: var(--color-text, #1a1a2e); outline: none; transition: border-color 0.2s; appearance: auto; cursor: pointer; }
+        .edit-biz-search select:focus { border-color: #006EE3; box-shadow: 0 0 0 3px rgba(0,110,227,0.1); }
+
+        /* Section cards */
+        .eb-section { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        .eb-section-title { display: flex; align-items: center; gap: 8px; margin: 0 0 16px; font-size: 1rem; font-weight: 700; color: #1a1a2e; }
+        .eb-section-title i { color: #006EE3; }
+        .eb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        @media (max-width: 600px) { .eb-grid { grid-template-columns: 1fr; } }
+        .eb-field label { display: block; font-size: 0.82rem; font-weight: 600; color: #555; margin-bottom: 5px; }
+        .eb-field-full { grid-column: 1 / -1; }
+        .eb-input { width: 100%; padding: 10px 14px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 0.9rem; color: var(--color-text, #1a1a2e); background: #fafbfc; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+        .eb-input:focus { border-color: #006EE3; background: #fff; box-shadow: 0 0 0 3px rgba(0,110,227,0.08); }
+        .eb-input::placeholder { color: #bbb; }
+        textarea.eb-input { resize: vertical; min-height: 80px; font-family: inherit; }
+
+        /* Media section */
+        .eb-media-preview { width: 100%; height: 180px; border-radius: 10px; overflow: hidden; background: #f1f5f9; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #e5e7eb; }
+        .eb-media-preview img { width: 100%; height: 100%; object-fit: cover; }
+        .eb-media-placeholder { text-align: center; color: #94a3b8; }
+        .eb-media-placeholder i { font-size: 2rem; display: block; margin-bottom: 4px; }
+        .eb-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .eb-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid #d1d5db; background: #fff; color: #374151; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .eb-btn:hover { border-color: #006EE3; color: #006EE3; }
+        .eb-btn-primary { background: #006EE3; border-color: #006EE3; color: #fff; }
+        .eb-btn-primary:hover { background: #005BB5; }
+        .eb-btn-danger { border-color: #dc2626; color: #dc2626; }
+        .eb-btn-danger:hover { background: #dc2626; color: #fff; }
+
+        /* Feature checkboxes */
+        .eb-features { display: flex; flex-wrap: wrap; gap: 12px; }
+        .eb-feature-check { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #374151; }
+        .eb-feature-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: #006EE3; }
+
+        /* Status badges */
+        .eb-status-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .eb-status-btn { padding: 8px 16px; border-radius: 8px; border: 1.5px solid #d1d5db; background: #fff; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .eb-status-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .eb-status-btn.active-approved { background: #006EE3; border-color: #006EE3; color: #fff; }
+        .eb-status-btn.active-pending { background: #d97706; border-color: #d97706; color: #fff; }
+        .eb-status-btn.active-rejected { background: #dc2626; border-color: #dc2626; color: #fff; }
+
+        /* Images grid */
+        .eb-images-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
+        .eb-img-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1; border: 1px solid #e5e7eb; }
+        .eb-img-item img { width: 100%; height: 100%; object-fit: cover; }
+        .eb-img-actions { position: absolute; bottom: 0; left: 0; right: 0; display: flex; gap: 2px; background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.2s; }
+        .eb-img-item:hover .eb-img-actions { opacity: 1; }
+        .eb-img-action-btn { flex: 1; padding: 4px; border: none; background: transparent; color: #fff; font-size: 0.72rem; cursor: pointer; }
+        .eb-img-action-btn:hover { background: rgba(255,255,255,0.2); }
+        .eb-img-cover-badge { position: absolute; top: 4px; left: 4px; background: #006EE3; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+
+        /* Video list */
+        .eb-video-item { display: flex; align-items: center; gap: 8px; padding: 8px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 6px; background: #fafbfc; }
+        .eb-video-item input { flex: 1; }
+        .eb-video-remove { background: none; border: none; color: #dc2626; cursor: pointer; font-size: 1rem; padding: 4px; }
+
+        /* HTML editor */
+        .eb-html-area { width: 100%; min-height: 200px; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.5; resize: vertical; tab-size: 2; }
+
+        /* Save bar */
+        .eb-save-bar { position: sticky; bottom: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 14px 0; margin-top: 8px; display: flex; justify-content: flex-end; gap: 10px; z-index: 100; box-shadow: 0 -4px 12px rgba(0,0,0,0.06); }
+
+        /* Loading */
+        .eb-loading { text-align: center; padding: 40px; color: #94a3b8; }
+        .eb-loading i { font-size: 2rem; display: block; margin-bottom: 8px; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Empty state */
+        .eb-empty { text-align: center; padding: 60px 20px; color: #94a3b8; }
+        .eb-empty i { font-size: 3rem; display: block; margin-bottom: 12px; }
+        .eb-empty p { font-size: 0.95rem; }
+
+        /* Header info */
+        .eb-info-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px; background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px; }
+        .eb-info-badge { padding: 3px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: #fff; }
+        .eb-info-text { font-size: 0.78rem; color: #64748b; }
+
+        /* Logo area */
+        .eb-logo-area { display: flex; align-items: center; gap: 16px; }
+        .eb-logo-preview { width: 80px; height: 80px; border-radius: 12px; overflow: hidden; background: #f1f5f9; display: flex; align-items: center; justify-content: center; border: 1px solid #e5e7eb; flex-shrink: 0; }
+        .eb-logo-preview img { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-admin" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name">HolaX</span> <span class="admin-badge">Admin</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="admin.html" class="nav-link"><i class="fas fa-arrow-left"></i> Panel Admin</a></li>
+                <li id="navUserItem" class="nav-user">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="edit-biz-page">
+        <!-- Header -->
+        <div class="edit-biz-header">
+            <a href="admin.html" class="edit-biz-back"><i class="fas fa-arrow-left"></i> Volver al Panel</a>
+            <h2><i class="fas fa-pen-to-square" style="color:#006EE3;"></i> Editar Negocio</h2>
+        </div>
+
+        <!-- Business Selector -->
+        <div class="edit-biz-search">
+            <select id="ebBizSelect">
+                <option value="">-- Selecciona un negocio para editar --</option>
+            </select>
+        </div>
+
+        <!-- Form Container -->
+        <div id="ebFormContainer">
+            <div class="eb-empty">
+                <i class="fas fa-building"></i>
+                <p>Selecciona un negocio del menú desplegable para comenzar a editarlo.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toastContainer" style="position:fixed;bottom:20px;right:20px;z-index:99999;"></div>
+
+    <script src="js/app.js"></script>
+    <script>
+    (function() {
+        'use strict';
+        const TOKEN_KEY = 'meridaunclick_token';
+        const select = document.getElementById('ebBizSelect');
+        const container = document.getElementById('ebFormContainer');
+        let currentBiz = null;
+        let categoriesCache = [];
+
+        // ─── Auth Check ─────────────────────────────────────
+        function checkAuth() {
+            const token = localStorage.getItem(TOKEN_KEY) || localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        // ─── Toast ──────────────────────────────────────────
+        function showToast(msg, type) {
+            type = type || 'info';
+            const colors = { success: '#22c55e', error: '#ef4444', info: '#006EE3' };
+            const toast = document.createElement('div');
+            toast.style.cssText = 'padding:12px 20px;border-radius:10px;color:#fff;font-size:0.88rem;font-weight:500;background:' + colors[type] + ';box-shadow:0 4px 20px rgba(0,0,0,0.2);margin-top:8px;max-width:360px;';
+            toast.textContent = msg;
+            document.getElementById('toastContainer').appendChild(toast);
+            setTimeout(function() { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; setTimeout(function() { toast.remove(); }, 300); }, 3000);
+        }
+        window.showToast = showToast;
+
+        function escH(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+        }
+
+        // ─── Load Businesses ─────────────────────────────────
+        async function loadBusinesses() {
+            select.innerHTML = '<option value="">-- Cargando negocios... --</option>';
+            try {
+                const data = await api.get('/businesses?status=approved&limit=500');
+                const pending = await api.get('/businesses?status=pending&limit=500');
+                const rejected = await api.get('/businesses?status=rejected&limit=100');
+                const all = [...(data.businesses||[]), ...(pending.businesses||[]), ...(rejected.businesses||[])];
+
+                select.innerHTML = '<option value="">-- Selecciona un negocio (' + all.length + ') --</option>';
+                all.sort(function(a,b) { return (a.title||'').localeCompare(b.title||''); });
+                all.forEach(function(b) {
+                    const statusIcon = b.status === 'approved' ? '✅' : b.status === 'pending' ? '⏳' : '❌';
+                    const opt = document.createElement('option');
+                    opt.value = b.id;
+                    opt.textContent = statusIcon + ' ' + (b.title || 'Sin título') + ' (ID:' + b.id + ')';
+                    select.appendChild(opt);
+                });
+            } catch(e) {
+                select.innerHTML = '<option value="">-- Error al cargar --</option>';
+                showToast('Error al cargar negocios: ' + e.message, 'error');
+            }
+        }
+
+        // ─── Load Categories ─────────────────────────────────
+        async function loadCategories() {
+            try {
+                const data = await api.get('/categories');
+                categoriesCache = data.categories || [];
+            } catch(e) { categoriesCache = []; }
+        }
+
+        function buildCategoryOptions(selectedId) {
+            let html = '<option value="">Seleccionar categoría...</option>';
+            categoriesCache.forEach(function(c) {
+                html += '<option value="' + c.id + '"' + (c.id === selectedId ? ' selected' : '') + '>' + escH(c.name) + '</option>';
+            });
+            return html;
+        }
+
+        // ─── Render Form ─────────────────────────────────────
+        // Generate auto JSON-LD for comparison preview
+        function generateAutoJsonLd(b) {
+            var isMedical = b.category_name && (b.category_name.toLowerCase().includes('médic') || b.category_name.toLowerCase().includes('medic'));
+            var ld = {
+                "@context": "https://schema.org",
+                "@type": isMedical ? "MedicalBusiness" : "LocalBusiness",
+                "name": b.title || 'Negocio',
+                "url": "https://holax.com.ve/negocio/" + (b.slug || ''),
+                "description": b.description ? b.description.substring(0, 160) : ''
+            };
+            if (b.category_name) ld.category = b.category_name;
+            if (b.especialidad) ld.medicalSpecialty = b.especialidad;
+            var wa = (b.whatsapp || b.phone || '').replace(/[^0-9]/g, '');
+            if (wa) ld.telephone = '+' + wa;
+            if (b.address) {
+                ld.address = {
+                    "@type": "PostalAddress",
+                    "streetAddress": b.address,
+                    "addressLocality": b.city || undefined,
+                    "addressRegion": b.state || undefined,
+                    "addressCountry": "VE"
+                };
+            }
+            if (b.logo) ld.logo = b.logo;
+            var sameAs = [];
+            if (b.instagram) sameAs.push('https://www.instagram.com/' + b.instagram.replace(/^@/, ''));
+            if (b.facebook) sameAs.push('https://www.facebook.com/' + b.facebook.replace(/^@/, ''));
+            if (b.website) sameAs.push(b.website);
+            if (sameAs.length) ld.sameAs = sameAs;
+            if (b.schedule) ld.openingHours = b.schedule;
+            return JSON.stringify(ld, null, 2);
+        }
+
+        function renderForm(b) {
+            currentBiz = b;
+            const statusColors = { approved: '#006EE3', pending: '#d97706', rejected: '#dc2626' };
+            const statusLabels = { approved: 'Aprobado', pending: 'Pendiente', rejected: 'Rechazado' };
+            const images = b.images || [];
+            const videos = b.video_url ? (typeof b.video_url === 'string' ? JSON.parse(b.video_url || '[]') : b.video_url) : [];
+
+            container.innerHTML = '' +
+            /* ── Info Bar ── */
+            '<div class="eb-info-bar">' +
+                '<strong>' + escH(b.title) + '</strong>' +
+                '<span class="eb-info-badge" style="background:' + (statusColors[b.status]||'#64748b') + ';">' + (statusLabels[b.status]||b.status) + '</span>' +
+                '<a href="/negocio/' + (b.slug||b.id) + '" target="_blank" class="eb-btn" style="margin-left:auto;"><i class="fas fa-external-link-alt"></i> Ver Página</a>' +
+                '<button class="eb-btn eb-btn-danger" onclick="ebDeleteBiz(' + b.id + ')"><i class="fas fa-trash"></i> Eliminar</button>' +
+            '</div>' +
+            '<p class="eb-info-text" style="margin:-10px 0 16px;">ID: ' + b.id + ' | Dueño: ' + escH(b.owner_name||b.user_id||'?') + ' | Vistas: ' + (b.views||0) + ' | Slug: ' + escH(b.slug||'') + '</p>' +
+
+            /* ── Logo ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-image"></i> Logo</h4>' +
+                '<div class="eb-logo-area">' +
+                    '<div class="eb-logo-preview" id="ebLogoPreview">' +
+                        (b.logo ? '<img src="' + escH(b.logo) + '" alt="Logo" onerror="this.style.display=\'none\'">' : '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>') +
+                    '</div>' +
+                    '<div>' +
+                        '<div class="eb-btn-row">' +
+                            '<button type="button" class="eb-btn" onclick="document.getElementById(\'ebLogoInput\').click()"><i class="fas fa-upload"></i> Subir Logo</button>' +
+                            (b.logo ? '<button type="button" class="eb-btn eb-btn-danger" onclick="ebRemoveLogo()"><i class="fas fa-trash"></i> Quitar</button>' : '') +
+                        '</div>' +
+                        '<input type="file" id="ebLogoInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="ebHandleLogo(this)">' +
+                        '<input type="hidden" id="ebLogoUrl" value="' + escH(b.logo||'') + '">' +
+                        '<p style="font-size:0.72rem;color:#9ca3af;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+
+            /* ── Banner ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-panorama" style="color:#7c3aed;"></i> Banner de Portada</h4>' +
+                '<p style="font-size:0.78rem;color:#6b7280;margin-bottom:10px;">Imagen de portada. Recomendado: 1200x400px.</p>' +
+                '<div class="eb-media-preview" id="ebBannerPreview">' +
+                    (b.banner ? '<img src="' + escH(b.banner) + '" onerror="this.parentElement.innerHTML=\'<div class=eb-media-placeholder><i class=fas fa-panorama></i><span>Sin banner</span></div>\'">' : '<div class="eb-media-placeholder"><i class="fas fa-panorama"></i><span>Sin banner</span></div>') +
+                '</div>' +
+                '<div class="eb-btn-row">' +
+                    '<button type="button" class="eb-btn" onclick="document.getElementById(\'ebBannerInput\').click()"><i class="fas fa-upload"></i> Subir Banner</button>' +
+                    (b.banner ? '<button type="button" class="eb-btn eb-btn-danger" onclick="ebRemoveBanner()"><i class="fas fa-trash"></i> Quitar</button>' : '') +
+                '</div>' +
+                '<input type="file" id="ebBannerInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="ebHandleBanner(this)">' +
+                '<input type="hidden" id="ebBannerUrl" value="' + escH(b.banner||'') + '">' +
+            '</div>' +
+
+            /* ── Basic Info ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-info-circle"></i> Información del Negocio</h4>' +
+                '<div class="eb-grid">' +
+                    '<div class="eb-field"><label>Nombre del Negocio *</label><input type="text" class="eb-input" id="ebTitle" value="' + escH(b.title||'') + '" maxlength="150"></div>' +
+                    '<div class="eb-field"><label>Descripción</label><textarea class="eb-input" id="ebDesc" rows="3">' + escH(b.description||'') + '</textarea></div>' +
+                    '<div class="eb-field"><label>Tipo de Negocio</label><select class="eb-input" id="ebType">' +
+                        '<option value="negocio"' + (b.business_type==='negocio'?' selected':'') + '>Negocio</option>' +
+                        '<option value="tienda"' + (b.business_type==='tienda'?' selected':'') + '>Tienda</option>' +
+                        '<option value="servicio"' + (b.business_type==='servicio'?' selected':'') + '>Servicio</option>' +
+                        '<option value="restaurante"' + (b.business_type==='restaurante'?' selected':'') + '>Restaurante</option>' +
+                        '<option value="profesional"' + (b.business_type==='profesional'?' selected':'') + '>Profesional</option>' +
+                        '<option value="otro"' + (b.business_type==='otro'?' selected':'') + '>Otro</option>' +
+                    '</select></div>' +
+                    '<div class="eb-field"><label>Categoría</label><select class="eb-input" id="ebCategory">' + buildCategoryOptions(b.category_id) + '</select></div>' +
+                    '<div class="eb-field eb-field-full" id="ebEspecialidadWrap" style="' + ((b.category_slug==='medicina-servicio-medico'||b.especialidad) ? '' : 'display:none') + '"><label><i class="fas fa-stethoscope" style="color:#e74c3c;"></i> Especialidad</label><input type="text" class="eb-input" id="ebEspecialidad" value="' + escH(b.especialidad||'') + '" placeholder="Ej: Cardiología, Dermatología..."></div>' +
+                '</div>' +
+            '</div>' +
+
+            /* ── Contact ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-phone"></i> Contacto</h4>' +
+                '<div class="eb-grid">' +
+                    '<div class="eb-field"><label>Teléfono</label><input type="tel" class="eb-input" id="ebPhone" value="' + escH(b.phone||'') + '"></div>' +
+                    '<div class="eb-field"><label>WhatsApp</label><input type="tel" class="eb-input" id="ebWhatsapp" value="' + escH(b.whatsapp||'') + '"></div>' +
+                    '<div class="eb-field"><label>Email</label><input type="email" class="eb-input" id="ebEmail" value="' + escH(b.email_contact||'') + '"></div>' +
+                    '<div class="eb-field"><label>Sitio Web</label><input type="url" class="eb-input" id="ebWebsite" value="' + escH(b.website||'') + '"></div>' +
+                    '<div class="eb-field"><label>Instagram</label><input type="text" class="eb-input" id="ebInstagram" value="' + escH(b.instagram||'') + '" placeholder="@usuario"></div>' +
+                    '<div class="eb-field"><label>Facebook</label><input type="text" class="eb-input" id="ebFacebook" value="' + escH(b.facebook||'') + '"></div>' +
+                    '<div class="eb-field"><label>TikTok</label><input type="text" class="eb-input" id="ebTiktok" value="' + escH(b.tiktok||'') + '"></div>' +
+                    '<div class="eb-field"><label>YouTube</label><input type="text" class="eb-input" id="ebYoutube" value="' + escH(b.youtube||'') + '"></div>' +
+                '</div>' +
+            '</div>' +
+
+            /* ── Location ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-map-marker-alt" style="color:#dc2626;"></i> Ubicación</h4>' +
+                '<div class="eb-grid">' +
+                    '<div class="eb-field"><label>Dirección</label><input type="text" class="eb-input" id="ebAddress" value="' + escH(b.address||'') + '"></div>' +
+                    '<div class="eb-field"><label>Ciudad</label><input type="text" class="eb-input" id="ebCity" value="' + escH(b.city||'') + '"></div>' +
+                    '<div class="eb-field"><label>Estado</label><input type="text" class="eb-input" id="ebState" value="' + escH(b.state||'') + '"></div>' +
+                    '<div class="eb-field"><label>Horario</label><input type="text" class="eb-input" id="ebSchedule" value="' + escH(b.schedule||'') + '" placeholder="Lun-Vie 8:00-17:00"></div>' +
+                '</div>' +
+            '</div>' +
+
+            /* ── Features ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-check-double" style="color:#f59e0b;"></i> Servicios / Características</h4>' +
+                '<div class="eb-features">' +
+                    '<label class="eb-feature-check"><input type="checkbox" id="ebParking"' + (b.has_parking?' checked':'') + '> Estacionamiento</label>' +
+                    '<label class="eb-feature-check"><input type="checkbox" id="ebWifi"' + (b.has_wifi?' checked':'') + '> WiFi</label>' +
+                    '<label class="eb-feature-check"><input type="checkbox" id="ebCard"' + (b.has_card?' checked':'') + '> Tarjeta</label>' +
+                    '<label class="eb-feature-check"><input type="checkbox" id="ebDelivery"' + (b.has_delivery?' checked':'') + '> Delivery</label>' +
+                    '<label class="eb-feature-check"><input type="checkbox" id="ebOutdoor"' + (b.has_outdoor?' checked':'') + '> Terraza</label>' +
+                '</div>' +
+            '</div>' +
+
+            /* ── Images ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-images" style="color:#7c3aed;"></i> Imágenes (' + images.length + ')</h4>' +
+                (images.length > 0 ?
+                    '<div class="eb-images-grid" id="ebImagesGrid">' +
+                    images.map(function(img, i) {
+                        return '<div class="eb-img-item">' +
+                            '<img src="' + escH(img.url) + '" alt="" onerror="this.parentElement.style.display=\'none\'">' +
+                            (img.is_cover ? '<span class="eb-img-cover-badge">Portada</span>' : '') +
+                            '<div class="eb-img-actions">' +
+                                (!img.is_cover ? '<button class="eb-img-action-btn" onclick="ebSetCover(' + img.id + ')" title="Portada"><i class="fas fa-star"></i></button>' : '') +
+                                '<button class="eb-img-action-btn" onclick="ebRemoveImage(' + img.id + ')" title="Eliminar"><i class="fas fa-trash"></i></button>' +
+                            '</div></div>';
+                    }).join('') +
+                    '</div>'
+                : '<p style="color:#94a3b8;font-size:0.85rem;">No hay imágenes.</p>') +
+                '<div class="eb-btn-row" style="margin-top:10px;">' +
+                    '<button type="button" class="eb-btn" onclick="document.getElementById(\'ebNewImageInput\').click()"><i class="fas fa-plus"></i> Agregar Imagen</button>' +
+                '</div>' +
+                '<input type="file" id="ebNewImageInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;" onchange="ebAddImages(this)">' +
+            '</div>' +
+
+            /* ── Videos ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-video" style="color:#ef4444;"></i> Videos</h4>' +
+                '<div id="ebVideoList">' +
+                    (videos.length > 0 ? videos.map(function(v, i) {
+                        return '<div class="eb-video-item"><input type="url" class="eb-input eb-video-url" value="' + escH(v) + '" placeholder="URL de video..."><button class="eb-video-remove" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button></div>';
+                    }).join('') : '') +
+                '</div>' +
+                '<div class="eb-btn-row">' +
+                    '<button type="button" class="eb-btn" onclick="ebAddVideoRow()"><i class="fas fa-plus"></i> Agregar Video</button>' +
+                    '<button type="button" class="eb-btn" onclick="document.getElementById(\'ebVideoFileInput\').click()"><i class="fas fa-upload"></i> Subir Video</button>' +
+                '</div>' +
+                '<input type="file" id="ebVideoFileInput" accept="video/*" style="display:none;" onchange="ebHandleVideoUpload(this)">' +
+            '</div>' +
+
+            /* ── Status ── */
+            '<div class="eb-section">' +
+                '<h4 class="eb-section-title"><i class="fas fa-toggle-on" style="color:#f59e0b;"></i> Estado</h4>' +
+                '<div class="eb-status-row">' +
+                    '<button class="eb-status-btn' + (b.status==='approved'?' active-approved':'') + '" onclick="ebChangeStatus(' + b.id + ',\'approved\')"><i class="fas fa-check"></i> Aprobar</button>' +
+                    '<button class="eb-status-btn' + (b.status==='pending'?' active-pending':'') + '" onclick="ebChangeStatus(' + b.id + ',\'pending\')"><i class="fas fa-clock"></i> Pendiente</button>' +
+                    '<button class="eb-status-btn' + (b.status==='rejected'?' active-rejected':'') + '" onclick="ebChangeStatus(' + b.id + ',\'rejected\')"><i class="fas fa-times"></i> Rechazar</button>' +
+                '</div>' +
+            '</div>' +
+
+            /* ── Custom HTML ── */
+            '<div class="eb-section">' +
+                '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">' +
+                    '<h4 class="eb-section-title" style="margin:0;"><i class="fas fa-code" style="color:#8b5cf6;"></i> HTML Personalizado</h4>' +
+                    '<div style="display:flex;gap:6px;">' +
+                        '<button type="button" class="eb-btn" onclick="ebPreviewHtml()"><i class="fas fa-eye"></i> Vista Previa</button>' +
+                        '<button type="button" class="eb-btn eb-btn-danger" onclick="if(confirm(\'Eliminar HTML personalizado?\')){document.getElementById(\'ebCustomHtml\').value=\'\';showToast(\'HTML eliminado\',\'info\');}"><i class="fas fa-trash"></i> Resetear</button>' +
+                    '</div>' +
+                '</div>' +
+                '<p style="font-size:0.82rem;color:#6b7280;margin:0 0 8px;">HTML que se mostrará en la página del negocio. Si se deja vacío se usa la plantilla por defecto.</p>' +
+                '<textarea id="ebCustomHtml" class="eb-input eb-html-area" placeholder="Escribe o pega aquí el HTML personalizado...">' + escH(b.custom_html||'') + '</textarea>' +
+            '</div>' +
+            /* ── SEO Meta Description (comparativo) ── */
+            '<div class="eb-section">' +
+                '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">' +
+                    '<h4 class="eb-section-title" style="margin:0;"><i class="fas fa-search" style="color:#059669;"></i> Meta Description SEO</h4>' +
+                    '<div style="display:flex;gap:6px;align-items:center;">' +
+                        '<span id="ebSeoDescCount" style="font-size:0.78rem;color:#6b7280;">0/160</span>' +
+                        '<button type="button" class="eb-btn eb-btn-danger" onclick="document.getElementById(\'ebSeoDesc\').value=\'\';updateSeoCompare();showToast(\'Meta description eliminada\',\'info\');"><i class="fas fa-trash"></i></button>' +
+                    '</div>' +
+                '</div>' +
+                '<p style="font-size:0.82rem;color:#6b7280;margin:0 0 12px;">Texto que aparece en los resultados de Google. Si se deja vacio se genera automaticamente. Max 160 caracteres.</p>' +
+                '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">' +
+                    '<div>' +
+                        '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
+                            '<span style="background:#dbeafe;color:#1d4ed8;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">ACTUAL (AUTO)</span>' +
+                            '<i class="fas fa-robot" style="color:#94a3b8;font-size:0.8rem;"></i>' +
+                        '</div>' +
+                        '<div style="padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;">' +
+                            '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
+                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - HolaX</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">holax.com.ve › negocio › ' + escH(b.slug||'...') + '</div>' +
+                            '<div style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.description ? b.description.substring(0,160) : 'Sin descripcion') + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div>' +
+                        '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
+                            '<span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">DESPUES DE EDITAR</span>' +
+                            '<i class="fas fa-pen" style="color:#059669;font-size:0.8rem;"></i>' +
+                        '</div>' +
+                        '<div id="ebSeoAfterBox" style="padding:12px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;">' +
+                            '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
+                            '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - HolaX</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">holax.com.ve › negocio › ' + escH(b.slug||'...') + '</div>' +
+                            '<div id="ebSeoAfterText" style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.seo_description || (b.description ? b.description.substring(0,160) : 'Igual al actual')) + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<textarea id="ebSeoDesc" class="eb-input" style="width:100%;min-height:70px;resize:vertical;font-size:0.9rem;padding:10px 14px;border:2px solid #e5e7eb;border-radius:10px;font-family:inherit;margin-top:12px;" placeholder="Ej: Tienda Pura Sangre - Ropa deportiva. Envios a todo Venezuela. Lun-Sab 9am-6pm" maxlength="200" oninput="updateSeoCompare()">' + escH(b.seo_description||'') + '</textarea>' +
+                '<p style="font-size:0.72rem;color:#94a3b8;margin:4px 0 0;">Escribe aqui la nueva meta description. La columna derecha se actualiza en tiempo real.</p>' +
+            '</div>' +
+
+
+            /* ── Rich Snippets JSON-LD (comparativo) ── */
+            '<div class="eb-section">' +
+                '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">' +
+                    '<h4 class="eb-section-title" style="margin:0;"><i class="fas fa-puzzle-piece" style="color:#dc2626;"></i> Rich Snippets (JSON-LD)</h4>' +
+                    '<div style="display:flex;gap:6px;">' +
+                        '<button type="button" class="eb-btn" onclick="ebValidateJsonLd()"><i class="fas fa-check-circle"></i> Validar</button>' +
+                        '<button type="button" class="eb-btn eb-btn-danger" onclick="if(confirm(\'Eliminar Rich Snippet personalizado? Se usara el automatico.\')){document.getElementById(\'ebCustomJsonLd\').value=\'\';updateJsonLdCompare();showToast(\'Rich Snippet eliminado\',\'info\');}"><i class="fas fa-trash"></i> Resetear</button>' +
+                    '</div>' +
+                '</div>' +
+                '<p style="font-size:0.82rem;color:#6b7280;margin:0 0 12px;">JSON-LD personalizado para rich snippets de Google. Si se deja vacio se genera automaticamente. <a href="https://schema.org/LocalBusiness" target="_blank" style="color:#7c3aed;">Ver esquema LocalBusiness</a></p>' +
+                '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">' +
+                    '<div>' +
+                        '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
+                            '<span style="background:#dbeafe;color:#1d4ed8;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">ACTUAL (AUTO)</span>' +
+                            '<i class="fas fa-robot" style="color:#94a3b8;font-size:0.8rem;"></i>' +
+                        '</div>' +
+                        '<pre id="ebJsonLdAuto" style="margin:0;padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;font-size:0.78rem;color:#334155;white-space:pre-wrap;word-break:break-all;max-height:320px;overflow-y:auto;line-height:1.5;font-family:Monaco,Consolas,monospace;">' + escH(generateAutoJsonLd(b)) + '</pre>' +
+                    '</div>' +
+                    '<div>' +
+                        '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
+                            '<span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;">DESPUES DE EDITAR</span>' +
+                            '<i class="fas fa-pen" style="color:#059669;font-size:0.8rem;"></i>' +
+                        '</div>' +
+                        '<pre id="ebJsonLdAfter" style="margin:0;padding:12px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;font-size:0.78rem;color:#334155;white-space:pre-wrap;word-break:break-all;max-height:320px;overflow-y:auto;line-height:1.5;font-family:Monaco,Consolas,monospace;">' + escH(b.custom_jsonld || generateAutoJsonLd(b)) + '</pre>' +
+                    '</div>' +
+                '</div>' +
+                '<textarea id="ebCustomJsonLd" class="eb-input eb-html-area" style="margin-top:12px;" placeholder="{ ... }" oninput="updateJsonLdCompare()">' + escH(b.custom_jsonld||'') + '</textarea>' +
+                '<p style="font-size:0.72rem;color:#94a3b8;margin:4px 0 0;">Pega aqui el JSON-LD personalizado. La columna derecha se actualiza al escribir.</p>' +
+                '<div id="ebJsonLdStatus" style="margin-top:8px;font-size:0.82rem;display:none;padding:8px 12px;border-radius:8px;"></div>' +
+            '</div>' +
+            '</div>' +
+
+            /* ── Save Button ── */
+            '<div class="eb-save-bar">' +
+                '<button class="eb-btn eb-btn-primary" style="padding:12px 32px;font-size:0.95rem;" onclick="ebSave()"><i class="fas fa-save"></i> Guardar Cambios</button>' +
+            '</div>';
+
+            // Category change → especialidad visibility
+            document.getElementById('ebCategory').addEventListener('change', function() {
+                var catId = parseInt(this.value);
+                var cat = categoriesCache.find(function(c) { return c.id === catId; });
+                var wrap = document.getElementById('ebEspecialidadWrap');
+                if (wrap) {
+                    wrap.style.display = (cat && cat.slug === 'medicina-servicio-medico') ? '' : 'none';
+                }
+            });
+
+            // Init SEO counter + JSON-LD status
+            if (typeof updateSeoCompare === 'function') updateSeoCompare();
+            if (typeof updateJsonLdCompare === 'function') updateJsonLdCompare();
+        }
+
+        // ─── Load Business Detail ────────────────────────────
+        async function loadBusiness(id) {
+            if (!id) {
+                container.innerHTML = '<div class="eb-empty"><i class="fas fa-building"></i><p>Selecciona un negocio del menú desplegable para comenzar a editarlo.</p></div>';
+                return;
+            }
+            container.innerHTML = '<div class="eb-loading"><i class="fas fa-spinner fa-spin"></i><p>Cargando negocio...</p></div>';
+            try {
+                const biz = await api.get('/businesses/' + id);
+                await loadCategories();
+                renderForm(biz);
+            } catch(e) {
+                container.innerHTML = '<div class="eb-empty"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><p>Error al cargar: ' + escH(e.message) + '</p></div>';
+                showToast('Error al cargar negocio', 'error');
+            }
+        }
+
+        // ─── Save ─────────────────────────────────────────────
+        window.ebSave = async function() {
+            if (!currentBiz) return;
+            var btn = document.querySelector('.eb-save-bar .eb-btn-primary');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+            try {
+                // Collect video URLs
+                var videoUrls = [];
+                document.querySelectorAll('.eb-video-url').forEach(function(el) {
+                    if (el.value && el.value.trim()) videoUrls.push(el.value.trim());
+                });
+
+                var payload = {
+                    title: document.getElementById('ebTitle').value,
+                    description: document.getElementById('ebDesc').value,
+                    business_type: document.getElementById('ebType').value,
+                    category_id: parseInt(document.getElementById('ebCategory').value) || null,
+                    phone: document.getElementById('ebPhone').value,
+                    whatsapp: document.getElementById('ebWhatsapp').value,
+                    email_contact: document.getElementById('ebEmail').value,
+                    website: document.getElementById('ebWebsite').value,
+                    instagram: document.getElementById('ebInstagram').value,
+                    facebook: document.getElementById('ebFacebook').value,
+                    tiktok: document.getElementById('ebTiktok').value,
+                    youtube: document.getElementById('ebYoutube').value,
+                    address: document.getElementById('ebAddress').value,
+                    city: document.getElementById('ebCity').value,
+                    state: document.getElementById('ebState').value,
+                    schedule: document.getElementById('ebSchedule').value,
+                    logo: document.getElementById('ebLogoUrl').value || null,
+                    banner: document.getElementById('ebBannerUrl').value || null,
+                    custom_html: document.getElementById('ebCustomHtml').value || null,
+                    seo_description: document.getElementById('ebSeoDesc').value || null,
+                    custom_jsonld: document.getElementById('ebCustomJsonLd').value || null,
+                    especialidad: document.getElementById('ebEspecialidad') ? document.getElementById('ebEspecialidad').value : null,
+                    has_parking: document.getElementById('ebParking').checked ? 1 : 0,
+                    has_wifi: document.getElementById('ebWifi').checked ? 1 : 0,
+                    has_card: document.getElementById('ebCard').checked ? 1 : 0,
+                    has_delivery: document.getElementById('ebDelivery').checked ? 1 : 0,
+                    has_outdoor: document.getElementById('ebOutdoor').checked ? 1 : 0,
+                    video_url: JSON.stringify(videoUrls),
+                };
+                await api.put('/businesses/' + currentBiz.id, payload);
+                showToast('Negocio actualizado exitosamente', 'success');
+                // Reload to reflect changes
+                loadBusiness(currentBiz.id);
+            } catch(e) {
+                showToast('Error: ' + e.message, 'error');
+            } finally {
+                btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Guardar Cambios';
+            }
+        };
+
+        // ─── Status ─────────────────────────────────────────
+        window.ebChangeStatus = async function(id, status) {
+            try {
+                await api.put('/businesses/' + id, { status: status });
+                showToast('Estado cambiado a ' + status, 'success');
+                loadBusiness(id);
+            } catch(e) { showToast('Error: ' + e.message, 'error'); }
+        };
+
+        // ─── Delete ─────────────────────────────────────────
+        window.ebDeleteBiz = async function(id) {
+            if (!confirm('¿Eliminar este negocio permanentemente?')) return;
+            try {
+                await api.delete('/businesses/' + id);
+                showToast('Negocio eliminado', 'success');
+                currentBiz = null;
+                select.value = '';
+                container.innerHTML = '<div class="eb-empty"><i class="fas fa-building"></i><p>Negocio eliminado. Selecciona otro para editar.</p></div>';
+                loadBusinesses();
+            } catch(e) { showToast('Error: ' + e.message, 'error'); }
+        };
+
+        // ─── Logo ───────────────────────────────────────────
+        window.ebHandleLogo = async function(input) {
+            var file = input.files[0]; if (!file) return;
+            try {
+                var fd = new FormData(); fd.append('file', file); fd.append('product_type', 'logo');
+                var data = await api.postFormData('/upload', fd);
+                if (data.url) {
+                    document.getElementById('ebLogoUrl').value = data.url;
+                    document.getElementById('ebLogoPreview').innerHTML = '<img src="' + data.url + '" alt="Logo">';
+                    showToast('Logo subido', 'success');
+                }
+            } catch(e) { showToast('Error al subir logo: ' + e.message, 'error'); }
+            input.value = '';
+        };
+        window.ebRemoveLogo = function() {
+            document.getElementById('ebLogoUrl').value = '';
+            document.getElementById('ebLogoPreview').innerHTML = '<i class="fas fa-store" style="font-size:1.5rem;color:#94a3b8;"></i>';
+        };
+
+        // ─── Banner ──────────────────────────────────────────
+        window.ebHandleBanner = async function(input) {
+            var file = input.files[0]; if (!file) return;
+            try {
+                var fd = new FormData(); fd.append('file', file); fd.append('product_type', 'banner');
+                var data = await api.postFormData('/upload', fd);
+                if (data.url) {
+                    document.getElementById('ebBannerUrl').value = data.url;
+                    document.getElementById('ebBannerPreview').innerHTML = '<img src="' + data.url + '">';
+                    showToast('Banner subido', 'success');
+                }
+            } catch(e) { showToast('Error al subir banner: ' + e.message, 'error'); }
+            input.value = '';
+        };
+        window.ebRemoveBanner = function() {
+            document.getElementById('ebBannerUrl').value = '';
+            document.getElementById('ebBannerPreview').innerHTML = '<div class="eb-media-placeholder"><i class="fas fa-panorama"></i><span>Sin banner</span></div>';
+        };
+
+        // ─── Images ──────────────────────────────────────────
+        window.ebAddImages = async function(input) {
+            if (!currentBiz || !input.files.length) return;
+            for (var i = 0; i < input.files.length; i++) {
+                try {
+                    var fd = new FormData(); fd.append('file', input.files[i]); fd.append('product_type', 'gallery'); fd.append('business_id', currentBiz.id);
+                    await api.postFormData('/images', fd);
+                } catch(e) { showToast('Error al subir imagen: ' + e.message, 'error'); }
+            }
+            showToast('Imágenes subidas', 'success');
+            loadBusiness(currentBiz.id);
+            input.value = '';
+        };
+        window.ebRemoveImage = async function(imgId) {
+            if (!currentBiz) return;
+            try { await api.delete('/images/' + imgId); showToast('Imagen eliminada', 'success'); loadBusiness(currentBiz.id); }
+            catch(e) { showToast('Error: ' + e.message, 'error'); }
+        };
+        window.ebSetCover = async function(imgId) {
+            if (!currentBiz) return;
+            try { await api.put('/images/' + imgId, { is_cover: 1 }); showToast('Portada actualizada', 'success'); loadBusiness(currentBiz.id); }
+            catch(e) { showToast('Error: ' + e.message, 'error'); }
+        };
+
+        // ─── Videos ──────────────────────────────────────────
+        window.ebAddVideoRow = function() {
+            var list = document.getElementById('ebVideoList');
+            var div = document.createElement('div');
+            div.className = 'eb-video-item';
+            div.innerHTML = '<input type="url" class="eb-input eb-video-url" placeholder="YouTube, TikTok o URL de video..."><button class="eb-video-remove" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>';
+            list.appendChild(div);
+            div.querySelector('input').focus();
+        };
+        window.ebHandleVideoUpload = async function(input) {
+            var file = input.files[0]; if (!file || !currentBiz) return;
+            try {
+                var fd = new FormData(); fd.append('file', file); fd.append('product_type', 'video');
+                var data = await api.postFormData('/upload', fd);
+                if (data.url) {
+                    var list = document.getElementById('ebVideoList');
+                    var div = document.createElement('div');
+                    div.className = 'eb-video-item';
+                    div.innerHTML = '<input type="url" class="eb-input eb-video-url" value="' + data.url + '"><button class="eb-video-remove" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>';
+                    list.appendChild(div);
+                    showToast('Video subido', 'success');
+                }
+            } catch(e) { showToast('Error: ' + e.message, 'error'); }
+            input.value = '';
+        };
+
+        // ─── HTML Preview ────────────────────────────────────
+        window.ebPreviewHtml = function() {
+            var html = document.getElementById('ebCustomHtml') ? document.getElementById('ebCustomHtml').value : '';
+            if (!html || !html.trim()) { showToast('No hay HTML para previsualizar', 'info'); return; }
+            var win = window.open('', '_blank', 'width=1200,height=800');
+            if (win) {
+                win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Vista Previa</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><style>body{margin:0;font-family:system-ui,sans-serif;}</style></head><body>' + html + '</body></html>');
+                win.document.close();
+            } else { showToast('Permite ventanas emergentes', 'error'); }
+        };
+
+        // ─── SEO Description comparison ──────────────────────
+        window.updateSeoCompare = function() {
+            var ta = document.getElementById('ebSeoDesc');
+            var countEl = document.getElementById('ebSeoDescCount');
+            var afterText = document.getElementById('ebSeoAfterText');
+            if (!ta) return;
+            var len = ta.value.length;
+            if (countEl) {
+                countEl.textContent = len + '/160';
+                countEl.style.color = len > 160 ? '#dc2626' : (len > 140 ? '#d97706' : '#6b7280');
+            }
+            if (afterText) {
+                afterText.textContent = ta.value || (currentBiz && currentBiz.description ? currentBiz.description.substring(0,160) : '');
+            }
+        };
+
+        // ─── JSON-LD comparison + validation ──────────────────
+        window.updateJsonLdCompare = function() {
+            var ta = document.getElementById('ebCustomJsonLd');
+            var statusEl = document.getElementById('ebJsonLdStatus');
+            var afterEl = document.getElementById('ebJsonLdAfter');
+            if (!ta) return;
+            var val = ta.value.trim();
+            // Update after-panel
+            if (afterEl) {
+                afterEl.textContent = val || (currentBiz ? generateAutoJsonLd(currentBiz) : '');
+            }
+            // Validate
+            if (!statusEl) return;
+            if (!val) { statusEl.style.display = 'none'; return; }
+            try {
+                JSON.parse(val);
+                statusEl.style.display = 'block';
+                statusEl.style.background = '#f0fdf4';
+                statusEl.style.color = '#059669';
+                statusEl.style.border = '1px solid #bbf7d0';
+                statusEl.innerHTML = '<i class="fas fa-check-circle"></i> JSON válido';
+            } catch(e) {
+                statusEl.style.display = 'block';
+                statusEl.style.background = '#fef2f2';
+                statusEl.style.color = '#dc2626';
+                statusEl.style.border = '1px solid #fecaca';
+                statusEl.innerHTML = '<i class="fas fa-times-circle"></i> Error: ' + escH(e.message);
+            }
+        };
+
+        window.ebValidateJsonLd = function() {
+            var ta = document.getElementById('ebCustomJsonLd');
+            if (!ta) return;
+            var val = ta.value.trim();
+            if (!val) { showToast('No hay JSON-LD para validar', 'info'); return; }
+            try {
+                var obj = JSON.parse(val);
+                var issues = [];
+                if (!obj['@context']) issues.push('Falta @context (debe ser "https://schema.org")');
+                if (!obj['@type']) issues.push('Falta @type (ej: LocalBusiness, Restaurant, Store...)');
+                if (!obj.name) issues.push('Falta name (nombre del negocio)');
+                if (issues.length > 0) {
+                    showToast('Advertencias: ' + issues.join('. '), 'info');
+                } else {
+                    showToast('JSON-LD válido y completo', 'success');
+                }
+            } catch(e) {
+                showToast('JSON inválido: ' + e.message, 'error');
+            }
+        };
+
+        // ─── Init ────────────────────────────────────────────
+        if (checkAuth()) {
+            select.addEventListener('change', function() { loadBusiness(this.value); });
+            loadBusinesses();
+        }
+
+        // Logout
+        document.getElementById('navLogout').addEventListener('click', function() {
+            localStorage.removeItem('meridaunclick_token');
+            localStorage.removeItem('meridaunclick_user');
+            window.location.href = 'login.html';
+        });
+    })();
+    </script>
+</body>
+</html>

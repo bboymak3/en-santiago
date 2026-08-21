@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entretenimiento en Venezuela - Radio en línea, TV en vivo y más. Disfruta de música, cine y folklor llanero con HOLAX.">
+    <meta name="keywords" content="radio en línea, TV Venezuela, entretenimiento, cine, folklor llanero, música Venezuela, HOLAX">
+    <title>Entretenimiento - HOLAX</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== ENTRETENIMIENTO PAGE STYLES ===== */
+        .ent-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29 0%, #1a1040 30%, #24243e 60%, #0f0c29 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .ent-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(120, 50, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(30, 100, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(180, 50, 200, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animated background orbs */
+        .ent-bg-orbs {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .ent-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: entOrbFloat 20s ease-in-out infinite;
+        }
+
+        .ent-orb:nth-child(1) {
+            width: 400px; height: 400px;
+            background: rgba(120, 50, 255, 0.15);
+            top: -100px; left: -100px;
+            animation-delay: 0s;
+        }
+
+        .ent-orb:nth-child(2) {
+            width: 300px; height: 300px;
+            background: rgba(30, 100, 255, 0.12);
+            top: 40%; right: -80px;
+            animation-delay: -7s;
+            animation-duration: 25s;
+        }
+
+        .ent-orb:nth-child(3) {
+            width: 350px; height: 350px;
+            background: rgba(200, 50, 180, 0.1);
+            bottom: -50px; left: 30%;
+            animation-delay: -14s;
+            animation-duration: 22s;
+        }
+
+        @keyframes entOrbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -40px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(40px, 30px) scale(1.02); }
+        }
+
+        /* Hero Section */
+        .ent-hero {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 80px 20px 60px;
+        }
+
+        .ent-hero-icon {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, #7c3aed, #3b82f6, #ec4899);
+            border-radius: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #fff;
+            margin-bottom: 24px;
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.35);
+            animation: entIconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes entIconPulse {
+            0%, 100% { box-shadow: 0 15px 40px rgba(124, 58, 237, 0.35); transform: translateY(0); }
+            50% { box-shadow: 0 20px 60px rgba(124, 58, 237, 0.5); transform: translateY(-5px); }
+        }
+
+        .ent-hero h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.15;
+        }
+
+        .ent-hero h1 .ent-highlight {
+            background: linear-gradient(135deg, #a78bfa, #60a5fa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ent-hero p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.55);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Section Headers */
+        .ent-section {
+            position: relative;
+            z-index: 1;
+            padding: 20px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ent-section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .ent-section-icon {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .ent-section-icon.radio-icon {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
+        }
+
+        .ent-section-icon.tv-icon {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.35);
+        }
+
+        .ent-section-text h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .ent-section-text p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .ent-section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            margin: 20px 0 50px;
+        }
+
+        /* Cards Grid */
+        .ent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        /* Radio Cards */
+        .ent-radio-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ent-radio-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #7c3aed, #a78bfa, #60a5fa);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .ent-radio-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 20px 50px rgba(124, 58, 237, 0.2), 0 0 0 1px rgba(124, 58, 237, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .ent-radio-card:hover::before {
+            opacity: 1;
+        }
+
+        .ent-radio-card.playing {
+            border-color: rgba(124, 58, 237, 0.5);
+            box-shadow: 0 20px 50px rgba(124, 58, 237, 0.3), 0 0 80px rgba(124, 58, 237, 0.15);
+        }
+
+        .ent-radio-card.playing::before {
+            opacity: 1;
+            animation: entPlayingBar 2s ease-in-out infinite;
+        }
+
+        @keyframes entPlayingBar {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .ent-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ent-card-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ent-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(124, 58, 237, 0.15);
+            color: #a78bfa;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .ent-card-badge.live-badge {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+        }
+
+        .ent-card-badge.live-badge .live-dot {
+            width: 6px; height: 6px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: entLivePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes entLivePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        .ent-card-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .ent-card-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.5;
+        }
+
+        .ent-card-logo {
+            width: 56px; height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .ent-card-logo.logo-radio {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(96, 165, 250, 0.2));
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .ent-card-logo.logo-tv {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(249, 115, 22, 0.2));
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* Radio Player Controls */
+        .ent-player {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 14px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .ent-player-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ent-play-btn {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+        }
+
+        .ent-play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(124, 58, 237, 0.5);
+        }
+
+        .ent-play-btn:active {
+            transform: scale(0.95);
+        }
+
+        .ent-play-btn.active {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .ent-play-btn.active .play-icon {
+            display: none;
+        }
+
+        .ent-play-btn.active .pause-icon {
+            display: inline;
+        }
+
+        .ent-play-btn .pause-icon {
+            display: none;
+        }
+
+        /* Sound Wave Animation */
+        .ent-sound-wave {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 30px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ent-sound-wave .bar {
+            width: 3px;
+            background: linear-gradient(180deg, #7c3aed, #a78bfa);
+            border-radius: 2px;
+            height: 6px;
+            transition: height 0.15s ease;
+        }
+
+        .ent-radio-card.playing .ent-sound-wave .bar {
+            animation: entWave 0.8s ease-in-out infinite;
+        }
+
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(1) { animation-delay: 0s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(2) { animation-delay: 0.1s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(3) { animation-delay: 0.2s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(4) { animation-delay: 0.3s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(5) { animation-delay: 0.15s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(6) { animation-delay: 0.25s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(7) { animation-delay: 0.05s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(8) { animation-delay: 0.35s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(9) { animation-delay: 0.12s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(10) { animation-delay: 0.22s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(11) { animation-delay: 0.08s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(12) { animation-delay: 0.18s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(13) { animation-delay: 0.28s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(14) { animation-delay: 0.06s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(15) { animation-delay: 0.16s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(16) { animation-delay: 0.26s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(17) { animation-delay: 0.04s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(18) { animation-delay: 0.14s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(19) { animation-delay: 0.24s; }
+        .ent-radio-card.playing .ent-sound-wave .bar:nth-child(20) { animation-delay: 0.09s; }
+
+        @keyframes entWave {
+            0%, 100% { height: 6px; }
+            50% { height: 28px; }
+        }
+
+        /* Volume Control */
+        .ent-volume-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .ent-volume-icon {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .ent-volume-icon:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .ent-volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .ent-volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .ent-volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .ent-volume-slider::-moz-range-thumb {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+        }
+
+        .ent-volume-val {
+            color: rgba(255, 255, 255, 0.35);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            min-width: 28px;
+            text-align: right;
+        }
+
+        /* Radio Website Link */
+        .ent-radio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            text-decoration: none;
+            margin-top: 14px;
+            transition: color 0.3s;
+        }
+
+        .ent-radio-link:hover {
+            color: #a78bfa;
+        }
+
+        /* TV Cards */
+        .ent-tv-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .ent-tv-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ef4444, #f97316, #eab308);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2;
+        }
+
+        .ent-tv-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(239, 68, 68, 0.3);
+            box-shadow: 0 20px 50px rgba(239, 68, 68, 0.15), 0 0 0 1px rgba(239, 68, 68, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .ent-tv-card:hover::before {
+            opacity: 1;
+        }
+
+        .ent-tv-preview {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, #1a1040, #0f0c29);
+            overflow: hidden;
+        }
+
+        .ent-tv-preview img,
+        .ent-tv-preview iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .ent-tv-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 12, 41, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            transition: background 0.3s;
+            z-index: 1;
+        }
+
+        .ent-tv-card:hover .ent-tv-overlay {
+            background: rgba(15, 12, 41, 0.45);
+        }
+
+        .ent-tv-overlay-icon {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .ent-tv-card:hover .ent-tv-overlay-icon {
+            background: rgba(239, 68, 68, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.3);
+        }
+
+        .ent-tv-live-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .ent-tv-live-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        .ent-tv-live-btn .live-dot {
+            width: 8px; height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            animation: entLivePulse 1.5s ease-in-out infinite;
+        }
+
+        .ent-tv-body {
+            padding: 24px 28px 28px;
+        }
+
+        .ent-tv-card .ent-card-top {
+            margin-bottom: 0;
+        }
+
+        .ent-tv-website-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            text-decoration: none;
+            margin-top: 14px;
+            transition: color 0.3s;
+        }
+
+        .ent-tv-website-link:hover {
+            color: #f87171;
+        }
+
+        /* Footer Override */
+        .ent-footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .ent-footer .footer-bottom p {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .ent-hero {
+                padding: 50px 16px 40px;
+            }
+
+            .ent-hero h1 {
+                font-size: 2rem;
+            }
+
+            .ent-hero p {
+                font-size: 1rem;
+            }
+
+            .ent-hero-icon {
+                width: 70px; height: 70px;
+                font-size: 32px;
+                border-radius: 22px;
+            }
+
+            .ent-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .ent-section {
+                padding: 10px 16px 50px;
+            }
+
+            .ent-section-header {
+                margin-bottom: 24px;
+            }
+
+            .ent-section-text h2 {
+                font-size: 1.4rem;
+            }
+
+            .ent-radio-card {
+                padding: 22px;
+            }
+
+            .ent-play-btn {
+                width: 44px; height: 44px;
+                font-size: 16px;
+            }
+
+            .ent-card-logo {
+                width: 48px; height: 48px;
+                font-size: 20px;
+            }
+
+            .ent-tv-body {
+                padding: 20px 22px 24px;
+            }
+
+            .ent-sound-wave .bar:nth-child(n+12) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ent-hero h1 {
+                font-size: 1.65rem;
+            }
+
+            .ent-card-name {
+                font-size: 1.15rem;
+            }
+
+            .ent-card-desc {
+                font-size: 0.82rem;
+            }
+
+            .ent-sound-wave .bar:nth-child(n+10) {
+                display: none;
+            }
+        }
+
+        /* Status label */
+        .ent-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .ent-status.status-off {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .ent-status.status-on {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+        }
+
+        .ent-status .status-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .ent-status.status-on .status-dot {
+            animation: entLivePulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+            <i class="fas fa-store"></i>
+            <span class="brand-name"><i class="fas fa-map-marker-alt brand-location-icon" style="font-size:0.7em;opacity:0.6;"></i> <span id="brandCity"></span> HOLAX</span>
+        </a>
+        <div class="location-selector" id="locationSelector">
+            <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                <i class="fas fa-map-marker-alt"></i>
+                <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="location-dropdown hidden" id="locationDropdown">
+                <div class="location-search">
+                    <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                </div>
+                <div class="location-option" data-state="" data-city="">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>Todo Venezuela</span>
+                </div>
+                <div class="location-divider"></div>
+                <div class="location-list" id="locationList"></div>
+            </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html" class="nav-link">Inicio</a></li>
+            <li><a href="search.html" class="nav-link">Negocios</a></li>
+            <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+            <li><a href="map.html" class="nav-link">Mapa</a></li>
+            <li><a href="entretenimiento.html" class="nav-link active">Entretenimiento</a></li>
+            <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+            <li class="nav-dropdown">
+                <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                    Más <i class="fas fa-chevron-down"></i>
+                </button>
+                <ul class="nav-dropdown-menu">
+                    <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                    <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                    <li class="nav-dropdown-divider"></li>
+                    <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                </ul>
+            </li>
+            <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+            <li id="navUserItem" class="nav-user hidden">
+                <a href="dashboard.html" class="nav-link" id="navUserName">
+                    <i class="fas fa-user-circle"></i> Mi Cuenta
+                </a>
+                <button class="nav-link btn-logout" id="navLogout">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </li>
+            <li class="nav-mobile-cta">
+                <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                    <i class="fas fa-shopping-bag"></i> Marketplace
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Entertainment Page -->
+<main class="ent-page">
+    <!-- Background Orbs -->
+    <div class="ent-bg-orbs">
+        <div class="ent-orb"></div>
+        <div class="ent-orb"></div>
+        <div class="ent-orb"></div>
+    </div>
+
+    <!-- Hero -->
+    <section class="ent-hero">
+        <div class="ent-hero-icon">
+            <i class="fas fa-headphones-alt"></i>
+        </div>
+        <h1>Entretenimiento <span class="ent-highlight">en Vivo</span></h1>
+        <p>Escucha radio en línea, disfruta TV en vivo y más. Todo el entretenimiento de Venezuela en un solo lugar.</p>
+    </section>
+
+    <!-- ===== RADIO EN LÍNEA ===== -->
+    <section class="ent-section" id="radioSection">
+        <div class="ent-section-header">
+            <div class="ent-section-icon radio-icon">
+                <i class="fas fa-broadcast-tower"></i>
+            </div>
+            <div class="ent-section-text">
+                <h2>Radio en Línea</h2>
+                <p>Escucha las mejores estaciones de radio de Venezuela</p>
+            </div>
+        </div>
+
+        <div class="ent-grid">
+            <!-- Radio Online -->
+            <div class="ent-radio-card" id="radio-1">
+                <div class="ent-card-top">
+                    <div class="ent-card-info">
+                        <div class="ent-card-badge"><i class="fas fa-broadcast-tower"></i> Radio en Vivo</div>
+                        <h3 class="ent-card-name">Radio Online</h3>
+                        <p class="ent-card-desc">Tu radio en línea con lo mejor de la música. Conéctate desde cualquier lugar del mundo y disfruta de la mejor programación.</p>
+                        <div class="ent-status status-off" id="status-1">
+                            <span class="status-dot"></span> Detenido
+                        </div>
+                    </div>
+                    <div class="ent-card-logo logo-radio">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                </div>
+                <div class="ent-player">
+                    <div class="ent-player-row">
+                        <button class="ent-play-btn" onclick="toggleRadio(1)" id="playBtn-1" aria-label="Reproducir Radio Online">
+                            <i class="fas fa-play play-icon"></i>
+                            <i class="fas fa-pause pause-icon"></i>
+                        </button>
+                        <div class="ent-sound-wave">
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        </div>
+                    </div>
+                    <div class="ent-volume-wrap">
+                        <i class="fas fa-volume-up ent-volume-icon" id="volIcon-1"></i>
+                        <input type="range" class="ent-volume-slider" id="volume-1" min="0" max="100" value="75" oninput="setVolume(1, this.value)">
+                        <span class="ent-volume-val" id="volVal-1">75%</span>
+                    </div>
+                </div>
+                <audio id="audio-1" preload="none" src="https://link.zeno.fm/5psfed1ojv4vv"></audio>
+                <a href="https://radioimpulsa.online" target="_blank" rel="noopener noreferrer" class="ent-radio-link">
+                    <i class="fas fa-external-link-alt"></i> Sitio Web
+                </a>
+            </div>
+
+            <!-- Radio Bravia -->
+            <div class="ent-radio-card" id="radio-3">
+                <div class="ent-card-top">
+                    <div class="ent-card-info">
+                        <div class="ent-card-badge"><i class="fas fa-broadcast-tower"></i> Radio en Vivo</div>
+                        <h3 class="ent-card-name">Radio Bravia</h3>
+                        <p class="ent-card-desc">Música y folklor llanero. La auténtica radio con el sabor de Venezuela, música popular, llanera y tradicional.</p>
+                        <div class="ent-status status-off" id="status-3">
+                            <span class="status-dot"></span> Detenido
+                        </div>
+                    </div>
+                    <div class="ent-card-logo logo-radio">
+                        <i class="fas fa-music"></i>
+                    </div>
+                </div>
+                <div class="ent-player">
+                    <div class="ent-player-row">
+                        <button class="ent-play-btn" onclick="toggleRadio(3)" id="playBtn-3" aria-label="Reproducir Radio Bravia">
+                            <i class="fas fa-play play-icon"></i>
+                            <i class="fas fa-pause pause-icon"></i>
+                        </button>
+                        <div class="ent-sound-wave">
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        </div>
+                    </div>
+                    <div class="ent-volume-wrap">
+                        <i class="fas fa-volume-up ent-volume-icon" id="volIcon-3"></i>
+                        <input type="range" class="ent-volume-slider" id="volume-3" min="0" max="100" value="75" oninput="setVolume(3, this.value)">
+                        <span class="ent-volume-val" id="volVal-3">75%</span>
+                    </div>
+                </div>
+                <audio id="audio-3" preload="none" src="https://link.zeno.fm/qxaw31rr8mauv"></audio>
+                <a href="https://musicayfolklor.com/radio/" target="_blank" rel="noopener noreferrer" class="ent-radio-link">
+                    <i class="fas fa-external-link-alt"></i> musicayfolklor.com/radio
+                </a>
+            </div>
+        </div>
+
+        <div class="ent-section-divider"></div>
+    </section>
+
+    <!-- ===== TV EN LÍNEA ===== -->
+    <section class="ent-section" id="tvSection">
+        <div class="ent-section-header">
+            <div class="ent-section-icon tv-icon">
+                <i class="fas fa-tv"></i>
+            </div>
+            <div class="ent-section-text">
+                <h2>TV en Línea</h2>
+                <p>Canales de televisión venezolanos y mundiales en vivo</p>
+            </div>
+        </div>
+
+        <div class="ent-grid">
+            <!-- Bravia TV -->
+            <div class="ent-tv-card">
+                <div class="ent-tv-preview">
+                    <div class="ent-tv-overlay">
+                        <div class="ent-tv-overlay-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <a href="https://www.braviatv.com/" target="_blank" rel="noopener noreferrer" class="ent-tv-live-btn">
+                            <span class="live-dot"></span> Ver en Vivo
+                        </a>
+                    </div>
+                </div>
+                <div class="ent-tv-body">
+                    <div class="ent-card-top">
+                        <div class="ent-card-info">
+                            <div class="ent-card-badge live-badge">
+                                <span class="live-dot"></span> EN VIVO
+                            </div>
+                            <h3 class="ent-card-name">Bravia TV</h3>
+                            <p class="ent-card-desc">Folklor Llanero de Venezuela y Colombia. Disfruta de la cultura llanera con música, tradiciones y mucho más.</p>
+                        </div>
+                        <div class="ent-card-logo logo-tv">
+                            <i class="fas fa-guitar"></i>
+                        </div>
+                    </div>
+                    <a href="https://www.braviatv.com/" target="_blank" rel="noopener noreferrer" class="ent-tv-website-link">
+                        <i class="fas fa-external-link-alt"></i> www.braviatv.com
+                    </a>
+                </div>
+            </div>
+
+            <!-- Runtime TV Cine -->
+            <div class="ent-tv-card">
+                <div class="ent-tv-preview">
+                    <div class="ent-tv-overlay">
+                        <div class="ent-tv-overlay-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <a href="https://www.runtime.tv/" target="_blank" rel="noopener noreferrer" class="ent-tv-live-btn">
+                            <span class="live-dot"></span> Ver en Vivo
+                        </a>
+                    </div>
+                </div>
+                <div class="ent-tv-body">
+                    <div class="ent-card-top">
+                        <div class="ent-card-info">
+                            <div class="ent-card-badge live-badge">
+                                <span class="live-dot"></span> EN VIVO
+                            </div>
+                            <h3 class="ent-card-name">Runtime TV Cine</h3>
+                            <p class="ent-card-desc">Cine en Español. Películas, estrenos y clásicos del cine hispanoamericano disponibles las 24 horas.</p>
+                        </div>
+                        <div class="ent-card-logo logo-tv">
+                            <i class="fas fa-film"></i>
+                        </div>
+                    </div>
+                    <a href="https://www.runtime.tv/" target="_blank" rel="noopener noreferrer" class="ent-tv-website-link">
+                        <i class="fas fa-external-link-alt"></i> www.runtime.tv
+                    </a>
+                </div>
+            </div>
+
+            <!-- Famelack TV Mundial -->
+            <div class="ent-tv-card">
+                <div class="ent-tv-preview">
+                    <div class="ent-tv-overlay">
+                        <div class="ent-tv-overlay-icon">
+                            <i class="fas fa-satellite-dish"></i>
+                        </div>
+                        <a href="https://famelack.com/" target="_blank" rel="noopener noreferrer" class="ent-tv-live-btn">
+                            <span class="live-dot"></span> Ver en Vivo
+                        </a>
+                    </div>
+                </div>
+                <div class="ent-tv-body">
+                    <div class="ent-card-top">
+                        <div class="ent-card-info">
+                            <div class="ent-card-badge live-badge">
+                                <span class="live-dot"></span> EN VIVO
+                            </div>
+                            <h3 class="ent-card-name">Famelack TV Mundial</h3>
+                            <p class="ent-card-desc">TV y Radio Mundial Gratis. Canales internacionales de deportes, noticias, entretenimiento y más sin costo.</p>
+                        </div>
+                        <div class="ent-card-logo logo-tv">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                    </div>
+                    <a href="https://famelack.com/" target="_blank" rel="noopener noreferrer" class="ent-tv-website-link">
+                        <i class="fas fa-external-link-alt"></i> famelack.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer ent-footer">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2025 HOLAX. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Toast Notification -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/app.js"></script>
+
+<!-- Entertainment Page Scripts -->
+<script>
+    // ===== RADIO PLAYER LOGIC =====
+    let currentRadio = null; // Track currently playing radio
+
+    function toggleRadio(id) {
+        const audio = document.getElementById('audio-' + id);
+        const card = document.getElementById('radio-' + id);
+        const playBtn = document.getElementById('playBtn-' + id);
+        const statusEl = document.getElementById('status-' + id);
+
+        if (!audio) return;
+
+        // If the clicked radio is already playing, pause it
+        if (currentRadio === id && !audio.paused) {
+            audio.pause();
+            card.classList.remove('playing');
+            playBtn.classList.remove('active');
+            statusEl.className = 'ent-status status-off';
+            statusEl.innerHTML = '<span class="status-dot"></span> Detenido';
+            currentRadio = null;
+            return;
+        }
+
+        // Stop any other playing radio
+        if (currentRadio !== null && currentRadio !== id) {
+            const prevAudio = document.getElementById('audio-' + currentRadio);
+            const prevCard = document.getElementById('radio-' + currentRadio);
+            const prevBtn = document.getElementById('playBtn-' + currentRadio);
+            const prevStatus = document.getElementById('status-' + currentRadio);
+            if (prevAudio) {
+                prevAudio.pause();
+                prevAudio.currentTime = 0;
+            }
+            if (prevCard) prevCard.classList.remove('playing');
+            if (prevBtn) prevBtn.classList.remove('active');
+            if (prevStatus) {
+                prevStatus.className = 'ent-status status-off';
+                prevStatus.innerHTML = '<span class="status-dot"></span> Detenido';
+            }
+        }
+
+        // Play or resume the selected radio
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                currentRadio = id;
+                card.classList.add('playing');
+                playBtn.classList.add('active');
+                statusEl.className = 'ent-status status-on';
+                statusEl.innerHTML = '<span class="status-dot"></span> Reproduciendo';
+            }).catch((err) => {
+                console.warn('Playback failed:', err);
+                card.classList.remove('playing');
+                playBtn.classList.remove('active');
+                statusEl.className = 'ent-status status-off';
+                statusEl.innerHTML = '<span class="status-dot"></span> Error al reproducir';
+            });
+        }
+    }
+
+    function setVolume(id, value) {
+        const audio = document.getElementById('audio-' + id);
+        const volIcon = document.getElementById('volIcon-' + id);
+        const volVal = document.getElementById('volVal-' + id);
+
+        if (!audio) return;
+
+        audio.volume = value / 100;
+        volVal.textContent = value + '%';
+
+        // Update volume icon
+        volIcon.className = 'fas ent-volume-icon ';
+        if (value == 0) {
+            volIcon.className += 'fa-volume-mute';
+        } else if (value < 40) {
+            volIcon.className += 'fa-volume-down';
+        } else {
+            volIcon.className += 'fa-volume-up';
+        }
+    }
+
+    // Set initial volume on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        for (let i = 1; i <= 3; i++) {
+            const audio = document.getElementById('audio-' + i);
+            if (audio) {
+                audio.volume = 0.75;
+            }
+        }
+    });
+
+    // Handle audio events
+    document.addEventListener('DOMContentLoaded', function() {
+        for (let i = 1; i <= 3; i++) {
+            const audio = document.getElementById('audio-' + i);
+            if (!audio) continue;
+
+            audio.addEventListener('waiting', function() {
+                const statusEl = document.getElementById('status-' + i);
+                if (statusEl) {
+                    statusEl.className = 'ent-status status-off';
+                    statusEl.innerHTML = '<span class="status-dot"></span> Conectando...';
+                    statusEl.querySelector('.status-dot').style.animation = 'entLivePulse 1s ease-in-out infinite';
+                }
+            });
+
+            audio.addEventListener('playing', function() {
+                const statusEl = document.getElementById('status-' + i);
+                if (statusEl) {
+                    statusEl.className = 'ent-status status-on';
+                    statusEl.innerHTML = '<span class="status-dot"></span> En Vivo';
+                }
+            });
+
+            audio.addEventListener('error', function() {
+                const statusEl = document.getElementById('status-' + i);
+                const card = document.getElementById('radio-' + i);
+                const playBtn = document.getElementById('playBtn-' + i);
+                if (statusEl) {
+                    statusEl.className = 'ent-status status-off';
+                    statusEl.innerHTML = '<span class="status-dot"></span> Sin conexión';
+                }
+                if (card) card.classList.remove('playing');
+                if (playBtn) playBtn.classList.remove('active');
+                currentRadio = null;
+            });
+
+            audio.addEventListener('pause', function() {
+                if (currentRadio === i) {
+                    const statusEl = document.getElementById('status-' + i);
+                    const card = document.getElementById('radio-' + i);
+                    const playBtn = document.getElementById('playBtn-' + i);
+                    if (statusEl && !audio.ended) {
+                        statusEl.className = 'ent-status status-off';
+                        statusEl.innerHTML = '<span class="status-dot"></span> Pausado';
+                    }
+                    if (card) card.classList.remove('playing');
+                    if (playBtn) playBtn.classList.remove('active');
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

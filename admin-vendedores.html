@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Vendedores y Agentes - HolaX Admin">
+    <title>Vendedores - Administración HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-admin" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name">HolaX</span> <span class="admin-badge">Admin</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="admin.html" class="nav-link"><i class="fas fa-cogs"></i> Panel Admin</a></li>
+                <li><a href="admin-vendedores.html" class="nav-link active"><i class="fas fa-store"></i> Vendedores</a></li>
+                <li><a href="admin-chat.html" class="nav-link"><i class="fas fa-comments"></i> Chat</a></li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="admin-panel">
+        <div class="admin-layout">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar" id="adminSidebar">
+                <div class="admin-sidebar-header">
+                    <i class="fas fa-store"></i>
+                    <span>Vendedores</span>
+                </div>
+                <nav class="admin-nav">
+                    <a href="admin.html" class="admin-nav-link">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Volver al Panel</span>
+                    </a>
+                    <a href="admin.html#tab=settings" class="admin-nav-link">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>Configuración General</span>
+                    </a>
+                    <a href="admin-chat.html" class="admin-nav-link">
+                        <i class="fas fa-comments"></i>
+                        <span>Configuración Chat</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <div class="admin-content">
+                <div class="admin-topbar">
+                    <div class="admin-topbar-left">
+                        <button class="admin-sidebar-toggle" id="adminSidebarToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="admin-page-title" id="adminPageTitle">Vendedores / Agentes</h1>
+                    </div>
+                    <div class="admin-topbar-right">
+                        <span class="admin-date" id="adminDate"></span>
+                    </div>
+                </div>
+
+                <!-- Vendedores Table -->
+                <div class="admin-card" style="margin-bottom:24px;">
+                    <div class="admin-card-header">
+                        <h3><i class="fas fa-store" style="color:#2563eb;"></i> Panel de Vendedores / Agentes</h3>
+                        <div class="admin-card-actions">
+                            <button class="btn btn-sm" style="background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;" onclick="document.getElementById('createUserSection').scrollIntoView({behavior:'smooth'})">
+                                <i class="fas fa-user-plus"></i> Crear Agente
+                            </button>
+                            <button class="btn btn-sm" id="btnRefreshSellers" style="background:var(--color-primary);color:#fff;">
+                                <i class="fas fa-sync-alt"></i> Actualizar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="admin-card-body">
+                        <p style="font-size:0.88rem;color:#6b7280;margin-bottom:14px;">Vista de todos los perfiles de vendedores/agentes registrados en la plataforma. Aquí puedes gestionar sus cuentas y asignarles Premium.</p>
+                        <div id="sellersLoading" style="text-align:center;padding:20px;color:#9ca3af;">
+                            <i class="fas fa-spinner fa-spin fa-2x"></i>
+                            <p style="margin-top:8px;">Cargando vendedores...</p>
+                        </div>
+                        <div class="admin-table-responsive">
+                            <table class="admin-table" id="sellersTable" style="display:none;">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Vendedor</th>
+                                        <th>Tienda</th>
+                                        <th>Ciudad / Estado</th>
+                                        <th>Teléfono</th>
+                                        <th>WhatsApp</th>
+                                        <th>Negocios</th>
+                                        <th>Plan</th>
+                                        <th>Registro</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sellersTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div id="sellersEmpty" class="empty-state-sm" style="display:none;">
+                            <p>No hay vendedores registrados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create User Section -->
+                <div class="admin-card" id="createUserSection">
+                    <div class="admin-card-header">
+                        <h3><i class="fas fa-user-plus" style="color:#006EE3;"></i> Crear Nueva Cuenta</h3>
+                    </div>
+                    <div class="admin-card-body">
+                        <p style="font-size:0.88rem;color:#6b7280;margin-bottom:16px;">Crea una nueva cuenta de usuario, agente o administrador directamente desde aquí.</p>
+                        <div style="max-width:500px;">
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-group" style="flex:1;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre Completo <span style="color:#dc2626;">*</span></label>
+                                    <input type="text" id="newUserName" class="form-control" placeholder="Ej: Juan Pérez">
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-group" style="flex:1;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Email <span style="color:#dc2626;">*</span></label>
+                                    <input type="email" id="newUserEmail" class="form-control" placeholder="Ej: juan@email.com">
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-group" style="flex:1;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Teléfono (opcional)</label>
+                                    <input type="text" id="newUserPhone" class="form-control" placeholder="Ej: 0414-123-4567">
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-group" style="flex:1;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Contraseña <span style="color:#dc2626;">*</span></label>
+                                    <div style="position:relative;">
+                                        <input type="password" id="newUserPassword" class="form-control" placeholder="Mínimo 6 caracteres">
+                                        <button type="button" id="toggleNewUserPwd" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#6b7280;cursor:pointer;font-size:0.9rem;"><i class="fas fa-eye"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-bottom:16px;">
+                                <div class="form-group" style="flex:1;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Rol</label>
+                                    <select id="newUserRole" class="form-control">
+                                        <option value="user">Usuario</option>
+                                        <option value="agent">Agente / Vendedor</option>
+                                        <option value="admin">Administrador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="createUserError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#dc2626;"></div>
+                            <div id="createUserSuccess" style="display:none;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#006EE3;"></div>
+                            <button class="btn btn-primary" id="btnCreateUser" style="background:linear-gradient(135deg,#006EE3,#3B9AFF);">
+                                <i class="fas fa-user-plus"></i> Crear Cuenta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit User Modal -->
+    <div class="modal hidden" id="editUserModal" style="z-index:9999;">
+        <div class="modal-overlay" id="editUserModalOverlay"></div>
+        <div class="modal-container" style="max-width:600px;max-height:90vh;overflow-y:auto;">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-edit" style="color:#1a73e8"></i> Editar Vendedor</h3>
+                <button class="modal-close" id="editUserModalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="editUserModalBody">
+                <div style="text-align:center;padding:40px;color:#9ca3af;"><i class="fas fa-spinner fa-spin fa-2x"></i><p style="margin-top:12px;">Cargando datos...</p></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="editUserModalCancel">Cancelar</button>
+                <button class="btn btn-primary" id="editUserModalSave" style="background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;"><i class="fas fa-save"></i> Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container v8 -->
+    <div id="toastContainer" style="position:fixed;top:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:8px;"></div>
+
+    <!-- Modal de Estadísticas del Vendedor -->
+    <div id="statsModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;overflow-y:auto;padding:20px;">
+        <div style="background:#fff;max-width:1100px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            <div style="background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:between;">
+                <div style="flex:1;">
+                    <h2 style="margin:0;font-size:1.3rem;display:flex;align-items:center;gap:10px;">
+                        <i class="fas fa-chart-line" style="color:#00d4ff;"></i>
+                        <span id="statsModalTitle">Estadísticas del Vendedor</span>
+                    </h2>
+                    <p style="margin:4px 0 0;font-size:0.85rem;color:#94a3b8;" id="statsModalSubtitle"></p>
+                </div>
+                <button onclick="closeStatsModal()" style="background:rgba(255,255,255,0.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="statsModalBody" style="padding:24px;max-height:75vh;overflow-y:auto;background:#f8fafc;">
+                <div style="text-align:center;padding:40px 20px;color:#64748b;">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p style="margin-top:12px;">Cargando estadísticas...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=9"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        // Auth check
+        if (!window.isAuthenticated || !window.isAuthenticated()) {
+            window.location.href = 'login.html';
+            return;
+        }
+        const user = window.getCachedUser ? window.getCachedUser() : null;
+        if (!user || (user.role !== 'admin' && user.role !== 'agent')) {
+            alert('Acceso denegado. Solo administradores.');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Helper: ocultar loading con seguridad (timeout)
+        function hideLoadingSafe() {
+            const loading = document.getElementById('sellersLoading');
+            if (loading) loading.style.display = 'none';
+        }
+
+        // Timeout de seguridad: si después de 15 segundos sigue cargando, mostrar error
+        setTimeout(function() {
+            const loading = document.getElementById('sellersLoading');
+            if (loading && loading.style.display !== 'none') {
+                hideLoadingSafe();
+                const table = document.getElementById('sellersTable');
+                const tbody = document.getElementById('sellersTableBody');
+                if (tbody) tbody.innerHTML = '<tr><td colspan="10"><div class="empty-state-sm"><p style="color:#dc2626;"><i class="fas fa-exclamation-triangle"></i> Tiempo de espera agotado. Verifica tu conexión o <button onclick="location.reload()" style="color:#2563eb;text-decoration:underline;background:none;border:none;cursor:pointer;font-weight:600;">recarga la página</button>.</p></div></td></tr>';
+                if (table) table.style.display = 'table';
+            }
+        }, 15000);
+
+        // Date
+        const dateEl = document.getElementById('adminDate');
+        if (dateEl) dateEl.textContent = new Date().toLocaleDateString('es-VE', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+        // ─── Hamburger menu toggle (fix for admin sub-pages) ──
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+            document.addEventListener('click', function(e) {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // Sidebar toggle
+        const sidebarToggle = document.getElementById('adminSidebarToggle');
+        const sidebar = document.getElementById('adminSidebar');
+        if (sidebarToggle && sidebar) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+            // Close sidebar on mobile when clicking a link
+            sidebar.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => sidebar.classList.remove('active'));
+            });
+        }
+
+        // Toast helper
+        function showToast(msg, type) {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            const colors = { success:'#006EE3', error:'#dc2626', info:'#2563eb' };
+            const icons = { success:'fa-check-circle', error:'fa-exclamation-circle', info:'fa-info-circle' };
+            const el = document.createElement('div');
+            el.style.cssText = `padding:12px 20px;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 4px 12px rgba(0,0,0,0.15);animation:slideIn 0.3s ease;background:${colors[type]||colors.info};`;
+            el.innerHTML = `<i class="fas ${icons[type]||icons.info}"></i> ${msg}`;
+            container.appendChild(el);
+            setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); }, 3000);
+        }
+
+        function escHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        // ─── Sellers Panel ──────────────────────────────────────
+        async function loadSellersPanel() {
+            const loading = document.getElementById('sellersLoading');
+            const table = document.getElementById('sellersTable');
+            const tbody = document.getElementById('sellersTableBody');
+            const empty = document.getElementById('sellersEmpty');
+            if (!tbody) return;
+
+            if (loading) loading.style.display = 'block';
+            if (table) table.style.display = 'none';
+            if (empty) empty.style.display = 'none';
+
+            try {
+                // Verificar que api esté disponible
+                if (typeof api === 'undefined') {
+                    throw new Error('Error de carga: el módulo API no está disponible. Recarga la página.');
+                }
+
+                const data = await api.get('/admin/sellers');
+                const sellers = data.sellers || [];
+
+                if (loading) loading.style.display = 'none';
+
+                if (sellers.length === 0) {
+                    if (empty) empty.style.display = 'block';
+                    return;
+                }
+
+                if (table) table.style.display = 'table';
+
+                tbody.innerHTML = sellers.map(s => {
+                    const avatarHTML = s.avatar
+                        ? `<img src="${s.avatar}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'">`
+                        : `<div style="width:32px;height:32px;border-radius:50%;background:#e0e7ff;color:#4338ca;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">${(s.user_name || 'V')[0].toUpperCase()}</div>`;
+                    const planBadge = s.plan_type === 'premium'
+                        ? '<span style="background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;padding:2px 10px;border-radius:12px;font-size:0.72rem;font-weight:700;">Premium</span>'
+                        : '<span style="background:#f1f5f9;color:#64748b;padding:2px 10px;border-radius:12px;font-size:0.72rem;">Basico</span>';
+                    const date = s.created_at ? new Date(s.created_at).toLocaleDateString('es-VE') : '-';
+                    const isPremium = s.plan_type === 'premium';
+
+                    return `<tr>
+                        <td>${s.user_id}</td>
+                        <td>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                ${avatarHTML}
+                                <div>
+                                    <div style="font-weight:600;font-size:0.85rem;">${escHtml(s.user_name || 'Sin nombre')}</div>
+                                    <div style="font-size:0.72rem;color:#94a3b8;">${escHtml(s.user_email || '')}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="font-weight:600;">${escHtml(s.store_name || '-')}</td>
+                        <td>${escHtml(s.city || '')} / ${escHtml(s.state || '')}</td>
+                        <td>${escHtml(s.phone || '-')}</td>
+                        <td>${s.whatsapp ? `<span style="color:#25D366;"><i class="fab fa-whatsapp"></i> ${escHtml(s.whatsapp)}</span>` : '<span style="color:#d1d5db;">-</span>'}</td>
+                        <td>${s.business_count || 0}</td>
+                        <td>${planBadge}</td>
+                        <td style="font-size:0.78rem;color:#94a3b8;">${date}</td>
+                        <td>
+                            <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                                <button class="btn btn-xs btn-outline" onclick="editSeller(${s.user_id})" title="Editar agente"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-xs" style="background:#2563eb;color:#fff;" onclick="viewSellerStats(${s.user_id})" title="Ver estadísticas"><i class="fas fa-chart-bar"></i></button>
+                                ${!isPremium ? `<button class="btn btn-xs" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:600;" onclick="activateSellerPremium(${s.user_id})" title="Activar Premium"><i class="fas fa-crown"></i> Premium</button>` : `<button class="btn btn-xs" style="background:#f1f5f9;color:#64748b;" onclick="deactivateSellerPremium(${s.user_id})" title="Quitar Premium"><i class="fas fa-times-circle"></i> Quitar</button>`}
+                            </div>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (err) {
+                if (loading) loading.style.display = 'none';
+                console.error('Error loading sellers:', err);
+
+                // Mensaje de error más amigable según el tipo de error
+                let errorMsg = err.message || 'Error desconocido';
+                let actionHTML = '';
+
+                // Si es error 401, ofrecer ir a login
+                if (errorMsg.includes('401') || errorMsg.includes('Token') || errorMsg.includes('token')) {
+                    errorMsg = 'Sesión expirada. Por favor, inicia sesión nuevamente.';
+                    actionHTML = ' <button onclick="window.location.href=\'login.html\'" style="color:#2563eb;text-decoration:underline;background:none;border:none;cursor:pointer;font-weight:600;">Ir a Login</button>';
+                }
+                // Si es error 403, explicar permisos
+                else if (errorMsg.includes('403') || errorMsg.includes('denegado') || errorMsg.includes('admin')) {
+                    errorMsg = 'Acceso denegado. Se requiere rol de administrador para ver los vendedores.';
+                }
+                // Si es error 500, sugerir recargar
+                else if (errorMsg.includes('500') || errorMsg.includes('interno')) {
+                    errorMsg = 'Error del servidor. Intenta nuevamente en unos momentos.';
+                    actionHTML = ' <button onclick="location.reload()" style="color:#2563eb;text-decoration:underline;background:none;border:none;cursor:pointer;font-weight:600;">Recargar</button>';
+                }
+                // Si es error de conexión
+                else if (errorMsg.includes('conexión') || errorMsg.includes('fetch') || errorMsg.includes('network')) {
+                    errorMsg = 'Error de conexión. Verifica tu internet e intenta nuevamente.';
+                    actionHTML = ' <button onclick="location.reload()" style="color:#2563eb;text-decoration:underline;background:none;border:none;cursor:pointer;font-weight:600;">Reintentar</button>';
+                }
+
+                if (tbody) tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state-sm"><p style="color:#dc2626;"><i class="fas fa-exclamation-circle"></i> ${escHtml(errorMsg)}${actionHTML}</p></div></td></tr>`;
+                if (table) table.style.display = 'table';
+            }
+        }
+
+        // Activate premium for a seller
+        window.activateSellerPremium = async function(userId) {
+            if (!confirm('¿Activar plan Premium a este vendedor por 3 meses?')) return;
+            try {
+                await api.post('/users/activate-premium', { user_id: userId, duration: '3_months' });
+                showToast('Premium activado exitosamente (3 meses)', 'success');
+                loadSellersPanel();
+            } catch (err) {
+                showToast('Error: ' + err.message, 'error');
+            }
+        };
+
+        // Deactivate premium for a seller
+        window.deactivateSellerPremium = async function(userId) {
+            if (!confirm('¿Quitar el plan Premium a este vendedor?')) return;
+            try {
+                await api.put(`/users/${userId}`, { plan_type: 'basic' });
+                showToast('Premium removido exitosamente', 'success');
+                loadSellersPanel();
+            } catch (err) {
+                showToast('Error: ' + err.message, 'error');
+            }
+        };
+
+        // Refresh sellers button
+        const btnRefreshSellers = document.getElementById('btnRefreshSellers');
+        if (btnRefreshSellers) {
+            btnRefreshSellers.addEventListener('click', loadSellersPanel);
+        }
+
+        // ─── Create User Form ─────────────────────────────────
+        const togglePwd = document.getElementById('toggleNewUserPwd');
+        const pwdInput = document.getElementById('newUserPassword');
+        if (togglePwd && pwdInput) {
+            togglePwd.addEventListener('click', () => {
+                const isPassword = pwdInput.type === 'password';
+                pwdInput.type = isPassword ? 'text' : 'password';
+                togglePwd.innerHTML = isPassword ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            });
+        }
+
+        const btnCreateUser = document.getElementById('btnCreateUser');
+        if (btnCreateUser) {
+            btnCreateUser.addEventListener('click', async () => {
+                const name = document.getElementById('newUserName')?.value.trim();
+                const email = document.getElementById('newUserEmail')?.value.trim();
+                const phone = document.getElementById('newUserPhone')?.value.trim();
+                const password = document.getElementById('newUserPassword')?.value;
+                const role = document.getElementById('newUserRole')?.value || 'user';
+
+                const errDiv = document.getElementById('createUserError');
+                const successDiv = document.getElementById('createUserSuccess');
+                if (errDiv) errDiv.style.display = 'none';
+                if (successDiv) successDiv.style.display = 'none';
+
+                if (!name || !email || !password) {
+                    if (errDiv) { errDiv.textContent = 'Nombre, email y contraseña son obligatorios.'; errDiv.style.display = 'block'; }
+                    return;
+                }
+                if (password.length < 6) {
+                    if (errDiv) { errDiv.textContent = 'La contraseña debe tener al menos 6 caracteres.'; errDiv.style.display = 'block'; }
+                    return;
+                }
+
+                btnCreateUser.disabled = true;
+                btnCreateUser.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creando...';
+
+                try {
+                    const result = await api.post('/admin/create-user', { name, email, phone, password, role });
+                    if (successDiv) { successDiv.textContent = result.message || `Usuario "${name}" creado correctamente.`; successDiv.style.display = 'block'; }
+                    document.getElementById('newUserName').value = '';
+                    document.getElementById('newUserEmail').value = '';
+                    document.getElementById('newUserPhone').value = '';
+                    document.getElementById('newUserPassword').value = '';
+                    document.getElementById('newUserRole').value = 'user';
+                    showToast('Cuenta creada exitosamente', 'success');
+                    loadSellersPanel();
+                } catch (err) {
+                    if (errDiv) { errDiv.textContent = err.message || 'Error al crear la cuenta.'; errDiv.style.display = 'block'; }
+                } finally {
+                    btnCreateUser.disabled = false;
+                    btnCreateUser.innerHTML = '<i class="fas fa-user-plus"></i> Crear Cuenta';
+                }
+            });
+        }
+
+        // ─── Edit User Modal ──────────────────────────────────
+        const editModal = document.getElementById('editUserModal');
+        const editModalBody = document.getElementById('editUserModalBody');
+        const editModalOverlay = document.getElementById('editUserModalOverlay');
+        const editModalClose = document.getElementById('editUserModalClose');
+        const editModalCancel = document.getElementById('editUserModalCancel');
+        const editModalSave = document.getElementById('editUserModalSave');
+
+        function closeEditModal() {
+            if (editModal) editModal.classList.add('hidden');
+        }
+        if (editModalOverlay) editModalOverlay.addEventListener('click', closeEditModal);
+        if (editModalClose) editModalClose.addEventListener('click', closeEditModal);
+        if (editModalCancel) editModalCancel.addEventListener('click', closeEditModal);
+
+        window.editSeller = async function(userId) {
+            if (!editModal || !editModalBody) return;
+            editModalBody.innerHTML = '<div style="text-align:center;padding:40px;color:#9ca3af;"><i class="fas fa-spinner fa-spin fa-2x"></i><p style="margin-top:12px;">Cargando datos del vendedor...</p></div>';
+            editModal.classList.remove('hidden');
+            editModal.dataset.userId = userId;
+
+            try {
+                const user = await api.get('/users/' + userId);
+                const initials = (user.name || 'U').split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().substring(0, 2);
+                const avatarHTML = user.avatar
+                    ? '<div style="width:56px;height:56px;border-radius:50%;overflow:hidden;"><img src="' + user.avatar + '" style="width:100%;height:100%;object-fit:cover;"></div>'
+                    : '<div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;">' + initials + '</div>';
+                const date = user.created_at ? new Date(user.created_at).toLocaleDateString('es-VE', { day:'2-digit', month:'long', year:'numeric' }) : '—';
+
+                editModalBody.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #e5e7eb;">
+                        ${avatarHTML}
+                        <div>
+                            <div style="font-size:0.82rem;color:#6b7280;">ID: <strong>${user.id}</strong></div>
+                            <div style="font-size:0.82rem;color:#6b7280;"><i class="fas fa-calendar"></i> Registro: ${date}</div>
+                            <div style="font-size:0.82rem;color:#6b7280;"><i class="fas fa-building"></i> ${user.business_count || 0} negocios</div>
+                        </div>
+                    </div>
+                    <form id="editSellerForm">
+                        <div style="margin-bottom:16px;">
+                            <div style="font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:10px;"><i class="fas fa-id-card" style="color:#2563eb;"></i> Datos Basicos</div>
+                            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                                <div style="flex:1;min-width:200px;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre Completo</label>
+                                    <input type="text" id="editSellerName" class="form-control" required value="${(user.name || '').replace(/"/g, '&quot;')}" placeholder="Nombre del vendedor">
+                                </div>
+                                <div style="flex:1;min-width:200px;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Correo Electronico</label>
+                                    <input type="email" id="editSellerEmail" class="form-control" required value="${(user.email || '').replace(/"/g, '&quot;')}" placeholder="correo@ejemplo.com">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <div style="font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:10px;"><i class="fas fa-phone-alt" style="color:#2563eb;"></i> Telefonos</div>
+                            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                                <div style="flex:1;min-width:200px;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Telefono</label>
+                                    <input type="tel" id="editSellerPhone" class="form-control" value="${(user.phone || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                </div>
+                                <div style="flex:1;min-width:200px;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</label>
+                                    <input type="tel" id="editSellerWhatsApp" class="form-control" value="${(user.whatsapp || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <div style="font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:10px;"><i class="fas fa-align-left" style="color:#2563eb;"></i> Biografia</div>
+                            <textarea id="editSellerBio" class="form-control" rows="3" placeholder="Descripcion del vendedor..." maxlength="500">${user.bio || ''}</textarea>
+                        </div>
+                        <div>
+                            <div style="font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:10px;"><i class="fas fa-shield-alt" style="color:#2563eb;"></i> Administracion</div>
+                            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                                <div style="flex:1;min-width:200px;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Rol</label>
+                                    <select id="editSellerRole" class="form-control">
+                                        <option value="user"${user.role === 'user' ? ' selected' : ''}>Usuario</option>
+                                        <option value="admin"${user.role === 'admin' ? ' selected' : ''}>Administrador</option>
+                                        <option value="agent"${user.role === 'agent' ? ' selected' : ''}>Agente</option>
+                                    </select>
+                                </div>
+                                <div style="flex:1;min-width:200px;">
+                                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Estado</label>
+                                    <select id="editSellerStatus" class="form-control">
+                                        <option value="activo"${user.is_active ? ' selected' : ''}>Activo</option>
+                                        <option value="inactivo"${!user.is_active ? ' selected' : ''}>Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>`;
+            } catch (err) {
+                showToast('Error al cargar datos del vendedor: ' + err.message, 'error');
+                closeEditModal();
+            }
+        };
+
+        if (editModalSave) {
+            editModalSave.addEventListener('click', async function() {
+                var userId = editModal ? editModal.dataset.userId : null;
+                if (!userId) return;
+
+                var name = document.getElementById('editSellerName')?.value?.trim();
+                var email = document.getElementById('editSellerEmail')?.value?.trim();
+                var phone = document.getElementById('editSellerPhone')?.value?.trim();
+                var whatsapp = document.getElementById('editSellerWhatsApp')?.value?.trim();
+                var bio = document.getElementById('editSellerBio')?.value?.trim();
+                var role = document.getElementById('editSellerRole')?.value;
+                var statusVal = document.getElementById('editSellerStatus')?.value;
+
+                if (!name || !email) {
+                    showToast('Nombre y email son requeridos', 'error');
+                    return;
+                }
+
+                editModalSave.disabled = true;
+                editModalSave.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+                try {
+                    await api.put('/users/' + userId, {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        whatsapp: whatsapp,
+                        bio: bio,
+                        role: role,
+                        is_active: statusVal === 'activo'
+                    });
+                    showToast('Vendedor actualizado exitosamente', 'success');
+                    closeEditModal();
+                    loadSellersPanel();
+                } catch (err) {
+                    showToast('Error: ' + err.message, 'error');
+                } finally {
+                    editModalSave.disabled = false;
+                    editModalSave.innerHTML = '<i class="fas fa-save"></i> Guardar Cambios';
+                }
+            });
+        }
+
+        // ─── Estadísticas del Vendedor ───────────────────────────
+        window.viewSellerStats = async function(userId) {
+            const modal = document.getElementById('statsModal');
+            const body = document.getElementById('statsModalBody');
+            const titleEl = document.getElementById('statsModalTitle');
+            const subtitleEl = document.getElementById('statsModalSubtitle');
+            if (!modal || !body) return;
+
+            // Resetear y mostrar modal
+            titleEl.textContent = 'Estadísticas del Vendedor #' + userId;
+            subtitleEl.textContent = 'Cargando información...';
+            body.innerHTML = `
+                <div style="text-align:center;padding:40px 20px;color:#64748b;">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p style="margin-top:12px;">Cargando estadísticas...</p>
+                </div>
+            `;
+            modal.style.display = 'block';
+
+            try {
+                const data = await api.get('/admin/sellers/' + userId + '/stats');
+                const u = data.user || {};
+                const s = data.stats || {};
+                const items = data.items || {};
+
+                // Actualizar título
+                titleEl.innerHTML = 'Estadísticas de <span style="color:#00d4ff;">' + escHtml(u.name || 'Vendedor #' + userId) + '</span>';
+                subtitleEl.textContent = 'ID: ' + userId + ' · ' + escHtml(u.email || '—') + ' · Rol: ' + escHtml(u.role || '—');
+
+                // Construir HTML con todas las estadísticas
+                body.innerHTML = `
+                    <!-- Resumen general -->
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;">
+                        <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#1e40af;">${s.total_businesses || 0}</div>
+                            <div style="font-size:0.75rem;color:#1e40af;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-store"></i> Negocios</div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#166534;">${s.total_jobs || 0}</div>
+                            <div style="font-size:0.75rem;color:#166534;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-briefcase"></i> Empleos</div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #fcd34d;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#92400e;">${s.total_properties || 0}</div>
+                            <div style="font-size:0.75rem;color:#92400e;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-home"></i> Propiedades</div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);border:1px solid #f9a8d4;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#9d174d;">${s.total_products || 0}</div>
+                            <div style="font-size:0.75rem;color:#9d174d;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-box"></i> Productos</div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:1px solid #c4b5fd;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#5b21b6;">${s.total_reviews || 0}</div>
+                            <div style="font-size:0.75rem;color:#5b21b6;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-star"></i> Reseñas</div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fdba74;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#9a3412;">${s.total_contacts || 0}</div>
+                            <div style="font-size:0.75rem;color:#9a3412;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-envelope"></i> Contactos</div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,#ecfeff,#cffafe);border:1px solid #67e8f9;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#0e7490;">${s.total_favorites || 0}</div>
+                            <div style="font-size:0.75rem;color:#0e7490;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-heart"></i> Favoritos</div>
+                        </div>
+                        <div style="background:linear-gradient(135deg,#f1f5f9,#e2e8f0);border:1px solid #cbd5e1;padding:16px;border-radius:8px;text-align:center;">
+                            <div style="font-size:1.8rem;font-weight:700;color:#0f172a;">${s.total_views || 0}</div>
+                            <div style="font-size:0.75rem;color:#0f172a;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;"><i class="fas fa-eye"></i> Vistas totales</div>
+                        </div>
+                    </div>
+
+                    <!-- Métricas adicionales -->
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:24px;">
+                        <div style="background:#fff;border:1px solid #e2e8f0;padding:14px;border-radius:8px;">
+                            <div style="font-size:0.7rem;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;"><i class="fas fa-calendar-check"></i> Fecha registro</div>
+                            <div style="font-size:0.95rem;font-weight:600;color:#0f172a;margin-top:4px;">${u.created_at ? new Date(u.created_at).toLocaleDateString('es-VE', { day: '2-digit', month: 'long', year: 'numeric' }) : '—'}</div>
+                        </div>
+                        <div style="background:#fff;border:1px solid #e2e8f0;padding:14px;border-radius:8px;">
+                            <div style="font-size:0.7rem;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;"><i class="fas fa-star"></i> Rating promedio</div>
+                            <div style="font-size:0.95rem;font-weight:600;color:#0f172a;margin-top:4px;">${s.avg_rating ? Number(s.avg_rating).toFixed(1) + ' / 5.0' : 'Sin reseñas'}</div>
+                        </div>
+                        <div style="background:#fff;border:1px solid #e2e8f0;padding:14px;border-radius:8px;">
+                            <div style="font-size:0.7rem;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;"><i class="fas fa-crown"></i> Plan</div>
+                            <div style="font-size:0.95rem;font-weight:600;color:#0f172a;margin-top:4px;">${u.plan_type === 'premium' ? '⭐ Premium' : 'Básico'}</div>
+                        </div>
+                        <div style="background:#fff;border:1px solid #e2e8f0;padding:14px;border-radius:8px;">
+                            <div style="font-size:0.7rem;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;"><i class="fas fa-shield-alt"></i> Estado</div>
+                            <div style="font-size:0.95rem;font-weight:600;color:#0f172a;margin-top:4px;">${u.is_active ? '🟢 Activo' : '🔴 Inactivo'}</div>
+                        </div>
+                    </div>
+
+                    <!-- Negocios -->
+                    ${items.businesses && items.businesses.length > 0 ? `
+                    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+                        <div style="background:#f8fafc;padding:12px 16px;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;">
+                            <h3 style="margin:0;font-size:0.95rem;color:#0f172a;"><i class="fas fa-store" style="color:#1e40af;"></i> Negocios registrados (${items.businesses.length})</h3>
+                        </div>
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+                                <thead style="background:#f1f5f9;">
+                                    <tr>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Título</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Categoría</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Estado</th>
+                                        <th style="padding:8px 12px;text-align:right;color:#475569;font-weight:600;">Vistas</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${items.businesses.map(b => `
+                                        <tr style="border-bottom:1px solid #f1f5f9;">
+                                            <td style="padding:8px 12px;color:#0f172a;font-weight:500;">${escHtml(b.title || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;">${escHtml(b.category_name || '—')}</td>
+                                            <td style="padding:8px 12px;">
+                                                <span style="padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;background:${b.status === 'approved' ? '#dcfce7' : b.status === 'pending' ? '#fef3c7' : '#fee2e2'};color:${b.status === 'approved' ? '#166534' : b.status === 'pending' ? '#92400e' : '#991b1b'};">${escHtml(b.status || '—')}</span>
+                                            </td>
+                                            <td style="padding:8px 12px;text-align:right;color:#475569;">${b.views || 0}</td>
+                                            <td style="padding:8px 12px;color:#94a3b8;">${b.created_at ? new Date(b.created_at).toLocaleDateString('es-VE') : '—'}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Empleos -->
+                    ${items.jobs && items.jobs.length > 0 ? `
+                    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+                        <div style="background:#f8fafc;padding:12px 16px;border-bottom:1px solid #e2e8f0;">
+                            <h3 style="margin:0;font-size:0.95rem;color:#0f172a;"><i class="fas fa-briefcase" style="color:#166534;"></i> Empleos publicados (${items.jobs.length})</h3>
+                        </div>
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+                                <thead style="background:#f1f5f9;">
+                                    <tr>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Título</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Tipo</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Salario</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Estado</th>
+                                        <th style="padding:8px 12px;text-align:right;color:#475569;font-weight:600;">Vistas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${items.jobs.map(j => `
+                                        <tr style="border-bottom:1px solid #f1f5f9;">
+                                            <td style="padding:8px 12px;color:#0f172a;font-weight:500;">${escHtml(j.title || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;">${escHtml(j.job_type || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;">${escHtml(j.salary || '—')}</td>
+                                            <td style="padding:8px 12px;">
+                                                <span style="padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;background:${j.status === 'active' || j.status === 'approved' ? '#dcfce7' : '#fee2e2'};color:${j.status === 'active' || j.status === 'approved' ? '#166534' : '#991b1b'};">${escHtml(j.status || '—')}</span>
+                                            </td>
+                                            <td style="padding:8px 12px;text-align:right;color:#475569;">${j.views || 0}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Propiedades -->
+                    ${items.properties && items.properties.length > 0 ? `
+                    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+                        <div style="background:#f8fafc;padding:12px 16px;border-bottom:1px solid #e2e8f0;">
+                            <h3 style="margin:0;font-size:0.95rem;color:#0f172a;"><i class="fas fa-home" style="color:#92400e;"></i> Propiedades (${items.properties.length})</h3>
+                        </div>
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+                                <thead style="background:#f1f5f9;">
+                                    <tr>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Título</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Tipo</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Operación</th>
+                                        <th style="padding:8px 12px;text-align:right;color:#475569;font-weight:600;">Precio</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${items.properties.map(p => `
+                                        <tr style="border-bottom:1px solid #f1f5f9;">
+                                            <td style="padding:8px 12px;color:#0f172a;font-weight:500;">${escHtml(p.title || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;">${escHtml(p.property_type || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;">${escHtml(p.operation_type || '—')}</td>
+                                            <td style="padding:8px 12px;text-align:right;color:#475569;">${escHtml(p.price || '—')} ${escHtml(p.currency || '')}</td>
+                                            <td style="padding:8px 12px;">
+                                                <span style="padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;background:${p.status === 'approved' ? '#dcfce7' : '#fee2e2'};color:${p.status === 'approved' ? '#166534' : '#991b1b'};">${escHtml(p.status || '—')}</span>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Productos -->
+                    ${items.products && items.products.length > 0 ? `
+                    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+                        <div style="background:#f8fafc;padding:12px 16px;border-bottom:1px solid #e2e8f0;">
+                            <h3 style="margin:0;font-size:0.95rem;color:#0f172a;"><i class="fas fa-box" style="color:#9d174d;"></i> Productos (${items.products.length})</h3>
+                        </div>
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+                                <thead style="background:#f1f5f9;">
+                                    <tr>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Nombre</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Categoría</th>
+                                        <th style="padding:8px 12px;text-align:right;color:#475569;font-weight:600;">Precio</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${items.products.map(p => `
+                                        <tr style="border-bottom:1px solid #f1f5f9;">
+                                            <td style="padding:8px 12px;color:#0f172a;font-weight:500;">${escHtml(p.name || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;">${escHtml(p.category || '—')}</td>
+                                            <td style="padding:8px 12px;text-align:right;color:#475569;">${escHtml(p.price || '—')}</td>
+                                            <td style="padding:8px 12px;">
+                                                <span style="padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;background:${p.status === 'active' ? '#dcfce7' : '#fee2e2'};color:${p.status === 'active' ? '#166534' : '#991b1b'};">${escHtml(p.status || '—')}</span>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Reseñas recibidas -->
+                    ${items.reviews && items.reviews.length > 0 ? `
+                    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+                        <div style="background:#f8fafc;padding:12px 16px;border-bottom:1px solid #e2e8f0;">
+                            <h3 style="margin:0;font-size:0.95rem;color:#0f172a;"><i class="fas fa-star" style="color:#5b21b6;"></i> Reseñas recibidas (${items.reviews.length})</h3>
+                        </div>
+                        <div style="padding:12px 16px;">
+                            ${items.reviews.map(r => `
+                                <div style="padding:8px 0;border-bottom:1px solid #f1f5f9;">
+                                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                                        <span style="color:#f59e0b;">${'★'.repeat(r.rating || 0)}${'☆'.repeat(5 - (r.rating || 0))}</span>
+                                        <span style="font-size:0.75rem;color:#94a3b8;">${r.created_at ? new Date(r.created_at).toLocaleDateString('es-VE') : ''}</span>
+                                    </div>
+                                    <p style="margin:0;font-size:0.82rem;color:#475569;">${escHtml(r.comment || 'Sin comentario')}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Contactos recibidos -->
+                    ${items.contacts && items.contacts.length > 0 ? `
+                    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:16px;overflow:hidden;">
+                        <div style="background:#f8fafc;padding:12px 16px;border-bottom:1px solid #e2e8f0;">
+                            <h3 style="margin:0;font-size:0.95rem;color:#0f172a;"><i class="fas fa-envelope" style="color:#9a3412;"></i> Contactos recibidos (${items.contacts.length})</h3>
+                        </div>
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+                                <thead style="background:#f1f5f9;">
+                                    <tr>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Nombre</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Email</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Mensaje</th>
+                                        <th style="padding:8px 12px;text-align:left;color:#475569;font-weight:600;">Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${items.contacts.map(c => `
+                                        <tr style="border-bottom:1px solid #f1f5f9;">
+                                            <td style="padding:8px 12px;color:#0f172a;font-weight:500;">${escHtml(c.sender_name || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;">${escHtml(c.sender_email || '—')}</td>
+                                            <td style="padding:8px 12px;color:#64748b;max-width:300px;overflow:hidden;text-overflow:ellipsis;">${escHtml((c.message || '').substring(0, 80))}${(c.message || '').length > 80 ? '...' : ''}</td>
+                                            <td style="padding:8px 12px;color:#94a3b8;">${c.created_at ? new Date(c.created_at).toLocaleDateString('es-VE') : '—'}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Empty state si no hay actividad -->
+                    ${(!items.businesses || items.businesses.length === 0) && (!items.jobs || items.jobs.length === 0) && (!items.properties || items.properties.length === 0) && (!items.products || items.products.length === 0) ? `
+                        <div style="text-align:center;padding:40px 20px;color:#64748b;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+                            <i class="fas fa-inbox fa-3x" style="color:#cbd5e1;margin-bottom:12px;"></i>
+                            <p style="font-size:0.95rem;font-weight:600;color:#475569;">Este vendedor no tiene actividad registrada</p>
+                            <p style="font-size:0.82rem;color:#94a3b8;margin-top:4px;">No ha registrado negocios, empleos, propiedades ni productos.</p>
+                        </div>
+                    ` : ''}
+
+                    <!-- JSON completo (debug) -->
+                    <details style="margin-top:16px;">
+                        <summary style="cursor:pointer;color:#64748b;font-size:0.82rem;padding:8px;background:#fff;border:1px solid #e2e8f0;border-radius:6px;">
+                            <i class="fas fa-code"></i> Ver respuesta JSON completa (debug)
+                        </summary>
+                        <pre style="background:#0f172a;color:#e2e8f0;padding:12px;border-radius:6px;margin-top:8px;font-size:0.78rem;overflow-x:auto;max-height:400px;">${escHtml(JSON.stringify(data, null, 2))}</pre>
+                    </details>
+                `;
+
+            } catch (err) {
+                console.error('Error loading seller stats:', err);
+                let errorMsg = err.message || 'Error desconocido';
+                body.innerHTML = `
+                    <div style="text-align:center;padding:40px 20px;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;">
+                        <i class="fas fa-exclamation-triangle fa-3x" style="margin-bottom:12px;"></i>
+                        <p style="font-size:0.95rem;font-weight:600;">Error al cargar estadísticas</p>
+                        <p style="font-size:0.82rem;margin-top:4px;">${escHtml(errorMsg)}</p>
+                        <button onclick="window.viewSellerStats(${userId})" style="margin-top:16px;background:#2563eb;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;">Reintentar</button>
+                    </div>
+                `;
+            }
+        };
+
+        window.closeStatsModal = function() {
+            const modal = document.getElementById('statsModal');
+            if (modal) modal.style.display = 'none';
+        };
+
+        // Cerrar modal al hacer click fuera
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('statsModal');
+            if (modal && e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('statsModal');
+                if (modal) modal.style.display = 'none';
+            }
+        });
+
+        // ─── Init ───────────────────────────────────────────────
+        loadSellersPanel();
+
+    })();
+    </script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

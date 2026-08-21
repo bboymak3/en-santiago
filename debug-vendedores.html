@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Debug - Panel Vendedores | HolaX</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #00d4ff; margin-bottom: 8px; font-size: 1.5rem; }
+        .subtitle { color: #94a3b8; margin-bottom: 24px; font-size: 0.9rem; }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .card h2 {
+            color: #00d4ff;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status.ok { background: #16a34a; color: #fff; }
+        .status.error { background: #dc2626; color: #fff; }
+        .status.warning { background: #f59e0b; color: #000; }
+        .status.pending { background: #64748b; color: #fff; }
+        pre {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 12px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .json-key { color: #00d4ff; }
+        .json-string { color: #4ade80; }
+        .json-number { color: #fbbf24; }
+        .json-boolean { color: #f87171; }
+        .json-null { color: #94a3b8; }
+        button {
+            background: #00d4ff;
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+        button:hover { background: #00a8cc; }
+        button.secondary {
+            background: #334155;
+            color: #e2e8f0;
+        }
+        button.secondary:hover { background: #475569; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid #334155;
+            font-size: 0.85rem;
+        }
+        th { color: #00d4ff; font-weight: 600; }
+        td { color: #cbd5e1; }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .badge-premium { background: #fef3c7; color: #92400e; }
+        .badge-basic { background: #f1f5f9; color: #64748b; }
+        .badge-admin { background: #dbeafe; color: #1e40af; }
+        .badge-agent { background: #dcfce7; color: #166534; }
+        .badge-user { background: #fce7f3; color: #9d174d; }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .info-item {
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+        }
+        .info-label { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; }
+        .info-value { color: #e2e8f0; font-weight: 600; font-size: 0.95rem; }
+        .actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .token-input {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        .token-input:focus { outline: none; border-color: #00d4ff; }
+        .empty { color: #64748b; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Debug - Panel de Vendedores</h1>
+        <p class="subtitle">Herramienta de diagnóstico para https://aunclick.pages.dev/admin-vendedores</p>
+
+        <div class="card">
+            <h2><span id="authStatus" class="status pending">⟳ Verificando...</span> Autenticación</h2>
+            <div id="authInfo">
+                <p style="color:#94a3b8;font-size:0.85rem;">Verificando si hay sesión activa...</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span id="apiStatus" class="status pending">⟳ Verificando...</span> API /admin/sellers</h2>
+            <div id="apiResult">
+                <p style="color:#94a3b8;font-size:0.85rem;">Probando endpoint...</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📊 Datos de vendedores</h2>
+            <div id="sellersData">
+                <p style="color:#94a3b8;font-size:0.85rem;">Esperando autenticación...</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🧪 Probar manualmente</h2>
+            <p style="color:#94a3b8;font-size:0.85rem;margin-bottom:12px;">
+                Pega un token JWT válido (de localStorage del navegador logueado) para probar la API:
+            </p>
+            <input type="text" id="manualToken" class="token-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+            <div class="actions">
+                <button onclick="testWithManualToken()">Probar con token</button>
+                <button class="secondary" onclick="clearToken()">Limpiar token manual</button>
+                <button class="secondary" onclick="location.href='/admin-vendedores'">Ir al panel real</button>
+            </div>
+            <div id="manualResult" style="margin-top:16px;"></div>
+        </div>
+
+        <div class="card">
+            <h2>📋 Información del entorno</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">URL actual</div>
+                    <div class="info-value" id="currentUrl"></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Token en localStorage</div>
+                    <div class="info-value" id="tokenStatus">—</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">User en localStorage</div>
+                    <div class="info-value" id="userStatus">—</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">API endpoint</div>
+                    <div class="info-value">/api/admin/sellers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=6"></script>
+    <script>
+    // Resaltar JSON
+    function syntaxHighlight(json) {
+        if (!json) return '<span class="json-null">null</span>';
+        json = JSON.stringify(json, null, 2);
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+            let cls = 'json-number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) cls = 'json-key';
+                else cls = 'json-string';
+            } else if (/true|false/.test(match)) {
+                cls = 'json-boolean';
+            } else if (/null/.test(match)) {
+                cls = 'json-null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    function escHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Cargar info del entorno
+    document.getElementById('currentUrl').textContent = window.location.href;
+
+    const token = localStorage.getItem('meridaunclick_token');
+    const userStr = localStorage.getItem('meridaunclick_user');
+
+    document.getElementById('tokenStatus').innerHTML = token
+        ? '<span style="color:#4ade80;">✓ Presente (' + token.substring(0, 20) + '...)</span>'
+        : '<span style="color:#f87171;">✗ No encontrado</span>';
+
+    document.getElementById('userStatus').innerHTML = userStr
+        ? '<span style="color:#4ade80;">✓ Presente</span>'
+        : '<span style="color:#f87171;">✗ No encontrado</span>';
+
+    // Verificar autenticación
+    async function checkAuth() {
+        const statusEl = document.getElementById('authStatus');
+        const infoEl = document.getElementById('authInfo');
+
+        if (!window.isAuthenticated) {
+            statusEl.textContent = '⚠ app.js no cargó';
+            statusEl.className = 'status error';
+            infoEl.innerHTML = '<p style="color:#f87171;">El módulo app.js no está cargado. Esto indica un problema con el cache del navegador.</p><p><button onclick="location.reload()" style="background:#00d4ff;color:#0f172a;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;">Recargar página</button></p>';
+            return;
+        }
+
+        if (!isAuthenticated()) {
+            statusEl.textContent = '✗ No autenticado';
+            statusEl.className = 'status error';
+            infoEl.innerHTML = '<p style="color:#f87171;">No hay sesión activa. Debes iniciar sesión en <a href="/login.html" style="color:#00d4ff;">/login.html</a> con una cuenta admin.</p>';
+            return;
+        }
+
+        const user = getCachedUser();
+        if (!user) {
+            statusEl.textContent = '✗ Sin usuario';
+            statusEl.className = 'status error';
+            infoEl.innerHTML = '<p style="color:#f87171;">Hay token pero no hay usuario en cache.</p>';
+            return;
+        }
+
+        const isAdmin = user.role === 'admin';
+        const isAgent = user.role === 'agent';
+
+        statusEl.textContent = isAdmin ? '✓ Admin' : (isAgent ? '✓ Agente' : '✗ Rol: ' + user.role);
+        statusEl.className = isAdmin ? 'status ok' : (isAgent ? 'status warning' : 'status error');
+
+        let roleBadge = '';
+        if (user.role === 'admin') roleBadge = '<span class="badge badge-admin">admin</span>';
+        else if (user.role === 'agent') roleBadge = '<span class="badge badge-agent">agent</span>';
+        else roleBadge = '<span class="badge badge-user">' + user.role + '</span>';
+
+        infoEl.innerHTML = `
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Nombre</div>
+                    <div class="info-value">${escHtml(user.name || '—')}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">${escHtml(user.email || '—')}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Rol</div>
+                    <div class="info-value">${roleBadge}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">ID</div>
+                    <div class="info-value">${user.id || '—'}</div>
+                </div>
+            </div>
+            ${!isAdmin && !isAgent ? '<p style="color:#f87171;margin-top:12px;">⚠ Tu rol no permite acceder al panel de vendedores. Necesitas ser <strong>admin</strong> o <strong>agent</strong>.</p>' : ''}
+        `;
+    }
+
+    // Probar API
+    async function testApi() {
+        const statusEl = document.getElementById('apiStatus');
+        const resultEl = document.getElementById('apiResult');
+        const dataEl = document.getElementById('sellersData');
+
+        if (!isAuthenticated()) {
+            statusEl.textContent = '⏭ Saltado';
+            statusEl.className = 'status warning';
+            resultEl.innerHTML = '<p style="color:#94a3b8;">No autenticado, no se puede probar la API.</p>';
+            return;
+        }
+
+        statusEl.textContent = '⟳ Llamando...';
+        statusEl.className = 'status pending';
+
+        try {
+            const startTime = Date.now();
+            const data = await api.get('/admin/sellers');
+            const duration = Date.now() - startTime;
+
+            statusEl.textContent = '✓ OK (' + duration + 'ms)';
+            statusEl.className = 'status ok';
+
+            const sellers = data.sellers || [];
+            resultEl.innerHTML = `
+                <p style="color:#4ade80;margin-bottom:8px;">✓ La API respondió correctamente en ${duration}ms</p>
+                <p style="color:#94a3b8;font-size:0.85rem;">Vendedores encontrados: <strong style="color:#00d4ff;">${sellers.length}</strong></p>
+                <details style="margin-top:12px;">
+                    <summary style="cursor:pointer;color:#00d4ff;font-size:0.85rem;">Ver respuesta JSON completa</summary>
+                    <pre>${syntaxHighlight(data)}</pre>
+                </details>
+            `;
+
+            // Mostrar tabla de vendedores
+            if (sellers.length === 0) {
+                dataEl.innerHTML = '<div class="empty">No hay vendedores registrados en la base de datos.</div>';
+            } else {
+                let html = '<table><thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Tienda</th><th>Rol</th><th>Plan</th><th>Negocios</th></tr></thead><tbody>';
+                sellers.forEach(s => {
+                    let roleBadge = '';
+                    if (s.user_role === 'admin') roleBadge = '<span class="badge badge-admin">admin</span>';
+                    else if (s.user_role === 'agent') roleBadge = '<span class="badge badge-agent">agent</span>';
+                    else if (s.user_role === 'seller') roleBadge = '<span class="badge badge-agent">seller</span>';
+                    else roleBadge = '<span class="badge badge-user">' + escHtml(s.user_role || '—') + '</span>';
+
+                    let planBadge = s.plan_type === 'premium'
+                        ? '<span class="badge badge-premium">Premium</span>'
+                        : '<span class="badge badge-basic">Básico</span>';
+
+                    html += `<tr>
+                        <td>${s.user_id}</td>
+                        <td>${escHtml(s.user_name || '—')}</td>
+                        <td>${escHtml(s.user_email || '—')}</td>
+                        <td>${escHtml(s.store_name || '—')}</td>
+                        <td>${roleBadge}</td>
+                        <td>${planBadge}</td>
+                        <td>${s.business_count || 0}</td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                dataEl.innerHTML = html;
+            }
+
+        } catch (err) {
+            statusEl.textContent = '✗ Error';
+            statusEl.className = 'status error';
+            resultEl.innerHTML = `
+                <p style="color:#f87171;margin-bottom:8px;">✗ Error al llamar la API:</p>
+                <pre style="color:#f87171;">${escHtml(err.message || err.toString())}</pre>
+                <p style="color:#94a3b8;font-size:0.85rem;margin-top:12px;">Esto es lo mismo que ve el panel real. Revisa el tipo de error:</p>
+                <ul style="color:#94a3b8;font-size:0.85rem;margin-left:20px;margin-top:8px;">
+                    <li><strong>401</strong>: Token inválido o expirado. Cierra sesión y vuelve a iniciar.</li>
+                    <li><strong>403</strong>: Tu usuario no es admin. Necesitas rol admin.</li>
+                    <li><strong>500</strong>: Error del servidor. Revisa los logs de Cloudflare.</li>
+                    <li><strong>Failed to fetch</strong>: Problema de red o CORS.</li>
+                </ul>
+            `;
+            dataEl.innerHTML = '<div class="empty">No se pudieron cargar los vendedores.</div>';
+        }
+    }
+
+    // Probar con token manual
+    async function testWithManualToken() {
+        const token = document.getElementById('manualToken').value.trim();
+        const resultEl = document.getElementById('manualResult');
+
+        if (!token) {
+            resultEl.innerHTML = '<p style="color:#f87171;">Pega un token primero.</p>';
+            return;
+        }
+
+        resultEl.innerHTML = '<p style="color:#94a3b8;">Probando...</p>';
+
+        try {
+            const response = await fetch('/api/admin/sellers', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            const text = await response.text();
+            let data;
+            try { data = JSON.parse(text); } catch { data = text; }
+
+            if (response.ok) {
+                const sellers = data.sellers || [];
+                resultEl.innerHTML = `
+                    <p style="color:#4ade80;margin-bottom:8px;">✓ HTTP ${response.status} - ${sellers.length} vendedores encontrados</p>
+                    <details>
+                        <summary style="cursor:pointer;color:#00d4ff;font-size:0.85rem;">Ver JSON</summary>
+                        <pre>${syntaxHighlight(data)}</pre>
+                    </details>
+                `;
+            } else {
+                resultEl.innerHTML = `
+                    <p style="color:#f87171;margin-bottom:8px;">✗ HTTP ${response.status} ${response.statusText}</p>
+                    <pre style="color:#f87171;">${escHtml(typeof data === 'string' ? data : JSON.stringify(data, null, 2))}</pre>
+                `;
+            }
+        } catch (err) {
+            resultEl.innerHTML = '<p style="color:#f87171;">Error: ' + escHtml(err.message) + '</p>';
+        }
+    }
+
+    function clearToken() {
+        document.getElementById('manualToken').value = '';
+        document.getElementById('manualResult').innerHTML = '';
+    }
+
+    // Ejecutar al cargar
+    checkAuth().then(() => testApi());
+    </script>
+</body>
+</html>

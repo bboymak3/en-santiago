@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ofertas de empleo en Venezuela - Encuentra trabajo en restaurantes, tiendas, servicios y más.">
+    <title>Empleo - HolaX</title>
+    <!-- Open Graph -->
+    <meta property="og:title" content="Empleo - Busca Trabajo en Venezuela | HolaX">
+    <meta property="og:description" content="Encuentra ofertas de empleo en Venezuela. Restaurantes, tiendas, servicios profesionales y mas. Publica vacantes y conecta con talentos.">
+    <meta property="og:site_name" content="HolaX">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://holax.com.ve/images/Holax.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://holax.com.ve/empleo.html">
+    <meta name="twitter:title" content="Empleo - Busca Trabajo en Venezuela | HolaX">
+    <meta name="twitter:description" content="Encuentra ofertas de empleo en Venezuela con HolaX. Restaurantes, tiendas, servicios y mas.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://holax.com.ve/images/Holax.png">
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ─── Empleo Hero ──────────────────────────────────────── */
+        .empleo-hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 30%, #3730a3 60%, #4338ca 100%);
+            padding-top: calc(var(--navbar-height) + 48px);
+            padding-bottom: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .empleo-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .empleo-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, rgba(79, 70, 229, 0.2) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .empleo-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,0.03) 1px, transparent 1px),
+                radial-gradient(circle at 75% 65%, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        .empleo-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .empleo-hero-content {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .empleo-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 18px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #c4b5fd;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .empleo-hero-badge i {
+            color: #fbbf24;
+            font-size: 0.72rem;
+        }
+
+        .empleo-hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .empleo-hero-title .highlight {
+            background: linear-gradient(135deg, #a78bfa, #818cf8, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .empleo-hero-subtitle {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        /* ─── Filter Bar ──────────────────────────────────────── */
+        .empleo-filters {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 20px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .empleo-filters-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .empleo-filter-group {
+            flex: 1;
+            min-width: 160px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .empleo-filter-group label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .empleo-filter-group label i {
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+
+        .empleo-filter-wrap {
+            position: relative;
+        }
+
+        .empleo-filter-wrap select,
+        .empleo-filter-wrap input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            font-family: inherit;
+            transition: all 0.25s;
+        }
+
+        .empleo-filter-wrap input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .empleo-filter-wrap select:focus,
+        .empleo-filter-wrap input:focus {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .empleo-filter-wrap select option {
+            background: #1f2937;
+            color: #fff;
+        }
+
+        .empleo-filter-arrow {
+            position: absolute;
+            right: 12px;
+            bottom: 13px;
+            font-size: 0.68rem;
+            color: rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+        }
+
+        .empleo-search-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 28px;
+            background: linear-gradient(135deg, #6366f1, #818cf8);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-family: inherit;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        .empleo-search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(99, 102, 241, 0.55);
+        }
+
+        /* ─── Results Info Bar ─────────────────────────────────── */
+        .empleo-results-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .empleo-results-count {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .empleo-results-count strong {
+            color: #1e1b4b;
+            font-weight: 700;
+        }
+
+        .empleo-view-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .empleo-sort-select {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .empleo-sort-select label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .empleo-sort-select select {
+            padding: 7px 12px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: #334155;
+            background: #fff;
+            outline: none;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .empleo-sort-select select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* ─── Jobs Grid ─────────────────────────────────────────── */
+        .empleo-main {
+            padding: 32px 0 64px;
+            background: #f8fafc;
+            min-height: 60vh;
+        }
+
+        .empleo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        /* ─── Job Card ────────────────────────────────────────── */
+        .job-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1.5px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-card:hover {
+            border-color: #6366f1;
+            box-shadow: 0 12px 36px rgba(99, 102, 241, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .job-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 22px 22px 0;
+            gap: 12px;
+        }
+
+        .job-card-company-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .job-card-logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #4f46e5;
+            flex-shrink: 0;
+            border: 2px solid #e0e7ff;
+            overflow: hidden;
+            position: relative;
+        }
+        .job-card-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .job-card-initials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .job-card-company {
+            min-width: 0;
+        }
+
+        .job-card-company-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #6366f1;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .job-card-posted {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .job-card-type-badge {
+            flex-shrink: 0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .job-card-type-badge.full-time {
+            background: #EFF6FF;
+            color: #006EE3;
+            border: 1px solid #a7f3d0;
+        }
+
+        .job-card-type-badge.part-time {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+        }
+
+        .job-card-type-badge.contract {
+            background: #ede9fe;
+            color: #7c3aed;
+            border: 1px solid #c4b5fd;
+        }
+
+        .job-card-type-badge.remote {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+
+        .job-card-type-badge.freelance {
+            background: #fce7f3;
+            color: #be185d;
+            border: 1px solid #fbcfe8;
+        }
+
+        .job-card-body {
+            padding: 16px 22px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+            line-height: 1.35;
+            letter-spacing: -0.2px;
+        }
+
+        .job-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .job-card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .job-card-meta-item i {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            width: 16px;
+            text-align: center;
+        }
+
+        .job-card-salary {
+            color: #006EE3;
+            font-weight: 600;
+        }
+
+        .job-card-salary i {
+            color: #006EE3 !important;
+        }
+
+        .job-card-description {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.65;
+            margin-bottom: 18px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .job-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px;
+            border-top: 1px solid #f1f5f9;
+            background: #fafbfd;
+        }
+
+        .job-card-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .job-card-views i {
+            font-size: 0.72rem;
+        }
+
+        .job-card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 20px;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .job-card-btn:hover {
+            background: linear-gradient(135deg, #4338ca, #4f46e5);
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .job-card-btn i {
+            font-size: 0.72rem;
+            transition: transform 0.25s;
+        }
+
+        .job-card-btn:hover i {
+            transform: translateX(2px);
+        }
+
+        /* ─── Loading / Empty States ────────────────────────────── */
+        .empleo-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            gap: 16px;
+        }
+
+        .empleo-loading i {
+            font-size: 2.5rem;
+            color: #a78bfa;
+            animation: spin 1s linear infinite;
+        }
+
+        .empleo-loading p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .empleo-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .empleo-empty-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #6366f1;
+            margin-bottom: 24px;
+        }
+
+        .empleo-empty h2 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .empleo-empty p {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            max-width: 420px;
+        }
+
+        .empleo-empty-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-outline:hover {
+            border-color: #6366f1;
+            color: #6366f1;
+            background: #eef2ff;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+            color: #fff;
+        }
+
+        /* ─── Pagination ────────────────────────────────────────── */
+        .empleo-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 32px 0 16px;
+        }
+
+        .empleo-pagination button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+        }
+
+        .empleo-pagination button:hover:not(:disabled) {
+            border-color: #6366f1;
+            color: #6366f1;
+            background: #eef2ff;
+        }
+
+        .empleo-pagination button.active {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .empleo-pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .empleo-pagination-info {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            padding: 0 8px;
+        }
+
+        /* ─── Footer (empleo) ───────────────────────────────────── */
+        .empleo-footer {
+            background: #0f0d2e;
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .empleo-footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.82rem;
+        }
+
+        .empleo-footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+
+        .empleo-footer a:hover {
+            color: #fff;
+        }
+
+        /* ─── Responsive ───────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .empleo-hero {
+                padding-top: calc(var(--navbar-height) + 28px);
+                padding-bottom: 36px;
+            }
+
+            .empleo-hero-title {
+                font-size: 1.8rem;
+            }
+
+            .empleo-hero-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 24px;
+            }
+
+            .empleo-filters {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+            .empleo-filters-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .empleo-filter-group {
+                min-width: 100%;
+            }
+
+            .empleo-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .empleo-results-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .empleo-view-controls {
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .empleo-hero-title {
+                font-size: 1.5rem;
+            }
+
+            .job-card-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .job-card-header > .job-card-type-badge {
+                align-self: flex-start;
+            }
+
+            .empleo-pagination button {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList"></div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link active">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="empleo-hero">
+        <div class="empleo-hero-bg" id="empleoHeroBg"></div>
+        <div class="container">
+            <div class="empleo-hero-content">
+                <div class="empleo-hero-badge">
+                    <i class="fas fa-briefcase"></i>
+                    Portal de Empleo
+                </div>
+                <h1 class="empleo-hero-title">
+                    Ofertas de <span class="highlight">Empleo</span>
+                </h1>
+                <p class="empleo-hero-subtitle">
+                    Encuentra oportunidades laborales en empresas de toda Venezuela. Filtra por estado, tipo de trabajo y más.
+                </p>
+
+                <!-- Filters -->
+                <div class="empleo-filters">
+                    <div class="empleo-filters-row">
+                        <div class="empleo-filter-group">
+                            <label><i class="fas fa-search"></i> Buscar</label>
+                            <div class="empleo-filter-wrap">
+                                <input type="text" id="jobSearchInput" placeholder="Título, empresa...">
+                            </div>
+                        </div>
+                        <div class="empleo-filter-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Estado</label>
+                            <div class="empleo-filter-wrap">
+                                <select id="jobStateFilter">
+                                    <option value="">Todos los estados</option>
+                                    <option value="Amazonas">Amazonas</option>
+                                    <option value="Anzoátegui">Anzoátegui</option>
+                                    <option value="Apure">Apure</option>
+                                    <option value="Aragua">Aragua</option>
+                                    <option value="Barinas">Barinas</option>
+                                    <option value="Bolívar">Bolívar</option>
+                                    <option value="Carabobo">Carabobo</option>
+                                    <option value="Cojedes">Cojedes</option>
+                                    <option value="Delta Amacuro">Delta Amacuro</option>
+                                    <option value="Distrito Capital">Distrito Capital</option>
+                                    <option value="Falcón">Falcón</option>
+                                    <option value="Guárico">Guárico</option>
+                                    <option value="Lara">Lara</option>
+                                    <option value="Mérida">Mérida</option>
+                                    <option value="Miranda">Miranda</option>
+                                    <option value="Monagas">Monagas</option>
+                                    <option value="Nueva Esparta">Nueva Esparta</option>
+                                    <option value="Portuguesa">Portuguesa</option>
+                                    <option value="Sucre">Sucre</option>
+                                    <option value="Táchira">Táchira</option>
+                                    <option value="Trujillo">Trujillo</option>
+                                    <option value="Vargas">Vargas</option>
+                                    <option value="Yaracuy">Yaracuy</option>
+                                    <option value="Zulia">Zulia</option>
+                                </select>
+                                <i class="fas fa-chevron-down empleo-filter-arrow"></i>
+                            </div>
+                        </div>
+                        <div class="empleo-filter-group">
+                            <label><i class="fas fa-clock"></i> Tipo</label>
+                            <div class="empleo-filter-wrap">
+                                <select id="jobTypeFilter">
+                                    <option value="">Todos los tipos</option>
+                                    <option value="tiempo_completo">Tiempo Completo</option>
+                                    <option value="medio_tiempo">Medio Tiempo</option>
+                                    <option value="contrato">Contrato</option>
+                                    <option value="remoto">Remoto</option>
+                                    <option value="freelance">Freelance</option>
+                                </select>
+                                <i class="fas fa-chevron-down empleo-filter-arrow"></i>
+                            </div>
+                        </div>
+                        <div class="empleo-filter-group" style="flex: 0; min-width: auto;">
+                            <label>&nbsp;</label>
+                            <button class="empleo-search-btn" id="jobSearchBtn">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="empleo-main">
+        <div class="container">
+            <!-- Results Bar -->
+            <div class="empleo-results-bar">
+                <div class="empleo-results-count" id="empleoResultsCount">
+                    <strong>0</strong> ofertas encontradas
+                </div>
+                <div class="empleo-view-controls">
+                    <div class="empleo-sort-select">
+                        <label for="jobSort">Ordenar:</label>
+                        <select id="jobSort">
+                            <option value="newest">Más reciente</option>
+                            <option value="views">Más visto</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="empleo-loading" id="empleoLoading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Buscando ofertas de empleo...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empleo-empty hidden" id="empleoEmpty">
+                <div class="empleo-empty-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h2>No hay ofertas de empleo</h2>
+                <p>Aún no se han publicado ofertas. ¡Vuelve pronto o registra tu negocio para publicar una!</p>
+                <div class="empleo-empty-actions">
+                    <a href="index.html" class="btn-outline"><i class="fas fa-home"></i> Volver al inicio</a>
+                    <a href="new-business.html" class="btn-primary"><i class="fas fa-plus"></i> Publicar oferta</a>
+                </div>
+            </div>
+
+            <!-- Jobs Grid -->
+            <div class="empleo-grid hidden" id="empleoGrid">
+                <!-- Job cards rendered dynamically -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="empleo-pagination hidden" id="empleoPagination">
+                <button id="empleoPrevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </button>
+                <div id="empleoPaginationPages"></div>
+                <button id="empleoNextBtn" disabled>
+                    Siguiente <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="empleo-footer">
+        <div class="container">
+            <p>&copy; 2025 <a href="index.html">HolaX</a>. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        // ─── Load Empleo Banner ─────────────────────────
+        (async function() {
+            try {
+                const resp = await fetch('/api/settings/public');
+                if (!resp.ok) return;
+                const data = await resp.json();
+                if (data.empleo_banner_url) {
+                    const bg = document.getElementById('empleoHeroBg');
+                    if (bg) {
+                        bg.style.backgroundImage = 'url(' + data.empleo_banner_url + ')';
+                    }
+                }
+            } catch(e) {}
+        })();
+    </script>
+    <script>
+        (function () {
+            'use strict';
+
+            // ─── Elements ───────────────────────────────────────
+            const grid = document.getElementById('empleoGrid');
+            const loading = document.getElementById('empleoLoading');
+            const emptyState = document.getElementById('empleoEmpty');
+            const resultsCount = document.getElementById('empleoResultsCount');
+            const paginationEl = document.getElementById('empleoPagination');
+            const paginationPages = document.getElementById('empleoPaginationPages');
+            const prevBtn = document.getElementById('empleoPrevBtn');
+            const nextBtn = document.getElementById('empleoNextBtn');
+
+            const searchInput = document.getElementById('jobSearchInput');
+            const stateFilter = document.getElementById('jobStateFilter');
+            const typeFilter = document.getElementById('jobTypeFilter');
+            const sortSelect = document.getElementById('jobSort');
+            const searchBtn = document.getElementById('jobSearchBtn');
+
+            let currentPage = 1;
+            const limit = 12;
+
+            // ─── Job Type Labels & Icons ────────────────────────
+            const JOB_TYPE_LABELS = {
+                'tiempo_completo': 'Tiempo Completo',
+                'medio_tiempo': 'Medio Tiempo',
+                'contrato': 'Contrato',
+                'remoto': 'Remoto',
+                'freelance': 'Freelance',
+            };
+
+            const JOB_TYPE_BADGE_CLASS = {
+                'tiempo_completo': 'full-time',
+                'medio_tiempo': 'part-time',
+                'contrato': 'contract',
+                'remoto': 'remote',
+                'freelance': 'freelance',
+            };
+
+            const JOB_TYPE_ICONS = {
+                'tiempo_completo': 'fa-clock',
+                'medio_tiempo': 'fa-hourglass-half',
+                'contrato': 'fa-file-signature',
+                'remoto': 'fa-laptop-house',
+                'freelance': 'fa-handshake',
+            };
+
+            function getJobTypeLabel(type) {
+                return JOB_TYPE_LABELS[type] || type || 'N/A';
+            }
+
+            function getJobTypeBadgeClass(type) {
+                return JOB_TYPE_BADGE_CLASS[type] || 'full-time';
+            }
+
+            function getJobTypeIcon(type) {
+                return JOB_TYPE_ICONS[type] || 'fa-briefcase';
+            }
+
+            // ─── Company Initials ──────────────────────────────
+            function getCompanyInitials(name) {
+                if (!name) return '?';
+                const words = name.trim().split(/\s+/);
+                if (words.length >= 2) {
+                    return (words[0][0] + words[1][0]).toUpperCase();
+                }
+                return name.substring(0, 2).toUpperCase();
+            }
+
+            // ─── Time Ago ──────────────────────────────────────
+            function timeAgo(dateStr) {
+                if (!dateStr) return '';
+                const now = new Date();
+                const date = new Date(dateStr);
+                const diffMs = now - date;
+                const diffMins = Math.floor(diffMs / 60000);
+                const diffHours = Math.floor(diffMs / 3600000);
+                const diffDays = Math.floor(diffMs / 86400000);
+
+                if (diffMins < 1) return 'Justo ahora';
+                if (diffMins < 60) return `Hace ${diffMins} min`;
+                if (diffHours < 24) return `Hace ${diffHours}h`;
+                if (diffDays < 7) return `Hace ${diffDays}d`;
+                if (diffDays < 30) return `Hace ${Math.floor(diffDays / 7)} sem`;
+                return `Hace ${Math.floor(diffDays / 30)} mes`;
+            }
+
+            // ─── Render Job Card ───────────────────────────────
+            function renderJobCard(job) {
+                if (!job) return '';
+
+                const typeLabel = getJobTypeLabel(job.job_type);
+                const badgeClass = getJobTypeBadgeClass(job.job_type);
+                const initials = getCompanyInitials(job.company_name);
+                const location = job.city && job.state
+                    ? `${job.city}, ${job.state}`
+                    : job.state || job.city || 'Venezuela';
+                const salaryHtml = job.salary
+                    ? `<span class="job-card-meta-item job-card-salary"><i class="fas fa-dollar-sign"></i> ${escapeHtml(job.salary)}</span>`
+                    : '';
+                const desc = job.description || 'No se proporcionó descripción.';
+
+                return `
+                    <article class="job-card">
+                        <div class="job-card-header">
+                            <div class="job-card-company-info">
+                                <div class="job-card-logo">${job.business_logo ? `<img src="${escapeHtml(job.business_logo)}" alt="${escapeHtml(job.company_name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}<span class="job-card-initials"${job.business_logo ? ' style="display:none"' : ''}>${initials}</span></div>
+                                <div class="job-card-company">
+                                    <div class="job-card-company-name">${escapeHtml(job.company_name)}</div>
+                                    <div class="job-card-posted">
+                                        <i class="far fa-clock"></i> ${timeAgo(job.created_at)}
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="job-card-type-badge ${badgeClass}">${typeLabel}</span>
+                        </div>
+                        <div class="job-card-body">
+                            <h3 class="job-card-title">${escapeHtml(job.title)}</h3>
+                            <div class="job-card-meta">
+                                <span class="job-card-meta-item">
+                                    <i class="fas fa-map-marker-alt"></i> ${escapeHtml(location)}
+                                </span>
+                                ${salaryHtml}
+                                <span class="job-card-meta-item">
+                                    <i class="fas fa-briefcase"></i> ${typeLabel}
+                                </span>
+                            </div>
+                            <p class="job-card-description">${escapeHtml(desc)}</p>
+                        </div>
+                        <div class="job-card-footer">
+                            <div class="job-card-views">
+                                <i class="far fa-eye"></i> ${job.views || 0} vistas
+                            </div>
+                            <button class="job-card-btn" onclick="window.location.href='/api/jobs/${job.id}'">
+                                Ver Empleo <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }
+
+            // ─── Escape HTML ───────────────────────────────────
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // ─── Fetch & Render Jobs ────────────────────────────
+            async function fetchJobs(page) {
+                currentPage = page || 1;
+
+                // Show loading
+                loading.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                grid.classList.add('hidden');
+                paginationEl.classList.add('hidden');
+
+                // Build query
+                const search = searchInput?.value?.trim() || '';
+                const state = stateFilter?.value || '';
+                const jobType = typeFilter?.value || '';
+                const sort = sortSelect?.value || 'newest';
+
+                let endpoint = `/jobs?status=approved&page=${currentPage}&limit=${limit}`;
+                if (search) endpoint += `&search=${encodeURIComponent(search)}`;
+                if (state) endpoint += `&state=${encodeURIComponent(state)}`;
+                if (jobType) endpoint += `&job_type=${encodeURIComponent(jobType)}`;
+                if (sort) endpoint += `&sort=${encodeURIComponent(sort)}`;
+
+                try {
+                    const data = await api.get(endpoint);
+                    const jobs = data.jobs || [];
+                    const pagination = data.pagination || {};
+
+                    loading.classList.add('hidden');
+
+                    // Results count
+                    const total = pagination.total || 0;
+                    if (resultsCount) {
+                        resultsCount.innerHTML = `<strong>${total}</strong> oferta${total !== 1 ? 's' : ''} encontrada${total !== 1 ? 's' : ''}`;
+                    }
+
+                    if (jobs.length === 0) {
+                        emptyState.classList.remove('hidden');
+                        return;
+                    }
+
+                    // Render cards
+                    grid.classList.remove('hidden');
+                    grid.innerHTML = jobs.map(renderJobCard).join('');
+
+                    // Pagination
+                    renderPagination(pagination);
+
+                } catch (error) {
+                    loading.classList.add('hidden');
+                    grid.classList.remove('hidden');
+                    grid.innerHTML = `
+                        <div class="empleo-empty" style="grid-column: 1 / -1;">
+                            <div class="empleo-empty-icon" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); color: #dc2626;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h2>Error al cargar ofertas</h2>
+                            <p>${escapeHtml(error.message)}</p>
+                            <div class="empleo-empty-actions">
+                                <button class="btn-primary" onclick="fetchJobs(1)"><i class="fas fa-redo"></i> Reintentar</button>
+                            </div>
+                        </div>
+                    `;
+                    console.error('Error fetching jobs:', error);
+                }
+            }
+
+            // ─── Pagination ────────────────────────────────────
+            function renderPagination(pagination) {
+                const totalPages = pagination.totalPages || 1;
+                const page = pagination.page || 1;
+
+                if (totalPages <= 1) {
+                    paginationEl.classList.add('hidden');
+                    return;
+                }
+
+                paginationEl.classList.remove('hidden');
+
+                prevBtn.disabled = page <= 1;
+                nextBtn.disabled = page >= totalPages;
+
+                let pagesHtml = '';
+                const maxVisible = 5;
+                let startPage = Math.max(1, page - Math.floor(maxVisible / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+                if (endPage - startPage < maxVisible - 1) {
+                    startPage = Math.max(1, endPage - maxVisible + 1);
+                }
+
+                if (startPage > 1) {
+                    pagesHtml += `<button onclick="fetchJobs(1)">1</button>`;
+                    if (startPage > 2) pagesHtml += `<span class="empleo-pagination-info">...</span>`;
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    pagesHtml += `<button class="${i === page ? 'active' : ''}" onclick="fetchJobs(${i})">${i}</button>`;
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) pagesHtml += `<span class="empleo-pagination-info">...</span>`;
+                    pagesHtml += `<button onclick="fetchJobs(${totalPages})">${totalPages}</button>`;
+                }
+
+                paginationPages.innerHTML = pagesHtml;
+            }
+
+            // ─── Event Listeners ───────────────────────────────
+            if (searchBtn) {
+                searchBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    fetchJobs(1);
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        fetchJobs(1);
+                    }
+                });
+            }
+
+            if (stateFilter) {
+                stateFilter.addEventListener('change', () => fetchJobs(1));
+            }
+
+            if (typeFilter) {
+                typeFilter.addEventListener('change', () => fetchJobs(1));
+            }
+
+            if (sortSelect) {
+                sortSelect.addEventListener('change', () => fetchJobs(1));
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentPage > 1) fetchJobs(currentPage - 1);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    const page = currentPage + 1;
+                    fetchJobs(page);
+                });
+            }
+
+            // ─── Auto-fill state from location selector ─────────
+            function syncStateFilter() {
+                const selectedState = getSelectedState();
+                if (selectedState && stateFilter) {
+                    stateFilter.value = selectedState;
+                }
+            }
+
+            // Observe state changes (polling is fine for this simple case)
+            const originalSetSelectedState = window.setSelectedState;
+            if (originalSetSelectedState) {
+                window.setSelectedState = function (stateName) {
+                    originalSetSelectedState(stateName);
+                    syncStateFilter();
+                    if (grid) fetchJobs(1);
+                };
+            }
+
+            // Expose globally for onclick handlers
+            window.fetchJobs = fetchJobs;
+
+            // ─── Init ─────────────────────────────────────────
+            document.addEventListener('DOMContentLoaded', () => {
+                syncStateFilter();
+                fetchJobs(1);
+            });
+
+            // Also run immediately if DOM is already loaded
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                syncStateFilter();
+                fetchJobs(1);
+            }
+        })();
+    </script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

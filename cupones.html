@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cupones y ofertas de negocios locales en Venezuela - Aprovecha descuentos exclusivos en HolaX.">
+    <title>Cupones y Ofertas - HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ─── Cupones Hero ───────────────────────────────────── */
+        .cupones-hero {
+            background: linear-gradient(135deg, #7c2d12 0%, #c2410c 30%, #ea580c 60%, #f97316 100%);
+            padding-top: calc(var(--navbar-height) + 48px);
+            padding-bottom: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cupones-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(249, 115, 22, 0.35) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(251, 191, 36, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, rgba(234, 88, 12, 0.25) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .cupones-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 75% 65%, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        .cupones-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cupones-hero-content {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .cupones-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 18px;
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            border-radius: 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fde68a;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .cupones-hero-badge i {
+            color: #fbbf24;
+            font-size: 0.72rem;
+        }
+
+        .cupones-hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .cupones-hero-title .highlight {
+            background: linear-gradient(135deg, #fde68a, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cupones-hero-subtitle {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        /* ─── Filter Bar ─────────────────────────────────────── */
+        .cupones-filters {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            padding: 20px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cupones-filters-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .cupones-filter-group {
+            flex: 1;
+            min-width: 160px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cupones-filter-group label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cupones-filter-group label i {
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+
+        .cupones-filter-wrap {
+            position: relative;
+        }
+
+        .cupones-filter-wrap select,
+        .cupones-filter-wrap input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            font-family: inherit;
+            transition: all 0.25s;
+        }
+
+        .cupones-filter-wrap input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .cupones-filter-wrap select:focus,
+        .cupones-filter-wrap input:focus {
+            border-color: rgba(249, 115, 22, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+        }
+
+        .cupones-filter-wrap select option {
+            background: #1f2937;
+            color: #fff;
+        }
+
+        .cupones-filter-arrow {
+            position: absolute;
+            right: 12px;
+            bottom: 13px;
+            font-size: 0.68rem;
+            color: rgba(255, 255, 255, 0.45);
+            pointer-events: none;
+        }
+
+        .cupones-search-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 28px;
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #78350f;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-family: inherit;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.45);
+        }
+
+        .cupones-search-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.6);
+        }
+
+        .cupones-clear-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .cupones-clear-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        /* ─── Results Info Bar ───────────────────────────────── */
+        .cupones-results-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cupones-results-count {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .cupones-results-count strong {
+            color: #9a3412;
+            font-weight: 700;
+        }
+
+        /* ─── Main Content ────────────────────────────────────── */
+        .cupones-main {
+            padding: 32px 0 64px;
+            background: #f8fafc;
+            min-height: 60vh;
+        }
+
+        .cupones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        /* ─── Coupon Card ────────────────────────────────────── */
+        .coupon-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1.5px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .coupon-card:hover {
+            border-color: #f97316;
+            box-shadow: 0 12px 36px rgba(249, 115, 22, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .coupon-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 22px 22px 0;
+            gap: 12px;
+        }
+
+        .coupon-card-business-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .coupon-card-logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #ea580c;
+            flex-shrink: 0;
+            border: 2px solid #fed7aa;
+        }
+
+        .coupon-card-business {
+            min-width: 0;
+        }
+
+        .coupon-card-business-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #ea580c;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .coupon-card-location {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .coupon-card-discount-badge {
+            flex-shrink: 0;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-align: center;
+            min-width: 72px;
+            line-height: 1.2;
+        }
+
+        .coupon-card-discount-badge.percentage {
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+        }
+
+        .coupon-card-discount-badge.fixed {
+            background: linear-gradient(135deg, #006EE3, #3B9AFF);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+
+        .coupon-card-discount-badge.free_delivery {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+        }
+
+        .coupon-card-discount-badge .discount-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.85;
+            display: block;
+        }
+
+        .coupon-card-body {
+            padding: 16px 22px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .coupon-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+            line-height: 1.35;
+            letter-spacing: -0.2px;
+        }
+
+        .coupon-card-description {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.65;
+            margin-bottom: 14px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .coupon-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .coupon-card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        .coupon-card-meta-item i {
+            font-size: 0.72rem;
+            width: 16px;
+            text-align: center;
+        }
+
+        .coupon-card-countdown {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 14px;
+        }
+
+        .coupon-card-countdown i {
+            font-size: 0.72rem;
+            color: #f59e0b;
+        }
+
+        .coupon-card-countdown.expired {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        .coupon-card-countdown.expired i {
+            color: #dc2626;
+        }
+
+        .coupon-card-code-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+
+        .coupon-card-code {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .coupon-card-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+            font-family: inherit;
+            flex-shrink: 0;
+        }
+
+        .coupon-card-copy-btn:hover {
+            background: linear-gradient(135deg, #c2410c, #ea580c);
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+        }
+
+        .coupon-card-copy-btn.copied {
+            background: linear-gradient(135deg, #006EE3, #3B9AFF);
+        }
+
+        .coupon-card-terms {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .coupon-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px;
+            border-top: 1px solid #f1f5f9;
+            background: #fafbfd;
+        }
+
+        .coupon-card-date-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .coupon-card-date-info i {
+            font-size: 0.72rem;
+        }
+
+        .coupon-card-view-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 20px;
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .coupon-card-view-btn:hover {
+            background: linear-gradient(135deg, #c2410c, #ea580c);
+            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .coupon-card-view-btn i {
+            font-size: 0.72rem;
+            transition: transform 0.25s;
+        }
+
+        .coupon-card-view-btn:hover i {
+            transform: translateX(2px);
+        }
+
+        /* ─── Loading / Empty States ──────────────────────────── */
+        .cupones-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            gap: 16px;
+        }
+
+        .cupones-loading i {
+            font-size: 2.5rem;
+            color: #fbbf24;
+            animation: spin 1s linear infinite;
+        }
+
+        .cupones-loading p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cupones-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cupones-empty-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ea580c;
+            margin-bottom: 24px;
+        }
+
+        .cupones-empty h2 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .cupones-empty p {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            max-width: 420px;
+        }
+
+        .cupones-empty-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cupones-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .cupones-btn-outline:hover {
+            border-color: #f97316;
+            color: #f97316;
+            background: #fff7ed;
+        }
+
+        .cupones-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
+        }
+
+        .cupones-btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.45);
+            color: #fff;
+        }
+
+        /* ─── Pagination ──────────────────────────────────────── */
+        .cupones-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 32px 0 16px;
+        }
+
+        .cupones-pagination button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+        }
+
+        .cupones-pagination button:hover:not(:disabled) {
+            border-color: #f97316;
+            color: #f97316;
+            background: #fff7ed;
+        }
+
+        .cupones-pagination button.active {
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+        }
+
+        .cupones-pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ─── Footer ─────────────────────────────────────────── */
+        .cupones-footer {
+            background: #431407;
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .cupones-footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.82rem;
+        }
+
+        .cupones-footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+
+        .cupones-footer a:hover {
+            color: #fff;
+        }
+
+        /* ─── Responsive ──────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .cupones-hero {
+                padding-top: calc(var(--navbar-height) + 28px);
+                padding-bottom: 36px;
+            }
+
+            .cupones-hero-title {
+                font-size: 1.8rem;
+            }
+
+            .cupones-hero-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 24px;
+            }
+
+            .cupones-filters {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+            .cupones-filters-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cupones-filter-group {
+                min-width: 100%;
+            }
+
+            .cupones-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .cupones-results-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cupones-hero-title {
+                font-size: 1.5rem;
+            }
+
+            .coupon-card-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .coupon-card-discount-badge {
+                align-self: flex-start;
+            }
+
+            .coupon-card-code-section {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .coupon-card-copy-btn {
+                justify-content: center;
+            }
+
+            .coupon-card-footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cupones-pagination button {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList"></div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="cupones-hero">
+        <div class="container">
+            <div class="cupones-hero-content">
+                <div class="cupones-hero-badge">
+                    <i class="fas fa-tag"></i>
+                    Ofertas Exclusivas
+                </div>
+                <h1 class="cupones-hero-title">
+                    Cupones y <span class="highlight">Ofertas</span>
+                </h1>
+                <p class="cupones-hero-subtitle">
+                    Aprovecha descuentos exclusivos de negocios locales en toda Venezuela. Encuentra las mejores promociones cerca de ti.
+                </p>
+
+                <!-- Filters -->
+                <div class="cupones-filters">
+                    <div class="cupones-filters-row">
+                        <div class="cupones-filter-group">
+                            <label><i class="fas fa-search"></i> Buscar</label>
+                            <div class="cupones-filter-wrap">
+                                <input type="text" id="couponSearchInput" placeholder="Negocio, cupón...">
+                            </div>
+                        </div>
+                        <div class="cupones-filter-group">
+                            <label><i class="fas fa-tag"></i> Categoría</label>
+                            <div class="cupones-filter-wrap">
+                                <select id="couponCategoryFilter">
+                                    <option value="">Todas las categorías</option>
+                                    <option value="restaurante">Restaurantes</option>
+                                    <option value="tienda">Tiendas</option>
+                                    <option value="servicio">Servicios</option>
+                                    <option value="salud">Salud</option>
+                                    <option value="educacion">Educación</option>
+                                    <option value="entretenimiento">Entretenimiento</option>
+                                    <option value="otro">Otros</option>
+                                </select>
+                                <i class="fas fa-chevron-down cupones-filter-arrow"></i>
+                            </div>
+                        </div>
+                        <div class="cupones-filter-group" style="flex: 0; min-width: auto;">
+                            <label>&nbsp;</label>
+                            <button class="cupones-search-btn" id="couponSearchBtn">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                        <div class="cupones-filter-group" style="flex: 0; min-width: auto;">
+                            <label>&nbsp;</label>
+                            <button class="cupones-clear-btn" id="couponClearBtn">
+                                <i class="fas fa-times"></i> Todos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- CTA Button -->
+                <div style="margin-top:20px;">
+                    <a href="dashboard.html" class="cupones-search-btn" style="background:linear-gradient(135deg,#92400e,#ea580c);padding:14px 36px;font-size:1rem;">
+                        <i class="fas fa-plus-circle"></i> Crear Cupón de Descuento
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="cupones-main">
+        <div class="container">
+            <!-- Results Bar -->
+            <div class="cupones-results-bar">
+                <div class="cupones-results-count" id="cuponesResultsCount">
+                    <strong>0</strong> cupones disponibles
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="cupones-loading" id="cuponesLoading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Buscando cupones y ofertas...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div class="cupones-empty hidden" id="cuponesEmpty">
+                <div class="cupones-empty-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <h2>No hay cupones disponibles</h2>
+                <p>Aún no se han publicado cupones. ¡Vuelve pronto para aprovechar descuentos exclusivos!</p>
+                <div class="cupones-empty-actions">
+                    <a href="index.html" class="cupones-btn-outline"><i class="fas fa-home"></i> Volver al inicio</a>
+                    <a href="search.html" class="cupones-btn-primary"><i class="fas fa-store"></i> Ver negocios</a>
+                </div>
+            </div>
+
+            <!-- Coupons Grid -->
+            <div class="cupones-grid hidden" id="cuponesGrid">
+                <!-- Coupon cards rendered dynamically -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="cupones-pagination hidden" id="cuponesPagination">
+                <button id="cuponesPrevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </button>
+                <div id="cuponesPaginationPages"></div>
+                <button id="cuponesNextBtn" disabled>
+                    Siguiente <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="cupones-footer">
+        <div class="container">
+            <p>&copy; 2025 <a href="index.html">HolaX</a>. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        (function () {
+            'use strict';
+
+            // ─── Elements ───────────────────────────────────────
+            const grid = document.getElementById('cuponesGrid');
+            const loading = document.getElementById('cuponesLoading');
+            const emptyState = document.getElementById('cuponesEmpty');
+            const resultsCount = document.getElementById('cuponesResultsCount');
+            const paginationEl = document.getElementById('cuponesPagination');
+            const paginationPages = document.getElementById('cuponesPaginationPages');
+            const prevBtn = document.getElementById('cuponesPrevBtn');
+            const nextBtn = document.getElementById('cuponesNextBtn');
+
+            const searchInput = document.getElementById('couponSearchInput');
+            const categoryFilter = document.getElementById('couponCategoryFilter');
+            const searchBtn = document.getElementById('couponSearchBtn');
+            const clearBtn = document.getElementById('couponClearBtn');
+
+            let currentPage = 1;
+            const limit = 12;
+            let allCoupons = [];
+
+            // ─── Escape HTML ───────────────────────────────────
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // ─── Business Initials ──────────────────────────────
+            function getBusinessInitials(name) {
+                if (!name) return '?';
+                const words = name.trim().split(/\s+/);
+                if (words.length >= 2) {
+                    return (words[0][0] + words[1][0]).toUpperCase();
+                }
+                return name.substring(0, 2).toUpperCase();
+            }
+
+            // ─── Discount Badge Display ────────────────────────
+            function getDiscountBadge(coupon) {
+                const type = coupon.discount_type || 'percentage';
+                const value = coupon.discount || '0';
+
+                if (type === 'percentage') {
+                    return {
+                        cssClass: 'percentage',
+                        value: value + '%',
+                        label: 'Descuento'
+                    };
+                } else if (type === 'fixed') {
+                    return {
+                        cssClass: 'fixed',
+                        value: '$' + value,
+                        label: 'Ahorra'
+                    };
+                } else if (type === 'free_delivery') {
+                    return {
+                        cssClass: 'free_delivery',
+                        value: 'GRATIS',
+                        label: 'Envío'
+                    };
+                }
+                return { cssClass: 'percentage', value: value + '%', label: 'Descuento' };
+            }
+
+            // ─── Time Until Expiry ────────────────────────────
+            function getTimeUntilExpiry(endDate) {
+                if (!endDate) return null;
+                const now = new Date();
+                const end = new Date(endDate);
+                const diffMs = end - now;
+
+                if (diffMs <= 0) return { text: 'Expirado', expired: true };
+
+                const diffDays = Math.floor(diffMs / 86400000);
+                const diffHours = Math.floor((diffMs % 86400000) / 3600000);
+
+                if (diffDays > 30) {
+                    return { text: `Vence en ${Math.floor(diffDays / 30)} meses`, expired: false };
+                } else if (diffDays > 1) {
+                    return { text: `Vence en ${diffDays} días`, expired: false };
+                } else if (diffDays === 1) {
+                    return { text: `Vence mañana`, expired: false };
+                } else {
+                    return { text: `Vence en ${diffHours}h`, expired: false };
+                }
+            }
+
+            // ─── Render Coupon Card ───────────────────────────
+            function renderCouponCard(coupon) {
+                if (!coupon) return '';
+
+                const badge = getDiscountBadge(coupon);
+                const initials = getBusinessInitials(coupon.business_name);
+                const location = coupon.business_city && coupon.business_state
+                    ? `${coupon.business_city}, ${coupon.business_state}`
+                    : coupon.business_state || coupon.business_city || 'Venezuela';
+                const desc = coupon.description || '';
+                const terms = coupon.terms || '';
+                const code = coupon.code || '—';
+                const businessId = coupon.business_id || '';
+                const businessSlug = coupon.business_slug || '';
+                const businessLink = businessId ? `/negocio/${businessSlug || businessId}` : '#';
+
+                const expiryInfo = getTimeUntilExpiry(coupon.end_date);
+                let countdownHtml = '';
+                if (expiryInfo) {
+                    countdownHtml = `
+                        <div class="coupon-card-countdown ${expiryInfo.expired ? 'expired' : ''}">
+                            <i class="fas ${expiryInfo.expired ? 'fa-clock' : 'fa-hourglass-half'}"></i>
+                            ${escapeHtml(expiryInfo.text)}
+                        </div>
+                    `;
+                }
+
+                const dateRange = [];
+                if (coupon.start_date) dateRange.push(formatDateShort(coupon.start_date));
+                if (coupon.end_date) dateRange.push(formatDateShort(coupon.end_date));
+                const dateStr = dateRange.length > 0 ? dateRange.join(' — ') : 'Sin fecha límite';
+
+                const codeSection = code && code !== '—' ? `
+                    <div class="coupon-card-code-section">
+                        <span class="coupon-card-code" id="code-${coupon.id}">${escapeHtml(code)}</span>
+                        <button class="coupon-card-copy-btn" onclick="copyCouponCode(${coupon.id}, '${escapeHtml(code)}', this)">
+                            <i class="fas fa-copy"></i> Usar Cupón
+                        </button>
+                    </div>
+                ` : '';
+
+                const termsHtml = terms ? `
+                    <p class="coupon-card-terms">
+                        <i class="fas fa-info-circle"></i> ${escapeHtml(terms)}
+                    </p>
+                ` : '';
+
+                return `
+                    <article class="coupon-card">
+                        <div class="coupon-card-header">
+                            <div class="coupon-card-business-info">
+                                <div class="coupon-card-logo">${initials}</div>
+                                <div class="coupon-card-business">
+                                    <div class="coupon-card-business-name">${escapeHtml(coupon.business_name || 'Negocio')}</div>
+                                    <div class="coupon-card-location">
+                                        <i class="fas fa-map-marker-alt"></i> ${escapeHtml(location)}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="coupon-card-discount-badge ${badge.cssClass}">
+                                ${badge.value}
+                                <span class="discount-label">${badge.label}</span>
+                            </div>
+                        </div>
+                        <div class="coupon-card-body">
+                            <h3 class="coupon-card-title">${escapeHtml(coupon.title)}</h3>
+                            ${desc ? `<p class="coupon-card-description">${escapeHtml(desc)}</p>` : ''}
+                            ${countdownHtml}
+                            ${codeSection}
+                            ${termsHtml}
+                        </div>
+                        <div class="coupon-card-footer">
+                            <div class="coupon-card-date-info">
+                                <i class="far fa-calendar-alt"></i> ${dateStr}
+                            </div>
+                            <a href="${businessLink}" class="coupon-card-view-btn">
+                                Ver Negocio <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }
+
+            function formatDateShort(dateStr) {
+                if (!dateStr) return '';
+                try {
+                    const date = new Date(dateStr);
+                    return date.toLocaleDateString('es-VE', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+                } catch {
+                    return dateStr;
+                }
+            }
+
+            // ─── Copy Coupon Code ──────────────────────────────
+            window.copyCouponCode = function (couponId, code, btn) {
+                // Use Clipboard API
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(code).then(function () {
+                        onCodeCopied(btn);
+                    }).catch(function () {
+                        fallbackCopy(code, btn);
+                    });
+                } else {
+                    fallbackCopy(code, btn);
+                }
+            };
+
+            function fallbackCopy(code, btn) {
+                try {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = code;
+                    textarea.style.position = 'fixed';
+                    textarea.style.left = '-9999px';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    onCodeCopied(btn);
+                } catch (e) {
+                    showToast('No se pudo copiar el código', 'error');
+                }
+            }
+
+            function onCodeCopied(btn) {
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+                showToast('Código de cupón copiado al portapapeles', 'success');
+                setTimeout(function () {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Usar Cupón';
+                }, 2000);
+            }
+
+            // ─── Fetch & Render Coupons ────────────────────────
+            async function fetchCoupons(page) {
+                currentPage = page || 1;
+
+                loading.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                grid.classList.add('hidden');
+                paginationEl.classList.add('hidden');
+
+                try {
+                    const data = await api.get(`/coupons?status=approved&page=${currentPage}&limit=${limit}`);
+                    const coupons = data.coupons || [];
+                    const pagination = data.pagination || {};
+                    const total = pagination.total || 0;
+
+                    loading.classList.add('hidden');
+                    resultsCount.innerHTML = `<strong>${total}</strong> cupones disponibles`;
+
+                    if (coupons.length === 0) {
+                        emptyState.classList.remove('hidden');
+                        return;
+                    }
+
+                    grid.innerHTML = coupons.map(c => renderCouponCard(c)).join('');
+                    grid.classList.remove('hidden');
+
+                    // Pagination
+                    const totalPages = pagination.totalPages || 1;
+                    if (totalPages > 1) {
+                        paginationEl.classList.remove('hidden');
+                        prevBtn.disabled = currentPage <= 1;
+                        nextBtn.disabled = currentPage >= totalPages;
+
+                        // Render page numbers
+                        let pagesHtml = '';
+                        const maxVisible = 5;
+                        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+                        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+                        if (endPage - startPage + 1 < maxVisible) {
+                            startPage = Math.max(1, endPage - maxVisible + 1);
+                        }
+
+                        if (startPage > 1) {
+                            pagesHtml += `<button onclick="goToCouponPage(1)" style="padding:10px 14px;">1</button>`;
+                            if (startPage > 2) pagesHtml += `<span style="color:#94a3b8;padding:0 4px;">...</span>`;
+                        }
+                        for (let i = startPage; i <= endPage; i++) {
+                            pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToCouponPage(${i})">${i}</button>`;
+                        }
+                        if (endPage < totalPages) {
+                            if (endPage < totalPages - 1) pagesHtml += `<span style="color:#94a3b8;padding:0 4px;">...</span>`;
+                            pagesHtml += `<button onclick="goToCouponPage(${totalPages})" style="padding:10px 14px;">${totalPages}</button>`;
+                        }
+                        paginationPages.innerHTML = pagesHtml;
+                    } else {
+                        paginationEl.classList.add('hidden');
+                    }
+                } catch (error) {
+                    loading.classList.add('hidden');
+                    showToast('Error al cargar los cupones. Intenta nuevamente.', 'error');
+                    console.error('Coupons fetch error:', error);
+                }
+            }
+
+            window.goToCouponPage = function (page) {
+                fetchCoupons(page);
+                window.scrollTo({ top: grid.offsetTop - 120, behavior: 'smooth' });
+            };
+
+            // ─── Client-side Filter ────────────────────────────
+            function applyClientFilter() {
+                const search = searchInput.value.trim().toLowerCase();
+                const category = categoryFilter.value;
+
+                const cards = grid.querySelectorAll('.coupon-card');
+                let visible = 0;
+
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    const matchSearch = !search || text.includes(search);
+                    // For category we'd need data attributes — simple approach: show all if no server filter
+                    if (matchSearch) {
+                        card.style.display = '';
+                        visible++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                resultsCount.innerHTML = `<strong>${visible}</strong> cupones disponibles`;
+            }
+
+            // ─── Event Listeners ───────────────────────────────
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    applyClientFilter();
+                });
+            }
+
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    searchInput.value = '';
+                    categoryFilter.value = '';
+                    applyClientFilter();
+                    // Restore original card visibility
+                    const cards = grid.querySelectorAll('.coupon-card');
+                    cards.forEach(card => { card.style.display = ''; });
+                    resultsCount.innerHTML = `<strong>${grid.querySelectorAll('.coupon-card').length}</strong> cupones disponibles`;
+                });
+            }
+
+            if (searchInput) {
+                let debounceTimer;
+                searchInput.addEventListener('input', function () {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(applyClientFilter, 300);
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function () {
+                    if (currentPage > 1) fetchCoupons(currentPage - 1);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function () {
+                    fetchCoupons(currentPage + 1);
+                });
+            }
+
+            // ─── Initialize ──────────────────────────────────────
+            fetchCoupons(1);
+        })();
+    </script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

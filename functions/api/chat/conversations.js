@@ -1,0 +1,294 @@
+// functions/api/chat/conversations.js
+// GET: List conversations for current user
+// POST: Create or find conversation between buyer and seller about a business
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
+
+export async function onRequestOptions() {
+  return new Response(null, { headers: corsHeaders });
+}
+
+function base64urlDecode(str) {
+  let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+  const pad = base64.length % 4;
+  if (pad) base64 += '='.repeat(4 - pad);
+  return JSON.parse(atob(base64));
+}
+
+async function verifyJWT(token, secret) {
+  const parts = token.split('.');
+  if (parts.length !== 3) return null;
+  const [headerB64, payloadB64, signatureB64] = parts;
+  const data = `${headerB64}.${payloadB64}`;
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
+  let sigBase64 = signatureB64.replace(/-/g, '+').replace(/_/g, '/');
+  const sigPad = sigBase64.length % 4;
+  if (sigPad) sigBase64 += '='.repeat(4 - sigPad);
+  const sigBytes = Uint8Array.from(atob(sigBase64), (c) => c.charCodeAt(0));
+  const isValid = await crypto.subtle.verify('HMAC', key, sigBytes, encoder.encode(data));
+  if (!isValid) return null;
+  const payload = base64urlDecode(payloadB64);
+  if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) return null;
+  return payload;
+}
+
+async function ensureTables(db) {
+  try {
+    await db.prepare(`
+      CREATE TABLE IF NOT EXISTS conversations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        business_id INTEGER NOT NULL,
+        buyer_id INTEGER NOT NULL,
+        seller_id INTEGER NOT NULL,
+        last_message TEXT,
+        last_message_at TEXT,
+        buyer_unread INTEGER DEFAULT 0,
+        seller_unread INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (business_id) REFERENCES businesses(id),
+        FOREIGN KEY (buyer_id) REFERENCES users(id),
+        FOREIGN KEY (seller_id) REFERENCES users(id),
+        UNIQUE(buyer_id, seller_id, business_id)
+      )
+    `).run();
+  } catch (e) {
+    // Table may already exist with different schema — ignore
+  }
+
+  try {
+    await db.prepare(`
+      CREATE TABLE IF NOT EXISTS messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        conversation_id INTEGER NOT NULL,
+        sender_id INTEGER NOT NULL,
+        content TEXT NOT NULL,
+        is_read INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON DELETE CASCADE,
+        FOREIGN KEY (sender_id) REFERENCES users(id)
+      )
+    `).run();
+  } catch (e) {
+    // Table may already exist with different schema — ignore
+  }
+
+  try { await db.prepare('CREATE INDEX IF NOT EXISTS idx_messages_conv ON messages(conversation_id)').run(); } catch (e) {}
+  try { await db.prepare('CREATE INDEX IF NOT EXISTS idx_conv_buyer ON conversations(buyer_id)').run(); } catch (e) {}
+  try { await db.prepare('CREATE INDEX IF NOT EXISTS idx_conv_seller ON conversations(seller_id)').run(); } catch (e) {}
+}
+
+// GET: List conversations
+export async function onRequestGet(context) {
+  try {
+    const { request, env } = context;
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({ error: 'Token requerido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+    const token = authHeader.substring(7);
+    const user = await verifyJWT(token, env.JWT_SECRET);
+    if (!user) return new Response(JSON.stringify({ error: 'Token inválido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+
+    // Ensure tables exist — ignore errors
+    try { await ensureTables(env.DB); } catch (e) { /* tables may already exist */ }
+
+    const url = new URL(request.url);
+    const unreadOnly = url.searchParams.get('unread') === '1';
+
+    // Get conversations — wrapped in case columns don't exist yet
+    let conversations = { results: [] };
+    try {
+      conversations = await env.DB.prepare(`
+        SELECT c.id, c.business_id, c.buyer_id, c.seller_id, c.last_message, c.last_message_at,
+               c.buyer_unread, c.seller_unread, c.created_at,
+               p.title as business_title,
+               p.cover_image as business_image,
+               p.status as business_status,
+               p.price, p.currency,
+               u_buyer.name as buyer_name,
+               u_seller.name as seller_name
+        FROM conversations c
+        LEFT JOIN businesses p ON c.business_id = p.id
+        LEFT JOIN users u_buyer ON c.buyer_id = u_buyer.id
+        LEFT JOIN users u_seller ON c.seller_id = u_seller.id
+        WHERE (c.buyer_id = ? OR c.seller_id = ?)
+        ${unreadOnly ? 'AND ((c.buyer_id = ? AND c.buyer_unread > 0) OR (c.seller_id = ? AND c.seller_unread > 0))' : ''}
+        ORDER BY COALESCE(c.last_message_at, c.created_at) DESC
+      `).bind(user.id, user.id, user.id, user.id).all();
+    } catch (e) {
+      // Query may fail if table schema doesn't match — return empty
+    }
+
+    // Get unread count
+    let totalUnread = 0;
+    try {
+      const unreadResult = await env.DB.prepare(`
+        SELECT COALESCE(SUM(CASE WHEN buyer_id = ? THEN buyer_unread ELSE seller_unread END), 0) as total
+        FROM conversations
+        WHERE (buyer_id = ? OR seller_id = ?)
+      `).bind(user.id, user.id, user.id).first();
+      totalUnread = unreadResult ? (unreadResult.total || 0) : 0;
+    } catch (e) {
+      // Ignore
+    }
+
+    const items = (conversations.results || []).map(c => ({
+      id: c.id,
+      business: {
+        id: c.business_id,
+        title: c.business_title,
+        image: c.business_image,
+        status: c.business_status,
+        price: c.price,
+        currency: c.currency,
+      },
+      other_user: c.buyer_id === user.id
+        ? { id: c.seller_id, name: c.seller_name, role: 'seller' }
+        : { id: c.buyer_id, name: c.buyer_name || (c.buyer_id === 0 ? 'Anonimo' : 'Usuario'), role: c.buyer_id === 0 ? 'anonymous' : 'buyer' },
+      last_message: c.last_message,
+      last_message_at: c.last_message_at,
+      unread: c.buyer_id === user.id ? c.buyer_unread : c.seller_unread,
+      created_at: c.created_at,
+    }));
+
+    return new Response(JSON.stringify({
+      conversations: items,
+      total_unread: totalUnread,
+    }), { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  } catch (error) {
+    // Last resort — return empty data instead of 500
+    return new Response(JSON.stringify({
+      conversations: [],
+      total_unread: 0,
+    }), { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
+}
+
+// POST: Create conversation or return existing one
+export async function onRequestPost(context) {
+  try {
+    const { request, env } = context;
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({ error: 'Token requerido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+    const token = authHeader.substring(7);
+    const user = await verifyJWT(token, env.JWT_SECRET);
+    if (!user) return new Response(JSON.stringify({ error: 'Token inválido' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+
+    const body = await request.json();
+    const { business_id, initial_message } = body;
+
+    if (!business_id) {
+      return new Response(JSON.stringify({ error: 'ID de propiedad requerido' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+
+    await ensureTables(env.DB);
+
+    // Get business and seller
+    const business = await env.DB.prepare('SELECT id, user_id, title, status FROM businesses WHERE id = ?').bind(business_id).first();
+    if (!business) {
+      return new Response(JSON.stringify({ error: 'Propiedad no encontrada' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+
+    // Don't allow chatting with yourself
+    if (business.user_id === user.id) {
+      return new Response(JSON.stringify({ error: 'No puedes enviar un mensaje sobre tu propia propiedad' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+
+    // ─── Check chat mode setting ──────────────────────────────
+    try {
+      const chatSettings = await env.DB.prepare(
+        "SELECT key, value FROM admin_settings WHERE key IN ('chat_enabled', 'chat_mode')"
+      ).all();
+      const settingsMap = {};
+      for (const row of (chatSettings.results || [])) settingsMap[row.key] = row.value;
+
+      const chatEnabled = settingsMap.chat_enabled !== '0';
+      const chatMode = settingsMap.chat_mode || 'all';
+
+      if (!chatEnabled || chatMode === 'none') {
+        return new Response(JSON.stringify({ error: 'El chat está desactivado temporalmente' }), {
+          status: 403,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (chatMode === 'premium_only') {
+        // Check if BOTH users (buyer/seller) are premium
+        const buyerPlan = await env.DB.prepare('SELECT plan_type FROM users WHERE id = ?').bind(user.id).first();
+        const sellerPlan = await env.DB.prepare('SELECT plan_type FROM users WHERE id = ?').bind(business.user_id).first();
+        if ((!buyerPlan || buyerPlan.plan_type !== 'premium') || (!sellerPlan || sellerPlan.plan_type !== 'premium')) {
+          return new Response(JSON.stringify({ error: 'El chat está disponible solo para usuarios Premium' }), {
+            status: 403,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          });
+        }
+      }
+    } catch (e) {
+      // If settings table doesn't exist, allow chat (fail open)
+    }
+
+    const buyerId = user.id;
+    const sellerId = business.user_id;
+
+    // Check if conversation already exists
+    let conversation = await env.DB.prepare(
+      'SELECT * FROM conversations WHERE buyer_id = ? AND seller_id = ? AND business_id = ?'
+    ).bind(buyerId, sellerId, business_id).first();
+
+    if (!conversation) {
+      // Create new conversation
+      const result = await env.DB.prepare(
+        'INSERT INTO conversations (business_id, buyer_id, seller_id, last_message_at) VALUES (?, ?, ?, datetime(\'now\'))'
+      ).bind(business_id, buyerId, sellerId).run();
+      conversation = {
+        id: result.meta.last_row_id,
+        business_id,
+        buyer_id: buyerId,
+        seller_id: sellerId,
+        buyer_unread: 0,
+        seller_unread: 0,
+      };
+    }
+
+    // Send initial message if provided
+    if (initial_message && initial_message.trim()) {
+      const message = initial_message.trim().substring(0, 2000);
+      await env.DB.prepare(
+        'INSERT INTO messages (conversation_id, sender_id, content) VALUES (?, ?, ?)'
+      ).bind(conversation.id, user.id, message).run();
+
+      // Update conversation - the buyer is the one sending, so increment seller_unread
+      await env.DB.prepare(
+        'UPDATE conversations SET last_message = ?, last_message_at = datetime(\'now\'), seller_unread = seller_unread + 1 WHERE id = ?'
+      ).bind(message, conversation.id).run();
+
+      conversation.last_message = message;
+    }
+
+    // Get other user info
+    const otherUser = await env.DB.prepare('SELECT id, name FROM users WHERE id = ?').bind(
+      conversation.buyer_id === user.id ? conversation.seller_id : conversation.buyer_id
+    ).first();
+
+    return new Response(JSON.stringify({
+      conversation: {
+        id: conversation.id,
+        business_id: business.id,
+        business_title: business.title,
+        business_status: business.status,
+        other_user: otherUser ? { id: otherUser.id, name: otherUser.name } : null,
+        last_message: conversation.last_message,
+        created_at: conversation.created_at,
+      },
+    }), { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: 'Error del servidor' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
+}

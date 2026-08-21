@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee los testimonios de nuestros clientes satisfechos. Descubre cómo HolaX ha ayudado a negocios en toda Venezuela a crecer.">
+    <meta name="theme-color" content="#006EE3">
+    <title>Clientes Satisfechos - HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <style>
+        .page-hero {
+            text-align: center;
+            padding: 3rem 1rem 2.5rem;
+            background: linear-gradient(135deg, #f7f9fc 0%, #eef3fb 100%);
+            border-radius: 0 0 24px 24px;
+            margin-bottom: 2.5rem;
+        }
+        .page-hero h1 {
+            font-size: 2.2rem;
+            color: var(--text-primary, #1a1a2e);
+            margin-bottom: 0.5rem;
+        }
+        .page-hero p {
+            color: var(--text-secondary, #555);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 950px;
+            margin: 0 auto 3rem;
+        }
+        @media (max-width: 800px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 500px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+            }
+        }
+        .testimonial-card {
+            background: #fff;
+            border: 1px solid #e8ecf1;
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .testimonial-card .quote-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            font-size: 1.8rem;
+            color: #e8ecf1;
+        }
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #eef3fb, #dbe6f8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--color-primary, #1a73e8);
+            flex-shrink: 0;
+        }
+        .testimonial-meta {
+            flex: 1;
+            min-width: 0;
+        }
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary, #1a1a2e);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .testimonial-business {
+            font-size: 0.8rem;
+            color: var(--text-muted, #888);
+            margin-top: 0.1rem;
+        }
+        .testimonial-stars {
+            margin-bottom: 0.85rem;
+            color: #f59e0b;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .testimonial-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary, #555);
+            line-height: 1.7;
+            margin: 0;
+            font-style: italic;
+        }
+        .testimonials-summary {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: #f7f9fc;
+            border-radius: 16px;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .testimonials-summary .big-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-primary, #1a73e8);
+        }
+        .testimonials-summary p {
+            color: var(--text-secondary, #555);
+            margin-top: 0.5rem;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList"></div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="planes.html" class="nav-link"><i class="fas fa-crown"></i> Nuestros Planes</a></li>
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="quienes-somos.html" class="nav-link"><i class="fas fa-info-circle"></i> Quiénes Somos</a></li>
+                        <li><a href="contacto.html" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a></li>
+                        <li><a href="privacidad.html" class="nav-link"><i class="fas fa-shield-halved"></i> Política de Privacidad</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Testimonials Content -->
+    <section class="section" style="padding-top: calc(var(--navbar-height) + var(--space-lg));">
+        <div class="container">
+            <div class="page-hero">
+                <h1><i class="fas fa-star" style="color: #f59e0b;"></i> Lo que Dicen Nuestros Clientes</h1>
+                <p>Miles de negocios y usuarios confían en HolaX. Estas son algunas de sus experiencias.</p>
+            </div>
+
+            <div class="testimonials-summary">
+                <div class="big-number">4.9 <i class="fas fa-star" style="font-size: 1.5rem;"></i></div>
+                <p>Promedio de satisfacción basado en las opiniones de nuestros usuarios</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-name">María González</div>
+                            <div class="testimonial-business">Panadería Dulce Hogar — Caracas</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Desde que publiqué mi panadería en HolaX, las personas me encuentran mucho más fácil. He recibido clientes nuevos que me dijeron que me vieron en la página. ¡Estoy muy contenta con los resultados!</p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-name">Carlos Mendoza</div>
+                            <div class="testimonial-business">Taller Mecánico Mendoza — Valencia</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">El plan Premium valió cada céntimo. Mis publicaciones ya no caducan y aparezco primero en las búsquedas de mi zona. El soporte siempre responde rápido. Totalmente recomendado.</p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-name">Ana Lucía Rojas</div>
+                            <div class="testimonial-business">Boutique Estilo Criollo — Maracaibo</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Vendo ropa y accesorios por el marketplace de HolaX y me ha ido excelente. La plataforma es muy fácil de usar y los clientes llegan solos. Lo mejor es que es económico para emprendedores como yo.</p>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-name">José Manuel Pérez</div>
+                            <div class="testimonial-business">Inmobiliaria Casas del Llano — Barinas</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">Publicamos todos nuestros inmuebles en HolaX y la visibilidad aumentó considerablemente. Los clientes pueden ver las propiedades en el mapa interactivo, eso les da mucha confianza. Muy útil para el sector inmobiliario.</p>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-name">Luisa Fernanda Torres</div>
+                            <div class="testimonial-business">Restaurante Sabores de Venezuela — Mérida</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Los turistas me encuentran por HolaX cuando buscan restaurantes en Mérida. Las reseñas y calificaciones me ayudan a generar confianza. Es como tener publicidad gratuita las 24 horas del día.</p>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-name">Roberto Sánchez</div>
+                            <div class="testimonial-business">Clínica Dental Sonrisa — Lechería</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Como profesional de la salud, necesitaba una forma sencilla de que los pacientes me encuentren. HolaX me dio visibilidad inmediata en mi zona. Recibo al menos 5 llamadas semanales gracias al directorio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <img src="images/favicon.jpeg" alt="HolaX" style="height:28px;width:auto;border-radius:6px;margin-right:6px;">
+                        <span>HolaX</span>
+                    </a>
+                    <p>El directorio de negocios más completo de Venezuela. Conectamos comercios con clientes en todo el país.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="search.html">Negocios</a></li>
+                        <li><a href="map.html">Mapa</a></li>
+                        <li><a href="planes.html">Nuestros Planes</a></li>
+                        <li><a href="new-business.html">Registrar Negocio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                        <li><a href="mision-vision.html">Misión y Visión</a></li>
+                        <li><a href="clientes-satisfechos.html">Clientes Satisfechos</a></li>
+                        <li><a href="privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@holax.com</li>
+                        <li><i class="fas fa-phone"></i> +58 414-000-0000</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Venezuela</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HolaX. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/app.js"></script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

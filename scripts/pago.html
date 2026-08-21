@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Realiza tu pago de suscripción Un Click">
+    <title>Pago - Un Click</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .pago-container { max-width:560px;margin:40px auto;padding:0 20px; }
+        .pago-card {
+            background:#fff;border:1px solid #e5e7eb;border-radius:16px;
+            padding:32px 28px;box-shadow:0 4px 16px rgba(0,0,0,0.06);
+        }
+        .pago-card h2 { margin-bottom:4px; }
+        .pago-card .pago-subtitle { color:#64748b;margin-bottom:24px; }
+        .pago-amount {
+            text-align:center;padding:20px;background:linear-gradient(135deg,#f0fdf4,#ecfdf5);
+            border-radius:12px;margin-bottom:24px;
+        }
+        .pago-amount .amount-label { font-size:0.85rem;color:#64748b;margin-bottom:4px; }
+        .pago-amount .amount-value { font-size:2.8rem;font-weight:800;color:#059669; }
+        .pago-amount .amount-duration { font-size:0.85rem;color:#059669; }
+        .pago-steps { margin-bottom:24px; }
+        .pago-step {
+            display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;
+            padding:12px;background:#f8fafc;border-radius:10px;
+        }
+        .pago-step-num {
+            width:28px;height:28px;border-radius:50%;background:#1a73e8;color:#fff;
+            display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;
+        }
+        .pago-step-text { font-size:0.9rem;color:#374151;line-height:1.4; }
+        .pago-step-text strong { display:block;margin-bottom:2px; }
+        .form-group { margin-bottom:16px; }
+        .form-group label { display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px; }
+        .form-control {
+            width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:10px;
+            font-size:0.95rem;font-family:inherit;transition:border-color 0.2s;
+        }
+        .form-control:focus { outline:none;border-color:#059669;box-shadow:0 0 0 3px rgba(5,150,105,0.1); }
+        #pagoProofPreview { margin-top:8px;max-width:280px; }
+        #pagoProofPreview img { max-width:100%;border-radius:8px;border:1px solid #e5e7eb; }
+        .btn-submit {
+            width:100%;padding:14px;border:none;border-radius:10px;
+            background:linear-gradient(135deg,#059669,#10b981);color:#fff;
+            font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s;
+            font-family:inherit;
+        }
+        .btn-submit:hover { opacity:0.9;transform:translateY(-1px); }
+        .btn-submit:disabled { opacity:0.5;cursor:not-allowed;transform:none; }
+        #pagoStatus { margin-top:16px;text-align:center;font-weight:600; }
+        .pago-info-box {
+            background:#fffbeb;border:1px solid #fde68a;border-radius:10px;
+            padding:14px;margin-bottom:20px;font-size:0.85rem;color:#92400e;
+        }
+        .pago-info-box i { margin-right:6px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-store"></i>
+                <span class="brand-name">Un Click</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="planes.html" class="nav-link">Planes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="pago-container">
+        <div class="pago-card">
+            <h2><i class="fas fa-credit-card" style="color:#059669;"></i> Realizar Pago</h2>
+            <p class="pago-subtitle" id="pagoSubtitle">Suscripción Trimestral</p>
+
+            <div class="pago-amount">
+                <div class="amount-label">Monto a pagar</div>
+                <div class="amount-value" id="pagoAmountDisplay">$30 USD</div>
+                <div class="amount-duration" id="pagoDurationDisplay">3 meses de acceso premium</div>
+            </div>
+
+            <div class="pago-info-box">
+                <i class="fas fa-info-circle"></i>
+                Realiza la transferencia y adjunta el comprobante. Tu acceso se activará una vez verificado (usualmente en menos de 24h).
+            </div>
+
+            <div class="pago-steps">
+                <div class="pago-step">
+                    <div class="pago-step-num">1</div>
+                    <div class="pago-step-text">
+                        <strong>Realiza la transferencia</strong>
+                        Envía el monto indicado a la cuenta que te proporcionaremos. Guarda el comprobante.
+                    </div>
+                </div>
+                <div class="pago-step">
+                    <div class="pago-step-num">2</div>
+                    <div class="pago-step-text">
+                        <strong>Sube el comprobante</strong>
+                        Toma una captura o foto clara del recibo y adjúntalo aquí abajo.
+                    </div>
+                </div>
+                <div class="pago-step">
+                    <div class="pago-step-num">3</div>
+                    <div class="pago-step-text">
+                        <strong>Espera la verificación</strong>
+                        El administrador revisará tu comprobante y activará tu plan. Recibirás acceso completo.
+                    </div>
+                </div>
+            </div>
+
+            <form id="pagoForm">
+                <div class="form-group">
+                    <label><i class="fas fa-image"></i> Comprobante de Pago *</label>
+                    <input type="file" id="pagoProof" class="form-control" accept="image/*" required>
+                    <small style="color:#6b7280;">Imagen del recibo o captura de pantalla</small>
+                    <div id="pagoProofPreview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-sticky-note"></i> Referencia (opcional)</label>
+                    <input type="text" id="pagoReference" class="form-control" placeholder="Número de referencia o nota">
+                </div>
+
+                <button type="submit" class="btn-submit" id="pagoSubmitBtn">
+                    <i class="fas fa-paper-plane"></i> Enviar Comprobante
+                </button>
+            </form>
+
+            <div id="pagoStatus"></div>
+        </div>
+
+        <p style="text-align:center;margin-top:20px;">
+            <a href="planes.html" style="color:#1a73e8;text-decoration:none;font-size:0.9rem;">
+                <i class="fas fa-arrow-left"></i> Volver a planes
+            </a>
+        </p>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+    (function() {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+            return;
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const plan = params.get('plan') || 'quarterly';
+
+        const planInfo = {
+            quarterly: { name: 'Suscripción Trimestral', amount: 30, duration: '3 meses de acceso premium', type: 'subscription_quarterly' },
+            annual: { name: 'Suscripción Anual', amount: 100, duration: '12 meses de acceso premium', type: 'subscription_annual' },
+            renewal: { name: 'Renovación de Producto', amount: 1, duration: '30 días adicionales', type: 'product_renewal' }
+        };
+
+        const info = planInfo[plan] || planInfo.quarterly;
+        document.getElementById('pagoSubtitle').textContent = info.name;
+        document.getElementById('pagoAmountDisplay').textContent = '$' + info.amount + ' USD';
+        document.getElementById('pagoDurationDisplay').textContent = info.duration;
+
+        // Image preview
+        document.getElementById('pagoProof').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('pagoProofPreview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    preview.innerHTML = '<img src="' + ev.target.result + '">';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Submit
+        document.getElementById('pagoForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const file = document.getElementById('pagoProof').files[0];
+            const notes = document.getElementById('pagoReference').value.trim();
+            const btn = document.getElementById('pagoSubmitBtn');
+            const status = document.getElementById('pagoStatus');
+
+            if (!file) { status.innerHTML = '<p style="color:#e91e63;">Adjunta el comprobante</p>'; return; }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
+            status.innerHTML = '';
+
+            try {
+                // Upload image
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('folder', 'payments');
+                const uploadRes = await fetch('/api/upload', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    body: formData
+                });
+                const uploadData = await uploadRes.json();
+                if (!uploadData.url) throw new Error('Error al subir imagen');
+
+                // Send payment
+                const payRes = await fetch('/api/payments', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                    body: JSON.stringify({
+                        amount: info.amount,
+                        payment_type: info.type,
+                        proof_url: uploadData.url,
+                        notes: notes || null
+                    })
+                });
+                const payData = await payRes.json();
+
+                if (payRes.ok) {
+                    status.innerHTML = '<p style="color:#28a745;"><i class="fas fa-check-circle"></i> ' + payData.message + '</p>';
+                    btn.style.display = 'none';
+                } else {
+                    status.innerHTML = '<p style="color:#e91e63;">' + (payData.error || 'Error') + '</p>';
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Reintentar';
+                }
+            } catch(err) {
+                status.innerHTML = '<p style="color:#e91e63;">Error: ' + err.message + '</p>';
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Reintentar';
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

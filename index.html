@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HolaX - El directorio más completo de negocios, propiedades y empleos en Venezuela. Encuentra comercios, inmuebles, ofertas de trabajo, profesionales y servicios en todo el país. Registro gratis.">
+    <meta name="keywords" content="directorio de negocios, Venezuela, comercios, restaurantes, farmacias, tiendas, profesionales, servicios, Mérida, registro gratis">
+    <title>HolaX - Directorio de Negocios en Venezuela</title>
+    <link rel="stylesheet" href="css/styles.css?v=13">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="apple-touch-icon" href="/images/PWA.jpeg">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#006EE3">
+    <meta name="google-site-verification" content="Upqdebr5WMAfea6ZMYcsZVTXR2Wo9N5cJZG0B6pk7I4" />
+    <meta property="og:title" content="HolaX - Directorio de Negocios en Venezuela">
+    <meta property="og:description" content="HolaX es el directorio de negocios y comercios más completo de Venezuela. Encuentra restaurantes, farmacias, tiendas, profesionales, servicios de salud y más en todo el país. Registro gratis.">
+    <meta property="og:site_name" content="HolaX">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://holax.com.ve/images/Holax.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://holax.com.ve/">
+    <meta name="twitter:title" content="HolaX - Directorio de Negocios en Venezuela">
+    <meta name="twitter:description" content="HolaX es el directorio de negocios y comercios más completo de Venezuela. Encuentra restaurantes, farmacias, tiendas, profesionales y más.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://holax.com.ve/images/Holax.png">
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">{
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "HolaX",
+        "alternateName": "HolaX - Directorio de Negocios de Venezuela",
+        "url": "https://holax.com.ve",
+        "logo": "https://holax.com.ve/images/Holax.png",
+        "description": "El directorio nacional de negocios, productos, inmuebles y empleos más completo de Venezuela.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "VE"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": ["Spanish"]
+        },
+        "sameAs": []
+    }</script>
+    <!-- JSON-LD: WebSite con SearchAction -->
+    <script type="application/ld+json">{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "HolaX",
+        "url": "https://holax.com.ve",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://holax.com.ve/search.html?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList">
+                        <!-- States loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="planes.html" class="nav-link"><i class="fas fa-crown"></i> Nuestros Planes</a></li>
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="quienes-somos.html" class="nav-link"><i class="fas fa-info-circle"></i> Quiénes Somos</a></li>
+                        <li><a href="contacto.html" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a></li>
+                        <li><a href="privacidad.html" class="nav-link"><i class="fas fa-shield-halved"></i> Política de Privacidad</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== 1. HERO SECTION ===== -->
+    <section class="idx-hero">
+        <div class="idx-hero-bg" id="idxHeroBg"></div>
+        <div class="idx-hero-particles"></div>
+        <div class="idx-hero-content">
+            <img id="idxHeroLogo" src="" alt="" style="display:none;max-height:80px;width:auto;margin:0 auto 16px;border-radius:8px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
+            <h1 class="idx-hero-title">Directorio de Negocios, Propiedades y Empleos en Venezuela</h1>
+            <p class="idx-hero-subtitle">&nbsp;</p>
+
+            <!-- Badge sobre el botón Explorar Negocios -->
+            <div class="idx-hero-badge" style="margin-bottom:12px;">
+                <i class="fas fa-star"></i> El directorio comercial #1 de Venezuela
+            </div>
+
+            <!-- Mobile: Search Trigger Button -->
+            <button class="idx-mobile-search-trigger" id="mobileSearchTrigger">
+                <i class="fas fa-search"></i>
+                <span>Explorar Negocios</span>
+                <i class="fas fa-chevron-down idx-mobile-search-arrow"></i>
+            </button>
+
+            <!-- Search Bar (desktop inline, mobile inside modal) -->
+            <form class="idx-search-bar" id="heroSearchForm" action="search.html" method="GET">
+                <div class="idx-search-modal-header" id="searchModalHeader">
+                    <h3><i class="fas fa-search"></i> Explorar Negocios</h3>
+                    <button type="button" class="idx-search-modal-close" id="searchModalClose">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="idx-search-row">
+                    <div class="idx-search-field">
+                        <label><i class="fas fa-map"></i> Estado</label>
+                        <div class="idx-select-wrap">
+                            <select id="searchEstado" name="estado">
+                                <option value="">Todo el país</option>
+                                <option value="Amazonas">Amazonas</option>
+                                <option value="Anzoátegui">Anzoátegui</option>
+                                <option value="Apure">Apure</option>
+                                <option value="Aragua">Aragua</option>
+                                <option value="Barinas">Barinas</option>
+                                <option value="Bolívar">Bolívar</option>
+                                <option value="Carabobo">Carabobo</option>
+                                <option value="Cojedes">Cojedes</option>
+                                <option value="Delta Amacuro">Delta Amacuro</option>
+                                <option value="Distrito Capital">Distrito Capital</option>
+                                <option value="Falcón">Falcón</option>
+                                <option value="Guárico">Guárico</option>
+                                <option value="Lara">Lara</option>
+                                <option value="Mérida">Mérida</option>
+                                <option value="Miranda">Miranda</option>
+                                <option value="Monagas">Monagas</option>
+                                <option value="Nueva Esparta">Nueva Esparta</option>
+                                <option value="Portuguesa">Portuguesa</option>
+                                <option value="Sucre">Sucre</option>
+                                <option value="Táchira">Táchira</option>
+                                <option value="Trujillo">Trujillo</option>
+                                <option value="Vargas">Vargas</option>
+                                <option value="Yaracuy">Yaracuy</option>
+                                <option value="Zulia">Zulia</option>
+                            </select>
+                            <i class="fas fa-chevron-down idx-select-arrow"></i>
+                        </div>
+                    </div>
+                    <div class="idx-search-field">
+                        <label><i class="fas fa-th-large"></i> Categoría</label>
+                        <div class="idx-select-wrap">
+                            <select id="searchCategoria" name="categoria">
+                                <option value="">Todas</option>
+                                <option value="restaurantes">Restaurantes</option>
+                                <option value="farmacias">Farmacias</option>
+                                <option value="clinicas-hospitales">Clínicas y Hospitales</option>
+                                <option value="medicina-servicio-medico">Medicina / Servicio Médico</option>
+                                <option value="supermercados">Supermercados</option>
+                                <option value="ropas">Ropas</option>
+                                <option value="barberias">Barberías y Salones</option>
+                                <option value="auto-talleres">Auto Talleres</option>
+                                <option value="cafeterias">Cafeterías</option>
+                                <option value="bares-discotecas">Bares y Discotecas</option>
+                                <option value="ferreterias">Ferreterías</option>
+                                <option value="tecnologia">Tecnología</option>
+                                <option value="hoteles-posadas">Hoteles y Posadas</option>
+                                <option value="gimnasios">Gimnasios</option>
+                                <option value="dentistas">Dentistas</option>
+                                <option value="celulares">Celulares</option>
+                                <option value="mueblerias">Mueblerías</option>
+                                <option value="juridicos">Jurídicos</option>
+                                <option value="academias">Academias</option>
+                                <option value="veterinarias">Veterinarias</option>
+                                <option value="electricos">Eléctricos</option>
+                                <option value="perfumerias">Perfumerías</option>
+                                <option value="joyerias">Joyerías</option>
+                                <option value="zapaterias">Zapaterías</option>
+                                <option value="panaderias">Panaderías</option>
+                                <option value="heladerias">Heladerías</option>
+                                <option value="pizzerias">Pizzerías</option>
+                                <option value="bicicletas">Bicicletas</option>
+                                <option value="encomiendas">Encomiendas</option>
+                                <option value="lavanderias">Lavanderías</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <i class="fas fa-chevron-down idx-select-arrow"></i>
+                        </div>
+                    </div>
+                    <div class="idx-search-field">
+                        <label><i class="fas fa-map-marker-alt"></i> Ciudad</label>
+                        <input type="text" id="searchCiudad" name="ciudad" placeholder="Ej: Mérida">
+                    </div>
+                </div>
+                <div class="idx-search-row idx-search-row-2">
+                    <div class="idx-search-field idx-search-field-full">
+                        <label><i class="fas fa-search"></i> Buscar</label>
+                        <input type="text" id="searchQuery" name="q" placeholder="Nombre o describe el negocio...">
+                    </div>
+                    <button type="submit" class="idx-search-btn">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+                <!-- Quick Links inside form (visible in mobile modal) -->
+                <div class="idx-quick-links idx-quick-links-modal">
+                    <a href="search.html?sort=popular" class="idx-quick-link">
+                        <i class="fas fa-fire"></i> Negocios Populares
+                    </a>
+                    <a href="search.html?sort=reciente" class="idx-quick-link">
+                        <i class="fas fa-clock"></i> Últimos Registrados
+                    </a>
+                    <a href="search.html?tipo_negocio=profesional" class="idx-quick-link">
+                        <i class="fas fa-mountain-sun"></i> Profesionales
+                    </a>
+                    <a href="new-business.html" class="idx-quick-link idx-quick-link-publish">
+                        <i class="fas fa-plus-circle"></i> Registrar Gratis
+                    </a>
+                </div>
+            </form>
+
+            <!-- Quick Links (desktop only) -->
+            <div class="idx-quick-links">
+                <a href="search.html?sort=popular" class="idx-quick-link">
+                    <i class="fas fa-fire"></i> Negocios Populares
+                </a>
+                <a href="search.html?sort=reciente" class="idx-quick-link">
+                    <i class="fas fa-clock"></i> Últimos Registrados
+                </a>
+                <a href="search.html?tipo_negocio=profesional" class="idx-quick-link">
+                    <i class="fas fa-mountain-sun"></i> Profesionales
+                </a>
+                <a href="new-business.html" class="idx-quick-link idx-quick-link-publish">
+                    <i class="fas fa-plus-circle"></i> Registrar Gratis
+                </a>
+            </div>
+
+            <!-- Mobile Search Modal Backdrop -->
+            <div class="idx-mobile-search-backdrop" id="mobileSearchBackdrop"></div>
+        </div>
+    </section>
+
+    <!-- ===== VIDEO CAROUSEL ===== -->
+    <section class="idx-section hidden" id="videoCarouselSection" style="padding:24px 0;">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444);">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Videos</h2>
+                        <p class="idx-section-subtitle">Contenido destacado</p>
+                    </div>
+                </div>
+            </div>
+            <div id="videoCarouselTrack" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-width:none;">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WEATHER CAROUSEL ===== -->
+    <section class="weather-carousel-section" id="weatherCarouselSection">
+        <div class="container">
+            <div class="weather-carousel-header">
+                <div class="weather-carousel-title">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Clima en Venezuela</span>
+                </div>
+            </div>
+            <div class="weather-carousel-track" id="weatherTrack">
+                <div class="weather-loading" id="weatherLoading">
+                    <i class="fas fa-spinner fa-spin"></i> Cargando clima...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 2. FEATURED PROPERTIES ===== -->
+    <section class="idx-section" id="featuredSection">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #1a73e8, #4a90e8);">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Negocios Destacados</h2>
+                        <p class="idx-section-subtitle">Las mejores oportunidades comerciales en Venezuela</p>
+                    </div>
+                </div>
+                <a href="search.html" class="idx-section-link">
+                    Ver todas <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="business-grid" id="featuredGrid">
+                <div class="loading-spinner" id="featuredLoading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Cargando negocios...</p>
+                </div>
+            </div>
+            <div class="text-center" id="featuredEmpty" style="display:none;">
+                <p class="text-muted">No hay negocios destacados en este momento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 2.5 FEATURED MEDICAL BUSINESSES ===== -->
+    <section class="idx-section idx-section-alt" id="featuredMedicalSection">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Servicios Médicos</h2>
+                        <p class="idx-section-subtitle">Doctores, clínicas y servicios de salud en Venezuela</p>
+                    </div>
+                </div>
+                <a href="search.html?categoria=medicina-servicio-medico" class="idx-section-link">
+                    Ver Todos <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="business-grid" id="featuredMedicalGrid">
+                <div class="loading-spinner" id="medicalLoading">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>Cargando servicios médicos...</p>
+                </div>
+            </div>
+            <div class="text-center" id="medicalEmpty" style="display:none;">
+                <p class="text-muted">No hay servicios médicos destacados en este momento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 3. FEATURED PROPERTIES (INMUEBLES) ===== -->
+    <section class="idx-section" id="featuredPropertiesSection">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #e67e22, #f39c12);">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Inmuebles Destacados</h2>
+                        <p class="idx-section-subtitle">Casas, apartamentos, terrenos y más en Venezuela</p>
+                    </div>
+                </div>
+                <a href="properties.html" class="idx-section-link">
+                    Ver Todos <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="business-grid" id="featuredPropertiesGrid">
+                <div class="loading-spinner" id="propertiesLoading">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>Cargando inmuebles...</p>
+                </div>
+                <div class="empty-state hidden" id="propertiesEmpty">
+                    <i class="fas fa-home fa-3x" style="color:#e67e22;"></i>
+                    <p>Aún no hay inmuebles publicados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 4. FEATURED PRODUCTS ===== -->
+    <section class="idx-section idx-section-alt" id="featuredProductsSection">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #e83e8c, #fd79a8);">
+                        <i class="fas fa-boxes-stacked"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Productos Destacados</h2>
+                        <p class="idx-section-subtitle">Los mejores productos del marketplace</p>
+                    </div>
+                </div>
+                <a href="marketplace.html" class="idx-section-link">
+                    Ver Todos <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="business-grid" id="featuredProductsGrid">
+                <div class="loading-spinner" id="productsLoading">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>Cargando productos...</p>
+                </div>
+                <div class="empty-state hidden" id="productsEmpty">
+                    <i class="fas fa-box fa-3x" style="color:#e83e8c;"></i>
+                    <p>Aún no hay productos publicados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 5. FEATURED JOBS ===== -->
+    <section class="idx-section" id="featuredJobsSection">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #17a2b8, #20c997);">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Empleos Destacados</h2>
+                        <p class="idx-section-subtitle">Oportunidades laborales en Venezuela</p>
+                    </div>
+                </div>
+                <a href="empleo.html" class="idx-section-link">
+                    Ver Todos <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="business-grid" id="featuredJobsGrid">
+                <div class="loading-spinner" id="jobsLoading">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>Cargando empleos...</p>
+                </div>
+                <div class="empty-state hidden" id="jobsEmpty">
+                    <i class="fas fa-briefcase fa-3x" style="color:#17a2b8;"></i>
+                    <p>Aún no hay empleos publicados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 6. EXPLORE BY TYPE ===== -->
+    <section class="idx-section idx-section-alt">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #6f42c1, #8b5cf6);">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Explora por Categoría</h2>
+                        <p class="idx-section-subtitle">Encuentra exactamente lo que buscas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="idx-types-grid" id="idxCategoriesGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== 4. MAP SECTION ===== -->
+    <section class="idx-section" id="homeMapSection">
+        <div class="container">
+            <div class="idx-section-header">
+                <div class="idx-section-header-left">
+                    <div class="idx-section-icon" style="background: linear-gradient(135deg, #ff6b35, #ff8c5a);">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div>
+                        <h2 class="idx-section-title">Mapa Interactivo</h2>
+                        <p class="idx-section-subtitle">Explora negocios y propiedades en Venezuela</p>
+                    </div>
+                </div>
+                <a href="map.html" class="idx-section-link">
+                    <i class="fas fa-expand"></i> Ver Mapa Completo
+                </a>
+            </div>
+            <div class="idx-map-wrapper" style="position:relative;">
+                <!-- Map Type Toggle -->
+                <div style="display:flex;gap:6px;margin-bottom:12px;">
+                    <button class="btn btn-primary btn-sm" id="homeMapToggleNegocios" style="flex:1;font-size:0.85rem;"><i class="fas fa-store"></i> Negocios</button>
+                    <button class="btn btn-primary btn-sm" id="homeMapToggleAmbos" style="flex:1;font-size:0.85rem;background:linear-gradient(135deg,#1a73e8,#006EE3);"><i class="fas fa-layer-group"></i> Todos</button>
+                    <button class="btn btn-secondary btn-sm" id="homeMapTogglePropiedades" style="flex:1;font-size:0.85rem;"><i class="fas fa-home"></i> Propiedades</button>
+                </div>
+                <div id="homeMap" class="home-map"></div>
+                <div class="idx-map-overlay" id="homeMapOverlay">
+                    <div class="idx-map-overlay-content">
+                        <div class="idx-map-overlay-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <p>Mapa interactivo con todas los negocios y propiedades</p>
+                        <a href="map.html" class="idx-map-btn">
+                            <i class="fas fa-expand"></i> Abrir Mapa Completo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 5. HOW IT WORKS ===== -->
+    <section class="idx-section idx-section-alt">
+        <div class="container">
+            <div class="idx-section-header idx-section-header-center">
+                <div class="idx-section-icon" style="background: linear-gradient(135deg, #28a745, #5cb85c);">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div>
+                    <h2 class="idx-section-title">¿Cómo funciona?</h2>
+                    <p class="idx-section-subtitle">Encuentra o publica tu negocio en 3 sencillos pasos</p>
+                </div>
+            </div>
+            <div class="idx-steps-grid">
+                <div class="idx-step-card">
+                    <div class="idx-step-connector"></div>
+                    <div class="idx-step-number">01</div>
+                    <div class="idx-step-icon-wrap">
+                        <div class="idx-step-icon" style="background: linear-gradient(135deg, #1a73e8, #4a90e8);">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                    </div>
+                    <h3>Registra</h3>
+                    <p>Regístrate y publica tu negocio con fotos, detalles y contacto de forma completamente gratuita.</p>
+                </div>
+                <div class="idx-step-card">
+                    <div class="idx-step-connector"></div>
+                    <div class="idx-step-number">02</div>
+                    <div class="idx-step-icon-wrap">
+                        <div class="idx-step-icon" style="background: linear-gradient(135deg, #ff6b35, #ff8c5a);">
+                            <i class="fas fa-search-location"></i>
+                        </div>
+                    </div>
+                    <h3>Explora</h3>
+                    <p>Explora negocios usando filtros avanzados, mapa interactivo y búsqueda por zona.</p>
+                </div>
+                <div class="idx-step-card">
+                    <div class="idx-step-number">03</div>
+                    <div class="idx-step-icon-wrap">
+                        <div class="idx-step-icon" style="background: linear-gradient(135deg, #28a745, #5cb85c);">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                    </div>
+                    <h3>Contacta</h3>
+                    <p>Comunícate directamente con el dueño del negocio sin intermediarios.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 6. STATS SECTION ===== -->
+    <section class="idx-stats-section">
+        <div class="idx-stats-bg"></div>
+        <div class="container">
+            <div class="idx-stats-grid">
+                <div class="idx-stat-card">
+                    <div class="idx-stat-icon-wrap">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="idx-stat-number" id="statProperties">0</div>
+                    <div class="idx-stat-label">Negocios Registrados</div>
+                </div>
+                <div class="idx-stat-card">
+                    <div class="idx-stat-icon-wrap" style="background: rgba(40, 167, 69, 0.15);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="idx-stat-number" id="statUsers">0</div>
+                    <div class="idx-stat-label">Usuarios Activos</div>
+                </div>
+                <div class="idx-stat-card">
+                    <div class="idx-stat-icon-wrap" style="background: rgba(255, 107, 53, 0.15);">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="idx-stat-number">24</div>
+                    <div class="idx-stat-label">Estados</div>
+                </div>
+                <div class="idx-stat-card">
+                    <div class="idx-stat-icon-wrap" style="background: rgba(111, 66, 193, 0.15);">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="idx-stat-number">100%</div>
+                    <div class="idx-stat-label">Gratuito</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 7. CTA SECTION ===== -->
+    <section class="idx-cta-section">
+        <div class="container">
+            <div class="idx-cta-card">
+                <div class="idx-cta-glow"></div>
+                <div class="idx-cta-content">
+                    <h2>¿Tienes un negocio o comercio?</h2>
+                    <p>Registra tu negocio gratis en HolaX y llega a miles de personas en toda Venezuela.</p>
+                    <a href="new-business.html" class="idx-cta-btn">
+                        <i class="fas fa-plus-circle"></i> Registrar Negocio Gratis
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <img src="images/favicon.jpeg" alt="HolaX" style="height:28px;width:auto;border-radius:6px;margin-right:6px;">
+                        <span>HolaX</span>
+                    </a>
+                    <p>El directorio de negocios más completo de Venezuela. Conectamos comercios con clientes en todo el país.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="search.html">Negocios</a></li>
+                        <li><a href="map.html">Mapa</a></li>
+                        <li><a href="planes.html">Nuestros Planes</a></li>
+                        <li><a href="new-business.html">Registrar Negocio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                        <li><a href="mision-vision.html">Misión y Visión</a></li>
+                        <li><a href="clientes-satisfechos.html">Clientes Satisfechos</a></li>
+                        <li><a href="privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@holax.com</li>
+                        <li><i class="fas fa-phone"></i> +58 414-000-0000</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Venezuela</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HolaX. Todos los derechos reservados.</p>
+                <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
+                <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/app.js?v=11"></script>
+    <script src="js/dynamic-categories.js?v=1"></script>
+    <script src="js/weather.js?v=1"></script>
+    <script src="js/home-map.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/ai-chatbot.js"></script>
+    <script>
+        // Drag-to-scroll for carousels
+        document.querySelectorAll('#videoCarouselTrack').forEach(track => {
+            let isDown = false, startX, scrollLeft;
+            track.addEventListener('mousedown', e => {
+                isDown = true;
+                track.style.cursor = 'grabbing';
+                startX = e.pageX - track.offsetLeft;
+                scrollLeft = track.scrollLeft;
+            });
+            track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
+            track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
+            track.addEventListener('mousemove', e => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - track.offsetLeft;
+                track.scrollLeft = scrollLeft - (x - startX);
+            });
+        });
+
+        // ─── Dynamic category grid on index ───────────────────
+        (async function loadIndexCategories() {
+            var grid = document.getElementById('idxCategoriesGrid');
+            if (!grid) return;
+
+            // Fallback gradient pairs for icon backgrounds
+            var gradients = [
+                ['#fef2f2','#fecaca'], ['#eff6ff','#dbeafe'], ['#ecfdf5','#d1fae5'],
+                ['#fff7ed','#fed7aa'], ['#f1f5f9','#cbd5e1'], ['#f3e8ff','#e9d5ff'],
+                ['#fce7f3','#fbcfe8'], ['#fef9c3','#fde68a'], ['#f0f9ff','#bae6fd'],
+                ['#EFF6FF','#a7f3d0'], ['#EFF6FF','#dcfce7']
+            ];
+            // Default colors for icon text
+            var iconColors = ['#e74c3c','#2196f3','#059669','#ff9800','#607d8b','#8e44ad','#e91e63','#f59e0b','#0284c7','#3f51b5','#1abc9c'];
+
+            function buildCard(cat, idx) {
+                var color = cat.color || iconColors[idx % iconColors.length];
+                var grad = gradients[idx % gradients.length];
+                var icon = cat.icon || 'fas fa-store';
+                // Strip 'fas ' or 'far ' etc. if present to use with 'fas ' prefix
+                var iconClass = icon.indexOf('fa-') === 0 ? 'fas ' + icon : icon;
+
+                var a = document.createElement('a');
+                a.href = 'search.html?categoria=' + encodeURIComponent(cat.slug);
+                a.className = 'idx-type-card';
+                a.innerHTML =
+                    '<div class="idx-type-icon" style="background:linear-gradient(135deg,' + grad[0] + ',' + grad[1] + ');color:' + color + ';">' +
+                        '<i class="' + iconClass + '"></i>' +
+                    '</div>' +
+                    '<h2>' + cat.name + '</h2>' +
+                    '<span class="idx-type-arrow"><i class="fas fa-arrow-right"></i></span>';
+                return a;
+            }
+
+            try {
+                var resp = await fetch('/api/categories');
+                var data = await resp.json();
+                var cats = data.categories || [];
+
+                grid.innerHTML = '';
+                cats.forEach(function(cat, i) {
+                    grid.appendChild(buildCard(cat, i));
+                });
+
+                // "Ver Todas" card at the end
+                var verTodas = document.createElement('a');
+                verTodas.href = 'search.html?categoria=all';
+                verTodas.className = 'idx-type-card';
+                verTodas.innerHTML =
+                    '<div class="idx-type-icon" style="background:linear-gradient(135deg,#f0f9ff,#bae6fd);color:#0284c7;">' +
+                        '<i class="fas fa-th-large"></i>' +
+                    '</div>' +
+                    '<h2>Ver Todas</h2>' +
+                    '<span class="idx-type-arrow"><i class="fas fa-arrow-right"></i></span>';
+                grid.appendChild(verTodas);
+
+            } catch(e) {
+                console.warn('Failed to load index categories, using fallback.', e);
+                grid.innerHTML = '<p style="color:#888;padding:20px;">No se pudieron cargar las categorías.</p>';
+            }
+        })();
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+
+        // ─── PWA Install Prompt ───────────────────────────
+        (function() {
+            let deferredPrompt = null;
+            const dismissKey = 'holax_pwa_dismissed';
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                // Don't show if dismissed in last 7 days
+                const dismissed = sessionStorage.getItem(dismissKey);
+                if (!dismissed) showInstallBanner();
+            });
+
+            window.addEventListener('appinstalled', () => {
+                hideInstallBanner();
+                deferredPrompt = null;
+            });
+
+            function showInstallBanner() {
+                if (document.getElementById('pwaInstallBanner')) return;
+                const banner = document.createElement('div');
+                banner.id = 'pwaInstallBanner';
+                banner.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:12px;max-width:600px;margin:0 auto;">
+                        <img src="/images/PWA.jpeg" alt="HOLAX" style="width:40px;height:40px;border-radius:10px;">
+                        <div style="flex:1;min-width:0;">
+                            <div style="font-weight:700;font-size:0.9rem;color:#fff;">Instalar HOLAX</div>
+                            <div style="font-size:0.75rem;color:rgba(255,255,255,0.8);">Acceso rápido desde tu pantalla de inicio</div>
+                        </div>
+                        <button id="pwaInstallBtn" style="background:#fff;color:#006EE3;border:none;padding:8px 16px;border-radius:8px;font-weight:700;font-size:0.82rem;cursor:pointer;white-space:nowrap;">Instalar</button>
+                        <button id="pwaDismissBtn" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1.1rem;padding:4px 2px;" aria-label="Cerrar">&times;</button>
+                    </div>
+                `;
+                Object.assign(banner.style, {
+                    position: 'fixed', bottom: '0', left: '0', right: '0', zIndex: '9999',
+                    background: 'linear-gradient(135deg, #006EE3, #0052b3)',
+                    padding: '12px 16px', boxShadow: '0 -4px 20px rgba(0,0,0,0.2)',
+                    transform: 'translateY(100%)', transition: 'transform 0.4s ease'
+                });
+                document.body.appendChild(banner);
+                requestAnimationFrame(() => banner.style.transform = 'translateY(0)');
+
+                document.getElementById('pwaInstallBtn').onclick = async () => {
+                    if (!deferredPrompt) return;
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    hideInstallBanner();
+                    deferredPrompt = null;
+                };
+                document.getElementById('pwaDismissBtn').onclick = () => {
+                    sessionStorage.setItem(dismissKey, '1');
+                    hideInstallBanner();
+                };
+            }
+
+            function hideInstallBanner() {
+                const banner = document.getElementById('pwaInstallBanner');
+                if (banner) {
+                    banner.style.transform = 'translateY(100%)';
+                    setTimeout(() => banner.remove(), 400);
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# HolaX - Directorio Nacional de Negocios de Venezuela
+# https://holax.com.ve
+
+User-agent: *
+Allow: /
+
+# Bloquear páginas privadas y de administración
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /api/
+Disallow: /functions/
+
+# Bloquear parámetros de búsqueda y filtros (evitar contenido duplicado)
+Disallow: /*?q=
+Disallow: /*?state=
+Disallow: /*?category=
+Disallow: /*?page=
+Disallow: /*?sort=
+
+# Sitemap dinámico
+Sitemap: https://holax.com.ve/sitemap.xml

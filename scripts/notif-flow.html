@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --text: #111827;
+    --text-sub: #6B7280;
+    --text-muted: #9CA3AF;
+    --bg: #FFFFFF;
+    --surface: #F9FAFB;
+    --border: #E5E7EB;
+    --connector: #94A3B8;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'SimHei', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root { width: 720px; margin: 0 auto; padding: 48px 40px; }
+
+  .flow-title {
+    font-size: 22px; font-weight: 700; color: var(--text);
+    text-align: center; margin-bottom: 6px;
+  }
+  .flow-subtitle {
+    font-size: 13px; color: var(--text-sub);
+    text-align: center; margin-bottom: 36px;
+  }
+
+  /* Phase groups */
+  .phase-group {
+    background: #F8FAFC; border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 0;
+  }
+  .phase-title {
+    font-size: 15px; font-weight: 700; padding: 10px 16px;
+    border-radius: 8px; margin-bottom: 14px;
+  }
+  .phase-steps { display: flex; flex-direction: column; gap: 8px; padding-left: 8px; }
+  .phase-step {
+    font-size: 13px; font-weight: 400; color: var(--text);
+    padding: 8px 14px; background: white; border-radius: 6px;
+    border: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .phase-step .step-num {
+    display: inline-block; width: 22px; height: 22px; line-height: 22px;
+    text-align: center; border-radius: 50%; font-size: 11px; font-weight: 600;
+    margin-right: 8px;
+  }
+  .phase-step .step-detail {
+    color: var(--text-muted); font-size: 11px; margin-top: 2px;
+  }
+
+  /* Phase connector arrows */
+  .phase-arrow {
+    text-align: center; color: var(--connector); font-size: 20px;
+    margin: 6px 0; line-height: 1;
+  }
+
+  /* Trigger branch group */
+  .trigger-branch {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    padding: 0 4px;
+  }
+  .trigger-card {
+    flex: 1; min-width: 140px; background: white;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; font-size: 12px;
+  }
+  .trigger-card .trigger-label {
+    font-weight: 600; font-size: 12px; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .trigger-card .trigger-desc {
+    color: var(--text-muted); font-size: 11px; line-height: 1.4;
+  }
+  .trigger-icon {
+    width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0;
+  }
+
+  /* Scheme: Blue-gray progression */
+  .phase-1 .phase-title { background: #F0F4F8; color: #334155; border-left: 4px solid #64748B; }
+  .phase-1 .step-num { background: #E2E8F0; color: #475569; }
+  .phase-2 .phase-title { background: #E8EDF2; color: #1E3A5F; border-left: 4px solid #5B7A99; }
+  .phase-2 .step-num { background: #DBEAFE; color: #1E3A5F; }
+  .phase-3 .phase-title { background: #E0E7EF; color: #1E3050; border-left: 4px solid #4A6B8A; }
+  .phase-3 .step-num { background: #D0D9E4; color: #1E3050; }
+  .phase-4 .phase-title { background: #D8E0EA; color: #172540; border-left: 4px solid #3A5C7A; }
+  .phase-4 .step-num { background: #C7D2E0; color: #172540; }
+  .phase-5 .phase-title { background: #D0D9E4; color: #14203A; border-left: 4px solid #2E5070; }
+  .phase-5 .step-num { background: #BCC7D6; color: #14203A; }
+
+  /* Legend */
+  .flow-legend {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    margin-top: 32px; padding: 14px 20px;
+    background: #F9FAFB; border-radius: 8px; border: 1px solid #E5E7EB;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #4B5563; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; border: 2px solid; }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="flow-title">Sistema de Notificaciones - HolaX</div>
+  <div class="flow-subtitle">Flujo completo: Eventos, API, Base de Datos y UI</div>
+
+  <!-- PHASE 1: Triggers -->
+  <div class="phase-group phase-1">
+    <div class="phase-title">1. Eventos Disparadores (Triggers Automáticos)</div>
+    <div class="trigger-branch">
+      <div class="trigger-card">
+        <div class="trigger-label">
+          <span class="trigger-icon" style="background:#F0FDF4;color:#059669;">&#127978;</span>
+          Nuevo Negocio
+        </div>
+        <div class="trigger-desc">POST /api/businesses<br>Notifica: Admin (siempre)<br>+ Todos (si toggle ON)</div>
+      </div>
+      <div class="trigger-card">
+        <div class="trigger-label">
+          <span class="trigger-icon" style="background:#EFF6FF;color:#006EE3;">&#128188;</span>
+          Nuevo Empleo
+        </div>
+        <div class="trigger-desc">POST /api/jobs<br>Notifica: Admin (siempre)<br>Link: /admin.html#jobs</div>
+      </div>
+      <div class="trigger-card">
+        <div class="trigger-label">
+          <span class="trigger-icon" style="background:#FEF3C7;color:#D97706;">&#11088;</span>
+          Nueva Reseña
+        </div>
+        <div class="trigger-desc">POST /api/reviews<br>Notifica: Dueño del negocio<br>Link: /negocio/{id}</div>
+      </div>
+      <div class="trigger-card">
+        <div class="trigger-label">
+          <span class="trigger-icon" style="background:#F5F3FF;color:#7C3AED;">&#128142;</span>
+          Solicitud Premium
+        </div>
+        <div class="trigger-desc">POST /api/plans/request-upgrade<br>Notifica: Admin (siempre)<br>Link: /admin.html#premium</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-arrow">&#8595;</div>
+
+  <!-- PHASE 2: Check -->
+  <div class="phase-group phase-2">
+    <div class="phase-title">2. Verificación de Configuración</div>
+    <div class="phase-steps">
+      <div class="phase-step"><span class="step-num">1</span>Consultar <b>admin_settings.notifications_enabled</b> = '1' ?</div>
+      <div class="phase-step"><span class="step-num">2</span>Si es '0' &#8594; <b>NO se envía notificación</b> (fin del flujo)</div>
+      <div class="phase-step"><span class="step-num">3</span>Si es '1' &#8594; Buscar admins activos: <code>SELECT id FROM users WHERE role='admin' AND is_active=1</code></div>
+      <div class="phase-step"><span class="step-num">4</span>Si <b>notify_all_users</b> = '1' &#8594; También buscar usuarios no-admin activos</div>
+    </div>
+  </div>
+
+  <div class="phase-arrow">&#8595;</div>
+
+  <!-- PHASE 3: Insert -->
+  <div class="phase-group phase-3">
+    <div class="phase-title">3. Insertar en Base de Datos (D1)</div>
+    <div class="phase-steps">
+      <div class="phase-step"><span class="step-num">1</span><b>INSERT INTO notifications</b> (user_id, type, title, message, link)</div>
+      <div class="phase-step"><span class="step-num">2</span>Se usa <code>env.DB.batch()</code> para insertar múltiples filas (1 por destinatario)</div>
+      <div class="phase-step"><span class="step-num">3</span>Cada notificación queda con <b>is_read = 0</b> y <b>created_at = datetime('now')</b></div>
+      <div class="phase-step"><span class="step-num">4</span>Error en notificación &#8594; <b>no falla</b> la operación principal (try/catch silencioso)</div>
+    </div>
+  </div>
+
+  <div class="phase-arrow">&#8595;</div>
+
+  <!-- PHASE 4: API -->
+  <div class="phase-group phase-4">
+    <div class="phase-title">4. API /api/notifications (Endpoints)</div>
+    <div class="phase-steps">
+      <div class="phase-step"><span class="step-num">G</span><b>GET /notifications</b> &#8594; Lista propia con paginación (?all=1 admin ve todas)</div>
+      <div class="phase-step"><span class="step-num">G</span><b>GET /notifications?action=unread_count</b> &#8594; Solo count (polling cada 30s)</div>
+      <div class="phase-step"><span class="step-num">G</span><b>GET /notifications?action=settings</b> &#8594; Config (solo admin)</div>
+      <div class="phase-step"><span class="step-num">P</span><b>POST /notifications</b> &#8594; Crear manual (admin: broadcast/array)</div>
+      <div class="phase-step"><span class="step-num">A</span><b>PATCH /notifications</b> &#8594; mark_read / mark_all_read / update_settings</div>
+      <div class="phase-step"><span class="step-num">D</span><b>DELETE /notifications</b> &#8594; Eliminar (admin: cualquier, user: propias)</div>
+    </div>
+  </div>
+
+  <div class="phase-arrow">&#8595;</div>
+
+  <!-- PHASE 5: UI -->
+  <div class="phase-group phase-5">
+    <div class="phase-title">5. Interfaz de Usuario</div>
+    <div class="phase-steps">
+      <div class="phase-step"><span class="step-num">1</span><b>Dashboard:</b> Campanita &#128276; con badge rojo (count no leídas) &#8594; Polling 30s</div>
+      <div class="phase-step"><span class="step-num">2</span><b>Dropdown:</b> Lista con iconos por tipo + "Marcar todas" + click &#8594; marca como leída + navega al link</div>
+      <div class="phase-step"><span class="step-num">3</span><b>Admin Panel:</b> Tab "Notificaciones" con historial global (todas las notifs del sistema)</div>
+      <div class="phase-step"><span class="step-num">4</span><b>Compositor:</b> Enviar a todos / solo admins / usuario específico (con búsqueda)</div>
+      <div class="phase-step"><span class="step-num">5</span><b>Admin Settings:</b> Toggle "Notificar al registrar negocio" + "Notificar a todos los usuarios"</div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="flow-legend">
+    <div class="legend-item"><div class="legend-dot" style="border-color:#64748B;background:#F0F4F8;"></div>Triggers</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#5B7A99;background:#E8EDF2;"></div>Verificación</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#4A6B8A;background:#E0E7EF;"></div>Base de Datos</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#3A5C7A;background:#D8E0EA;"></div>API</div>
+    <div class="legend-item"><div class="legend-dot" style="border-color:#2E5070;background:#D0D9E4;"></div>Interfaz</div>
+  </div>
+</div>
+</body>
+</html>

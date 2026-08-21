@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Chat - Administración HolaX">
+    <title>Chat - Administración HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .chat-logs-view { display:none; }
+        .chat-logs-view.active { display:block; }
+        .chat-config-view.hidden { display:none; }
+        .chat-back-btn { display:inline-flex;align-items:center;gap:6px;color:#6b7280;font-size:0.9rem;cursor:pointer;border:none;background:none;padding:6px 0;transition:color 0.2s; }
+        .chat-back-btn:hover { color:#2563eb; }
+        .conv-row { display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;transition:all 0.15s;margin-bottom:8px; }
+        .conv-row:hover { border-color:#2563eb;background:#f8faff; }
+        .conv-avatar { width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0; }
+        .conv-info { flex:1;min-width:0; }
+        .conv-names { font-weight:600;font-size:0.88rem;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+        .conv-meta { font-size:0.78rem;color:#94a3b8;margin-top:2px;display:flex;gap:8px;flex-wrap:wrap; }
+        .conv-last-msg { font-size:0.8rem;color:#6b7280;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px; }
+        .conv-stats { text-align:right;flex-shrink:0; }
+        .conv-msg-count { font-size:0.72rem;background:#e0e7ff;color:#4338ca;padding:2px 8px;border-radius:10px;font-weight:600; }
+        .conv-date { font-size:0.72rem;color:#94a3b8;margin-top:4px; }
+        .msg-bubble { max-width:75%;padding:10px 14px;border-radius:14px;font-size:0.88rem;line-height:1.5;margin-bottom:8px;word-wrap:break-word; }
+        .msg-mine { background:#2563eb;color:#fff;margin-left:auto;border-bottom-right-radius:4px; }
+        .msg-other { background:#f1f5f9;color:#111;border-bottom-left-radius:4px; }
+        .msg-time { font-size:0.68rem;color:#94a3b8;margin-top:2px; }
+        .msg-sender { font-size:0.75rem;font-weight:600;margin-bottom:2px; }
+        .chat-messages-container { background:#fafbfc;border:1px solid #e5e7eb;border-radius:12px;padding:20px;max-height:500px;overflow-y:auto; }
+        .chat-conv-header { background:#fff;border:1px solid #e5e7eb;border-radius:12px 12px 0 0;padding:16px 20px;display:flex;align-items:center;justify-content:space-between; }
+        .chat-conv-info h3 { margin:0;font-size:1rem;font-weight:700; }
+        .chat-conv-info p { margin:2px 0 0;font-size:0.8rem;color:#6b7280; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-admin" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name">HolaX</span> <span class="admin-badge">Admin</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="admin.html" class="nav-link"><i class="fas fa-cogs"></i> Panel Admin</a></li>
+                <li><a href="admin-vendedores.html" class="nav-link"><i class="fas fa-store"></i> Vendedores</a></li>
+                <li><a href="admin-chat.html" class="nav-link active"><i class="fas fa-comments"></i> Chat</a></li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="admin-panel">
+        <div class="admin-layout">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar" id="adminSidebar">
+                <div class="admin-sidebar-header">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat</span>
+                </div>
+                <nav class="admin-nav">
+                    <a href="admin.html" class="admin-nav-link">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Volver al Panel</span>
+                    </a>
+                    <a href="admin.html#tab=settings" class="admin-nav-link">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>Configuración General</span>
+                    </a>
+                    <a href="admin-vendedores.html" class="admin-nav-link">
+                        <i class="fas fa-store"></i>
+                        <span>Vendedores / Agentes</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <div class="admin-content">
+                <div class="admin-topbar">
+                    <div class="admin-topbar-left">
+                        <button class="admin-sidebar-toggle" id="adminSidebarToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="admin-page-title" id="adminPageTitle">Chat</h1>
+                    </div>
+                    <div class="admin-topbar-right">
+                        <span class="admin-date" id="adminDate"></span>
+                    </div>
+                </div>
+
+                <!-- ─── VIEW: Chat Config ───────────────────────── -->
+                <div class="chat-config-view" id="chatConfigView">
+                    <!-- Stats cards -->
+                    <div class="admin-stats-grid" style="margin-bottom:20px;">
+                        <div class="admin-stat-card" style="border-left:4px solid #25d366;cursor:pointer;" onclick="showChatLogs()">
+                            <div class="admin-stat-icon" style="background:#EFF6FF;color:#25d366;">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-number" id="statTotalConvs">-</div>
+                                <div class="admin-stat-label">Total Conversaciones</div>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card" style="border-left:4px solid #8b5cf6;cursor:pointer;" onclick="showChatLogs('comment')">
+                            <div class="admin-stat-icon" style="background:#f5f3ff;color:#8b5cf6;">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-number" id="statCommentConvs">-</div>
+                                <div class="admin-stat-label">Comentarios de Producto</div>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card" style="border-left:4px solid #2563eb;cursor:pointer;" onclick="showChatLogs('business')">
+                            <div class="admin-stat-icon" style="background:#eff6ff;color:#2563eb;">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-number" id="statBusinessConvs">-</div>
+                                <div class="admin-stat-label">Chats de Negocio</div>
+                            </div>
+                        </div>
+                        <div class="admin-stat-card" style="border-left:4px solid #f59e0b;">
+                            <div class="admin-stat-icon" style="background:#fffbeb;color:#f59e0b;">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="admin-stat-info">
+                                <div class="admin-stat-number" id="statTotalMsgs">-</div>
+                                <div class="admin-stat-label">Total Mensajes</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick access to chat logs -->
+                    <div class="admin-card" style="margin-bottom:20px;">
+                        <div class="admin-card-header">
+                            <h3><i class="fas fa-history" style="color:#2563eb;"></i> Registro de Conversaciones</h3>
+                            <div class="admin-card-actions">
+                                <button class="btn btn-primary btn-sm" onclick="showChatLogs()">
+                                    <i class="fas fa-search"></i> Ver Todos los Chats
+                                </button>
+                            </div>
+                        </div>
+                        <div class="admin-card-body">
+                            <p style="font-size:0.88rem;color:#6b7280;margin-bottom:12px;">
+                                Todas las conversaciones entre usuarios y vendedores se almacenan como respaldo. Puedes buscar por nombre, email, negocio o contenido del mensaje. Ideal para resolver disputas o verificar acuerdos.
+                            </p>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                <input type="text" id="chatLogsQuickSearch" class="form-control" placeholder="Buscar conversación rápida..." style="flex:1;min-width:250px;">
+                                <button class="btn btn-primary btn-sm" onclick="quickSearchChats()">
+                                    <i class="fas fa-search"></i> Buscar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anonymous Comments Toggle -->
+                    <div class="admin-card" style="margin-bottom:20px;">
+                        <div class="admin-card-header">
+                            <h3><i class="fas fa-user-secret" style="color:#8b5cf6;"></i> Mensajes Anónimos en Productos</h3>
+                        </div>
+                        <div class="admin-card-body">
+                            <p style="font-size:0.88rem;color:#6b7280;margin-bottom:14px;">
+                                Controla si los usuarios no registrados pueden dejar comentarios en los productos. Los comentarios anónimos aparecerán etiquetados como "Anónimo" en el chat de admin.
+                            </p>
+                            <div style="display:flex;align-items:center;gap:14px;">
+                                <label class="toggle-switch" style="position:relative;display:inline-block;width:52px;height:28px;flex-shrink:0;">
+                                    <input type="checkbox" id="anonCommentsToggle" data-key="anonymous_comments_enabled" style="opacity:0;width:0;height:0;">
+                                    <span style="position:absolute;cursor:pointer;inset:0;background:#cbd5e1;border-radius:28px;transition:all 0.3s;" id="anonToggleTrack"></span>
+                                    <span style="position:absolute;content:'';height:22px;width:22px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:all 0.3s;box-shadow:0 1px 3px rgba(0,0,0,0.2);" id="anonToggleThumb"></span>
+                                </label>
+                                <div>
+                                    <div id="anonToggleLabel" style="font-weight:600;font-size:0.9rem;color:#111;">Activados</div>
+                                    <div style="font-size:0.78rem;color:#94a3b8;" id="anonToggleDesc">Cualquier persona puede comentar en productos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Mode Config -->
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3><i class="fas fa-sliders-h" style="color:#25d366;"></i> Modo de Chat</h3>
+                            <div class="admin-card-actions">
+                                <button class="btn btn-primary btn-sm" id="adminSaveSettingsBtn">
+                                    <i class="fas fa-save"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="admin-card-body">
+                            <div style="display:flex;flex-direction:column;gap:12px;">
+                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:all 0.2s;">
+                                    <input type="radio" name="chat_mode" value="all" data-key="chat_mode" style="width:20px;height:20px;accent-color:#25d366;">
+                                    <div style="flex:1;">
+                                        <div style="font-weight:700;color:#111;font-size:0.95rem;"><i class="fas fa-globe" style="color:#25d366;margin-right:8px;"></i> Todos los usuarios</div>
+                                        <div style="font-size:0.82rem;color:#6b7280;margin-top:2px;">Cualquier usuario registrado puede chatear con vendedores.</div>
+                                    </div>
+                                </label>
+                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:all 0.2s;">
+                                    <input type="radio" name="chat_mode" value="premium_only" data-key="chat_mode" style="width:20px;height:20px;accent-color:#f59e0b;">
+                                    <div style="flex:1;">
+                                        <div style="font-weight:700;color:#111;font-size:0.95rem;"><i class="fas fa-crown" style="color:#f59e0b;margin-right:8px;"></i> Solo Premium</div>
+                                        <div style="font-size:0.82rem;color:#6b7280;margin-top:2px;">Ambas partes (comprador y vendedor) deben ser Premium.</div>
+                                    </div>
+                                </label>
+                                <label class="settings-radio-card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:all 0.2s;">
+                                    <input type="radio" name="chat_mode" value="none" data-key="chat_mode" style="width:20px;height:20px;accent-color:#dc2626;">
+                                    <div style="flex:1;">
+                                        <div style="font-weight:700;color:#111;font-size:0.95rem;"><i class="fas fa-ban" style="color:#dc2626;margin-right:8px;"></i> Desactivado</div>
+                                        <div style="font-size:0.82rem;color:#6b7280;margin-top:2px;">El chat entre usuarios está completamente desactivado.</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div id="chatModeStatus" style="margin-top:14px;padding:10px 14px;border-radius:10px;font-size:0.85rem;display:none;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── VIEW: Chat Logs ─────────────────────────── -->
+                <div class="chat-logs-view" id="chatLogsView">
+                    <button class="chat-back-btn" onclick="showChatConfig()">
+                        <i class="fas fa-arrow-left"></i> Volver a Configuración
+                    </button>
+
+                    <!-- Search bar -->
+                    <div class="admin-card" style="margin-top:12px;margin-bottom:16px;">
+                        <div class="admin-card-body" style="padding:14px 18px;">
+                            <!-- Filter buttons -->
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;" id="chatFilterBtns">
+                                <button class="btn btn-primary btn-sm" data-filter="all" onclick="setChatFilter('all')">
+                                    <i class="fas fa-comments"></i> Todos
+                                </button>
+                                <button class="btn btn-outline btn-sm" data-filter="comment" onclick="setChatFilter('comment')">
+                                    <i class="fas fa-comment-dots"></i> Comentarios de Producto
+                                </button>
+                                <button class="btn btn-outline btn-sm" data-filter="business" onclick="setChatFilter('business')">
+                                    <i class="fas fa-store"></i> Chats de Negocio
+                                </button>
+                            </div>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                                <div style="position:relative;flex:1;min-width:220px;">
+                                    <i class="fas fa-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;"></i>
+                                    <input type="text" id="chatLogsSearch" class="form-control" placeholder="Buscar por nombre, email, negocio o mensaje..." style="padding-left:36px;">
+                                </div>
+                                <button class="btn btn-primary btn-sm" id="btnSearchLogs" style="min-width:100px;">
+                                    <i class="fas fa-search"></i> Buscar
+                                </button>
+                                <button class="btn btn-secondary btn-sm" id="btnClearSearch">
+                                    <i class="fas fa-times"></i> Limpiar
+                                </button>
+                                <button class="btn btn-secondary btn-sm" id="btnRefreshLogs">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conversation list -->
+                    <div id="chatLogsListContainer">
+                        <div id="chatLogsLoading" style="text-align:center;padding:40px;color:#9ca3af;">
+                            <i class="fas fa-spinner fa-spin fa-2x"></i>
+                            <p style="margin-top:10px;">Cargando conversaciones...</p>
+                        </div>
+                        <div id="chatLogsList"></div>
+                        <div id="chatLogsEmpty" class="empty-state-sm" style="display:none;padding:40px;">
+                            <i class="fas fa-comments" style="font-size:2.5rem;color:#d1d5db;"></i>
+                            <p style="margin-top:12px;font-size:0.95rem;color:#6b7280;">No se encontraron conversaciones.</p>
+                        </div>
+                        <div class="admin-pagination" id="chatLogsPagination"></div>
+                    </div>
+
+                    <!-- Conversation detail (hidden by default) -->
+                    <div id="chatConvDetail" style="display:none;">
+                        <div class="chat-conv-header">
+                            <div class="chat-conv-info">
+                                <button class="chat-back-btn" onclick="hideConvDetail()" style="margin-bottom:8px;">
+                                    <i class="fas fa-arrow-left"></i> Volver a la lista
+                                </button>
+                                <h3 id="convDetailTitle">Cargando...</h3>
+                                <p id="convDetailMeta"></p>
+                            </div>
+                            <div id="convDetailBadges" style="display:flex;gap:6px;flex-shrink:0;"></div>
+                        </div>
+                        <div class="chat-messages-container" id="convMessagesContainer" style="border-top:none;border-radius:0 0 12px 12px;margin-top:-1px;">
+                            <div id="convMessagesLoading" style="text-align:center;padding:40px;color:#9ca3af;">
+                                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                            </div>
+                            <div id="convMessagesList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast container -->
+    <div id="toastContainer" style="position:fixed;top:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:8px;"></div>
+
+    <script src="js/app.js"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        // Auth check
+        if (!window.isAuthenticated || !window.isAuthenticated()) {
+            window.location.href = 'login.html';
+            return;
+        }
+        const user = window.getCachedUser ? window.getCachedUser() : null;
+        if (!user || user.role !== 'admin') {
+            alert('Acceso denegado. Solo administradores.');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Date
+        const dateEl = document.getElementById('adminDate');
+        if (dateEl) dateEl.textContent = new Date().toLocaleDateString('es-VE', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+        // ─── Hamburger menu toggle (fix for admin sub-pages) ──
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+            });
+            navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                });
+            });
+            document.addEventListener('click', function(e) {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
+            });
+        }
+
+        // Sidebar toggle
+        const sidebarToggle = document.getElementById('adminSidebarToggle');
+        const sidebar = document.getElementById('adminSidebar');
+        if (sidebarToggle && sidebar) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+            // Close sidebar on mobile when clicking a link
+            sidebar.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => sidebar.classList.remove('active'));
+            });
+        }
+
+        // Toast
+        function showToast(msg, type) {
+            const c = document.getElementById('toastContainer');
+            if (!c) return;
+            const colors = { success:'#006EE3', error:'#dc2626', info:'#2563eb' };
+            const icons = { success:'fa-check-circle', error:'fa-exclamation-circle', info:'fa-info-circle' };
+            const el = document.createElement('div');
+            el.style.cssText = `padding:12px 20px;border-radius:10px;color:#fff;font-size:0.9rem;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 4px 12px rgba(0,0,0,0.15);background:${colors[type]||colors.info};`;
+            el.innerHTML = `<i class="fas ${icons[type]||icons.info}"></i> ${msg}`;
+            c.appendChild(el);
+            setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); }, 3000);
+        }
+
+        function esc(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function formatDate(d) {
+            if (!d) return '-';
+            try { return new Date(d).toLocaleDateString('es-VE', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }); } catch(e) { return d; }
+        }
+
+        // ─── View Switching ────────────────────────────────
+        const configView = document.getElementById('chatConfigView');
+        const logsView = document.getElementById('chatLogsView');
+        const pageTitle = document.getElementById('adminPageTitle');
+
+        window.showChatConfig = function() {
+            configView.classList.remove('hidden');
+            logsView.classList.remove('active');
+            pageTitle.textContent = 'Chat';
+        };
+
+        window.showChatLogs = function(filterOrSearch) {
+            configView.classList.add('hidden');
+            logsView.classList.add('active');
+            pageTitle.textContent = 'Registro de Chats';
+            if (typeof filterOrSearch === 'string' && (filterOrSearch === 'comment' || filterOrSearch === 'business' || filterOrSearch === 'all')) {
+                setChatFilter(filterOrSearch);
+            } else if (filterOrSearch !== undefined) {
+                document.getElementById('chatLogsSearch').value = filterOrSearch;
+            }
+            loadChatLogs(1);
+        };
+
+        window.quickSearchChats = function() {
+            const q = document.getElementById('chatLogsQuickSearch').value.trim();
+            showChatLogs(q);
+        };
+
+        // Enter key on quick search
+        const quickInput = document.getElementById('chatLogsQuickSearch');
+        if (quickInput) quickInput.addEventListener('keydown', e => { if (e.key === 'Enter') quickSearchChats(); });
+
+        // ─── Anonymous Comments Toggle ──────────────────────
+        const anonToggle = document.getElementById('anonCommentsToggle');
+        const anonTrack = document.getElementById('anonToggleTrack');
+        const anonThumb = document.getElementById('anonToggleThumb');
+        const anonLabel = document.getElementById('anonToggleLabel');
+        const anonDesc = document.getElementById('anonToggleDesc');
+
+        function updateAnonToggleUI(isEnabled) {
+            if (isEnabled) {
+                anonToggle.checked = true;
+                anonTrack.style.background = '#8b5cf6';
+                anonThumb.style.transform = 'translateX(24px)';
+                anonLabel.textContent = 'Activados';
+                anonLabel.style.color = '#111';
+                anonDesc.textContent = 'Cualquier persona puede comentar en productos';
+            } else {
+                anonToggle.checked = false;
+                anonTrack.style.background = '#cbd5e1';
+                anonThumb.style.transform = 'translateX(0)';
+                anonLabel.textContent = 'Desactivados';
+                anonLabel.style.color = '#94a3b8';
+                anonDesc.textContent = 'Solo usuarios registrados pueden comentar';
+            }
+        }
+
+        if (anonToggle) {
+            anonToggle.addEventListener('change', async function() {
+                const val = this.checked ? '1' : '0';
+                updateAnonToggleUI(this.checked);
+                try {
+                    await api.put('/settings', { anonymous_comments_enabled: val });
+                    showToast(this.checked ? 'Comentarios anónimos activados' : 'Comentarios anónimos desactivados', 'success');
+                } catch(e) {
+                    showToast('Error al guardar: ' + e.message, 'error');
+                    updateAnonToggleUI(!this.checked);
+                }
+            });
+        }
+
+        // Load anonymous setting
+        async function loadAnonSetting() {
+            try {
+                const settings = await api.get('/settings');
+                const enabled = settings.anonymous_comments_enabled !== '0';
+                updateAnonToggleUI(enabled);
+            } catch(e) {}
+        }
+        loadAnonSetting();
+
+        // ─── Chat Settings ──────────────────────────────────
+        async function loadSettings() {
+            try {
+                const settings = await api.get('/settings');
+                document.querySelectorAll('#chatConfigView [data-key]').forEach(el => {
+                    const key = el.dataset.key;
+                    const value = settings[key];
+                    if (el.type === 'radio') el.checked = (el.value === value);
+                    else el.value = value || '';
+                });
+                highlightChatModeCard();
+            } catch (err) { showToast('Error al cargar configuración', 'error'); }
+        }
+
+        async function saveSettings() {
+            try {
+                const updates = {};
+                document.querySelectorAll('#chatConfigView [data-key]').forEach(el => {
+                    const key = el.dataset.key;
+                    if (el.type === 'radio') { if (el.checked) updates[key] = el.value; }
+                    else updates[key] = el.value;
+                });
+                await api.put('/settings', updates);
+                showToast('Configuración guardada', 'success');
+                highlightChatModeCard();
+            } catch (err) { showToast('Error: ' + err.message, 'error'); }
+        }
+
+        function highlightChatModeCard() {
+            const colors = { all:'#25d366', premium_only:'#f59e0b', none:'#dc2626' };
+            document.querySelectorAll('[name="chat_mode"]').forEach(r => {
+                const card = r.closest('.settings-radio-card');
+                if (!card) return;
+                if (r.checked) {
+                    card.style.borderColor = colors[r.value]||'#25d366';
+                    card.style.background = r.value==='all'?'#EFF6FF':r.value==='premium_only'?'#fffbeb':'#fef2f2';
+                } else { card.style.borderColor='#e5e7eb'; card.style.background='transparent'; }
+            });
+            const st = document.getElementById('chatModeStatus');
+            if (st) {
+                const ch = document.querySelector('[name="chat_mode"]:checked');
+                if (ch) {
+                    const m = { all:{bg:'#EFF6FF',border:'#BFDBFE',color:'#006EE3',text:'Chat activo para todos los usuarios.'}, premium_only:{bg:'#fffbeb',border:'#fde68a',color:'#b45309',text:'Chat restringido a usuarios Premium.'}, none:{bg:'#fef2f2',border:'#fecaca',color:'#dc2626',text:'Chat desactivado.'} };
+                    const s = m[ch.value]||m.all;
+                    st.style.display='block'; st.style.background=s.bg; st.style.border='1px solid '+s.border; st.style.color=s.color;
+                    st.innerHTML='<i class="fas fa-info-circle"></i> '+s.text;
+                }
+            }
+        }
+
+        document.querySelectorAll('[name="chat_mode"]').forEach(r => r.addEventListener('change', () => highlightChatModeCard()));
+        const saveBtn = document.getElementById('adminSaveSettingsBtn');
+        if (saveBtn) saveBtn.addEventListener('click', saveSettings);
+
+        // ─── Chat Logs ──────────────────────────────────────
+        let logsPage = 1;
+        let currentFilter = 'all';
+
+        window.setChatFilter = function(filter) {
+            currentFilter = filter;
+            // Update button styles
+            document.querySelectorAll('#chatFilterBtns button').forEach(btn => {
+                if (btn.dataset.filter === filter) {
+                    btn.className = 'btn btn-primary btn-sm';
+                } else {
+                    btn.className = 'btn btn-outline btn-sm';
+                }
+            });
+            loadChatLogs(1);
+        };
+
+        async function loadChatLogs(page) {
+            logsPage = page || 1;
+            const loading = document.getElementById('chatLogsLoading');
+            const list = document.getElementById('chatLogsList');
+            const empty = document.getElementById('chatLogsEmpty');
+            const pagination = document.getElementById('chatLogsPagination');
+            const detail = document.getElementById('chatConvDetail');
+            const listContainer = document.getElementById('chatLogsListContainer');
+
+            if (loading) loading.style.display = 'block';
+            if (list) list.innerHTML = '';
+            if (empty) empty.style.display = 'none';
+            if (pagination) pagination.innerHTML = '';
+            if (detail) detail.style.display = 'none';
+            if (listContainer) listContainer.style.display = 'block';
+
+            const search = document.getElementById('chatLogsSearch').value.trim();
+            try {
+                const params = new URLSearchParams({ page: logsPage, limit: 20 });
+                if (search) params.set('search', search);
+                if (currentFilter && currentFilter !== 'all') params.set('filter', currentFilter);
+                const data = await api.get('/admin/chat-logs?' + params.toString());
+
+                if (loading) loading.style.display = 'none';
+
+                // Debug: check if API returned error
+                if (data.error) {
+                    list.innerHTML = '<p style="color:#dc2626;text-align:center;padding:20px;">Error del servidor: ' + esc(data.error) + (data.debug ? '<br><small>' + esc(data.debug) + '</small>' : '') + '</p>';
+                    return;
+                }
+
+                const convs = data.conversations || [];
+
+                // Update stats on config view
+                if (page === 1 && data.stats) {
+                    const statTotal = document.getElementById('statTotalConvs');
+                    if (statTotal) statTotal.textContent = data.stats.all_conversations || 0;
+                    const statComment = document.getElementById('statCommentConvs');
+                    if (statComment) statComment.textContent = data.stats.comment_conversations || 0;
+                    const statBusiness = document.getElementById('statBusinessConvs');
+                    if (statBusiness) statBusiness.textContent = data.stats.business_conversations || 0;
+                }
+
+                if (convs.length === 0) {
+                    if (empty) empty.style.display = 'block';
+                    return;
+                }
+
+                list.innerHTML = convs.map(c => {
+                    const isComment = (c.last_message || '').startsWith('[COMENTARIO]');
+                    const date = formatDate(c.last_message_at || c.created_at);
+                    const buyerDisplay = c.buyer_id === 0 ? 'Anónimo' : (c.buyer_name || 'Anónimo');
+                    const typeBadge = isComment
+                        ? '<span style="display:inline-flex;align-items:center;gap:4px;background:#f5f3ff;color:#8b5cf6;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:600;"><i class="fas fa-comment-dots"></i> Comentario</span>'
+                        : '<span style="display:inline-flex;align-items:center;gap:4px;background:#eff6ff;color:#2563eb;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:600;"><i class="fas fa-store"></i> Negocio</span>';
+                    const cleanMsg = (c.last_message || '').replace(/^\[COMENTARIO[^\]]*\]\s*/, '').replace(/^\[COMENTARIO en [^\]]*\]\s*[^\s]*:\s*/, '');
+                    return `
+                    <div class="conv-row" onclick="openConversation(${c.id})">
+                        <div class="conv-avatar" style="background:${isComment ? '#f5f3ff' : '#e0e7ff'};color:${isComment ? '#8b5cf6' : '#4338ca'};">${(buyerDisplay||'?')[0].toUpperCase()}</div>
+                        <div class="conv-info">
+                            <div class="conv-names">${esc(buyerDisplay)} <i class="fas fa-exchange-alt" style="font-size:0.7rem;color:#d1d5db;margin:0 4px;"></i> ${esc(c.seller_name||'Vendedor')} ${typeBadge}</div>
+                            <div class="conv-meta">
+                                <span style="color:${isComment ? '#8b5cf6' : '#2563eb'};"><i class="fas ${isComment ? 'fa-comment-dots' : 'fa-user'}"></i> ${isComment ? (c.buyer_id === 0 ? 'Anónimo' : 'Comprador') : 'Comprador'}</span>
+                                <span style="color:#006EE3;"><i class="fas fa-store"></i> Vendedor</span>
+                                ${c.business_title ? `<span><i class="fas fa-building"></i> ${esc(c.business_title)}</span>` : ''}
+                            </div>
+                            ${c.last_message ? `<div class="conv-last-msg"><i class="fas fa-comment-dots" style="color:#d1d5db;margin-right:4px;"></i>${esc(cleanMsg || c.last_message)}</div>` : ''}
+                        </div>
+                        <div class="conv-stats">
+                            <span class="conv-msg-count">${c.message_count || 0} msgs</span>
+                            <div class="conv-date">${date}</div>
+                        </div>
+                    </div>`;
+                }).join('');
+
+                // Pagination
+                if (data.pagination && data.pagination.totalPages > 1) {
+                    const p = data.pagination;
+                    let html = '';
+                    if (p.page > 1) html += `<button class="btn btn-xs btn-outline" onclick="loadChatLogs(${p.page-1})"><i class="fas fa-chevron-left"></i></button>`;
+                    html += `<span style="padding:0 12px;font-size:0.82rem;color:#6b7280;">Página ${p.page} de ${p.totalPages} (${p.total} total)</span>`;
+                    if (p.page < p.totalPages) html += `<button class="btn btn-xs btn-outline" onclick="loadChatLogs(${p.page+1})"><i class="fas fa-chevron-right"></i></button>`;
+                    pagination.innerHTML = html;
+                }
+            } catch (err) {
+                if (loading) loading.style.display = 'none';
+                console.error('Error loading chat logs:', err);
+                if (list) list.innerHTML = `<p style="color:#dc2626;text-align:center;padding:20px;">Error: ${esc(err.message)}</p>`;
+            }
+        }
+
+        window.loadChatLogs = loadChatLogs;
+
+        // Open conversation detail
+        window.openConversation = async function(convId) {
+            const listContainer = document.getElementById('chatLogsListContainer');
+            const detail = document.getElementById('chatConvDetail');
+            const msgsLoading = document.getElementById('convMessagesLoading');
+            const msgsList = document.getElementById('convMessagesList');
+            const titleEl = document.getElementById('convDetailTitle');
+            const metaEl = document.getElementById('convDetailMeta');
+            const badgesEl = document.getElementById('convDetailBadges');
+
+            if (listContainer) listContainer.style.display = 'none';
+            if (detail) detail.style.display = 'block';
+            if (msgsLoading) msgsLoading.style.display = 'block';
+            if (msgsList) msgsList.innerHTML = '';
+            if (titleEl) titleEl.textContent = 'Cargando...';
+
+            try {
+                const data = await api.get('/admin/chat-logs?conversation_id=' + convId);
+                const conv = data.conversation;
+                const messages = data.messages || [];
+
+                if (!conv) { titleEl.textContent = 'No encontrada'; return; }
+
+                titleEl.textContent = (conv.buyer.name||'Anónimo') + ' ↔ ' + (conv.seller.name||'Vendedor');
+                const commentBadge = conv.is_comment ? ' <span style="background:#f5f3ff;color:#8b5cf6;padding:2px 10px;border-radius:8px;font-size:0.75rem;font-weight:600;"><i class="fas fa-comment-dots"></i> Comentario de Producto</span>' : '';
+                metaEl.innerHTML = `
+                    ${commentBadge}
+                    ${conv.business_title ? `<br><i class="fas fa-building"></i> <a href="/negocio/${conv.business_slug||conv.business_id}" target="_blank" style="color:#2563eb;">${esc(conv.business_title)}</a> &nbsp;|&nbsp; ` : '<br>'}
+                    <i class="fas fa-user"></i> ${esc(conv.buyer.name||'Anónimo')} (${esc(conv.buyer.email||'N/A')}) &nbsp;|&nbsp;
+                    <i class="fas fa-store"></i> ${esc(conv.seller.name||'Vendedor')} (${esc(conv.seller.email||'')}) &nbsp;|&nbsp;
+                    <i class="fas fa-calendar"></i> ${formatDate(conv.created_at)} &nbsp;|&nbsp;
+                    <i class="fas fa-comment"></i> ${conv.message_count} mensajes
+                `;
+                badgesEl.innerHTML = `
+                    ${conv.business_slug ? `<a href="/negocio/${conv.business_slug}" target="_blank" class="btn btn-xs btn-outline" title="Ver negocio"><i class="fas fa-external-link-alt"></i> Negocio</a>` : ''}
+                `;
+
+                if (msgsLoading) msgsLoading.style.display = 'none';
+
+                if (messages.length === 0) {
+                    msgsList.innerHTML = '<p style="text-align:center;color:#94a3b8;padding:30px;">No hay mensajes en esta conversación.</p>';
+                    return;
+                }
+
+                let html = '';
+                let lastDate = '';
+                messages.forEach(m => {
+                    const msgDate = m.created_at ? m.created_at.substring(0,10) : '';
+                    if (msgDate && msgDate !== lastDate) {
+                        html += `<div style="text-align:center;margin:16px 0 8px;"><span style="background:#e5e7eb;color:#6b7280;padding:3px 12px;border-radius:10px;font-size:0.72rem;">${formatDate(m.created_at).substring(0,12)}</span></div>`;
+                        lastDate = msgDate;
+                    }
+                    const isMine = false; // Admin view: show both sides
+                    const senderLabel = m.sender_id === conv.buyer.id
+                        ? `<span style="color:#2563eb;"><i class="fas fa-user"></i> ${esc(m.sender_name||'Comprador')}</span>`
+                        : `<span style="color:#006EE3;"><i class="fas fa-store"></i> ${esc(m.sender_name||'Vendedor')}</span>`;
+                    const bubbleClass = m.sender_id === conv.seller.id ? 'msg-other' : 'msg-mine';
+                    html += `
+                        <div style="display:flex;flex-direction:column;${m.sender_id === conv.seller.id ? '' : 'align-items:flex-end;'}">
+                            <div class="msg-sender">${senderLabel} <span class="msg-time">${m.created_at ? m.created_at.substring(11,16) : ''}</span></div>
+                            <div class="msg-bubble ${bubbleClass}">${esc(m.content)}</div>
+                        </div>`;
+                });
+
+                msgsList.innerHTML = html;
+
+                // Scroll to bottom
+                const container = document.getElementById('convMessagesContainer');
+                if (container) container.scrollTop = container.scrollHeight;
+
+            } catch (err) {
+                if (msgsLoading) msgsLoading.style.display = 'none';
+                msgsList.innerHTML = `<p style="color:#dc2626;text-align:center;padding:20px;">Error: ${esc(err.message)}</p>`;
+            }
+        };
+
+        window.hideConvDetail = function() {
+            document.getElementById('chatConvDetail').style.display = 'none';
+            document.getElementById('chatLogsListContainer').style.display = 'block';
+        };
+
+        // Search buttons
+        document.getElementById('btnSearchLogs').addEventListener('click', () => loadChatLogs(1));
+        document.getElementById('btnClearSearch').addEventListener('click', () => {
+            document.getElementById('chatLogsSearch').value = '';
+            loadChatLogs(1);
+        });
+        document.getElementById('btnRefreshLogs').addEventListener('click', () => loadChatLogs(logsPage));
+        const searchInput = document.getElementById('chatLogsSearch');
+        if (searchInput) searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') loadChatLogs(1); });
+
+        // ─── Load Stats ────────────────────────────────────
+        async function loadStats() {
+            try {
+                const data = await api.get('/admin/chat-logs?limit=1');
+                if (data.stats) {
+                    document.getElementById('statTotalConvs').textContent = data.stats.all_conversations || 0;
+                    document.getElementById('statCommentConvs').textContent = data.stats.comment_conversations || 0;
+                    document.getElementById('statBusinessConvs').textContent = data.stats.business_conversations || 0;
+                }
+                // Count total messages
+                const dataAll = await api.get('/admin/chat-logs?limit=50&page=1');
+                let totalMsgs = 0;
+                (dataAll.conversations || []).forEach(c => { totalMsgs += (c.message_count || 0); });
+                document.getElementById('statTotalMsgs').textContent = totalMsgs;
+            } catch(e) {
+                document.getElementById('statTotalConvs').textContent = '0';
+                document.getElementById('statCommentConvs').textContent = '0';
+                document.getElementById('statBusinessConvs').textContent = '0';
+                document.getElementById('statTotalMsgs').textContent = '0';
+            }
+        }
+
+        // ─── Init ──────────────────────────────────────────
+        loadSettings();
+        loadStats();
+
+    })();
+    </script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detalle de inmueble en HolaX - Directorio de negocios e inmuebles de Venezuela.">
+    <title>Inmueble - HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList">
+                        <!-- States loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="inmuebles.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="marketplace.html" class="nav-link">Marketplace</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="entretenimiento.html" class="nav-link"><i class="fas fa-theater-masks"></i> Entretenimiento</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user hidden">
+                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Property Detail -->
+    <main class="property-detail-page">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="inmuebles.html">Inmuebles</a>
+                <span id="breadcrumbTitle">Cargando...</span>
+            </nav>
+
+            <!-- Loading State -->
+            <div class="loading-spinner" id="propertyLoading">
+                <i class="fas fa-spinner fa-spin fa-3x"></i>
+                <p>Cargando propiedad...</p>
+            </div>
+
+            <!-- Error State -->
+            <div class="error-state hidden" id="propertyError">
+                <i class="fas fa-exclamation-circle fa-3x"></i>
+                <h2>Propiedad no encontrada</h2>
+                <p>La propiedad que buscas no existe o ha sido eliminada.</p>
+                <a href="inmuebles.html" class="btn btn-primary">Buscar Inmuebles</a>
+            </div>
+
+            <!-- Property Content -->
+            <div class="property-content hidden" id="propertyContent">
+                <!-- Gallery -->
+                <div class="property-gallery" id="propertyGallery">
+                    <div class="gallery-main">
+                        <img id="mainImage" src="" alt="" class="gallery-main-img">
+                        <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Siguiente">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span id="galleryCurrent">1</span> / <span id="galleryTotal">1</span>
+                        </div>
+                        <button class="gallery-fullscreen" id="galleryFullscreen" aria-label="Pantalla completa">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <!-- Badges on image -->
+                        <div class="gallery-badges" id="galleryBadges"></div>
+                    </div>
+                    <div class="gallery-thumbnails" id="galleryThumbnails">
+                        <!-- Thumbnails loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Compact Info Card -->
+                <div class="compact-info-card">
+                    <!-- Top row: Badges + Price + Favorite -->
+                    <div class="compact-top-row">
+                        <div class="compact-price-row">
+                            <span id="propDetailBadges"></span>
+                        </div>
+                        <button class="btn-favorite" id="btnFavorite" aria-label="Agregar a favoritos" data-property-id="">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <h1 class="compact-title" id="propDetailTitle">Cargando...</h1>
+                    <div class="compact-price" id="propDetailPrice" style="display:none;">--</div>
+                    <!-- Address -->
+                    <div class="compact-address" id="propDetailLocation">
+                        <i class="fas fa-map-marker-alt"></i> <span>Cargando...</span>
+                    </div>
+
+                    <!-- Feature Chips -->
+                    <div class="feature-chips">
+                        <div class="feature-chip" id="statBedroomsWrap" style="display:none;" title="Habitaciones">
+                            <i class="fas fa-bed"></i> <span id="statBedrooms">--</span>
+                        </div>
+                        <div class="feature-chip" id="statBathroomsWrap" style="display:none;" title="Baños">
+                            <i class="fas fa-bath"></i> <span id="statBathrooms">--</span>
+                        </div>
+                        <div class="feature-chip" id="statParkingWrap" style="display:none;" title="Estacionamientos">
+                            <i class="fas fa-car"></i> <span id="statParking">--</span>
+                        </div>
+                        <div class="feature-chip" id="statAreaWrap" style="display:none;" title="Área">
+                            <i class="fas fa-ruler-combined"></i> <span id="statArea">--</span>
+                        </div>
+                        <div class="feature-chip" id="statYearWrap" style="display:none;" title="Año de construcción">
+                            <i class="fas fa-calendar-alt"></i> <span id="statYear">--</span>
+                        </div>
+                        <div class="feature-chip" id="statFloorsWrap" style="display:none;" title="Pisos">
+                            <i class="fas fa-layer-group"></i> <span id="statFloors">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Description (collapsible) -->
+                    <div class="compact-description collapsed" id="propDescription">
+                        <p>Cargando descripción...</p>
+                    </div>
+                    <button class="description-toggle" id="descriptionToggle" style="display:none;">
+                        Leer más <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <!-- Features Section -->
+                <div class="property-section hidden" id="featuresSection">
+                    <h2 class="property-section-title">Características</h2>
+                    <div class="features-list" id="featuresList">
+                        <!-- Features loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <div class="property-section map-section-wrapper hidden" id="mapSection">
+                    <h2 class="property-section-title">Ubicación</h2>
+                    <div class="property-map" id="propertyMap"></div>
+                    <button class="open-map-modal-btn" id="openMapModalBtn">
+                        <i class="fas fa-expand"></i> Ver en Mapa Completo
+                    </button>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="property-section contact-section">
+                    <h2 class="property-section-title">Contactar al Propietario</h2>
+                    <div class="contact-actions" id="contactActions">
+                        <a href="#" class="btn btn-whatsapp btn-full btn-lg" id="mainWhatsApp" style="display:none;" target="_blank" rel="noopener">
+                            <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                        </a>
+                        <a href="#" class="btn btn-full btn-lg" id="emailContactBtn" style="display:none;background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-weight:600;border-radius:12px;text-align:center;text-decoration:none;padding:14px 24px;font-size:1rem;">
+                            <i class="fas fa-envelope"></i> Contactar por Email
+                        </a>
+                        <button class="btn btn-primary btn-full btn-lg" id="openChatBtn" style="margin-top:8px;">
+                            <i class="fas fa-comment-dots"></i> Enviar Mensaje
+                        </button>
+                        <button class="btn btn-share-wa btn-full btn-lg" id="shareWhatsAppBtn" style="margin-top:8px;">
+                            <i class="fab fa-whatsapp"></i> Compartir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similar Properties -->
+            <section class="section hidden" id="similarSection">
+                <div class="section-header">
+                    <h2 class="section-title">Propiedades Similares</h2>
+                    <a href="inmuebles.html" class="section-link">Ver más <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="property-grid" id="similarGrid">
+                    <!-- Similar properties loaded dynamically -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Image Lightbox -->
+    <div class="lightbox hidden" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img id="lightboxImage" src="" alt="" class="lightbox-img">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
+    <!-- Full-Screen Map Modal -->
+    <div class="map-modal" id="mapModal">
+        <div class="map-modal-header">
+            <h3><i class="fas fa-map-marker-alt"></i> Ubicación de la Propiedad</h3>
+            <button class="map-modal-close" id="mapModalClose" aria-label="Cerrar mapa">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="map-modal-body">
+            <div id="mapModalMap"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 HolaX. Todos los derechos reservados.</p>
+                <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
+                <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hidden elements for app.js compatibility -->
+    <span id="statAreaLabel" class="hidden"></span>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/property-detail.js"></script>
+    <script src="js/chat.js"></script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>

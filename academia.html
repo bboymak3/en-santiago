@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Academia de Agentes AunClick - Aprende, gana XP y conviértete en Partner Digital Certificado.">
+<title>Academia de Agentes - AunClick</title>
+<meta property="og:title" content="Academia de Agentes - AunClick">
+<meta property="og:description" content="Aprende y crece como agente digital. Clases, exámenes y certificaciones.">
+<meta property="og:site_name" content="AunClick">
+<meta property="og:locale" content="es_VE">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#7c3aed;--primary-light:#ede9fe;--primary-dark:#5b21b6;
+  --success:#10b981;--success-light:#d1fae5;
+  --danger:#ef4444;--danger-light:#fee2e2;
+  --warning:#f59e0b;--warning-light:#fef3c7;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;
+  --gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  --radius:12px;--radius-sm:8px;--radius-lg:16px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 15px rgba(0,0,0,.08),0 4px 6px rgba(0,0,0,.05);
+  --header-h:60px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f0f5;color:var(--gray-800);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+button:active{transform:scale(.97)}
+
+/* Header */
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:#fff;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 16px;z-index:100;box-shadow:var(--shadow)}
+.header-logo{font-size:18px;font-weight:800;color:var(--primary);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.header-logo i{font-size:22px}
+.header-spacer{flex:1}
+.header-avatar{width:36px;height:36px;border-radius:50%;background:var(--primary-light);border:2px solid var(--primary);cursor:pointer;object-fit:cover;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:14px;color:var(--primary);flex-shrink:0}
+.header-avatar img{width:100%;height:100%;object-fit:cover}
+.header-logout{background:none;color:var(--gray-500);font-size:18px;padding:6px 10px;margin-left:8px;flex-shrink:0}
+.header-profile-btn{background:var(--primary);color:#fff;font-size:12px;font-weight:600;padding:6px 12px;border-radius:var(--radius-sm);display:flex;align-items:center;gap:6px;margin-left:8px;flex-shrink:0;transition:background .2s}
+.header-profile-btn:hover{background:var(--primary-dark);text-decoration:none;color:#fff}
+
+/* Toast */
+.toast-container{position:fixed;top:72px;left:50%;transform:translateX(-50%);z-index:999;width:90%;max-width:400px;pointer-events:none}
+.toast{background:var(--gray-800);color:#fff;padding:12px 20px;border-radius:var(--radius-sm);font-size:14px;text-align:center;box-shadow:var(--shadow-lg);opacity:0;transform:translateY(-10px);transition:all .3s ease;pointer-events:auto}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--danger)}
+
+/* Loading spinner */
+.page-loader{text-align:center;padding:80px 20px}
+.spinner{width:40px;height:40px;border:3px solid var(--gray-200);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Main */
+.main{padding:calc(var(--header-h) + 16px) 16px 32px;max-width:640px;margin:0 auto}
+
+/* Card */
+.card{background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:20px;margin-bottom:16px}
+.card-title{font-size:16px;font-weight:700;color:var(--gray-900);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card-title i{color:var(--primary)}
+
+/* Profile card */
+.profile-card{text-align:center;position:relative}
+.profile-avatar-wrap{position:relative;width:90px;height:90px;margin:0 auto 12px}
+.profile-avatar{width:90px;height:90px;border-radius:50%;border:3px solid var(--primary);object-fit:cover;cursor:pointer;display:flex;align-items:center;justify-content:center;background:var(--primary-light);color:var(--primary);font-size:32px;overflow:hidden}
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-avatar-overlay{position:absolute;bottom:0;left:0;right:0;height:30px;border-radius:0 0 50% 50%;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;cursor:pointer}
+.profile-avatar-wrap:hover .profile-avatar-overlay{opacity:1}
+.profile-avatar-overlay i{color:#fff;font-size:12px}
+.profile-name{font-size:20px;font-weight:700;color:var(--gray-900)}
+.profile-bio{font-size:14px;color:var(--gray-500);margin-top:4px;margin-bottom:16px;max-width:400px;margin-left:auto;margin-right:auto}
+
+/* Level badge */
+.level-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}
+.level-1{background:#fee2e2;color:#dc2626}.level-2{background:#fef3c7;color:#d97706}
+.level-3{background:#fef3c7;color:#d97706}.level-4{background:#e0e7ff;color:#4f46e5}
+.level-5{background:#e0e7ff;color:#4f46e5}.level-6{background:#ede9fe;color:#7c3aed}
+.level-7{background:#ede9fe;color:#7c3aed}.level-8{background:#fce7f3;color:#db2777}
+.level-9{background:#fce7f3;color:#db2777}.level-10{background:#fef3c7;color:#b45309}
+
+/* XP bar */
+.xp-bar-wrap{margin-bottom:16px}
+.xp-label{display:flex;justify-content:space-between;font-size:12px;color:var(--gray-500);margin-bottom:6px}
+.xp-bar{height:8px;background:var(--gray-200);border-radius:4px;overflow:hidden}
+.xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-dark));border-radius:4px;transition:width .6s ease}
+
+/* Stats row */
+.stats-row{display:flex;justify-content:center;gap:24px;margin-bottom:16px}
+.stat-item{text-align:center}
+.stat-value{font-size:20px;font-weight:800;color:var(--gray-900)}
+.stat-label{font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:.5px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{opacity:.9}
+.btn-outline{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+.btn-outline:hover{background:var(--primary-light)}
+.btn-sm{padding:8px 14px;font-size:13px}
+.btn-block{width:100%;justify-content:center}
+.btn:disabled{opacity:.5;pointer-events:none}
+
+/* Share button */
+.share-btn{background:var(--primary-light);color:var(--primary);border:1.5px solid var(--primary-light);margin:0 auto}
+.share-btn:hover{background:var(--primary);color:#fff}
+
+/* Class cards */
+.classes-grid{display:grid;gap:12px}
+.class-card{background:#fff;border-radius:var(--radius);border:1.5px solid var(--gray-200);padding:16px;transition:border-color .2s}
+.class-card:hover{border-color:var(--primary-light)}
+.class-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.class-title{font-size:15px;font-weight:700;color:var(--gray-900)}
+.class-desc{font-size:13px;color:var(--gray-500);margin-top:4px;line-height:1.5}
+.class-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center}
+.class-meta-item{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--gray-500)}
+.class-meta-item i{font-size:11px}
+.class-status{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:12px}
+.class-status.completed{background:var(--success-light);color:var(--success)}
+.class-status.available{background:var(--primary-light);color:var(--primary)}
+.class-xp{background:var(--warning-light);color:#92400e;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;display:inline-flex;align-items:center;gap:4px}
+
+/* Quiz panel */
+.quiz-panel{background:var(--gray-50);border-radius:var(--radius);margin-top:12px;padding:16px;border:1.5px solid var(--primary-light)}
+.quiz-progress{display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:13px;color:var(--gray-500)}
+.quiz-progress-bar{flex:1;height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .3s}
+.quiz-question{font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:14px}
+.quiz-options{display:grid;gap:8px}
+.quiz-option{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#fff;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;font-size:14px;color:var(--gray-700)}
+.quiz-option:hover{border-color:var(--primary);background:var(--primary-light)}
+.quiz-option.selected{border-color:var(--primary);background:var(--primary-light);color:var(--primary-dark)}
+.quiz-option-letter{width:28px;height:28px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all .15s}
+.quiz-option.selected .quiz-option-letter{background:var(--primary);color:#fff}
+.quiz-nav{display:flex;gap:10px;margin-top:16px}
+
+/* Results panel */
+.results-panel{text-align:center;padding:20px}
+.results-score{font-size:48px;font-weight:800;margin:12px 0}
+.results-score.pass{color:var(--success)}
+.results-score.fail{color:var(--danger)}
+.results-message{font-size:15px;color:var(--gray-600);margin-bottom:8px}
+.results-xp{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:4px}
+.results-levelup{background:var(--warning-light);color:#92400e;padding:10px 16px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;margin-top:12px;display:inline-flex;align-items:center;gap:6px}
+.results-actions{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* Exam section */
+.exam-card{text-align:center}
+.exam-locked{padding:24px}
+.exam-locked i{font-size:36px;color:var(--gray-300);margin-bottom:12px}
+.exam-locked h3{font-size:16px;font-weight:700;color:var(--gray-700);margin-bottom:6px}
+.exam-locked p{font-size:14px;color:var(--gray-500)}
+.exam-info{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:20px}
+.exam-info-item{text-align:center}
+.exam-info-value{font-size:22px;font-weight:800;color:var(--gray-900)}
+.exam-info-label{font-size:11px;color:var(--gray-500);text-transform:uppercase}
+.exam-passed{padding:20px}
+.exam-passed i{font-size:48px;color:var(--success);margin-bottom:8px}
+.exam-passed h3{font-size:18px;font-weight:700;color:var(--success);margin-bottom:4px}
+.exam-passed p{font-size:14px;color:var(--gray-600)}
+
+/* Badges grid */
+.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.badge-card{background:#fff;border-radius:var(--radius);border:1.5px solid var(--gray-200);padding:16px 12px;text-align:center;transition:transform .2s}
+.badge-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.badge-icon{width:48px;height:48px;border-radius:50%;background:var(--warning-light);color:#d97706;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px}
+.badge-card .badge-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px}
+.badge-name{font-size:13px;font-weight:700;color:var(--gray-800);margin-bottom:4px}
+.badge-desc{font-size:11px;color:var(--gray-500);line-height:1.4}
+.badge-date{font-size:10px;color:var(--gray-400);margin-top:6px}
+.no-badges{text-align:center;padding:32px;color:var(--gray-400);font-size:14px}
+.no-badges i{font-size:32px;margin-bottom:8px;display:block}
+
+/* File input hidden */
+.hidden-input{display:none}
+
+/* Section empty state */
+.empty-state{text-align:center;padding:32px;color:var(--gray-400);font-size:14px}
+.empty-state i{font-size:32px;margin-bottom:8px;display:block}
+
+/* Responsive */
+@media(min-width:480px){
+  .main{padding:calc(var(--header-h) + 24px) 24px 48px}
+  .card{padding:24px}
+  .badges-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:768px){
+  .main{max-width:720px}
+}
+</style>
+</head>
+<body>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Header -->
+<header class="header">
+  <a href="/" class="header-logo">
+    <i class="fas fa-graduation-cap"></i>
+    AunClick Academy
+  </a>
+  <div class="header-spacer"></div>
+  <a id="headerAvatarLink" href="#" title="Mi perfil">
+    <div class="header-avatar" id="headerAvatar">
+      <i class="fas fa-user"></i>
+    </div>
+  </a>
+  <a id="headerProfileBtn" href="#" class="header-profile-btn" title="Ver mi perfil público">
+    <i class="fas fa-id-card"></i> Ver mi Perfil
+  </a>
+  <button class="header-logout" id="logoutBtn" title="Cerrar sesión">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</header>
+
+<!-- Main content -->
+<main class="main" id="mainContent">
+  <div class="page-loader" id="pageLoader">
+    <div class="spinner"></div>
+    <p style="color:var(--gray-500);font-size:14px">Cargando tu perfil...</p>
+  </div>
+</main>
+
+<!-- Hidden file input for avatar -->
+<input type="file" class="hidden-input" id="avatarInput" accept="image/*">
+
+<script>
+(function(){
+  'use strict';
+
+  // ── Config ──
+  const API = '/api';
+  let TOKEN = localStorage.getItem('meridaunclick_token') || localStorage.getItem('token');
+  let USER_ID = localStorage.getItem('meridaunclick_user') ? JSON.parse(localStorage.getItem('meridaunclick_user')).id : (localStorage.getItem('user_id') || '');
+  let userProfile = null;
+  let agentProgress = null;
+  let classes = [];
+  let examStatus = null;
+
+  // ── Helpers ──
+  function apiHeaders(){ return {'Content-Type':'application/json','Authorization':'Bearer '+TOKEN} }
+
+  async function apiGet(path){
+    const r = await fetch(API+path,{headers:apiHeaders()});
+    if(r.status===401){ localStorage.removeItem('meridaunclick_token'); localStorage.removeItem('meridaunclick_user'); window.location.href='/login.html?redirect=academia.html'; return null; }
+    if(!r.ok) throw await r.json();
+    return r.json();
+  }
+
+  async function apiPost(path,body){
+    const r = await fetch(API+path,{method:'POST',headers:apiHeaders(),body:JSON.stringify(body)});
+    if(r.status===401){ localStorage.removeItem('meridaunclick_token'); localStorage.removeItem('meridaunclick_user'); window.location.href='/login.html?redirect=academia.html'; return null; }
+    if(!r.ok){ const e=await r.json(); throw new Error(e.error||'Error'); }
+    return r.json();
+  }
+
+  function showToast(msg, type){
+    const c=document.getElementById('toastContainer');
+    const t=document.createElement('div');
+    t.className='toast'+(type?' '+type:'');
+    t.textContent=msg;
+    c.appendChild(t);
+    requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),300)},2500);
+  }
+
+  function getLevelName(l){return{3:'Aprendiz',5:'Intermedio',7:'Avanzado',10:'Experto'}[l]||''}
+
+  function levelBadgeClass(l){ return 'level-'+Math.min(l,10) }
+
+  function formatBadgeIcon(icon){
+    if(!icon) return 'fas fa-medal';
+    return icon;
+  }
+
+  // ── Auth check ──
+  if(!TOKEN){ window.location.href='/login.html?redirect=academia.html'; return; }
+
+  // ── Header ──
+  document.getElementById('logoutBtn').addEventListener('click',function(){
+    localStorage.removeItem('meridaunclick_token');
+    localStorage.removeItem('meridaunclick_user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    window.location.href='/login.html';
+  });
+
+  // ── Avatar upload ──
+  document.getElementById('avatarInput').addEventListener('change',async function(e){
+    const file=e.target.files[0];
+    if(!file) return;
+    try{
+      const fd=new FormData();
+      fd.append('file',file);
+      fd.append('product_type','avatar');
+      const r=await fetch(API+'/upload',{method:'POST',headers:{'Authorization':'Bearer '+TOKEN},body:fd});
+      if(r.status===401){ localStorage.removeItem('meridaunclick_token'); localStorage.removeItem('meridaunclick_user'); window.location.href='/login.html?redirect=academia.html'; return; }
+      const upData=await r.json();
+      if(!upData.url) throw new Error('No URL returned');
+      await fetch(API+'/user-profile',{method:'PUT',headers:apiHeaders(),body:JSON.stringify({avatar:upData.url})});
+      userProfile.avatar=upData.url;
+      render();
+      showToast('Avatar actualizado','success');
+    }catch(err){
+      showToast('Error al subir avatar: '+err.message,'error');
+    }
+    e.target.value='';
+  });
+
+  // ── Initialize ──
+  async function init(){
+    try{
+      // Load profile + progress + classes + exam in parallel
+      const [profileData, progressData, classesData, examData] = await Promise.all([
+        apiGet('/user-profile'),
+        apiGet('/agent-progress'),
+        apiGet('/agent-classes'),
+        apiGet('/agent-exam')
+      ]);
+      if(!profileData||!progressData||!classesData||!examData){ return; }
+
+      userProfile = profileData.profile || profileData;
+      USER_ID = userProfile.id || USER_ID;
+      localStorage.setItem('user_id', USER_ID);
+
+      agentProgress = progressData;
+      classes = classesData.classes || [];
+      examStatus = examData;
+
+      // Update header avatar link
+      document.getElementById('headerAvatarLink').href='/perfil.html?id='+USER_ID;
+      document.getElementById('headerProfileBtn').href='/perfil.html?id='+USER_ID;
+
+      render();
+    }catch(err){
+      document.getElementById('pageLoader').innerHTML='<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error al cargar datos</p><p style="font-size:12px;margin-top:4px;color:var(--gray-400)">'+err.message+'</p></div>';
+    }
+  }
+
+  function render(){
+    const m=document.getElementById('mainContent');
+    m.innerHTML='';
+
+    m.innerHTML += renderProfileCard();
+    m.innerHTML += renderClassesSection();
+    m.innerHTML += renderExamSection();
+    m.innerHTML += renderBadgesSection();
+
+    bindClassEvents();
+  }
+
+  // ── Render: Profile Card ──
+  function renderProfileCard(){
+    const p=agentProgress;
+    const lvl=p.level;
+    const xpPercent=p.progress_percent;
+    const completedClasses=p.completed_classes? p.completed_classes.length : 0;
+    const totalBadges=p.total_badges||0;
+    const avatarHTML=userProfile.avatar
+      ? '<img src="'+userProfile.avatar+'" alt="Avatar">'
+      : '<i class="fas fa-user"></i>';
+    const headerAvatarHTML=userProfile.avatar
+      ? '<img src="'+userProfile.avatar+'" alt="Avatar">'
+      : '<i class="fas fa-user"></i>';
+    document.getElementById('headerAvatar').innerHTML=headerAvatarHTML;
+
+    let levelLabel='Nivel '+lvl;
+    const ln=getLevelName(lvl);
+    if(ln) levelLabel+=' · '+ln;
+
+    return `
+    <div class="card profile-card">
+      <div class="profile-avatar-wrap" onclick="document.getElementById('avatarInput').click()">
+        <div class="profile-avatar">${avatarHTML}</div>
+        <div class="profile-avatar-overlay"><i class="fas fa-camera"></i></div>
+      </div>
+      <div class="profile-name">${userProfile.name||'Agente'}</div>
+      ${userProfile.bio?'<div class="profile-bio">'+escapeHTML(userProfile.bio)+'</div>':''}
+      <span class="level-badge ${levelBadgeClass(lvl)}"><i class="fas fa-star"></i> ${levelLabel}</span>
+      <div class="xp-bar-wrap">
+        <div class="xp-label"><span>${p.xp} XP</span><span>${p.xp_in_current_level} / ${p.xp_needed_for_next} XP</span></div>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:${xpPercent}%"></div></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-value">${completedClasses}</div><div class="stat-label">Clases</div></div>
+        <div class="stat-item"><div class="stat-value">${totalBadges}</div><div class="stat-label">Medallas</div></div>
+        <div class="stat-item"><div class="stat-value">${examStatus.exam_passed?'✓':'—'}</div><div class="stat-label">Examen</div></div>
+      </div>
+      <button class="btn btn-sm share-btn" onclick="copyProfileLink()">
+        <i class="fas fa-share-alt"></i> Compartir mi perfil
+      </button>
+    </div>`;
+  }
+
+  function copyProfileLink(){
+    const url=window.location.origin+'/perfil.html?id='+USER_ID;
+    navigator.clipboard.writeText(url).then(()=>showToast('Link copiado al portapapeles','success')).catch(()=>showToast('No se pudo copiar','error'));
+  }
+  window.copyProfileLink=copyProfileLink;
+
+  // ── Render: Classes Section ──
+  function renderClassesSection(){
+    if(!classes.length){
+      return '<div class="card"><div class="card-title"><i class="fas fa-book-open"></i> Mis Clases</div><div class="empty-state"><i class="fas fa-inbox"></i><p>No hay clases disponibles aún</p></div></div>';
+    }
+    let cards=classes.map(function(c){
+      const completed=c.is_completed===1||c.is_completed===true;
+      const statusHTML=completed
+        ?'<span class="class-status completed"><i class="fas fa-check-circle"></i> Completada</span>'
+        :'<span class="class-status available"><i class="fas fa-play-circle"></i> Disponible</span>';
+      return `
+      <div class="class-card" id="classCard-${c.id}">
+        <div class="class-card-top">
+          <div style="flex:1">
+            <div class="class-title">${escapeHTML(c.title)}</div>
+            ${c.description?'<div class="class-desc">'+escapeHTML(c.description)+'</div>':''}
+          </div>
+        </div>
+        <div class="class-meta">
+          <span class="class-meta-item"><i class="fas fa-question-circle"></i> ${c.question_count||0} preguntas</span>
+          <span class="class-xp"><i class="fas fa-bolt"></i> +${c.xp_reward||10} XP</span>
+          ${statusHTML}
+          ${!completed?'<button class="btn btn-sm btn-primary" onclick="startQuiz('+c.id+')" style="margin-left:auto"><i class="fas fa-play"></i> Comenzar</button>':''}
+        </div>
+        <div id="quizPanel-${c.id}"></div>
+      </div>`;
+    }).join('');
+
+    return '<div class="card"><div class="card-title"><i class="fas fa-book-open"></i> Mis Clases</div><div class="classes-grid">'+cards+'</div></div>';
+  }
+
+  // ── Quiz State ──
+  const quizStates={};
+
+  function bindClassEvents(){}
+
+  async function startQuiz(classId){
+    const panel=document.getElementById('quizPanel-'+classId);
+    if(!panel) return;
+    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Cargando preguntas...</p></div>';
+
+    try{
+      const data=await apiGet('/agent-classes/'+classId);
+      if(!data) return;
+      const questions=data.questions||[];
+      if(!questions.length){
+        panel.innerHTML='<div class="empty-state" style="padding:12px"><i class="fas fa-exclamation-circle"></i><p>No hay preguntas para esta clase</p></div>';
+        return;
+      }
+      quizStates[classId]={questions:questions,current:0,answers:[]};
+      renderQuestion(classId);
+    }catch(err){
+      panel.innerHTML='<div class="empty-state" style="padding:12px;color:var(--danger)"><i class="fas fa-exclamation-triangle"></i><p>Error: '+err.message+'</p></div>';
+    }
+  }
+  window.startQuiz=startQuiz;
+
+  function renderQuestion(classId){
+    const qs=quizStates[classId];
+    const q=qs.questions[qs.current];
+    const total=qs.questions.length;
+    const current=qs.current+1;
+    const pct=Math.round((current/total)*100);
+
+    const letters=['A','B','C','D'];
+    const options=[
+      {letter:'A', text:q.option_a},
+      {letter:'B', text:q.option_b},
+      {letter:'C', text:q.option_c},
+      {letter:'D', text:q.option_d}
+    ].filter(function(o){ return o.text; });
+    const selected=qs.answers[qs.current]||'';
+
+    const optionsHTML=options.map(function(opt,i){
+      const letter=opt.letter;
+      const sel=selected===letter?' selected':'';
+      return `<div class="quiz-option${sel}" onclick="selectOption(${classId},'${letter}')" data-letter="${letter}">
+        <span class="quiz-option-letter">${letter}</span>
+        <span>${escapeHTML(opt.text)}</span>
+      </div>`;
+    }).join('');
+
+    const isLast=current===total;
+
+    document.getElementById('quizPanel-'+classId).innerHTML=`
+    <div class="quiz-panel">
+      <div class="quiz-progress">
+        <span>${current} / ${total}</span>
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div class="quiz-question">${current}. ${escapeHTML(q.question)}</div>
+      <div class="quiz-options">${optionsHTML}</div>
+      <div class="quiz-nav">
+        ${current>1?'<button class="btn btn-sm btn-outline" onclick="prevQuestion('+classId+')"><i class="fas fa-arrow-left"></i> Anterior</button>':''}
+        <div style="flex:1"></div>
+        <button class="btn btn-sm btn-primary" onclick="${isLast?'submitQuiz('+classId+')':'nextQuestion('+classId+')'}" ${!selected?'disabled':''}>
+          ${isLast?'<i class="fas fa-check"></i> Enviar':'Siguiente <i class="fas fa-arrow-right"></i>'}
+        </button>
+      </div>
+    </div>`;
+  }
+
+  function selectOption(classId,letter){
+    quizStates[classId].answers[quizStates[classId].current]=letter;
+    // Update UI
+    const panel=document.getElementById('quizPanel-'+classId);
+    panel.querySelectorAll('.quiz-option').forEach(function(el){
+      el.classList.toggle('selected',el.dataset.letter===letter);
+    });
+    // Enable submit button
+    const btn=panel.querySelector('.quiz-nav .btn-primary');
+    if(btn) btn.disabled=false;
+  }
+  window.selectOption=selectOption;
+
+  function nextQuestion(classId){
+    const qs=quizStates[classId];
+    if(qs.current<qs.questions.length-1){
+      qs.current++;
+      renderQuestion(classId);
+      document.getElementById('quizPanel-'+classId).scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  }
+  window.nextQuestion=nextQuestion;
+
+  function prevQuestion(classId){
+    const qs=quizStates[classId];
+    if(qs.current>0){
+      qs.current--;
+      renderQuestion(classId);
+    }
+  }
+  window.prevQuestion=prevQuestion;
+
+  async function submitQuiz(classId){
+    const qs=quizStates[classId];
+    const panel=document.getElementById('quizPanel-'+classId);
+    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Calificando...</p></div>';
+
+    // Build answers array
+    const answers=qs.questions.map(function(q,i){
+      return {question_id:q.id, answer:qs.answers[i]||''};
+    });
+
+    try{
+      const result=await apiPost('/agent-progress',{class_id:classId,answers:answers});
+      if(!result) return;
+      renderQuizResults(classId,result);
+      // Refresh progress
+      const freshProgress=await apiGet('/agent-progress');
+      if(freshProgress) agentProgress=freshProgress;
+    }catch(err){
+      panel.innerHTML='<div class="results-panel" style="color:var(--danger)"><i class="fas fa-exclamation-triangle" style="font-size:24px;margin-bottom:8px"></i><p>'+escapeHTML(err.message)+'</p><button class="btn btn-sm btn-outline" onclick="startQuiz('+classId+')" style="margin-top:12px"><i class="fas fa-redo"></i> Reintentar</button></div>';
+    }
+  }
+  window.submitQuiz=submitQuiz;
+
+  function renderQuizResults(classId,r){
+    const passed=r.score_percent>=70;
+    const cls=classes.find(function(c){return c.id===classId});
+
+    let html=`<div class="quiz-panel results-panel">`;
+    html+=`<i class="fas ${passed?'fa-check-circle':'fa-times-circle'}" style="font-size:40px;color:${passed?'var(--success)':'var(--danger)'}"></i>`;
+    html+=`<div class="results-score ${passed?'pass':'fail'}">${r.score_percent}%</div>`;
+    html+=`<div class="results-message">${r.correct_answers} de ${r.total_questions} correctas</div>`;
+    html+=`<div class="results-xp"><i class="fas fa-bolt"></i> +${r.xp_earned} XP ganados</div>`;
+    if(r.leveled_up){
+      html+=`<div class="results-levelup"><i class="fas fa-arrow-up"></i> ¡Subiste al nivel ${r.new_level}! ${getLevelName(r.new_level)?'· '+getLevelName(r.new_level):''}</div>`;
+    }
+    html+=`<div class="results-actions">`;
+    html+=`<button class="btn btn-sm btn-outline" onclick="closeQuiz(${classId})">Cerrar</button>`;
+    if(!passed && cls){
+      html+=`<button class="btn btn-sm btn-primary" onclick="startQuiz(${classId})"><i class="fas fa-redo"></i> Reintentar</button>`;
+    }
+    html+=`</div></div>`;
+
+    document.getElementById('quizPanel-'+classId).innerHTML=html;
+
+    // Update the class card to show completed
+    const card=document.getElementById('classCard-'+classId);
+    if(passed && card){
+      const c=classes.find(function(c){return c.id===classId});
+      if(c) c.is_completed=1;
+      // Re-render to update status
+      const metaDiv=card.querySelector('.class-meta');
+      if(metaDiv){
+        const statusEl=metaDiv.querySelector('.class-status');
+        if(statusEl){
+          statusEl.className='class-status completed';
+          statusEl.innerHTML='<i class="fas fa-check-circle"></i> Completada';
+        }
+        const btn=metaDiv.querySelector('.btn-primary');
+        if(btn) btn.remove();
+      }
+    }
+
+    // Update header stats quickly
+    render();
+  }
+
+  function closeQuiz(classId){
+    document.getElementById('quizPanel-'+classId).innerHTML='';
+    delete quizStates[classId];
+  }
+  window.closeQuiz=closeQuiz;
+
+  // ── Render: Exam Section ──
+  function renderExamSection(){
+    const lvl=examStatus.level||agentProgress.level||1;
+    const passed=examStatus.exam_passed;
+    const attemptsRemaining=examStatus.attempts_remaining;
+    const canTake=examStatus.can_take_exam;
+
+    let content='';
+
+    if(lvl<7){
+      content=`
+      <div class="exam-locked">
+        <i class="fas fa-lock"></i>
+        <h3>Examen Bloqueado</h3>
+        <p>Necesitas <strong>nivel 7</strong> para desbloquear el examen final.</p>
+        <p style="margin-top:8px;font-size:13px;color:var(--gray-400)">Tu nivel actual: ${lvl}</p>
+      </div>`;
+    } else if(passed){
+      const passedDate=examStatus.exam_passed_at ? formatDate(examStatus.exam_passed_at) : '';
+      content=`
+      <div class="exam-passed">
+        <i class="fas fa-trophy"></i>
+        <h3>Examen Aprobado</h3>
+        <p>${examStatus.score_percent?'Calificación: '+examStatus.score_percent+'%':'¡Felicidades!'}</p>
+        ${passedDate?'<p style="font-size:12px;color:var(--gray-400);margin-top:4px">'+passedDate+'</p>':''}
+      </div>`;
+    } else {
+      content=`
+      <div class="exam-info">
+        <div class="exam-info-item"><div class="exam-info-value">15</div><div class="exam-info-label">Preguntas</div></div>
+        <div class="exam-info-item"><div class="exam-info-value">80%</div><div class="exam-info-label">Para aprobar</div></div>
+        <div class="exam-info-item"><div class="exam-info-value">${attemptsRemaining}</div><div class="exam-info-label">Intentos restantes</div></div>
+      </div>
+      ${canTake
+        ?'<button class="btn btn-primary btn-block" onclick="startExam()"><i class="fas fa-file-alt"></i> Comenzar Examen</button>'
+        :'<div style="color:var(--gray-400);font-size:13px">No tienes intentos disponibles. Contacta al administrador.</div>'}
+      <div id="examPanel"></div>`;
+    }
+
+    return `<div class="card exam-card"><div class="card-title"><i class="fas fa-award"></i> Examen Final</div>${content}</div>`;
+  }
+
+  // ── Exam State ──
+  let examQuestions=[];
+  let examTimer = 0;
+  let examTimerInterval = null;
+
+  async function startExam(){
+    const panel=document.getElementById('examPanel');
+    if(!panel) return;
+    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Cargando examen...</p></div>';
+
+    try{
+      const data=await apiGet('/agent-exam/questions');
+      if(!data) return;
+      examQuestions=data.questions||[];
+      if(!examQuestions.length){
+        panel.innerHTML='<div class="empty-state" style="padding:12px"><i class="fas fa-exclamation-circle"></i><p>No hay preguntas disponibles</p></div>';
+        return;
+      }
+      examTimer = 1800; // 30 minutes in seconds
+      examTimerInterval = setInterval(function() {
+          examTimer--;
+          if (examTimer <= 0) {
+              clearInterval(examTimerInterval);
+              submitExam(); // Auto-submit when time runs out
+              return;
+          }
+          var mins = Math.floor(examTimer / 60);
+          var secs = examTimer % 60;
+          var timerEl = document.getElementById('exam-timer');
+          if (timerEl) {
+              timerEl.innerHTML = '<i class="fas fa-clock"></i> ' + mins + ':' + (secs < 10 ? '0' : '') + secs;
+              if (examTimer <= 300) timerEl.style.color = '#dc2626'; // Red when under 5 min
+          }
+      }, 1000);
+      renderExamQuestion(0,new Array(examQuestions.length).fill(''));
+    }catch(err){
+      panel.innerHTML='<div style="color:var(--danger);text-align:center;padding:12px"><i class="fas fa-exclamation-triangle"></i><p>'+escapeHTML(err.message)+'</p></div>';
+    }
+  }
+  window.startExam=startExam;
+
+  let examCurrentIdx=0;
+  let examAnswers=[];
+
+  function renderExamQuestion(idx,answers){
+    examCurrentIdx=idx;
+    examAnswers=answers;
+    const q=examQuestions[idx];
+    const total=examQuestions.length;
+    const current=idx+1;
+    const pct=Math.round((current/total)*100);
+
+    const letters=['A','B','C','D'];
+    const options=[
+      {letter:'A', text:q.option_a},
+      {letter:'B', text:q.option_b},
+      {letter:'C', text:q.option_c},
+      {letter:'D', text:q.option_d}
+    ].filter(function(o){ return o.text; });
+    const selected=answers[idx]||'';
+
+    const optionsHTML=options.map(function(opt,i){
+      const letter=opt.letter;
+      const sel=selected===letter?' selected':'';
+      return `<div class="quiz-option${sel}" onclick="selectExamOption('${letter}')" data-letter="${letter}">
+        <span class="quiz-option-letter">${letter}</span>
+        <span>${escapeHTML(opt.text)}</span>
+      </div>`;
+    }).join('');
+
+    const isLast=current===total;
+
+    document.getElementById('examPanel').innerHTML=`
+    <div class="quiz-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:8px 12px;background:linear-gradient(90deg,#f5f3ff,#ede9fe);border-radius:8px;">
+        <span style="font-weight:600;font-size:0.9rem;color:#7c3aed;"><i class="fas fa-file-alt"></i> Pregunta ${idx + 1} de ${examQuestions.length}</span>
+        <span id="exam-timer" style="font-weight:700;font-size:0.95rem;color:#7c3aed;"><i class="fas fa-clock"></i> 30:00</span>
+      </div>
+      <div style="height:6px;background:#e5e7eb;border-radius:3px;margin-bottom:16px;overflow:hidden;">
+        <div style="height:100%;background:linear-gradient(90deg,#7c3aed,#3b82f6);border-radius:3px;width:${((idx + 1) / examQuestions.length * 100)}%;transition:width 0.3s;"></div>
+      </div>
+      <div class="quiz-question">${current}. ${escapeHTML(q.question)}</div>
+      ${q.class_name?'<div style="font-size:11px;color:var(--gray-400);margin-bottom:12px"><i class="fas fa-book"></i> '+escapeHTML(q.class_name)+'</div>':''}
+      <div class="quiz-options">${optionsHTML}</div>
+      <div class="quiz-nav">
+        ${current>1?'<button class="btn btn-sm btn-outline" onclick="examPrev()"><i class="fas fa-arrow-left"></i> Anterior</button>':''}
+        <div style="flex:1"></div>
+        <button class="btn btn-sm btn-primary" onclick="${isLast?'submitExam()':'examNext()'}" ${!selected?'disabled':''}>
+          ${isLast?'<i class="fas fa-check"></i> Enviar Examen':'Siguiente <i class="fas fa-arrow-right"></i>'}
+        </button>
+      </div>
+    </div>`;
+  }
+
+  function selectExamOption(letter){
+    examAnswers[examCurrentIdx]=letter;
+    const panel=document.getElementById('examPanel');
+    panel.querySelectorAll('.quiz-option').forEach(function(el){
+      el.classList.toggle('selected',el.dataset.letter===letter);
+    });
+    const btn=panel.querySelector('.quiz-nav .btn-primary');
+    if(btn) btn.disabled=false;
+  }
+  window.selectExamOption=selectExamOption;
+
+  function examNext(){
+    if(examCurrentIdx<examQuestions.length-1){
+      renderExamQuestion(examCurrentIdx+1,examAnswers);
+      document.getElementById('examPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  }
+  window.examNext=examNext;
+
+  function examPrev(){
+    if(examCurrentIdx>0){
+      renderExamQuestion(examCurrentIdx-1,examAnswers);
+    }
+  }
+  window.examPrev=examPrev;
+
+  async function submitExam(){
+    if (examTimerInterval) { clearInterval(examTimerInterval); examTimerInterval = null; }
+    const panel=document.getElementById('examPanel');
+    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Calificando examen...</p></div>';
+
+    const answers=examQuestions.map(function(q,i){
+      return {question_id:q.id, answer:examAnswers[i]||''};
+    });
+
+    try{
+      const result=await apiPost('/agent-exam',{answers:answers});
+      if(!result) return;
+      renderExamResults(result);
+    }catch(err){
+      panel.innerHTML='<div class="results-panel" style="color:var(--danger)"><i class="fas fa-exclamation-triangle" style="font-size:24px;margin-bottom:8px"></i><p>'+escapeHTML(err.message)+'</p><button class="btn btn-sm btn-outline" onclick="startExam()" style="margin-top:12px"><i class="fas fa-redo"></i> Reintentar</button></div>';
+    }
+  }
+  window.submitExam=submitExam;
+
+  function renderExamResults(r){
+    const panel=document.getElementById('examPanel');
+    let html=`<div class="quiz-panel results-panel">`;
+    if(r.passed){
+      html+=`<i class="fas fa-trophy" style="font-size:48px;color:var(--success)"></i>`;
+      html+=`<div class="results-score pass">${r.score_percent}%</div>`;
+      html+=`<div class="results-message" style="font-size:16px;font-weight:700;color:var(--success)">¡Aprobaste!</div>`;
+      html+=`<div class="results-message">Eres ahora un <strong>Partner Digital Certificado</strong></div>`;
+    }else{
+      html+=`<i class="fas fa-times-circle" style="font-size:48px;color:var(--danger)"></i>`;
+      html+=`<div class="results-score fail">${r.score_percent}%</div>`;
+      html+=`<div class="results-message">No aprobaste (necesitas 80%)</div>`;
+      html+=`<div class="results-message">Intentos restantes: ${r.attempts_remaining}</div>`;
+    }
+    html+=`<div class="results-message" style="margin-top:4px">${r.correct_answers} de ${r.total_questions} correctas</div>`;
+    html+=`<div class="results-actions">`;
+    if(!r.passed && r.attempts_remaining>0){
+      html+=`<button class="btn btn-sm btn-primary" onclick="startExam()"><i class="fas fa-redo"></i> Reintentar</button>`;
+    }
+    html+=`<button class="btn btn-sm btn-outline" onclick="closeExam()">Cerrar</button>`;
+    html+=`</div></div>`;
+    panel.innerHTML=html;
+  }
+
+  function closeExam(){
+    if (examTimerInterval) { clearInterval(examTimerInterval); examTimerInterval = null; }
+    const panel=document.getElementById('examPanel');
+    if(panel) panel.innerHTML='';
+    examQuestions=[];
+    examAnswers=[];
+    examCurrentIdx=0;
+    // Refresh exam status
+    apiGet('/agent-exam').then(function(d){
+      if(d){ examStatus=d; render(); }
+    });
+  }
+  window.closeExam=closeExam;
+
+  // ── Render: Badges Section ──
+  function renderBadgesSection(){
+    const badges=agentProgress.badges||[];
+    if(!badges.length){
+      return '<div class="card"><div class="card-title"><i class="fas fa-medal"></i> Medallas</div><div class="no-badges"><i class="fas fa-lock"></i><p>Completa clases y sube de nivel para ganar medallas</p></div></div>';
+    }
+
+    const cards=badges.map(function(b){
+      const icon=(b.badge_icon||'fas fa-medal').replace(/[^a-zA-Z0-9\s\-]/g,'');
+      const earnedDate=b.earned_at ? formatDate(b.earned_at) : '';
+      return `
+      <div class="badge-card">
+        <div class="badge-icon"><i class="${icon}"></i></div>
+        <div class="badge-name">${escapeHTML(b.badge_name)}</div>
+        <div class="badge-desc">${escapeHTML(b.badge_description)}</div>
+        ${earnedDate?'<div class="badge-date"><i class="fas fa-calendar"></i> '+earnedDate+'</div>':''}
+      </div>`;
+    }).join('');
+
+    return `<div class="card"><div class="card-title"><i class="fas fa-medal"></i> Medallas (${badges.length})</div><div class="badges-grid">${cards}</div></div>`;
+  }
+
+  // ── Utilities ──
+  function escapeHTML(str){
+    if(!str) return '';
+    const div=document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function formatDate(dateStr){
+    if(!dateStr) return '';
+    try{
+      const d=new Date(dateStr+'Z');
+      if(isNaN(d.getTime())) return dateStr;
+      return d.toLocaleDateString('es-VE',{day:'numeric',month:'short',year:'numeric'});
+    }catch(e){ return dateStr; }
+  }
+
+  // ── Start ──
+  init();
+
+})();
+</script>
+</body>
+</html>

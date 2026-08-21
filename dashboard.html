@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RYF2N8ZD15');
+</script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de usuario de HolaX - Gestiona tus negocios y mensajes.">
+    <title>Mi Panel - HolaX</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+    /* === Edit Business Modal === */
+    #editBusinessModal .modal-content { max-width:680px; }
+    .eb-loading { text-align:center; padding:40px; }
+    .eb-loading i { font-size:2.5rem; color:#006EE3; }
+    .eb-loading p { margin-top:10px; color:#64748b; }
+    .eb-section { margin-bottom:18px; }
+    .eb-section-title {
+        display:flex; align-items:center; gap:8px;
+        font-size:0.85rem; font-weight:700; color:#006EE3;
+        text-transform:uppercase; letter-spacing:0.5px;
+        margin-bottom:12px; padding-bottom:6px;
+        border-bottom:2px solid #EFF6FF;
+    }
+    .eb-section-title i { font-size:0.9rem; }
+    .eb-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .eb-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+    .eb-field { margin-bottom:10px; }
+    .eb-field label {
+        display:block; font-size:0.8rem; font-weight:600; color:#374151;
+        margin-bottom:4px;
+    }
+    .eb-input {
+        width:100%; padding:9px 12px; border:1px solid #d1d5db; border-radius:8px;
+        font-size:0.9rem; transition:border-color 0.2s, box-shadow 0.2s;
+        background:#fff; font-family:inherit;
+    }
+    .eb-input:focus {
+        outline:none; border-color:#006EE3;
+        box-shadow:0 0 0 3px rgba(0,110,227,0.12);
+    }
+    .eb-textarea { resize:vertical; min-height:60px; }
+    .eb-select { appearance:none; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%236b7280'/%3E%3C/svg%3E") no-repeat right 12px center #fff; padding-right:32px; }
+    /* Video section */
+    .eb-video-tabs { display:flex; gap:0; margin-bottom:12px; }
+    .eb-video-tab {
+        flex:1; padding:8px 12px; border:1px solid #d1d5db;
+        background:#f9fafb; font-size:0.82rem; font-weight:600;
+        cursor:pointer; text-align:center; transition:all 0.2s;
+        font-family:inherit; color:#475569;
+    }
+    .eb-video-tab:first-child { border-radius:8px 0 0 8px; }
+    .eb-video-tab:last-child { border-radius:0 8px 8px 0; }
+    .eb-video-tab.active {
+        background:#006EE3; color:#fff; border-color:#006EE3;
+    }
+    .eb-video-content { display:none; }
+    .eb-video-content.active { display:block; }
+    .eb-video-drop {
+        border:2px dashed #d1d5db; border-radius:12px; padding:20px;
+        text-align:center; cursor:pointer; transition:border-color 0.2s;
+    }
+    .eb-video-drop:hover { border-color:#006EE3; }
+    .eb-video-drop i { font-size:1.8rem; color:#94a3b8; }
+    .eb-video-drop p { font-size:0.82rem; color:#64748b; margin-top:6px; }
+    .eb-video-preview {
+        border-radius:12px; overflow:hidden; margin-top:12px;
+        background:#000; max-height:300px;
+    }
+    .eb-video-preview video, .eb-video-preview iframe {
+        width:100%; display:block; border:none; max-height:300px;
+    }
+    .eb-video-remove {
+        display:inline-flex; align-items:center; gap:4px; margin-top:6px;
+        padding:4px 10px; border-radius:6px; border:1px solid #fecaca;
+        background:#fef2f2; color:#dc2626; font-size:0.78rem; cursor:pointer;
+        font-family:inherit;
+    }
+    .eb-video-file-info {
+        display:flex; align-items:center; gap:8px; margin-top:8px;
+        padding:8px 12px; background:#EFF6FF; border-radius:8px;
+        font-size:0.82rem; color:#004899;
+    }
+    /* Multi-video list */
+    .eb-video-item {
+        display:flex; align-items:center; gap:8px; padding:8px 12px;
+        background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px;
+        font-size:0.82rem;
+    }
+    .eb-video-item-text {
+        flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+        color:#334155; font-family:monospace;
+    }
+    .eb-video-item-remove {
+        display:inline-flex; align-items:center; justify-content:center;
+        width:26px; height:26px; border-radius:6px; border:none;
+        background:#fef2f2; color:#dc2626; cursor:pointer; font-size:0.8rem;
+        flex-shrink:0;
+    }
+    .eb-video-item-remove:hover { background:#fecaca; }
+    .eb-video-item-num {
+        display:inline-flex; align-items:center; justify-content:center;
+        width:22px; height:22px; border-radius:50%; background:#e0e7ff;
+        color:#4338ca; font-size:0.72rem; font-weight:700; flex-shrink:0;
+    }
+    /* Feature chips */
+    .eb-features { display:flex; flex-wrap:wrap; gap:8px; }
+    .eb-feature {
+        display:inline-flex; align-items:center; gap:6px;
+        padding:8px 14px; border-radius:20px; border:1.5px solid #e5e7eb;
+        background:#f9fafb; font-size:0.82rem; font-weight:500;
+        cursor:pointer; transition:all 0.2s; user-select:none; color:#475569;
+    }
+    .eb-feature:hover { border-color:#006EE3; }
+    .eb-feature.checked {
+        background:#EFF6FF; border-color:#006EE3; color:#004899;
+    }
+    .eb-feature i { font-size:0.85rem; }
+    /* Modal body scroll */
+    #editBusinessModal .modal-body { max-height:65vh; overflow-y:auto; padding:16px 20px; }
+    @media (max-width:640px) {
+        .eb-grid-2, .eb-grid-3 { grid-template-columns:1fr; }
+        #editBusinessModal .modal-content { margin:8px; max-height:95vh; }
+        #editBusinessModal .modal-body { max-height:70vh; }
+    }
+    /* === Plan Badge === */
+    .plan-badge {
+        display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;
+        font-size:0.78rem;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;
+    }
+    .plan-badge-basic {
+        background:#f1f5f9;color:#64748b;border:1px solid #e2e8f0;
+    }
+    .plan-badge-premium {
+        background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border:1px solid #fbbf24;
+        box-shadow:0 2px 8px rgba(251,191,36,0.3);
+    }
+    /* === Quick Actions Grid === */
+    .quick-actions-grid {
+        display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+    }
+    @media (max-width:768px) {
+        .quick-actions-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:400px) {
+        .quick-actions-grid { grid-template-columns:1fr 1fr; gap:8px; }
+    }
+    .quick-action-card {
+        display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 16px;
+        border-radius:16px;border:none;
+        text-decoration:none;color:#fff;transition:all 0.25s;cursor:pointer;
+        box-shadow:0 2px 8px rgba(0,0,0,0.08);position:relative;overflow:hidden;
+    }
+    .quick-action-card::before {
+        content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
+        pointer-events:none;
+    }
+    .quick-action-card:hover {
+        transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.15);
+    }
+    .quick-action-card.qa-negocio { background:linear-gradient(135deg,#006EE3,#3B9AFF); }
+    .quick-action-card.qa-inmueble { background:linear-gradient(135deg,#2563eb,#3b82f6); }
+    .quick-action-card.qa-producto { background:linear-gradient(135deg,#d97706,#f59e0b); }
+    .quick-action-card.qa-empleo { background:linear-gradient(135deg,#7c3aed,#8b5cf6); }
+    .quick-action-card.qa-bazar { background:linear-gradient(135deg,#059669,#10b981); }
+    .quick-action-icon {
+        width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+        font-size:1.4rem;transition:transform 0.2s;background:rgba(255,255,255,0.25);
+    }
+    .quick-action-card:hover .quick-action-icon { transform:scale(1.15); }
+    .quick-action-label {
+        font-size:0.85rem;font-weight:700;text-align:center;line-height:1.3;
+        text-shadow:0 1px 2px rgba(0,0,0,0.1);
+    }
+    /* === Admin Premium === */
+    .voucher-thumb {
+        width:60px;height:60px;border-radius:8px;object-fit:cover;cursor:pointer;border:2px solid #e5e7eb;transition:border-color 0.2s;
+    }
+    .voucher-thumb:hover { border-color:#d97706; }
+    .btn-approve-premium {
+        padding:6px 14px;border-radius:6px;border:none;font-size:0.8rem;font-weight:600;cursor:pointer;
+        background:#006EE3;color:#fff;transition:all 0.2s;font-family:inherit;
+    }
+    .btn-approve-premium:hover { background:#005BB5; }
+    .btn-reject-premium {
+        padding:6px 14px;border-radius:6px;border:none;font-size:0.8rem;font-weight:600;cursor:pointer;
+        background:#dc2626;color:#fff;transition:all 0.2s;font-family:inherit;
+    }
+    .btn-reject-premium:hover { background:#b91c1c; }
+    .btn-view-voucher {
+        padding:6px 12px;border-radius:6px;border:1px solid #d1d5db;background:#fff;font-size:0.8rem;cursor:pointer;
+        transition:all 0.2s;font-family:inherit;
+    }
+    .btn-view-voucher:hover { border-color:#d97706;background:#fffbeb; }
+    /* === Admin Edit Businesses Panel === */
+    .aeb-card { background:#fff;border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid #e5e7eb; }
+    .aeb-card h4 { font-size:0.95rem;font-weight:700;color:#374151;margin:0 0 14px;display:flex;align-items:center;gap:8px; }
+    .aeb-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+    .aeb-field { margin-bottom:10px; }
+    .aeb-field label { display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px; }
+    .aeb-logo-area { display:flex;align-items:center;gap:16px;margin-bottom:12px; }
+    .aeb-logo-preview { width:80px;height:80px;border-radius:12px;border:2px dashed #d1d5db;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f9fafb;flex-shrink:0; }
+    .aeb-logo-preview img { width:100%;height:100%;object-fit:contain; }
+    .aeb-images-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px; }
+    .aeb-img-thumb { position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1;border:1px solid #e5e7eb; }
+    .aeb-img-thumb img { width:100%;height:100%;object-fit:cover; }
+    .aeb-img-remove { position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;border:none;background:rgba(220,38,38,0.9);color:#fff;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+    .aeb-img-cover { position:absolute;bottom:4px;left:4px;background:rgba(0,110,227,0.9);color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:4px; }
+    @media(max-width:640px) { .aeb-grid { grid-template-columns:1fr; } .aeb-images-grid { grid-template-columns:repeat(3,1fr); } }
+    .voucher-lightbox {
+        position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;
+    }
+    .voucher-lightbox img { max-width:90%;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+    .voucher-lightbox-close {
+        position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;border:none;
+        background:rgba(255,255,255,0.2);color:#fff;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    }
+    .voucher-lightbox-close:hover { background:rgba(255,255,255,0.3); }
+    </style>
+
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/favicon.jpeg" alt="HolaX" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
+                <span class="brand-name"><span id="brandCity"></span> HolaX</span>
+            </a>
+            <div class="location-selector" id="locationSelector">
+                <button class="location-btn" id="locationBtn" aria-label="Seleccionar ubicación">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-label" id="locationLabel">Todo Venezuela</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="location-dropdown hidden" id="locationDropdown">
+                    <div class="location-search">
+                        <input type="text" id="locationSearchInput" placeholder="Buscar estado..." autocomplete="off">
+                    </div>
+                    <div class="location-option" data-state="" data-city="">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Todo Venezuela</span>
+                    </div>
+                    <div class="location-divider"></div>
+                    <div class="location-list" id="locationList">
+                        <!-- States loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="search.html" class="nav-link">Negocios</a></li>
+                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
+                <li><a href="map.html" class="nav-link">Mapa</a></li>
+                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
+                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-label="Más opciones">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li class="nav-dropdown-divider"></li>
+                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                    </ul>
+                </li>
+                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navUserItem" class="nav-user">
+                    <a href="dashboard.html" class="nav-link active" id="navUserName">
+                        <i class="fas fa-user-circle"></i> Mi Cuenta
+                    </a>
+                    <button class="nav-link btn-logout" id="navLogout">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </li>
+                <li class="nav-mobile-cta">
+                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                        <i class="fas fa-shopping-bag"></i> Marketplace
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <main class="dashboard">
+        <div class="container dashboard-container">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar" id="dashboardSidebar">
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="userAvatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-info">
+                        <h3 id="dashUserName">Usuario</h3>
+                        <p id="dashUserEmail">usuario@email.com</p>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="sidebar-link active" data-section="overview">
+                        <i class="fas fa-th-large"></i> Resumen
+                    </a>
+                    <a href="#" class="sidebar-link" data-section="businesses">
+                        <i class="fas fa-building"></i> Mis Negocios
+                    </a>
+                    <a href="#" class="sidebar-link" data-section="messages">
+                        <i class="fas fa-envelope"></i> Mensajes
+                        <span class="badge" id="msgBadge">0</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-section="favorites">
+                        <i class="fas fa-heart"></i> Favoritos
+                    </a>
+                    <a href="#" class="sidebar-link" data-section="products">
+                        <i class="fas fa-shopping-bag"></i> Mis Productos
+                    </a>
+                    <a href="#" class="sidebar-link" data-section="my-properties">
+                        <i class="fas fa-home"></i> Mis Inmuebles
+                    </a>
+                    <a href="#" class="sidebar-link" data-section="stats">
+                        <i class="fas fa-chart-line"></i> Estadísticas
+                    </a>
+                    <a href="#" class="sidebar-link" data-section="profile">
+                        <i class="fas fa-user-edit"></i> Mi Perfil
+                    </a>
+                    <a href="/academia.html" class="sidebar-link" id="sidebarAcademyLink">
+                        <i class="fas fa-graduation-cap"></i> Academia
+                    </a>
+                    <a href="#" class="sidebar-link" id="sidebarProfileLink">
+                        <i class="fas fa-id-card"></i> Mi Perfil Partner
+                    </a>
+                    <!-- Admin link added dynamically in dashboard.js if user is admin -->
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="dashboard-main">
+                <!-- Header -->
+                <div class="dashboard-header">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="dashboard-title" id="sectionTitle">Resumen</h1>
+                    <div class="dashboard-header-actions">
+                        <!-- Notifications Bell -->
+                        <div class="notif-bell-wrapper" id="notifBellWrapper" style="position:relative;">
+                            <button class="notif-bell-btn" id="notifBellBtn" title="Notificaciones" style="position:relative;background:none;border:2px solid #e2e8f0;width:40px;height:40px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#475569;transition:all .2s;">
+                                <i class="fas fa-bell" style="font-size:1.05rem;"></i>
+                                <span class="notif-badge" id="notifBadge" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:0.65rem;font-weight:700;min-width:18px;height:18px;border-radius:9px;align-items:center;justify-content:center;padding:0 4px;box-shadow:0 2px 6px rgba(239,68,68,0.4);display:none;">0</span>
+                            </button>
+                            <!-- Notifications Dropdown -->
+                            <div class="notif-dropdown" id="notifDropdown" style="display:none;position:absolute;top:48px;right:0;width:360px;max-height:460px;background:#fff;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,0.15);border:1px solid #e2e8f0;overflow:hidden;z-index:9999;">
+                                <div style="padding:14px 16px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;">
+                                    <div style="font-weight:700;font-size:0.95rem;color:#1e293b;">Notificaciones</div>
+                                    <div style="display:flex;gap:6px;">
+                                        <button id="notifMarkAllRead" style="font-size:0.72rem;color:#006EE3;background:none;border:none;cursor:pointer;font-weight:600;">Marcar todas</button>
+                                        <button id="notifCloseDropdown" style="font-size:1rem;color:#94a3b8;background:none;border:none;cursor:pointer;">&times;</button>
+                                    </div>
+                                </div>
+                                <div class="notif-list" id="notifList" style="max-height:370px;overflow-y:auto;">
+                                    <div style="text-align:center;padding:32px 16px;color:#94a3b8;">
+                                        <i class="fas fa-spinner fa-spin" style="font-size:20px;"></i>
+                                        <p style="margin-top:8px;font-size:0.82rem;">Cargando...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="headerBtnNewProduct" style="background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,0.2);box-shadow:0 4px 14px rgba(217,119,6,0.35);">
+                            <i class="fas fa-shopping-bag"></i> Publicar Producto
+                        </button>
+                        <a href="new-business.html" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Nuevo Negocio
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Overview Section -->
+                <section class="dashboard-section" id="sectionOverview">
+                    <!-- Plan Badge + Quick Actions -->
+                    <div class="dash-card" style="margin-bottom:20px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                <h3 style="margin:0;">Mi Panel</h3>
+                                <span id="planBadge" class="plan-badge plan-badge-basic">
+                                    <i class="fas fa-user"></i> Basico
+                                </span>
+                            </div>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;" id="planActionBtns">
+                                <!-- Filled dynamically by JS -->
+                            </div>
+                        </div>
+                        <div class="quick-actions-grid">
+                            <a href="new-business.html" class="quick-action-card qa-negocio">
+                                <div class="quick-action-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <span class="quick-action-label">Publicar Negocio</span>
+                            </a>
+                            <a href="new-property.html" class="quick-action-card qa-inmueble">
+                                <div class="quick-action-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <span class="quick-action-label">Publicar Inmueble</span>
+                            </a>
+                            <a href="#" class="quick-action-card qa-producto" id="quickActionProduct">
+                                <div class="quick-action-icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <span class="quick-action-label">Publicar Producto</span>
+                            </a>
+                            <a href="#" class="quick-action-card qa-empleo" id="quickActionJob">
+                                <div class="quick-action-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <span class="quick-action-label">Publicar Empleo</span>
+                            </a>
+                            <a href="#" class="quick-action-card qa-bazar" id="quickActionBazar" style="display:none;">
+                                <div class="quick-action-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <span class="quick-action-label">Bazar</span>
+                            </a>
+                        </div>
+                        <p id="planExpiryInfo" style="margin:12px 0 0;font-size:0.82rem;color:#64748b;display:none;">
+                            <i class="fas fa-info-circle"></i> <span></span>
+                        </p>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="dash-stats-grid">
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-blue">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="dashTotalProps">0</div>
+                                <div class="dash-stat-label">Total Negocios</div>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-green">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="dashPublishedProps">0</div>
+                                <div class="dash-stat-label">Registrados</div>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-orange">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="dashPendingProps">0</div>
+                                <div class="dash-stat-label">Pendientes</div>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-purple">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="dashTotalViews">0</div>
+                                <div class="dash-stat-label">Vistas Totales</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Business Profile CTA -->
+                    <div class="dash-card" id="editProfileCTA" style="display:none;">
+                        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                            <div style="flex:1;min-width:200px;">
+                                <h3 style="margin:0 0 4px 0;font-size:1.05rem;color:#0f172a;"><i class="fas fa-store" style="color:#006EE3;margin-right:6px;"></i> <span id="editProfileBizName">—</span></h3>
+                                <p style="margin:0;font-size:0.85rem;color:#64748b;" id="editProfileBizStatus">—</p>
+                            </div>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                <button class="btn btn-primary" id="editProfileBtn" onclick="" style="padding:14px 32px;font-size:1rem;font-weight:700;border-radius:12px;background:linear-gradient(135deg,#006EE3,#0ea5e9);box-shadow:0 4px 14px rgba(0,110,227,0.35);display:flex;align-items:center;gap:8px;">
+                                    <i class="fas fa-pen-to-square"></i> Editar Perfil del Negocio
+                                </button>
+                                <a href="#" class="btn btn-secondary" id="editProfileViewBtn" style="padding:14px 24px;font-size:0.95rem;font-weight:600;border-radius:12px;display:flex;align-items:center;gap:8px;text-decoration:none;">
+                                    <i class="fas fa-eye"></i> Ver Perfil
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Businesses -->
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3>Negocios Recientes</h3>
+                            <a href="#" class="dash-link" data-section="businesses">Ver todas</a>
+                        </div>
+                        <div class="dash-table-responsive">
+                            <table class="dash-table" id="recentPropsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Negocio</th>
+                                        <th>Categoría</th>
+                                        <th>Estado</th>
+                                        <th>Estatus</th>
+                                        <th>Vistas</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentPropsBody">
+                                    <tr class="empty-row">
+                                        <td colspan="6">
+                                            <div class="empty-state">
+                                                <i class="fas fa-inbox"></i>
+                                                <p>No tienes negocios aún.</p>
+                                                <a href="new-business.html" class="btn btn-primary btn-sm">Registrar Negocio</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Businesses Section -->
+                <section class="dashboard-section hidden" id="sectionBusinesses">
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3>Mis Negocios</h3>
+                            <a href="new-business.html" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Nuevo
+                            </a>
+                        </div>
+                        <div class="dash-filters">
+                            <select id="dashPropFilter" class="form-select">
+                                <option value="">Todas</option>
+                                <option value="publicada">Registrados</option>
+                                <option value="pendiente">Pendientes</option>
+                                <option value="rechazada">Rechazados</option>
+                            </select>
+                        </div>
+                        <div class="dash-table-responsive">
+                            <table class="dash-table" id="allPropsTable">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Título</th>
+                                        <th>Categoría</th>
+                                        <th>Estado</th>
+                                        <th>Estatus</th>
+                                        <th>Vistas</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allPropsBody">
+                                    <tr class="empty-row">
+                                        <td colspan="7">
+                                            <div class="empty-state">
+                                                <i class="fas fa-inbox"></i>
+                                                <p>No tienes negocios.</p>
+                                                <a href="new-business.html" class="btn btn-primary btn-sm">Registrar Negocio</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Services Management Panel (shown when a business is selected) -->
+                    <div class="dash-card" id="servicesManagerPanel" style="display:none;margin-top:20px;">
+                        <div class="dash-card-header">
+                            <h3><i class="fas fa-concierge-bell" style="color:#f59e0b;"></i> Servicios de: <span id="servicesBusinessName">—</span></h3>
+                            <button class="btn btn-secondary btn-sm" id="closeServicesPanel">
+                                <i class="fas fa-times"></i> Cerrar
+                            </button>
+                        </div>
+                        <div class="dash-info-banner" style="margin-bottom:16px;">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Agrega los servicios que ofrece este negocio. Se mostrarán en la ficha pública del negocio.</p>
+                        </div>
+
+                        <!-- Add service form -->
+                        <div class="dash-service-form" id="serviceFormArea" style="margin-bottom:20px;padding:16px;background:#f8f9fa;border-radius:12px;">
+                            <h4 style="margin:0 0 12px 0;font-size:0.95rem;"><i class="fas fa-plus-circle" style="color:#006EE3;"></i> <span id="serviceFormTitle">Agregar Servicio</span></h4>
+                            <input type="hidden" id="editServiceId" value="">
+                            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;">
+                                <div style="flex:1;min-width:200px;">
+                                    <label style="font-size:0.8rem;font-weight:600;color:#555;display:block;margin-bottom:4px;">Nombre del servicio *</label>
+                                    <input type="text" id="serviceTitleInput" placeholder="Ej: Corte de cabello" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;">
+                                </div>
+                                <div style="flex:2;min-width:200px;">
+                                    <label style="font-size:0.8rem;font-weight:600;color:#555;display:block;margin-bottom:4px;">Descripción</label>
+                                    <input type="text" id="serviceDescInput" placeholder="Breve descripción del servicio" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;">
+                                </div>
+                                <div style="display:flex;gap:8px;">
+                                    <button class="btn btn-primary btn-sm" id="saveServiceBtn">
+                                        <i class="fas fa-save"></i> Guardar
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm" id="cancelServiceBtn" style="display:none;">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services list -->
+                        <div id="businessServicesManager" class="services-manager-list">
+                            <div class="empty-state" style="padding:30px;">
+                                <i class="fas fa-concierge-bell" style="font-size:2rem;color:#ccc;"></i>
+                                <p style="margin-top:8px;">Este negocio aún no tiene servicios registrados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Messages Section -->
+                <section class="dashboard-section hidden" id="sectionMessages">
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3>Mensajes Recibidos</h3>
+                        </div>
+                        <div class="messages-list" id="messagesList">
+                            <div class="empty-state">
+                                <i class="fas fa-envelope-open"></i>
+                                <p>No tienes mensajes nuevos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Favorites Section -->
+                <section class="dashboard-section hidden" id="sectionFavorites">
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3>Mis Favoritos</h3>
+                        </div>
+                        <div class="business-grid" id="favoritesGrid">
+                            <div class="empty-state">
+                                <i class="fas fa-heart"></i>
+                                <p>No tienes negocios favoritos.</p>
+                                <a href="search.html" class="btn btn-primary btn-sm">Explorar Negocios</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- My Products Section -->
+                <section class="dashboard-section hidden" id="sectionProducts">
+                    <div class="dash-card" style="margin-bottom:20px;">
+                        <div class="dash-card-header">
+                            <h3><i class="fas fa-shopping-bag"></i> Mis Productos (Marketplace)</h3>
+                            <button class="btn btn-primary btn-sm" id="btnNewProduct">
+                                <i class="fas fa-plus"></i> Publicar Producto
+                            </button>
+                        </div>
+                        <div class="dash-info-banner" style="margin-bottom:16px;">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Publica productos en el marketplace para que los compradores te contacten por WhatsApp.</p>
+                        </div>
+                    </div>
+                    <div id="myProductsByStore">
+                        <div style="text-align:center;color:#94a3b8;padding:24px;">
+                            <i class="fas fa-spinner fa-spin" style="font-size:24px;color:#f59e0b;"></i>
+                            <p style="margin-top:8px;">Cargando productos...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- My Properties (Inmuebles) Section -->
+                <section class="dashboard-section hidden" id="sectionMy-properties">
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3><i class="fas fa-home"></i> Mis Inmuebles</h3>
+                            <a href="new-property.html" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Publicar Inmueble
+                            </a>
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <select id="myPropsFilter" class="form-select" style="width:auto;max-width:200px;">
+                                <option value="">Todas</option>
+                                <option value="approved">Publicadas</option>
+                                <option value="pending">Pendientes</option>
+                                <option value="rejected">Rechazadas</option>
+                            </select>
+                        </div>
+                        <div class="business-grid" id="myPropertiesGrid">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Cargando inmuebles...</p></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats Section -->
+                <section class="dashboard-section hidden" id="sectionStats">
+                    <div class="dash-stats-grid" style="margin-bottom:24px;">
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-blue"><i class="fas fa-eye"></i></div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="statTotalViews">0</div>
+                                <div class="dash-stat-label">Vistas Totales</div>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-green"><i class="fab fa-whatsapp"></i></div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="statTotalWA">0</div>
+                                <div class="dash-stat-label">Clics WhatsApp</div>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-orange"><i class="fas fa-phone"></i></div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="statTotalPhone">0</div>
+                                <div class="dash-stat-label">Clics Teléfono</div>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon stat-icon-purple"><i class="fas fa-share-alt"></i></div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="statTotalShares">0</div>
+                                <div class="dash-stat-label">Compartidos</div>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card">
+                            <div class="dash-stat-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#2563eb;"><i class="fas fa-globe"></i></div>
+                            <div class="dash-stat-info">
+                                <div class="dash-stat-number" id="statTotalWeb">0</div>
+                                <div class="dash-stat-label">Clics Web</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Period selector -->
+                    <div class="dash-card" style="margin-bottom:20px;">
+                        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                            <span style="font-weight:600;color:#475569;"><i class="fas fa-calendar"></i> Período:</span>
+                            <button class="btn period-btn active" data-period="7d" style="padding:8px 16px;border-radius:8px;border:1px solid #e2e8f0;background:#f1f5f9;cursor:pointer;font-size:0.85rem;font-weight:600;">7 días</button>
+                            <button class="btn period-btn" data-period="30d" style="padding:8px 16px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;cursor:pointer;font-size:0.85rem;font-weight:600;">30 días</button>
+                            <button class="btn period-btn" data-period="90d" style="padding:8px 16px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;cursor:pointer;font-size:0.85rem;font-weight:600;">90 días</button>
+                            <span id="statsBusinessSelector" style="margin-left:auto;"></span>
+                        </div>
+                    </div>
+
+                    <!-- Daily Chart -->
+                    <div class="dash-card" style="margin-bottom:20px;">
+                        <div class="dash-card-header">
+                            <h3><i class="fas fa-chart-line"></i> Vistas Diarias</h3>
+                        </div>
+                        <div id="statsChartContainer" style="position:relative;height:220px;width:100%;overflow-x:auto;">
+                            <canvas id="statsDailyChart" style="width:100%;height:200px;"></canvas>
+                            <p id="statsChartEmpty" style="display:none;text-align:center;color:#94a3b8;padding:40px 0;">Sin datos para este período.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats per business -->
+                    <div class="dash-card" id="statsPerBusinessCard">
+                        <div class="dash-card-header">
+                            <h3><i class="fas fa-chart-bar"></i> Estadísticas por Negocio</h3>
+                        </div>
+                        <div class="dash-table-responsive">
+                            <table class="dash-table">
+                                <thead>
+                                    <tr>
+                                        <th>Negocio</th>
+                                        <th>Categoría</th>
+                                        <th>Vistas</th>
+                                        <th>WhatsApp</th>
+                                        <th>Teléfono</th>
+                                        <th>Web</th>
+                                        <th>Compartidos</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="statsPerBusinessBody">
+                                    <tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:24px;">Cargando estadísticas...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Admin Section (only visible for admin users) -->
+                <section class="dashboard-section hidden" id="sectionAdmin">
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3><i class="fas fa-shield-alt"></i> Panel de Administración</h3>
+                        </div>
+
+                        <!-- Admin Tabs -->
+                        <div class="admin-tabs">
+                            <button class="admin-tab active" id="adminTabPending">
+                                <i class="fas fa-clock"></i> Pendientes <span class="badge badge-warning" id="adminPendingBadgeTop">0</span>
+                            </button>
+                            <button class="admin-tab" id="adminTabAll">
+                                <i class="fas fa-list"></i> Negocios
+                            </button>
+                            <button class="admin-tab" id="adminTabUsers">
+                                <i class="fas fa-users-cog"></i> Usuarios
+                            </button>
+                            <button class="admin-tab" id="adminTabSettings">
+                                <i class="fas fa-cog"></i> Configuracion
+                            </button>
+                            <button class="admin-tab" id="adminTabPremium">
+                                <i class="fas fa-crown"></i> Solicitudes Premium <span class="badge badge-warning" id="adminPremiumBadge">0</span>
+                            </button>
+                            <button class="admin-tab" id="adminTabEditBiz">
+                                <i class="fas fa-pen-to-square"></i> Editar Negocios
+                            </button>
+                            <button class="admin-tab" id="adminTabCategories">
+                                <i class="fas fa-tags"></i> Categorias <span class="badge badge-warning" id="adminCatSuggBadge" style="display:none;">0</span>
+                            </button>
+                        </div>
+
+                        <!-- Pending Businesses Panel -->
+                        <div id="adminPanelPending">
+                            <div class="dash-info-banner">
+                                <i class="fas fa-info-circle"></i>
+                                <p>Los negocios nuevos aparecen aquí con estado <strong>Pendiente</strong>. Debes aprobarlos para que sean visibles públicamente en la plataforma.</p>
+                            </div>
+                            <div class="dash-table-responsive">
+                                <table class="dash-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Negocio</th>
+                                            <th>Categoría</th>
+                                            <th>Ubicación</th>
+                                            <th>Fecha</th>
+                                            <th>Propietario</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminPendingBody">
+                                        <tr class="empty-row">
+                                            <td colspan="6">
+                                                <div class="empty-state">
+                                                    <i class="fas fa-spinner fa-spin"></i>
+                                                    <p>Cargando negocios pendientes...</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- All Businesses Panel -->
+                        <div id="adminPanelAll" class="hidden">
+                            <div class="dash-table-responsive">
+                                <table class="dash-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Negocio</th>
+                                            <th>Categoría</th>
+                                            <th>Estado</th>
+                                            <th>Estatus</th>
+                                            <th>Propietario</th>
+                                            <th>Fecha</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminAllPropsBody">
+                                        <tr class="empty-row">
+                                            <td colspan="7">
+                                                <div class="empty-state">
+                                                    <i class="fas fa-spinner fa-spin"></i>
+                                                    <p>Cargando...</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Users Panel -->
+                        <div id="adminPanelUsers" class="hidden">
+                            <div class="admin-users-header">
+                                <div class="admin-users-stats" id="adminUsersStats">
+                                    <div class="admin-stat-chip admin-stat-chip-blue">
+                                        <i class="fas fa-users"></i> <span id="statTotalUsers">0</span> Usuarios
+                                    </div>
+                                    <div class="admin-stat-chip admin-stat-chip-red">
+                                        <i class="fas fa-shield-alt"></i> <span id="statAdminUsers">0</span> Admins
+                                    </div>
+                                    <div class="admin-stat-chip admin-stat-chip-green">
+                                        <i class="fas fa-crown" style="color:#f59e0b;"></i> <span id="statPremiumUsers">0</span> Premium
+                                    </div>
+                                    <div class="admin-stat-chip">
+                                        <i class="fas fa-user"></i> <span id="statNormalUsers">0</span> Normales
+                                    </div>
+                                </div>
+                                <div class="admin-users-search">
+                                    <div class="admin-search-wrapper">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="adminUsersSearchInput" placeholder="Buscar por nombre o email...">
+                                    </div>
+                                    <button class="btn" id="btnManualPremium" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-weight:600;padding:8px 16px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;font-size:0.85rem;">
+                                        <i class="fas fa-crown"></i> Activar Premium
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="dash-table-responsive">
+                                <table class="dash-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Usuario</th>
+                                            <th>Email</th>
+                                            <th>Teléfono</th>
+                                            <th>Rol</th>
+                                            <th>Plan</th>
+                                            <th>Negocios</th>
+                                            <th>Registro</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminUsersBody">
+                                        <tr class="empty-row">
+                                            <td colspan="7">
+                                                <div class="empty-state">
+                                                    <i class="fas fa-spinner fa-spin"></i>
+                                                    <p>Cargando usuarios...</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Premium Requests Panel -->
+                        <div id="adminPanelPremium" class="hidden">
+                            <div class="dash-info-banner" style="background:#fffbeb;border-color:#fde68a;">
+                                <i class="fas fa-crown" style="color:#d97706;"></i>
+                                <p>Aqui se muestran las solicitudes de usuarios que desean pasarse al plan Premium. Revisa el comprobante de pago y aprueba o rechaza la solicitud.</p>
+                            </div>
+                            <div class="dash-table-responsive">
+                                <table class="dash-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Usuario</th>
+                                            <th>Email</th>
+                                            <th>Plan</th>
+                                            <th>Voucher</th>
+                                            <th>Fecha</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminPremiumBody">
+                                        <tr class="empty-row">
+                                            <td colspan="6">
+                                                <div class="empty-state">
+                                                    <i class="fas fa-spinner fa-spin"></i>
+                                                    <p>Cargando solicitudes...</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                                        <!-- Settings Panel -->
+                        <div id="adminPanelSettings" class="hidden">
+                            <div class="dash-info-banner" style="background:#EFF6FF;border-color:#86efac;margin-bottom:20px;">
+                                <i class="fas fa-info-circle" style="color:#006EE3;"></i>
+                                <p>Aqui puedes configurar aspectos generales de la plataforma, incluyendo el banner principal del inicio.</p>
+                            </div>
+                            <div style="background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #e5e7eb;">
+                                <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+                                    <i class="fas fa-image" style="color:#006EE3;"></i> Banner del Inicio (Hero)
+                                </h3>
+                                <p style="font-size:0.85rem;color:#6b7280;margin-bottom:16px;">Imagen de fondo del hero en la pagina principal. Resolucion recomendada: 1920x800px. Max 5MB.</p>
+                                <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+                                    <div style="width:200px;height:100px;border-radius:10px;border:2px dashed #d1d5db;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f9fafb;flex-shrink:0;position:relative;">
+                                        <i class="fas fa-panorama" id="adminBannerPlaceholderIcon" style="font-size:1.8rem;color:#94a3b8;"></i>
+                                        <img id="adminBannerImg" src="" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:none;">
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;gap:8px;">
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('adminBannerInput').click()">
+                                            <i class="fas fa-upload"></i> Subir Banner
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm" id="adminBannerRemoveBtn" style="display:none;" onclick="removeAdminBanner()">
+                                            <i class="fas fa-trash"></i> Quitar Banner
+                                        </button>
+                                        <input type="file" id="adminBannerInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="handleAdminBannerSelect(this)">
+                                        <span style="font-size:0.75rem;color:#9ca3af;">JPG, PNG o WebP - Max 5MB</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #e5e7eb;">
+                                <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+                                    <i class="fas fa-sliders-h" style="color:#006EE3;"></i> Configuracion General
+                                </h3>
+                                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+                                    <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">Nombre del Sitio</label><input type="text" class="eb-input" data-key="site_name" placeholder="HolaX"></div>
+                                    <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">Email de Contacto</label><input type="email" class="eb-input" data-key="contact_email" placeholder="admin@ejemplo.com"></div>
+                                    <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">WhatsApp</label><input type="text" class="eb-input" data-key="whatsapp_number" placeholder="+58-414-000-0000"></div>
+                                    <div><label style="display:block;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:4px;">Max negocios por usuario</label><input type="number" class="eb-input" data-key="max_businesses_per_user" placeholder="10"></div>
+                                </div>
+                            </div>
+                            <div style="background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #e5e7eb;">
+                                <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:16px;display:flex;align-items:center;gap:8px;"><i class="fas fa-toggle-on" style="color:#006EE3;"></i> Funcionalidades</h3>
+                                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;">
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="businesses_enabled"> Negocios</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="marketplace_enabled"> Marketplace</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="jobs_enabled"> Empleo</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="events_enabled"> Eventos</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="chat_enabled"> Chat</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="reviews_enabled"> Resenas</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="coupons_enabled"> Cupones</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="registrations_enabled"> Registros</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="require_approval"> Requieren aprobacion</label>
+                                    <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;font-size:0.85rem;color:#374151;"><input type="checkbox" data-key="emergency_enabled"> Emergencias</label>
+                                </div>
+                            </div>
+                            <input type="hidden" id="setting_hero_banner_url" data-key="hero_banner_url">
+                            <div style="text-align:right;"><button class="btn" id="dashAdminSaveSettingsBtn" style="background:linear-gradient(135deg,#006EE3,#005BB5);color:#fff;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;font-size:0.95rem;"><i class="fas fa-save"></i> Guardar Configuracion</button></div>
+                        </div>
+
+                        <!-- Edit Businesses Panel (NEW) -->
+                        <div id="adminPanelEditBiz" class="hidden">
+                            <div class="dash-info-banner" style="background:#eff6ff;border-color:#93c5fd;margin-bottom:20px;">
+                                <i class="fas fa-info-circle" style="color:#2563eb;"></i>
+                                <p>Selecciona un negocio del listado para editar su informacion, cambiar logo, gestionar imagenes o eliminarlo.</p>
+                            </div>
+                            <div style="margin-bottom:16px;">
+                                <select id="adminEditBizSelect" class="eb-input" style="max-width:400px;width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                    <option value="">-- Selecciona un negocio --</option>
+                                </select>
+                            </div>
+                            <div id="adminEditBizContainer" style="display:none;">
+                                <!-- Business info loaded dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Categories Management Panel -->
+                        <div id="adminPanelCategories" class="hidden">
+                            <div class="dash-info-banner" style="background:#f0fdf4;border-color:#86efac;margin-bottom:20px;">
+                                <i class="fas fa-info-circle" style="color:#16a34a;"></i>
+                                <p>Aqui puedes gestionar las categorias del directorio. Las nuevas categorias se reflejaran automaticamente en todos los filtros del sitio.</p>
+                            </div>
+
+                            <!-- Create New Category -->
+                            <div style="background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #e5e7eb;">
+                                <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+                                    <i class="fas fa-plus-circle" style="color:#16a34a;"></i> Crear Nueva Categoria
+                                </h3>
+                                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;">
+                                    <div style="flex:1;min-width:200px;">
+                                        <label style="display:block;font-size:0.82rem;font-weight:600;color:#6b7280;margin-bottom:4px;">Nombre *</label>
+                                        <input type="text" id="newCatName" placeholder="Ej: Veterinarias" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                    </div>
+                                    <div style="min-width:180px;">
+                                        <label style="display:block;font-size:0.82rem;font-weight:600;color:#6b7280;margin-bottom:4px;">Icono (FontAwesome)</label>
+                                        <input type="text" id="newCatIcon" placeholder="fas fa-store" value="fas fa-store" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                    </div>
+                                    <div style="min-width:120px;">
+                                        <label style="display:block;font-size:0.82rem;font-weight:600;color:#6b7280;margin-bottom:4px;">Color</label>
+                                        <div style="display:flex;align-items:center;gap:6px;">
+                                            <input type="color" id="newCatColor" value="#607d8b" style="width:36px;height:36px;border:1px solid #d1d5db;border-radius:6px;cursor:pointer;padding:2px;">
+                                            <span id="newCatColorLabel" style="font-size:0.82rem;color:#6b7280;">#607d8b</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-sm" id="btnCreateCategory" style="background:#16a34a;border-color:#16a34a;">
+                                        <i class="fas fa-plus"></i> Crear
+                                    </button>
+                                </div>
+                                <div id="newCatError" style="color:#dc2626;font-size:0.82rem;margin-top:8px;display:none;"></div>
+                            </div>
+
+                            <!-- Category Suggestions -->
+                            <div style="background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #e5e7eb;">
+                                <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:4px;display:flex;align-items:center;gap:8px;">
+                                    <i class="fas fa-inbox" style="color:#f59e0b;"></i> Solicitudes de Nuevas Categorias
+                                    <span class="badge badge-warning" id="catSuggCount" style="font-size:0.7rem;">0</span>
+                                </h3>
+                                <p style="font-size:0.82rem;color:#6b7280;margin-bottom:12px;">Los usuarios pueden sugerir categorias desde el formulario de registro. Aprueba para crearlas automaticamente.</p>
+                                <div id="catSuggestionsList">
+                                    <div style="text-align:center;color:#94a3b8;padding:16px;">
+                                        <i class="fas fa-spinner fa-spin"></i> Cargando solicitudes...
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- All Categories Table -->
+                            <div style="background:#fff;border-radius:12px;padding:20px;border:1px solid #e5e7eb;">
+                                <h3 style="font-size:1rem;font-weight:700;color:#374151;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+                                    <i class="fas fa-list" style="color:#006EE3;"></i> Todas las Categorias
+                                </h3>
+                                <div class="dash-table-responsive">
+                                    <table class="dash-table" id="adminCategoriesTable">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Slug</th>
+                                                <th>Icono</th>
+                                                <th>Color</th>
+                                                <th>Negocios</th>
+                                                <th>Orden</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminCategoriesBody">
+                                            <tr class="empty-row">
+                                                <td colspan="8">
+                                                    <div class="empty-state">
+                                                        <i class="fas fa-spinner fa-spin"></i>
+                                                        <p>Cargando categorias...</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section class="dashboard-section hidden" id="sectionProfile">
+                    <!-- Profile Header Card -->
+                    <div class="profile-header-card">
+                        <div class="profile-cover"></div>
+                        <div class="profile-header-body">
+                            <div class="profile-avatar-large" id="profileAvatarLarge">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-header-info">
+                                <h2 id="profileDisplayName">Usuario</h2>
+                                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                                    <span class="profile-role-badge" id="profileRoleBadge">Usuario</span>
+                                    <span id="profilePlanBadge" class="plan-badge plan-badge-basic"><i class="fas fa-user"></i> Basico</span>
+                                </div>
+                                <p class="profile-email-display" id="profileDisplayEmail">usuario@email.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Form Card -->
+                    <div class="profile-form-card">
+                        <div class="profile-form-card-header">
+                            <div class="profile-section-icon">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <div>
+                                <h3>Información Personal</h3>
+                                <p>Actualiza tus datos y se reflejarán en todas tus publicaciones</p>
+                            </div>
+                        </div>
+
+                        <form class="profile-form" id="profileForm">
+                            <!-- Contact Info Section -->
+                            <div class="profile-form-section">
+                                <div class="profile-form-section-title">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>Datos Básicos</span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="profile-input-group">
+                                        <label for="profileName">Nombre Completo</label>
+                                        <div class="profile-input-wrapper">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" id="profileName" name="name" required placeholder="Ej: Juan Pérez">
+                                        </div>
+                                    </div>
+                                    <div class="profile-input-group">
+                                        <label for="profileEmail">Correo Electrónico</label>
+                                        <div class="profile-input-wrapper">
+                                            <i class="fas fa-envelope"></i>
+                                            <input type="email" id="profileEmail" name="email" required placeholder="correo@ejemplo.com">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phone Section -->
+                            <div class="profile-form-section">
+                                <div class="profile-form-section-title">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <span>Teléfonos de Contacto</span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="profile-input-group">
+                                        <label for="profilePhone">Teléfono Principal</label>
+                                        <div class="profile-input-wrapper">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="tel" id="profilePhone" name="phone" placeholder="+58 414 0000000">
+                                        </div>
+                                    </div>
+                                    <div class="profile-input-group">
+                                        <label for="profileWhatsApp">
+                                            <i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp
+                                        </label>
+                                        <div class="profile-input-wrapper">
+                                            <i class="fab fa-whatsapp" style="color:#25d366"></i>
+                                            <input type="tel" id="profileWhatsApp" name="whatsapp" placeholder="+58 414 0000000">
+                                        </div>
+                                        <small class="profile-input-hint">Los clientes podrán contactarte directamente por WhatsApp desde tus negocios</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bio Section -->
+                            <div class="profile-form-section">
+                                <div class="profile-form-section-title">
+                                    <i class="fas fa-align-left"></i>
+                                    <span>Sobre Mí</span>
+                                </div>
+                                <div class="profile-input-group">
+                                    <label for="profileBio">Biografía / Descripción</label>
+                                    <div class="profile-textarea-wrapper">
+                                        <textarea id="profileBio" name="bio" rows="4" placeholder="Cuéntanos sobre ti, tu experiencia, las zonas donde trabajas..." maxlength="500"></textarea>
+                                        <span class="profile-char-count" id="bioCharCount">0/500</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sync Info Banner -->
+                            <div class="profile-sync-banner">
+                                <div class="profile-sync-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <div class="profile-sync-text">
+                                    <strong>Sincronización automática</strong>
+                                    <p>Al guardar, tu información se actualizará en todos tus negocios publicados. Los clientes verán tu teléfono y WhatsApp actualizados al contactarte.</p>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="profile-form-actions">
+                                <button type="submit" class="btn btn-primary profile-save-btn" id="profileSaveBtn">
+                                    <i class="fas fa-check-circle"></i> Guardar Cambios
+                                </button>
+                                <button type="button" class="btn btn-secondary profile-cancel-btn" id="profileCancelBtn">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Product Modal -->
+    <div class="modal hidden" id="productModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content" style="max-width:560px;">
+            <div class="modal-header">
+                <h3 id="productModalTitle"><i class="fas fa-plus-circle"></i> Publicar Producto</h3>
+                <button class="modal-close" id="productModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm" class="profile-form">
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-store"></i> <span>Publicar desde tu Negocio</span></div>
+                        <div class="profile-input-group">
+                            <label for="prodBusiness">Negocio / Comercio (opcional)</label>
+                            <div class="profile-input-wrapper"><i class="fas fa-store"></i>
+                            <select id="prodBusiness" name="business_id">
+                                <option value="">Publicar como usuario independiente</option>
+                            </select>
+                            </div>
+                            <small class="profile-input-hint">Selecciona desde cuál negocio quieres publicar este producto. Si no tienes negocios registrados, <a href="new-business.html" style="color:#006EE3;font-weight:600;">registra uno aquí</a>.</small>
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-tag"></i> <span>Información del Producto</span></div>
+                        <div class="profile-input-group">
+                            <label for="prodName">Nombre del producto *</label>
+                            <div class="profile-input-wrapper"><i class="fas fa-box"></i>
+                            <input type="text" id="prodName" name="name" required placeholder="Ej: iPhone 14 Pro">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="profile-input-group">
+                                <label for="prodPrice">Precio ($)</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-dollar-sign"></i>
+                                <input type="number" id="prodPrice" name="price" required min="0" step="0.01" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="profile-input-group">
+                                <label for="prodCategory">Categoría</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-tag"></i>
+                                <select id="prodCategory" name="category">
+                                    <option value="general">General</option>
+                                    <option value="vehiculos">Vehículos</option>
+                                    <option value="inmuebles">Inmuebles</option>
+                                    <option value="electronica">Electrónica</option>
+                                    <option value="servicios">Servicios</option>
+                                    <option value="ropa">Ropa</option>
+                                    <option value="hogar">Hogar</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-camera"></i> <span>Fotos del Producto</span></div>
+                        <div class="profile-input-group" style="display:none;">
+                            <div class="profile-input-wrapper"><i class="fas fa-link"></i>
+                            <input type="text" id="prodImage" name="image">
+                            </div>
+                        </div>
+                        <div class="prod-upload-area" id="prodUploadArea">
+                            <small class="profile-input-hint" style="display:block;margin-bottom:8px;">Sube hasta 5 fotos. La primera será la principal.</small>
+                            <div class="prod-upload-btns">
+                                <label class="btn btn-primary btn-sm prod-upload-label" for="prodImageFile">
+                                    <i class="fas fa-images"></i> Agregar Fotos
+                                </label>
+                                <input type="file" id="prodImageFile" name="image_file" accept="image/*" multiple style="display:none;">
+                                <label class="btn btn-secondary btn-sm prod-upload-label" for="prodAttachFile">
+                                    <i class="fas fa-paperclip"></i> Adjuntar Archivo
+                                </label>
+                                <input type="file" id="prodAttachFile" name="attach_file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt" style="display:none;">
+                            </div>
+                            <div class="prod-upload-preview" id="prodUploadPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+                            <div class="prod-upload-progress hidden" id="prodUploadProgress">
+                                <i class="fas fa-spinner fa-spin"></i> Subiendo imagen(es)...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-video"></i> <span>Videos del Producto</span></div>
+                        <div id="prodVideoList">
+                            <div class="profile-input-group" style="margin-bottom:8px;">
+                                <div class="profile-input-wrapper"><i class="fas fa-video"></i>
+                                <input type="url" class="prod-video-url" placeholder="YouTube, TikTok o URL de video directo...">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+                            <label class="btn btn-outline btn-sm" style="cursor:pointer;margin:0;">
+                                <i class="fas fa-film"></i> Adjuntar Video
+                                <input type="file" id="prodVideoFile" accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov" style="display:none;">
+                            </label>
+                            <button type="button" id="prodAddVideoBtn" class="btn btn-outline btn-sm"><i class="fas fa-plus"></i> Agregar URL</button>
+                        </div>
+                        <span id="prodVideoUploadStatus" style="font-size:0.8rem;color:#6b7280;display:block;margin-bottom:6px;"></span>
+                        <small class="profile-input-hint">Adjunta videos desde tu teléfono o pega URLs (YouTube, TikTok, .mp4)</small>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-align-left"></i> <span>Descripción</span></div>
+                        <div class="profile-textarea-wrapper">
+                            <textarea id="prodDescription" name="description" rows="3" placeholder="Describe tu producto..." maxlength="500"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="productModalCancel">Cancelar</button>
+                <button class="btn btn-primary" id="productModalSave"><i class="fas fa-save"></i> Publicar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Modal -->
+    <div class="modal hidden" id="jobModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content" style="max-width:600px;max-height:90vh;overflow-y:auto;">
+            <div class="modal-header">
+                <h3><i class="fas fa-briefcase"></i> Publicar Empleo</h3>
+                <button class="modal-close" id="jobModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="jobForm" class="profile-form">
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-store"></i> <span>Empresa</span></div>
+                        <div class="profile-input-group">
+                            <label for="jobBusiness">Negocio / Empresa *</label>
+                            <div class="profile-input-wrapper"><i class="fas fa-store"></i>
+                            <select id="jobBusiness" name="business_id" required>
+                                <option value="">Selecciona un negocio registrado</option>
+                            </select>
+                            </div>
+                            <small class="profile-input-hint">Selecciona HOLAX o un negocio registrado. Si no ves tu negocio, regístralo primero.</small>
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-briefcase"></i> <span>Información del Empleo</span></div>
+                        <div class="profile-input-group">
+                            <label for="jobTitle">Título del empleo *</label>
+                            <div class="profile-input-wrapper"><i class="fas fa-briefcase"></i>
+                            <input type="text" id="jobTitle" name="title" required placeholder="Ej: Chef de Cocina">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="profile-input-group">
+                                <label for="jobType">Tipo de empleo *</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-clock"></i>
+                                <select id="jobType" name="job_type" required>
+                                    <option value="tiempo_completo">Tiempo Completo</option>
+                                    <option value="medio_tiempo">Medio Tiempo</option>
+                                    <option value="contrato">Contrato</option>
+                                    <option value="remoto">Remoto</option>
+                                    <option value="freelance">Freelance</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="profile-input-group">
+                                <label for="jobSalary">Salario ($)</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-dollar-sign"></i>
+                                <input type="text" id="jobSalary" name="salary" placeholder="Ej: $500 - $800">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="profile-input-group">
+                                <label for="jobState">Estado *</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-map-marker-alt"></i>
+                                <input type="text" id="jobState" name="state" required placeholder="Ej: Mérida">
+                                </div>
+                            </div>
+                            <div class="profile-input-group">
+                                <label for="jobCity">Ciudad</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-city"></i>
+                                <input type="text" id="jobCity" name="city" placeholder="Ej: Mérida">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-align-left"></i> <span>Descripción y Requisitos</span></div>
+                        <div class="profile-textarea-wrapper">
+                            <textarea id="jobDescription" name="description" rows="3" placeholder="Describe el puesto de trabajo..." maxlength="2000"></textarea>
+                        </div>
+                        <div class="profile-textarea-wrapper" style="margin-top:10px;">
+                            <textarea id="jobRequirements" name="requirements" rows="2" placeholder="Requisitos del puesto (experiencia, habilidades...)"></textarea>
+                        </div>
+                        <div class="profile-textarea-wrapper" style="margin-top:10px;">
+                            <textarea id="jobBenefits" name="benefits" rows="2" placeholder="Beneficios ofrecidos"></textarea>
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-camera"></i> <span>Fotos del Empleo</span></div>
+                        <small class="profile-input-hint" style="display:block;margin-bottom:8px;">Sube imágenes del lugar de trabajo, equipo, etc. (máx 5)</small>
+                        <div class="prod-upload-btns">
+                            <label class="btn btn-primary btn-sm prod-upload-label" for="jobImageFile">
+                                <i class="fas fa-images"></i> Agregar Fotos
+                            </label>
+                            <input type="file" id="jobImageFile" accept="image/*" multiple style="display:none;">
+                        </div>
+                        <div id="jobUploadPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+                        <div class="prod-upload-progress hidden" id="jobUploadProgress">
+                            <i class="fas fa-spinner fa-spin"></i> Subiendo imagen(es)...
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-video"></i> <span>Videos del Empleo</span></div>
+                        <div id="jobVideoList">
+                            <div class="profile-input-group" style="margin-bottom:8px;">
+                                <div class="profile-input-wrapper"><i class="fas fa-video"></i>
+                                <input type="url" class="job-video-url" placeholder="YouTube, TikTok o URL de video...">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="jobAddVideoBtn" class="btn btn-outline btn-sm" style="margin-bottom:8px;"><i class="fas fa-plus"></i> Agregar otro video</button>
+                    </div>
+                    <div class="profile-form-section">
+                        <div class="profile-form-section-title"><i class="fas fa-address-card"></i> <span>Contacto</span></div>
+                        <div class="form-row">
+                            <div class="profile-input-group">
+                                <label for="jobEmail">Email de contacto</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-envelope"></i>
+                                <input type="email" id="jobEmail" name="contact_email" placeholder="rrhh@empresa.com">
+                                </div>
+                            </div>
+                            <div class="profile-input-group">
+                                <label for="jobPhone">Teléfono</label>
+                                <div class="profile-input-wrapper"><i class="fas fa-phone"></i>
+                                <input type="tel" id="jobPhone" name="contact_phone" placeholder="+58 412 1234567">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="jobModalCancel">Cancelar</button>
+                <button class="btn btn-primary" id="jobModalSave"><i class="fas fa-save"></i> Publicar Empleo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bazar Modal -->
+    <div class="modal hidden" id="bazarModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content" style="max-width:420px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-store" style="color:#059669;"></i> Participar en Bazar</h3>
+                <button class="modal-close" id="bazarModalClose">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align:center;padding:24px;">
+                <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#059669,#10b981);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                    <i class="fas fa-store" style="color:#fff;font-size:1.5rem;"></i>
+                </div>
+                <h4 style="margin:0 0 8px;">Estas interesado en participar en un bazar?</h4>
+                <p style="color:#6b7280;font-size:0.9rem;margin:0 0 20px;">Selecciona tu respuesta para participar.</p>
+                <div style="display:flex;gap:12px;">
+                    <button id="bazarDashSi" style="flex:1;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:1rem;font-weight:600;cursor:pointer;">Si</button>
+                    <button id="bazarDashNo" style="flex:1;padding:12px;border-radius:12px;border:2px solid #e5e7eb;background:#fff;color:#374151;font-size:1rem;font-weight:600;cursor:pointer;">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal hidden" id="deleteModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle text-danger"></i> Confirmar Eliminación</h3>
+                <button class="modal-close" id="deleteModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este negocio? Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="deleteModalCancel">Cancelar</button>
+                <button class="btn btn-danger" id="deleteModalConfirm">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Edit Business Modal -->
+    <div class="modal hidden" id="editBusinessModal">
+        <div class="modal-overlay" onclick="closeEditBusinessModal()"></div>
+        <div class="modal-content" style="max-width:680px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit" style="color:#006EE3;"></i> Editar Negocio</h3>
+                <button class="modal-close" onclick="closeEditBusinessModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="editBizModalBody">
+                <div class="eb-loading" id="editBizLoading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Cargando datos del negocio...</p>
+                </div>
+                <form id="editBizForm" style="display:none;" onsubmit="return false;">
+                    <input type="hidden" id="editBizId">
+
+                    <!-- Logo -->
+                    <div class="eb-section eb-logo-section">
+                        <div class="eb-section-title"><i class="fas fa-image"></i> Logo del Negocio</div>
+                        <div class="aeb-logo-area">
+                            <div class="aeb-logo-preview edit-biz-logo-preview">
+                                <i class="fas fa-store edit-biz-logo-icon" style="font-size:1.5rem;color:#94a3b8;"></i>
+                                <img class="edit-biz-logo-img" src="" alt="Logo" style="display:none;" onerror="this.style.display='none'">
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.querySelector('.edit-biz-logo-input').click()">
+                                    <i class="fas fa-upload"></i> Subir Logo
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm edit-biz-logo-remove-btn" style="display:none;" onclick="window._removeEditBizLogo && window._removeEditBizLogo()">
+                                    <i class="fas fa-trash"></i> Quitar
+                                </button>
+                                <input type="file" class="edit-biz-logo-input" accept="image/jpeg,image/png,image/webp" style="display:none;">
+                                <input type="hidden" class="edit-biz-logo-url" value="">
+                                <p style="font-size:0.75rem;color:#9ca3af;margin-top:4px;">JPG, PNG, WebP - Max 5MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Basic Info -->
+                    <div class="eb-section">
+                        <div class="eb-section-title"><i class="fas fa-info-circle"></i> Informacion Basica</div>
+                        <div class="eb-field">
+                            <label for="editBizTitle">Nombre del Negocio *</label>
+                            <input type="text" id="editBizTitle" class="eb-input" required maxlength="150">
+                        </div>
+                        <div class="eb-field">
+                            <label for="editBizDesc">Descripcion</label>
+                            <textarea id="editBizDesc" class="eb-input eb-textarea" rows="3"></textarea>
+                        </div>
+                        <div class="eb-grid-2">
+                            <div class="eb-field">
+                                <label for="editBizCat">Categoria</label>
+                                <select id="editBizCat" class="eb-input eb-select">
+                                    <option value="">Selecciona</option>
+                                    <option value="restaurantes">Restaurantes</option>
+                                    <option value="farmacias">Farmacias</option>
+                                    <option value="clinicas-hospitales">Clinicas y Hospitales</option>
+                                    <option value="medicina-servicio-medico">Medicina / Servicio Médico</option>
+                                    <option value="supermercados">Supermercados</option>
+                                    <option value="ropas">Ropas</option>
+                                    <option value="barberias">Barberias y Salones</option>
+                                    <option value="auto-talleres">Auto Talleres</option>
+                                    <option value="cafeterias">Cafeterias</option>
+                                    <option value="bares-discotecas">Bares y Discotecas</option>
+                                    <option value="ferreterias">Ferreterias</option>
+                                    <option value="tecnologia">Tecnologia</option>
+                                    <option value="hoteles-posadas">Hoteles y Posadas</option>
+                                    <option value="gimnasios">Gimnasios</option>
+                                    <option value="dentistas">Dentistas</option>
+                                    <option value="celulares">Celulares</option>
+                                    <option value="mueblerias">Mueblerias</option>
+                                    <option value="juridicos">Juridicos</option>
+                                    <option value="academias">Academias</option>
+                                    <option value="veterinarias">Veterinarias</option>
+                                    <option value="electricos">Electricos</option>
+                                    <option value="perfumerias">Perfumerias</option>
+                                    <option value="joyerias">Joyerias</option>
+                                    <option value="zapaterias">Zapaterias</option>
+                                    <option value="panaderias">Panaderias</option>
+                                    <option value="heladerias">Heladerias</option>
+                                    <option value="pizzerias">Pizzerias</option>
+                                    <option value="bicicletas">Bicicletas</option>
+                                    <option value="encomiendas">Encomiendas</option>
+                                    <option value="lavanderias">Lavanderias</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizType">Tipo de Negocio</label>
+                                <select id="editBizType" class="eb-input eb-select">
+                                    <option value="">Selecciona</option>
+                                    <option value="negocio">Negocio</option>
+                                    <option value="profesional">Profesional</option>
+                                    <option value="servicio">Servicio</option>
+                                    <option value="restaurante">Restaurante</option>
+                                    <option value="tienda">Tienda</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Especialidad (solo Medicina Servicio Médico) -->
+                        <div class="eb-field" id="editBizEspecialidadWrap" style="display:none;">
+                            <label for="editBizEspecialidad"><i class="fas fa-stethoscope" style="color:#e74c3c;"></i> Especialidad</label>
+                            <input type="text" id="editBizEspecialidad" class="eb-input" placeholder="Ej: Cardiología, Dermatología...">
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="eb-section">
+                        <div class="eb-section-title"><i class="fas fa-phone"></i> Contacto</div>
+                        <div class="eb-grid-2">
+                            <div class="eb-field">
+                                <label for="editBizPhone">Telefono</label>
+                                <input type="tel" id="editBizPhone" class="eb-input" placeholder="+58 414 000-0000">
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizWhatsapp"><i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp</label>
+                                <input type="tel" id="editBizWhatsapp" class="eb-input" placeholder="+58 414 000-0000">
+                            </div>
+                        </div>
+                        <div class="eb-grid-2">
+                            <div class="eb-field">
+                                <label for="editBizEmail"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="editBizEmail" class="eb-input" placeholder="contacto@negocio.com">
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizWebsite"><i class="fas fa-globe"></i> Website</label>
+                                <input type="url" id="editBizWebsite" class="eb-input" placeholder="www.tunegocio.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="eb-section">
+                        <div class="eb-section-title"><i class="fas fa-share-nodes"></i> Redes Sociales</div>
+                        <div class="eb-grid-2">
+                            <div class="eb-field">
+                                <label for="editBizInstagram"><i class="fab fa-instagram" style="color:#e4405f;"></i> Instagram</label>
+                                <input type="text" id="editBizInstagram" class="eb-input" placeholder="@tunegocio">
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizFacebook"><i class="fab fa-facebook" style="color:#1877f2;"></i> Facebook</label>
+                                <input type="text" id="editBizFacebook" class="eb-input" placeholder="facebook.com/tunegocio">
+                            </div>
+                        </div>
+                        <div class="eb-grid-3">
+                            <div class="eb-field">
+                                <label for="editBizTwitter"><i class="fab fa-x-twitter"></i> Twitter/X</label>
+                                <input type="text" id="editBizTwitter" class="eb-input" placeholder="https://x.com/tunegocio">
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizTiktok"><i class="fab fa-tiktok"></i> TikTok</label>
+                                <input type="text" id="editBizTiktok" class="eb-input" placeholder="https://tiktok.com/@tunegocio">
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizYoutube"><i class="fab fa-youtube" style="color:#ff0000;"></i> YouTube</label>
+                                <input type="text" id="editBizYoutube" class="eb-input" placeholder="https://youtube.com/@tunegocio">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video -->
+                    <div class="eb-section">
+                        <div class="eb-section-title"><i class="fas fa-video" style="color:#6366f1;"></i> Videos del Negocio</div>
+                        <div id="ebVideosList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
+                        <div class="eb-video-tabs">
+                            <button type="button" class="eb-video-tab active" id="ebVideoTabFile" onclick="setEditBizVideoMode('file')">
+                                <i class="fas fa-upload"></i> Subir desde PC
+                            </button>
+                            <button type="button" class="eb-video-tab" id="ebVideoTabUrl" onclick="setEditBizVideoMode('url')">
+                                <i class="fas fa-link"></i> Pegar URL
+                            </button>
+                        </div>
+                        <div class="eb-video-content active" id="ebVideoFileContent">
+                            <div class="eb-video-drop" id="ebVideoDrop" onclick="document.getElementById('ebVideoFileInput').click()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Haz clic para seleccionar un video</p>
+                                <p style="font-size:0.75rem;color:#94a3b8;">MP4, WebM - Max 50MB por video</p>
+                            </div>
+                            <input type="file" id="ebVideoFileInput" accept="video/*" multiple style="display:none;" onchange="handleEditBizVideoFile(this)">
+                            <div id="ebVideoFileInfo"></div>
+                        </div>
+                        <div class="eb-video-content" id="ebVideoUrlContent">
+                            <div style="display:flex;gap:8px;">
+                                <input type="url" id="editBizVideoUrl" class="eb-input" placeholder="https://youtube.com/watch?v=... o tiktok.com/..." style="flex:1;">
+                                <button type="button" class="btn btn-primary" style="padding:8px 16px;font-size:0.82rem;white-space:nowrap;" onclick="addEditBizVideoUrl()"><i class="fas fa-plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="editBizVideoUrlHidden">
+                    </div>
+
+                    <!-- Galería de Imágenes -->
+                    <div class="eb-section">
+                        <div class="eb-section-title"><i class="fas fa-images" style="color:#006EE3;"></i> Galería de Imágenes</div>
+                        <div id="ebBizGallery" style="min-height:40px;"></div>
+                        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                            <label class="btn btn-primary btn-sm" style="cursor:pointer;margin:0;">
+                                <i class="fas fa-plus"></i> Agregar Imágenes
+                                <input type="file" id="ebBizGalleryFiles" accept="image/*" multiple style="display:none;">
+                            </label>
+                            <label class="btn btn-secondary btn-sm" style="cursor:pointer;margin:0;">
+                                <i class="fas fa-camera"></i> Tomar Foto
+                                <input type="file" id="ebBizGalleryCamera" accept="image/*" capture="environment" style="display:none;">
+                            </label>
+                            <span id="ebBizGalleryStatus" style="font-size:0.8rem;color:#6b7280;"></span>
+                        </div>
+                        <div style="margin-top:8px;display:flex;gap:6px;">
+                            <input type="url" id="ebBizGalleryURL" class="eb-input" placeholder="O pega URL de imagen">
+                            <button type="button" id="ebBizGalleryURLBtn" class="btn btn-primary btn-sm" style="display:none;white-space:nowrap;"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="eb-section">
+                        <div class="eb-section-title"><i class="fas fa-map-marker-alt"></i> Ubicacion</div>
+                        <div class="eb-field">
+                            <label for="editBizAddress">Direccion</label>
+                            <input type="text" id="editBizAddress" class="eb-input" placeholder="Av. 3 Milagros, Centro">
+                        </div>
+                        <div class="eb-grid-2">
+                            <div class="eb-field">
+                                <label for="editBizCity">Ciudad</label>
+                                <input type="text" id="editBizCity" class="eb-input" placeholder="Merida">
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizState">Estado</label>
+                                <select id="editBizState" class="eb-input eb-select">
+                                    <option value="">Selecciona</option>
+                                    <option value="Amazonas">Amazonas</option><option value="Anzoategui">Anzoategui</option>
+                                    <option value="Apure">Apure</option><option value="Aragua">Aragua</option>
+                                    <option value="Barinas">Barinas</option><option value="Bolivar">Bolivar</option>
+                                    <option value="Carabobo">Carabobo</option><option value="Cojedes">Cojedes</option>
+                                    <option value="Delta Amacuro">Delta Amacuro</option><option value="Distrito Capital">Distrito Capital</option>
+                                    <option value="Falcon">Falcon</option><option value="Guarico">Guarico</option>
+                                    <option value="Lara">Lara</option><option value="Merida">Merida</option>
+                                    <option value="Miranda">Miranda</option><option value="Monagas">Monagas</option>
+                                    <option value="Nueva Esparta">Nueva Esparta</option><option value="Portuguesa">Portuguesa</option>
+                                    <option value="Sucre">Sucre</option><option value="Tachira">Tachira</option>
+                                    <option value="Trujillo">Trujillo</option><option value="Vargas">Vargas</option>
+                                    <option value="Yaracuy">Yaracuy</option><option value="Zulia">Zulia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="eb-grid-2">
+                            <div class="eb-field">
+                                <label for="editBizLat">Latitud</label>
+                                <input type="number" id="editBizLat" class="eb-input" step="any" placeholder="8.63">
+                            </div>
+                            <div class="eb-field">
+                                <label for="editBizLng">Longitud</label>
+                                <input type="number" id="editBizLng" class="eb-input" step="any" placeholder="-66.59">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule & Features -->
+                    <div class="eb-section">
+                        <div class="eb-section-title"><i class="fas fa-clipboard-list"></i> Horario y Caracteristicas</div>
+                        <div class="eb-field">
+                            <label for="editBizSchedule"><i class="fas fa-clock"></i> Horario de Atencion</label>
+                            <textarea id="editBizSchedule" class="eb-input eb-textarea" rows="2" placeholder="Lun-Vie 8:00-17:00, Sab 8:00-12:00"></textarea>
+                        </div>
+                        <div class="eb-features" id="editBizFeatures">
+                            <div class="eb-feature" data-feature="Estacionamiento" onclick="this.classList.toggle('checked')">
+                                <i class="fas fa-parking"></i> Estacionamiento
+                            </div>
+                            <div class="eb-feature" data-feature="Wi-Fi" onclick="this.classList.toggle('checked')">
+                                <i class="fas fa-wifi"></i> WiFi
+                            </div>
+                            <div class="eb-feature" data-feature="Tarjeta" onclick="this.classList.toggle('checked')">
+                                <i class="fas fa-credit-card"></i> Tarjetas
+                            </div>
+                            <div class="eb-feature" data-feature="Delivery" onclick="this.classList.toggle('checked')">
+                                <i class="fas fa-motorcycle"></i> Delivery
+                            </div>
+                            <div class="eb-feature" data-feature="Terraza" onclick="this.classList.toggle('checked')">
+                                <i class="fas fa-umbrella-beach"></i> Terraza
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeEditBusinessModal()">Cancelar</button>
+                <button class="btn btn-primary" id="editBizSaveBtn" onclick="saveEditBusiness()">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Premium Upgrade Modal -->
+    <div class="modal" id="premiumModal" style="display:none;">
+        <div class="modal-overlay" id="premiumModalOverlay"></div>
+        <div class="modal-content" style="max-width:520px;">
+            <div class="modal-header" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;">
+                <h3><i class="fas fa-crown"></i> Mejorar a Plan Premium</h3>
+                <button class="modal-close" id="premiumModalClose">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:24px;">
+                <div style="margin-bottom:20px;">
+                    <h4 style="margin:0 0 8px;font-size:1rem;color:#1a1a2e;">Instrucciones de Pago</h4>
+                    <p style="margin:0;font-size:0.88rem;color:#64748b;">Realiza el pago movil al numero indicado y adjunta el comprobante (voucher) de pago. Un administrador revisara tu solicitud y activara tu plan Premium.</p>
+                </div>
+
+                <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:16px;margin-bottom:20px;text-align:center;">
+                    <p style="margin:0 0 6px;font-size:0.78rem;color:#64748b;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Numero de Pago Movil</p>
+                    <p style="margin:0;font-size:1.5rem;font-weight:800;color:#006EE3;letter-spacing:1px;" id="paymentPhoneDisplay">0414-000-0000</p>
+                    <p style="margin:6px 0 0;font-size:0.78rem;color:#94a3b8;">Banco: Venezuela / Cedula: V-00000000 / Telf: 0414-000-0000</p>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;">Duracion del Plan</label>
+                    <select id="premiumPlanDuration" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;">
+                        <option value="3_months">3 Meses - $10/mes ($30 total)</option>
+                        <option value="1_year">1 Anio - $90 (ahorra $30!)</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;">Tu numero de pago (opcional)</label>
+                    <input type="text" id="premiumPaymentPhone" placeholder="Ej: 0412-123-4567" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;">
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;">Numero de Referencia del Pago <span style="color:#dc2626;">*</span></label>
+                    <input type="text" id="premiumRefNumber" placeholder="Ej: 12345678901234567890" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;">
+                    <p style="margin:4px 0 0;font-size:0.75rem;color:#94a3b8;">Ingresa el numero de referencia que te dio el banco al hacer el pago movil.</p>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;">Comprobante de Pago (Voucher) <span style="color:#dc2626;">*</span></label>
+                    <div style="display:flex;gap:8px;margin-bottom:10px;">
+                        <button type="button" id="premiumVoucherBtn" style="flex:1;padding:10px;border-radius:8px;border:2px solid #d1d5db;background:#f9fafb;cursor:pointer;font-size:0.85rem;font-weight:600;font-family:inherit;color:#475569;transition:all 0.2s;">
+                            <i class="fas fa-image"></i> Subir Imagen
+                        </button>
+                        <button type="button" id="premiumCameraBtn" style="flex:1;padding:10px;border-radius:8px;border:2px solid #d1d5db;background:#f9fafb;cursor:pointer;font-size:0.85rem;font-weight:600;font-family:inherit;color:#475569;transition:all 0.2s;">
+                            <i class="fas fa-camera"></i> Tomar Foto
+                        </button>
+                    </div>
+                    <input type="file" id="premiumVoucherInput" accept="image/*" style="display:none;">
+                    <input type="file" id="premiumCameraInput" accept="image/*" capture="environment" style="display:none;">
+                    <div id="premiumVoucherDrop" style="border:2px dashed #d1d5db;border-radius:10px;padding:24px 20px;text-align:center;cursor:pointer;transition:border-color 0.2s;">
+                        <div id="premiumVoucherPreview" style="display:none;margin-bottom:12px;position:relative;">
+                            <img id="premiumVoucherImg" src="" alt="Voucher" style="max-width:100%;max-height:200px;border-radius:8px;">
+                            <button type="button" id="premiumVoucherRemove" style="position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(220,38,38,0.9);color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">&times;</button>
+                        </div>
+                        <div id="premiumVoucherPlaceholder">
+                            <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:#94a3b8;"></i>
+                            <p style="margin:8px 0 0;font-size:0.88rem;color:#64748b;">O arrastra tu comprobante aqui</p>
+                            <p style="margin:4px 0 0;font-size:0.75rem;color:#94a3b8;">JPG, PNG - Max 5MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="premiumSubmitError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#dc2626;"></div>
+            </div>
+            <div class="modal-footer" style="padding:16px 24px;border-top:1px solid #e5e7eb;display:flex;gap:10px;justify-content:flex-end;">
+                <button class="btn btn-secondary" id="premiumModalCancel" style="padding:10px 20px;">Cancelar</button>
+                <button class="btn" id="premiumSubmitBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-weight:600;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;">
+                    <i class="fas fa-paper-plane"></i> Enviar Solicitud
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin: Manual Premium Activation Modal -->
+    <div class="modal" id="manualPremiumModal" style="display:none;">
+        <div class="modal-overlay" id="manualPremiumOverlay"></div>
+        <div class="modal-content" style="max-width:520px;">
+            <div class="modal-header" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;">
+                <h3><i class="fas fa-crown"></i> Activar Premium Manual</h3>
+                <button class="modal-close" id="manualPremiumClose">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:24px;">
+                <p style="font-size:0.88rem;color:#64748b;margin-bottom:16px;">Busca un usuario por email o nombre, verifica el pago movil recibido, y activa su plan Premium.</p>
+                <div style="margin-bottom:14px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;">Buscar Usuario</label>
+                    <div style="display:flex;gap:8px;">
+                        <input type="text" id="manualPremiumSearch" placeholder="Email o nombre del usuario..." style="flex:1;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;">
+                        <button id="manualPremiumSearchBtn" style="padding:10px 16px;border-radius:8px;border:none;background:#006EE3;color:#fff;cursor:pointer;font-weight:600;"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div id="manualPremiumUserResult" style="display:none;margin-bottom:16px;border:1px solid #e5e7eb;border-radius:10px;padding:14px;background:#f9fafb;">
+                </div>
+                <div id="manualPremiumActions" style="display:none;margin-bottom:14px;">
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;">Duracion del Plan</label>
+                    <select id="manualPremiumDuration" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;">
+                        <option value="3_months">3 Meses ($30)</option>
+                        <option value="1_year">1 Anio ($90)</option>
+                    </select>
+                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;margin-top:12px;">Nota del pago (opcional)</label>
+                    <input type="text" id="manualPremiumNotes" placeholder="Ej: Pago recibido por pago movil 0414-xxx" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;">
+                </div>
+                <div id="manualPremiumError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;font-size:0.85rem;color:#dc2626;"></div>
+            </div>
+            <div class="modal-footer" style="padding:16px 24px;border-top:1px solid #e5e7eb;display:flex;gap:10px;justify-content:flex-end;">
+                <button class="btn btn-secondary" id="manualPremiumCancelBtn" style="padding:10px 20px;">Cancelar</button>
+                <button class="btn" id="manualPremiumActivateBtn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-weight:600;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;" disabled>
+                    <i class="fas fa-crown"></i> Activar Premium
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/dynamic-categories.js?v=1"></script>
+    <script src="js/dashboard.js?v=12"></script>
+    <script src="js/chat.js"></script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+    }
+    </script>
+</body>
+</html>
