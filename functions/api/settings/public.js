@@ -60,7 +60,7 @@ export async function onRequestGet(context) {
       ai_chatbot_welcome: '',
       reviews_enabled: '1',
       marketplace_enabled: '1',
-      site_name: 'AuNclick',
+      site_name: 'En Santiago',
       hero_banner_url: '',
       hero_logo_url: '',
       marketplace_banner_url: '',
