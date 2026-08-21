@@ -1,16 +1,16 @@
-name = "aunclick"
+name = "en-santiago"
 compatibility_date = "2024-01-01"
 pages_build_output_dir = "."
 
 [[d1_databases]]
 binding = "DB"
-database_name = "generico_db"
-database_id = "38dd85ba-03dc-4937-af19-4d1c41a18f27"
+database_name = "en-santiago-db"
+database_id = "083ae5ed-b15f-4ff3-abcf-b3a3b666bb79"
 
 [[r2_buckets]]
 binding = "R2"
-bucket_name = "my-emdash-media"
+bucket_name = "en-santiago-media"
 
 [vars]
-R2_FOLDER = "merida"
-JWT_SECRET = "aunclick_jwt_secret_2024_secure"
+R2_FOLDER = "santiago"
+JWT_SECRET = "ensantiago_jwt_secret_2024"
