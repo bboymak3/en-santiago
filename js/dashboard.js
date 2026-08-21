@@ -1614,11 +1614,11 @@ window.closeEditBusinessModal = function() {
             if (select) {
                 select.innerHTML = '<option value="" disabled selected>Selecciona un negocio</option>';
                 // Always add HOLAX as the first option (uses En Santiago.png logo)
-                const en-santiagoOpt = document.createElement('option');
-                en-santiagoOpt.value = 'en-santiago';
-                en-santiagoOpt.textContent = 'HOLAX';
-                en-santiagoOpt.dataset.logo = '/images/En Santiago.png';
-                select.appendChild(en-santiagoOpt);
+                const ensantiagoOpt = document.createElement('option');
+                ensantiagoOpt.value = 'en-santiago';
+                ensantiagoOpt.textContent = 'En Santiago';
+                ensantiagoOpt.dataset.logo = '/images/favicon.jpeg';
+                select.appendChild(ensantiagoOpt);
                 if (businesses.length > 0) {
                     businesses.forEach(b => {
                         const opt = document.createElement('option');

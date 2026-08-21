@@ -2800,11 +2800,11 @@ if (!window._renderVideoList) {
         if (!select) return;
         try {
             // Always add HOLAX as the first option (default for jobs without a store)
-            const en-santiagoOpt = document.createElement('option');
-            en-santiagoOpt.value = 'HOLAX';
-            en-santiagoOpt.textContent = 'HOLAX';
-            en-santiagoOpt.dataset.logo = '/images/En Santiago.png';
-            select.appendChild(en-santiagoOpt);
+            const ensantiagoOpt = document.createElement('option');
+            ensantiagoOpt.value = 'En Santiago';
+            ensantiagoOpt.textContent = 'En Santiago';
+            ensantiagoOpt.dataset.logo = '/images/favicon.jpeg';
+            select.appendChild(ensantiagoOpt);
 
             const data = await api.get('/businesses?status=approved&limit=200');
             if (data.businesses) {
@@ -2845,10 +2845,10 @@ if (!window._renderVideoList) {
             if (!jobCompany || !jobLogoGroup) return;
             const val = jobCompany.value;
             jobLogoGroup.style.display = val ? '' : 'none';
-            if (val === 'HOLAX') {
-                const en-santiagoLogo = document.getElementById('setting_en-santiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
-                jobLogoInput.value = en-santiagoLogo;
-                jobLogoPreview.src = en-santiagoLogo;
+            if (val === 'En Santiago') {
+                const ensantiagoLogo = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+                jobLogoInput.value = ensantiagoLogo;
+                jobLogoPreview.src = ensantiagoLogo;
                 jobLogoPreview.style.display = '';
                 if (jobLogoClearBtn) jobLogoClearBtn.style.display = '';
             }
@@ -3279,7 +3279,7 @@ if (!window._renderVideoList) {
     //  Banners, logos, ajustes de visualización
     //  Funciones: loadSettings()
     //  Exporta: window.handleAdminBannerSelect, window.removeAdminBanner,
-    //            window.handleEn SantiagoLogoSelect, window.removeEn SantiagoLogo, etc.
+    //            window.handleEnsantiagoLogoSelect, window.removeEnsantiagoLogo, etc.
     // ═══════════════════════════════════════════════════════════
 
     async function loadSettings() {
@@ -3288,7 +3288,7 @@ if (!window._renderVideoList) {
             const settings = data.settings || data;
 
             // Save HOLAX logo default before settings loop might overwrite it
-            const en-santiagoDefaultUrl = document.getElementById('setting_en-santiago_logo_url')?.value || '';
+            const ensantiagoDefaultUrl = document.getElementById('setting_ensantiago_logo_url')?.value || '';
 
             // Populate toggle checkboxes and inputs
             document.querySelectorAll('[data-key]').forEach(el => {
@@ -3304,9 +3304,9 @@ if (!window._renderVideoList) {
             });
 
             // Restore HOLAX logo default if setting doesn't exist in DB
-            if (!settings.en-santiago_logo_url && en-santiagoDefaultUrl) {
-                const el = document.getElementById('setting_en-santiago_logo_url');
-                if (el) el.value = en-santiagoDefaultUrl;
+            if (!settings.ensantiago_logo_url && ensantiagoDefaultUrl) {
+                const el = document.getElementById('setting_ensantiago_logo_url');
+                if (el) el.value = ensantiagoDefaultUrl;
             }
 
             // Highlight active radio card (only if chat_mode radios exist on this page)
@@ -4446,7 +4446,7 @@ if (!window._renderVideoList) {
     };
 
     // ─── HOLAX Logo Management ─────────────────
-    window.handleEn SantiagoLogoSelect = async function(input) {
+    window.handleEnsantiagoLogoSelect = async function(input) {
         const file = input.files[0];
         if (!file) return;
         if (file.size > 2 * 1024 * 1024) { showToast('Max 2MB para el logo', 'error'); input.value = ''; return; }
@@ -4457,10 +4457,10 @@ if (!window._renderVideoList) {
             fd.append('product_type', 'logo');
             const result = await api.postFormData('/upload', fd);
             if (result.url) {
-                document.getElementById('setting_en-santiago_logo_url').value = result.url;
-                const img = document.getElementById('en-santiagoLogoImg');
-                const icon = document.getElementById('en-santiagoLogoPlaceholder');
-                const btn = document.getElementById('en-santiagoLogoRemoveBtn');
+                document.getElementById('setting_ensantiago_logo_url').value = result.url;
+                const img = document.getElementById('ensantiagoLogoImg');
+                const icon = document.getElementById('ensantiagoLogoPlaceholder');
+                const btn = document.getElementById('ensantiagoLogoRemoveBtn');
                 if (img) { img.src = result.url; img.style.display = ''; }
                 if (icon) icon.style.display = 'none';
                 if (btn) btn.style.display = 'inline-flex';
@@ -4472,20 +4472,20 @@ if (!window._renderVideoList) {
         input.value = '';
     };
 
-    window.removeEn SantiagoLogo = function() {
-        document.getElementById('setting_en-santiago_logo_url').value = '';
-        const img = document.getElementById('en-santiagoLogoImg');
-        const icon = document.getElementById('en-santiagoLogoPlaceholder');
-        const btn = document.getElementById('en-santiagoLogoRemoveBtn');
+    window.removeEnsantiagoLogo = function() {
+        document.getElementById('setting_ensantiago_logo_url').value = '';
+        const img = document.getElementById('ensantiagoLogoImg');
+        const icon = document.getElementById('ensantiagoLogoPlaceholder');
+        const btn = document.getElementById('ensantiagoLogoRemoveBtn');
         if (img) { img.src = ''; img.style.display = 'none'; }
         if (icon) icon.style.display = '';
         if (btn) btn.style.display = 'none';
     };
 
-    window.previewEn SantiagoLogo = function(url) {
-        const img = document.getElementById('en-santiagoLogoImg');
-        const icon = document.getElementById('en-santiagoLogoPlaceholder');
-        const btn = document.getElementById('en-santiagoLogoRemoveBtn');
+    window.previewEnsantiagoLogo = function(url) {
+        const img = document.getElementById('ensantiagoLogoImg');
+        const icon = document.getElementById('ensantiagoLogoPlaceholder');
+        const btn = document.getElementById('ensantiagoLogoRemoveBtn');
         if (url.trim()) {
             if (img) { img.src = url; img.style.display = ''; }
             if (icon) icon.style.display = 'none';
@@ -4497,15 +4497,15 @@ if (!window._renderVideoList) {
         }
     };
 
-    window.saveEn SantiagoLogoSettings = async function() {
-        const url = document.getElementById('setting_en-santiago_logo_url')?.value?.trim();
+    window.saveEnsantiagoLogoSettings = async function() {
+        const url = document.getElementById('setting_ensantiago_logo_url')?.value?.trim();
         if (!url) {
             showToast('Pega una URL o sube un logo primero', 'error');
             return;
         }
         try {
             showToast('Guardando logo HOLAX y actualizando empleos...', 'info');
-            const result = await api.put('/settings', { en-santiago_logo_url: url });
+            const result = await api.put('/settings', { ensantiago_logo_url: url });
             let msg = 'Logo HOLAX guardado exitosamente';
             if (result.en-santiago_jobs_updated) {
                 msg += ` — ${result.en-santiago_jobs_updated} empleo(s) HOLAX actualizado(s) con el nuevo logo`;
@@ -4634,12 +4634,12 @@ if (!window._renderVideoList) {
             if (btn) btn.style.display = 'inline-flex';
         }
         // HOLAX logo preview
-        const en-santiagoLogoUrl = document.getElementById('setting_en-santiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
-        if (en-santiagoLogoUrl) {
-            const img = document.getElementById('en-santiagoLogoImg');
-            const icon = document.getElementById('en-santiagoLogoPlaceholder');
-            const btn = document.getElementById('en-santiagoLogoRemoveBtn');
-            if (img) { img.src = en-santiagoLogoUrl; img.style.display = ''; }
+        const ensantiagoLogoUrl = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+        if (ensantiagoLogoUrl) {
+            const img = document.getElementById('ensantiagoLogoImg');
+            const icon = document.getElementById('ensantiagoLogoPlaceholder');
+            const btn = document.getElementById('ensantiagoLogoRemoveBtn');
+            if (img) { img.src = ensantiagoLogoUrl; img.style.display = ''; }
             if (icon) icon.style.display = 'none';
             if (btn) btn.style.display = 'inline-flex';
         }
