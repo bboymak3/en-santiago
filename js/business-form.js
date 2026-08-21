@@ -1106,7 +1106,7 @@
         videoFileInput.addEventListener('change', function() {
             var files = this.files;
             if (!files || !files.length) return;
-            var token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('token');
+            var token = localStorage.getItem('ensantiago_token') || localStorage.getItem('token');
             var infoDiv = document.getElementById('bizFormVideoFileInfo');
 
             Array.from(files).forEach(function(file) {

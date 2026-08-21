@@ -8,8 +8,8 @@
 const API = '/api';
 
 // ─── Token Management ──────────────────────────────────────────
-const TOKEN_KEY = 'meriden-santiago_token';
-const USER_KEY = 'meriden-santiago_user';
+const TOKEN_KEY = 'ensantiago_token';
+const USER_KEY = 'ensantiago_user';
 
 // ─── Santiago de Chile States ────────────────────────────────────────────
 const CLNEZUELA_STATES = [
@@ -369,7 +369,7 @@ function showWebPageSelector() {
     modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
 
     // Check if user is logged in
-    const token = localStorage.getItem('meriden-santiago_token');
+    const token = localStorage.getItem('ensantiago_token');
     if (!token) {
         const body = document.getElementById('webPageSelectorBody');
         body.innerHTML = `

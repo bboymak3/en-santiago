@@ -5385,7 +5385,7 @@ if (!window._renderVideoList) {
 
     // Load all 4 dropdowns (business, property, product, job)
     async function loadPopupLinkSelectors(s) {
-        const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken') || '';
+        const token = localStorage.getItem('ensantiago_token') || localStorage.getItem('authToken') || '';
         const headers = { 'Authorization': 'Bearer ' + token };
         const currentLink = s.popup_link_url || '';
         const currentType = s.popup_link_type || '';
@@ -5605,7 +5605,7 @@ if (!window._renderVideoList) {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('product_type', 'popup');
-            const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken') || '';
+            const token = localStorage.getItem('ensantiago_token') || localStorage.getItem('authToken') || '';
             const resp = await fetch('/api/upload', {
                 method: 'POST',
                 headers: { 'Authorization': 'Bearer ' + token },
@@ -5745,7 +5745,7 @@ if (!window._renderVideoList) {
             // Actually, let's use the settings API to toggle — but we need a proper endpoint.
             // For simplicity, we'll toggle by deleting and re-adding, or better: we add a PUT handler.
             // For now, use the raw SQL approach via a quick fetch:
-            const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken');
+            const token = localStorage.getItem('ensantiago_token') || localStorage.getItem('authToken');
             await fetch(`/api/video-carousel?id=${id}&toggle=1`, {
                 method: 'PUT',
                 headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
@@ -5880,7 +5880,7 @@ if (!window._renderVideoList) {
                     formData.append('folder', 'santiago/carousel');
                     const uploadResp = await fetch('/api/upload', {
                         method: 'POST',
-                        headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken')) },
+                        headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('ensantiago_token') || localStorage.getItem('authToken')) },
                         body: formData
                     });
                     const uploadData = await uploadResp.json();

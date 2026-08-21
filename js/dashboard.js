@@ -1541,7 +1541,7 @@ window.closeEditBusinessModal = function() {
                     const fd = new FormData();
                     fd.append('file', file);
                     fd.append('product_type', 'job');
-                    const token = localStorage.getItem('meriden-santiago_token') || localStorage.getItem('authToken');
+                    const token = localStorage.getItem('ensantiago_token') || localStorage.getItem('authToken');
                     fetch('/api/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token }, body: fd })
                     .then(r => r.json())
                     .then(data => {
