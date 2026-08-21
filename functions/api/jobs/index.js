@@ -238,31 +238,31 @@ export async function onRequestPost(context) {
 
     if (companyNameFinal === HOLAX_NAME) {
       // HOLAX is a virtual/placeholder company — auto-create if not exists
-      let en-santiagoRow = await env.DB.prepare('SELECT id FROM businesses WHERE title = ? LIMIT 1')
+      let ensantiagoRow = await env.DB.prepare('SELECT id FROM businesses WHERE title = ? LIMIT 1')
         .bind(HOLAX_NAME).first();
-      if (!en-santiagoRow) {
+      if (!ensantiagoRow) {
         // Ensure logo column exists
         try { await env.DB.prepare('ALTER TABLE businesses ADD COLUMN logo TEXT').run(); } catch(e) {}
         try { await env.DB.prepare('ALTER TABLE businesses ADD COLUMN banner TEXT').run(); } catch(e) {}
         // Find a valid category_id (look for 'General', fallback to first available)
-        let en-santiagoCatId = await env.DB.prepare('SELECT id FROM categories WHERE slug = ? LIMIT 1')
+        let ensantiagoCatId = await env.DB.prepare('SELECT id FROM categories WHERE slug = ? LIMIT 1')
           .bind('general').first();
-        const catId = en-santiagoCatId ? en-santiagoCatId.id : (await env.DB.prepare('SELECT id FROM categories ORDER BY id LIMIT 1').first()).id;
-        const en-santiagoInsert = await env.DB.prepare(`
+        const catId = ensantiagoCatId ? ensantiagoCatId.id : (await env.DB.prepare('SELECT id FROM categories ORDER BY id LIMIT 1').first()).id;
+        const ensantiagoInsert = await env.DB.prepare(`
           INSERT INTO businesses (user_id, title, slug, status, category_id, logo, description)
           VALUES (?, ?, ?, ?, ?, ?, ?)
         `).bind(
           payload.id,
           HOLAX_NAME,
-          'en-santiago',
+          'En Santiago',
           'approved',
           catId,
           '/images/En Santiago.png',
           'Plataforma En Santiago – Directorio comercial e inmobiliario de Santiago de Chile'
         ).run();
-        businessId = en-santiagoInsert.meta.last_row_id;
+        businessId = ensantiagoInsert.meta.last_row_id;
       } else {
-        businessId = en-santiagoRow.id;
+        businessId = ensantiagoRow.id;
       }
     } else {
       // Verify that company_name exists in the businesses table

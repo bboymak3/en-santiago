@@ -132,7 +132,7 @@ export async function onRequestGet(context) {
 
   // ─── Check Environment Config ────────────────────────────────
   health.config.has_jwt_secret = !!env.JWT_SECRET;
-  health.config.r2_folder = env.R2_FOLDER || 'en-santiago';
+  health.config.r2_folder = env.R2_FOLDER || 'En Santiago';
 
   // ─── Check API Endpoints ────────────────────────────────────
   health.endpoints = {
