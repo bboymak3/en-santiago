@@ -1,6 +1,5 @@
 // functions/api/settings/public.js
-// GET: Public settings endpoint (no auth required)
-// Returns only the settings needed by the frontend (ai_chatbot_enabled, ai_chatbot_welcome, etc.)
+// GET: Public settings (subset of all settings)
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -8,17 +7,20 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-export async function onRequestOptions() {
-  return new Response(null, { headers: corsHeaders });
-}
-
 // Only expose these keys publicly
 const PUBLIC_KEYS = [
   'ai_chatbot_enabled',
   'ai_chatbot_welcome',
   'reviews_enabled',
   'marketplace_enabled',
+  'businesses_enabled',
+  'jobs_enabled',
+  'medical_enabled',
+  'properties_enabled',
+  'events_enabled',
+  'weather_enabled',
   'site_name',
+  'site_description',
   'hero_banner_url',
   'hero_logo_url',
   'marketplace_banner_url',
@@ -30,6 +32,8 @@ const PUBLIC_KEYS = [
   'popup_link_type',
   'popup_cta_text',
   'empleo_banner_url',
+  'whatsapp_number',
+  'contact_email',
 ];
 
 export async function onRequestGet(context) {
@@ -43,14 +47,40 @@ export async function onRequestGet(context) {
       });
     }
 
-    // Fetch only the public keys
+    // Fetch from BOTH settings table and admin_settings table
     const placeholders = PUBLIC_KEYS.map(() => '?').join(',');
-    const rows = await env.DB.prepare(
-      `SELECT key, value FROM admin_settings WHERE key IN (${placeholders})`
-    ).bind(...PUBLIC_KEYS).all();
+
+    // Try settings table first
+    let rows = [];
+    try {
+      const result = await env.DB.prepare(
+        `SELECT key, value FROM settings WHERE key IN (${placeholders})`
+      ).bind(...PUBLIC_KEYS).all();
+      rows = result.results || [];
+    } catch (e) {
+      console.warn('settings table query failed, trying admin_settings:', e);
+    }
+
+    // Also try admin_settings table
+    try {
+      const result2 = await env.DB.prepare(
+        `SELECT key, value FROM admin_settings WHERE key IN (${placeholders})`
+      ).bind(...PUBLIC_KEYS).all();
+      // Merge — admin_settings overrides settings
+      for (const row of (result2.results || [])) {
+        const existing = rows.find(r => r.key === row.key);
+        if (existing) {
+          existing.value = row.value;
+        } else {
+          rows.push(row);
+        }
+      }
+    } catch (e) {
+      // admin_settings might not have all keys
+    }
 
     const settings = {};
-    for (const row of rows.results || []) {
+    for (const row of rows) {
       settings[row.key] = row.value;
     }
 
@@ -60,7 +90,14 @@ export async function onRequestGet(context) {
       ai_chatbot_welcome: '',
       reviews_enabled: '1',
       marketplace_enabled: '1',
+      businesses_enabled: '1',
+      jobs_enabled: '1',
+      medical_enabled: '1',
+      properties_enabled: '1',
+      events_enabled: '1',
+      weather_enabled: '1',
       site_name: 'En Santiago',
+      site_description: 'Directorio de negocios en Santiago de Chile',
       hero_banner_url: '',
       hero_logo_url: '',
       marketplace_banner_url: '',
@@ -70,13 +107,15 @@ export async function onRequestGet(context) {
       popup_image_url: '',
       popup_link_url: '',
       popup_link_type: '',
-      popup_cta_text: 'Ver mas',
+      popup_cta_text: 'Ver más',
       empleo_banner_url: '',
+      whatsapp_number: '',
+      contact_email: '',
     };
 
     const response = {};
     for (const key of PUBLIC_KEYS) {
-      response[key] = settings[key] || defaults[key] || '';
+      response[key] = settings[key] !== undefined ? settings[key] : (defaults[key] || '');
     }
 
     return new Response(JSON.stringify(response), {

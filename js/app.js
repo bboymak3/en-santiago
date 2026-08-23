@@ -1116,40 +1116,61 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = redirectParam;
     }
 
-    // Load featured businesses on index page
-    const featuredGrid = document.getElementById('featuredGrid');
-    if (featuredGrid) {
-        loadFeaturedProperties();
-    }
+    // Load featured sections on index page — controlled by admin settings
+    fetch('/api/settings/public').then(r => r.json()).then(settings => {
+        // Negocios destacados
+        if (settings.businesses_enabled !== '0' && document.getElementById('featuredGrid')) {
+            loadFeaturedProperties();
+        } else {
+            var el = document.getElementById('featuredSection');
+            if (el) el.style.display = 'none';
+        }
 
-    // Load featured medical businesses on index page
-    const featuredMedicalGrid = document.getElementById('featuredMedicalGrid');
-    if (featuredMedicalGrid) {
-        loadFeaturedMedical();
-    }
+        // Servicios médicos destacados
+        if (settings.medical_enabled !== '0' && document.getElementById('featuredMedicalGrid')) {
+            loadFeaturedMedical();
+        } else {
+            var el = document.getElementById('featuredMedicalSection');
+            if (el) el.style.display = 'none';
+        }
+
+        // Inmuebles destacados
+        if (settings.properties_enabled !== '0' && document.getElementById('featuredPropertiesGrid')) {
+            loadFeaturedPropertiesSection();
+        } else {
+            var el = document.getElementById('featuredPropertiesSection');
+            if (el) el.style.display = 'none';
+        }
+
+        // Productos destacados
+        if (settings.marketplace_enabled !== '0' && document.getElementById('featuredProductsGrid')) {
+            loadFeaturedProducts();
+        } else {
+            var el = document.getElementById('featuredProductsSection');
+            if (el) el.style.display = 'none';
+        }
+
+        // Empleos destacados
+        if (settings.jobs_enabled !== '0' && document.getElementById('featuredJobsGrid')) {
+            loadFeaturedJobs();
+        } else {
+            var el = document.getElementById('featuredJobsSection');
+            if (el) el.style.display = 'none';
+        }
+    }).catch(err => {
+        // Si falla, cargar todo (fallback)
+        console.warn('Settings load failed, loading all sections:', err);
+        if (document.getElementById('featuredGrid')) loadFeaturedProperties();
+        if (document.getElementById('featuredMedicalGrid')) loadFeaturedMedical();
+        if (document.getElementById('featuredPropertiesGrid')) loadFeaturedPropertiesSection();
+        if (document.getElementById('featuredProductsGrid')) loadFeaturedProducts();
+        if (document.getElementById('featuredJobsGrid')) loadFeaturedJobs();
+    });
 
     // Load stats on index page
     const statProperties = document.getElementById('statProperties');
     if (statProperties) {
         loadSiteStats();
-    }
-
-    // Load featured properties (inmuebles) on index page
-    const featuredPropertiesGrid = document.getElementById('featuredPropertiesGrid');
-    if (featuredPropertiesGrid) {
-        loadFeaturedPropertiesSection();
-    }
-
-    // Load featured products on index page
-    const featuredProductsGrid = document.getElementById('featuredProductsGrid');
-    if (featuredProductsGrid) {
-        loadFeaturedProducts();
-    }
-
-    // Load featured jobs on index page
-    const featuredJobsGrid = document.getElementById('featuredJobsGrid');
-    if (featuredJobsGrid) {
-        loadFeaturedJobs();
     }
 
     // initHomeMap is handled by home-map.js

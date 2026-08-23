@@ -4,32 +4,28 @@
 (function () {
     'use strict';
 
-    // ─── Santiago de Chilen States with coordinates ───────────────────────
+    // ─── Comunas de Santiago con coordenadas ───────────────────────
     const STATES = [
-        { name: 'Distrito Capital', lat: 10.4806, lng: -66.9036 },
-        { name: 'Miranda', lat: 10.2500, lng: -66.5000 },
-        { name: 'Zulia', lat: 10.6427, lng: -71.6125 },
-        { name: 'Carabobo', lat: 10.1626, lng: -67.5874 },
-        { name: 'Aragua', lat: 10.2466, lng: -67.5958 },
-        { name: 'Lara', lat: 10.0676, lng: -69.3256 },
-        { name: 'Santiago', lat: 8.5980, lng: -71.1400 },
-        { name: 'Táchira', lat: 7.7648, lng: -72.2292 },
-        { name: 'Bolívar', lat: 8.1292, lng: -63.5503 },
-        { name: 'Anzoátegui', lat: 10.2214, lng: -64.6325 },
-        { name: 'Vargas', lat: 10.5994, lng: -66.9333 },
-        { name: 'Falcón', lat: 11.4044, lng: -69.6731 },
-        { name: 'Portuguesa', lat: 9.0422, lng: -69.7350 },
-        { name: 'Santiago', lat: -33.45234, lng: -70.67086 },
-        { name: 'Sucre', lat: 10.4598, lng: -64.1750 },
-        { name: 'Nueva Esparta', lat: 10.9584, lng: -63.8439 },
-        { name: 'Monagas', lat: 9.7458, lng: -63.1833 },
-        { name: 'Trujillo', lat: 9.3700, lng: -70.4340 },
-        { name: 'Yaracuy', lat: 10.3389, lng: -68.7417 },
-        { name: 'Guárico', lat: 9.9156, lng: -67.3533 },
-        { name: 'Cojedes', lat: 9.6614, lng: -68.5733 },
-        { name: 'Apure', lat: 7.8909, lng: -67.4736 },
-        { name: 'Amazonas', lat: 5.6642, lng: -67.6228 },
-        { name: 'Delta Amacuro', lat: 8.8125, lng: -61.9736 },
+        { name: 'Santiago Centro', lat: -33.4489, lng: -70.6693 },
+        { name: 'Las Condes', lat: -33.4182, lng: -70.5764 },
+        { name: 'Providencia', lat: -33.4285, lng: -70.6107 },
+        { name: 'Maipú', lat: -33.5115, lng: -70.7624 },
+        { name: 'Ñuñoa', lat: -33.4635, lng: -70.6001 },
+        { name: 'La Florida', lat: -33.5319, lng: -70.5918 },
+        { name: 'Pudahuel', lat: -33.4439, lng: -70.7394 },
+        { name: 'Huechuraba', lat: -33.3729, lng: -70.6483 },
+        { name: 'Recoleta', lat: -33.4118, lng: -70.6461 },
+        { name: 'Independencia', lat: -33.4133, lng: -70.6572 },
+        { name: 'Macul', lat: -33.4872, lng: -70.5956 },
+        { name: 'La Reina', lat: -33.4477, lng: -70.5461 },
+        { name: 'Peñalolén', lat: -33.4908, lng: -70.5839 },
+        { name: 'Vitacura', lat: -33.4028, lng: -70.6075 },
+        { name: 'Lo Barnechea', lat: -33.3583, lng: -70.5264 },
+        { name: 'Puente Alto', lat: -33.6112, lng: -70.5847 },
+        { name: 'San Bernardo', lat: -33.5922, lng: -70.6997 },
+        { name: 'Colina', lat: -33.2015, lng: -70.6747 },
+        { name: 'Quilicura', lat: -33.3594, lng: -70.7344 },
+        { name: 'Lampa', lat: -33.2785, lng: -70.7681 },
     ];
 
     // ─── WMO Weather Code mapping ─────────────────────────────────
