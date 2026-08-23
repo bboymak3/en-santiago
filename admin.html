@@ -2010,6 +2010,23 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="profile-input-group" style="grid-column: 1 / -1;">
+                                <label>📍 Perfil de Google Maps del Negocio</label>
+                                <div style="display:flex;gap:8px;align-items:center;">
+                                    <div class="profile-input-wrapper" style="flex:1;">
+                                        <i class="fab fa-google" style="color:#4285F4"></i>
+                                        <input type="url" id="bizEditGoogleMapsUrl" name="google_maps_url" placeholder="https://maps.google.com/?cid=... o https://g.co/kgs/...">
+                                    </div>
+                                    <a href="#" id="bizViewGoogleProfile" target="_blank" rel="noopener" style="display:none;flex-shrink:0;padding:10px 16px;background:linear-gradient(135deg,#4285F4,#34A853,#FBBC04,#EA4335);color:#fff;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;white-space:nowrap;gap:6px;align-items:center;">
+                                        <i class="fab fa-google"></i> Ver Perfil de Google
+                                    </a>
+                                </div>
+                                <p style="font-size:0.78rem;color:#94a3b8;margin-top:4px;">
+                                    Pega la URL del perfil de Google Maps del negocio. Se mostrará un botón "Ver Perfil de Google" en la ficha pública.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="profile-input-group">
                                 <label>Instagram</label>
                                 <div class="profile-input-wrapper"><i class="fab fa-instagram" style="color:#E4405F"></i>
@@ -2863,7 +2880,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
     </div>
 
     <script src="js/app.js?v=10"></script>
-    <script src="js/admin.js?v=12"></script>
+    <script src="js/admin.js?v=13"></script>
     <style>
     /* Editar Negocios styles */
     .aeb-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;}

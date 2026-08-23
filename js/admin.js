@@ -1227,6 +1227,26 @@ if (!window._renderVideoList) {
             if (document.getElementById('bizEditWebUrl')) {
                 document.getElementById('bizEditWebUrl').value = biz.web_url || biz.website || '';
             }
+            // Google Maps URL
+            if (document.getElementById('bizEditGoogleMapsUrl')) {
+                document.getElementById('bizEditGoogleMapsUrl').value = biz.google_maps_url || '';
+            }
+            // Mostrar/ocultar botón "Ver Perfil de Google"
+            var googleBtn = document.getElementById('bizViewGoogleProfile');
+            var googleInput = document.getElementById('bizEditGoogleMapsUrl');
+            if (googleBtn && googleInput) {
+                function updateGoogleBtn() {
+                    var val = googleInput.value.trim();
+                    if (val) {
+                        googleBtn.href = val.startsWith('http') ? val : 'https://' + val;
+                        googleBtn.style.display = 'inline-flex';
+                    } else {
+                        googleBtn.style.display = 'none';
+                    }
+                }
+                googleInput.oninput = updateGoogleBtn;
+                updateGoogleBtn();
+            }
             document.getElementById('bizEditInstagram').value = biz.instagram || '';
             document.getElementById('bizEditFacebook').value = biz.facebook || '';
             document.getElementById('bizEditAddress').value = biz.address || '';
@@ -1480,6 +1500,7 @@ if (!window._renderVideoList) {
                 website: document.getElementById('bizEditWebsite')?.value?.trim() || '',
                 web_url: document.getElementById('bizEditWebUrl')?.value?.trim() || '',
                 web_page_mode: document.getElementById('bizEditWebPageMode')?.value || 'auto',
+                google_maps_url: document.getElementById('bizEditGoogleMapsUrl')?.value?.trim() || '',
                 instagram: document.getElementById('bizEditInstagram')?.value?.trim() || '',
                 facebook: document.getElementById('bizEditFacebook')?.value?.trim() || '',
                 address: document.getElementById('bizEditAddress')?.value?.trim() || '',

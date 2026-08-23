@@ -150,7 +150,7 @@ export async function onRequestPut(context) {
       'email_contact', 'schedule',
       'has_parking', 'has_wifi', 'has_card', 'has_delivery', 'has_outdoor',
       'custom_html', 'especialidad', 'seo_description', 'custom_jsonld',
-      'web_url', 'web_page_mode',
+      'web_url', 'web_page_mode', 'google_maps_url',
     ];
 
     const setClauses = [];

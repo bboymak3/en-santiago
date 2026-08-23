@@ -482,6 +482,18 @@ function populateBusinessDetail(b) {
         }
     }
 
+    // Show Google Profile button if business has google_maps_url
+    const googleProfileBtn = document.getElementById('googleProfileBtn');
+    if (googleProfileBtn) {
+        const googleUrl = b.google_maps_url || '';
+        if (googleUrl) {
+            googleProfileBtn.href = googleUrl.startsWith('http') ? googleUrl : 'https://' + googleUrl;
+            googleProfileBtn.style.display = 'block';
+        } else {
+            googleProfileBtn.style.display = 'none';
+        }
+    }
+
     // Open chat button
     const openChatBtn = document.getElementById('openChatBtn');
     if (openChatBtn) {
