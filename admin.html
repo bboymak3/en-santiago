@@ -1986,6 +1986,30 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="profile-input-group" style="grid-column: 1 / -1;">
+                                <label>🔗 Página Web del Negocio (modo de visualización)</label>
+                                <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+                                    <div style="flex:1;min-width:200px;">
+                                        <label style="font-size:0.8rem;color:#64748b;margin-bottom:4px;">Modo</label>
+                                        <select id="bizEditWebPageMode" name="web_page_mode" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
+                                            <option value="auto">🤖 Automático (landing generada por En Santiago)</option>
+                                            <option value="external">🔗 URL Externa (usar el sitio web del negocio)</option>
+                                            <option value="none">🚫 Sin página web (solo ficha)</option>
+                                        </select>
+                                    </div>
+                                    <div style="flex:2;min-width:250px;">
+                                        <label style="font-size:0.8rem;color:#64748b;margin-bottom:4px;">URL externa (si modo = URL Externa)</label>
+                                        <input type="url" id="bizEditWebUrl" name="web_url" placeholder="https://www.mi-negocio.cl" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
+                                    </div>
+                                </div>
+                                <p style="font-size:0.78rem;color:#94a3b8;margin-top:6px;">
+                                    <b>Automático:</b> se crea una landing page en /web/slug del negocio.<br>
+                                    <b>URL Externa:</b> al visitar /web/slug se redirige al sitio web del negocio.<br>
+                                    <b>Sin página web:</b> al visitar /web/slug se redirige a la ficha del negocio.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="profile-input-group">
                                 <label>Instagram</label>
                                 <div class="profile-input-wrapper"><i class="fab fa-instagram" style="color:#E4405F"></i>
@@ -2839,7 +2863,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
     </div>
 
     <script src="js/app.js?v=10"></script>
-    <script src="js/admin.js?v=10"></script>
+    <script src="js/admin.js?v=12"></script>
     <style>
     /* Editar Negocios styles */
     .aeb-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;}

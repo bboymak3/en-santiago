@@ -1221,6 +1221,12 @@ if (!window._renderVideoList) {
             document.getElementById('bizEditWhatsApp').value = biz.whatsapp || '';
             document.getElementById('bizEditEmail').value = biz.email_contact || '';
             document.getElementById('bizEditWebsite').value = biz.website || '';
+            if (document.getElementById('bizEditWebPageMode')) {
+                document.getElementById('bizEditWebPageMode').value = biz.web_page_mode || 'auto';
+            }
+            if (document.getElementById('bizEditWebUrl')) {
+                document.getElementById('bizEditWebUrl').value = biz.web_url || biz.website || '';
+            }
             document.getElementById('bizEditInstagram').value = biz.instagram || '';
             document.getElementById('bizEditFacebook').value = biz.facebook || '';
             document.getElementById('bizEditAddress').value = biz.address || '';
@@ -1472,6 +1478,8 @@ if (!window._renderVideoList) {
                 whatsapp: document.getElementById('bizEditWhatsApp')?.value?.trim() || '',
                 email_contact: document.getElementById('bizEditEmail')?.value?.trim() || '',
                 website: document.getElementById('bizEditWebsite')?.value?.trim() || '',
+                web_url: document.getElementById('bizEditWebUrl')?.value?.trim() || '',
+                web_page_mode: document.getElementById('bizEditWebPageMode')?.value || 'auto',
                 instagram: document.getElementById('bizEditInstagram')?.value?.trim() || '',
                 facebook: document.getElementById('bizEditFacebook')?.value?.trim() || '',
                 address: document.getElementById('bizEditAddress')?.value?.trim() || '',

@@ -31,6 +31,31 @@ export async function onRequestGet(context) {
       });
     }
 
+    // ─── Web page mode: auto (landing propia) vs external (URL del negocio) vs none ───
+    const webPageMode = business.web_page_mode || 'auto';
+    const webUrl = business.web_url || business.website || '';
+
+    if (webPageMode === 'external' && webUrl) {
+      // Redirigir a la URL externa del negocio
+      const externalUrl = webUrl.startsWith('http') ? webUrl : 'https://' + webUrl;
+      return new Response('', {
+        status: 302,
+        headers: { 'Location': externalUrl },
+      });
+    }
+
+    if (webPageMode === 'none') {
+      // Sin página web — redirigir a la ficha del negocio
+      const bizTipo = (business.business_type || 'negocio').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const bizCat = business.category_slug || 'otro';
+      return new Response('', {
+        status: 302,
+        headers: { 'Location': `/${bizTipo}/${bizCat}/${slug}` },
+      });
+    }
+
+    // Mode 'auto': continuar y generar la landing page propia
+
     // Products
     const products = await env.DB.prepare(
       `SELECT id, name, price, slug, image, description
