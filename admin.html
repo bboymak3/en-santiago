@@ -83,7 +83,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     <span>Administración</span>
                 </div>
                 <nav class="admin-nav">
-                    <a href="https://ia-google-scan-en-santiago.correo36000.workers.dev" target="_blank" class="admin-nav-link admin-nav-link-premium" style="background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.1)); border-left: 3px solid #fbbf24;">
+                    <a href="#" onclick="window.open('https://ia-google-scan-en-santiago.correo36000.workers.dev/?token=' + (localStorage.getItem('ensantiago_token') || localStorage.getItem('token') || localStorage.getItem('a58_token') || ''), '_blank'); return false;" class="admin-nav-link admin-nav-link-premium" style="background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.1)); border-left: 3px solid #fbbf24;">
                         <i class="fas fa-bolt" style="color: #fbbf24;"></i>
                         <span style="color: #fbbf24; font-weight: 600;">CREAR PERFIL AVANZADO</span>
                     </a>
