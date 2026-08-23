@@ -367,8 +367,8 @@ export async function onRequestPost(context) {
         phone, whatsapp, website, instagram, facebook, twitter, tiktok, youtube, email_contact, schedule,
         has_parking, has_wifi, has_card, has_delivery, has_outdoor,
         video_url, logo, banner, especialidad,
-        status
-      ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        status, web_url, web_page_mode
+      ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     `).bind(
       payload.id,
       title,
@@ -401,7 +401,9 @@ export async function onRequestPost(context) {
       body.logo || null,
       body.banner || null,
       body.especialidad || null,
-      'pending'
+      'pending',
+      body.web_url || null,
+      body.web_page_mode || 'auto'
     ).run();
 
     const businessId = result.meta.last_row_id;
