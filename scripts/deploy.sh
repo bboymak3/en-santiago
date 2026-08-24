@@ -1,46 +1,49 @@
 #!/bin/bash
-# Un Click - Deploy Script
+# Deploy automático: GitHub + Cloudflare Pages
+# Uso: bash deploy.sh
+# Requiere: CLOUDFLARE_API_TOKEN en variable de entorno
 # 
-# CRITICAL: wrangler.toml must be at the PROJECT ROOT level,
-# with pages_build_output_dir pointing to a "build" subdirectory.
-# The "functions/" dir must ALSO be at the project root (not inside build).
-# This is the only way wrangler v4 properly picks up D1/R2 bindings.
-#
-# Directory structure:
-#   /tmp/aunclick-project/
-#   ├── wrangler.toml          <-- config (detected by wrangler)
-#   ├── functions/             <-- Pages Functions (bundled separately)
-#   └── build/                 <-- pages_build_output_dir (static assets)
-#       ├── index.html
-#       ├── js/
-#       ├── css/
-#       └── ...
+# Pasos:
+# 1. git add + commit + push a GitHub (bboymak3/en-santiago)
+# 2. Deploy a Cloudflare Pages (proyecto: en-santiago)
+# 3. D1 + R2 bindings se preservan vía wrangler.toml
 
 set -e
 
 PROJECT_DIR="/home/z/my-project/repos/en-santiago"
 BUILD_PARENT="/tmp/en-santiago-project"
-# CLOUDFLARE_API_TOKEN must be set as environment variable
-if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-  echo "ERROR: CLOUDFLARE_API_TOKEN environment variable is not set."
-  echo "Export it before running: export CLOUDFLARE_API_TOKEN=your_token_here"
+CF_TOKEN="${CLOUDFLARE_API_TOKEN:-}"
+
+if [ -z "$CF_TOKEN" ]; then
+  echo "ERROR: Exporta CLOUDFLARE_API_TOKEN antes de ejecutar"
+  echo "  export CLOUDFLARE_API_TOKEN=cfat_xxx"
   exit 1
 fi
 
 export PATH="$PATH:/home/z/.npm-global/bin"
+cd "$PROJECT_DIR"
 
-echo "=== Preparing build directory ==="
+# ─── 1. PUSH A GITHUB ─────────────────────────────────────────
+echo "=== 1. Git: sync con GitHub ==="
+git add -A
+if git diff --cached --quiet; then
+  echo "    No hay cambios para commitear"
+else
+  COMMIT_MSG="${DEPLOY_MSG:-Update: $(date '+%Y-%m-%d %H:%M')}"
+  git commit -m "$COMMIT_MSG"
+  git push origin main
+  echo "    ✓ Pushed to GitHub"
+fi
+
+# ─── 2. PREPARAR BUILD ────────────────────────────────────────
+echo "=== 2. Preparando build ==="
 rm -rf "$BUILD_PARENT"
 mkdir -p "$BUILD_PARENT/build"
 mkdir -p "$BUILD_PARENT/functions"
 
-# 1. Copy wrangler.toml to project root
 cp "$PROJECT_DIR/wrangler.toml" "$BUILD_PARENT/wrangler.toml"
-
-# 2. Copy functions to project root (outside build/)
 cp -r "$PROJECT_DIR/functions/"* "$BUILD_PARENT/functions/"
 
-# 3. Copy everything else to build/ (static assets)
 rsync -a \
   --exclude='wrangler.*' \
   --exclude='functions' \
@@ -54,10 +57,18 @@ rsync -a \
   --exclude='_worker.js' \
   --exclude='tectonic' \
   --exclude='schema*.sql' \
+  --exclude='.git' \
   "$PROJECT_DIR/" "$BUILD_PARENT/build/"
 
-echo "=== Deploying to Cloudflare Pages ==="
+# ─── 3. DEPLOY A CLOUDFLARE PAGES ────────────────────────────
+echo "=== 3. Deploy a Cloudflare Pages ==="
 cd "$BUILD_PARENT"
-npx wrangler pages deploy build --project-name=en-santiago --branch=main --commit-dirty=true
+npx wrangler pages deploy build \
+  --project-name=en-santiago \
+  --branch=main \
+  --commit-dirty=true
 
-echo "=== Deployment complete ==="
+echo ""
+echo "=== ✓ Deploy completo ==="
+echo "    GitHub:  https://github.com/bboymak3/en-santiago"
+echo "    Preview: https://en-santiago.pages.dev"
