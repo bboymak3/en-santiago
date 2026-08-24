@@ -18,8 +18,8 @@
 
 set -e
 
-PROJECT_DIR="/home/z/my-project"
-BUILD_PARENT="/tmp/aunclick-project"
+PROJECT_DIR="/home/z/my-project/repos/en-santiago"
+BUILD_PARENT="/tmp/en-santiago-project"
 # CLOUDFLARE_API_TOKEN must be set as environment variable
 if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
   echo "ERROR: CLOUDFLARE_API_TOKEN environment variable is not set."
@@ -58,6 +58,6 @@ rsync -a \
 
 echo "=== Deploying to Cloudflare Pages ==="
 cd "$BUILD_PARENT"
-npx wrangler pages deploy build --project-name=aunclick --branch=main --commit-dirty=true
+npx wrangler pages deploy build --project-name=en-santiago --branch=main --commit-dirty=true
 
 echo "=== Deployment complete ==="
