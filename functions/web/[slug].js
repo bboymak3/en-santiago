@@ -136,8 +136,21 @@ export async function onRequestGet(context) {
       aiFaqs: null, // Si la IA genera FAQ, se usan en lugar de las hardcoded
     };
 
-    // Intentar usar IA si está disponible y no hay cache
-    if (env.AI && !business.ai_cache) {
+    // Determinar si la cache de IA sigue siendo válida (TTL de 30 días)
+    let cacheValid = false;
+    let cachedData = null;
+    if (business.ai_cache) {
+      try {
+        cachedData = JSON.parse(business.ai_cache);
+        const cachedAt = cachedData._cached_at || 0;
+        const ageMs = Date.now() - cachedAt;
+        const TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 días
+        cacheValid = cachedAt > 0 && ageMs < TTL_MS && cachedData.metaDescription;
+      } catch (e) { cacheValid = false; }
+    }
+
+    // Llamar IA solo si: hay binding AI y (no hay cache válida)
+    if (env.AI && !cacheValid) {
       try {
         const aiResult = await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8', {
           messages: [
@@ -194,30 +207,29 @@ Datos del negocio:
             aboutText: parsed.aboutText || aiContent.aboutText,
             whyChooseText: parsed.whyChooseText || aiContent.whyChooseText,
             aiFaqs: parsed.faqs || null,
+            _cached_at: Date.now(),
           };
 
           // Guardar en cache para futuros requests (no llamar IA cada vez)
+          const cachePayload = JSON.stringify(aiContent);
           try {
             await env.DB.prepare('UPDATE businesses SET ai_cache = ? WHERE id = ?')
-              .bind(JSON.stringify(aiContent), business.id).run();
+              .bind(cachePayload, business.id).run();
           } catch (cacheErr) {
-            // Si no existe la columna ai_cache, continuar sin cachear
+            // Si no existe la columna ai_cache, crearla y reintentar
             try {
               await env.DB.prepare('ALTER TABLE businesses ADD COLUMN ai_cache TEXT').run();
               await env.DB.prepare('UPDATE businesses SET ai_cache = ? WHERE id = ?')
-                .bind(JSON.stringify(aiContent), business.id).run();
+                .bind(cachePayload, business.id).run();
             } catch (e) { /* columna ya existe o error, continuar */ }
           }
         }
       } catch (aiError) {
         console.warn('IA optimization failed, using defaults:', aiError);
       }
-    } else if (business.ai_cache) {
-      // Usar cache existente
-      try {
-        const cached = JSON.parse(business.ai_cache);
-        if (cached.metaDescription) aiContent = { ...aiContent, ...cached };
-      } catch (e) { /* cache corrupto, usar defaults */ }
+    } else if (cacheValid && cachedData) {
+      // Usar cache válida existente
+      aiContent = { ...aiContent, ...cachedData };
     }
 
     // Si la IA generó FAQ, usarlas

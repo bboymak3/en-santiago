@@ -219,6 +219,16 @@ export async function onRequestPut(context) {
       });
     }
 
+    // Invalidar cache de IA cuando se edita el negocio (campos relevantes para SEO)
+    const seoRelevantFields = ['title', 'description', 'category_id', 'business_type',
+      'address', 'city', 'state', 'phone', 'whatsapp', 'website', 'instagram', 'facebook',
+      'schedule', 'has_parking', 'has_wifi', 'has_card', 'has_delivery', 'has_outdoor',
+      'especialidad', 'seo_description'];
+    const shouldInvalidateCache = seoRelevantFields.some(f => body[f] !== undefined);
+    if (shouldInvalidateCache) {
+      setClauses.push('ai_cache = NULL');
+    }
+
     setClauses.push("updated_at = datetime('now')");
     bindings.push(id);
 
@@ -226,7 +236,10 @@ export async function onRequestPut(context) {
       `UPDATE businesses SET ${setClauses.join(', ')} WHERE id = ?`
     ).bind(...bindings).run();
 
-    return new Response(JSON.stringify({ message: 'Negocio actualizado exitosamente' }), {
+    return new Response(JSON.stringify({
+      message: 'Negocio actualizado exitosamente',
+      ai_cache_invalidated: shouldInvalidateCache
+    }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

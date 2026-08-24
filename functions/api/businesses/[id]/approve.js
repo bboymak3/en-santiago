@@ -83,9 +83,9 @@ export async function onRequestPost(context) {
       });
     }
 
-    // Update status
+    // Update status + invalidar cache IA (para que la landing regenere contenido ahora que es público)
     await env.DB.prepare(
-      "UPDATE businesses SET status = 'approved', updated_at = datetime('now') WHERE id = ?"
+      "UPDATE businesses SET status = 'approved', ai_cache = NULL, updated_at = datetime('now') WHERE id = ?"
     ).bind(id).run();
 
     return new Response(JSON.stringify({ message: 'Negocio aprobado exitosamente' }), {
