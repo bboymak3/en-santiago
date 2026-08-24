@@ -124,6 +124,110 @@ export async function onRequestGet(context) {
     // Generate services from description keywords
     const services = extractServices(fullDescription, business);
 
+    // ─── IA: Optimizar contenido SEO con Workers AI ───────────────
+    // Genera: meta description, hero tagline, FAQ mejoradas, servicios detectados
+    // Cache: usa el campo ai_cache (JSON) del negocio para no llamar la IA en cada request
+    let aiContent = {
+      metaDescription: `${title} — ${business.category_name || 'Negocio'} en ${business.city || 'Santiago'}. ${fullDescription.substring(0, 120)}`.substring(0, 160),
+      heroTagline: `Bienvenido a ${title}`,
+      heroSubtitle: `${business.category_name || 'Negocio'} en ${business.city || 'Santiago de Chile'}`,
+      aboutText: fullDescription || `Descubre los servicios de ${title} en ${business.city || 'Santiago'}.`,
+      whyChooseText: `En ${title} nos especializamos en ofrecer ${business.category_name ? business.category_name.toLowerCase() : 'servicios de calidad'} en ${business.city || 'Santiago de Chile'}.`,
+      aiFaqs: null, // Si la IA genera FAQ, se usan en lugar de las hardcoded
+    };
+
+    // Intentar usar IA si está disponible y no hay cache
+    if (env.AI && !business.ai_cache) {
+      try {
+        const aiResult = await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8', {
+          messages: [
+            {
+              role: 'system',
+              content: `Eres un experto en SEO y marketing digital. Generas contenido optimizado para landing pages de negocios en Santiago de Chile. Responde SOLO con JSON valido, sin texto adicional ni markdown.`
+            },
+            {
+              role: 'user',
+              content: `Genera contenido SEO para la landing page de este negocio. Responde en JSON con esta estructura exacta:
+{
+  "metaDescription": "meta description de maximo 155 caracteres, persuasiva, con keywords del negocio y ubicacion",
+  "heroTagline": "titulo corto atractivo para el hero (max 50 caracteres)",
+  "heroSubtitle": "subtitulo del hero (max 80 caracteres)",
+  "aboutText": "parrafo de 2-3 lineas describiendo el negocio de forma atractiva",
+  "whyChooseText": "texto de 1-2 lineas sobre por que elegir este negocio",
+  "faqs": [
+    {"q": "pregunta frecuente 1", "a": "respuesta detallada 1"},
+    {"q": "pregunta frecuente 2", "a": "respuesta detallada 2"},
+    {"q": "pregunta frecuente 3", "a": "respuesta detallada 3"},
+    {"q": "pregunta frecuente 4", "a": "respuesta detallada 4"}
+  ]
+}
+
+Datos del negocio:
+- Nombre: ${title}
+- Categoria: ${business.category_name || 'No especificada'}
+- Descripcion: ${fullDescription || 'Sin descripcion'}
+- Ciudad: ${business.city || 'Santiago'}
+- Direccion: ${business.address || 'No disponible'}
+- Telefono: ${business.phone || 'No disponible'}
+- WhatsApp: ${business.whatsapp || 'No disponible'}
+- Horarios: ${business.schedule || 'No especificados'}
+- Instagram: ${business.instagram || 'No'}
+- Facebook: ${business.facebook || 'No'}
+- Servicios detectados: ${services.map(s => s.name).join(', ') || 'No especificados'}
+- Delivery: ${business.has_delivery ? 'Si' : 'No'}
+- Estacionamiento: ${business.has_parking ? 'Si' : 'No'}
+- WiFi: ${business.has_wifi ? 'Si' : 'No'}
+- Pago con tarjeta: ${business.has_card ? 'Si' : 'No'}`
+            }
+          ],
+          max_tokens: 1024,
+        });
+
+        const aiText = (aiResult).response || '';
+        const jsonMatch = aiText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          const parsed = JSON.parse(jsonMatch[0]);
+          aiContent = {
+            metaDescription: (parsed.metaDescription || aiContent.metaDescription).substring(0, 160),
+            heroTagline: parsed.heroTagline || aiContent.heroTagline,
+            heroSubtitle: parsed.heroSubtitle || aiContent.heroSubtitle,
+            aboutText: parsed.aboutText || aiContent.aboutText,
+            whyChooseText: parsed.whyChooseText || aiContent.whyChooseText,
+            aiFaqs: parsed.faqs || null,
+          };
+
+          // Guardar en cache para futuros requests (no llamar IA cada vez)
+          try {
+            await env.DB.prepare('UPDATE businesses SET ai_cache = ? WHERE id = ?')
+              .bind(JSON.stringify(aiContent), business.id).run();
+          } catch (cacheErr) {
+            // Si no existe la columna ai_cache, continuar sin cachear
+            try {
+              await env.DB.prepare('ALTER TABLE businesses ADD COLUMN ai_cache TEXT').run();
+              await env.DB.prepare('UPDATE businesses SET ai_cache = ? WHERE id = ?')
+                .bind(JSON.stringify(aiContent), business.id).run();
+            } catch (e) { /* columna ya existe o error, continuar */ }
+          }
+        }
+      } catch (aiError) {
+        console.warn('IA optimization failed, using defaults:', aiError);
+      }
+    } else if (business.ai_cache) {
+      // Usar cache existente
+      try {
+        const cached = JSON.parse(business.ai_cache);
+        if (cached.metaDescription) aiContent = { ...aiContent, ...cached };
+      } catch (e) { /* cache corrupto, usar defaults */ }
+    }
+
+    // Si la IA generó FAQ, usarlas
+    if (aiContent.aiFaqs && Array.isArray(aiContent.aiFaqs) && aiContent.aiFaqs.length > 0) {
+      faqs.length = 0;
+      aiContent.aiFaqs.forEach(faq => {
+        if (faq.q && faq.a) faqs.push({ q: faq.q, a: faq.a });
+      });
+    }
+
     const html = `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -146,7 +250,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
-    <meta name="description" content="${escapeHtml(metaDescription)}">
+    <meta name="description" content="${escapeHtml(aiContent.metaDescription)}">
     <title>${escapeHtml(title)} - ${escapeHtml(business.category_name || 'Negocio')} en ${escapeHtml(business.city || 'Santiago de Chile')}</title>
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="${baseUrl}/${bizTipo}/${bizCat}/${business.slug}">
@@ -700,8 +804,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ${escapeHtml(business.city || '')}${business.state ? ', ' + escapeHtml(business.state) : ''}
             ${business.category_name ? ' &middot; ' + escapeHtml(business.category_name) : ''}
         </div>
-        <h1 class="lp-hero-title">${escapeHtml(title)}</h1>
-        <p class="lp-hero-subtitle">${escapeHtml(fullDescription || business.category_name || 'Conoce nuestros servicios y productos. Estamos para atenderte.')}</p>
+        <h1 class="lp-hero-title">${escapeHtml(aiContent.heroTagline)}</h1>
+        <p class="lp-hero-subtitle">${escapeHtml(aiContent.heroSubtitle)}</p>
         <div class="lp-hero-actions">
             ${whatsappNumber ? `<a href="${whatsappLink}" target="_blank" rel="noopener" class="lp-btn lp-btn-whatsapp"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</a>` : ''}
             ${phoneClean ? `<a href="tel:${phoneClean}" class="lp-btn lp-btn-phone"><i class="fas fa-phone"></i> ${escapeHtml(business.phone || '')}</a>` : ''}
@@ -740,7 +844,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         ` : `
         <div class="lp-about-grid" style="max-width:700px;margin:0 auto;">
             <div>
-                <p class="lp-about-text">${fullDescription ? escapeHtml(fullDescription) : escapeHtml(title) + ' es un negocio de ' + (business.category_name ? business.category_name.toLowerCase() : 'servicios generales') + ' ubicado en ' + (business.city || 'Santiago de Chile') + '. Nos caracterizamos por ofrecer un servicio de calidad y atencion personalizada a cada uno de nuestros clientes.'}</p>
+                <p class="lp-about-text">${escapeHtml(aiContent.aboutText)}</p>
                 <div class="lp-about-highlights">
                     ${business.category_name ? `<div class="lp-about-highlight"><i class="fas fa-check"></i> Especialistas en ${escapeHtml(business.category_name.toLowerCase())}</div>` : ''}
                     ${business.city ? `<div class="lp-about-highlight"><i class="fas fa-check"></i> Ubicados en ${escapeHtml(business.city + (business.state ? ', ' + business.state : ''))}</div>` : ''}
@@ -780,7 +884,7 @@ ${services.length > 0 ? `
     <div class="lp-container">
         <div class="lp-section-header">
             <div class="lp-section-label">Por Que Elegirnos</div>
-            <h2 class="lp-section-title">Razones para confiar en ${escapeHtml(title)}</h2>
+            <h2 class="lp-section-title">${escapeHtml(aiContent.whyChooseText)}</h2>
         </div>
         <div class="lp-why-grid">
             ${whyUs.slice(0, 6).map(w => `
