@@ -22,25 +22,39 @@ export async function onRequestGet(context) {
     ).bind(slug).first();
 
     if (!category) {
-      // Try matching by name (slugify comparison)
+      // FIX: If the requested slug doesn't match any row, try to find a category
+      // whose slugify(name) matches — this catches renamed categories where
+      // external links still point to the OLD slug.
+      //
+      // Example: admin renames "Tapizados de Volantes" (slug: tapizados-de-volantes)
+      //          to "Tapizar IA" (new slug: tapizar-ia). Old Google links still
+      //          point to /categoria/tapizados-de-volantes. We try to find it by
+      //          slugify(name) first, and also by an alternative slug-match pass.
+      const decodedSlug = decodeURIComponent(slug);
+
+      // Pass 1: try matching by slugify(name) — handles cases where slug was
+      // never regenerated but name was changed
       const allCats = await env.DB.prepare(
         `SELECT * FROM categories ORDER BY name ASC`
       ).all();
       const match = (allCats.results || []).find(c => {
-        const catSlug = c.name.toLowerCase()
+        const catSlug = (c.name || '').toLowerCase()
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
           .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        return catSlug === decodeURIComponent(slug);
+        return catSlug === decodedSlug;
       });
-      if (!match) {
-        return new Response('<h1>Categoría no encontrada</h1><p>La categoría que buscas no existe.</p>', {
-          status: 404,
-          headers: { 'Content-Type': 'text/html; charset=utf-8' },
+
+      if (match) {
+        // 301 redirect to the canonical URL with the current slug
+        return new Response('', {
+          status: 301,
+          headers: { 'Location': `/categoria/${match.slug}` },
         });
       }
-      return new Response('', {
-        status: 301,
-        headers: { 'Location': `/categoria/${match.slug}` },
+
+      return new Response('<h1>Categoría no encontrada</h1><p>La categoría que buscas no existe.</p>', {
+        status: 404,
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
       });
     }
 

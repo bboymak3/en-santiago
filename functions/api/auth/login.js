@@ -94,9 +94,26 @@ export async function onRequestPost(context) {
       });
     }
 
-    // Create JWT token
+    // FIX: Admin users automatically get premium plan (no expiration)
+    // Esto garantiza que cualquier cuenta con role='admin' tenga acceso premium
+    // sin necesidad de activación manual, incluso si plan_type='basic' en DB.
+    let effectivePlanType = user.plan_type || 'basic';
+    if (user.role === 'admin' && effectivePlanType !== 'premium') {
+      try {
+        await env.DB.prepare(
+          "UPDATE users SET plan_type = 'premium', plan_starts_at = datetime('now'), plan_expires_at = NULL, updated_at = datetime('now') WHERE id = ?"
+        ).bind(user.id).run();
+        effectivePlanType = 'premium';
+      } catch (e) {
+        // Si falla el update, no bloquear el login, pero loguear
+        console.error('Failed to upgrade admin to premium:', e.message);
+      }
+    }
+
+    // Create JWT token — incluir plan_type para que el backend lo tenga sin
+    // hacer query adicional cada vez (optimización + evitar races)
     const token = await createJWT(
-      { id: user.id, name: user.name, email: user.email, role: user.role, iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 86400 * 7 },
+      { id: user.id, name: user.name, email: user.email, role: user.role, plan_type: effectivePlanType, iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 86400 * 7 },
       jwtSecret
     );
 
@@ -110,6 +127,7 @@ export async function onRequestPost(context) {
         role: user.role,
         phone: user.phone,
         avatar: user.avatar,
+        plan_type: effectivePlanType,
       },
     }), {
       status: 200,

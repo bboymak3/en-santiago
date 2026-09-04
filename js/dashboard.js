@@ -25,7 +25,7 @@ function _openEditBizModal(id) {
     document.querySelectorAll('#editBizFeatures .eb-feature').forEach(function(f) { f.classList.remove('checked'); });
     window._editBizVideos = [];
 
-    var token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+    var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
     fetch('/api/businesses/' + id, {
         headers: { 'Authorization': 'Bearer ' + token }
     })
@@ -46,6 +46,7 @@ function _openEditBizModal(id) {
             el('editBizWhatsapp', biz.whatsapp);
             el('editBizEmail', biz.email_contact || biz.email);
             el('editBizWebsite', biz.website);
+            el('editBizGoogleMapsUrl', biz.google_maps_url);
             el('editBizInstagram', biz.instagram);
             el('editBizFacebook', biz.facebook);
             el('editBizTwitter', biz.twitter);
@@ -465,9 +466,9 @@ window.closeEditBusinessModal = function() {
                 }
             }
 
-            // Recent businesses table (last 5)
+            // Recent businesses table (mostrar TODOS, no solo 5)
             if (recentPropsBody) {
-                const recent = userProperties.slice(0, 5);
+                const recent = userProperties; // FIX: antes era slice(0, 5), ahora muestra todos
                 if (recent.length === 0) {
                     recentPropsBody.innerHTML = `
                         <tr class="empty-row">
@@ -1541,7 +1542,7 @@ window.closeEditBusinessModal = function() {
                     const fd = new FormData();
                     fd.append('file', file);
                     fd.append('product_type', 'job');
-                    const token = localStorage.getItem('ensantiago_token') || localStorage.getItem('authToken');
+                    const token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('authToken'));
                     fetch('/api/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token }, body: fd })
                     .then(r => r.json())
                     .then(data => {
@@ -2740,6 +2741,7 @@ window.closeEditBusinessModal = function() {
         el('editBizWhatsapp', biz.whatsapp);
         el('editBizEmail', biz.email_contact || biz.email);
         el('editBizWebsite', biz.website);
+        el('editBizGoogleMapsUrl', biz.google_maps_url);
         el('editBizInstagram', biz.instagram);
         el('editBizFacebook', biz.facebook);
         el('editBizTwitter', biz.twitter);
@@ -2823,7 +2825,7 @@ window.closeEditBusinessModal = function() {
     window.handleEditBizVideoFile = function(input) {
         var files = input.files;
         if (!files || !files.length) return;
-        var token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+        var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
 
         Array.from(files).forEach(function(file) {
             if (!file.type.startsWith('video/')) {
@@ -2892,7 +2894,7 @@ window.closeEditBusinessModal = function() {
     async function loadEditBizGallery(businessId) {
         const galleryEl = document.getElementById('ebBizGallery');
         if (!galleryEl || !businessId) return;
-        const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+        const token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
         try {
             const res = await fetch('/api/businesses/' + businessId, { headers: { 'Authorization': 'Bearer ' + token } });
             const biz = await res.json();
@@ -2927,7 +2929,7 @@ window.closeEditBusinessModal = function() {
         var bizId = idEl.value;
         var statusEl = document.getElementById('ebBizGalleryStatus');
         if (statusEl) statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
-        var token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+        var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
         try {
             var fd = new FormData();
             fd.append('file', file);
@@ -2945,7 +2947,7 @@ window.closeEditBusinessModal = function() {
     }
 
     async function deleteEditBizImage(bizId, imgId) {
-        var token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+        var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
         try {
             await fetch('/api/images/' + bizId + '?image_id=' + imgId, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } });
             showToast('Imagen eliminada', 'success');
@@ -2954,7 +2956,7 @@ window.closeEditBusinessModal = function() {
     }
 
     async function setEditBizCover(bizId, imgId) {
-        var token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+        var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
         try {
             await fetch('/api/images/' + bizId + '?image_id=' + imgId, { method: 'PUT', headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ is_cover: 1 }) });
             showToast('Portada actualizada', 'success');
@@ -2988,7 +2990,7 @@ window.closeEditBusinessModal = function() {
                 var url = galleryURL.value.trim();
                 var idEl = document.getElementById('editBizId');
                 if (!url || !idEl || !idEl.value) return;
-                var token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+                var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
                 this.disabled = true; this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
                 try {
                     await fetch('/api/images/' + idEl.value, { method: 'POST', headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ url: url, is_cover: 0 }) });
@@ -3031,6 +3033,7 @@ window.closeEditBusinessModal = function() {
                 whatsapp: document.getElementById('editBizWhatsapp').value,
                 email_contact: document.getElementById('editBizEmail').value,
                 website: document.getElementById('editBizWebsite').value,
+                google_maps_url: document.getElementById('editBizGoogleMapsUrl')?.value || '',
                 instagram: document.getElementById('editBizInstagram').value,
                 facebook: document.getElementById('editBizFacebook').value,
                 twitter: document.getElementById('editBizTwitter').value,
@@ -3930,6 +3933,7 @@ window.closeEditBusinessModal = function() {
                 <div class="aeb-field"><label>WhatsApp</label><input type="tel" class="eb-input" id="aebWhatsapp" value="${escH(b.whatsapp||'')}"></div>
                 <div class="aeb-field"><label>Email</label><input type="email" class="eb-input" id="aebEmail" value="${escH(b.email_contact||b.email||'')}"></div>
                 <div class="aeb-field"><label>Website</label><input type="url" class="eb-input" id="aebWebsite" value="${escH(b.website||'')}"></div>
+                <div class="aeb-field"><label>URL Perfil de Google</label><input type="url" class="eb-input" id="aebGoogleMapsUrl" value="${escH(b.google_maps_url||'')}" placeholder="https://maps.google.com/?cid=... o https://g.co/kgs/..."></div>
                 <div class="aeb-field"><label>Instagram</label><input type="text" class="eb-input" id="aebInstagram" value="${escH(b.instagram||'')}"></div>
                 <div class="aeb-field"><label>Facebook</label><input type="text" class="eb-input" id="aebFacebook" value="${escH(b.facebook||'')}"></div>
                 <div class="aeb-field"><label>TikTok</label><input type="text" class="eb-input" id="aebTiktok" value="${escH(b.tiktok||'')}"></div>
@@ -4092,6 +4096,7 @@ window.closeEditBusinessModal = function() {
                 whatsapp: document.getElementById('aebWhatsapp').value,
                 email_contact: document.getElementById('aebEmail').value,
                 website: document.getElementById('aebWebsite').value,
+                google_maps_url: document.getElementById('aebGoogleMapsUrl').value,
                 instagram: document.getElementById('aebInstagram').value,
                 facebook: document.getElementById('aebFacebook').value,
                 tiktok: document.getElementById('aebTiktok').value,

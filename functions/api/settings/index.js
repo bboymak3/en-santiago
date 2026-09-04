@@ -53,6 +53,16 @@ const DEFAULT_SETTINGS = {
   marketplace_enabled: '1',
   businesses_enabled: '1',
   jobs_enabled: '1',
+  // FIX: Módulos adicionales del sitio que faltaban en allowed_keys
+  medical_enabled: '1',
+  properties_enabled: '1',
+  weather_enabled: '1',
+  // FIX: Toggles específicos para secciones destacadas del home
+  featured_businesses_enabled: '1',
+  featured_medical_enabled: '1',
+  featured_properties_enabled: '1',
+  featured_products_enabled: '1',
+  featured_jobs_enabled: '1',
   // Chat configuration
   chat_enabled: '1',
   chat_mode: 'all', // 'all' | 'premium_only' | 'none'
@@ -88,6 +98,8 @@ const DEFAULT_SETTINGS = {
   points_per_booking: '15',
   // Hero banner
   hero_banner_url: '',
+  // FIX: Banner de la página de búsqueda
+  search_banner_url: '',
   // Hero logo (overlays on banner)
   hero_logo_url: '',
   // Marketplace banner

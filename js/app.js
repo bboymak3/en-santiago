@@ -683,13 +683,41 @@ function getBusinessTypeLabel(type) {
 
 
 // ─── Business URL Helper ─────────────────────────────────────
+// FIX: Antes siempre generaba /negocio/{slug} (legacy) que hacia redirect 301
+// a la URL canonica /{tipo}/{categoria}/{slug}. Eso funcionaba pero era lento
+// (1 redirect extra) y rompia si la URL legacy tenia cacheada una categoria vieja.
+// Ahora generamos la URL canonica directamente usando business_type + category_slug.
+// Si no tenemos category_slug (e.g. listado de businesses sin JOIN), hacemos fallback
+// a /negocio/{slug} que sigue funcionando con redirect.
 function getBusinessUrl(business) {
     if (!business) return '#';
     if (business.slug) {
-        const prefix = (business.category_slug === 'medicina-servicio-medico') ? '/medicina-servicio-medico' : '/negocio';
-        return prefix + '/' + business.slug;
+        // Caso especial: medicina tiene una seccion dedicada
+        if (business.category_slug === 'medicina-servicio-medico') {
+            return '/medicina-servicio-medico/' + business.slug;
+        }
+        // Si tenemos category_slug y tipo, generar URL canonica
+        if (business.category_slug && business.business_type) {
+            const tipo = slugifyBizUrl(business.business_type);
+            return '/' + tipo + '/' + business.category_slug + '/' + business.slug;
+        }
+        // Si tenemos tipo_negocio_slug (viene de algunos JOINs), usarlo
+        if (business.category_slug && business.tipo_negocio_slug) {
+            return '/' + business.tipo_negocio_slug + '/' + business.category_slug + '/' + business.slug;
+        }
+        // Fallback: URL legacy (redirige 301 al canonico)
+        return '/negocio/' + business.slug;
     }
     return '/business.html?id=' + business.id;
+}
+
+// Slugify local (no depende de nada externo)
+function slugifyBizUrl(text) {
+    if (!text) return 'negocio';
+    return text.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
 }
 
 // ─── WhatsApp Share ────────────────────────────────────────────
@@ -751,11 +779,15 @@ function createBusinessCard(business) {
 
     const bizUrl = getBusinessUrl(business);
     const isMedical = business.category_slug === 'medicina-servicio-medico';
+    // Optimización: usar srcset para servir imagen más pequeña en mobile
+    const imgSrcset = imgSrc && imgSrc.includes('/api/serve?key=')
+        ? `${imgSrc}&w=400 400w, ${imgSrc}&w=800 800w`
+        : '';
     return `
         <article class="business-card${isMedical ? ' business-card--medical' : ''}" data-business-id="${business.id}">
             <a href="${bizUrl}" class="business-card-link">
                 <div class="business-card-image">
-                    <img src="${imgSrc}" alt="${business.title || 'Sin título'}" loading="lazy" onerror="this.src='${placeholderImg}'">
+                    <img src="${imgSrc}" alt="${business.title || 'Sin título'}" loading="lazy" width="400" height="300" ${imgSrcset ? `srcset="${imgSrcset}" sizes="(max-width: 768px) 400px, 300px"` : ''} onerror="this.src='${placeholderImg}'">
                     <div class="business-card-badges">
                         ${especialidadBadge}${featuredBadge}${statusBadge}
                     </div>
@@ -952,6 +984,19 @@ async function loadVideoCarousel() {
 // ─── Hero Banner Loader ─────────────────────────────────
 async function loadHeroBanner() {
     const heroBg = document.getElementById('idxHeroBg');
+    // FIX: Banner de search.html
+    const searchHeroBanner = document.getElementById('searchHeroBanner');
+    const searchBannerImg = document.getElementById('searchBannerImg');
+    fetch('/api/settings/public').then(r => r.json()).then(data => {
+        if (heroBg && data.hero_banner_url) {
+            heroBg.style.backgroundImage = `url(${data.hero_banner_url})`;
+        }
+        // FIX: Aplicar banner de search.html si existe
+        if (searchHeroBanner && searchBannerImg && data.search_banner_url) {
+            searchBannerImg.src = data.search_banner_url;
+            searchHeroBanner.style.display = 'block';
+        }
+    }).catch(() => {});
     const heroLogo = document.getElementById('idxHeroLogo');
     if (!heroBg) return;
     try {
@@ -1117,9 +1162,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load featured sections on index page — controlled by admin settings
+    // FIX: Hay 2 niveles de toggles:
+    //  - *_enabled (businesses_enabled, marketplace_enabled, etc.): habilita/deshabilita
+    //    el módulo completo (afecta a todo el sitio).
+    //  - featured_*_enabled (featured_businesses_enabled, featured_products_enabled, etc.):
+    //    controla específicamente si la sección destacada del HOME se muestra.
+    // Para que una sección destacada se vea, AMBOS deben estar activos.
     fetch('/api/settings/public').then(r => r.json()).then(settings => {
         // Negocios destacados
-        if (settings.businesses_enabled !== '0' && document.getElementById('featuredGrid')) {
+        var showFeaturedBusinesses = settings.businesses_enabled !== '0' && settings.featured_businesses_enabled !== '0';
+        if (showFeaturedBusinesses && document.getElementById('featuredGrid')) {
             loadFeaturedProperties();
         } else {
             var el = document.getElementById('featuredSection');
@@ -1127,7 +1179,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Servicios médicos destacados
-        if (settings.medical_enabled !== '0' && document.getElementById('featuredMedicalGrid')) {
+        var showFeaturedMedical = settings.medical_enabled !== '0' && settings.featured_medical_enabled !== '0';
+        if (showFeaturedMedical && document.getElementById('featuredMedicalGrid')) {
             loadFeaturedMedical();
         } else {
             var el = document.getElementById('featuredMedicalSection');
@@ -1135,7 +1188,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Inmuebles destacados
-        if (settings.properties_enabled !== '0' && document.getElementById('featuredPropertiesGrid')) {
+        var showFeaturedProperties = settings.properties_enabled !== '0' && settings.featured_properties_enabled !== '0';
+        if (showFeaturedProperties && document.getElementById('featuredPropertiesGrid')) {
             loadFeaturedPropertiesSection();
         } else {
             var el = document.getElementById('featuredPropertiesSection');
@@ -1143,7 +1197,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Productos destacados
-        if (settings.marketplace_enabled !== '0' && document.getElementById('featuredProductsGrid')) {
+        var showFeaturedProducts = settings.marketplace_enabled !== '0' && settings.featured_products_enabled !== '0';
+        if (showFeaturedProducts && document.getElementById('featuredProductsGrid')) {
             loadFeaturedProducts();
         } else {
             var el = document.getElementById('featuredProductsSection');
@@ -1151,7 +1206,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Empleos destacados
-        if (settings.jobs_enabled !== '0' && document.getElementById('featuredJobsGrid')) {
+        var showFeaturedJobs = settings.jobs_enabled !== '0' && settings.featured_jobs_enabled !== '0';
+        if (showFeaturedJobs && document.getElementById('featuredJobsGrid')) {
             loadFeaturedJobs();
         } else {
             var el = document.getElementById('featuredJobsSection');
@@ -1225,8 +1281,8 @@ async function loadFeaturedProperties() {
         }
 
         if (emptyState) emptyState.style.display = 'none';
-        // When a state is selected, show up to 12; otherwise show 3 featured
-        const maxShow = getSelectedState() ? 12 : 4;
+        // FIX: Mostrar siempre 12 fichas (antes era 4 sin state, 12 con state)
+        const maxShow = 12;
         businesses = businesses.slice(0, maxShow);
         grid.innerHTML = businesses.map(p => createBusinessCard(p)).join('');
         // Update section title to reflect state filter

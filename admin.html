@@ -1031,12 +1031,34 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 <h4 class="settings-section-title"><i class="fas fa-puzzle-piece" style="color:#28a745;"></i> Funcionalidades</h4>
                                 <div class="settings-toggle-row"><label class="settings-label">Reseñas y Calificaciones</label><label class="settings-switch"><input type="checkbox" id="setting_reviews_enabled" data-key="reviews_enabled"><span class="settings-switch-slider"></span></label></div>
                                 <div class="settings-toggle-row"><label class="settings-label">Cupones y Ofertas</label><label class="settings-switch"><input type="checkbox" id="setting_coupons_enabled" data-key="coupons_enabled"><span class="settings-switch-slider"></span></label></div>
-                                <div class="settings-toggle-row"><label class="settings-label">Marketplace</label><label class="settings-switch"><input type="checkbox" id="setting_marketplace_enabled" data-key="marketplace_enabled"><span class="settings-switch-slider"></span></label></div>
                                 <div class="settings-toggle-row"><label class="settings-label">Programa de Puntos</label><label class="settings-switch"><input type="checkbox" id="setting_points_enabled" data-key="points_enabled"><span class="settings-switch-slider"></span></label></div>
                                 <div class="settings-toggle-row"><label class="settings-label">Servicios de Emergencia</label><label class="settings-switch"><input type="checkbox" id="setting_emergency_enabled" data-key="emergency_enabled"><span class="settings-switch-slider"></span></label></div>
                                 <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-store" style="color:#059669;margin-right:4px;"></i> Encuesta Bazar (Dashboard)</label><label class="settings-switch"><input type="checkbox" id="setting_bazar_enabled" data-key="bazar_enabled"><span class="settings-switch-slider"></span></label></div>
                                 <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-video" style="color:#dc2626;margin-right:4px;"></i> Carrusel de Videos (Index)</label><label class="settings-switch"><input type="checkbox" id="setting_video_carousel_enabled" data-key="video_carousel_enabled"><span class="settings-switch-slider"></span></label></div>
 
+                            </div>
+                            <hr style="margin:20px 0; border-color:var(--color-border-light);">
+                            <!-- FIX: Módulos del sitio (toggles generales de secciones completas) -->
+                            <div class="settings-section">
+                                <h4 class="settings-section-title"><i class="fas fa-layer-group" style="color:#7c3aed;"></i> Módulos del Sitio (Secciones Completas)</h4>
+                                <p style="font-size:0.75rem;color:#94a3b8;margin-bottom:12px;">Activa o desactiva secciones COMPLETAS del sitio. Si desactivas un módulo, no se mostrará en ninguna parte (home, búsquedas, mapa, etc.).</p>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-store" style="color:#1a73e8;margin-right:4px;"></i> Negocios (Directorio completo)</label><label class="settings-switch"><input type="checkbox" id="setting_businesses_enabled" data-key="businesses_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-heartbeat" style="color:#e74c3c;margin-right:4px;"></i> Servicios Médicos</label><label class="settings-switch"><input type="checkbox" id="setting_medical_enabled" data-key="medical_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-home" style="color:#e67e22;margin-right:4px;"></i> Inmuebles (Properties)</label><label class="settings-switch"><input type="checkbox" id="setting_properties_enabled" data-key="properties_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-boxes-stacked" style="color:#e83e8c;margin-right:4px;"></i> Marketplace (Productos)</label><label class="settings-switch"><input type="checkbox" id="setting_marketplace_enabled" data-key="marketplace_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-briefcase" style="color:#17a2b8;margin-right:4px;"></i> Empleos</label><label class="settings-switch"><input type="checkbox" id="setting_jobs_enabled" data-key="jobs_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-calendar-day" style="color:#8b5cf6;margin-right:4px;"></i> Eventos</label><label class="settings-switch"><input type="checkbox" id="setting_events_enabled" data-key="events_enabled"><span class="settings-switch-slider"></span></label></div>
+                            </div>
+                            <hr style="margin:20px 0; border-color:var(--color-border-light);">
+                            <!-- FIX: Secciones destacadas del Home (sub-toggles) -->
+                            <div class="settings-section">
+                                <h4 class="settings-section-title"><i class="fas fa-star" style="color:#f59e0b;"></i> Secciones Destacadas del Home</h4>
+                                <p style="font-size:0.75rem;color:#94a3b8;margin-bottom:12px;">Controla específicamente qué secciones se muestran en la página principal. Para que una sección se vea, su módulo (arriba) también debe estar activo.</p>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-store" style="color:#1a73e8;margin-right:4px;"></i> Negocios Destacados</label><label class="settings-switch"><input type="checkbox" id="setting_featured_businesses_enabled" data-key="featured_businesses_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-heartbeat" style="color:#e74c3c;margin-right:4px;"></i> Servicios Médicos</label><label class="settings-switch"><input type="checkbox" id="setting_featured_medical_enabled" data-key="featured_medical_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-home" style="color:#e67e22;margin-right:4px;"></i> Inmuebles Destacados</label><label class="settings-switch"><input type="checkbox" id="setting_featured_properties_enabled" data-key="featured_properties_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-boxes-stacked" style="color:#e83e8c;margin-right:4px;"></i> Productos Destacados</label><label class="settings-switch"><input type="checkbox" id="setting_featured_products_enabled" data-key="featured_products_enabled"><span class="settings-switch-slider"></span></label></div>
+                                <div class="settings-toggle-row"><label class="settings-label"><i class="fas fa-briefcase" style="color:#17a2b8;margin-right:4px;"></i> Empleos Destacados</label><label class="settings-switch"><input type="checkbox" id="setting_featured_jobs_enabled" data-key="featured_jobs_enabled"><span class="settings-switch-slider"></span></label></div>
                             </div>
                             <hr style="margin:20px 0; border-color:var(--color-border-light);">
                             <!-- Notificaciones -->
@@ -1074,6 +1096,26 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                         <input type="file" id="adminBannerInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="handleAdminBannerSelect(this)">
                                         <input type="hidden" id="setting_hero_banner_url" data-key="hero_banner_url">
                                         <p style="font-size:0.72rem;color:#94a3b8;margin:6px 0 0;">JPG, PNG, WebP - Max 5MB. Se recomienda 1920x800px.</p>
+                                    </div>
+                                </div>
+                                <!-- FIX: Banner de la página de búsqueda (search.html) -->
+                                <div style="margin-top:16px;padding-top:16px;border-top:1px solid #e5e7eb;">
+                                    <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:8px;">
+                                        <i class="fas fa-search" style="color:#006EE3;margin-right:4px;"></i> Banner página de Búsqueda (search.html)
+                                    </label>
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <div id="searchBannerPreviewContainer" style="width:120px;height:50px;border:1px solid #e5e7eb;border-radius:6px;overflow:hidden;background:#f8fafc;display:flex;align-items:center;justify-content:center;">
+                                            <span style="font-size:0.65rem;color:#94a3b8;">Sin banner</span>
+                                        </div>
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('searchBannerInput').click()">
+                                            <i class="fas fa-upload"></i> Subir
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm" id="searchBannerRemoveBtn" onclick="removeSearchBanner()" style="display:none;margin-left:6px;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <input type="file" id="searchBannerInput" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="handleSearchBannerSelect(this)">
+                                        <input type="hidden" id="setting_search_banner_url" data-key="search_banner_url">
+                                        <p style="font-size:0.72rem;color:#94a3b8;margin:6px 0 0;">Banner para la página /search.html</p>
                                     </div>
                                 </div>
                                 <div style="margin-top:12px;text-align:right;">

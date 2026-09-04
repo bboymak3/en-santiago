@@ -1,16 +1,8 @@
-# HolaX - Cloudflare Pages Redirects
+# En Santiago - Cloudflare Pages Redirects
 # https://developers.cloudflare.com/pages/configuration/redirects/
 
-# Seguridad: redirigir robots.txt dinámico a la raíz (los crawlers buscan /robots.txt)
-/robots.txt /api/robots 200
-
-# Redirigir antiguo dominio a nuevo (solo páginas, NO API calls)
-# Los API calls desde aunclick.pages.dev se redirigen SIN cambiar método (308)
-https://aunclick.pages.dev/api/* https://holax.com.ve/api/:splat 308
-https://aunclick.pages.dev/* https://holax.com.ve/:splat 301
-
-# SEO: redirigir www a apex (sin www)
-https://www.holax.com.ve/* https://holax.com.ve/:splat 301
+# Robots.txt: servido como archivo estático (no necesita redirect a Function)
+# El archivo robots.txt en la raíz tiene el contenido correcto.
 
 # Redirecciones de páginas antiguas o renombradas
 /reservar.html /reservas.html 301
@@ -18,7 +10,3 @@ https://www.holax.com.ve/* https://holax.com.ve/:splat 301
 /eventos /entretenimiento.html 301
 /negocio.html /search.html 301
 /registro.html /new-business.html 301
-# /perfil.html ya no se redirige — es la página pública de perfil del partner
-
-# Sitemap: ahora manejado directamente por Function en /functions/sitemap.xml/index.js
-# (el status 200 en _redirects no invoca Functions de forma confiable)

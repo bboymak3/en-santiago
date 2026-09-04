@@ -1,20 +1,44 @@
-# Un Click - Cloudflare Pages Headers
+# En Santiago - Cloudflare Pages Headers
 # https://developers.cloudflare.com/pages/configuration/headers/
 
 # Seguridad global para todas las respuestas
 /*
   X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
+  X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(self)
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; connect-src 'self' https:; font-src 'self' https: data:; frame-src 'self' https:; object-src 'none'; base-uri 'self'
+  X-Permitted-Cross-Domain-Policies: none
+
+# Headers SEO para sitemap y robots
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
 
 # Seguridad API - sin cache sensible
 /api/*
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
   Access-Control-Allow-Headers: Content-Type, Authorization
-  Cache-Control: no-store
+
+# Imágenes servidas por /api/serve - cache largo (1 año) para optimización
+/api/serve
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Accept
+
+# Imágenes optimizadas /api/img - cache largo
+/api/img
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Accept
 
 # Archivos estáticos - cache con revalidación
 /css/*.css
@@ -28,11 +52,12 @@
 /sw.js
   Cache-Control: no-cache, no-store, must-revalidate
 
-# Sitemap XML - forzar Content-Type correcto
-/sitemap.xml
-  Content-Type: application/xml; charset=utf-8
-
 # PWA Manifest
 /manifest.json
   Content-Type: application/manifest+json
   Cache-Control: public, max-age=3600
+
+# HTML pages - revalidate on each request
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Type: text/html; charset=utf-8

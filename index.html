@@ -28,9 +28,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <link rel="apple-touch-icon" href="/images/favicon.jpeg">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json?v=3">
     <meta name="theme-color" content="#006EE3">
     <meta name="google-site-verification" content="Upqdebr5WMAfea6ZMYcsZVTXR2Wo9N5cJZG0B6pk7I4" />
+    <link rel="canonical" href="https://en-santiago.pages.dev/">
     <meta property="og:title" content="En Santiago - Directorio de Negocios en Santiago de Chile">
     <meta property="og:description" content="En Santiago es el directorio de negocios y comercios más completo de Santiago de Chile. Encuentra restaurantes, farmacias, tiendas, profesionales, servicios de salud y más en todo el país. Registro gratis.">
     <meta property="og:site_name" content="En Santiago">
@@ -76,6 +77,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "query-input": "required name=search_term_string"
         }
     }</script>
+    <!-- FIX: JSON-LD WebPage con BreadcrumbList para rich snippets -->
+    <script type="application/ld+json">{
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "En Santiago - Directorio de Negocios en Santiago de Chile",
+        "description": "Directorio metropolitano de negocios, productos, inmuebles y empleos en Santiago de Chile. Encuentra comercios, profesionales y servicios en todo el país.",
+        "url": "https://en-santiago.pages.dev/",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "En Santiago",
+            "url": "https://en-santiago.pages.dev"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" }
+            ]
+        }
+    }</script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -109,6 +129,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                 </div>
             </div>
+            <a href="registrar-negocio.html" class="nav-crear-btn" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:50px;background:linear-gradient(135deg,#006EE3,#005BB5);color:#fff;font-size:0.85rem;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 0 20px rgba(0,110,227,0.3);transition:transform 0.2s,box-shadow 0.2s;"><i class="fas fa-plus-circle"></i> Crear Negocio</a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
             </button>
