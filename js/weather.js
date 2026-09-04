@@ -1,5 +1,6 @@
 // js/weather.js — Weather Carousel for En Santiago Index
 // Uses Open-Meteo API (free, no API key required)
+// OPTIMIZADO: 1 solo request batch + deferred load (no bloquea LCP)
 
 (function () {
     'use strict';
@@ -30,7 +31,6 @@
 
     // ─── WMO Weather Code mapping ─────────────────────────────────
     function getWeatherInfo(code, isDay) {
-        // Returns { icon (FA class), colorClass, description }
         if (code === 0) {
             return isDay
                 ? { icon: 'fas fa-sun', cls: 'w-sunny', desc: 'Despejado', accent: '#fbbf24' }
@@ -88,22 +88,17 @@
         if (code === 96 || code === 99) {
             return { icon: 'fas fa-bolt', cls: 'w-thunder', desc: 'Tormenta con granizo', accent: '#fde047' };
         }
-        // Fallback
         return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#94a3b8' };
     }
 
-    // ─── Format temperature ───────────────────────────────────────
     function formatTemp(celsius) {
         return Math.round(celsius) + '°';
     }
 
-    // ─── Build a single weather card HTML ─────────────────────────
     function buildCard(state, data) {
         const cw = data.current_weather;
         const isDay = cw.is_day === 1;
         const info = getWeatherInfo(cw.weathercode, isDay);
-
-        // Wind speed in km/h (API returns m/s)
         const windKmh = Math.round(cw.windspeed * 3.6);
 
         const card = document.createElement('div');
@@ -126,31 +121,29 @@
                 </span>
             </div>
         `;
-
         return card;
     }
 
-    // ─── Fetch weather for all states (batched) ───────────────────
+    // ─── Fetch weather: 1 solo request batch ──────────────────────
+    // Open-Meteo soporta múltiples coordenadas en 1 request.
+    // Si el batch falla, solo pedir las primeras 5 comunas (no 20 individuales).
     async function fetchAllWeather() {
+        const BASE = 'https://api.open-meteo.com/v1/forecast';
         const results = [];
 
-        // Open-Meteo allows multiple lat/lon in one request
-        const BASE = 'https://api.open-meteo.com/v1/forecast';
-        const params = {
-            latitude: STATES.map(s => s.lat).join(','),
-            longitude: STATES.map(s => s.lng).join(','),
-            current_weather: 'true',
-            timezone: 'America/Caracas',
-        };
-
-        const url = BASE + '?' + new URLSearchParams(params).toString();
-
+        // 1. Intentar batch con todas las comunas (1 request)
         try {
-            const resp = await fetch(url);
+            const params = new URLSearchParams({
+                latitude: STATES.map(s => s.lat).join(','),
+                longitude: STATES.map(s => s.lng).join(','),
+                current_weather: 'true',
+                timezone: 'America/Santiago', // FIX: era America/Caracas
+            });
+
+            const resp = await fetch(BASE + '?' + params.toString());
             if (!resp.ok) throw new Error('API error ' + resp.status);
             const json = await resp.json();
 
-            // The API returns arrays in the same order as the input coordinates
             for (let i = 0; i < STATES.length; i++) {
                 results.push({
                     state: STATES[i],
@@ -160,32 +153,36 @@
                     is_day: json.current_weather.is_day[i],
                 });
             }
+            return results;
         } catch (err) {
-            console.warn('[Weather] Batch fetch failed, falling back to individual:', err.message);
-            // Fallback: individual requests in small batches
-            for (const state of STATES) {
-                try {
-                    const resp = await fetch(
-                        BASE + '?' + new URLSearchParams({
-                            latitude: state.lat,
-                            longitude: state.lng,
-                            current_weather: 'true',
-                            timezone: 'America/Caracas',
-                        }).toString()
-                    );
-                    const json = await resp.json();
-                    results.push({
-                        state: state,
-                        temperature: json.current_weather.temperature,
-                        windspeed: json.current_weather.windspeed,
-                        weathercode: json.current_weather.weathercode,
-                        is_day: json.current_weather.is_day,
-                    });
-                } catch (e) {
-                    console.warn('[Weather] Failed for', state.name, e.message);
-                    // Skip this state on failure
-                }
+            console.warn('[Weather] Batch failed:', err.message);
+        }
+
+        // 2. Fallback: solo 5 comunas principales (1 request, no 20)
+        try {
+            const TOP5 = STATES.slice(0, 5);
+            const params = new URLSearchParams({
+                latitude: TOP5.map(s => s.lat).join(','),
+                longitude: TOP5.map(s => s.lng).join(','),
+                current_weather: 'true',
+                timezone: 'America/Santiago',
+            });
+
+            const resp = await fetch(BASE + '?' + params.toString());
+            if (!resp.ok) throw new Error('API error ' + resp.status);
+            const json = await resp.json();
+
+            for (let i = 0; i < TOP5.length; i++) {
+                results.push({
+                    state: TOP5[i],
+                    temperature: json.current_weather.temperature[i],
+                    windspeed: json.current_weather.windspeed[i],
+                    weathercode: json.current_weather.weathercode[i],
+                    is_day: json.current_weather.is_day[i],
+                });
             }
+        } catch (err) {
+            console.warn('[Weather] Fallback failed:', err.message);
         }
 
         return results;
@@ -205,48 +202,50 @@
                 return;
             }
 
-            // Clear loading
             track.innerHTML = '';
-
-            // Sort alphabetically by state name
             results.sort((a, b) => a.state.name.localeCompare(b.state.name, 'es'));
 
-            // Render cards (original set)
             const fragment = document.createDocumentFragment();
             for (const r of results) {
                 fragment.appendChild(buildCard(r.state, { current_weather: r }));
             }
             track.appendChild(fragment);
 
-            // Duplicate the set for seamless infinite loop
+            // Duplicate for seamless infinite loop
             const clone = track.innerHTML;
             track.insertAdjacentHTML('beforeend', clone);
 
-            // Setup marquee behavior
             setupMarquee(track);
-
         } catch (err) {
             console.error('[Weather] Error:', err);
             loading.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error al cargar el clima';
         }
     }
 
-    // ─── Infinite marquee scroll ───────────────────────────────────
     function setupMarquee(track) {
-        // Pause on hover/touch
         track.addEventListener('mouseenter', () => track.classList.add('weather-paused'));
         track.addEventListener('mouseleave', () => track.classList.remove('weather-paused'));
         track.addEventListener('touchstart', () => track.classList.add('weather-paused'), { passive: true });
         track.addEventListener('touchend', () => {
-            // Resume after a short delay on mobile
             setTimeout(() => track.classList.remove('weather-paused'), 2000);
         });
     }
 
-    // ─── Initialize when DOM is ready ─────────────────────────────
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderWeatherCarousel);
-    } else {
-        renderWeatherCarousel();
+    // ─── DEFERRED LOAD: esperar a que la página cargue completamente ──
+    // ANTES: se ejecutaba inmediatamente, bloqueando el render (17s de TBT)
+    // AHORA: se ejecuta después de window.load (no bloquea LCP/FCP)
+    function init() {
+        if (document.readyState === 'complete') {
+            // La página ya cargó, ejecutar ahora
+            setTimeout(renderWeatherCarousel, 100);
+        } else {
+            // Esperar a que la página cargue completamente
+            window.addEventListener('load', function () {
+                // Pequeño delay para no competir con otros scripts de carga
+                setTimeout(renderWeatherCarousel, 200);
+            });
+        }
     }
+
+    init();
 })();
