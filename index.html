@@ -8,14 +8,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
 <!-- End Google Tag Manager -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<!-- Google tag (gtag.js) — diferido: carga DESPUÉS del render para no bloquear LCP -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RYF2N8ZD15');
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KBV8M0TFFV';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KBV8M0TFFV');
+  }, 500);
+});
 </script>
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
@@ -23,7 +29,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="description" content="En Santiago - El directorio más completo de negocios, propiedades y empleos en Santiago de Chile. Encuentra comercios, inmuebles, ofertas de trabajo, profesionales y servicios en todo el país. Registro gratis.">
     <meta name="keywords" content="directorio de negocios, Santiago de Chile, comercios, restaurantes, farmacias, tiendas, profesionales, servicios, Santiago, registro gratis">
     <title>En Santiago - Directorio de Negocios en Santiago de Chile</title>
-    <link rel="stylesheet" href="css/styles.css?v=14">
+    <!-- CSS crítico inline (above-the-fold) — evita bloqueo de render -->
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f0f4f8;color:#1a1a2e}
+      .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);padding:10px 0;transition:all .3s}
+      .nav-container{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+      .nav-logo{display:flex;align-items:center;color:#fff;text-decoration:none;font-weight:700;font-size:1.5rem}
+      .nav-logo img{height:36px;border-radius:6px;margin-right:8px}
+      .nav-links{display:flex;gap:24px;list-style:none}
+      .nav-links a{color:#fff;text-decoration:none;font-weight:500;font-size:.95rem;transition:color .2s}
+      .nav-links a:hover{color:#006EE3}
+      .hero-section{min-height:35vh;display:flex;align-items:center;color:#fff;margin-top:80px;background-size:cover;background-position:center}
+      .container{max-width:1280px;margin:0 auto;padding:0 20px}
+      .idx-hero-bg{width:100%;min-height:35vh;background:#1a1a2e}
+      .loading-spinner{text-align:center;padding:40px;color:#94a3b8}
+      .weather-carousel-section{background:#0f172a;padding:16px 0;overflow:hidden}
+      .weather-carousel-track{display:flex;gap:12px;overflow:hidden}
+      .weather-card{flex:0 0 160px;background:#1e293b;border-radius:12px;padding:12px;text-align:center;color:#fff}
+      @media(max-width:768px){.nav-links{display:none}.hero-section{min-height:30vh}}
+    </style>
+    <!-- CSS completo: cargar de forma no bloqueante -->
+    <link rel="preload" as="style" href="css/styles.css?v=14" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/styles.css?v=14"></noscript>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
