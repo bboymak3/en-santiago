@@ -57,7 +57,7 @@ export async function renderProductPage(env, product, options) {
   }
   const mainImage = productImages[0] || '';
 
-  const baseUrl = 'https://en-santiago.pages.dev';
+  const baseUrl = 'https://en-santiago.com';
   const title = product.name || 'Producto';
   const price = product.price ? `$${Number(product.price).toLocaleString('es-CL')}` : '';
   const description = product.description
@@ -167,21 +167,14 @@ export async function renderProductPage(env, product, options) {
   const html = `<!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
-<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KBV8M0TFFV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-RYF2N8ZD15');
+  gtag('config', 'G-KBV8M0TFFV');
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -229,14 +222,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     })())}</script>
     <script type="application/ld+json">${(() => {
       const crumbs = [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" },
-        { "@type": "ListItem", "position": 2, "name": "Marketplace", "item": "https://en-santiago.pages.dev/marketplace.html" }
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Marketplace", "item": "https://en-santiago.com/marketplace.html" }
       ];
       if (productTypeSlug) {
-        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": productTypeSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), "item": "https://en-santiago.pages.dev/tipo/" + encodeURIComponent(productTypeSlug) });
+        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": productTypeSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), "item": "https://en-santiago.com/tipo/" + encodeURIComponent(productTypeSlug) });
       }
       if (product.category) {
-        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": product.category, "item": "https://en-santiago.pages.dev/marketplace.html?categoria=" + encodeURIComponent(product.category) });
+        crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": product.category, "item": "https://en-santiago.com/marketplace.html?categoria=" + encodeURIComponent(product.category) });
       }
       crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": title, "item": canonicalUrl });
       return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": crumbs });
@@ -429,11 +422,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <nav class="navbar" id="navbar">
+<nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo"><img src="/images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;"> <span class="brand-name">En Santiago</span></a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir men\u00fa">

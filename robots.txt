@@ -1,5 +1,5 @@
 # En Santiago - Directorio de Negocios de Santiago de Chile
-# https://en-santiago.pages.dev
+# https://en-santiago.com
 
 # === GENERATIVE AI CRAWLERS — ALLOW ALL ===
 # Optimizado para GEO (Generative Engine Optimization)
@@ -64,4 +64,4 @@ Disallow: /*?business_type=
 Disallow: /*?city=
 
 # Sitemap dinámico
-Sitemap: https://en-santiago.pages.dev/sitemap.xml
+Sitemap: https://en-santiago.com/sitemap.xml

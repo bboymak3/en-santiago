@@ -242,7 +242,7 @@
                 "@context": "https://schema.org",
                 "@type": isMedical ? "MedicalBusiness" : "LocalBusiness",
                 "name": b.title || 'Negocio',
-                "url": "https://en-santiago.pages.dev/negocio/" + (b.slug || ''),
+                "url": "https://en-santiago.com/negocio/" + (b.slug || ''),
                 "description": b.description ? b.description.substring(0, 160) : ''
             };
             if (b.category_name) ld.category = b.category_name;
@@ -455,7 +455,7 @@
                         '<div style="padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;">' +
                             '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
                             '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - En Santiago</div>' +
-                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.pages.dev › negocio › ' + escH(b.slug||'...') + '</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.com › negocio › ' + escH(b.slug||'...') + '</div>' +
                             '<div style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.description ? b.description.substring(0,160) : 'Sin descripcion') + '</div>' +
                         '</div>' +
                     '</div>' +
@@ -467,7 +467,7 @@
                         '<div id="ebSeoAfterBox" style="padding:12px 14px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;">' +
                             '<div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Vista en Google</div>' +
                             '<div style="color:#1a0dab;font-size:1rem;font-weight:500;margin-bottom:2px;">' + escH(b.title||'Negocio') + ' - En Santiago</div>' +
-                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.pages.dev › negocio › ' + escH(b.slug||'...') + '</div>' +
+                            '<div style="color:#006621;font-size:0.78rem;margin-bottom:4px;">en-santiago.com › negocio › ' + escH(b.slug||'...') + '</div>' +
                             '<div id="ebSeoAfterText" style="color:#545454;font-size:0.84rem;line-height:1.4;">' + escH(b.seo_description || (b.description ? b.description.substring(0,160) : 'Igual al actual')) + '</div>' +
                         '</div>' +
                     '</div>' +

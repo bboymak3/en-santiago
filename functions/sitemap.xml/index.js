@@ -5,7 +5,7 @@
 export async function onRequestGet(context) {
   try {
     const { env } = context;
-    const baseUrl = 'https://en-santiago.pages.dev';
+    const baseUrl = 'https://en-santiago.com';
 
     // FIX: Páginas estáticas con lastmod automático (fecha de hoy)
     const today = new Date().toISOString().substring(0, 10);
