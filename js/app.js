@@ -981,54 +981,67 @@ async function loadVideoCarousel() {
     }
 }
 
+// ─── CONSOLIDATED HOME DATA ──────────────────────────────────
+// 1 sola llamada a /api/home-data reemplaza ~15 llamadas individuales
+var _homeDataCache = null;
+var _homeDataPromise = null;
+
+async function getHomeData() {
+    if (_homeDataCache) return _homeDataCache;
+    if (_homeDataPromise) return _homeDataPromise;
+    _homeDataPromise = fetch('/api/home-data').then(function(r) {
+        return r.ok ? r.json() : Promise.reject('HTTP ' + r.status);
+    }).then(function(data) {
+        _homeDataCache = data;
+        return data;
+    }).catch(function(err) {
+        console.warn('[home-data] Failed:', err);
+        _homeDataPromise = null;
+        return null;
+    });
+    return _homeDataPromise;
+}
+
 // ─── Hero Banner Loader ─────────────────────────────────
 async function loadHeroBanner() {
     const heroBg = document.getElementById('idxHeroBg');
-    // FIX: Banner de search.html
     const searchHeroBanner = document.getElementById('searchHeroBanner');
     const searchBannerImg = document.getElementById('searchBannerImg');
-    fetch('/api/settings/public').then(r => r.json()).then(data => {
-        if (heroBg && data.hero_banner_url) {
-            heroBg.style.backgroundImage = `url(${data.hero_banner_url})`;
-        }
-        // FIX: Aplicar banner de search.html si existe
-        if (searchHeroBanner && searchBannerImg && data.search_banner_url) {
-            searchBannerImg.src = data.search_banner_url;
-            searchHeroBanner.style.display = 'block';
-        }
-    }).catch(() => {});
     const heroLogo = document.getElementById('idxHeroLogo');
     if (!heroBg) return;
     try {
-        const resp = await fetch('/api/settings/public');
-        if (!resp.ok) return;
-        const data = await resp.json();
+        // Usar home-data consolidado (1 sola llamada para todo)
+        const homeData = await getHomeData();
+        const data = homeData ? homeData.settings : await fetch('/api/settings/public').then(r => r.json());
+
         if (data.hero_banner_url) {
             heroBg.style.backgroundImage = `url(${data.hero_banner_url})`;
             heroBg.style.backgroundSize = 'cover';
             heroBg.style.backgroundPosition = 'center';
             heroBg.style.backgroundRepeat = 'no-repeat';
+            var heroPreload = document.getElementById('heroPreload');
+            if (heroPreload) heroPreload.href = data.hero_banner_url;
+        }
+        if (searchHeroBanner && searchBannerImg && data.search_banner_url) {
+            searchBannerImg.src = data.search_banner_url;
+            searchHeroBanner.style.display = 'block';
         }
         if (data.hero_logo_url && heroLogo) {
             heroLogo.src = data.hero_logo_url;
             heroLogo.style.display = 'block';
-            // Lower logo on all screen sizes
             positionHeroLogo(heroLogo);
             window.addEventListener('resize', () => positionHeroLogo(heroLogo));
         }
-    } catch(e) {
-        // Silent fail — default CSS gradient applies
-    }
+    } catch(e) {}
 }
 
-// ─── Marketplace Banner (same pattern as hero banner) ────────
+// ─── Marketplace Banner ─────────────────────────────────
 async function loadMarketplaceBanner() {
     const mpBg = document.getElementById('mpHeroBg');
     if (!mpBg) return;
     try {
-        const resp = await fetch('/api/settings/public');
-        if (!resp.ok) return;
-        const data = await resp.json();
+        const homeData = await getHomeData();
+        const data = homeData ? homeData.settings : await fetch('/api/settings/public').then(r => r.json());
         if (data.marketplace_banner_url) {
             mpBg.style.backgroundImage = `url(${data.marketplace_banner_url})`;
             mpBg.style.backgroundSize = 'cover';
@@ -1162,66 +1175,87 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load featured sections on index page — controlled by admin settings
-    // FIX: Hay 2 niveles de toggles:
-    //  - *_enabled (businesses_enabled, marketplace_enabled, etc.): habilita/deshabilita
-    //    el módulo completo (afecta a todo el sitio).
-    //  - featured_*_enabled (featured_businesses_enabled, featured_products_enabled, etc.):
-    //    controla específicamente si la sección destacada del HOME se muestra.
-    // Para que una sección destacada se vea, AMBOS deben estar activos.
-    fetch('/api/settings/public').then(r => r.json()).then(settings => {
-        // Negocios destacados
-        var showFeaturedBusinesses = settings.businesses_enabled !== '0' && settings.featured_businesses_enabled !== '0';
-        if (showFeaturedBusinesses && document.getElementById('featuredGrid')) {
-            loadFeaturedProperties();
-        } else {
-            var el = document.getElementById('featuredSection');
-            if (el) el.style.display = 'none';
-        }
+    // Usar home-data consolidado (1 sola llamada para settings + featured data)
+    (async function() {
+        try {
+            const homeData = await getHomeData();
+            const settings = homeData ? homeData.settings : await fetch('/api/settings/public').then(r => r.json());
 
-        // Servicios médicos destacados
-        var showFeaturedMedical = settings.medical_enabled !== '0' && settings.featured_medical_enabled !== '0';
-        if (showFeaturedMedical && document.getElementById('featuredMedicalGrid')) {
-            loadFeaturedMedical();
-        } else {
-            var el = document.getElementById('featuredMedicalSection');
-            if (el) el.style.display = 'none';
-        }
+            // Negocios destacados
+            var showFeaturedBusinesses = settings.businesses_enabled !== '0' && settings.featured_businesses_enabled !== '0';
+            if (showFeaturedBusinesses && document.getElementById('featuredGrid')) {
+                if (homeData && homeData.businesses && homeData.businesses.length > 0) {
+                    // Usar datos del home-data consolidado
+                    renderFeaturedBusinesses(homeData.businesses);
+                } else {
+                    loadFeaturedProperties();
+                }
+            } else {
+                var el = document.getElementById('featuredSection');
+                if (el) el.style.display = 'none';
+            }
 
-        // Inmuebles destacados
-        var showFeaturedProperties = settings.properties_enabled !== '0' && settings.featured_properties_enabled !== '0';
-        if (showFeaturedProperties && document.getElementById('featuredPropertiesGrid')) {
-            loadFeaturedPropertiesSection();
-        } else {
-            var el = document.getElementById('featuredPropertiesSection');
-            if (el) el.style.display = 'none';
-        }
+            // Servicios médicos destacados
+            var showFeaturedMedical = settings.medical_enabled !== '0' && settings.featured_medical_enabled !== '0';
+            if (showFeaturedMedical && document.getElementById('featuredMedicalGrid')) {
+                if (homeData && homeData.medical && homeData.medical.length > 0) {
+                    renderFeaturedMedical(homeData.medical);
+                } else {
+                    loadFeaturedMedical();
+                }
+            } else {
+                var el = document.getElementById('featuredMedicalSection');
+                if (el) el.style.display = 'none';
+            }
 
-        // Productos destacados
-        var showFeaturedProducts = settings.marketplace_enabled !== '0' && settings.featured_products_enabled !== '0';
-        if (showFeaturedProducts && document.getElementById('featuredProductsGrid')) {
-            loadFeaturedProducts();
-        } else {
-            var el = document.getElementById('featuredProductsSection');
-            if (el) el.style.display = 'none';
-        }
+            // Inmuebles destacados
+            var showFeaturedProperties = settings.properties_enabled !== '0' && settings.featured_properties_enabled !== '0';
+            if (showFeaturedProperties && document.getElementById('featuredPropertiesGrid')) {
+                if (homeData && homeData.properties && homeData.properties.length > 0) {
+                    renderFeaturedPropertiesData(homeData.properties);
+                } else {
+                    loadFeaturedPropertiesSection();
+                }
+            } else {
+                var el = document.getElementById('featuredPropertiesSection');
+                if (el) el.style.display = 'none';
+            }
 
-        // Empleos destacados
-        var showFeaturedJobs = settings.jobs_enabled !== '0' && settings.featured_jobs_enabled !== '0';
-        if (showFeaturedJobs && document.getElementById('featuredJobsGrid')) {
-            loadFeaturedJobs();
-        } else {
-            var el = document.getElementById('featuredJobsSection');
-            if (el) el.style.display = 'none';
+            // Productos destacados
+            var showFeaturedProducts = settings.marketplace_enabled !== '0' && settings.featured_products_enabled !== '0';
+            if (showFeaturedProducts && document.getElementById('featuredProductsGrid')) {
+                loadFeaturedProducts();
+            } else {
+                var el = document.getElementById('featuredProductsSection');
+                if (el) el.style.display = 'none';
+            }
+
+            // Empleos destacados
+            var showFeaturedJobs = settings.jobs_enabled !== '0' && settings.featured_jobs_enabled !== '0';
+            if (showFeaturedJobs && document.getElementById('featuredJobsGrid')) {
+                loadFeaturedJobs();
+            } else {
+                var el = document.getElementById('featuredJobsSection');
+                if (el) el.style.display = 'none';
+            }
+
+            // Stats
+            if (homeData && homeData.stats && document.getElementById('statProperties')) {
+                renderStats(homeData.stats);
+            } else if (document.getElementById('statProperties')) {
+                loadSiteStats();
+            }
+        } catch (err) {
+            // Fallback: cargar todo individualmente
+            console.warn('Home data failed, loading individually:', err);
+            if (document.getElementById('featuredGrid')) loadFeaturedProperties();
+            if (document.getElementById('featuredMedicalGrid')) loadFeaturedMedical();
+            if (document.getElementById('featuredPropertiesGrid')) loadFeaturedPropertiesSection();
+            if (document.getElementById('featuredProductsGrid')) loadFeaturedProducts();
+            if (document.getElementById('featuredJobsGrid')) loadFeaturedJobs();
+            if (document.getElementById('statProperties')) loadSiteStats();
         }
-    }).catch(err => {
-        // Si falla, cargar todo (fallback)
-        console.warn('Settings load failed, loading all sections:', err);
-        if (document.getElementById('featuredGrid')) loadFeaturedProperties();
-        if (document.getElementById('featuredMedicalGrid')) loadFeaturedMedical();
-        if (document.getElementById('featuredPropertiesGrid')) loadFeaturedPropertiesSection();
-        if (document.getElementById('featuredProductsGrid')) loadFeaturedProducts();
-        if (document.getElementById('featuredJobsGrid')) loadFeaturedJobs();
-    });
+    })();
 
     // Load stats on index page
     const statProperties = document.getElementById('statProperties');
@@ -2040,3 +2074,58 @@ async function loadFeaturedJobs() {
     }
 })();
 
+
+// ─── Render helpers para home-data consolidado ──────────────
+function renderFeaturedBusinesses(businesses) {
+    const grid = document.getElementById('featuredGrid');
+    const loading = document.getElementById('featuredLoading');
+    const emptyState = document.getElementById('featuredEmpty');
+    if (!grid) return;
+    if (loading) loading.remove();
+    if (!businesses || businesses.length === 0) {
+        if (emptyState) emptyState.style.display = '';
+        return;
+    }
+    if (emptyState) emptyState.style.display = 'none';
+    const maxShow = 12;
+    businesses = businesses.slice(0, maxShow);
+    grid.innerHTML = businesses.map(p => createBusinessCard(p)).join('');
+}
+
+function renderFeaturedMedical(medical) {
+    const grid = document.getElementById('featuredMedicalGrid');
+    if (!grid) return;
+    const loading = grid.querySelector('.loading-spinner');
+    if (loading) loading.remove();
+    if (!medical || medical.length === 0) return;
+    grid.innerHTML = medical.map(p => createBusinessCard(p)).join('');
+}
+
+function renderFeaturedPropertiesData(properties) {
+    const grid = document.getElementById('featuredPropertiesGrid');
+    if (!grid) return;
+    const loading = grid.querySelector('.loading-spinner');
+    if (loading) loading.remove();
+    if (!properties || properties.length === 0) return;
+    grid.innerHTML = properties.map(p => {
+        const price = p.price ? new Intl.NumberFormat('es-CL', { style: 'currency', currency: p.currency || 'CLP', maximumFractionDigits: 0 }).format(p.price) : '';
+        return `<a href="/properties/${p.id}" class="property-card">
+            <div class="property-card-body">
+                <h4>${p.title || 'Propiedad'}</h4>
+                <p>${p.city || ''}, ${p.state || ''}</p>
+                ${price ? `<span class="property-price">${price}</span>` : ''}
+            </div>
+        </a>`;
+    }).join('');
+}
+
+function renderStats(stats) {
+    const statProps = document.getElementById('statProperties');
+    const statUsers = document.getElementById('statUsers');
+    const statBiz = document.getElementById('statBusinesses');
+    const statJobs = document.getElementById('statJobs');
+    if (statBiz) statBiz.textContent = stats.total_businesses || '0';
+    if (statProps) statProps.textContent = stats.total_properties || '0';
+    if (statJobs) statJobs.textContent = stats.total_jobs || '0';
+    if (statUsers) statUsers.textContent = stats.total_users || '0';
+}
