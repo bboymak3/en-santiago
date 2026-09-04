@@ -1,11 +1,14 @@
 // js/weather.js — Weather Carousel for En Santiago Index
 // Uses Open-Meteo API (free, no API key required)
-// OPTIMIZADO: 1 solo request batch + deferred load (no bloquea LCP)
+// OPTIMIZADO: 1 solo request batch + cache localStorage 30min + deferred load
 
 (function () {
     'use strict';
 
-    // ─── Comunas de Santiago con coordenadas ───────────────────────
+    const CACHE_KEY = 'enSantiago_weather_cache';
+    const CACHE_TTL = 30 * 60 * 1000; // 30 minutos
+
+    // ─── Comunas de Santiago (TOP 10 para reducir requests) ──────
     const STATES = [
         { name: 'Santiago Centro', lat: -33.4489, lng: -70.6693 },
         { name: 'Las Condes', lat: -33.4182, lng: -70.5764 },
@@ -14,80 +17,30 @@
         { name: 'Ñuñoa', lat: -33.4635, lng: -70.6001 },
         { name: 'La Florida', lat: -33.5319, lng: -70.5918 },
         { name: 'Pudahuel', lat: -33.4439, lng: -70.7394 },
-        { name: 'Huechuraba', lat: -33.3729, lng: -70.6483 },
         { name: 'Recoleta', lat: -33.4118, lng: -70.6461 },
-        { name: 'Independencia', lat: -33.4133, lng: -70.6572 },
-        { name: 'Macul', lat: -33.4872, lng: -70.5956 },
-        { name: 'La Reina', lat: -33.4477, lng: -70.5461 },
-        { name: 'Peñalolén', lat: -33.4908, lng: -70.5839 },
-        { name: 'Vitacura', lat: -33.4028, lng: -70.6075 },
-        { name: 'Lo Barnechea', lat: -33.3583, lng: -70.5264 },
         { name: 'Puente Alto', lat: -33.6112, lng: -70.5847 },
         { name: 'San Bernardo', lat: -33.5922, lng: -70.6997 },
-        { name: 'Colina', lat: -33.2015, lng: -70.6747 },
-        { name: 'Quilicura', lat: -33.3594, lng: -70.7344 },
-        { name: 'Lampa', lat: -33.2785, lng: -70.7681 },
     ];
 
-    // ─── WMO Weather Code mapping ─────────────────────────────────
     function getWeatherInfo(code, isDay) {
-        if (code === 0) {
-            return isDay
-                ? { icon: 'fas fa-sun', cls: 'w-sunny', desc: 'Despejado', accent: '#fbbf24' }
-                : { icon: 'fas fa-moon', cls: 'w-clear-night', desc: 'Despejado', accent: '#94a3b8' };
-        }
-        if (code === 1) {
-            return isDay
-                ? { icon: 'fas fa-cloud-sun', cls: 'w-partly-cloudy', desc: 'Principalmente despejado', accent: '#fbbf24' }
-                : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Principalmente despejado', accent: '#94a3b8' };
-        }
-        if (code === 2) {
-            return isDay
-                ? { icon: 'fas fa-cloud-sun', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#cbd5e1' }
-                : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#cbd5e1' };
-        }
-        if (code === 3) {
-            return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#94a3b8' };
-        }
-        if (code === 45 || code === 48) {
-            return { icon: 'fas fa-smog', cls: 'w-fog', desc: 'Niebla', accent: '#64748b' };
-        }
-        if (code >= 51 && code <= 55) {
-            return { icon: 'fas fa-cloud-rain', cls: 'w-drizzle', desc: 'Llovizna', accent: '#7dd3fc' };
-        }
-        if (code >= 56 && code <= 57) {
-            return { icon: 'fas fa-cloud-rain', cls: 'w-drizzle', desc: 'Llovizna congelante', accent: '#7dd3fc' };
-        }
-        if (code >= 61 && code <= 63) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia', accent: '#38bdf8' };
-        }
-        if (code === 65) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-heavy-rain', desc: 'Lluvia fuerte', accent: '#0284c7' };
-        }
-        if (code >= 66 && code <= 67) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia congelante', accent: '#38bdf8' };
-        }
-        if (code >= 71 && code <= 75) {
-            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Nieve', accent: '#e0f2fe' };
-        }
-        if (code === 77) {
-            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Granizo', accent: '#e0f2fe' };
-        }
-        if (code >= 80 && code <= 81) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Chubascos', accent: '#38bdf8' };
-        }
-        if (code === 82) {
-            return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-heavy-rain', desc: 'Chubascos fuertes', accent: '#0284c7' };
-        }
-        if (code === 85 || code === 86) {
-            return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Copos de nieve', accent: '#e0f2fe' };
-        }
-        if (code === 95) {
-            return { icon: 'fas fa-bolt', cls: 'w-thunder', desc: 'Tormenta', accent: '#fde047' };
-        }
-        if (code === 96 || code === 99) {
-            return { icon: 'fas fa-bolt', cls: 'w-thunder', desc: 'Tormenta con granizo', accent: '#fde047' };
-        }
+        if (code === 0) return isDay
+            ? { icon: 'fas fa-sun', cls: 'w-sunny', desc: 'Despejado', accent: '#fbbf24' }
+            : { icon: 'fas fa-moon', cls: 'w-clear-night', desc: 'Despejado', accent: '#94a3b8' };
+        if (code === 1) return isDay
+            ? { icon: 'fas fa-cloud-sun', cls: 'w-partly-cloudy', desc: 'Mayormente despejado', accent: '#fbbf24' }
+            : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Mayormente despejado', accent: '#94a3b8' };
+        if (code === 2) return isDay
+            ? { icon: 'fas fa-cloud-sun', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#cbd5e1' }
+            : { icon: 'fas fa-cloud-moon', cls: 'w-partly-cloudy', desc: 'Parcialmente nublado', accent: '#cbd5e1' };
+        if (code === 3) return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#94a3b8' };
+        if (code === 45 || code === 48) return { icon: 'fas fa-smog', cls: 'w-fog', desc: 'Niebla', accent: '#64748b' };
+        if (code >= 51 && code <= 57) return { icon: 'fas fa-cloud-rain', cls: 'w-drizzle', desc: 'Llovizna', accent: '#7dd3fc' };
+        if (code >= 61 && code <= 65) return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia', accent: '#38bdf8' };
+        if (code >= 66 && code <= 67) return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Lluvia helada', accent: '#38bdf8' };
+        if (code >= 71 && code <= 77) return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Nieve', accent: '#e0f2fe' };
+        if (code >= 80 && code <= 82) return { icon: 'fas fa-cloud-showers-heavy', cls: 'w-rain', desc: 'Chubascos', accent: '#38bdf8' };
+        if (code >= 85 && code <= 86) return { icon: 'fas fa-snowflake', cls: 'w-snow', desc: 'Copos de nieve', accent: '#e0f2fe' };
+        if (code >= 95 && code <= 99) return { icon: 'fas fa-bolt', cls: 'w-thunder', desc: 'Tormenta', accent: '#fde047' };
         return { icon: 'fas fa-cloud', cls: 'w-cloudy', desc: 'Nublado', accent: '#94a3b8' };
     }
 
@@ -124,26 +77,56 @@
         return card;
     }
 
-    // ─── Fetch weather: 1 solo request batch ──────────────────────
-    // Open-Meteo soporta múltiples coordenadas en 1 request.
-    // Si el batch falla, solo pedir las primeras 5 comunas (no 20 individuales).
-    async function fetchAllWeather() {
-        const BASE = 'https://api.open-meteo.com/v1/forecast';
-        const results = [];
-
-        // 1. Intentar batch con todas las comunas (1 request)
+    // ─── Cache en localStorage ───────────────────────────────────
+    function getCachedWeather() {
         try {
-            const params = new URLSearchParams({
-                latitude: STATES.map(s => s.lat).join(','),
-                longitude: STATES.map(s => s.lng).join(','),
-                current_weather: 'true',
-                timezone: 'America/Santiago', // FIX: era America/Caracas
-            });
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (!cached) return null;
+            const data = JSON.parse(cached);
+            if (Date.now() - data.timestamp > CACHE_TTL) return null;
+            return data.results;
+        } catch (e) { return null; }
+    }
 
+    function setCachedWeather(results) {
+        try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+                timestamp: Date.now(),
+                results: results,
+            }));
+        } catch (e) { /* localStorage might be full */ }
+    }
+
+    // ─── Fetch weather: 1 solo request batch ──────────────────────
+    async function fetchAllWeather() {
+        // 1. Intentar cache primero
+        const cached = getCachedWeather();
+        if (cached && cached.length > 0) {
+            console.log('[Weather] Cache hit — sin request a la API');
+            return cached;
+        }
+
+        // 2. Batch request (1 sola llamada con todas las comunas)
+        const BASE = 'https://api.open-meteo.com/v1/forecast';
+        const params = new URLSearchParams({
+            latitude: STATES.map(s => s.lat).join(','),
+            longitude: STATES.map(s => s.lng).join(','),
+            current_weather: 'true',
+            timezone: 'America/Santiago',
+        });
+
+        try {
             const resp = await fetch(BASE + '?' + params.toString());
             if (!resp.ok) throw new Error('API error ' + resp.status);
             const json = await resp.json();
 
+            // Si la API devuelve error (rate limit, etc.)
+            if (json.error) {
+                console.warn('[Weather] API error:', json.reason || 'unknown');
+                return getCachedWeather() || [];
+            }
+
+            const results = [];
             for (let i = 0; i < STATES.length; i++) {
                 results.push({
                     state: STATES[i],
@@ -153,39 +136,15 @@
                     is_day: json.current_weather.is_day[i],
                 });
             }
+
+            // Guardar en cache
+            setCachedWeather(results);
             return results;
         } catch (err) {
-            console.warn('[Weather] Batch failed:', err.message);
+            console.warn('[Weather] Fetch failed:', err.message);
+            // Intentar cache expirado como fallback
+            return getCachedWeather() || [];
         }
-
-        // 2. Fallback: solo 5 comunas principales (1 request, no 20)
-        try {
-            const TOP5 = STATES.slice(0, 5);
-            const params = new URLSearchParams({
-                latitude: TOP5.map(s => s.lat).join(','),
-                longitude: TOP5.map(s => s.lng).join(','),
-                current_weather: 'true',
-                timezone: 'America/Santiago',
-            });
-
-            const resp = await fetch(BASE + '?' + params.toString());
-            if (!resp.ok) throw new Error('API error ' + resp.status);
-            const json = await resp.json();
-
-            for (let i = 0; i < TOP5.length; i++) {
-                results.push({
-                    state: TOP5[i],
-                    temperature: json.current_weather.temperature[i],
-                    windspeed: json.current_weather.windspeed[i],
-                    weathercode: json.current_weather.weathercode[i],
-                    is_day: json.current_weather.is_day[i],
-                });
-            }
-        } catch (err) {
-            console.warn('[Weather] Fallback failed:', err.message);
-        }
-
-        return results;
     }
 
     // ─── Render the carousel ──────────────────────────────────────
@@ -198,7 +157,13 @@
             const results = await fetchAllWeather();
 
             if (results.length === 0) {
-                loading.innerHTML = '<i class="fas fa-exclamation-circle"></i> No se pudo obtener el clima';
+                // En lugar de mostrar error, ocultar la sección gracefully
+                const section = track.closest('.weather-section') || track.closest('section');
+                if (section) {
+                    section.style.display = 'none';
+                } else {
+                    loading.innerHTML = '<i class="fas fa-cloud-slash"></i> Clima no disponible';
+                }
                 return;
             }
 
@@ -211,14 +176,14 @@
             }
             track.appendChild(fragment);
 
-            // Duplicate for seamless infinite loop
             const clone = track.innerHTML;
             track.insertAdjacentHTML('beforeend', clone);
-
             setupMarquee(track);
         } catch (err) {
             console.error('[Weather] Error:', err);
-            loading.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error al cargar el clima';
+            // Ocultar sección en vez de mostrar error
+            const section = track.closest('.weather-section') || track.closest('section');
+            if (section) section.style.display = 'none';
         }
     }
 
@@ -231,17 +196,12 @@
         });
     }
 
-    // ─── DEFERRED LOAD: esperar a que la página cargue completamente ──
-    // ANTES: se ejecutaba inmediatamente, bloqueando el render (17s de TBT)
-    // AHORA: se ejecuta después de window.load (no bloquea LCP/FCP)
+    // ─── DEFERRED LOAD ────────────────────────────────────────────
     function init() {
         if (document.readyState === 'complete') {
-            // La página ya cargó, ejecutar ahora
             setTimeout(renderWeatherCarousel, 100);
         } else {
-            // Esperar a que la página cargue completamente
             window.addEventListener('load', function () {
-                // Pequeño delay para no competir con otros scripts de carga
                 setTimeout(renderWeatherCarousel, 200);
             });
         }
