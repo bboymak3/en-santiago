@@ -5113,7 +5113,7 @@ function verInformeCliente(idx) {
 // sistema de recordatorios (globalprov3 worker)
 // ============================================
 
-const RECORDATORIO_API = 'https://globalprov3.activo.workers.dev';
+const RECORDATORIO_API = 'https://globalprov3.estilosgrado33.workers.dev';
 
 async function registrarRecordatoriosCliente(nombreCliente, telefono, patentesEncoded) {
     const patentes = JSON.parse(decodeURIComponent(patentesEncoded));
