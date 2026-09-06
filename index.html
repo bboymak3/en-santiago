@@ -22,6 +22,25 @@ window.addEventListener('load', function() {
     <meta name="description" content="En Santiago - El directorio más completo de negocios, propiedades y empleos en Santiago de Chile. Encuentra comercios, inmuebles, ofertas de trabajo, profesionales y servicios en todo el país. Registro gratis.">
     <meta name="keywords" content="directorio de negocios, Santiago de Chile, comercios, restaurantes, farmacias, tiendas, profesionales, servicios, Santiago, registro gratis">
     <title>En Santiago - Directorio de Negocios en Santiago de Chile</title>
+
+    <!-- === OPTIMIZACIÓN LCP (Largest Contentful Paint) === -->
+    <!-- Preconnect a dominios externos para acelerar handshakes TLS -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://api.open-meteo.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Preload del hero banner (LCP element) — fetchpriority alta -->
+    <link rel="preload" as="image"
+          href="/api/serve?key=santiago%2Fbanners%2F1787688450570_directorio-domercial-de-santiago-chile-region-metropilitana-servicios-negocios-empleo-donde-publicar-tu-negocio-agencia-de-marketing-en-santiago-360.jpg"
+          fetchpriority="high" />
+
+    <!-- Theme color para browser UI -->
+    <meta name="theme-color" content="#006EE3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
     <!-- CSS crítico inline (above-the-fold) — evita bloqueo de render -->
     <style>
       *{margin:0;padding:0;box-sizing:border-box}
@@ -124,7 +143,6 @@ window.addEventListener('load', function() {
     }</script>
 <script src="/js/compress-image.js"></script>
 <script src="/js/compress-image-auto.js"></script>
-    <link rel="preload" as="image" href="" id="heroPreload" fetchpriority="high" />
 </head>
 <body>
 <!-- Navigation -->

@@ -1019,8 +1019,8 @@ async function loadHeroBanner() {
             heroBg.style.backgroundSize = 'cover';
             heroBg.style.backgroundPosition = 'center';
             heroBg.style.backgroundRepeat = 'no-repeat';
-            var heroPreload = document.getElementById('heroPreload');
-            if (heroPreload) heroPreload.href = data.hero_banner_url;
+            // Hero preload ya está en el HTML head estáticamente con fetchpriority="high"
+            // No es necesario setearlo dinámicamente aquí (mejor LCP)
         }
         if (searchHeroBanner && searchBannerImg && data.search_banner_url) {
             searchBannerImg.src = data.search_banner_url;
