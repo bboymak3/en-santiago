@@ -141,6 +141,40 @@ window.addEventListener('load', function() {
             ]
         }
     }</script>
+    <!-- FAQPage schema para rich snippets de preguntas frecuentes -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es En Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "En Santiago es el directorio metropolitano de negocios, productos, inmuebles y empleos más completo de Santiago de Chile. Permite a los usuarios encontrar comercios, profesionales y servicios en todas las comunas de la Región Metropolitana."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo registro mi negocio en En Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Para registrar tu negocio gratis, ve a /registrar-negocio.html, crea una cuenta y completa el formulario con los datos de tu negocio (nombre, categoría, comuna, contacto, fotos). La aprobación toma entre 24 y 72 horas."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es gratis publicar mi negocio en En Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sí, el registro básico es completamente gratis. Existen planes premium opcionales desde $10 USD/mes que ofrecen posición destacada en búsquedas, etiqueta Recomendado, estadísticas y reservas online."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué comunas de Santiago opera el directorio?",
+          "acceptedAnswer": {"@type": "Answer", "text": "En Santiago cubre las 52 comunas de la Región Metropolitana: Santiago Centro, Las Condes, Providencia, Maipú, Ñuñoa, La Florida, Pudahuel, Quilicura, Vitacura, Lo Barnechea, San Bernardo, Puente Alto, entre otras."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo puedo encontrar un negocio específico en Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Usa el buscador en /search.html y filtra por categoría (restaurantes, barberías, mecánicos, farmacias, etc.) y comuna. También puedes buscar por nombre del negocio o palabra clave."}
+        }
+      ]
+    }
+    </script>
 <script src="/js/compress-image.js"></script>
 <script src="/js/compress-image-auto.js"></script>
 </head>
