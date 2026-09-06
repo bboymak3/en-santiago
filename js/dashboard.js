@@ -1614,7 +1614,7 @@ window.closeEditBusinessModal = function() {
             const select = document.getElementById('jobBusiness');
             if (select) {
                 select.innerHTML = '<option value="" disabled selected>Selecciona un negocio</option>';
-                // Always add HOLAX as the first option (uses En Santiago.png logo)
+                // Always add HOLAX as the first option (uses En-Santiago-OG.png logo)
                 const ensantiagoOpt = document.createElement('option');
                 ensantiagoOpt.value = 'en-santiago';
                 ensantiagoOpt.textContent = 'En Santiago';

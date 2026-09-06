@@ -103,7 +103,7 @@ export function renderBusinessPage(env, business, options = {}) {
     : business.description
       ? business.description.substring(0, 160)
       : `Información sobre ${title} en ${business.city || 'Santiago de Chile'}. Dirección, contacto, servicios y más.`;
-  const imageUrl = business.cover_image || `${baseUrl}/images/En Santiago.png`;
+  const imageUrl = business.cover_image || `${baseUrl}/images/En-Santiago-OG.png`;
   const finalCanonical = canonicalUrl || `${baseUrl}${pathPrefix || '/negocio'}/${business.slug}`;
 
   // Breadcrumb helpers

@@ -2875,7 +2875,7 @@ if (!window._renderVideoList) {
             const val = jobCompany.value;
             jobLogoGroup.style.display = val ? '' : 'none';
             if (val === 'En Santiago') {
-                const ensantiagoLogo = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+                const ensantiagoLogo = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En-Santiago-OG.png';
                 jobLogoInput.value = ensantiagoLogo;
                 jobLogoPreview.src = ensantiagoLogo;
                 jobLogoPreview.style.display = '';
@@ -4701,7 +4701,7 @@ if (!window._renderVideoList) {
             if (btn) btn.style.display = 'inline-flex';
         }
         // HOLAX logo preview
-        const ensantiagoLogoUrl = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+        const ensantiagoLogoUrl = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En-Santiago-OG.png';
         if (ensantiagoLogoUrl) {
             const img = document.getElementById('ensantiagoLogoImg');
             const icon = document.getElementById('ensantiagoLogoPlaceholder');
