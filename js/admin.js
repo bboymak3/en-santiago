@@ -913,14 +913,14 @@ if (!window._renderVideoList) {
                                     <label for="editUserPhone">Teléfono</label>
                                     <div class="profile-input-wrapper">
                                         <i class="fas fa-phone"></i>
-                                        <input type="tel" id="editUserPhone" name="phone" class="form-control" value="${(user.phone || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                        <input type="tel" id="editUserPhone" name="phone" class="form-control" value="${(user.phone || '').replace(/"/g, '&quot;')}" placeholder="+56 9 8721 1321">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="editUserWhatsApp"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</label>
                                     <div class="profile-input-wrapper">
                                         <i class="fab fa-whatsapp" style="color:#25d366"></i>
-                                        <input type="tel" id="editUserWhatsApp" name="whatsapp" class="form-control" value="${(user.whatsapp || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                        <input type="tel" id="editUserWhatsApp" name="whatsapp" class="form-control" value="${(user.whatsapp || '').replace(/"/g, '&quot;')}" placeholder="+56 9 8721 1321">
                                     </div>
                                     <small class="form-hint">Número visible para compradores</small>
                                 </div>

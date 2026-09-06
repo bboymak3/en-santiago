@@ -169,11 +169,11 @@
           <div class="form-row">
             <div class="form-group">
               <label>Teléfono</label>
-              <input type="tel" id="newSellerPhone" class="form-control" placeholder="+58 414...">
+              <input type="tel" id="newSellerPhone" class="form-control" placeholder="+56 9...">
             </div>
             <div class="form-group">
               <label>WhatsApp</label>
-              <input type="tel" id="newSellerWhatsapp" class="form-control" placeholder="+58 414...">
+              <input type="tel" id="newSellerWhatsapp" class="form-control" placeholder="+56 9...">
             </div>
           </div>
         </div>

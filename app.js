@@ -6780,7 +6780,7 @@ async function guardarUltraMsg() {
 async function testearUltraMsg() {
     var tel = document.getElementById('ultramsg-test-tel').value.trim().replace(/\D/g, '');
     if (tel.length < 10) {
-        mostrarNotificacion('warning', 'Telefono invalido', 'Ingresa un telefono con codigo de pais (ej: 5804167775771)');
+        mostrarNotificacion('warning', 'Telefono invalido', 'Ingresa un telefono con codigo de pais (ej: 56987211321)');
         return;
     }
     var resultDiv = document.getElementById('ultramsg-test-result');
