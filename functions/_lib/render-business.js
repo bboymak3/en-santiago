@@ -966,8 +966,8 @@ export function renderBusinessPage(env, business, options = {}) {
                         <i class="fas fa-globe-americas"></i>
                         <span>Todo Santiago de Chile</span>
                     </div>
-                    <div class="location-divider"></div>
-                    <div class="location-list" id="locationList"></div>
+                    
+                    
                 </div>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
@@ -983,7 +983,7 @@ export function renderBusinessPage(env, business, options = {}) {
                     <button class="nav-dropdown-toggle" aria-label="Más opciones">Más <i class="fas fa-chevron-down"></i></button>
                     <ul class="nav-dropdown-menu">
                         <li><a href="/marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="/emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
@@ -1090,17 +1090,17 @@ export function renderBusinessPage(env, business, options = {}) {
                     <div class="gallery-all-grid" id="galleryAllGrid" style="display:none;">
                         <!-- Grid con TODAS las fotos, se despliega al hacer click en "Ver todas" -->
                     </div>
-                    <div class="gallery-badges" id="galleryBadges"></div>
+                    
                 </div>
 
                 <div class="business-section hidden" id="featuresSection">
                     <h2 class="business-section-title">Características</h2>
-                    <div class="features-list" id="featuresList"></div>
+                    
                 </div>
 
                 <div class="business-section map-section-wrapper hidden" id="mapSection">
                     <h2 class="business-section-title">Ubicación</h2>
-                    <div class="business-map" id="businessMap"></div>
+                    
                     <button class="open-map-modal-btn" id="openMapModalBtn"><i class="fas fa-expand"></i> Ver en Mapa Completo</button>
                 </div>
 
@@ -1172,14 +1172,14 @@ export function renderBusinessPage(env, business, options = {}) {
                         <h2 class="business-section-title"><i class="fas fa-boxes-stacked" style="color:#006EE3;"></i> Productos</h2>
                         <a href="/marketplace.html" class="section-link" id="viewAllProducts">Ver más <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="products-grid" id="businessProductsGrid"></div>
+                    
                 </section>
 
                 <section class="business-section" id="servicesSection" style="display:none;">
                     <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
                         <h2 class="business-section-title"><i class="fas fa-concierge-bell" style="color:#f59e0b;"></i> Servicios</h2>
                     </div>
-                    <div class="services-list" id="businessServicesList"></div>
+                    
                 </section>
 
                 <section class="business-section" id="jobsSection" style="display:none;">
@@ -1187,7 +1187,7 @@ export function renderBusinessPage(env, business, options = {}) {
                         <h2 class="business-section-title" style="font-size:1.1rem;margin:0;"><i class="fas fa-briefcase" style="color:#1a73e8;"></i> Empleo</h2>
                         <a href="/empleo.html" class="section-link" id="viewAllJobs" style="display:none;">Ver más <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="jobs-list" id="businessJobsList"></div>
+                    
                     <div id="businessJobsEmpty" style="display:none;text-align:center;padding:12px 16px;">
                         <a href="/empleo.html" class="btn btn-secondary" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:0.82rem;border-radius:8px;text-decoration:none;width:auto;max-width:240px;justify-content:center;margin:0 auto;"><i class="fas fa-briefcase"></i> Ir a ofertas de empleo</a>
                     </div>
@@ -1199,7 +1199,7 @@ export function renderBusinessPage(env, business, options = {}) {
                     <h2 class="section-title" style="display:flex;align-items:center;gap:8px;"><i class="fas fa-store" style="color:#006EE3;font-size:0.9rem;"></i> Negocios Similares</h2>
                     <a href="/search.html" class="section-link" style="font-size:0.8rem;">Ver más <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="business-grid" id="similarGrid"></div>
+                
             </section>
         </div>
     </main>
@@ -1209,7 +1209,7 @@ export function renderBusinessPage(env, business, options = {}) {
         <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
         <img id="lightboxImage" src="" alt="" class="lightbox-img">
         <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
-        <div class="lightbox-counter" id="lightboxCounter"></div>
+        
     </div>
 
     <div class="map-modal" id="mapModal">
@@ -1217,15 +1217,15 @@ export function renderBusinessPage(env, business, options = {}) {
             <h3><i class="fas fa-map-marker-alt"></i> Ubicación del Negocio</h3>
             <button class="map-modal-close" id="mapModalClose" aria-label="Cerrar mapa"><i class="fas fa-times"></i></button>
         </div>
-        <div class="map-modal-body"><div id="mapModalMap"></div></div>
+        <div class="map-modal-body"></div>
     </div>
 
-    <div class="toast-container" id="toastContainer"></div>
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
                 <p>&copy; ${new Date().getFullYear()} En Santiago. Todos los derechos reservados.</p>
-                <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
+                
                 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
             </div>
         </div>

@@ -57,9 +57,9 @@
           <!-- Messages View -->
           <div class="cb-chat-messages hidden" id="cbChatMessagesView">
             <!-- Business info bar -->
-            <div class="cb-chat-business-bar" id="cbChatBusinessBar"></div>
+            
             <!-- Messages list -->
-            <div class="cb-chat-messages-list" id="cbChatMessagesList"></div>
+            
           </div>
         </div>
 

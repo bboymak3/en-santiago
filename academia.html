@@ -202,7 +202,7 @@ button:active{transform:scale(.97)}
 <body>
 
 <!-- Toast container -->
-<div class="toast-container" id="toastContainer"></div>
+
 
 <!-- Header -->
 <header class="header">
@@ -210,7 +210,7 @@ button:active{transform:scale(.97)}
     <i class="fas fa-graduation-cap"></i>
     AunClick Academy
   </a>
-  <div class="header-spacer"></div>
+  
   <a id="headerAvatarLink" href="#" title="Mi perfil">
     <div class="header-avatar" id="headerAvatar">
       <i class="fas fa-user"></i>
@@ -227,7 +227,7 @@ button:active{transform:scale(.97)}
 <!-- Main content -->
 <main class="main" id="mainContent">
   <div class="page-loader" id="pageLoader">
-    <div class="spinner"></div>
+    
     <p style="color:var(--gray-500);font-size:14px">Cargando tu perfil...</p>
   </div>
 </main>
@@ -390,7 +390,7 @@ button:active{transform:scale(.97)}
       <span class="level-badge ${levelBadgeClass(lvl)}"><i class="fas fa-star"></i> ${levelLabel}</span>
       <div class="xp-bar-wrap">
         <div class="xp-label"><span>${p.xp} XP</span><span>${p.xp_in_current_level} / ${p.xp_needed_for_next} XP</span></div>
-        <div class="xp-bar"><div class="xp-bar-fill" style="width:${xpPercent}%"></div></div>
+        <div class="xp-bar"></div>
       </div>
       <div class="stats-row">
         <div class="stat-item"><div class="stat-value">${completedClasses}</div><div class="stat-label">Clases</div></div>
@@ -433,7 +433,7 @@ button:active{transform:scale(.97)}
           ${statusHTML}
           ${!completed?'<button class="btn btn-sm btn-primary" onclick="startQuiz('+c.id+')" style="margin-left:auto"><i class="fas fa-play"></i> Comenzar</button>':''}
         </div>
-        <div id="quizPanel-${c.id}"></div>
+        
       </div>`;
     }).join('');
 
@@ -448,7 +448,7 @@ button:active{transform:scale(.97)}
   async function startQuiz(classId){
     const panel=document.getElementById('quizPanel-'+classId);
     if(!panel) return;
-    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Cargando preguntas...</p></div>';
+    panel.innerHTML='<div style="text-align:center;padding:16px"><p style="font-size:13px;color:var(--gray-500)">Cargando preguntas...</p></div>';
 
     try{
       const data=await apiGet('/agent-classes/'+classId);
@@ -497,13 +497,13 @@ button:active{transform:scale(.97)}
     <div class="quiz-panel">
       <div class="quiz-progress">
         <span>${current} / ${total}</span>
-        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+        <div class="quiz-progress-bar"></div>
       </div>
       <div class="quiz-question">${current}. ${escapeHTML(q.question)}</div>
       <div class="quiz-options">${optionsHTML}</div>
       <div class="quiz-nav">
         ${current>1?'<button class="btn btn-sm btn-outline" onclick="prevQuestion('+classId+')"><i class="fas fa-arrow-left"></i> Anterior</button>':''}
-        <div style="flex:1"></div>
+        
         <button class="btn btn-sm btn-primary" onclick="${isLast?'submitQuiz('+classId+')':'nextQuestion('+classId+')'}" ${!selected?'disabled':''}>
           ${isLast?'<i class="fas fa-check"></i> Enviar':'Siguiente <i class="fas fa-arrow-right"></i>'}
         </button>
@@ -546,7 +546,7 @@ button:active{transform:scale(.97)}
   async function submitQuiz(classId){
     const qs=quizStates[classId];
     const panel=document.getElementById('quizPanel-'+classId);
-    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Calificando...</p></div>';
+    panel.innerHTML='<div style="text-align:center;padding:16px"><p style="font-size:13px;color:var(--gray-500)">Calificando...</p></div>';
 
     // Build answers array
     const answers=qs.questions.map(function(q,i){
@@ -651,7 +651,7 @@ button:active{transform:scale(.97)}
       ${canTake
         ?'<button class="btn btn-primary btn-block" onclick="startExam()"><i class="fas fa-file-alt"></i> Comenzar Examen</button>'
         :'<div style="color:var(--gray-400);font-size:13px">No tienes intentos disponibles. Contacta al administrador.</div>'}
-      <div id="examPanel"></div>`;
+      `;
     }
 
     return `<div class="card exam-card"><div class="card-title"><i class="fas fa-award"></i> Examen Final</div>${content}</div>`;
@@ -665,7 +665,7 @@ button:active{transform:scale(.97)}
   async function startExam(){
     const panel=document.getElementById('examPanel');
     if(!panel) return;
-    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Cargando examen...</p></div>';
+    panel.innerHTML='<div style="text-align:center;padding:16px"><p style="font-size:13px;color:var(--gray-500)">Cargando examen...</p></div>';
 
     try{
       const data=await apiGet('/agent-exam/questions');
@@ -736,14 +736,14 @@ button:active{transform:scale(.97)}
         <span id="exam-timer" style="font-weight:700;font-size:0.95rem;color:#7c3aed;"><i class="fas fa-clock"></i> 30:00</span>
       </div>
       <div style="height:6px;background:#e5e7eb;border-radius:3px;margin-bottom:16px;overflow:hidden;">
-        <div style="height:100%;background:linear-gradient(90deg,#7c3aed,#3b82f6);border-radius:3px;width:${((idx + 1) / examQuestions.length * 100)}%;transition:width 0.3s;"></div>
+        
       </div>
       <div class="quiz-question">${current}. ${escapeHTML(q.question)}</div>
       ${q.class_name?'<div style="font-size:11px;color:var(--gray-400);margin-bottom:12px"><i class="fas fa-book"></i> '+escapeHTML(q.class_name)+'</div>':''}
       <div class="quiz-options">${optionsHTML}</div>
       <div class="quiz-nav">
         ${current>1?'<button class="btn btn-sm btn-outline" onclick="examPrev()"><i class="fas fa-arrow-left"></i> Anterior</button>':''}
-        <div style="flex:1"></div>
+        
         <button class="btn btn-sm btn-primary" onclick="${isLast?'submitExam()':'examNext()'}" ${!selected?'disabled':''}>
           ${isLast?'<i class="fas fa-check"></i> Enviar Examen':'Siguiente <i class="fas fa-arrow-right"></i>'}
         </button>
@@ -780,7 +780,7 @@ button:active{transform:scale(.97)}
   async function submitExam(){
     if (examTimerInterval) { clearInterval(examTimerInterval); examTimerInterval = null; }
     const panel=document.getElementById('examPanel');
-    panel.innerHTML='<div style="text-align:center;padding:16px"><div class="spinner"></div><p style="font-size:13px;color:var(--gray-500)">Calificando examen...</p></div>';
+    panel.innerHTML='<div style="text-align:center;padding:16px"><p style="font-size:13px;color:var(--gray-500)">Calificando examen...</p></div>';
 
     const answers=examQuestions.map(function(q,i){
       return {question_id:q.id, answer:examAnswers[i]||''};

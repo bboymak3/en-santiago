@@ -536,7 +536,7 @@
                 html: '<div class="marker-pin" style="background-color: ' + color + ';">'
                     + '<span class="marker-price">' + priceText + '</span>'
                     + '</div>'
-                    + '<div class="marker-shadow"></div>',
+                    + '',
                 iconSize: [40, 52],
                 iconAnchor: [20, 52],
                 popupAnchor: [0, -56],

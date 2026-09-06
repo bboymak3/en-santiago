@@ -1344,7 +1344,7 @@
                 <h3 style="color:#1a1a2e;font-weight:800;margin-bottom:5px;">GLOBAL PRO</h3>
                 <p style="color:#666;font-size:0.9rem;">Panel de Administracion</p>
             </div>
-            <div id="login-error" style="display:none;" class="alert alert-danger py-2" role="alert"></div>
+            
             <div class="mb-3">
                 <label class="form-label fw-bold" style="color:#333;"><i class="fas fa-user me-1"></i>Usuario</label>
                 <input type="text" id="login-usuario" class="form-control form-control-lg" placeholder="Ingrese su usuario" style="border-radius:10px;border:2px solid #e0e0e0;padding:12px 15px;font-size:1rem;">
@@ -1423,7 +1423,7 @@
                                 <label class="form-label">Modelo <small class="text-muted">(autocompleta al escribir)</small></label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control" id="marca" placeholder="-----------" autocomplete="off" oninput="autocompletarMarca(this.value)" onfocus="autocompletarMarca(this.value)" onblur="setTimeout(()=>document.getElementById('marca-dropdown').style.display='none',200)">
-                                    <div id="marca-dropdown" class="position-absolute w-100 bg-white border rounded shadow-sm" style="display:none; z-index:1050; max-height:200px; overflow-y:auto;"></div>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -1438,7 +1438,7 @@
                                             <i class="fas fa-plus"></i> ADD
                                         </button>
                                     </div>
-                                    <div id="modelo-dropdown" class="position-absolute w-100 bg-white border rounded shadow-sm" style="display:none; z-index:1050; max-height:200px; overflow-y:auto;"></div>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-2 mb-3">
@@ -1564,7 +1564,7 @@
                             </div>
                         </div>
                         <!-- Lista de items agregados -->
-                        <div id="diag-items-lista"></div>
+                        
                         <!-- Totales -->
                         <div class="alert alert-light mt-2 mb-0" id="diag-subtotal-container">
                             <div class="row g-2">
@@ -1692,7 +1692,7 @@
                                 <button type="button" class="btn btn-outline-warning btn-sm" onclick="abrirModalCostoExtraForm()">
                                     <i class="fas fa-plus me-1"></i>Agregar Costo Adicional
                                 </button>
-                                <div id="costos-extra-lista-form" class="mt-2"></div>
+                                
                             </div>
                         </div>
 
@@ -2177,19 +2177,19 @@
                     </div>
                     <!-- Leyenda -->
                     <div class="cal-legend">
-                        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#0d6efd;"></div>Taller</div>
-                        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#ff6b00;"></div>Domicilio</div>
-                        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#28a745;"></div>Inspección</div>
-                        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#dc3545;"></div>Urgencia</div>
-                        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#6c757d;"></div>Otro</div>
-                        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#a80000;border:2px dashed #a80000;background:transparent;"></div>OT Programada</div>
+                        <div class="cal-legend-item">Taller</div>
+                        <div class="cal-legend-item">Domicilio</div>
+                        <div class="cal-legend-item">Inspección</div>
+                        <div class="cal-legend-item">Urgencia</div>
+                        <div class="cal-legend-item">Otro</div>
+                        <div class="cal-legend-item">OT Programada</div>
                     </div>
                 </div>
             </div>
 
             <!-- Contenedor del Calendario -->
             <div id="calendar-container">
-                <div id='fullcalendar'></div>
+                
             </div>
 
             <!-- Zona Papelera para eliminar eventos arrastrando -->
@@ -2273,7 +2273,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="liquidacion-resumen" class="mb-4"></div>
+                    
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-file-invoice-dollar me-2"></i>Detalle de Liquidación
@@ -2497,7 +2497,7 @@
                 <div class="modal-body text-center py-4">
                     <i class="fas fa-exclamation-triangle text-danger fa-3x mb-3"></i>
                     <h5>¿Está seguro?</h5>
-                    <p id="nombre-tecnico-eliminar" class="fw-bold text-danger fs-5"></p>
+                    
                     <p class="text-muted">Se desactivará el técnico. No se eliminarán sus órdenes previas.</p>
                 </div>
                 <div class="modal-footer justify-content-center">
@@ -2794,7 +2794,7 @@ function doGet(e) {
                             <i class="fas fa-car"></i>
                             <strong>Patente:</strong> <span id="costos-patente">-</span>
                         </div>
-                        <div style="width:1px;height:18px;background:#ddd;"></div>
+                        
                         <div class="gp-info-item">
                             <i class="fas fa-user"></i>
                             <strong>Cliente:</strong> <span id="costos-cliente">-</span>
@@ -2827,14 +2827,14 @@ function doGet(e) {
                     </div>
 
                     <!-- Lista de costos existentes -->
-                    <div id="costos-lista"></div>
+                    
 
                     <!-- Desglose + Totales -->
                     <div id="costos-desglose-container" style="display:none;">
                         <div class="gp-totals-box">
                             <div class="gp-desglose" id="gp-desglose-cats">
-                                <div class="gp-desglose-item"><div class="gp-dot mo"></div> MO: <strong id="costos-total-mano-obra">$0</strong></div>
-                                <div class="gp-desglose-item"><div class="gp-dot rep"></div> Rep: <strong id="costos-total-repuestos">$0</strong></div>
+                                <div class="gp-desglose-item"> MO: <strong id="costos-total-mano-obra">$0</strong></div>
+                                <div class="gp-desglose-item"> Rep: <strong id="costos-total-repuestos">$0</strong></div>
                             </div>
                             <div class="gp-total-row total-extras">
                                 <span class="gp-label">Total Extras</span>
@@ -2932,7 +2932,7 @@ function doGet(e) {
                                 </h2>
                                 <div id="edit-collapse-servicios" class="accordion-collapse collapse show" data-bs-parent="#editOrdenAccordion">
                                     <div class="accordion-body p-3" style="background:#f0f4ff;border-radius:0 0 10px 10px;">
-                                        <div id="edit-servicios-display"></div>
+                                        
                                         <div class="mt-3 p-3 rounded-3" style="background:white;border:2px dashed #0d6efd;">
                                             <div class="fw-bold text-primary mb-2" style="font-size:0.85rem;"><i class="fas fa-plus-circle me-1"></i>Agregar Nuevo Servicio</div>
                                             <div class="row g-2 align-items-end">
@@ -2957,7 +2957,7 @@ function doGet(e) {
                                 <div id="edit-collapse-pagos" class="accordion-collapse collapse show" data-bs-parent="#editOrdenAccordion">
                                     <div class="accordion-body p-3" style="background:#f0fff4;border-radius:0 0 10px 10px;">
                                         <div class="row g-2 mb-3">
-                                            <div class="col-12"><div id="edit-resumen-valores" class="p-2 rounded" style="background:#f8f9fa;font-size:0.9rem;"></div></div>
+                                            <div class="col-12"></div>
                                         </div>
                                         <div class="row g-3">
                                             <div class="col-md-4">
@@ -2987,7 +2987,7 @@ function doGet(e) {
                                 </h2>
                                 <div id="edit-collapse-costos" class="accordion-collapse collapse" data-bs-parent="#editOrdenAccordion">
                                     <div class="accordion-body p-3">
-                                        <div id="edit-costos-adicionales-list"></div>
+                                        
                                         <div class="row g-2 mt-2 align-items-end">
                                             <div class="col-md-4"><label class="form-label fw-bold">Concepto</label><input type="text" class="form-control form-control-sm" id="edit-costo-concepto" placeholder="Ej: Cambio de aceite"></div>
                                             <div class="col-md-3"><label class="form-label fw-bold">Monto</label><input type="number" class="form-control form-control-sm" id="edit-costo-monto" min="0" placeholder="$0"></div>
@@ -3193,7 +3193,7 @@ function doGet(e) {
                             </button>
                         </div>
                     </div>
-                    <div id="ultramsg-test-result" class="mt-2" style="display:none;"></div>
+                    
                 </div>
             </div>
 
@@ -3287,7 +3287,7 @@ function doGet(e) {
                         </div>
 
                         <!-- Resultado de test -->
-                        <div id="domicilio-test-result" class="mt-3" style="display:none;"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -3335,7 +3335,7 @@ function doGet(e) {
         </div>
 
     <!-- Overlay oscuro detrás del sidebar -->
-    <div class="gp-sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    
 
     <!-- Sidebar Panel -->
     <div class="gp-sidebar-panel" id="sidebarPanel">
@@ -3370,7 +3370,7 @@ function doGet(e) {
             </a>
         </div>
 
-        <div class="gp-sidebar-divider"></div>
+        
 
         <!-- CATÁLOGOS -->
         <div class="gp-sidebar-section">
@@ -3383,7 +3383,7 @@ function doGet(e) {
             </a>
         </div>
 
-        <div class="gp-sidebar-divider"></div>
+        
 
         <!-- GESTIÓN & FINANZAS -->
         <div class="gp-sidebar-section">
@@ -3402,7 +3402,7 @@ function doGet(e) {
             </a>
         </div>
 
-        <div class="gp-sidebar-divider"></div>
+        
 
         <!-- CRM & MARKETING -->
         <div class="gp-sidebar-section">
@@ -3412,7 +3412,7 @@ function doGet(e) {
             </a>
         </div>
 
-        <div class="gp-sidebar-divider"></div>
+        
 
         <!-- CONFIGURACIÓN -->
         <div class="gp-sidebar-section">
@@ -3428,7 +3428,7 @@ function doGet(e) {
             </a>
         </div>
 
-        <div class="gp-sidebar-divider"></div>
+        
 
         <!-- SESIÓN -->
         <div class="gp-sidebar-section">
@@ -3440,7 +3440,7 @@ function doGet(e) {
 
     <!-- Botón toggle del sidebar (dos etapas: tab → botón → menú) -->
     <div class="gp-sidebar">
-        <div class="gp-sidebar-tab" id="sidebarTab" onclick="revealSidebarBtn()" title="Menú"></div>
+        
         <button class="gp-sidebar-toggle" id="sidebarToggleBtn" onclick="toggleSidebar()" title="Abrir menú">
             <i class="fas fa-bars"></i>
         </button>
@@ -3561,7 +3561,7 @@ function doGet(e) {
                                        oninput="autocompletarMarcaExpress(this.value)"
                                        onfocus="autocompletarMarcaExpress(this.value)"
                                        onblur="setTimeout(()=>document.getElementById('express-marca-dropdown').style.display='none',200)">
-                                <div id="express-marca-dropdown" class="position-absolute w-100 bg-white border rounded shadow-sm" style="display:none; z-index:99999; max-height:200px; overflow-y:auto;"></div>
+                                
                             </div>
                         </div>
                         <div class="col-md-4 mb-2 mb-md-0">
@@ -3576,7 +3576,7 @@ function doGet(e) {
                                         <i class="fas fa-list"></i>
                                     </button>
                                 </div>
-                                <div id="express-modelo-dropdown" class="position-absolute w-100 bg-white border rounded shadow-sm" style="display:none; z-index:99999; max-height:200px; overflow-y:auto;"></div>
+                                
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -3658,7 +3658,7 @@ function doGet(e) {
                     <div class="alert py-2 m-2 mb-0" style="background:#f0fff4;border:1px solid #198754;border-radius:8px;font-size:0.82rem;color:#155724;">
                         <i class="fas fa-mouse-pointer me-1"></i>Haz click en el mapa para seleccionar la ubicacion del cliente. La direccion se completara automaticamente.
                     </div>
-                    <div id="express-mapa-container" style="height:350px;width:100%;"></div>
+                    
                     <div class="p-2">
                         <div class="d-flex align-items-center gap-2">
                             <i class="fas fa-map-pin text-success"></i>

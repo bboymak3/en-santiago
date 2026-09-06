@@ -78,7 +78,7 @@
             <input type="file" id="subPayProof" accept="image/*" class="form-control" style="max-width:400px;">
             <small style="color:#6b7280;">Sube la captura del pago realizado</small>
           </div>
-          <div id="subPayProofPreview" style="margin:8px 0;max-width:300px;"></div>
+          
           <div class="form-group">
             <label>Notas (opcional)</label>
             <textarea id="subPayNotes" class="form-control" rows="2" placeholder="Referencia del pago, número de transacción..." style="max-width:400px;"></textarea>
@@ -86,7 +86,7 @@
           <button class="btn btn-primary" id="subPaySubmit" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
             <i class="fas fa-paper-plane"></i> Enviar Comprobante
           </button>
-          <div id="subPayStatus" style="margin-top:12px;"></div>
+          
         </div>
       </div>
 

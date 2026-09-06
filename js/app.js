@@ -1054,9 +1054,7 @@ async function loadMarketplaceBanner() {
 // Keep the agency links consistent across every static page that loads this module.
 function addAgencyFooterLinks() {
     document.querySelectorAll('.footer-bottom').forEach((footerBottom) => {
-        const links = [
-            ['https://maps.app.goo.gl/Jz2QTADrNNneQtGd9', 'Página web desarrollada por Grupo 360 Soluciones'],
-            ['http://coporo.pages.dev/', 'Diseño de páginas webs - SEO Local -'],
+        const links = [            ['http://coporo.pages.dev/', 'Diseño de páginas webs - SEO Local -'],
         ];
 
         links.forEach(([href, label]) => {

@@ -253,7 +253,7 @@
                         <i class="fas fa-globe-americas"></i>
                         <span>Todo Santiago de Chile</span>
                     </div>
-                    <div class="location-divider"></div>
+                    
                     <div class="location-list" id="locationList">
                         <!-- States loaded dynamically -->
                     </div>
@@ -276,7 +276,7 @@
                     <ul class="nav-dropdown-menu">
                         <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
                         <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
@@ -1075,7 +1075,7 @@
                                         <i class="fas fa-plus"></i> Crear
                                     </button>
                                 </div>
-                                <div id="newCatError" style="color:#dc2626;font-size:0.82rem;margin-top:8px;display:none;"></div>
+                                
                             </div>
 
                             <!-- Category Suggestions -->
@@ -1131,7 +1131,7 @@
                 <section class="dashboard-section hidden" id="sectionProfile">
                     <!-- Profile Header Card -->
                     <div class="profile-header-card">
-                        <div class="profile-cover"></div>
+                        
                         <div class="profile-header-body">
                             <div class="profile-avatar-large" id="profileAvatarLarge">
                                 <i class="fas fa-user"></i>
@@ -1255,7 +1255,7 @@
 
     <!-- Product Modal -->
     <div class="modal hidden" id="productModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content" style="max-width:560px;">
             <div class="modal-header">
                 <h3 id="productModalTitle"><i class="fas fa-plus-circle"></i> Publicar Producto</h3>
@@ -1325,7 +1325,7 @@
                                 </label>
                                 <input type="file" id="prodAttachFile" name="attach_file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt" style="display:none;">
                             </div>
-                            <div class="prod-upload-preview" id="prodUploadPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+                            
                             <div class="prod-upload-progress hidden" id="prodUploadProgress">
                                 <i class="fas fa-spinner fa-spin"></i> Subiendo imagen(es)...
                             </div>
@@ -1367,7 +1367,7 @@
 
     <!-- Job Modal -->
     <div class="modal hidden" id="jobModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content" style="max-width:600px;max-height:90vh;overflow-y:auto;">
             <div class="modal-header">
                 <h3><i class="fas fa-briefcase"></i> Publicar Empleo</h3>
@@ -1451,7 +1451,7 @@
                             </label>
                             <input type="file" id="jobImageFile" accept="image/*" multiple style="display:none;">
                         </div>
-                        <div id="jobUploadPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+                        
                         <div class="prod-upload-progress hidden" id="jobUploadProgress">
                             <i class="fas fa-spinner fa-spin"></i> Subiendo imagen(es)...
                         </div>
@@ -1495,7 +1495,7 @@
 
     <!-- Bazar Modal -->
     <div class="modal hidden" id="bazarModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content" style="max-width:420px;">
             <div class="modal-header">
                 <h3><i class="fas fa-store" style="color:#059669;"></i> Participar en Bazar</h3>
@@ -1517,7 +1517,7 @@
 
     <!-- Delete Confirmation Modal -->
     <div class="modal hidden" id="deleteModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fas fa-exclamation-triangle text-danger"></i> Confirmar Eliminación</h3>
@@ -1538,7 +1538,7 @@
     
     <!-- Edit Business Modal -->
     <div class="modal hidden" id="editBusinessModal">
-        <div class="modal-overlay" onclick="closeEditBusinessModal()"></div>
+        
         <div class="modal-content" style="max-width:680px;">
             <div class="modal-header">
                 <h3><i class="fas fa-edit" style="color:#006EE3;"></i> Editar Negocio</h3>
@@ -1704,7 +1704,7 @@
                     <!-- Video -->
                     <div class="eb-section">
                         <div class="eb-section-title"><i class="fas fa-video" style="color:#6366f1;"></i> Videos del Negocio</div>
-                        <div id="ebVideosList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
+                        
                         <div class="eb-video-tabs">
                             <button type="button" class="eb-video-tab active" id="ebVideoTabFile" onclick="setEditBizVideoMode('file')">
                                 <i class="fas fa-upload"></i> Subir desde PC
@@ -1720,7 +1720,7 @@
                                 <p style="font-size:0.75rem;color:#94a3b8;">MP4, WebM - Max 50MB por video</p>
                             </div>
                             <input type="file" id="ebVideoFileInput" accept="video/*" multiple style="display:none;" onchange="handleEditBizVideoFile(this)">
-                            <div id="ebVideoFileInfo"></div>
+                            
                         </div>
                         <div class="eb-video-content" id="ebVideoUrlContent">
                             <div style="display:flex;gap:8px;">
@@ -1734,7 +1734,7 @@
                     <!-- Galería de Imágenes -->
                     <div class="eb-section">
                         <div class="eb-section-title"><i class="fas fa-images" style="color:#006EE3;"></i> Galería de Imágenes</div>
-                        <div id="ebBizGallery" style="min-height:40px;"></div>
+                        
                         <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
                             <label class="btn btn-primary btn-sm" style="cursor:pointer;margin:0;">
                                 <i class="fas fa-plus"></i> Agregar Imágenes
@@ -2044,11 +2044,11 @@
     </div>
 
 <!-- Toast Notification -->
-    <div class="toast-container" id="toastContainer"></div>
+    
 
     <!-- Premium Upgrade Modal -->
     <div class="modal" id="premiumModal" style="display:none;">
-        <div class="modal-overlay" id="premiumModalOverlay"></div>
+        
         <div class="modal-content" style="max-width:520px;">
             <div class="modal-header" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;">
                 <h3><i class="fas fa-crown"></i> Mejorar a Plan Premium</h3>
@@ -2110,7 +2110,7 @@
                     </div>
                 </div>
 
-                <div id="premiumSubmitError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#dc2626;"></div>
+                
             </div>
             <div class="modal-footer" style="padding:16px 24px;border-top:1px solid #e5e7eb;display:flex;gap:10px;justify-content:flex-end;">
                 <button class="btn btn-secondary" id="premiumModalCancel" style="padding:10px 20px;">Cancelar</button>
@@ -2123,7 +2123,7 @@
 
     <!-- Admin: Manual Premium Activation Modal -->
     <div class="modal" id="manualPremiumModal" style="display:none;">
-        <div class="modal-overlay" id="manualPremiumOverlay"></div>
+        
         <div class="modal-content" style="max-width:520px;">
             <div class="modal-header" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;">
                 <h3><i class="fas fa-crown"></i> Activar Premium Manual</h3>
@@ -2138,8 +2138,7 @@
                         <button id="manualPremiumSearchBtn" style="padding:10px 16px;border-radius:8px;border:none;background:#006EE3;color:#fff;cursor:pointer;font-weight:600;"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
-                <div id="manualPremiumUserResult" style="display:none;margin-bottom:16px;border:1px solid #e5e7eb;border-radius:10px;padding:14px;background:#f9fafb;">
-                </div>
+                
                 <div id="manualPremiumActions" style="display:none;margin-bottom:14px;">
                     <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;">Duracion del Plan</label>
                     <select id="manualPremiumDuration" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;">
@@ -2149,7 +2148,7 @@
                     <label style="display:block;font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:6px;margin-top:12px;">Nota del pago (opcional)</label>
                     <input type="text" id="manualPremiumNotes" placeholder="Ej: Pago recibido por pago movil 0414-xxx" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;">
                 </div>
-                <div id="manualPremiumError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;font-size:0.85rem;color:#dc2626;"></div>
+                
             </div>
             <div class="modal-footer" style="padding:16px 24px;border-top:1px solid #e5e7eb;display:flex;gap:10px;justify-content:flex-end;">
                 <button class="btn btn-secondary" id="manualPremiumCancelBtn" style="padding:10px 20px;">Cancelar</button>

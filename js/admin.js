@@ -6851,7 +6851,7 @@ if (!window._renderVideoList) {
                 }
                 html += '<strong>' + _esc(u.name) + '</strong></div></td>';
                 html += '<td><span style="background:' + lvlColor + '15;color:' + lvlColor + ';border:1px solid ' + lvlColor + '30;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;">Nivel ' + lvl + '</span></td>';
-                html += '<td style="min-width:120px;"><div style="font-size:0.72rem;color:#6b7280;margin-bottom:3px;">' + xp + ' XP</div><div style="background:#e5e7eb;border-radius:6px;height:6px;overflow:hidden;"><div style="background:' + lvlColor + ';height:100%;border-radius:6px;width:' + pct + '%;transition:width 0.3s;"></div></div></td>';
+                html += '<td style="min-width:120px;"><div style="font-size:0.72rem;color:#6b7280;margin-bottom:3px;">' + xp + ' XP</div><div style="background:#e5e7eb;border-radius:6px;height:6px;overflow:hidden;"></div></td>';
                 html += '<td>' + (p.total_classes_completed || 0) + '</td>';
                 html += '<td>' + (p.total_badges || 0) + '</td>';
                 html += '<td>';

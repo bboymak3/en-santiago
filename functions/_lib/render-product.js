@@ -440,7 +440,7 @@ export async function renderProductPage(env, product, options) {
                     </button>
                     <ul class="nav-dropdown-menu" id="navbarDropdown">
                         <li><a href="/marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="/emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
@@ -709,14 +709,14 @@ export async function renderProductPage(env, product, options) {
         <button class="pd-lightbox-nav pd-lightbox-prev" onclick="event.stopPropagation();navLightbox(-1)"><i class="fas fa-chevron-left"></i></button>
         <img id="pdLightboxImg" src="" alt="">
         <button class="pd-lightbox-nav pd-lightbox-next" onclick="event.stopPropagation();navLightbox(1)"><i class="fas fa-chevron-right"></i></button>
-        <div class="pd-lightbox-counter" id="pdLightboxCounter"></div>
+        
     </div>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
                 <p>&copy; ${new Date().getFullYear()} En Santiago. Todos los derechos reservados.</p>
-                <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
+                
                 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
             </div>
         </div>

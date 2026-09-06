@@ -91,7 +91,7 @@
               </tbody>
             </table>
           </div>
-          <div class="admin-pagination" id="adminSellersPagination"></div>
+          
         </div>
       </div>
     `;
@@ -136,7 +136,7 @@
               </tbody>
             </table>
           </div>
-          <div class="admin-pagination" id="adminPaymentsPagination"></div>
+          
         </div>
       </div>
     `;
@@ -147,7 +147,7 @@
     createSellerModal.className = 'modal hidden';
     createSellerModal.id = 'adminCreateSellerModal';
     createSellerModal.innerHTML = `
-      <div class="modal-overlay"></div>
+      
       <div class="modal-content" style="max-width:500px;">
         <div class="modal-header">
           <h3><i class="fas fa-user-plus" style="color:#1a73e8;"></i> Crear Nuevo Vendedor</h3>
@@ -190,7 +190,7 @@
     payDetailModal.className = 'modal hidden';
     payDetailModal.id = 'adminPaymentDetailModal';
     payDetailModal.innerHTML = `
-      <div class="modal-overlay"></div>
+      
       <div class="modal-content" style="max-width:550px;">
         <div class="modal-header">
           <h3><i class="fas fa-receipt" style="color:#059669;"></i> Detalle de Pago</h3>
@@ -199,7 +199,7 @@
         <div class="modal-body" id="payDetailBody">
           <p style="text-align:center;color:#999;">Cargando...</p>
         </div>
-        <div class="modal-footer" id="payDetailFooter"></div>
+        
       </div>
     `;
     document.body.appendChild(payDetailModal);

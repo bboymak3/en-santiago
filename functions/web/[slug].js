@@ -808,10 +808,10 @@ Datos del negocio:
 <!-- HERO -->
 <section class="lp-hero" id="hero">
     ${business.banner ? `
-        <div class="lp-hero-banner" style="background-image:url('${escapeHtml(business.banner)}');"></div>
-        <div class="lp-hero-overlay"></div>
-        <div class="lp-hero-pattern"></div>
-    ` : (business.cover_image ? '<div class="lp-hero-bg"></div><div class="lp-hero-pattern"></div>' : '<div class="lp-hero-pattern"></div>')}
+        
+        
+        
+    ` : (business.cover_image ? '' : '')}
     <div class="lp-hero-content">
         ${business.logo ? `<img src="${escapeHtml(business.logo)}" alt="${escapeHtml(title)}" class="lp-hero-logo">` : ''}
         <div class="lp-hero-badge">
@@ -1128,7 +1128,6 @@ ${(business.lat || business.latitude || business.address) ? `
     </div>
     <div class="lp-footer-copy">&copy; ${new Date().getFullYear()} ${escapeHtml(title)}. Todos los derechos reservados.</div>
     <div class="lp-footer-links">
-        <a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a>
         <a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a>
     </div>
 </footer>
@@ -1161,7 +1160,7 @@ window.addEventListener('scroll', () => {
     <button class="lp-lightbox-nav lp-lightbox-prev" onclick="event.stopPropagation();navLpLightbox(-1)" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
     <img id="lpLightboxImg" src="" alt="">
     <button class="lp-lightbox-nav lp-lightbox-next" onclick="event.stopPropagation();navLpLightbox(1)" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
-    <div class="lp-lightbox-counter" id="lpLightboxCounter"></div>
+    
 </div>
 <script>
 (function(){

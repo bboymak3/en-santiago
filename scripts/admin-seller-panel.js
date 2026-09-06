@@ -81,7 +81,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="admin-pagination" id="adminSellersPagination"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
 
             <!-- Create Seller Modal -->
             <div class="modal hidden" id="adminCreateSellerModal">
-                <div class="modal-overlay"></div>
+                
                 <div class="modal-content" style="max-width:480px;">
                     <div class="modal-header">
                         <h3><i class="fas fa-user-plus" style="color:#059669;"></i> Crear Nuevo Vendedor</h3>

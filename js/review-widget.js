@@ -62,7 +62,7 @@
         <div class="reviews-dist-row">
           <span class="reviews-dist-label">${i} <i class="fas fa-star" style="color:${STAR_FILLED};font-size:0.7rem;"></i></span>
           <div class="reviews-dist-bar-wrap">
-            <div class="reviews-dist-bar" style="width:${percentage}%;"></div>
+            
           </div>
           <span class="reviews-dist-count">${count}</span>
         </div>

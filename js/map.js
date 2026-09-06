@@ -234,7 +234,7 @@
                 html: '<div class="marker-pin" style="background-color: ' + iconColor + ';">'
                     + '<span class="marker-price">' + safeGetTypeIcon(business.business_type) + '</span>'
                     + '</div>'
-                    + '<div class="marker-shadow"></div>',
+                    + '',
                 iconSize: [40, 52],
                 iconAnchor: [20, 52],
                 popupAnchor: [0, -56],
@@ -938,7 +938,7 @@
             html: '<div class="marker-pin" style="background-color: #006EE3;">'
                 + '<span class="marker-price" style="font-size:10px;"><i class="fas fa-home"></i></span>'
                 + '</div>'
-                + '<div class="marker-shadow"></div>',
+                + '',
             iconSize: [40, 52],
             iconAnchor: [20, 52],
             popupAnchor: [0, -56],

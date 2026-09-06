@@ -298,7 +298,7 @@ export async function onRequestGet(context) {
 
     <footer class="cat-footer">
         <p>&copy; ${new Date().getFullYear()} <a href="/">En Santiago</a> — Directorio de Negocios en Santiago de Chile</p>
-      <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
+      
       <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
     </footer>
 </body>

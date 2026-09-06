@@ -83,7 +83,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0f1
   </div>
 </div>
 <div class="container">
-  <div class="stats" id="stats"></div>
+  
   <div class="toolbar">
     <h2 id="filterTitle">Todas las ordenes</h2>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
@@ -91,7 +91,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0f1
       <button class="btn btn-primary btn-sm" onclick="loadOrdenes()">Actualizar</button>
     </div>
   </div>
-  <div id="ordersContainer" class="orders-list"></div>
+  
 </div>
 <div class="modal-overlay" id="rejectModal" onclick="if(event.target===this)closeRejectModal()">
   <div class="modal">
@@ -108,7 +108,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0f1
     </div>
   </div>
 </div>
-<div class="toast" id="toast"></div>
+
 <script>
 var API = '/api/citas-admin';
 var currentFilter = '';
