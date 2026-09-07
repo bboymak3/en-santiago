@@ -4,7 +4,7 @@
 export async function onRequestGet(context) {
   try {
     const { env } = context;
-    const baseUrl = 'https://en-santiago.pages.dev';
+    const baseUrl = 'https://en-santiago.com';
 
     // All public-facing pages (ordered by priority)
     const staticPages = [

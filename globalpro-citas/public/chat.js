@@ -153,7 +153,7 @@
 
     const wrapper = document.createElement('div');
     wrapper.className = 'service-selector';
-    wrapper.innerHTML = `<h4>Selecciona un servicio</h4><div class="service-list" id="serviceList"></div>`;
+    wrapper.innerHTML = `<h4>Selecciona un servicio</h4>`;
     container.insertBefore(wrapper, typing);
 
     const list = document.getElementById('serviceList');

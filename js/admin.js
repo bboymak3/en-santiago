@@ -913,14 +913,14 @@ if (!window._renderVideoList) {
                                     <label for="editUserPhone">Teléfono</label>
                                     <div class="profile-input-wrapper">
                                         <i class="fas fa-phone"></i>
-                                        <input type="tel" id="editUserPhone" name="phone" class="form-control" value="${(user.phone || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                        <input type="tel" id="editUserPhone" name="phone" class="form-control" value="${(user.phone || '').replace(/"/g, '&quot;')}" placeholder="+56 9 8721 1321">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="editUserWhatsApp"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</label>
                                     <div class="profile-input-wrapper">
                                         <i class="fab fa-whatsapp" style="color:#25d366"></i>
-                                        <input type="tel" id="editUserWhatsApp" name="whatsapp" class="form-control" value="${(user.whatsapp || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                        <input type="tel" id="editUserWhatsApp" name="whatsapp" class="form-control" value="${(user.whatsapp || '').replace(/"/g, '&quot;')}" placeholder="+56 9 8721 1321">
                                     </div>
                                     <small class="form-hint">Número visible para compradores</small>
                                 </div>
@@ -2875,7 +2875,7 @@ if (!window._renderVideoList) {
             const val = jobCompany.value;
             jobLogoGroup.style.display = val ? '' : 'none';
             if (val === 'En Santiago') {
-                const ensantiagoLogo = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+                const ensantiagoLogo = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En-Santiago-OG.png';
                 jobLogoInput.value = ensantiagoLogo;
                 jobLogoPreview.src = ensantiagoLogo;
                 jobLogoPreview.style.display = '';
@@ -4701,7 +4701,7 @@ if (!window._renderVideoList) {
             if (btn) btn.style.display = 'inline-flex';
         }
         // HOLAX logo preview
-        const ensantiagoLogoUrl = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+        const ensantiagoLogoUrl = document.getElementById('setting_ensantiago_logo_url')?.value || '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En-Santiago-OG.png';
         if (ensantiagoLogoUrl) {
             const img = document.getElementById('ensantiagoLogoImg');
             const icon = document.getElementById('ensantiagoLogoPlaceholder');
@@ -6851,7 +6851,7 @@ if (!window._renderVideoList) {
                 }
                 html += '<strong>' + _esc(u.name) + '</strong></div></td>';
                 html += '<td><span style="background:' + lvlColor + '15;color:' + lvlColor + ';border:1px solid ' + lvlColor + '30;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;">Nivel ' + lvl + '</span></td>';
-                html += '<td style="min-width:120px;"><div style="font-size:0.72rem;color:#6b7280;margin-bottom:3px;">' + xp + ' XP</div><div style="background:#e5e7eb;border-radius:6px;height:6px;overflow:hidden;"><div style="background:' + lvlColor + ';height:100%;border-radius:6px;width:' + pct + '%;transition:width 0.3s;"></div></div></td>';
+                html += '<td style="min-width:120px;"><div style="font-size:0.72rem;color:#6b7280;margin-bottom:3px;">' + xp + ' XP</div><div style="background:#e5e7eb;border-radius:6px;height:6px;overflow:hidden;"></div></td>';
                 html += '<td>' + (p.total_classes_completed || 0) + '</td>';
                 html += '<td>' + (p.total_badges || 0) + '</td>';
                 html += '<td>';

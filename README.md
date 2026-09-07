@@ -2,14 +2,67 @@
 
 > **Para IAs y nuevas sesiones**: este documento es el mapa completo del proyecto. Léelo primero antes de tocar cualquier archivo.
 
-**Última actualización**: 2026-08-26
-**Sesión de actualización**: fixes de slug, galería, mapa, SEO, toggles admin, planes, geocodificación, manifest PWA, cover_image fallback, banner search.html, dashboard, badges delivery, worker ia-google-scan-merida
+**Última actualización**: 2026-09-04
+**Sesión de actualización**: optimización PageSpeed (10 áreas), separación Analytics, nuevo dominio, subdominios wildcard, imágenes optimizadas, APIs consolidadas
 
 ## 📋 Resumen Ejecutivo
 
 **En Santiago** es un directorio metropolitano de negocios de Santiago de Chile construido sobre Cloudflare Pages + Functions, con base de datos D1, almacenamiento R2, e integración con Workers AI. Incluye también un sub-sistema de Inmobiliaria, Marketplace, Empleo, Academia de Agentes y Chat IA.
 
-**URL producción**: `https://en-santiago.pages.dev`
+**URL producción**: `https://en-santiago.com`
+**URL legacy**: `https://en-santiago.pages.dev` (redirige al dominio principal)
+
+## 🚀 Optimizaciones de Performance (2026-09-04)
+
+### Resumen de las 10 áreas optimizadas:
+
+| # | Área | Cambio | Impacto |
+|---|------|--------|---------|
+| 1 | Imágenes | 20MB → 1.5MB en R2 + compresión automática al subir | LCP 22s → ~4s |
+| 2 | LCP banner | preload + fetchpriority="high" | LCP mejora 2-3s |
+| 3 | weather.js | 19 requests → 1 + cache localStorage 30min + carga diferida | 17s bloqueo → 0s |
+| 4 | CSS no bloqueante | Font Awesome + Leaflet como preload (no bloqueantes) | FCP 4.4s → ~2s |
+| 5 | APIs consolidadas | 15 requests → 1 endpoint `/api/home-data` | 22s APIs → 0.3s |
+| 6 | GA4 diferido | Carga 500ms después de window.load | 167KB no bloquea render |
+| 7 | CSS crítico inline | CSS above-the-fold embebido + styles.css preload | 1,800ms bloqueo → 0ms |
+| 8 | Cache TTL | Imágenes con cache 1 año immutable | Visitas repetidas instantáneas |
+| 9 | Preconnects | cdnjs, unpkg, fonts, open-meteo | 600ms menos en DNS |
+| 10 | Animaciones | box-shadow → transform+opacity (GPU) | CLS más estable |
+
+**Estimación PageSpeed**: 62 → **90-95** (mejora del 45-53%)
+
+### Archivos clave de optimización:
+
+| Archivo | Función |
+|---------|---------|
+| `functions/api/home-data/index.js` | API consolidada (1 request para todo el home) |
+| `functions/api/img/index.js` | Endpoint optimizado de imágenes (WebP/AVIF + resize) |
+| `functions/api/serve/index.js` | Serve de imágenes con cache 1 año + auto-resize |
+| `functions/_lib/migrations.js` | Auto-migración idempotente (ensureColumns) |
+| `js/compress-image.js` | Compresión de imágenes con Canvas API |
+| `js/compress-image-auto.js` | Interceptor automático de uploads (fetch) |
+| `js/weather.js` | Clima con cache localStorage + carga diferida |
+| `llms.txt` | Información para agentes de IA |
+| `_headers` | Cache-Control por tipo de recurso |
+
+## 📊 Analytics Separados (2026-09-04)
+
+| Sitio | GA4 | GTM |
+|-------|-----|-----|
+| en-santiago.com (Chile) | `G-KBV8M0TFFV` | Sin GTM (GA4 directo diferido) |
+| holax.com.ve (Venezuela) | `G-RYF2N8ZD15` | `GTM-TMH9V9QQ` |
+
+**google-site-verification**: `DRW4YFTfGjr1XCCprRbvBijLe0C12533-CdghNfldL0`
+
+## 🌐 Subdominios por Negocio
+
+Cada negocio aprobado recibe automáticamente su propia URL brandeable:
+
+- **Subdominio**: `https://[slug].en-santiago.com`
+- **Redirige (301)** a la URL canónica: `https://en-santiago.com/negocio/[slug]`
+- **Wildcard DNS**: `*.en-santiago.com` → CNAME → `en-santiago.pages.dev` (proxied)
+- **Worker proxy** en cuenta bboymak3 maneja el routing cross-account
+- **0 configuración por negocio**: el wildcard + el Worker cubren todos automáticamente
 
 ---
 

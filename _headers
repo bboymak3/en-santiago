@@ -25,7 +25,20 @@
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
   Access-Control-Allow-Headers: Content-Type, Authorization
-  Cache-Control: no-store
+
+# Imágenes servidas por /api/serve - cache largo (1 año) para optimización
+/api/serve
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Accept
+
+# Imágenes optimizadas /api/img - cache largo
+/api/img
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Accept
 
 # Archivos estáticos - cache con revalidación
 /css/*.css

@@ -1,0 +1,50 @@
+# En Santiago
+
+> En Santiago es el directorio metropolitano de negocios, productos, inmuebles y empleos más completo de Santiago de Chile. Permite registrar comercios, profesionales y servicios con georreferenciación, WhatsApp, SEO local y marketplace integrado.
+
+## Páginas principales
+
+- [Inicio](https://en-santiago.com/)
+- [Buscar negocios](https://en-santiago.com/search.html)
+- [Registrar negocio gratis](https://en-santiago.com/registrar-negocio.html)
+- [Categorías](https://en-santiago.com/categoria/otros)
+- [Marketplace](https://en-santiago.com/marketplace.html)
+- [Empleos](https://en-santiago.com/empleo.html)
+- [Propiedades](https://en-santiago.com/properties.html)
+- [Mapa de negocios](https://en-santiago.com/map.html)
+- [Planes](https://en-santiago.com/planes.html)
+- [Contacto](https://en-santiago.com/contacto.html)
+- [Quiénes somos](https://en-santiago.com/quienes-somos.html)
+- [Preguntas frecuentes](https://en-santiago.com/faq)
+- [Política de privacidad](https://en-santiago.com/privacidad.html)
+
+## Categorías de negocios
+
+- [Mecánico a domicilio](https://en-santiago.com/categoria/mecanico-a-domicilio)
+- [Limpieza a domicilio](https://en-santiago.com/categoria/limpieza-a-domicilio)
+- [Tatuajes](https://en-santiago.com/categoria/tatoo-studio)
+- [Tapizado de volantes](https://en-santiago.com/categoria/tapizado-de-volantes)
+- [Spa y uñas](https://en-santiago.com/categoria/spad-de-unas)
+- [Autolavado](https://en-santiago.com/categoria/autolavado-carwash)
+- [Otros servicios](https://en-santiago.com/categoria/otros)
+
+## Negocios destacados
+
+- [Samsara Tattoo Studio](https://en-santiago.com/negocio/tatoo-studio/samsara-tattoo-studio)
+- [Tapizado de Volantes Santiago](https://en-santiago.com/negocio/tapizado-de-volantes/tapizado-de-volantes)
+- [LLANOCAR CL Mecánico a Domicilio](https://en-santiago.com/automotriz/mecanico-a-domicilio/llanocar-cl-mecanico-a-domicilio)
+- [Mecánico a Domicilio 24/7](https://en-santiago.com/servicios-varios/otros/mecanico-a-domicilio-247)
+- [Limpieza a Domicilio 24/7](https://en-santiago.com/servicios-varios/limpieza-a-domicilio/limpieza-a-domicilio-247)
+- [DR Mecánico Automotriz](https://en-santiago.com/automotriz/mecanico-a-domicilio/dr-mecanico-automotriz)
+
+## Información para agentes de IA
+
+Este sitio web es un directorio comercial de Santiago de Chile que permite a los usuarios:
+- Buscar negocios por categoría, comuna o palabra clave
+- Registrar nuevos negocios de forma gratuita con SEO local
+- Ver fichas detalladas con información de contacto, ubicación y servicios
+- Acceder a marketplace, empleos y propiedades
+
+Los datos de los negocios están disponibles vía API REST en https://en-santiago.com/api/businesses
+El sitemap está disponible en https://en-santiago.com/sitemap.xml
+El archivo robots.txt está disponible en https://en-santiago.com/robots.txt

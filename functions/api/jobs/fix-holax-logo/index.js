@@ -53,11 +53,11 @@ export async function onRequestPost(context) {
     // Ensure column exists
     try { await env.DB.prepare(`ALTER TABLE job_listings ADD COLUMN business_logo TEXT`).run(); } catch(e) {}
 
-    const LOGO_URL = '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png';
+    const LOGO_URL = '/api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En-Santiago-OG.png';
 
     // Update all HOLAX jobs that have no logo, empty logo, or old default logo
     const result = await env.DB.prepare(
-      `UPDATE job_listings SET business_logo = ? WHERE company_name = 'HOLAX' AND (business_logo IS NULL OR business_logo = '' OR business_logo = '/images/En Santiago.png')`
+      `UPDATE job_listings SET business_logo = ? WHERE company_name = 'HOLAX' AND (business_logo IS NULL OR business_logo = '' OR business_logo = '/images/En-Santiago-OG.png')`
     ).bind(LOGO_URL).run();
 
     return new Response(JSON.stringify({

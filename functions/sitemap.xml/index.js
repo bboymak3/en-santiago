@@ -5,7 +5,7 @@
 export async function onRequestGet(context) {
   try {
     const { env } = context;
-    const baseUrl = 'https://en-santiago.pages.dev';
+    const baseUrl = 'https://en-santiago.com';
 
     // FIX: Páginas estáticas con lastmod automático (fecha de hoy)
     const today = new Date().toISOString().substring(0, 10);
@@ -32,6 +32,14 @@ export async function onRequestGet(context) {
       { loc: '/privacidad.html', priority: '0.3', changefreq: 'yearly' },
       { loc: '/eliminacion-datos.html', priority: '0.3', changefreq: 'yearly' },
       { loc: '/login.html', priority: '0.3', changefreq: 'monthly' },
+      // === BLOG (artículos SEO con keywords locales) ===
+      { loc: '/blog/', priority: '0.8', changefreq: 'weekly' },
+      { loc: '/blog/mecanico-a-domicilio-santiago.html', priority: '0.8', changefreq: 'monthly' },
+      { loc: '/blog/mejores-barberias-santiago.html', priority: '0.8', changefreq: 'monthly' },
+      { loc: '/blog/restaurantes-providencia.html', priority: '0.8', changefreq: 'monthly' },
+      { loc: '/blog/farmacias-turno-santiago.html', priority: '0.8', changefreq: 'monthly' },
+      { loc: '/blog/registrar-negocio-santiago.html', priority: '0.8', changefreq: 'monthly' },
+      { loc: '/blog/comunas-santiago.html', priority: '0.8', changefreq: 'monthly' },
     ];
 
     let dynamicUrls = '';

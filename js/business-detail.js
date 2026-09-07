@@ -163,6 +163,16 @@ function populateBusinessDetail(b) {
         }
     }
 
+    // FIX: Prevenir loop infinito en onerror de imágenes de galería.
+    // Si una imagen falla, se reemplaza por placeholder PERO se marca con data-f="1"
+    // para evitar reintentos infinitos. El onerror inline verifica el flag antes de reintentar.
+    // Se define placeholderImg ANTES de usarlo en los onerror.
+    const placeholderImg = 'data:image/svg+xml,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" fill="%23e0e0e0"><rect width="800" height="600"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23999" font-size="20" font-family="sans-serif">Sin imagen</text></svg>'
+    );
+    // onerror anti-loop: si ya mostramos placeholder, no hacer nada
+    const onErrorSafe = `if(this.dataset.f==='1')return;this.dataset.f='1';this.src='${placeholderImg}'`;
+
     const mainImage = document.getElementById('mainImage');
     const galleryThumbs = document.getElementById('galleryThumbs');  // FIX: ID correcto (sin "nails")
     const galleryCurrent = document.getElementById('galleryCurrent');
@@ -171,10 +181,6 @@ function populateBusinessDetail(b) {
     const businessGallery = document.getElementById('businessGallery');
     const galleryViewAllBtn = document.getElementById('galleryViewAllBtn');
     const galleryAllGrid = document.getElementById('galleryAllGrid');
-
-    const placeholderImg = 'data:image/svg+xml,' + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" fill="%23e0e0e0"><rect width="800" height="600"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23999" font-size="20" font-family="sans-serif">Sin imagen</text></svg>'
-    );
 
     if (images.length === 0) {
         if (mainImage) mainImage.src = placeholderImg;
@@ -196,7 +202,7 @@ function populateBusinessDetail(b) {
         if (galleryThumbs) {
             galleryThumbs.innerHTML = images.map((img, i) => `
                 <div class="gallery-thumb ${i === 0 ? 'active' : ''}" data-index="${i}" onclick="setGalleryImage(${i})">
-                    <img src="${img.url}" alt="Imagen ${i + 1}" loading="lazy" onerror="this.src='${placeholderImg}'">
+                    <img src="${img.url}" alt="Imagen ${i + 1}" loading="lazy" onerror="${onErrorSafe}">
                 </div>
             `).join('');
         }
@@ -215,7 +221,7 @@ function populateBusinessDetail(b) {
                     } else {
                         // Mostrar grid con TODAS las fotos
                         galleryAllGrid.innerHTML = images.map((img, i) => `
-                            <img src="${img.url}" alt="Imagen ${i + 1}" loading="lazy" onclick="openLightboxAt(${i})" onerror="this.src='${placeholderImg}'">
+                            <img src="${img.url}" alt="Imagen ${i + 1}" loading="lazy" onclick="openLightboxAt(${i})" onerror="${onErrorSafe}">
                         `).join('');
                         galleryAllGrid.style.display = 'grid';
                         galleryViewAllBtn.classList.add('expanded');

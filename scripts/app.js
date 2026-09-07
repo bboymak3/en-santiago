@@ -8,38 +8,65 @@
 const API = '/api';
 
 // ─── Token Management ──────────────────────────────────────────
-const TOKEN_KEY = 'meridaunclick_token';
-const USER_KEY = 'meridaunclick_user';
+const TOKEN_KEY = 'ensantiago_token';
+const USER_KEY = 'ensantiago_user';
 
-// ─── Venezuela States ────────────────────────────────────────────
-const VENEZUELA_STATES = [
-  { name: 'Amazonas', slug: 'amazonas' },
-  { name: 'Anzoátegui', slug: 'anzoategui' },
-  { name: 'Apure', slug: 'apure' },
-  { name: 'Aragua', slug: 'aragua' },
-  { name: 'Barinas', slug: 'barinas' },
-  { name: 'Bolívar', slug: 'bolivar' },
-  { name: 'Carabobo', slug: 'carabobo' },
-  { name: 'Cojedes', slug: 'cojedes' },
-  { name: 'Delta Amacuro', slug: 'delta-amacuro' },
-  { name: 'Distrito Capital', slug: 'distrito-capital' },
-  { name: 'Falcón', slug: 'falcon' },
-  { name: 'Guárico', slug: 'guarico' },
-  { name: 'Lara', slug: 'lara' },
-  { name: 'Mérida', slug: 'merida' },
-  { name: 'Miranda', slug: 'miranda' },
-  { name: 'Monagas', slug: 'monagas' },
-  { name: 'Nueva Esparta', slug: 'nueva-esparta' },
-  { name: 'Portuguesa', slug: 'portuguesa' },
-  { name: 'Sucre', slug: 'sucre' },
-  { name: 'Táchira', slug: 'tachira' },
-  { name: 'Trujillo', slug: 'trujillo' },
-  { name: 'Vargas', slug: 'vargas' },
-  { name: 'Yaracuy', slug: 'yaracuy' },
-  { name: 'Zulia', slug: 'zulia' },
+// ─── Comunas de la Región Metropolitana de Santiago ─────────────
+const CHILE_COMMUNES = [
+  { name: 'Cerrillos', slug: 'cerrillos' },
+  { name: 'Cerro Navia', slug: 'cerro-navia' },
+  { name: 'Conchalí', slug: 'conchali' },
+  { name: 'El Bosque', slug: 'el-bosque' },
+  { name: 'Estación Central', slug: 'estacion-central' },
+  { name: 'Huechuraba', slug: 'huechuraba' },
+  { name: 'Independencia', slug: 'independencia' },
+  { name: 'La Cisterna', slug: 'la-cisterna' },
+  { name: 'La Florida', slug: 'la-florida' },
+  { name: 'La Granja', slug: 'la-granja' },
+  { name: 'La Pintana', slug: 'la-pintana' },
+  { name: 'La Reina', slug: 'la-reina' },
+  { name: 'Las Condes', slug: 'las-condes' },
+  { name: 'Lo Barnechea', slug: 'lo-barnechea' },
+  { name: 'Lo Espejo', slug: 'lo-espejo' },
+  { name: 'Lo Prado', slug: 'lo-prado' },
+  { name: 'Macul', slug: 'macul' },
+  { name: 'Maipú', slug: 'maipu' },
+  { name: 'Ñuñoa', slug: 'nunoa' },
+  { name: 'Pedro Aguirre Cerda', slug: 'pedro-aguirre-cerda' },
+  { name: 'Peñalolén', slug: 'penalolen' },
+  { name: 'Providencia', slug: 'providencia' },
+  { name: 'Pudahuel', slug: 'pudahuel' },
+  { name: 'Quilicura', slug: 'quilicura' },
+  { name: 'Quinta Normal', slug: 'quinta-normal' },
+  { name: 'Recoleta', slug: 'recoleta' },
+  { name: 'Renca', slug: 'renca' },
+  { name: 'San Joaquín', slug: 'san-joaquin' },
+  { name: 'San Miguel', slug: 'san-miguel' },
+  { name: 'San Ramón', slug: 'san-ramon' },
+  { name: 'Santiago Centro', slug: 'santiago' },
+  { name: 'Vitacura', slug: 'vitacura' },
+  // Comunas aledañas
+  { name: 'Puente Alto', slug: 'puente-alto' },
+  { name: 'San Bernardo', slug: 'san-bernardo' },
+  { name: 'Colina', slug: 'colina' },
+  { name: 'Lampa', slug: 'lampa' },
+  { name: 'Tiltil', slug: 'tiltil' },
+  { name: 'Buin', slug: 'buin' },
+  { name: 'Paine', slug: 'paine' },
+  { name: 'Melipilla', slug: 'melipilla' },
+  { name: 'Padre Hurtado', slug: 'padre-hurtado' },
+  { name: 'Peñaflor', slug: 'penaflor' },
+  { name: 'Talagante', slug: 'talagante' },
+  { name: 'El Monte', slug: 'el-monte' },
+  { name: 'Pirque', slug: 'pirque' },
+  { name: 'San José de Maipo', slug: 'san-jose-de-maipo' },
+  { name: 'Calera de Tango', slug: 'calera-de-tango' },
 ];
 
-const LOCATION_KEY = 'aunclick_selected_state';
+// Alias para compatibilidad con código legacy que usa VENEZUELA_STATES
+const VENEZUELA_STATES = CHILE_COMMUNES;
+
+const LOCATION_KEY = 'ensantiago_selected_commune';
 
 // ─── Location Selector System ───────────────────────────────────
 function getSelectedState() {

@@ -828,13 +828,13 @@ async function guardarOrden() {
                 </style>
                 <div class="gp-modal-crear">
                     <div class="gp-icon-wrap">
-                        <div class="gp-ring"></div>
+                        
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <h3 class="gp-orden-title">¡Orden Creada Exitosamente!</h3>
                     <div class="gp-orden-num">OT #${numOrden}</div>
                     <div class="gp-orden-sub"><i class="fas fa-car me-1"></i>${ordenData.patente} &bull; ${ordenData.cliente}</div>
-                    <div class="gp-divider"></div>
+                    
                     <div class="gp-actions-grid">
                         <button class="gp-action-btn gp-btn-whatsapp" onclick="window.open('https://wa.me/${ordenData.telefono.replace(/\D/g, '')}?text=${encodeURIComponent('Hola, tiene una orden de trabajo de Global Pro Automotriz. Para verla y aprobarla, ingrese a: ' + linkAprobacion)}', '_blank')">
                             <i class="fab fa-whatsapp"></i> WhatsApp
@@ -1605,7 +1605,7 @@ function mostrarOrdenEnModal(orden) {
         </div>
         
         ${firmaHtml}
-        <div id="fotos-ot-admin-container"></div>
+        
         <hr>
         
         <div class="alert alert-info">
@@ -3506,7 +3506,7 @@ function renderizarLiquidacionOrdenes(ordenes) {
 
     // (Sección Adelantos movida arriba, antes del gráfico circular)
 
-    html += '<div id="liquidacion-totales-dinamicos"></div>';
+    html += '';
     elResultados.innerHTML = html;
 
     // Calcular totales iniciales (respetando comuna cancelado persistido)
@@ -4939,7 +4939,7 @@ function renderizarCarteraClientes(ordenes, filtro) {
         </tr>
         <tr id="${clientId}-detalle" style="display:none;">
             <td colspan="11" style="padding:0;">
-                <div id="${clientId}-contenido" style="padding:12px;background:#f8f9fa;border-radius:8px;"></div>
+                
             </td>
         </tr>`;
     });
@@ -6780,7 +6780,7 @@ async function guardarUltraMsg() {
 async function testearUltraMsg() {
     var tel = document.getElementById('ultramsg-test-tel').value.trim().replace(/\D/g, '');
     if (tel.length < 10) {
-        mostrarNotificacion('warning', 'Telefono invalido', 'Ingresa un telefono con codigo de pais (ej: 5804167775771)');
+        mostrarNotificacion('warning', 'Telefono invalido', 'Ingresa un telefono con codigo de pais (ej: 56987211321)');
         return;
     }
     var resultDiv = document.getElementById('ultramsg-test-result');

@@ -81,7 +81,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="admin-pagination" id="adminSellersPagination"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
 
             <!-- Create Seller Modal -->
             <div class="modal hidden" id="adminCreateSellerModal">
-                <div class="modal-overlay"></div>
+                
                 <div class="modal-content" style="max-width:480px;">
                     <div class="modal-header">
                         <h3><i class="fas fa-user-plus" style="color:#059669;"></i> Crear Nuevo Vendedor</h3>
@@ -142,11 +142,11 @@
                             <div style="display:flex;gap:12px;margin-bottom:14px;">
                                 <div class="form-group" style="flex:1;">
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Teléfono</label>
-                                    <input type="tel" id="newSellerPhone" placeholder="+58 414 0000000" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                    <input type="tel" id="newSellerPhone" placeholder="+56 9 8721 1321" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
                                 </div>
                                 <div class="form-group" style="flex:1;">
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">WhatsApp</label>
-                                    <input type="tel" id="newSellerWhatsapp" placeholder="+58 414 0000000" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
+                                    <input type="tel" id="newSellerWhatsapp" placeholder="+56 9 8721 1321" class="form-control" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;">
                                 </div>
                             </div>
                         </form>

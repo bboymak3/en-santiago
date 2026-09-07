@@ -451,7 +451,7 @@ window.closeEditBusinessModal = function() {
                 if (userProperties.length > 1) {
                     const selectorWrap = document.createElement('div');
                     selectorWrap.style.cssText = 'margin-top:12px;padding-top:12px;border-top:1px solid #e2e8f0;';
-                    selectorWrap.innerHTML = '<p style="margin:0 0 8px;font-size:0.8rem;color:#64748b;font-weight:600;">Tambien puedes editar:</p><div style="display:flex;gap:8px;flex-wrap:wrap;" id="editProfileOtherBiz"></div>';
+                    selectorWrap.innerHTML = '<p style="margin:0 0 8px;font-size:0.8rem;color:#64748b;font-weight:600;">Tambien puedes editar:</p>';
                     editProfileCTA.appendChild(selectorWrap);
                     const otherWrap = document.getElementById('editProfileOtherBiz');
                     userProperties.forEach(b => {
@@ -1614,7 +1614,7 @@ window.closeEditBusinessModal = function() {
             const select = document.getElementById('jobBusiness');
             if (select) {
                 select.innerHTML = '<option value="" disabled selected>Selecciona un negocio</option>';
-                // Always add HOLAX as the first option (uses En Santiago.png logo)
+                // Always add HOLAX as the first option (uses En-Santiago-OG.png logo)
                 const ensantiagoOpt = document.createElement('option');
                 ensantiagoOpt.value = 'en-santiago';
                 ensantiagoOpt.textContent = 'En Santiago';
@@ -4422,7 +4422,7 @@ window.closeEditBusinessModal = function() {
                         <div style="font-size:0.75rem;color:#64748b;line-height:1.4;">${escapeNotifHtml(n.message || '')}</div>
                         <div style="font-size:0.68rem;color:#94a3b8;margin-top:4px;">${timeAgo}</div>
                     </div>
-                    ${n.is_read ? '' : '<div style="width:8px;height:8px;border-radius:50%;background:#006EE3;flex-shrink:0;margin-top:6px;"></div>'}
+                    ${n.is_read ? '' : ''}
                 </div>`;
             }).join('');
 

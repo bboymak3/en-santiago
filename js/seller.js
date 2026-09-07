@@ -296,7 +296,7 @@
             return `
                 <div class="monthly-chart-bar">
                     <div class="bar-value">${d.count}</div>
-                    <div class="bar" style="height:${height}px;"></div>
+                    
                     <div class="bar-label">${name}</div>
                 </div>
             `;

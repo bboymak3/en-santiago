@@ -4,7 +4,7 @@
 
 export async function onRequestGet() {
   const robotsTxt = `# En Santiago - Directorio de Negocios de Santiago de Chile
-# https://en-santiago.pages.dev
+# https://en-santiago.com
 
 # === GENERATIVE AI CRAWLERS — ALLOW ALL ===
 User-agent: GPTBot
@@ -62,7 +62,7 @@ Disallow: /*?categoria=
 Disallow: /*?business_type=
 Disallow: /*?city=
 
-Sitemap: https://en-santiago.pages.dev/sitemap.xml`;
+Sitemap: https://en-santiago.com/sitemap.xml`;
 
   return new Response(robotsTxt, {
     status: 200,

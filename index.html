@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
-<!-- End Google Tag Manager -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<!-- Google tag (gtag.js) — diferido: carga DESPUÉS del render para no bloquear LCP -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RYF2N8ZD15');
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KBV8M0TFFV';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KBV8M0TFFV');
+  }, 500);
+});
 </script>
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg?v=4">
@@ -23,16 +22,62 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="description" content="En Santiago - El directorio más completo de negocios, propiedades y empleos en Santiago de Chile. Encuentra comercios, inmuebles, ofertas de trabajo, profesionales y servicios en todo el país. Registro gratis.">
     <meta name="keywords" content="directorio de negocios, Santiago de Chile, comercios, restaurantes, farmacias, tiendas, profesionales, servicios, Santiago, registro gratis">
     <title>En Santiago - Directorio de Negocios en Santiago de Chile</title>
-    <link rel="stylesheet" href="css/styles.css?v=13">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- === OPTIMIZACIÓN LCP (Largest Contentful Paint) === -->
+    <!-- Preconnect a dominios externos para acelerar handshakes TLS -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://api.open-meteo.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Preload del hero banner (LCP element) — fetchpriority alta -->
+    <link rel="preload" as="image"
+          href="/api/serve?key=santiago%2Fbanners%2F1787688450570_directorio-domercial-de-santiago-chile-region-metropilitana-servicios-negocios-empleo-donde-publicar-tu-negocio-agencia-de-marketing-en-santiago-360.jpg"
+          fetchpriority="high" />
+
+    <!-- Theme color para browser UI -->
+    <meta name="theme-color" content="#006EE3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+    <!-- CSS crítico inline (above-the-fold) — evita bloqueo de render -->
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f0f4f8;color:#1a1a2e}
+      .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);padding:10px 0;transition:all .3s}
+      .nav-container{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+      .nav-logo{display:flex;align-items:center;color:#fff;text-decoration:none;font-weight:700;font-size:1.5rem}
+      .nav-logo img{height:36px;border-radius:6px;margin-right:8px}
+      .nav-links{display:flex;gap:24px;list-style:none}
+      .nav-links a{color:#fff;text-decoration:none;font-weight:500;font-size:.95rem;transition:color .2s}
+      .nav-links a:hover{color:#006EE3}
+      .hero-section{min-height:35vh;display:flex;align-items:center;color:#fff;margin-top:80px;background-size:cover;background-position:center}
+      .container{max-width:1280px;margin:0 auto;padding:0 20px}
+      .idx-hero-bg{width:100%;min-height:35vh;background:#1a1a2e}
+      .loading-spinner{text-align:center;padding:40px;color:#94a3b8}
+      .weather-carousel-section{background:#0f172a;padding:16px 0;overflow:hidden}
+      .weather-carousel-track{display:flex;gap:12px;overflow:hidden}
+      .weather-card{flex:0 0 160px;background:#1e293b;border-radius:12px;padding:12px;text-align:center;color:#fff}
+      @media(max-width:768px){.nav-links{display:none}.hero-section{min-height:30vh}}
+    </style>
+    <!-- CSS completo: cargar de forma no bloqueante -->
+    <link rel="preload" as="style" href="css/styles.css?v=14" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/styles.css?v=14"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="preconnect" href="https://api.open-meteo.com">
+    <link rel="preload" as="style" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""></noscript>
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=4">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=4">
     <link rel="manifest" href="/manifest.json?v=4">
     <meta name="theme-color" content="#006EE3">
-    <meta name="google-site-verification" content="Upqdebr5WMAfea6ZMYcsZVTXR2Wo9N5cJZG0B6pk7I4" />
-    <link rel="canonical" href="https://en-santiago.pages.dev/">
+    <meta name="google-site-verification" content="DRW4YFTfGjr1XCCprRbvBijLe0C12533-CdghNfldL0" />
+    <link rel="canonical" href="https://en-santiago.com/">
     <meta property="og:title" content="En Santiago - Directorio de Negocios en Santiago de Chile">
     <meta property="og:description" content="En Santiago es el directorio de negocios y comercios más completo de Santiago de Chile. Encuentra restaurantes, farmacias, tiendas, profesionales, servicios de salud y más en todo el país. Registro gratis.">
     <meta property="og:site_name" content="En Santiago">
@@ -41,7 +86,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="og:image" content="https://en-santiago.com/images/Holax.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://en-santiago.pages.dev/">
+    <meta property="og:url" content="https://en-santiago.com/">
     <meta name="twitter:title" content="En Santiago - Directorio de Negocios en Santiago de Chile">
     <meta name="twitter:description" content="En Santiago es el directorio de negocios y comercios más completo de Santiago de Chile. Encuentra restaurantes, farmacias, tiendas, profesionales y más.">
     <meta name="twitter:card" content="summary_large_image">
@@ -52,7 +97,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@type": "Organization",
         "name": "En Santiago",
         "alternateName": "En Santiago - Directorio de Negocios de Santiago de Chile",
-        "url": "https://en-santiago.pages.dev",
+        "url": "https://en-santiago.com",
         "logo": "https://en-santiago.com/images/Holax.png",
         "description": "El directorio metropolitano de negocios, productos, inmuebles y empleos más completo de Santiago de Chile.",
         "address": {
@@ -71,10 +116,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "En Santiago",
-        "url": "https://en-santiago.pages.dev",
+        "url": "https://en-santiago.com",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://en-santiago.pages.dev/search.html?q={search_term_string}",
+            "target": "https://en-santiago.com/search.html?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     }</script>
@@ -84,26 +129,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@type": "WebPage",
         "name": "En Santiago - Directorio de Negocios en Santiago de Chile",
         "description": "Directorio metropolitano de negocios, productos, inmuebles y empleos en Santiago de Chile. Encuentra comercios, profesionales y servicios en todo el país.",
-        "url": "https://en-santiago.pages.dev/",
+        "url": "https://en-santiago.com/",
         "isPartOf": {
             "@type": "WebSite",
             "name": "En Santiago",
-            "url": "https://en-santiago.pages.dev"
+            "url": "https://en-santiago.com"
         },
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" }
+                { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.com/" }
             ]
         }
     }</script>
+    <!-- FAQPage schema para rich snippets de preguntas frecuentes -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es En Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "En Santiago es el directorio metropolitano de negocios, productos, inmuebles y empleos más completo de Santiago de Chile. Permite a los usuarios encontrar comercios, profesionales y servicios en todas las comunas de la Región Metropolitana."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo registro mi negocio en En Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Para registrar tu negocio gratis, ve a /registrar-negocio.html, crea una cuenta y completa el formulario con los datos de tu negocio (nombre, categoría, comuna, contacto, fotos). La aprobación toma entre 24 y 72 horas."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es gratis publicar mi negocio en En Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sí, el registro básico es completamente gratis. Existen planes premium opcionales desde $10 USD/mes que ofrecen posición destacada en búsquedas, etiqueta Recomendado, estadísticas y reservas online."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué comunas de Santiago opera el directorio?",
+          "acceptedAnswer": {"@type": "Answer", "text": "En Santiago cubre las 52 comunas de la Región Metropolitana: Santiago Centro, Las Condes, Providencia, Maipú, Ñuñoa, La Florida, Pudahuel, Quilicura, Vitacura, Lo Barnechea, San Bernardo, Puente Alto, entre otras."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo puedo encontrar un negocio específico en Santiago?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Usa el buscador en /search.html y filtra por categoría (restaurantes, barberías, mecánicos, farmacias, etc.) y comuna. También puedes buscar por nombre del negocio o palabra clave."}
+        }
+      ]
+    }
+    </script>
+<script src="/js/compress-image.js"></script>
+<script src="/js/compress-image-auto.js"></script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <!-- Navigation -->
+<!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
@@ -124,7 +201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i class="fas fa-globe-americas"></i>
                         <span>Todo Santiago de Chile</span>
                     </div>
-                    <div class="location-divider"></div>
+                    
                     <div class="location-list" id="locationList">
                         <!-- States loaded dynamically -->
                     </div>
@@ -150,11 +227,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <li><a href="planes.html" class="nav-link"><i class="fas fa-crown"></i> Nuestros Planes</a></li>
                         <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
                         <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="quienes-somos.html" class="nav-link"><i class="fas fa-info-circle"></i> Quiénes Somos</a></li>
                         <li><a href="contacto.html" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a></li>
                         <li><a href="privacidad.html" class="nav-link"><i class="fas fa-shield-halved"></i> Política de Privacidad</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
@@ -178,8 +255,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- ===== 1. HERO SECTION ===== -->
     <section class="idx-hero">
-        <div class="idx-hero-bg" id="idxHeroBg"></div>
-        <div class="idx-hero-particles"></div>
+        
+        
         <div class="idx-hero-content">
             <img id="idxHeroLogo" src="" alt="" style="display:none;max-height:80px;width:auto;margin:0 auto 16px;border-radius:8px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
             <h1 class="idx-hero-title">Directorio de Negocios, Propiedades y Empleos en Santiago de Chile</h1>
@@ -347,7 +424,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <!-- Mobile Search Modal Backdrop -->
-            <div class="idx-mobile-search-backdrop" id="mobileSearchBackdrop"></div>
+            
         </div>
     </section>
 
@@ -365,8 +442,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                 </div>
             </div>
-            <div id="videoCarouselTrack" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-width:none;">
-            </div>
+            
         </div>
     </section>
 
@@ -549,7 +625,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                 </div>
             </div>
-            <div class="idx-types-grid" id="idxCategoriesGrid"></div>
+            
         </div>
     </section>
 
@@ -577,7 +653,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <button class="btn btn-primary btn-sm" id="homeMapToggleAmbos" style="flex:1;font-size:0.85rem;background:linear-gradient(135deg,#1a73e8,#006EE3);"><i class="fas fa-layer-group"></i> Todos</button>
                     <button class="btn btn-secondary btn-sm" id="homeMapTogglePropiedades" style="flex:1;font-size:0.85rem;"><i class="fas fa-home"></i> Propiedades</button>
                 </div>
-                <div id="homeMap" class="home-map"></div>
+                
                 <div class="idx-map-overlay" id="homeMapOverlay">
                     <div class="idx-map-overlay-content">
                         <div class="idx-map-overlay-icon">
@@ -607,7 +683,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="idx-steps-grid">
                 <div class="idx-step-card">
-                    <div class="idx-step-connector"></div>
+                    
                     <div class="idx-step-number">01</div>
                     <div class="idx-step-icon-wrap">
                         <div class="idx-step-icon" style="background: linear-gradient(135deg, #1a73e8, #4a90e8);">
@@ -618,7 +694,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p>Regístrate y publica tu negocio con fotos, detalles y contacto de forma completamente gratuita.</p>
                 </div>
                 <div class="idx-step-card">
-                    <div class="idx-step-connector"></div>
+                    
                     <div class="idx-step-number">02</div>
                     <div class="idx-step-icon-wrap">
                         <div class="idx-step-icon" style="background: linear-gradient(135deg, #ff6b35, #ff8c5a);">
@@ -644,7 +720,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- ===== 6. STATS SECTION ===== -->
     <section class="idx-stats-section">
-        <div class="idx-stats-bg"></div>
+        
         <div class="container">
             <div class="idx-stats-grid">
                 <div class="idx-stat-card">
@@ -683,7 +759,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="idx-cta-section">
         <div class="container">
             <div class="idx-cta-card">
-                <div class="idx-cta-glow"></div>
+                
                 <div class="idx-cta-content">
                     <h2>¿Tienes un negocio o comercio?</h2>
                     <p>Registra tu negocio gratis en En Santiago y llega a miles de personas en toda Santiago de Chile.</p>
@@ -735,25 +811,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="footer-col">
                     <h4>Contacto</h4>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> info@en-santiago.com</li>
-                        <li><i class="fas fa-phone"></i> +58 414-000-0000</li>
+                        <li><i class="fas fa-envelope"></i> ensantaigodirectorio@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +56 9 8721 1321</li>
                         <li><i class="fas fa-map-marker-alt"></i> Santiago de Chile</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 En Santiago. Todos los derechos reservados.</p>
-                <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
+                
                 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
             </div>
         </div>
     </footer>
 
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="js/app.js?v=11"></script>
     <script src="js/dynamic-categories.js?v=1"></script>
-    <script src="js/weather.js?v=2"></script>
+    <script defer src="js/weather.js?v=3"></script>
     <script src="js/home-map.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/ai-chatbot.js"></script>

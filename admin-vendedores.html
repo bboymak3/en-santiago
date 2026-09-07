@@ -9,6 +9,8 @@
     <title>Vendedores - Administración En Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="/js/compress-image.js"></script>
+<script src="/js/compress-image-auto.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -144,7 +146,7 @@
                             <div class="form-row" style="margin-bottom:12px;">
                                 <div class="form-group" style="flex:1;">
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Teléfono (opcional)</label>
-                                    <input type="text" id="newUserPhone" class="form-control" placeholder="Ej: 0414-123-4567">
+                                    <input type="text" id="newUserPhone" class="form-control" placeholder="Ej: +56 9 1234 5678">
                                 </div>
                             </div>
                             <div class="form-row" style="margin-bottom:12px;">
@@ -166,8 +168,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="createUserError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#dc2626;"></div>
-                            <div id="createUserSuccess" style="display:none;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#006EE3;"></div>
+                            
+                            
                             <button class="btn btn-primary" id="btnCreateUser" style="background:linear-gradient(135deg,#006EE3,#3B9AFF);">
                                 <i class="fas fa-user-plus"></i> Crear Cuenta
                             </button>
@@ -180,7 +182,7 @@
 
     <!-- Edit User Modal -->
     <div class="modal hidden" id="editUserModal" style="z-index:9999;">
-        <div class="modal-overlay" id="editUserModalOverlay"></div>
+        
         <div class="modal-container" style="max-width:600px;max-height:90vh;overflow-y:auto;">
             <div class="modal-header">
                 <h3><i class="fas fa-user-edit" style="color:#1a73e8"></i> Editar Vendedor</h3>
@@ -197,7 +199,7 @@
     </div>
 
     <!-- Toast container v8 -->
-    <div id="toastContainer" style="position:fixed;top:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:8px;"></div>
+    
 
     <!-- Modal de Estadísticas del Vendedor -->
     <div id="statsModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;overflow-y:auto;padding:20px;">
@@ -208,7 +210,7 @@
                         <i class="fas fa-chart-line" style="color:#00d4ff;"></i>
                         <span id="statsModalTitle">Estadísticas del Vendedor</span>
                     </h2>
-                    <p style="margin:4px 0 0;font-size:0.85rem;color:#94a3b8;" id="statsModalSubtitle"></p>
+                    
                 </div>
                 <button onclick="closeStatsModal()" style="background:rgba(255,255,255,0.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;">
                     <i class="fas fa-times"></i>
@@ -559,11 +561,11 @@
                             <div style="display:flex;gap:12px;flex-wrap:wrap;">
                                 <div style="flex:1;min-width:200px;">
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Telefono</label>
-                                    <input type="tel" id="editSellerPhone" class="form-control" value="${(user.phone || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                    <input type="tel" id="editSellerPhone" class="form-control" value="${(user.phone || '').replace(/"/g, '&quot;')}" placeholder="+56 9 8721 1321">
                                 </div>
                                 <div style="flex:1;min-width:200px;">
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</label>
-                                    <input type="tel" id="editSellerWhatsApp" class="form-control" value="${(user.whatsapp || '').replace(/"/g, '&quot;')}" placeholder="+58 414 0000000">
+                                    <input type="tel" id="editSellerWhatsApp" class="form-control" value="${(user.whatsapp || '').replace(/"/g, '&quot;')}" placeholder="+56 9 8721 1321">
                                 </div>
                             </div>
                         </div>

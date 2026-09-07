@@ -25,6 +25,8 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
   display: none !important;
 }
 </style>
+<script src="/js/compress-image.js"></script>
+<script src="/js/compress-image-auto.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -51,7 +53,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     <ul class="nav-dropdown-menu">
                         <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
                         <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
@@ -356,7 +358,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="admin-pagination" id="adminPropsPagination"></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -404,7 +406,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="admin-pagination" id="adminUsersPagination"></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -452,7 +454,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     <i class="fas fa-plug"></i> Probar Conexión
                                 </button>
                             </div>
-                            <div id="fbConfigStatus" style="margin-top:12px;"></div>
+                            
                         </div>
                     </div>
 
@@ -466,7 +468,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                             <button class="btn btn-primary btn-lg" id="fbImportNow">
                                 <i class="fab fa-facebook"></i> Importar Posts Ahora
                             </button>
-                            <div id="fbImportStatus" style="margin-top:12px;"></div>
+                            
                         </div>
                     </div>
 
@@ -507,7 +509,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     <label style="display:block;font-size:0.82rem;font-weight:600;color:#374151;margin-bottom:4px;">Mensaje <span style="color:#dc2626;">*</span></label>
                                     <textarea id="adminMsgBody" class="form-control" rows="4" placeholder="Escribe el mensaje para el usuario..." style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea>
                                 </div>
-                                <div id="adminMsgSendError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#dc2626;"></div>
+                                
                                 <button class="btn btn-primary btn-sm" id="adminSendMsgBtn" style="background:linear-gradient(135deg,#2563eb,#3b82f6);padding:10px 20px;">
                                     <i class="fas fa-paper-plane"></i> Enviar Mensaje
                                 </button>
@@ -551,7 +553,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="admin-pagination" id="adminMsgsPagination"></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -598,7 +600,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="admin-pagination" id="adminJobsPagination"></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -658,7 +660,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="admin-pagination" id="propertiesPagination"></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -697,7 +699,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="admin-pagination" id="adminProductsPagination"></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -734,7 +736,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 <i class="fas fa-plus"></i> Crear
                             </button>
                         </div>
-                        <div id="admin2NewCatError" style="color:#dc2626;font-size:0.82rem;margin-top:8px;display:none;"></div>
+                        
                     </div>
 
                     <!-- Category Suggestions -->
@@ -801,7 +803,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         </div>
 
                         <!-- Stats Cards -->
-                        <div id="academyStats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px;"></div>
+                        
 
                         <!-- Classes Table -->
                         <div style="overflow-x:auto;">
@@ -890,7 +892,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                     <div style="font-weight:600;font-size:0.85rem;color:#374151;"><i class="fas fa-list-ol" style="color:#7c3aed;"></i> Preguntas Generadas (<span id="academyQPreviewCount">0</span>)</div>
                                     <button class="btn btn-secondary btn-sm" id="academyClearQPreviewBtn" style="font-size:0.75rem;"><i class="fas fa-trash"></i> Limpiar</button>
                                 </div>
-                                <div id="academyQPreviewList" style="display:grid;gap:10px;max-height:400px;overflow-y:auto;"></div>
+                                
                             </div>
                             <div style="display:flex;gap:10px;">
                                 <button class="btn btn-primary" id="academySaveClassBtn" style="background:#7c3aed;"><i class="fas fa-save"></i> Guardar Clase</button>
@@ -908,7 +910,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 <button class="btn btn-secondary btn-sm" id="academyCloseQuestionsBtn"><i class="fas fa-arrow-left"></i> Volver</button>
                             </div>
                         </div>
-                        <div id="academyQuestionsList"></div>
+                        
                         <!-- Inline add/edit question form (hidden) -->
                         <div id="academyInlineQForm" class="hidden" style="background:#f5f3ff;border:1px solid #ddd6fe;border-radius:10px;padding:16px;margin-top:12px;">
                             <h4 style="margin:0 0 12px;font-size:0.9rem;color:#7c3aed;" id="academyInlineQFormTitle">Nueva Pregunta</h4>
@@ -1017,7 +1019,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 </div>
                                 <i class="fas fa-external-link-alt" style="color:#25d366;font-size:0.9rem;"></i>
                             </div>
-                            <div style="height:12px;"></div>
+                            
                             <!-- Link to Vendedores (separate page) -->
                             <div class="settings-section" style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;" onclick="window.location.href='admin-vendedores.html'">
                                 <div>
@@ -1230,7 +1232,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                             </button>
                                         </div>
                                         <div class="form-group" style="margin-bottom:6px;">
-                                            <input type="url" id="setting_ensantiago_logo_url" data-key="ensantiago_logo_url" class="form-control" value="api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En Santiago.png" placeholder="O pega una URL de imagen aquí..." oninput="previewEn SantiagoLogo(this.value)">
+                                            <input type="url" id="setting_ensantiago_logo_url" data-key="ensantiago_logo_url" class="form-control" value="api/serve?key=santiago%2Flogos%2F6%2F1783998320478_Logo_En-Santiago-OG.png" placeholder="O pega una URL de imagen aquí..." oninput="previewEn SantiagoLogo(this.value)">
                                         </div>
                                         <p style="font-size:0.72rem;color:#94a3af8;margin:0;">PNG, JPG o WebP. Al guardar se aplicará el logo a todos los empleos En Santiago existentes.</p>
                                         <input type="file" id="ensantiagoLogoInput" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleEn SantiagoLogoSelect(this)">
@@ -1301,7 +1303,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                             <option value="">-- Cargando negocios... --</option>
                         </select>
                     </div>
-                    <div id="adminEditBizContainer" style="display:none;"></div>
+                    
                 </div>
 
                 <!-- ==================== PREMIUM TAB ==================== -->
@@ -1353,7 +1355,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 <button class="btn btn-sm premium-filter-btn" data-filter="all">
                                     <i class="fas fa-list"></i> Todas
                                 </button>
-                                <div style="flex:1;"></div>
+                                
                                 <button class="btn btn-sm" id="btnRefreshPremium" style="background:var(--color-primary);color:#fff;">
                                     <i class="fas fa-sync-alt"></i> Actualizar
                                 </button>
@@ -1371,12 +1373,12 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 <i class="fas fa-spinner fa-spin fa-2x"></i>
                                 <p style="margin-top:8px;">Cargando solicitudes...</p>
                             </div>
-                            <div id="premiumRequestsList"></div>
+                            
                             <div id="premiumRequestsEmpty" class="empty-state-sm" style="display:none;">
                                 <i class="fas fa-inbox" style="font-size:2rem;color:#d1d5db;"></i>
                                 <p>No hay solicitudes en esta categoria.</p>
                             </div>
-                            <div class="admin-pagination" id="premiumRequestsPagination"></div>
+                            
                         </div>
                     </div>
 
@@ -1417,7 +1419,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                         <tbody id="premiumSearchResultsBody"></tbody>
                                     </table>
                                 </div>
-                                <div class="admin-pagination" id="premiumUsersPagination"></div>
+                                
                             </div>
                             <div id="premiumSearchEmpty" class="empty-state-sm" style="display:none;">
                                 <p>No se encontraron usuarios.</p>
@@ -1586,7 +1588,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 </tbody>
                             </table>
                         </div>
-                        <div id="bazarPagination" style="margin-top:16px;display:flex;justify-content:center;gap:6px;"></div>
+                        
                     </div>
                 </div>
 
@@ -1640,7 +1642,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                             <div id="notifSpecificUserWrap" class="form-group" style="display:none;margin-bottom:14px;">
                                 <label style="font-weight:600;font-size:0.85rem;margin-bottom:4px;display:block;">Buscar usuario</label>
                                 <input type="text" id="notifUserSearch" placeholder="Buscar por nombre o email..." style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.9rem;outline:none;">
-                                <div id="notifUserResults" style="margin-top:6px;max-height:160px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px;display:none;"></div>
+                                
                                 <input type="hidden" id="notifSelectedUserId" value="">
                             </div>
                             <div class="form-group" style="margin-bottom:14px;">
@@ -1667,7 +1669,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 <button class="btn btn-primary" id="notifSendBtn" style="background:#006EE3;"><i class="fas fa-paper-plane"></i> Enviar</button>
                                 <button class="btn btn-secondary" id="notifCancelBtn"><i class="fas fa-times"></i> Cancelar</button>
                             </div>
-                            <div id="notifSendStatus" style="margin-top:10px;display:none;"></div>
+                            
                         </div>
 
                         <!-- Notifications History Table -->
@@ -1689,7 +1691,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 </tbody>
                             </table>
                         </div>
-                        <div id="adminNotifPagination" style="margin-top:16px;display:flex;justify-content:center;gap:6px;"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -1697,7 +1699,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Notification Detail Modal -->
     <div class="modal hidden" id="notifDetailModal">
-        <div class="modal-overlay" onclick="document.getElementById('notifDetailModal').classList.add('hidden')"></div>
+        
         <div class="modal-content" style="max-width:560px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
                 <h3 style="margin:0;font-size:1.1rem;"><i class="fas fa-envelope-open-text" style="color:#006EE3;"></i> Detalle de Notificación</h3>
@@ -1711,22 +1713,22 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
             <div style="margin-bottom:16px;">
                 <label style="font-size:0.75rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;">Título</label>
-                <div id="notifDetailTitle" style="font-size:1.05rem;font-weight:700;color:#1e293b;margin-top:4px;line-height:1.4;"></div>
+                
             </div>
 
             <div style="margin-bottom:16px;">
                 <label style="font-size:0.75rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;">Mensaje</label>
-                <div id="notifDetailMessage" style="font-size:0.95rem;color:#334155;margin-top:4px;line-height:1.6;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0;"></div>
+                
             </div>
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
                 <div>
                     <label style="font-size:0.75rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;">Destinatario</label>
-                    <div id="notifDetailUser" style="font-size:0.9rem;color:#1e293b;margin-top:4px;"></div>
+                    
                 </div>
                 <div>
                     <label style="font-size:0.75rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;">Fecha</label>
-                    <div id="notifDetailDate" style="font-size:0.9rem;color:#1e293b;margin-top:4px;"></div>
+                    
                 </div>
             </div>
 
@@ -1753,7 +1755,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Carousel Add Video Modal -->
     <div class="modal hidden" id="carouselVideoModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content" style="max-width:520px;">
             <div class="modal-header">
                 <h3><i class="fas fa-video" style="color:#dc2626;"></i> Agregar Video al Carrusel</h3>
@@ -1774,7 +1776,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         </label>
                         <span id="carouselVideoFileName" style="font-size:0.82rem;color:#059669;display:none;"><i class="fas fa-check-circle"></i> </span>
                     </div>
-                    <p id="carouselVideoFileError" style="font-size:0.78rem;color:#dc2626;margin-top:4px;display:none;"></p>
+                    
                 </div>
 
                 <!-- Negocio asociado -->
@@ -1812,7 +1814,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Premium Voucher Modal -->
     <div class="modal hidden" id="premiumVoucherModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content" style="max-width:560px;">
             <div class="modal-header">
                 <h3><i class="fas fa-receipt" style="color:#FFD700;"></i> Comprobante de Pago</h3>
@@ -1829,7 +1831,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Premium Manual Activate Modal -->
     <div class="modal hidden" id="premiumActivateModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content" style="max-width:480px;">
             <div class="modal-header">
                 <h3><i class="fas fa-crown" style="color:#FFD700;"></i> Activar Plan Premium</h3>
@@ -1841,7 +1843,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         <i class="fas fa-user" style="color:#fff;font-size:1.4rem;"></i>
                     </div>
                     <h4 id="premiumActivateUserName" style="margin:4px 0 2px;"></h4>
-                    <p id="premiumActivateUserEmail" style="color:#6b7280;font-size:0.85rem;margin:0;"></p>
+                    
                 </div>
                 <div class="form-group">
                     <label for="premiumActivateDuration"><i class="fas fa-calendar"></i> Duracion del Plan</label>
@@ -1866,7 +1868,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Business Detail Modal -->
     <div class="modal hidden" id="adminBusinessModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content modal-lg">
             <div class="modal-header">
                 <h3 id="adminPropModalTitle">Detalle de Negocio</h3>
@@ -1883,7 +1885,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Business Edit Modal -->
     <div class="modal hidden" id="adminBusinessEditModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content modal-lg">
             <div class="modal-header">
                 <h3 id="adminBizEditTitle"><i class="fas fa-building" style="color:#1a73e8"></i> Editar Negocio</h3>
@@ -1934,7 +1936,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     <div class="profile-form-section">
                         <div class="profile-form-section-title"><i class="fas fa-panorama" style="color:#7c3aed;"></i> <span>Imagen de Portada (Banner)</span></div>
                         <p style="font-size:0.82rem;color:#6b7280;margin-bottom:10px;">Esta imagen se muestra como portada tipo Facebook en la página del negocio. Recomendado: 1200x400px.</p>
-                        <div id="bizEditBannerPreview" style="margin-bottom:10px;border-radius:10px;overflow:hidden;max-height:200px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;"></div>
+                        
                         <div class="profile-input-group">
                             <label>Subir Banner</label>
                             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -1957,7 +1959,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     <!-- Imagen de Portada -->
                     <div class="profile-form-section">
                         <div class="profile-form-section-title"><i class="fas fa-image"></i> <span>Imagen de Portada</span></div>
-                        <div id="bizEditImagePreview" style="margin-bottom:10px;"></div>
+                        
                         <div class="profile-input-group">
                             <label>Subir Imagen</label>
                             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -1979,7 +1981,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     <!-- Galería de Imágenes -->
                     <div class="profile-form-section">
                         <div class="profile-form-section-title"><i class="fas fa-images"></i> <span>Galería de Imágenes</span></div>
-                        <div id="bizEditGallery" style="min-height:40px;"></div>
+                        
                         <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
                             <label class="btn btn-primary btn-sm" style="cursor:pointer;margin:0;background:#006EE3;border-color:#006EE3;">
                                 <i class="fas fa-plus"></i> Agregar Imágenes
@@ -2003,13 +2005,13 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                             <div class="profile-input-group">
                                 <label>Teléfono</label>
                                 <div class="profile-input-wrapper"><i class="fas fa-phone"></i>
-                                <input type="tel" id="bizEditPhone" name="phone" placeholder="+58 414 0000000">
+                                <input type="tel" id="bizEditPhone" name="phone" placeholder="+56 9 8721 1321">
                                 </div>
                             </div>
                             <div class="profile-input-group">
                                 <label>WhatsApp</label>
                                 <div class="profile-input-wrapper"><i class="fab fa-whatsapp" style="color:#25d366"></i>
-                                <input type="tel" id="bizEditWhatsApp" name="whatsapp" placeholder="+58 414 0000000">
+                                <input type="tel" id="bizEditWhatsApp" name="whatsapp" placeholder="+56 9 8721 1321">
                                 </div>
                             </div>
                         </div>
@@ -2137,13 +2139,13 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                             <label style="font-size:0.85rem;font-weight:600;color:#374151;margin-bottom:4px;display:block;">
                                 <i class="fas fa-video" style="color:#ef4444;"></i> Videos del Negocio
                             </label>
-                            <div id="bizEditVideosList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px;"></div>
+                            
                             <div style="display:flex;gap:6px;flex-wrap:wrap;">
                                 <input type="url" id="bizEditVideoUrl" placeholder="https://youtube.com/watch?v=... o tiktok.com/..." style="flex:1;min-width:200px;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.85rem;">
                                 <button type="button" id="bizEditVideoAddBtn" style="padding:8px 14px;border-radius:8px;border:none;background:#006EE3;color:#fff;font-size:0.82rem;font-weight:600;cursor:pointer;white-space:nowrap;"><i class="fas fa-plus"></i> Agregar URL</button>
                                 <button type="button" id="bizEditVideoUploadBtn" style="padding:8px 14px;border-radius:8px;border:1px solid #d1d5db;background:#f9fafb;color:#374151;font-size:0.82rem;font-weight:600;cursor:pointer;white-space:nowrap;" onclick="document.getElementById('bizEditVideoFileInput').click()"><i class="fas fa-upload"></i> Subir Video</button>
                             </div>
-                            <div id="bizEditVideoFileInfo" style="margin-top:6px;"></div>
+                            
                             <input type="file" id="bizEditVideoFileInput" accept="video/*" multiple style="display:none;">
                         </div>
                     </div>
@@ -2158,7 +2160,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- User Edit Modal -->
     <div class="modal hidden" id="adminUserModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content modal-lg">
             <div class="modal-header">
                 <h3><i class="fas fa-user-edit" style="color:#1a73e8"></i> Editar Usuario</h3>
@@ -2210,7 +2212,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 <label for="editUserPhone">Teléfono</label>
                                 <div class="profile-input-wrapper">
                                     <i class="fas fa-phone"></i>
-                                    <input type="tel" id="editUserPhone" name="phone" class="form-control" placeholder="+58 414 0000000">
+                                    <input type="tel" id="editUserPhone" name="phone" class="form-control" placeholder="+56 9 8721 1321">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -2219,7 +2221,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                                 </label>
                                 <div class="profile-input-wrapper">
                                     <i class="fab fa-whatsapp" style="color:#25d366"></i>
-                                    <input type="tel" id="editUserWhatsApp" name="whatsapp" class="form-control" placeholder="+58 414 0000000">
+                                    <input type="tel" id="editUserWhatsApp" name="whatsapp" class="form-control" placeholder="+56 9 8721 1321">
                                 </div>
                                 <small class="form-hint">Número que verán los clientes al contactar por WhatsApp</small>
                             </div>
@@ -2274,7 +2276,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Reject Reason Modal -->
     <div class="modal hidden" id="adminRejectModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fas fa-ban text-danger"></i> Rechazar Negocio</h3>
@@ -2297,7 +2299,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Message Detail Modal -->
     <div class="modal hidden" id="adminMsgModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fas fa-envelope-open"></i> Detalle del Mensaje</h3>
@@ -2314,7 +2316,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Confirm Delete Modal -->
     <div class="modal hidden" id="adminDeleteModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fas fa-exclamation-triangle text-danger"></i> Confirmar Eliminación</h3>
@@ -2334,7 +2336,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Create Job Modal -->
     <div class="modal hidden" id="adminJobModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content modal-lg">
             <div class="modal-header">
                 <h3><i class="fas fa-briefcase" style="color:#6366f1"></i> Publicar Oferta de Empleo</h3>
@@ -2406,7 +2408,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     </div>
                     <div class="form-group">
                         <label for="jobContactPhone">Teléfono de Contacto</label>
-                        <input type="tel" id="jobContactPhone" name="contact_phone" placeholder="+58 414 000-0000">
+                        <input type="tel" id="jobContactPhone" name="contact_phone" placeholder="+56 9 0000 0000">
                     </div>
                 </div>
             </div>
@@ -2421,7 +2423,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Edit Inmueble Modal -->
     <div class="modal hidden" id="adminInmuebleEditModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content modal-xl">
             <div class="modal-header">
                 <h3><i class="fas fa-edit" style="color:#6366f1"></i> Editar Inmueble <span id="editInmuebleId"></span></h3>
@@ -2502,7 +2504,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     </div>
                     <div class="form-group">
                         <label for="eiWhatsApp">WhatsApp</label>
-                        <input type="tel" id="eiWhatsApp" placeholder="+58 414 000-0000">
+                        <input type="tel" id="eiWhatsApp" placeholder="+56 9 0000 0000">
                     </div>
                 </div>
                 <div class="form-row">
@@ -2555,7 +2557,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                 <!-- Imágenes actuales -->
                 <div class="form-group">
                     <label>Imágenes actuales <small style="color:#888;">(se eliminan individualmente)</small></label>
-                    <div id="eiImagesList" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;"></div>
+                    
                 </div>
                 <!-- Agregar imagen por URL -->
                 <div class="form-row">
@@ -2576,7 +2578,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                 <!-- Videos -->
                 <div class="form-group">
                     <label>Videos <small style="color:#888;">(URLs de YouTube, TikTok, etc.)</small></label>
-                    <div id="eiVideoList"></div>
+                    
                     <button class="btn btn-outline btn-sm" id="eiAddVideoBtn" type="button" style="margin-top:6px;"><i class="fas fa-plus"></i> Agregar video</button>
                 </div>
             </div>
@@ -2588,7 +2590,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
     </div>
 
     <!-- Toast Notification -->
-    <div class="toast-container" id="toastContainer"></div>
+    
 
     <style>
         .modal-xl { max-width: 95vw; max-height: 92vh; }
@@ -2749,7 +2751,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Productos B2 Modal -->
     <div class="modal hidden" id="adminProductsB2Modal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content modal-xl">
             <div class="modal-header">
                 <h3><i class="fas fa-boxes-stacked" style="color:#006EE3;"></i> Productos B2 - Gestión Completa</h3>
@@ -2765,7 +2767,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         <option value="rejected">Rechazados</option>
                     </select>
                     <input type="text" id="b2SearchInput" class="form-input-sm" placeholder="Buscar producto...">
-                    <div style="flex:1;"></div>
+                    
                     <span id="b2ResultsCount" style="font-size:0.82rem;color:#64748b;">0 productos</span>
                     <button class="btn btn-primary btn-sm" id="b2CreateBtn" style="background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;font-weight:700;">
                         <i class="fas fa-plus"></i> Nuevo Producto
@@ -2795,7 +2797,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                 </div>
                 <!-- Pagination -->
                 <div style="padding:12px 20px;border-top:1px solid #e5e7eb;">
-                    <div id="b2Pagination" style="display:flex;align-items:center;justify-content:center;gap:6px;"></div>
+                    
                 </div>
             </div>
         </div>
@@ -2803,7 +2805,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
 
     <!-- Product Edit Sub-Modal (nested inside Products B2) -->
     <div class="modal hidden" id="b2EditModal">
-        <div class="modal-overlay"></div>
+        
         <div class="modal-content" style="max-width:560px;">
             <div class="modal-header">
                 <h3 id="b2EditTitle"><i class="fas fa-edit"></i> Editar Producto</h3>
@@ -2855,7 +2857,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     </div>
                     <div class="profile-form-section">
                         <div class="profile-form-section-title"><i class="fas fa-image"></i> <span>Imagen del Producto</span></div>
-                        <div id="b2EditImagePreview" style="margin-bottom:10px;"></div>
+                        
                         <div class="profile-input-group">
                             <label>Subir Imagen</label>
                             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">

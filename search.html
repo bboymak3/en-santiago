@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
-<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KBV8M0TFFV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-RYF2N8ZD15');
+  gtag('config', 'G-KBV8M0TFFV');
 </script>
     <meta charset="UTF-8">
+    <link rel="canonical" href="https://en-santiago.com/search.html">
     <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explorar negocios en Santiago de Chile - Restaurantes, farmacias, tiendas, profesionales y más.">
@@ -28,25 +22,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="og:site_name" content="En Santiago">
     <meta property="og:locale" content="es_CL">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
+    <meta property="og:image" content="https://en-santiago.com/images/En-Santiago-OG.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://en-santiago.pages.dev/search.html">
+    <meta property="og:url" content="https://en-santiago.com/search.html">
     <meta name="twitter:title" content="Explorar Negocios - En Santiago Santiago de Chile">
     <meta name="twitter:description" content="Busca y explora negocios en todo Santiago de Chile. Restaurantes, farmacias, tiendas, profesionales y más.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
+    <meta name="twitter:image" content="https://en-santiago.com/images/En-Santiago-OG.png">
     <link rel="stylesheet" href="css/styles.css?v=12">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Leaflet for mini map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="/js/compress-image.js"></script>
+<script src="/js/compress-image-auto.js"></script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <!-- Navigation -->
+<!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
@@ -67,7 +59,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i class="fas fa-globe-americas"></i>
                         <span>Todo Santiago de Chile</span>
                     </div>
-                    <div class="location-divider"></div>
+                    
                     <div class="location-list" id="locationList">
                         <!-- States loaded dynamically -->
                     </div>
@@ -88,7 +80,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                     <ul class="nav-dropdown-menu">
                         <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
@@ -115,7 +107,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- FIX: Banner configurable desde el admin -->
         <section class="search-hero-banner" id="searchHeroBanner" style="display:none;position:relative;width:100%;height:200px;overflow:hidden;background:linear-gradient(135deg,#1e3a5f,#2563eb);">
             <img id="searchBannerImg" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
-            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);"></div>
+            
             <div style="position:absolute;bottom:20px;left:20px;right:20px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
                 <h1 style="font-size:1.8rem;font-weight:800;margin:0;">Explorar Negocios</h1>
                 <p style="font-size:0.95rem;margin:4px 0 0;opacity:0.9;">Encuentra negocios, productos y servicios en Santiago de Chile</p>
@@ -341,7 +333,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
-                    <div id="searchMiniMap"></div>
+                    
                 </div>
             </div>
         </div>
@@ -360,7 +352,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <!-- Toast Notification -->
-    <div class="toast-container" id="toastContainer"></div>
+    
 
     <script src="js/app.js?v=10"></script>
     <script src="js/dynamic-categories.js?v=1"></script>

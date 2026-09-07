@@ -95,7 +95,7 @@ export function renderBusinessPage(env, business, options = {}) {
     reviewCount = 0,
   } = options;
 
-  const baseUrl = 'https://en-santiago.pages.dev';
+  const baseUrl = 'https://en-santiago.com';
   const title = business.title || 'Negocio';
   // Use custom SEO description if provided, otherwise auto-generate
   const description = business.seo_description
@@ -103,7 +103,7 @@ export function renderBusinessPage(env, business, options = {}) {
     : business.description
       ? business.description.substring(0, 160)
       : `Información sobre ${title} en ${business.city || 'Santiago de Chile'}. Dirección, contacto, servicios y más.`;
-  const imageUrl = business.cover_image || `${baseUrl}/images/En Santiago.png`;
+  const imageUrl = business.cover_image || `${baseUrl}/images/En-Santiago-OG.png`;
   const finalCanonical = canonicalUrl || `${baseUrl}${pathPrefix || '/negocio'}/${business.slug}`;
 
   // Breadcrumb helpers
@@ -117,21 +117,14 @@ export function renderBusinessPage(env, business, options = {}) {
   const html = `<!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TMH9V9QQ');</script>
-<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYF2N8ZD15"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KBV8M0TFFV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-RYF2N8ZD15');
+  gtag('config', 'G-KBV8M0TFFV');
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -227,14 +220,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     <script type="application/ld+json">${(() => {
       const crumbs = [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" },
-        { "@type": "ListItem", "position": 2, "name": sectionBreadcrumbText, "item": "https://en-santiago.pages.dev/search.html" }
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.com/" },
+        { "@type": "ListItem", "position": 2, "name": sectionBreadcrumbText, "item": "https://en-santiago.com/search.html" }
       ];
       if (categoryBreadcrumb) {
-        crumbs.push({ "@type": "ListItem", "position": 3, "name": categoryBreadcrumb.name, "item": categoryBreadcrumb.url.startsWith('http') ? categoryBreadcrumb.url : "https://en-santiago.pages.dev" + categoryBreadcrumb.url });
+        crumbs.push({ "@type": "ListItem", "position": 3, "name": categoryBreadcrumb.name, "item": categoryBreadcrumb.url.startsWith('http') ? categoryBreadcrumb.url : "https://en-santiago.com" + categoryBreadcrumb.url });
       } else if (business.category_name) {
         const catSlug = (business.category_name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        crumbs.push({ "@type": "ListItem", "position": 3, "name": business.category_name, "item": "https://en-santiago.pages.dev/categoria/" + catSlug });
+        crumbs.push({ "@type": "ListItem", "position": 3, "name": business.category_name, "item": "https://en-santiago.com/categoria/" + catSlug });
       }
       crumbs.push({ "@type": "ListItem", "position": crumbs.length + 1, "name": title, "item": finalCanonical });
       return JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": crumbs });
@@ -952,11 +945,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMH9V9QQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <!-- Navigation -->
+<!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/index.html" class="nav-logo">
@@ -977,8 +966,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i class="fas fa-globe-americas"></i>
                         <span>Todo Santiago de Chile</span>
                     </div>
-                    <div class="location-divider"></div>
-                    <div class="location-list" id="locationList"></div>
+                    
+                    
                 </div>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
@@ -994,7 +983,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <button class="nav-dropdown-toggle" aria-label="Más opciones">Más <i class="fas fa-chevron-down"></i></button>
                     <ul class="nav-dropdown-menu">
                         <li><a href="/marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
-                        <li class="nav-dropdown-divider"></li>
+                        
                         <li><a href="/emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
@@ -1101,17 +1090,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="gallery-all-grid" id="galleryAllGrid" style="display:none;">
                         <!-- Grid con TODAS las fotos, se despliega al hacer click en "Ver todas" -->
                     </div>
-                    <div class="gallery-badges" id="galleryBadges"></div>
+                    
                 </div>
 
                 <div class="business-section hidden" id="featuresSection">
                     <h2 class="business-section-title">Características</h2>
-                    <div class="features-list" id="featuresList"></div>
+                    
                 </div>
 
                 <div class="business-section map-section-wrapper hidden" id="mapSection">
                     <h2 class="business-section-title">Ubicación</h2>
-                    <div class="business-map" id="businessMap"></div>
+                    
                     <button class="open-map-modal-btn" id="openMapModalBtn"><i class="fas fa-expand"></i> Ver en Mapa Completo</button>
                 </div>
 
@@ -1183,14 +1172,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <h2 class="business-section-title"><i class="fas fa-boxes-stacked" style="color:#006EE3;"></i> Productos</h2>
                         <a href="/marketplace.html" class="section-link" id="viewAllProducts">Ver más <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="products-grid" id="businessProductsGrid"></div>
+                    
                 </section>
 
                 <section class="business-section" id="servicesSection" style="display:none;">
                     <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
                         <h2 class="business-section-title"><i class="fas fa-concierge-bell" style="color:#f59e0b;"></i> Servicios</h2>
                     </div>
-                    <div class="services-list" id="businessServicesList"></div>
+                    
                 </section>
 
                 <section class="business-section" id="jobsSection" style="display:none;">
@@ -1198,7 +1187,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <h2 class="business-section-title" style="font-size:1.1rem;margin:0;"><i class="fas fa-briefcase" style="color:#1a73e8;"></i> Empleo</h2>
                         <a href="/empleo.html" class="section-link" id="viewAllJobs" style="display:none;">Ver más <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="jobs-list" id="businessJobsList"></div>
+                    
                     <div id="businessJobsEmpty" style="display:none;text-align:center;padding:12px 16px;">
                         <a href="/empleo.html" class="btn btn-secondary" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:0.82rem;border-radius:8px;text-decoration:none;width:auto;max-width:240px;justify-content:center;margin:0 auto;"><i class="fas fa-briefcase"></i> Ir a ofertas de empleo</a>
                     </div>
@@ -1210,7 +1199,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <h2 class="section-title" style="display:flex;align-items:center;gap:8px;"><i class="fas fa-store" style="color:#006EE3;font-size:0.9rem;"></i> Negocios Similares</h2>
                     <a href="/search.html" class="section-link" style="font-size:0.8rem;">Ver más <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="business-grid" id="similarGrid"></div>
+                
             </section>
         </div>
     </main>
@@ -1220,7 +1209,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
         <img id="lightboxImage" src="" alt="" class="lightbox-img">
         <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
-        <div class="lightbox-counter" id="lightboxCounter"></div>
+        
     </div>
 
     <div class="map-modal" id="mapModal">
@@ -1228,15 +1217,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h3><i class="fas fa-map-marker-alt"></i> Ubicación del Negocio</h3>
             <button class="map-modal-close" id="mapModalClose" aria-label="Cerrar mapa"><i class="fas fa-times"></i></button>
         </div>
-        <div class="map-modal-body"><div id="mapModalMap"></div></div>
+        <div class="map-modal-body"></div>
     </div>
 
-    <div class="toast-container" id="toastContainer"></div>
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
                 <p>&copy; ${new Date().getFullYear()} En Santiago. Todos los derechos reservados.</p>
-                <p><a href="https://maps.app.goo.gl/Jz2QTADrNNneQtGd9" target="_blank" rel="noopener noreferrer">Página web desarrollada por Grupo 360 Soluciones</a></p>
+                
                 <p><a href="http://coporo.pages.dev/" target="_blank" rel="noopener noreferrer">Diseño de páginas webs - SEO Local -</a></p>
             </div>
         </div>

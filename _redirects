@@ -4,9 +4,18 @@
 # Robots.txt: servido como archivo estático (no necesita redirect a Function)
 # El archivo robots.txt en la raíz tiene el contenido correcto.
 
-# Redirecciones de páginas antiguas o renombradas
+# === REDIRECCIONES SEO CRÍTICAS ===
+# Evitar contenido duplicado: /index.html -> / (canonical)
+/index.html / 301
+
+# === Redirecciones de páginas antiguas o renombradas ===
 /reservar.html /reservas.html 301
 /cupón.html /cupones.html 301
 /eventos /entretenimiento.html 301
 /negocio.html /search.html 301
 /registro.html /new-business.html 301
+
+# === Redirección de URLs venezolanas (heredadas de HolaX) ===
+# Cualquier /estado/venezuela -> homepage
+/venezuela/* / 301
+/holax/* / 301
