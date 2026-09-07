@@ -232,9 +232,70 @@ export async function onRequestPut(context) {
     setClauses.push("updated_at = datetime('now')");
     bindings.push(id);
 
-    await env.DB.prepare(
-      `UPDATE businesses SET ${setClauses.join(', ')} WHERE id = ?`
-    ).bind(...bindings).run();
+    // FIX: Si una columna no existe en la DB (ej. custom_jsonld), el UPDATE
+    // fallaría con 500. Para evitarlo, ejecutamos el UPDATE dentro de un try/catch
+    // y si falla por columna faltante, intentamos agregarla y reintentar.
+    try {
+      await env.DB.prepare(
+        `UPDATE businesses SET ${setClauses.join(', ')} WHERE id = ?`
+      ).bind(...bindings).run();
+    } catch (updateErr) {
+      // Si el error es por columna faltante, agregarla y reintentar
+      if (updateErr.message && updateErr.message.includes('no such column')) {
+        const match = updateErr.message.match(/no such column: (\w+)/);
+        if (match && match[1]) {
+          const missingCol = match[1];
+          try {
+            await env.DB.prepare(`ALTER TABLE businesses ADD COLUMN ${missingCol} TEXT`).run();
+            // Reintentar el UPDATE original
+            await env.DB.prepare(
+              `UPDATE businesses SET ${setClauses.join(', ')} WHERE id = ?`
+            ).bind(...bindings).run();
+          } catch (alterErr) {
+            console.error('ALTER TABLE failed:', alterErr.message);
+            return new Response(JSON.stringify({
+              error: 'Error interno del servidor',
+              details: `No se pudo agregar la columna faltante ${missingCol}: ${alterErr.message}`
+            }), {
+              status: 500,
+              headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            });
+          }
+        } else {
+          throw updateErr;
+        }
+      } else {
+        throw updateErr;
+      }
+    }
+
+    // FIX: Geocodificación automática al editar negocio.
+    // Si el usuario cambió la dirección pero no proporcionó lat/lng,
+    // intentar geocodificar para que aparezca en el mapa.
+    if (body.address !== undefined && !body.lat && !body.lng) {
+      try {
+        const existingBiz = await env.DB.prepare('SELECT address, city, state, lat, lng FROM businesses WHERE id = ?').bind(id).first();
+        const finalAddr = body.address !== undefined ? body.address : existingBiz?.address;
+        const finalCity = body.city !== undefined ? body.city : existingBiz?.city;
+        const finalState = body.state !== undefined ? body.state : existingBiz?.state;
+        const addrParts = [finalAddr, finalCity, finalState, 'Chile'].filter(Boolean).join(', ');
+        if (addrParts && (!existingBiz?.lat || !existingBiz?.lng)) {
+          const q = encodeURIComponent(addrParts);
+          const resp = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1&countrycodes=cl`, {
+            headers: { 'User-Agent': 'en-santiago-pages/1.0 (correo36000@gmail.com)' },
+          });
+          if (resp.ok) {
+            const arr = await resp.json();
+            if (arr && arr.length > 0 && arr[0].lat && arr[0].lon) {
+              await env.DB.prepare('UPDATE businesses SET lat = ?, lng = ? WHERE id = ?')
+                .bind(parseFloat(arr[0].lat), parseFloat(arr[0].lon), id).run();
+            }
+          }
+        }
+      } catch (geoErr) {
+        console.error('Geocoding failed (non-blocking):', geoErr.message);
+      }
+    }
 
     return new Response(JSON.stringify({
       message: 'Negocio actualizado exitosamente',

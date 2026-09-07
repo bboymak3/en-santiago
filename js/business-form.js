@@ -762,6 +762,7 @@
         const whatsapp = getValue('propWhatsapp');
         const emailContact = getValue('propEmail');
         const website = getValue('propWebsite');
+        const googleMapsUrl = getValue('propGoogleMapsUrl');
         const instagram = getValue('propInstagram');
         const facebook = getValue('propFacebook');
         const twitter = getValue('propTwitter');
@@ -840,6 +841,7 @@
             phone,
             whatsapp,
             website,
+            google_maps_url: googleMapsUrl || '',
             instagram,
             facebook,
             twitter,
@@ -1106,7 +1108,7 @@
         videoFileInput.addEventListener('change', function() {
             var files = this.files;
             if (!files || !files.length) return;
-            var token = localStorage.getItem('ensantiago_token') || localStorage.getItem('token');
+            var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
             var infoDiv = document.getElementById('bizFormVideoFileInfo');
 
             Array.from(files).forEach(function(file) {
@@ -1198,7 +1200,7 @@
 
             try {
                 var headers = { 'Content-Type': 'application/json' };
-                var token = localStorage.getItem('en-santiago_token');
+                var token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
                 if (token) headers['Authorization'] = 'Bearer ' + token;
 
                 var resp = await fetch('/api/category-suggestions', {

@@ -164,11 +164,13 @@ function populateBusinessDetail(b) {
     }
 
     const mainImage = document.getElementById('mainImage');
-    const galleryThumbnails = document.getElementById('galleryThumbnails');
+    const galleryThumbs = document.getElementById('galleryThumbs');  // FIX: ID correcto (sin "nails")
     const galleryCurrent = document.getElementById('galleryCurrent');
     const galleryTotal = document.getElementById('galleryTotal');
     const galleryBadges = document.getElementById('galleryBadges');
     const businessGallery = document.getElementById('businessGallery');
+    const galleryViewAllBtn = document.getElementById('galleryViewAllBtn');
+    const galleryAllGrid = document.getElementById('galleryAllGrid');
 
     const placeholderImg = 'data:image/svg+xml,' + encodeURIComponent(
         '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" fill="%23e0e0e0"><rect width="800" height="600"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23999" font-size="20" font-family="sans-serif">Sin imagen</text></svg>'
@@ -177,16 +179,12 @@ function populateBusinessDetail(b) {
     if (images.length === 0) {
         if (mainImage) mainImage.src = placeholderImg;
         if (mainImage) mainImage.alt = b.title || 'Sin imagen';
-        if (businessGallery) {
-            // Hide navigation if no images
-            const prevBtn = document.getElementById('galleryPrev');
-            const nextBtn = document.getElementById('galleryNext');
-            if (prevBtn) prevBtn.style.display = 'none';
-            if (nextBtn) nextBtn.style.display = 'none';
-        }
-        if (galleryThumbnails) galleryThumbnails.style.display = 'none';
+        if (businessGallery) businessGallery.style.display = 'none';
     } else {
-        // Set main image
+        // FIX: Galería con 3 niveles:
+        // 1. Foto principal grande (la primera)
+        // 2. Carrusel de miniaturas con TODAS las fotos (scroll-x, swipe con dedo)
+        // 3. Botón "Ver todas las fotos" → despliega grid con todas las fotos inline
         if (mainImage) {
             mainImage.src = images[0].url || placeholderImg;
             mainImage.alt = b.title || 'Negocio';
@@ -194,16 +192,42 @@ function populateBusinessDetail(b) {
         if (galleryCurrent) galleryCurrent.textContent = '1';
         if (galleryTotal) galleryTotal.textContent = images.length;
 
-        // Build thumbnails
-        if (galleryThumbnails) {
-            galleryThumbnails.innerHTML = images.map((img, i) => `
+        // Build thumbnails (carrusel desplazable con scroll-x)
+        if (galleryThumbs) {
+            galleryThumbs.innerHTML = images.map((img, i) => `
                 <div class="gallery-thumb ${i === 0 ? 'active' : ''}" data-index="${i}" onclick="setGalleryImage(${i})">
                     <img src="${img.url}" alt="Imagen ${i + 1}" loading="lazy" onerror="this.src='${placeholderImg}'">
                 </div>
             `).join('');
         }
 
-        // Init gallery navigation
+        // Botón "Ver todas las fotos" → solo si hay más de 1 foto
+        if (galleryViewAllBtn) {
+            if (images.length > 1) {
+                galleryViewAllBtn.style.display = '';
+                galleryViewAllBtn.onclick = () => {
+                    const isExpanded = galleryAllGrid.style.display !== 'none';
+                    if (isExpanded) {
+                        // Ocultar grid
+                        galleryAllGrid.style.display = 'none';
+                        galleryViewAllBtn.classList.remove('expanded');
+                        galleryViewAllBtn.innerHTML = '<i class="fas fa-images"></i> Ver todas las fotos';
+                    } else {
+                        // Mostrar grid con TODAS las fotos
+                        galleryAllGrid.innerHTML = images.map((img, i) => `
+                            <img src="${img.url}" alt="Imagen ${i + 1}" loading="lazy" onclick="openLightboxAt(${i})" onerror="this.src='${placeholderImg}'">
+                        `).join('');
+                        galleryAllGrid.style.display = 'grid';
+                        galleryViewAllBtn.classList.add('expanded');
+                        galleryViewAllBtn.innerHTML = '<i class="fas fa-times"></i> Ocultar fotos';
+                    }
+                };
+            } else {
+                galleryViewAllBtn.style.display = 'none';
+            }
+        }
+
+        // Init gallery navigation (click en foto principal → lightbox)
         initGallery(images);
     }
 
@@ -323,31 +347,25 @@ function populateBusinessDetail(b) {
     const featDelivery = document.getElementById('statFeatureDelivery');
     if (featDelivery) featDelivery.style.display = b.has_delivery ? '' : 'none';
 
+    // FIX: Badge adicional "Servicio a Domicilio" (mismo flag has_delivery)
+    const featServicioDomicilio = document.getElementById('statFeatureServicioDomicilio');
+    if (featServicioDomicilio) featServicioDomicilio.style.display = b.has_delivery ? '' : 'none';
+
     // Feature: Outdoor
     const featOutdoor = document.getElementById('statFeatureOutdoor');
     if (featOutdoor) featOutdoor.style.display = b.has_outdoor ? '' : 'none';
 
     // ─── Description ──────────────────────────────────────────
+    // FIX: La descripción se muestra SIEMPRE COMPLETA, sin collapse ni degradado.
+    // Solo tiene justificación del texto (sin otros efectos).
     const descEl = document.getElementById('propDescription');
     const descToggle = document.getElementById('descriptionToggle');
     if (descEl) {
         if (b.description) {
             descEl.innerHTML = `<p>${escapeHtml(b.description)}</p>`;
-            // Check if description is long enough for collapse
-            if (b.description.length > 200) {
-                descEl.classList.add('collapsed');
-                if (descToggle) {
-                    descToggle.style.display = '';
-                    descToggle.onclick = () => {
-                        descEl.classList.toggle('collapsed');
-                        descToggle.innerHTML = descEl.classList.contains('collapsed')
-                            ? 'Leer más <i class="fas fa-chevron-down"></i>'
-                            : 'Leer menos <i class="fas fa-chevron-up"></i>';
-                    };
-                }
-            } else {
-                descEl.classList.remove('collapsed');
-            }
+            // Sin collapse, sin "Leer más": siempre desplegada
+            descEl.classList.remove('collapsed');
+            if (descToggle) descToggle.style.display = 'none';
         } else {
             descEl.innerHTML = '<p>Sin descripción disponible.</p>';
             if (descToggle) descToggle.style.display = 'none';
@@ -575,14 +593,17 @@ function initGallery(images) {
     galleryImages = images;
     currentGalleryIndex = 0;
 
-    const prevBtn = document.getElementById('galleryPrev');
-    const nextBtn = document.getElementById('galleryNext');
-
-    if (prevBtn) {
-        prevBtn.onclick = () => setGalleryImage(currentGalleryIndex - 1);
+    // Click en la foto principal o botón zoom → abre lightbox
+    const mainWrap = document.getElementById('galleryMainWrap');
+    const zoomBtn = document.getElementById('galleryZoomBtn');
+    if (mainWrap) {
+        mainWrap.addEventListener('click', () => openLightboxAt(currentGalleryIndex));
     }
-    if (nextBtn) {
-        nextBtn.onclick = () => setGalleryImage(currentGalleryIndex + 1);
+    if (zoomBtn) {
+        zoomBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLightboxAt(currentGalleryIndex);
+        });
     }
 }
 
@@ -607,15 +628,31 @@ function setGalleryImage(index) {
     }
     if (galleryCurrent) galleryCurrent.textContent = index + 1;
 
-    // Update active thumbnail
+    // Update active thumbnail y hacer scroll al activo en la franja
     document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
         thumb.classList.toggle('active', i === index);
     });
+
+    // Scroll suave al thumbnail activo (para que sea visible en el carrusel)
+    const activeThumb = document.querySelector('.gallery-thumb.active');
+    if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
 }
 
 // ─── Lightbox ────────────────────────────────────────────────
-function initLightbox(images) {
-    let lightboxIndex = currentGalleryIndex;
+// FIX: El botón "atrás" del lightbox NAVEGA a la foto anterior,
+// NO cierra el lightbox ni sale de la web. El único botón que
+// cierra es la X (lightboxClose).
+function openLightboxAt(index) {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox || galleryImages.length === 0) return;
+    lightbox.classList.remove('hidden');
+    initLightbox(galleryImages, index);
+}
+
+function initLightbox(images, startIndex) {
+    let lightboxIndex = (typeof startIndex === 'number') ? startIndex : currentGalleryIndex;
 
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
@@ -634,6 +671,7 @@ function initLightbox(images) {
         if (lightboxCounter) lightboxCounter.textContent = `${lightboxIndex + 1} / ${images.length}`;
     }
 
+    // FIX: Botón "anterior" navega a la foto anterior (con wrap), NO cierra el lightbox
     if (lightboxPrev) {
         lightboxPrev.onclick = (e) => {
             e.stopPropagation();
@@ -642,6 +680,7 @@ function initLightbox(images) {
         };
     }
 
+    // FIX: Botón "siguiente" navega a la foto siguiente (con wrap)
     if (lightboxNext) {
         lightboxNext.onclick = (e) => {
             e.stopPropagation();
@@ -650,17 +689,21 @@ function initLightbox(images) {
         };
     }
 
+    // FIX: Solo la X cierra el lightbox (no los botones de navegación)
     if (lightboxClose) {
-        lightboxClose.onclick = () => lightbox.classList.add('hidden');
+        lightboxClose.onclick = (e) => {
+            e.stopPropagation();
+            lightbox.classList.add('hidden');
+        };
     }
 
-    // Close on backdrop click
-    lightbox.addEventListener('click', (e) => {
+    // Click en backdrop (el fondo negro) también cierra, PERO no en la imagen ni botones
+    lightbox.onclick = (e) => {
         if (e.target === lightbox) lightbox.classList.add('hidden');
-    });
+    };
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
+    // Keyboard: ESC cierra, flechas navegan
+    document.onkeydown = (e) => {
         if (lightbox.classList.contains('hidden')) return;
         if (e.key === 'Escape') lightbox.classList.add('hidden');
         if (e.key === 'ArrowLeft') {
@@ -671,12 +714,14 @@ function initLightbox(images) {
             lightboxIndex = (lightboxIndex + 1) % images.length;
             updateLightbox();
         }
-    });
+    };
 
     updateLightbox();
 }
 
 // ─── Similar Businesses ─────────────────────────────────────
+// FIX: Rediseñado como carrusel horizontal desplazable con el dedo.
+// Tarjetas fijas con datos precisos centrados: logo, nombre, categoría, tipo.
 async function loadSimilarBusinesses(currentBusiness) {
     const similarSection = document.getElementById('similarSection');
     const similarGrid = document.getElementById('similarGrid');
@@ -684,7 +729,7 @@ async function loadSimilarBusinesses(currentBusiness) {
     if (!similarSection || !similarGrid) return;
 
     try {
-        let endpoint = `/businesses?status=approved&limit=4`;
+        let endpoint = `/businesses?status=approved&limit=10`;
         if (currentBusiness.category_id) {
             endpoint += `&category_id=${currentBusiness.category_id}`;
         } else if (currentBusiness.category_slug) {
@@ -698,7 +743,29 @@ async function loadSimilarBusinesses(currentBusiness) {
         let businesses = (data.businesses || []).filter(b => b.id !== currentBusiness.id);
 
         if (businesses.length > 0) {
-            similarGrid.innerHTML = businesses.slice(0, 4).map(b => createBusinessCard(b)).join('');
+            // FIX: Nueva tarjeta compacta centrada con datos precisos
+            const placeholderImg = 'data:image/svg+xml,' + encodeURIComponent(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="%23f1f5f9"><rect width="200" height="200"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%2394a3b8" font-size="40" font-family="sans-serif">📷</text></svg>'
+            );
+            similarGrid.innerHTML = businesses.slice(0, 10).map(b => {
+                const logo = b.logo || b.cover_image || b.images?.[0]?.url || placeholderImg;
+                const name = b.title || 'Sin nombre';
+                const category = b.category_name || '';
+                const type = b.business_type ? getBusinessTypeLabel(b.business_type) : '';
+                const bizUrl = getBusinessUrl(b);
+                return `
+                    <a href="${bizUrl}" class="similar-biz-card">
+                        <div class="similar-biz-logo">
+                            <img src="${logo}" alt="${escapeHtml(name)}" loading="lazy" onerror="this.src='${placeholderImg}'">
+                        </div>
+                        <div class="similar-biz-info">
+                            <h4 class="similar-biz-name">${escapeHtml(name)}</h4>
+                            ${category ? `<div class="similar-biz-cat"><i class="fas fa-tag"></i> ${escapeHtml(category)}</div>` : ''}
+                            ${type ? `<div class="similar-biz-type"><i class="fas fa-store"></i> ${escapeHtml(type)}</div>` : ''}
+                        </div>
+                    </a>
+                `;
+            }).join('');
             similarSection.classList.remove('hidden');
         }
     } catch (error) {
@@ -761,23 +828,27 @@ async function loadBusinessJobs(businessId) {
     const sectionHeader = section ? section.querySelector('.section-header') : null;
     if (!section) return;
 
-    // Always show the jobs section
-    section.style.display = '';
+    // FIX: Por defecto, OCULTAR la sección completa. Solo se muestra si el negocio
+    // tiene ofertas de empleo asociadas. Antes se mostraba siempre con un botón
+    // "Ir a ofertas de empleo" aunque no tuviera ofertas, lo cual no tenía sentido.
+    section.style.display = 'none';
 
     try {
         const data = await api.get(`/jobs?business_id=${businessId}&limit=10`);
         const jobs = data.jobs || [];
 
         if (jobs.length === 0) {
-            // No jobs — hide list and header title, show only "Ver Empleos" button
+            // No jobs asociados al negocio → OCULTAR toda la sección Empleo
+            section.style.display = 'none';
             if (list) list.style.display = 'none';
             if (viewAll) viewAll.style.display = 'none';
             if (sectionHeader) sectionHeader.style.display = 'none';
-            if (emptyDiv) emptyDiv.style.display = '';
+            if (emptyDiv) emptyDiv.style.display = 'none';
             return;
         }
 
-        // Has jobs — show list and "Ver más" link
+        // Tiene empleos asociados → mostrar sección completa con la lista
+        section.style.display = '';
         if (list) list.style.display = '';
         if (emptyDiv) emptyDiv.style.display = 'none';
         if (sectionHeader) sectionHeader.style.display = '';
@@ -793,10 +864,11 @@ async function loadBusinessJobs(businessId) {
             </a>
         `).join('');
     } catch (err) {
-        // On error, show only "Ver Empleos" button
+        // On error: ocultar toda la sección (no mostrar el botón suelto)
+        section.style.display = 'none';
         if (list) list.style.display = 'none';
         if (sectionHeader) sectionHeader.style.display = 'none';
-        if (emptyDiv) emptyDiv.style.display = '';
+        if (emptyDiv) emptyDiv.style.display = 'none';
         console.warn('Error loading business jobs:', err);
     }
 }

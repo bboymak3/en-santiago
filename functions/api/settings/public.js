@@ -36,6 +36,14 @@ const PUBLIC_KEYS = [
   'empleo_banner_url',
   'whatsapp_number',
   'contact_email',
+  // FIX: nuevos toggles para secciones destacadas del home
+  'featured_businesses_enabled',
+  'featured_medical_enabled',
+  'featured_properties_enabled',
+  'featured_products_enabled',
+  'featured_jobs_enabled',
+  // FIX: banner de la página de búsqueda
+  'search_banner_url',
 ];
 
 export async function onRequestGet(context) {
@@ -115,6 +123,13 @@ export async function onRequestGet(context) {
       empleo_banner_url: '',
       whatsapp_number: '',
       contact_email: '',
+      // FIX: defaults para secciones destacadas del home (activas por defecto)
+      featured_businesses_enabled: '1',
+      featured_medical_enabled: '1',
+      featured_properties_enabled: '1',
+      featured_products_enabled: '1',
+      featured_jobs_enabled: '1',
+      search_banner_url: '',
     };
 
     const response = {};

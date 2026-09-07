@@ -9259,41 +9259,32 @@ a.btn-icon {
 }
 
 /* Compact Description */
+/* FIX: Descripción siempre visible completa, sin collapse ni degradado.
+   Único efecto: justificación del texto. */
 .compact-description {
     font-size: var(--font-size-sm);
     color: var(--color-text);
     line-height: 1.7;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .compact-description.collapsed {
-    max-height: 80px;
-    overflow: hidden;
-    position: relative;
+    /* Sin max-height, sin overflow: siempre desplegado */
+    max-height: none;
+    overflow: visible;
+    position: static;
 }
 
 .compact-description.collapsed::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-    background: linear-gradient(transparent, var(--color-white));
-    pointer-events: none;
+    /* Sin degradado */
+    content: none;
+    display: none;
 }
 
+/* FIX: ocultar botón Leer más/Leer menos, no se usa más */
 .description-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-primary);
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: var(--space-xs) 0;
-    margin-top: var(--space-xs);
+    display: none !important;
 }
 
 .description-toggle:hover {

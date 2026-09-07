@@ -155,7 +155,9 @@ export async function onRequestGet(context) {
           c.name as category_name, c.slug as category_slug,
           tn.slug as tipo_negocio_slug, tn.name as tipo_negocio_name,
           u.name as owner_name, u.phone as owner_phone, u.whatsapp as owner_whatsapp, u.avatar as owner_avatar,
+          u.plan_type as owner_plan_type,
           (SELECT url FROM images WHERE business_id = p.id AND is_cover = 1 LIMIT 1) as cover_image,
+          (SELECT url FROM images WHERE business_id = p.id ORDER BY is_cover DESC, order_index ASC LIMIT 1) as fallback_image,
           (SELECT COUNT(*) FROM images WHERE business_id = p.id) as image_count
         FROM businesses p
         LEFT JOIN categories c ON p.category_id = c.id
@@ -173,6 +175,7 @@ export async function onRequestGet(context) {
           c.name as category_name, c.slug as category_slug,
           u.name as owner_name, u.phone as owner_phone, u.whatsapp as owner_whatsapp, u.avatar as owner_avatar,
           (SELECT url FROM images WHERE business_id = p.id AND is_cover = 1 LIMIT 1) as cover_image,
+          (SELECT url FROM images WHERE business_id = p.id ORDER BY is_cover DESC, order_index ASC LIMIT 1) as fallback_image,
           (SELECT COUNT(*) FROM images WHERE business_id = p.id) as image_count
         FROM businesses p
         LEFT JOIN categories c ON p.category_id = c.id
@@ -182,6 +185,15 @@ export async function onRequestGet(context) {
         LIMIT ? OFFSET ?
       `;
       businesses = await env.DB.prepare(querySimple).bind(...bindings, limit, offset).all();
+    }
+
+    // FIX: Si no hay cover_image (is_cover=1), usar fallback_image (primera imagen disponible)
+    for (const biz of businesses.results) {
+      if (!biz.cover_image && biz.fallback_image) {
+        biz.cover_image = biz.fallback_image;
+      }
+      // Limpiar fallback_image del output (no se necesita en el frontend)
+      delete biz.fallback_image;
     }
 
     return new Response(JSON.stringify({
@@ -407,6 +419,31 @@ export async function onRequestPost(context) {
     ).run();
 
     const businessId = result.meta.last_row_id;
+
+    // FIX: Geocodificación automática de la dirección.
+    // Si el negocio no tiene lat/lng pero tiene address, intentar obtener
+    // coordenadas vía Nominatim (OpenStreetMap, gratis).
+    // Esto hace que los negocios aparezcan automáticamente en el mapa.
+    if (!body.lat || !body.lng) {
+      try {
+        const addrParts = [body.address, body.city, body.state, 'Chile'].filter(Boolean).join(', ');
+        if (addrParts) {
+          const q = encodeURIComponent(addrParts);
+          const resp = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1&countrycodes=cl`, {
+            headers: { 'User-Agent': 'en-santiago-pages/1.0 (correo36000@gmail.com)' },
+          });
+          if (resp.ok) {
+            const arr = await resp.json();
+            if (arr && arr.length > 0 && arr[0].lat && arr[0].lon) {
+              await env.DB.prepare('UPDATE businesses SET lat = ?, lng = ? WHERE id = ?')
+                .bind(parseFloat(arr[0].lat), parseFloat(arr[0].lon), businessId).run();
+            }
+          }
+        }
+      } catch (geoErr) {
+        console.error('Geocoding failed (non-blocking):', geoErr.message);
+      }
+    }
 
     // Apply plan-based rules
     // Basic: 20-day expiration

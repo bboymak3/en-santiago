@@ -51,28 +51,31 @@ export async function onRequestGet(context) {
       hasTiposTable = true;
     } catch (e) { /* table doesn't exist yet */ }
 
-    // Look up the category by slug (avoid tipo_negocio_id — column may not exist yet)
+    // Look up the category by slug (still needed for breadcrumb context, but NOT for filtering)
     let catRow;
     try {
       catRow = await env.DB.prepare(
         'SELECT id, slug, name FROM categories WHERE slug = ? AND is_active = 1'
       ).bind(categoria).first();
     } catch (e) {
-      // If even the basic query fails, skip category filter
       catRow = null;
     }
+    // catRow is no longer used for SQL filtering; the business lookup is by slug only.
 
-    // Try full query first (with tipos_negocio), fall back to simple if tables/columns missing
+    // FIX: NO filtrar por categoria en la query SQL.
+    // Antes era: WHERE b.slug = ? AND c.id = ? (con el category_id de la URL)
+    // Eso rompia cuando el business fue movido a otra categoria: la URL vieja
+    // tenia la categoria anterior, la query no encontraba el business, y daba 404.
+    // Ahora buscamos solo por slug, y si la URL no coincide con la categoria
+    // actual del business, hacemos 301 redirect a la URL canonica nueva.
     let business;
 
     async function queryBusiness(query, ...bindArgs) {
       return env.DB.prepare(query).bind(...bindArgs).first();
     }
 
-    const whereClause = catRow
-      ? ' WHERE b.slug = ? AND b.status = \'approved\' AND c.id = ?'
-      : ' WHERE b.slug = ? AND b.status = \'approved\'';
-    const bindArgs = catRow ? [slug, catRow.id] : [slug];
+    const whereClause = ' WHERE b.slug = ? AND b.status = \'approved\'';
+    const bindArgs = [slug];
 
     // Try BIZ_FULL first, fall back to BIZ_SIMPLE
     try {

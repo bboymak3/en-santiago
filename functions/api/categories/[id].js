@@ -48,6 +48,10 @@ async function requireAdmin(request, env) {
 }
 
 // ─── PUT: Update category ───────────────────────────────────
+// FIX: Cuando se cambia el `name`, se regenera el `slug` (manteniéndolo único).
+// Antes el slug NO se actualizaba, lo que dejaba la categoría inconsistente
+// (mostraba el nombre nuevo pero el slug viejo, rompiendo /categoria/:slug
+// y los enlaces de negocios que dependen de category_slug por JOIN).
 export async function onRequestPut(context) {
   try {
     const { request, env, params } = context;
@@ -71,21 +75,69 @@ export async function onRequestPut(context) {
     }
 
     const body = await request.json();
-    const { name, icon, color, sort_order, is_active, banner_url } = body;
+    const { name, slug: explicitSlug, icon, color, sort_order, is_active, banner_url } = body;
 
     // Auto-migrate: add banner_url column if missing
     try { await env.DB.prepare('ALTER TABLE categories ADD COLUMN banner_url TEXT').run(); } catch(e) {}
 
-    const existing = await env.DB.prepare('SELECT id FROM categories WHERE id = ?').bind(catId).first();
+    const existing = await env.DB.prepare('SELECT id, name, slug FROM categories WHERE id = ?').bind(catId).first();
     if (!existing) {
       return new Response(JSON.stringify({ error: 'Categoria no encontrada.' }), {
         status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
+    // ─── Slug regeneration logic ─────────────────────────────────
+    // 1) Si el admin pasa un `slug` explícito en el body, se usa tal cual (sanitizado).
+    // 2) Si no, y el `name` cambió, se regenera a partir del nuevo nombre.
+    // 3) Si el `name` no cambió y no hay slug explícito, NO se toca el slug.
+    function slugify(text) {
+      return (text || '').toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
+        .substring(0, 80);
+    }
+
+    let newSlug = null;
+    let slugSource = null; // 'explicit' | 'regenerated'
+    if (explicitSlug !== undefined && typeof explicitSlug === 'string' && explicitSlug.trim()) {
+      newSlug = slugify(explicitSlug);
+      slugSource = 'explicit';
+    } else if (name !== undefined && name.trim() && name.trim() !== existing.name) {
+      newSlug = slugify(name);
+      slugSource = 'regenerated';
+    }
+
+    // Validate uniqueness only if slug is changing
+    if (newSlug && newSlug !== existing.slug) {
+      let candidate = newSlug;
+      let counter = 1;
+      while (counter <= 100) {
+        const dup = await env.DB.prepare(
+          'SELECT id FROM categories WHERE slug = ? AND id != ?'
+        ).bind(candidate, catId).first();
+        if (!dup) break;
+        candidate = newSlug + '-' + counter;
+        counter++;
+      }
+      newSlug = candidate;
+    } else if (newSlug && newSlug === existing.slug) {
+      // No change needed
+      newSlug = null;
+      slugSource = null;
+    }
+
     const updates = [];
     const values = [];
     if (name !== undefined) { updates.push('name = ?'); values.push(name.trim()); }
+    if (newSlug !== null) {
+      updates.push('slug = ?');
+      values.push(newSlug);
+      updates.push("updated_at = datetime('now')");
+    }
     if (icon !== undefined) { updates.push('icon = ?'); values.push(icon); }
     if (color !== undefined) { updates.push('color = ?'); values.push(color); }
     if (sort_order !== undefined) { updates.push('sort_order = ?'); values.push(parseInt(sort_order)); }
@@ -103,7 +155,14 @@ export async function onRequestPut(context) {
 
     const updated = await env.DB.prepare('SELECT * FROM categories WHERE id = ?').bind(catId).first();
 
-    return new Response(JSON.stringify({ message: 'Categoria actualizada', category: updated }), {
+    return new Response(JSON.stringify({
+      message: 'Categoria actualizada',
+      category: updated,
+      slug_changed: newSlug !== null,
+      previous_slug: newSlug !== null ? existing.slug : null,
+      new_slug: newSlug,
+      slug_source: slugSource,
+    }), {
       status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {

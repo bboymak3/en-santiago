@@ -323,7 +323,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .pd-biz-name i { color:#006EE3; font-size:1rem; }
         .pd-title { font-size:1.65rem; font-weight:700; color:#0f172a; margin:0 0 6px; line-height:1.3; letter-spacing:-0.2px; }
         .pd-price { font-size:1.7rem; font-weight:800; color:#006EE3; margin:0 0 12px; }
-        .pd-desc { font-size:1.2rem; color:#475569; line-height:1.6; margin:0 0 18px; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+        .pd-desc { font-size:1.2rem; color:#475569; line-height:1.6; margin:0 0 18px; text-align:justify; text-justify:inter-word; }
         .pd-meta { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:21px; }
         .pd-meta-chip { display:flex; align-items:center; gap:6px; padding:7px 14px; background:#f8fafc; border-radius:10px; font-size:1rem; color:#475569; border:1px solid #f1f5f9; }
         .pd-meta-chip i { color:#006EE3; font-size:1rem; }

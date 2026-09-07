@@ -157,7 +157,9 @@
     <script>
     (function() {
         'use strict';
-        const TOKEN_KEY = 'meriden-santiago_token';
+        // FIX: TOKEN_KEY era 'meriden-santiago_token' (typo), nunca encontraba el token
+        // y redirigía a login.html. Ahora usa getToken() de app.js con fallback a
+        // las keys correctas.
         const select = document.getElementById('ebBizSelect');
         const container = document.getElementById('ebFormContainer');
         let currentBiz = null;
@@ -165,7 +167,7 @@
 
         // ─── Auth Check ─────────────────────────────────────
         function checkAuth() {
-            const token = localStorage.getItem(TOKEN_KEY) || localStorage.getItem('token');
+            const token = (typeof getToken === 'function') ? getToken() : (localStorage.getItem('ensantiago_token') || localStorage.getItem('auth_token') || localStorage.getItem('token'));
             if (!token) {
                 window.location.href = 'login.html';
                 return false;
@@ -342,6 +344,7 @@
                     '<div class="eb-field"><label>WhatsApp</label><input type="tel" class="eb-input" id="ebWhatsapp" value="' + escH(b.whatsapp||'') + '"></div>' +
                     '<div class="eb-field"><label>Email</label><input type="email" class="eb-input" id="ebEmail" value="' + escH(b.email_contact||'') + '"></div>' +
                     '<div class="eb-field"><label>Sitio Web</label><input type="url" class="eb-input" id="ebWebsite" value="' + escH(b.website||'') + '"></div>' +
+                    '<div class="eb-field"><label>URL Perfil de Google</label><input type="url" class="eb-input" id="ebGoogleMapsUrl" value="' + escH(b.google_maps_url||'') + '" placeholder="https://maps.google.com/?cid=... o https://g.co/kgs/..."></div>' +
                     '<div class="eb-field"><label>Instagram</label><input type="text" class="eb-input" id="ebInstagram" value="' + escH(b.instagram||'') + '" placeholder="@usuario"></div>' +
                     '<div class="eb-field"><label>Facebook</label><input type="text" class="eb-input" id="ebFacebook" value="' + escH(b.facebook||'') + '"></div>' +
                     '<div class="eb-field"><label>TikTok</label><input type="text" class="eb-input" id="ebTiktok" value="' + escH(b.tiktok||'') + '"></div>' +
@@ -562,6 +565,7 @@
                     whatsapp: document.getElementById('ebWhatsapp').value,
                     email_contact: document.getElementById('ebEmail').value,
                     website: document.getElementById('ebWebsite').value,
+                    google_maps_url: document.getElementById('ebGoogleMapsUrl').value,
                     instagram: document.getElementById('ebInstagram').value,
                     facebook: document.getElementById('ebFacebook').value,
                     tiktok: document.getElementById('ebTiktok').value,
@@ -659,8 +663,19 @@
             if (!currentBiz || !input.files.length) return;
             for (var i = 0; i < input.files.length; i++) {
                 try {
-                    var fd = new FormData(); fd.append('file', input.files[i]); fd.append('product_type', 'gallery'); fd.append('business_id', currentBiz.id);
-                    await api.postFormData('/images', fd);
+                    // FIX: Flujo correcto de subida de imágenes:
+                    //   1. Subir archivo a /api/upload → retorna {url}
+                    //   2. Registrar imagen en DB con POST /api/images/{businessId} JSON {url, is_cover:0}
+                    // Antes se llamaba api.postFormData('/images', fd) que no existe como ruta.
+                    var fd = new FormData();
+                    fd.append('file', input.files[i]);
+                    fd.append('product_type', 'gallery');
+                    var uploadResp = await api.postFormData('/upload', fd);
+                    if (!uploadResp || !uploadResp.url) {
+                        showToast('Error al subir imagen: ' + (uploadResp && uploadResp.error ? uploadResp.error : 'sin URL'), 'error');
+                        continue;
+                    }
+                    await api.post('/images/' + currentBiz.id, { url: uploadResp.url, is_cover: 0 });
                 } catch(e) { showToast('Error al subir imagen: ' + e.message, 'error'); }
             }
             showToast('Imágenes subidas', 'success');
@@ -669,13 +684,22 @@
         };
         window.ebRemoveImage = async function(imgId) {
             if (!currentBiz) return;
-            try { await api.delete('/images/' + imgId); showToast('Imagen eliminada', 'success'); loadBusiness(currentBiz.id); }
-            catch(e) { showToast('Error: ' + e.message, 'error'); }
+            try {
+                // FIX: endpoint correcto es DELETE /api/images/{businessId}?image_id={imageId}
+                await api.delete('/images/' + currentBiz.id + '?image_id=' + imgId);
+                showToast('Imagen eliminada', 'success');
+                loadBusiness(currentBiz.id);
+            } catch(e) { showToast('Error: ' + e.message, 'error'); }
         };
         window.ebSetCover = async function(imgId) {
             if (!currentBiz) return;
-            try { await api.put('/images/' + imgId, { is_cover: 1 }); showToast('Portada actualizada', 'success'); loadBusiness(currentBiz.id); }
-            catch(e) { showToast('Error: ' + e.message, 'error'); }
+            try {
+                // FIX: el endpoint correcto es PUT /api/images/{businessId}?image_id={imageId}
+                // Antes se llamaba api.put('/images/' + imgId, ...) que NO existe (faltaba businessId en URL).
+                await api.put('/images/' + currentBiz.id + '?image_id=' + imgId, { is_cover: 1 });
+                showToast('Portada actualizada', 'success');
+                loadBusiness(currentBiz.id);
+            } catch(e) { showToast('Error: ' + e.message, 'error'); }
         };
 
         // ─── Videos ──────────────────────────────────────────
@@ -790,8 +814,10 @@
 
         // Logout
         document.getElementById('navLogout').addEventListener('click', function() {
-            localStorage.removeItem('meriden-santiago_token');
-            localStorage.removeItem('meriden-santiago_user');
+            // FIX: limpiar todas las keys posibles de token para no dejar sesión activa
+            ['ensantiago_token', 'ensantiago_user', 'auth_token', 'token', 'meriden-santiago_token', 'meriden-santiago_user'].forEach(function(k) {
+                localStorage.removeItem(k);
+            });
             window.location.href = 'login.html';
         });
     })();

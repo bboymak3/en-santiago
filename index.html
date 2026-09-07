@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   gtag('config', 'G-RYF2N8ZD15');
 </script>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg">
+    <link rel="icon" type="image/jpeg" href="/images/favicon.jpeg?v=4">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="En Santiago - El directorio más completo de negocios, propiedades y empleos en Santiago de Chile. Encuentra comercios, inmuebles, ofertas de trabajo, profesionales y servicios en todo el país. Registro gratis.">
     <meta name="keywords" content="directorio de negocios, Santiago de Chile, comercios, restaurantes, farmacias, tiendas, profesionales, servicios, Santiago, registro gratis">
@@ -27,23 +27,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=4">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="/manifest.json?v=4">
     <meta name="theme-color" content="#006EE3">
     <meta name="google-site-verification" content="Upqdebr5WMAfea6ZMYcsZVTXR2Wo9N5cJZG0B6pk7I4" />
+    <link rel="canonical" href="https://en-santiago.pages.dev/">
     <meta property="og:title" content="En Santiago - Directorio de Negocios en Santiago de Chile">
     <meta property="og:description" content="En Santiago es el directorio de negocios y comercios más completo de Santiago de Chile. Encuentra restaurantes, farmacias, tiendas, profesionales, servicios de salud y más en todo el país. Registro gratis.">
     <meta property="og:site_name" content="En Santiago">
     <meta property="og:locale" content="es_CL">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
+    <meta property="og:image" content="https://en-santiago.com/images/Holax.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://en-santiago.pages.dev/">
     <meta name="twitter:title" content="En Santiago - Directorio de Negocios en Santiago de Chile">
     <meta name="twitter:description" content="En Santiago es el directorio de negocios y comercios más completo de Santiago de Chile. Encuentra restaurantes, farmacias, tiendas, profesionales y más.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://en-santiago.pages.dev/images/En Santiago.png">
+    <meta name="twitter:image" content="https://en-santiago.com/images/Holax.png">
     <!-- JSON-LD: Organization -->
     <script type="application/ld+json">{
         "@context": "https://schema.org",
@@ -51,7 +53,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "name": "En Santiago",
         "alternateName": "En Santiago - Directorio de Negocios de Santiago de Chile",
         "url": "https://en-santiago.pages.dev",
-        "logo": "https://en-santiago.pages.dev/images/En Santiago.png",
+        "logo": "https://en-santiago.com/images/Holax.png",
         "description": "El directorio metropolitano de negocios, productos, inmuebles y empleos más completo de Santiago de Chile.",
         "address": {
             "@type": "PostalAddress",
@@ -74,6 +76,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "@type": "SearchAction",
             "target": "https://en-santiago.pages.dev/search.html?q={search_term_string}",
             "query-input": "required name=search_term_string"
+        }
+    }</script>
+    <!-- FIX: JSON-LD WebPage con BreadcrumbList para rich snippets -->
+    <script type="application/ld+json">{
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "En Santiago - Directorio de Negocios en Santiago de Chile",
+        "description": "Directorio metropolitano de negocios, productos, inmuebles y empleos en Santiago de Chile. Encuentra comercios, profesionales y servicios en todo el país.",
+        "url": "https://en-santiago.pages.dev/",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "En Santiago",
+            "url": "https://en-santiago.pages.dev"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://en-santiago.pages.dev/" }
+            ]
         }
     }</script>
 </head>
@@ -109,6 +130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                 </div>
             </div>
+            <a href="registrar-negocio.html" class="nav-crear-btn" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:50px;background:linear-gradient(135deg,#006EE3,#005BB5);color:#fff;font-size:0.85rem;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 0 20px rgba(0,110,227,0.3);transition:transform 0.2s,box-shadow 0.2s;"><i class="fas fa-plus-circle"></i> Crear Negocio</a>
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
             </button>
@@ -119,6 +141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><a href="map.html" class="nav-link">Mapa</a></li>
                 <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
                 <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li><a href="/blog/" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
                 <li class="nav-dropdown">
                     <button class="nav-dropdown-toggle" aria-label="Más opciones">
                         Más <i class="fas fa-chevron-down"></i>

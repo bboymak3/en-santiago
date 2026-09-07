@@ -1,29 +1,35 @@
-// functions/api/sitemap/index.js
+// functions/sitemap.xml/index.js
 // GET: Generate dynamic XML sitemap for SEO (no auth required)
+// FIX: Limpiado de estados de Venezuela, agregadas páginas faltantes, lastmod en estáticas
 
 export async function onRequestGet(context) {
   try {
     const { env } = context;
     const baseUrl = 'https://en-santiago.pages.dev';
 
-    // All public-facing pages (ordered by priority)
+    // FIX: Páginas estáticas con lastmod automático (fecha de hoy)
+    const today = new Date().toISOString().substring(0, 10);
     const staticPages = [
       { loc: '/', priority: '1.0', changefreq: 'daily' },
       { loc: '/search.html', priority: '0.9', changefreq: 'daily' },
+      { loc: '/planes.html', priority: '0.9', changefreq: 'monthly' },
       { loc: '/marketplace.html', priority: '0.8', changefreq: 'daily' },
       { loc: '/properties.html', priority: '0.8', changefreq: 'daily' },
       { loc: '/map.html', priority: '0.8', changefreq: 'weekly' },
       { loc: '/empleo.html', priority: '0.7', changefreq: 'daily' },
       { loc: '/new-business.html', priority: '0.7', changefreq: 'monthly' },
-      { loc: '/entretenimiento.html', priority: '0.7', changefreq: 'weekly' },
-      { loc: '/reservas.html', priority: '0.7', changefreq: 'weekly' },
-      { loc: '/cupones.html', priority: '0.7', changefreq: 'weekly' },
-      { loc: '/planes.html', priority: '0.6', changefreq: 'monthly' },
-      { loc: '/contacto.html', priority: '0.5', changefreq: 'monthly' },
-      { loc: '/quienes-somos.html', priority: '0.4', changefreq: 'yearly' },
-      { loc: '/emergencia.html', priority: '0.6', changefreq: 'monthly' },
-      { loc: '/eventos.html', priority: '0.6', changefreq: 'weekly' },
-      { loc: '/privacidad.html', priority: '0.4', changefreq: 'yearly' },
+      { loc: '/registrar-negocio.html', priority: '0.9', changefreq: 'monthly' },
+      { loc: '/new-property.html', priority: '0.7', changefreq: 'monthly' },
+      { loc: '/contacto.html', priority: '0.6', changefreq: 'monthly' },
+      { loc: '/quienes-somos.html', priority: '0.6', changefreq: 'yearly' },
+      { loc: '/partners.html', priority: '0.6', changefreq: 'monthly' },
+      { loc: '/academia.html', priority: '0.6', changefreq: 'weekly' },
+      { loc: '/entretenimiento.html', priority: '0.6', changefreq: 'weekly' },
+      { loc: '/reservas.html', priority: '0.6', changefreq: 'weekly' },
+      { loc: '/cupones.html', priority: '0.6', changefreq: 'weekly' },
+      { loc: '/emergencia.html', priority: '0.5', changefreq: 'monthly' },
+      { loc: '/eventos.html', priority: '0.5', changefreq: 'weekly' },
+      { loc: '/privacidad.html', priority: '0.3', changefreq: 'yearly' },
       { loc: '/eliminacion-datos.html', priority: '0.3', changefreq: 'yearly' },
       { loc: '/login.html', priority: '0.3', changefreq: 'monthly' },
     ];
@@ -121,50 +127,33 @@ export async function onRequestGet(context) {
       // Categories may not exist
     }
 
-    // Fetch all states with businesses
+    // FIX: Fetch all comunas (states) with businesses — sin hardcode de estados de Venezuela
+    // La consulta anterior tenía un CASE WHEN con estados de Venezuela (Anzoátegui, Bolívar, etc.)
+    // que no aplican a Chile. Ahora usa slugify dinámico en JavaScript.
     try {
       const states = await env.DB.prepare(
-        `SELECT LOWER(REPLACE(REPLACE(
-           CASE state
-             WHEN 'Anzoátegui' THEN 'anzoategui'
-             WHEN 'Bolívar' THEN 'bolivar'
-             WHEN 'Carabobo' THEN 'carabobo'
-             WHEN 'Falcón' THEN 'falcon'
-             WHEN 'Guárico' THEN 'guarico'
-             WHEN 'Santiago' THEN 'santiago'
-             WHEN 'Miranda' THEN 'miranda'
-             WHEN 'Monagas' THEN 'monagas'
-             WHEN 'Nueva Esparta' THEN 'nueva-esparta'
-             WHEN 'Portuguesa' THEN 'portuguesa'
-             WHEN 'Sucre' THEN 'sucre'
-             WHEN 'Táchira' THEN 'tachira'
-             WHEN 'Trujillo' THEN 'trujillo'
-             WHEN 'Yaracuy' THEN 'yaracuy'
-             WHEN 'Zulia' THEN 'zulia'
-             WHEN 'Santiago' THEN 'santiago'
-             WHEN 'Aragua' THEN 'aragua'
-             WHEN 'Lara' THEN 'lara'
-             WHEN 'Vargas' THEN 'vargas'
-             WHEN 'Distrito Capital' THEN 'distrito-capital'
-             WHEN 'Amazonas' THEN 'amazonas'
-             WHEN 'Apure' THEN 'apure'
-             WHEN 'Cojedes' THEN 'cojedes'
-             WHEN 'Delta Amacuro' THEN 'delta-amacuro'
-             ELSE LOWER(REPLACE(state, ' ', '-'))
-           END
-         , 'á','a'), 'é','e'), 'í','i'), 'ó','o'), 'ú','u'), 'ñ','n') as state_slug,
-           MAX(b.updated_at) as last_updated
-         FROM businesses b
-         WHERE b.status = 'approved' AND b.state IS NOT NULL AND b.state != ''
-         GROUP BY b.state
+        `SELECT DISTINCT state, MAX(updated_at) as last_updated
+         FROM businesses
+         WHERE status = 'approved' AND state IS NOT NULL AND state != ''
+         GROUP BY state
          ORDER BY last_updated DESC`
       ).all();
 
+      function slugifyState(text) {
+        if (!text) return '';
+        return text.toLowerCase()
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+      }
+
       for (const st of states.results) {
-        if (!st.state_slug) continue;
+        if (!st.state) continue;
+        const stateSlug = slugifyState(st.state);
+        if (!stateSlug) continue;
         const lastmod = st.last_updated ? st.last_updated.substring(0, 10) : '';
         dynamicUrls += `  <url>
-    <loc>${baseUrl}/comuna/${st.state_slug}</loc>
+    <loc>${baseUrl}/comuna/${stateSlug}</loc>
     <lastmod>${lastmod}</lastmod>
     <priority>0.6</priority>
     <changefreq>weekly</changefreq>
@@ -174,11 +163,12 @@ export async function onRequestGet(context) {
       // States may not exist
     }
 
-    // Build static page URLs
+    // Build static page URLs with lastmod
     let staticUrls = '';
     for (const page of staticPages) {
       staticUrls += `  <url>
     <loc>${baseUrl}${page.loc}</loc>
+    <lastmod>${today}</lastmod>
     <priority>${page.priority}</priority>
     <changefreq>${page.changefreq}</changefreq>
   </url>\n`;

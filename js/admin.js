@@ -4436,6 +4436,44 @@ if (!window._renderVideoList) {
         if (btn) btn.style.display = 'none';
     };
 
+    // FIX: Banner de la página de búsqueda (search.html)
+    window.handleSearchBannerSelect = async function(input) {
+        const file = input.files[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) { showToast('Max 5MB para el banner', 'error'); input.value = ''; return; }
+
+        try {
+            showToast('Subiendo banner de búsqueda...', 'info');
+            const fd = new FormData();
+            fd.append('file', file);
+            fd.append('product_type', 'banner');
+            const result = await api.postFormData('/upload', fd);
+            if (result.url) {
+                document.getElementById('setting_search_banner_url').value = result.url;
+                const preview = document.getElementById('searchBannerPreviewContainer');
+                if (preview) {
+                    preview.innerHTML = '<img src="' + result.url + '" style="width:100%;height:100%;object-fit:cover;">';
+                }
+                const btn = document.getElementById('searchBannerRemoveBtn');
+                if (btn) btn.style.display = 'inline-flex';
+                showToast('Banner de búsqueda subido. Guarda la configuración para aplicarlo.', 'success');
+            }
+        } catch(e) {
+            showToast('Error al subir banner: ' + e.message, 'error');
+        }
+        input.value = '';
+    };
+
+    window.removeSearchBanner = function() {
+        document.getElementById('setting_search_banner_url').value = '';
+        const preview = document.getElementById('searchBannerPreviewContainer');
+        if (preview) {
+            preview.innerHTML = '<span style="font-size:0.65rem;color:#94a3b8;">Sin banner</span>';
+        }
+        const btn = document.getElementById('searchBannerRemoveBtn');
+        if (btn) btn.style.display = 'none';
+    };
+
     // ─── Logo Management ────────────────────────────────
     window.handleAdminLogoSelect = async function(input) {
         const file = input.files[0];
@@ -5153,7 +5191,10 @@ if (!window._renderVideoList) {
                 html += '<td><div style="display:flex;align-items:center;gap:6px;">' + bannerThumb + '<input type="file" id="catBanner_' + c.id + '" accept="image/*" style="display:none;" onchange="admin2UploadCatBanner(' + c.id + ',this)"><button onclick="document.getElementById(\'catBanner_' + c.id + '\').click()" style="background:none;border:1px solid #d1d5db;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#374151;" title="Subir banner"><i class="fas fa-upload"></i></button>' + (c.banner_url ? '<button onclick="admin2RemoveCatBanner(' + c.id + ')" style="background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#dc2626;" title="Quitar banner"><i class="fas fa-times"></i></button>' : '') + '</div></td>';
                 html += '<td>' + (c.business_count || 0) + '</td>';
                 html += '<td>' + c.sort_order + '</td>';
-                html += '<td><button onclick="admin2DeleteCat(' + c.id + ',\'' + _esc(c.name).replace(/'/g, "\\'") + '\')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.82rem;" title="Desactivar"><i class="fas fa-trash"></i></button></td>';
+                html += '<td style="white-space:nowrap;">'
+                    + '<button onclick="admin2EditCat(' + c.id + ')" style="background:none;border:1px solid #d1d5db;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#374151;margin-right:4px;" title="Editar nombre / slug"><i class="fas fa-edit"></i></button>'
+                    + '<button onclick="admin2DeleteCat(' + c.id + ',\'' + _esc(c.name).replace(/'/g, "\\'") + '\')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.82rem;" title="Desactivar"><i class="fas fa-trash"></i></button>'
+                    + '</td>';
                 html += '</tr>';
             });
             tbody.innerHTML = html;
@@ -5190,6 +5231,149 @@ if (!window._renderVideoList) {
         } catch(e) {
             showToast('Error al eliminar banner', 'error');
         }
+    };
+
+    // ═══════════════════════════════════════════════════════════
+    //  EDITAR CATEGORÍA — Modal de edición (nombre + slug + meta)
+    //  FIX: Antes no existía este modal; el admin renombraba vía
+    //  otros medios y el slug NO se regeneraba, dejando la DB
+    //  inconsistente. Ahora el backend recalcula el slug y este
+    //  modal le permite al admin:
+    //    - Editar nombre (slug se regenera solo)
+    //    - Editar slug manualmente (override)
+    //    - Editar icono, color, sort_order
+    //  Muestra advertencia clara cuando el slug cambia.
+    // ═══════════════════════════════════════════════════════════
+    window.admin2EditCat = async function(catId) {
+        // Buscar la categoría actual del último fetch
+        let cat = null;
+        try {
+            const data = await api.get('/categories');
+            cat = (data.categories || []).find(c => String(c.id) === String(catId));
+        } catch (e) {
+            showToast('No se pudo cargar la categoría', 'error');
+            return;
+        }
+        if (!cat) {
+            showToast('Categoría no encontrada', 'error');
+            return;
+        }
+
+        const slugifyLive = function(text) {
+            return (text || '').toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '')
+                .substring(0, 80);
+        };
+
+        const dialog = document.createElement('div');
+        dialog.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;';
+        dialog.innerHTML = ''
+            + '<div style="background:#fff;border-radius:14px;padding:24px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-height:90vh;overflow:auto;">'
+            + '  <h3 style="margin:0 0 16px;font-size:1.05rem;display:flex;align-items:center;gap:8px;"><i class="fas fa-edit" style="color:#006EE3;"></i> Editar Categoría</h3>'
+            + '  <input type="hidden" id="aebCatId" value="' + cat.id + '">'
+            + '  <div style="margin-bottom:12px;">'
+            + '    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:4px;color:#374151;">Nombre *</label>'
+            + '    <input type="text" id="aebCatName" value="' + _esc(cat.name) + '" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.9rem;" placeholder="Ej: Tapizar IA">'
+            + '  </div>'
+            + '  <div style="margin-bottom:12px;">'
+            + '    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:4px;color:#374151;">Slug (URL pública)</label>'
+            + '    <div style="display:flex;gap:6px;">'
+            + '      <input type="text" id="aebCatSlug" value="' + _esc(cat.slug) + '" style="flex:1;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.85rem;font-family:monospace;color:#475569;" placeholder="auto-generado">'
+            + '      <button type="button" id="aebCatSlugAuto" style="background:#f1f5f9;border:1px solid #d1d5db;border-radius:8px;padding:0 12px;font-size:0.78rem;color:#374151;cursor:pointer;white-space:nowrap;" title="Regenerar a partir del nombre"><i class="fas fa-magic"></i> Auto</button>'
+            + '    </div>'
+            + '    <p style="font-size:0.72rem;color:#6b7280;margin:4px 0 0;">URL actual: <code style="background:#f1f5f9;padding:1px 5px;border-radius:4px;">/categoria/' + _esc(cat.slug) + '</code></p>'
+            + '    <p id="aebCatSlugWarn" style="font-size:0.72rem;color:#dc2626;margin:4px 0 0;display:none;"><i class="fas fa-exclamation-triangle"></i> El slug cambiará. Los enlaces antiguos se redirigen automáticamente (301) al nuevo.</p>'
+            + '  </div>'
+            + '  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">'
+            + '    <div>'
+            + '      <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:4px;color:#374151;">Icono (FontAwesome)</label>'
+            + '      <input type="text" id="aebCatIcon" value="' + _esc(cat.icon || 'fas fa-store') + '" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.85rem;font-family:monospace;" placeholder="fas fa-store">'
+            + '    </div>'
+            + '    <div>'
+            + '      <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:4px;color:#374151;">Color</label>'
+            + '      <input type="color" id="aebCatColor" value="' + _esc(cat.color || '#607d8b') + '" style="width:100%;height:38px;padding:2px;border:1px solid #d1d5db;border-radius:8px;cursor:pointer;">'
+            + '    </div>'
+            + '  </div>'
+            + '  <div style="margin-bottom:16px;">'
+            + '    <label style="display:block;font-size:0.8rem;font-weight:600;margin-bottom:4px;color:#374151;">Orden (sort_order)</label>'
+            + '    <input type="number" id="aebCatSort" value="' + (cat.sort_order || 0) + '" min="0" max="9999" style="width:120px;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:0.85rem;">'
+            + '  </div>'
+            + '  <div style="display:flex;gap:8px;justify-content:flex-end;border-top:1px solid #e5e7eb;padding-top:16px;">'
+            + '    <button id="aebCatCancel" class="btn" style="padding:8px 16px;">Cancelar</button>'
+            + '    <button id="aebCatSave" class="btn btn-primary" style="background:#006EE3;border-color:#006EE3;padding:8px 18px;"><i class="fas fa-check"></i> Guardar</button>'
+            + '  </div>'
+            + '</div>';
+        document.body.appendChild(dialog);
+
+        const nameInput = dialog.querySelector('#aebCatName');
+        const slugInput = dialog.querySelector('#aebCatSlug');
+        const slugWarn = dialog.querySelector('#aebCatSlugWarn');
+        const originalSlug = cat.slug;
+
+        // Auto-regenerar slug cuando cambia el nombre (solo si el admin no tocó el slug manualmente)
+        let slugManuallyEdited = false;
+        slugInput.addEventListener('input', function() { slugManuallyEdited = true; });
+        nameInput.addEventListener('input', function() {
+            if (!slugManuallyEdited) {
+                slugInput.value = slugifyLive(nameInput.value);
+                updateSlugWarn();
+            }
+        });
+        dialog.querySelector('#aebCatSlugAuto').addEventListener('click', function() {
+            slugInput.value = slugifyLive(nameInput.value);
+            slugManuallyEdited = false;
+            updateSlugWarn();
+        });
+        slugInput.addEventListener('input', updateSlugWarn);
+
+        function updateSlugWarn() {
+            const newSlug = slugifyLive(slugInput.value);
+            if (newSlug && newSlug !== originalSlug) {
+                slugWarn.style.display = 'block';
+                slugWarn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Slug cambiará de <code style="background:#fef2f2;padding:1px 5px;border-radius:4px;">' + _esc(originalSlug) + '</code> a <code style="background:#f0fdf4;padding:1px 5px;border-radius:4px;">' + _esc(newSlug) + '</code>. Los enlaces antiguos se redirigen automáticamente (301) al nuevo.';
+            } else {
+                slugWarn.style.display = 'none';
+            }
+        }
+
+        dialog.querySelector('#aebCatCancel').onclick = function() { document.body.removeChild(dialog); };
+        dialog.querySelector('#aebCatSave').onclick = async function() {
+            const payload = {
+                name: nameInput.value.trim(),
+                icon: dialog.querySelector('#aebCatIcon').value.trim(),
+                color: dialog.querySelector('#aebCatColor').value,
+                sort_order: parseInt(dialog.querySelector('#aebCatSort').value) || 0,
+            };
+            // Slug: si el admin lo editó o es distinto al original, mandarlo explícito
+            const finalSlug = slugifyLive(slugInput.value);
+            if (finalSlug && finalSlug !== originalSlug) {
+                payload.slug = finalSlug;
+            }
+            if (!payload.name) {
+                showToast('El nombre es obligatorio', 'error');
+                return;
+            }
+            try {
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+                const resp = await api.put('/categories/' + catId, payload);
+                document.body.removeChild(dialog);
+                if (resp.slug_changed) {
+                    showToast('Categoría actualizada. Slug: ' + resp.previous_slug + ' → ' + resp.new_slug, 'success');
+                } else {
+                    showToast('Categoría actualizada', 'success');
+                }
+                loadAdmin2Categories();
+            } catch (e) {
+                showToast('Error: ' + (e.message || ''), 'error');
+                this.disabled = false;
+                this.innerHTML = '<i class="fas fa-check"></i> Guardar';
+            }
+        };
     };
 
     async function loadAdmin2CatSuggestions() {

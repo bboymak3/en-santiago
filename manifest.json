@@ -1,9 +1,9 @@
 {
   "id": "/",
-  "name": "HOLAX - Directorio de Negocios de Santiago de Chile",
-  "short_name": "HOLAX",
+  "name": "En Santiago - Directorio de Negocios de Santiago de Chile",
+  "short_name": "En Santiago",
   "description": "Directorio Metropolitano de Negocios de Santiago de Chile. Encuentra negocios, productos, empleos y servicios en tu ciudad.",
-  "start_url": "/",
+  "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -15,40 +15,52 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/images/icon-512x512.png",
+      "src": "/images/icon-512x512.png?v=4",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/images/icon-512x512.png",
+      "src": "/images/icon-512x512.png?v=4",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/images/icon-192x192.png",
+      "src": "/images/icon-192x192.png?v=4",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/images/icon-192x192.png",
+      "src": "/images/icon-192x192.png?v=4",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/images/icon-96x96.png?v=4",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/apple-touch-icon.png?v=4",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "screenshots": [
     {
-      "src": "/images/screenshot-wide.png",
+      "src": "/images/screenshot-wide.png?v=4",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "En Santiago - Directorio de Negocios en Santiago de Chile (Desktop)"
     },
     {
-      "src": "/images/screenshot-narrow.png",
+      "src": "/images/screenshot-narrow.png?v=4",
       "sizes": "1170x1392",
       "type": "image/png",
       "form_factor": "narrow",
@@ -63,7 +75,7 @@
       "description": "Buscar negocios por categoria y ubicacion",
       "icons": [
         {
-          "src": "/images/icon-96x96.png",
+          "src": "/images/icon-96x96.png?v=4",
           "sizes": "96x96",
           "type": "image/png"
         }
@@ -76,7 +88,7 @@
       "description": "Ver productos y ofertas",
       "icons": [
         {
-          "src": "/images/icon-96x96.png",
+          "src": "/images/icon-96x96.png?v=4",
           "sizes": "96x96",
           "type": "image/png"
         }
@@ -89,17 +101,24 @@
       "description": "Ver negocios en el mapa",
       "icons": [
         {
-          "src": "/images/icon-96x96.png",
+          "src": "/images/icon-96x96.png?v=4",
           "sizes": "96x96",
           "type": "image/png"
         }
       ]
-    }
-  ],
-  "protocol_handlers": [
+    },
     {
-      "protocol": "web+en-santiago",
-      "url": "/search.html?q=%s"
+      "name": "Blog",
+      "short_name": "Blog",
+      "url": "/blog/",
+      "description": "Guias y consejos locales",
+      "icons": [
+        {
+          "src": "/images/icon-96x96.png?v=4",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
