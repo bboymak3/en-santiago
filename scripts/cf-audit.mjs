@@ -78,6 +78,28 @@ async function auditD1() {
     WHERE b.status='approved' AND (b.city LIKE '%providencia%' OR b.address LIKE '%providencia%' OR b.state LIKE '%providencia%')
     GROUP BY c.slug ORDER BY n DESC`);
   report.providencia = prov;
+
+  // Conteo final por artículo con la misma config que blog/*.html (data-terms + data-categories)
+  const fs = await import('node:fs');
+  report.final = {};
+  console.log('\nCONTEO FINAL POR ARTÍCULO (aprobados, términos OR categorías)');
+  for (const f of fs.readdirSync('blog').filter((x) => x.endsWith('.html'))) {
+    const html = fs.readFileSync(`blog/${f}`, 'utf8');
+    const tag = html.match(/<script[^>]*blog-businesses\.js[^>]*>/);
+    if (!tag) continue;
+    const attr = (name) => ((tag[0].match(new RegExp(`data-${name}="([^"]*)"`)) || [])[1] || '').split('|').filter(Boolean);
+    const terms = attr('terms');
+    const cats = attr('categories');
+    if (!terms.length && !cats.length) continue;
+    const conds = [];
+    const params = [];
+    terms.forEach((t) => { conds.push(MATCH); const p = `%${t}%`; params.push(p, p, p, p); });
+    cats.forEach((c) => { conds.push('b.category_id = (SELECT id FROM categories WHERE slug = ?)'); params.push(c); });
+    const rows = await d1(`SELECT b.title, c.slug FROM businesses b LEFT JOIN categories c ON c.id=b.category_id
+      WHERE b.status='approved' AND (${conds.join(' OR ')})`, params);
+    report.final[f] = { terms, cats, n: rows.length, negocios: rows };
+    console.log(`  ${String(rows.length).padStart(3)}  ${f}  → ${rows.map((r) => `${r.title} [${r.slug}]`).join(' | ')}`);
+  }
   console.log('\nAPROBADOS EN PROVIDENCIA por categoría', prov);
 }
 

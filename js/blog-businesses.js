@@ -5,7 +5,8 @@
 //   <section data-blog-biz="top"></section>      → fichas arriba (6)
 //   <section data-blog-biz="bottom"></section>   → más fichas + "Ver más" + "Ver todas"
 //   <script src="/js/blog-businesses.js" defer
-//           data-terms="barber|barbería"   (términos buscados en título/descripción, separados por |)
+//           data-terms="barber|barbería"   (términos buscados en título/descripción/dirección, separados por |)
+//           data-categories="barberias"    (slugs de categoría, separados por |; opcional)
 //           data-label="barberías"         (texto para títulos y botón)
 //           data-q="barberia"></script>    (búsqueda para el botón "Ver más ...")
 //
@@ -18,6 +19,7 @@
   var script = document.currentScript;
   var cfg = {
     terms: ((script && script.dataset.terms) || '').split('|').map(function (t) { return t.trim(); }).filter(Boolean),
+    categories: ((script && script.dataset.categories) || '').split('|').map(function (t) { return t.trim(); }).filter(Boolean),
     label: (script && script.dataset.label) || '',
     q: (script && script.dataset.q) || '',
   };
@@ -33,6 +35,9 @@
   var generalDone = false;
   var shown = 0;
 
+  cfg.categories.forEach(function (slug) {
+    sources.push('/api/businesses?categoria=' + encodeURIComponent(slug) + '&sort=views_desc&limit=30');
+  });
   cfg.terms.forEach(function (term) {
     sources.push('/api/businesses?search=' + encodeURIComponent(term) + '&sort=views_desc&limit=30');
   });
@@ -136,6 +141,10 @@
     '</article>';
   }
 
+  function hasRelated() {
+    return pool.some(function (b) { return b._related; });
+  }
+
   function takeNext(n) {
     var slice = pool.slice(shown, shown + n);
     shown += slice.length;
@@ -182,22 +191,23 @@
   }
 
   function renderTop(el) {
-    var title = cfg.label ? 'Negocios recomendados: ' + cfg.label : 'Negocios destacados en Santiago';
     el.classList.add('bb-section');
     el.innerHTML =
-      '<div class="bb-head"><div><h2>' + esc(title) + '</h2><p>Fichas verificadas del directorio En Santiago</p></div>' +
+      '<div class="bb-head"><div><h2>Negocios destacados en Santiago</h2><p>Fichas verificadas del directorio En Santiago</p></div>' +
       '<a href="' + searchUrl() + '">Ver todos →</a></div>' +
       '<div class="bb-grid"><div class="bb-loading">Cargando negocios…</div></div>';
     var grid = el.querySelector('.bb-grid');
     return ensure(TOP_COUNT).then(function () {
       var items = takeNext(TOP_COUNT);
       if (!items.length) { el.style.display = 'none'; return; }
+      // Solo se titula con la etiqueta del artículo si hay negocios relacionados
+      if (cfg.label && hasRelated()) el.querySelector('.bb-head h2').textContent = 'Negocios recomendados: ' + cfg.label;
       grid.innerHTML = items.map(card).join('');
     });
   }
 
   function renderBottom(el) {
-    var title = cfg.label ? 'Más ' + cfg.label + ' y negocios relacionados' : 'Más negocios en Santiago';
+    var title = cfg.label && hasRelated() ? 'Más ' + cfg.label + ' y negocios relacionados' : 'Más negocios en Santiago';
     el.classList.add('bb-section');
     el.innerHTML =
       '<div class="bb-head"><div><h2>' + esc(title) + '</h2><p>Descubre más fichas del directorio</p></div></div>' +
