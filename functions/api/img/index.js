@@ -66,6 +66,7 @@ export async function onRequestGet(context) {
 
     const cache = caches.default;
     const cacheKeyUrl = new URL(request.url);
+    cacheKeyUrl.searchParams.set('_f', targetFormat);
     cacheKeyUrl.searchParams.sort();
     const cacheKeyStr = cacheKeyUrl.toString();
     const cachedResponse = await cache.match(cacheKeyStr);
@@ -95,7 +96,10 @@ export async function onRequestGet(context) {
     }
 
     try {
-      const resized = await fetch(request.url, {
+      // Origen = original crudo vía /api/serve?raw=1 (pedir request.url
+      // volvía a entrar en esta misma función)
+      const rawUrl = `${url.origin}/api/serve?key=${encodeURIComponent(key)}&raw=1`;
+      const resized = await fetch(rawUrl, {
         cf: {
           image: {
             width: w || undefined,
@@ -108,15 +112,14 @@ export async function onRequestGet(context) {
         },
       });
 
-      if (!resized.ok) {
-        throw new Error('Image resizing failed: ' + resized.status);
+      const cfResized = resized.headers.get('cf-resized') || '';
+      if (!resized.ok || !cfResized || cfResized.includes('err=')) {
+        throw new Error('Image resizing failed: ' + resized.status + ' ' + cfResized);
       }
 
       const optimizedBuffer = await resized.arrayBuffer();
 
-      const contentType = targetFormat === 'avif' ? 'image/avif'
-                        : targetFormat === 'webp' ? 'image/webp'
-                        : getContentTypeFromKey(key);
+      const contentType = resized.headers.get('Content-Type') || getContentTypeFromKey(key);
 
       context.waitUntil(
         env.R2.put(CACHE_PREFIX + variantKey, optimizedBuffer, {

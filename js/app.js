@@ -759,6 +759,13 @@ function getStatusBadge(status) {
     return `<span class="${cls}">${getStatusLabel(status)}</span>`;
 }
 
+// ─── Thumbnails ────────────────────────────────────────────────
+// /api/serve redimensiona con ?w=; sin él entrega la imagen a 1600px
+function thumbUrl(url, w) {
+    if (!url || url.indexOf('/api/serve?key=') === -1 || /[?&]w=/.test(url)) return url;
+    return url + '&w=' + w;
+}
+
 // ─── Business Card HTML Generator ──────────────────────────────
 function createBusinessCard(business) {
     if (!business) return '';
@@ -780,14 +787,15 @@ function createBusinessCard(business) {
     const bizUrl = getBusinessUrl(business);
     const isMedical = business.category_slug === 'medicina-servicio-medico';
     // Optimización: usar srcset para servir imagen más pequeña en mobile
-    const imgSrcset = imgSrc && imgSrc.includes('/api/serve?key=')
-        ? `${imgSrc}&w=400 400w, ${imgSrc}&w=800 800w`
+    const isServed = coverImage && coverImage.includes('/api/serve?key=') && !/[?&]w=/.test(coverImage);
+    const imgSrcset = isServed
+        ? `${coverImage}&w=400 400w, ${coverImage}&w=800 800w`
         : '';
     return `
         <article class="business-card${isMedical ? ' business-card--medical' : ''}" data-business-id="${business.id}">
             <a href="${bizUrl}" class="business-card-link">
                 <div class="business-card-image">
-                    <img src="${imgSrc}" alt="${business.title || 'Sin título'}" loading="lazy" width="400" height="300" ${imgSrcset ? `srcset="${imgSrcset}" sizes="(max-width: 768px) 400px, 300px"` : ''} onerror="this.src='${placeholderImg}'">
+                    <img src="${isServed ? thumbUrl(imgSrc, 400) : imgSrc}" alt="${business.title || 'Sin título'}" loading="lazy" decoding="async" width="400" height="300" ${imgSrcset ? `srcset="${imgSrcset}" sizes="(max-width: 768px) 400px, 300px"` : ''} onerror="this.src='${placeholderImg}'">
                     <div class="business-card-badges">
                         ${especialidadBadge}${featuredBadge}${statusBadge}
                     </div>
@@ -1478,7 +1486,7 @@ function createPropertyCard(p) {
     <a href="property-detail.html?id=${p.id}" class="business-card">
         ${featuredBadge}
         <div class="business-card-img">
-            ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23f0f0f0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23ccc%22 font-size=%2240%22>🏠</text></svg>'">` : '<div class="card-img-placeholder"><i class="fas fa-home"></i></div>'}
+            ${img ? `<img src="${escapeHtml(thumbUrl(img, 400))}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23f0f0f0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23ccc%22 font-size=%2240%22>🏠</text></svg>'">` : '<div class="card-img-placeholder"><i class="fas fa-home"></i></div>'}
             <div class="card-badges">
                 <span class="card-badge card-badge-type">${escapeHtml(typeLabel)}</span>
                 <span class="card-badge card-badge-op">${escapeHtml(opLabel)}</span>
@@ -1862,7 +1870,7 @@ async function loadFeaturedProducts() {
             <a href="/producto/${slug}" class="business-card">
                 ${featuredBadge}
                 <div class="business-card-img">
-                    ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.style.display='none'">` : '<div class="card-img-placeholder"><i class="fas fa-box"></i></div>'}
+                    ${img ? `<img src="${escapeHtml(thumbUrl(img, 400))}" alt="${escapeHtml(p.name)}" loading="lazy" decoding="async" onerror="this.style.display='none'">` : '<div class="card-img-placeholder"><i class="fas fa-box"></i></div>'}
                     <div class="card-badges">
                         <span class="card-badge card-badge-type">${escapeHtml(p.category || 'General')}</span>
                     </div>
@@ -1933,7 +1941,7 @@ async function loadFeaturedJobs() {
             <a href="empleo.html" class="business-card">
                 ${featuredBadge}
                 <div class="business-card-img">
-                    ${bizLogo ? `<img src="${escapeHtml(bizLogo)}" alt="${escapeHtml(j.company_name || '')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}
+                    ${bizLogo ? `<img src="${escapeHtml(thumbUrl(bizLogo, 320))}" alt="${escapeHtml(j.company_name || '')}" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}
                     <div class="card-img-placeholder" style="${bizLogo ? 'display:none;' : ''}background:linear-gradient(135deg,#17a2b8,#20c997);">
                         <i class="fas fa-briefcase" style="color:#fff;font-size:2rem;"></i>
                     </div>
