@@ -244,7 +244,7 @@ export async function onRequestPost(context) {
     try { await env.DB.prepare("ALTER TABLE businesses ADD COLUMN banner TEXT").run(); } catch(e) { /* column may exist */ }
     try { await env.DB.prepare("ALTER TABLE businesses ADD COLUMN especialidad TEXT").run(); } catch(e) { /* column may exist */ }
 
-    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET;
 
     // Auth required
     const authHeader = request.headers.get('Authorization');

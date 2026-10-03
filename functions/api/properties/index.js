@@ -175,7 +175,7 @@ export async function onRequestPost(context) {
     // Auto-migrate: add whatsapp column if missing
     try { await env.DB.prepare('ALTER TABLE properties ADD COLUMN whatsapp TEXT').run(); } catch(e) {}
 
-    const jwtSecret = env.JWT_SECRET || 'en-santiago_jwt_secret_2024';
+    const jwtSecret = env.JWT_SECRET;
 
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
