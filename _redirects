@@ -19,3 +19,6 @@
 # Cualquier /estado/venezuela -> homepage
 /venezuela/* / 301
 /holax/* / 301
+
+# === Blog: URL con tilde -> archivo real sin tilde ===
+/blog/mejores-barber%C3%ADas-santiago /blog/mejores-barberias-santiago.html 301

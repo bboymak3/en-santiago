@@ -1,0 +1,37 @@
+name: lighthouse (rendimiento)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ccr-a0b7bfcc-xpytrq]
+    paths:
+      - .github/workflows/lighthouse.yml
+      - scripts/lh-summary.mjs
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Lighthouse (móvil)
+        run: |
+          i=0
+          for u in https://en-santiago.com/ https://en-santiago.com/search.html https://en-santiago.com/blog/mejores-barberias-santiago.html https://en-santiago.com/map.html; do
+            i=$((i+1))
+            npx -y lighthouse@12 "$u" --only-categories=performance --output=json --output-path="lh-$i.json" \
+              --chrome-flags="--headless=new --no-sandbox" --quiet || echo "falló $u"
+          done
+          node scripts/lh-summary.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse
+          path: lh-*.json
+          if-no-files-found: ignore

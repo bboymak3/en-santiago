@@ -60,7 +60,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET;
 
     // Auth required
     const authHeader = request.headers.get('Authorization');

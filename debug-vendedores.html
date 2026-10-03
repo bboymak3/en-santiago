@@ -132,8 +132,8 @@
         .token-input:focus { outline: none; border-color: #00d4ff; }
         .empty { color: #64748b; text-align: center; padding: 20px; }
     </style>
-<script src="/js/compress-image.js"></script>
-<script src="/js/compress-image-auto.js"></script>
+<script defer src="/js/compress-image.js"></script>
+<script defer src="/js/compress-image-auto.js"></script>
 </head>
 <body>
     <div class="container">
@@ -198,7 +198,7 @@
         </div>
     </div>
 
-    <script src="js/app.js?v=6"></script>
+    <script src="js/app.js?v=7"></script>
     <script>
     // Resaltar JSON
     function syntaxHighlight(json) {
@@ -253,7 +253,7 @@
         if (!isAuthenticated()) {
             statusEl.textContent = '✗ No autenticado';
             statusEl.className = 'status error';
-            infoEl.innerHTML = '<p style="color:#f87171;">No hay sesión activa. Debes iniciar sesión en <a href="/login.html" style="color:#00d4ff;">/login.html</a> con una cuenta admin.</p>';
+            infoEl.innerHTML = '<p style="color:#f87171;">No hay sesión activa. Debes iniciar sesión en <a href="/login" style="color:#00d4ff;">/login.html</a> con una cuenta admin.</p>';
             return;
         }
 

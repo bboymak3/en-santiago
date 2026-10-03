@@ -21,7 +21,7 @@
     // ─── Check Auth and Redirect ────────────────────────────────
     function checkAuthAndRedirect() {
         if (isAuthenticated()) {
-            window.location.href = '/dashboard.html';
+            window.location.href = '/dashboard';
             return true;
         }
         return false;
@@ -283,7 +283,7 @@
 
             // Redirect after short delay
             setTimeout(() => {
-                window.location.href = '/dashboard.html';
+                window.location.href = '/dashboard';
             }, 1000);
         } catch (error) {
             showMessage(registerMessage, 'Error de conexión. Verifica tu internet e intenta de nuevo.', 'error');

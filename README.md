@@ -84,7 +84,6 @@ Cada negocio aprobado recibe automáticamente su propia URL brandeable:
 | `DB` | D1 database | `en-santiago-db` (ID: `083ae5ed-b15f-4ff3-abcf-b3a3b666bb79`) |
 | `R2` | R2 bucket | `en-santiago-media` |
 | `AI` | Workers AI | Llama 3.1 8B Instruct |
-| `JWT_SECRET` | Var | `ensantiago_jwt_secret_2024` |
 | `R2_FOLDER` | Var | `santiago` |
 
 ⚠️ **NOTA IMPORTANTE**: Cloudflare Pages NO está conectado a GitHub (source = None). Los deploys se hacen con `wrangler pages deploy`. Esto significa que `git push` **NO despliega automáticamente**. Ver sección "Deploy" abajo.

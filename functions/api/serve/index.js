@@ -15,9 +15,17 @@ const corsHeaders = {
 };
 
 const CACHE_PREFIX = 'cache/img/';
+// Si Image Resizing no responde a tiempo se sirve el original. El original de
+// respaldo se cachea poco tiempo para que la variante optimizada pueda
+// generarse cuando Image Resizing esté activo (antes quedaba 1 año en caché).
+const RESIZE_TIMEOUT_MS = 3000;
+const FALLBACK_CACHE = 'public, max-age=3600';
 const MAX_WIDTH_BANNERS = 1600;  // banners can be wider
 const MAX_WIDTH_LOGOS = 800;      // logos are smaller
 const QUALITY = 80;
+// Anchos permitidos para ?w= (se ajusta al más cercano hacia arriba para
+// no generar infinitas variantes en cache)
+const ALLOWED_WIDTHS = [160, 320, 400, 640, 800, 1200, 1600];
 
 export async function onRequestOptions() {
   return new Response(null, { headers: corsHeaders });
@@ -56,17 +64,25 @@ export async function onRequestGet(context) {
     const ext = key.split('.').pop().toLowerCase();
     const skipOptimization = ext === 'svg' || ext === 'ico' || ext === 'gif';
 
-    if (skipOptimization) {
+    // ?raw=1 sirve el original tal cual. Lo usa Image Resizing como origen
+    // (antes se pedía request.url, que volvía a entrar en esta misma función).
+    if (skipOptimization || url.searchParams.get('raw') === '1') {
       return await serveOriginal(env, request, key);
     }
 
-    // Determinar ancho máximo según tipo de imagen
+    // Determinar ancho máximo según tipo de imagen y ?w= solicitado
     const isLogo = key.includes('/logos/');
-    const maxWidth = isLogo ? MAX_WIDTH_LOGOS : MAX_WIDTH_BANNERS;
+    const typeMax = isLogo ? MAX_WIDTH_LOGOS : MAX_WIDTH_BANNERS;
+    const maxWidth = pickWidth(parseInt(url.searchParams.get('w'), 10), typeMax);
 
-    // 1. Edge cache
+    // 1. Edge cache (la clave incluye ancho y formato para no servir AVIF
+    //    a un navegador que no lo soporta)
     const cache = caches.default;
-    const cacheKeyStr = request.url;
+    const cacheKeyUrl = new URL(url.origin + url.pathname);
+    cacheKeyUrl.searchParams.set('key', key);
+    cacheKeyUrl.searchParams.set('w', String(maxWidth));
+    cacheKeyUrl.searchParams.set('f', targetFormat);
+    const cacheKeyStr = cacheKeyUrl.toString();
     const cachedResponse = await cache.match(cacheKeyStr);
     if (cachedResponse) return cachedResponse;
 
@@ -87,21 +103,18 @@ export async function onRequestGet(context) {
           'Last-Modified': cachedVariant.uploaded ? cachedVariant.uploaded.toUTCString() : '',
           'X-Optimized': '1',
           'X-Cache': 'r2-variant',
+          'Vary': 'Accept',
         },
       });
       context.waitUntil(cache.put(cacheKeyStr, response.clone()));
       return response;
     }
 
-    // 3. Fetch original from R2
-    const original = await env.R2.get(key);
-    if (!original) {
-      return new Response('Image not found', { status: 404, headers: corsHeaders });
-    }
-
-    // 4. Try Cloudflare Image Resizing (if available in the account)
+    // 3. Try Cloudflare Image Resizing sobre el original (?raw=1)
     try {
-      const resized = await fetch(request.url, {
+      const rawUrl = `${url.origin}${url.pathname}?key=${encodeURIComponent(key)}&raw=1`;
+      const resized = await fetch(rawUrl, {
+        signal: AbortSignal.timeout(RESIZE_TIMEOUT_MS),
         cf: {
           image: {
             width: maxWidth,
@@ -113,11 +126,12 @@ export async function onRequestGet(context) {
         },
       });
 
-      if (resized.ok) {
+      // Si Image Resizing no está activo, Cloudflare devuelve el original sin
+      // el header cf-resized: en ese caso no se guarda como variante.
+      const cfResized = resized.headers.get('cf-resized') || '';
+      if (resized.ok && cfResized && !cfResized.includes('err=')) {
         const optimizedBuffer = await resized.arrayBuffer();
-        const contentType = targetFormat === 'avif' ? 'image/avif'
-                          : targetFormat === 'webp' ? 'image/webp'
-                          : getContentTypeFromKey(key);
+        const contentType = resized.headers.get('Content-Type') || getContentTypeFromKey(key);
 
         // Guardar en R2 cache
         context.waitUntil(
@@ -142,6 +156,7 @@ export async function onRequestGet(context) {
             'X-Original-Format': ext,
             'X-Target-Format': targetFormat,
             'X-Max-Width': String(maxWidth),
+            'Vary': 'Accept',
           },
         });
         context.waitUntil(cache.put(cacheKeyStr, response.clone()));
@@ -152,8 +167,12 @@ export async function onRequestGet(context) {
       console.warn('Image Resizing not available, serving original:', resizeErr.message);
     }
 
-    // 5. Fallback: serve original with long cache
-    const response = await serveOriginalStream(original, key);
+    // 4. Fallback: serve original with long cache
+    const original = await env.R2.get(key);
+    if (!original) {
+      return new Response('Image not found', { status: 404, headers: corsHeaders });
+    }
+    const response = await serveOriginalStream(original, key, FALLBACK_CACHE);
     context.waitUntil(cache.put(cacheKeyStr, response.clone()));
     return response;
 
@@ -161,6 +180,12 @@ export async function onRequestGet(context) {
     console.error('Serve image error:', error);
     return new Response('Error serving image', { status: 500, headers: corsHeaders });
   }
+}
+
+function pickWidth(requested, typeMax) {
+  if (!requested || requested <= 0) return typeMax;
+  const snapped = ALLOWED_WIDTHS.find((w) => w >= requested) || typeMax;
+  return Math.min(snapped, typeMax);
 }
 
 function buildVariantKey(key, w, format) {
@@ -196,14 +221,14 @@ async function serveOriginal(env, request, key) {
   return response;
 }
 
-async function serveOriginalStream(object, key) {
+async function serveOriginalStream(object, key, cacheControl = 'public, max-age=31536000, immutable') {
   const contentType = object.httpMetadata?.contentType || getContentTypeFromKey(key);
   return new Response(object.body, {
     status: 200,
     headers: {
       ...corsHeaders,
       'Content-Type': contentType,
-      'Cache-Control': 'public, max-age=31536000, immutable',
+      'Cache-Control': cacheControl,
       'ETag': object.etag || '',
       'Last-Modified': object.uploaded.toUTCString(),
       'X-Optimized': '0',

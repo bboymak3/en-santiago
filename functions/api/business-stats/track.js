@@ -56,7 +56,7 @@ export async function onRequestPost(context) {
     }
 
     const validatedSource = VALID_SOURCES.includes(source) ? source : null;
-    const jwtSecret = env.JWT_SECRET || 'en-santiago_default_secret_2024';
+    const jwtSecret = env.JWT_SECRET;
 
     // Get client IP
     const clientIP = request.headers.get('CF-Connecting-IP')

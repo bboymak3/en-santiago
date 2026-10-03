@@ -397,7 +397,7 @@ function showWebPageSelector() {
                 <i class="fas fa-user-lock" style="font-size:2.5rem;color:#cbd5e1;margin-bottom:12px;"></i>
                 <p style="font-size:0.95rem;font-weight:600;">Inicia sesion para ver tus paginas web</p>
                 <p style="font-size:0.85rem;margin-top:4px;">Necesitas tener una cuenta y al menos un negocio registrado.</p>
-                <a href="/login.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#006EE3;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Iniciar Sesion</a>
+                <a href="/login" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#006EE3;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Iniciar Sesion</a>
             </div>`;
         return;
     }
@@ -412,7 +412,7 @@ function showWebPageSelector() {
                     <i class="fas fa-store" style="font-size:2.5rem;color:#cbd5e1;margin-bottom:12px;"></i>
                     <p style="font-size:0.95rem;font-weight:600;">No tienes negocios registrados</p>
                     <p style="font-size:0.85rem;margin-top:4px;">Primero crea un negocio para generar su pagina web.</p>
-                    <a href="/new-business.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#006EE3;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Crear Negocio</a>
+                    <a href="/new-business" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#006EE3;color:#fff;border-radius:10px;font-size:0.9rem;font-weight:600;">Crear Negocio</a>
                 </div>`;
             return;
         }
@@ -423,7 +423,7 @@ function showWebPageSelector() {
             html += `
                 <a href="/web/${b.slug}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:10px;text-decoration:none;color:inherit;transition:all 0.2s;background:#fff;" onmouseover="this.style.borderColor='#0ea5e9';this.style.boxShadow='0 4px 12px rgba(14,165,233,0.1)';" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='none';">
                     <div style="width:52px;height:52px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">
-                        ${coverImg ? `<img src="${coverImg}" alt="" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fas fa-store" style="font-size:1.2rem;color:#94a3b8;"></i>'}
+                        ${coverImg ? `<img src="${thumbUrl(coverImg, 160)}" alt="" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fas fa-store" style="font-size:1.2rem;color:#94a3b8;"></i>'}
                     </div>
                     <div style="flex:1;min-width:0;">
                         <div style="font-size:0.95rem;font-weight:700;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${b.title || 'Sin nombre'}</div>
@@ -498,7 +498,7 @@ function updateNav() {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const redirect = encodeURIComponent('new-business.html');
-                window.location.href = `/login.html?redirect=${redirect}`;
+                window.location.href = `/login?redirect=${redirect}`;
             });
         });
     }
@@ -614,7 +614,7 @@ async function toggleFavorite(businessId) {
     if (!isAuthenticated()) {
         showToast('Inicia sesión para guardar favoritos', 'warning');
         setTimeout(() => {
-            window.location.href = `/login.html?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+            window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
         }, 1500);
         return;
     }
@@ -708,7 +708,7 @@ function getBusinessUrl(business) {
         // Fallback: URL legacy (redirige 301 al canonico)
         return '/negocio/' + business.slug;
     }
-    return '/business.html?id=' + business.id;
+    return '/business?id=' + business.id;
 }
 
 // Slugify local (no depende de nada externo)
@@ -759,6 +759,18 @@ function getStatusBadge(status) {
     return `<span class="${cls}">${getStatusLabel(status)}</span>`;
 }
 
+// ─── Thumbnails ────────────────────────────────────────────────
+// /api/serve redimensiona con ?w=; sin él entrega la imagen a 1600px
+function thumbUrl(url, w) {
+    if (!url || url.indexOf('/api/serve?key=') === -1 || /[?&]w=/.test(url)) return url;
+    return url + '&w=' + w;
+}
+
+// Ancho para banners a pantalla completa (móvil 800, escritorio 1600)
+function bannerUrl(url) {
+    return thumbUrl(url, (window.innerWidth || 1024) * (window.devicePixelRatio || 1) > 1000 ? 1600 : 800);
+}
+
 // ─── Business Card HTML Generator ──────────────────────────────
 function createBusinessCard(business) {
     if (!business) return '';
@@ -780,14 +792,15 @@ function createBusinessCard(business) {
     const bizUrl = getBusinessUrl(business);
     const isMedical = business.category_slug === 'medicina-servicio-medico';
     // Optimización: usar srcset para servir imagen más pequeña en mobile
-    const imgSrcset = imgSrc && imgSrc.includes('/api/serve?key=')
-        ? `${imgSrc}&w=400 400w, ${imgSrc}&w=800 800w`
+    const isServed = coverImage && coverImage.includes('/api/serve?key=') && !/[?&]w=/.test(coverImage);
+    const imgSrcset = isServed
+        ? `${coverImage}&w=400 400w, ${coverImage}&w=800 800w`
         : '';
     return `
         <article class="business-card${isMedical ? ' business-card--medical' : ''}" data-business-id="${business.id}">
             <a href="${bizUrl}" class="business-card-link">
                 <div class="business-card-image">
-                    <img src="${imgSrc}" alt="${business.title || 'Sin título'}" loading="lazy" width="400" height="300" ${imgSrcset ? `srcset="${imgSrcset}" sizes="(max-width: 768px) 400px, 300px"` : ''} onerror="this.src='${placeholderImg}'">
+                    <img src="${isServed ? thumbUrl(imgSrc, 400) : imgSrc}" alt="${business.title || 'Sin título'}" loading="lazy" decoding="async" width="400" height="300" ${imgSrcset ? `srcset="${imgSrcset}" sizes="(max-width: 768px) 400px, 300px"` : ''} onerror="this.src='${placeholderImg}'">
                     <div class="business-card-badges">
                         ${especialidadBadge}${featuredBadge}${statusBadge}
                     </div>
@@ -839,7 +852,7 @@ function getSearchParams() {
 function requireAuth() {
     if (!isAuthenticated()) {
         const redirect = encodeURIComponent(window.location.pathname + window.location.search);
-        window.location.href = `/login.html?redirect=${redirect}`;
+        window.location.href = `/login?redirect=${redirect}`;
         return false;
     }
     return true;
@@ -1015,7 +1028,7 @@ async function loadHeroBanner() {
         const data = homeData ? homeData.settings : await fetch('/api/settings/public').then(r => r.json());
 
         if (data.hero_banner_url) {
-            heroBg.style.backgroundImage = `url(${data.hero_banner_url})`;
+            heroBg.style.backgroundImage = `url(${bannerUrl(data.hero_banner_url)})`;
             heroBg.style.backgroundSize = 'cover';
             heroBg.style.backgroundPosition = 'center';
             heroBg.style.backgroundRepeat = 'no-repeat';
@@ -1023,7 +1036,7 @@ async function loadHeroBanner() {
             // No es necesario setearlo dinámicamente aquí (mejor LCP)
         }
         if (searchHeroBanner && searchBannerImg && data.search_banner_url) {
-            searchBannerImg.src = data.search_banner_url;
+            searchBannerImg.src = bannerUrl(data.search_banner_url);
             searchHeroBanner.style.display = 'block';
         }
         if (data.hero_logo_url && heroLogo) {
@@ -1043,7 +1056,7 @@ async function loadMarketplaceBanner() {
         const homeData = await getHomeData();
         const data = homeData ? homeData.settings : await fetch('/api/settings/public').then(r => r.json());
         if (data.marketplace_banner_url) {
-            mpBg.style.backgroundImage = `url(${data.marketplace_banner_url})`;
+            mpBg.style.backgroundImage = `url(${bannerUrl(data.marketplace_banner_url)})`;
             mpBg.style.backgroundSize = 'cover';
             mpBg.style.backgroundPosition = 'center';
             mpBg.style.backgroundRepeat = 'no-repeat';
@@ -1478,7 +1491,7 @@ function createPropertyCard(p) {
     <a href="property-detail.html?id=${p.id}" class="business-card">
         ${featuredBadge}
         <div class="business-card-img">
-            ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23f0f0f0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23ccc%22 font-size=%2240%22>🏠</text></svg>'">` : '<div class="card-img-placeholder"><i class="fas fa-home"></i></div>'}
+            ${img ? `<img src="${escapeHtml(thumbUrl(img, 400))}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect fill=%22%23f0f0f0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23ccc%22 font-size=%2240%22>🏠</text></svg>'">` : '<div class="card-img-placeholder"><i class="fas fa-home"></i></div>'}
             <div class="card-badges">
                 <span class="card-badge card-badge-type">${escapeHtml(typeLabel)}</span>
                 <span class="card-badge card-badge-op">${escapeHtml(opLabel)}</span>
@@ -1598,7 +1611,7 @@ async function loadSiteStats() {
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         if (clearFiltersBtn) {
             clearFiltersBtn.addEventListener('click', () => {
-                window.location.href = '/search.html';
+                window.location.href = '/search';
             });
         }
 
@@ -1642,7 +1655,7 @@ async function loadSiteStats() {
                 const cats = catData.categories || [];
                 const matchedCat = cats.find(c => c.slug === categoria || c.name.toLowerCase() === categoria.toLowerCase());
                 if (matchedCat && matchedCat.banner_url) {
-                    categoryBannerImg.src = matchedCat.banner_url;
+                    categoryBannerImg.src = bannerUrl(matchedCat.banner_url);
                     categoryBannerTitle.textContent = matchedCat.name;
                     categoryBannerEl.style.display = 'block';
                 } else {
@@ -1862,7 +1875,7 @@ async function loadFeaturedProducts() {
             <a href="/producto/${slug}" class="business-card">
                 ${featuredBadge}
                 <div class="business-card-img">
-                    ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.style.display='none'">` : '<div class="card-img-placeholder"><i class="fas fa-box"></i></div>'}
+                    ${img ? `<img src="${escapeHtml(thumbUrl(img, 400))}" alt="${escapeHtml(p.name)}" loading="lazy" decoding="async" onerror="this.style.display='none'">` : '<div class="card-img-placeholder"><i class="fas fa-box"></i></div>'}
                     <div class="card-badges">
                         <span class="card-badge card-badge-type">${escapeHtml(p.category || 'General')}</span>
                     </div>
@@ -1933,7 +1946,7 @@ async function loadFeaturedJobs() {
             <a href="empleo.html" class="business-card">
                 ${featuredBadge}
                 <div class="business-card-img">
-                    ${bizLogo ? `<img src="${escapeHtml(bizLogo)}" alt="${escapeHtml(j.company_name || '')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}
+                    ${bizLogo ? `<img src="${escapeHtml(thumbUrl(bizLogo, 320))}" alt="${escapeHtml(j.company_name || '')}" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}
                     <div class="card-img-placeholder" style="${bizLogo ? 'display:none;' : ''}background:linear-gradient(135deg,#17a2b8,#20c997);">
                         <i class="fas fa-briefcase" style="color:#fff;font-size:2rem;"></i>
                     </div>
@@ -1992,7 +2005,7 @@ async function loadFeaturedJobs() {
                 popup.style.cssText = 'position:relative;max-width:90vw;max-height:90vh;border-radius:16px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.4);animation:_popupScaleIn 0.3s ease;background:#fff;';
 
                 const img = document.createElement('img');
-                img.src = settings.popup_image_url;
+                img.src = bannerUrl(settings.popup_image_url);
                 img.alt = 'Publicidad';
                 img.style.cssText = 'display:block;max-width:90vw;max-height:80vh;object-fit:contain;cursor:pointer;';
                 img.onerror = function() { overlay.remove(); };

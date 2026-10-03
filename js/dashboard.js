@@ -237,7 +237,7 @@ window.closeEditBusinessModal = function() {
         currentUser = await getCurrentUser();
         if (!currentUser) {
             removeToken();
-            window.location.href = '/login.html';
+            window.location.href = '/login';
             return;
         }
 
@@ -315,7 +315,7 @@ window.closeEditBusinessModal = function() {
         // Set profile partner link
         var profileLink = document.getElementById('sidebarProfileLink');
         if (profileLink && currentUser.id) {
-            profileLink.href = '/perfil.html?id=' + currentUser.id;
+            profileLink.href = '/perfil?id=' + currentUser.id;
         }
     }
 

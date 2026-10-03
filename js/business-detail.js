@@ -796,7 +796,7 @@ async function loadBusinessProducts(businessId) {
         }
 
         section.style.display = '';
-        if (viewAll) viewAll.href = `/marketplace.html?business_id=${businessId}`;
+        if (viewAll) viewAll.href = `/marketplace?business_id=${businessId}`;
 
         grid.innerHTML = products.map(p => {
             // Parse image: could be JSON array string or plain URL
