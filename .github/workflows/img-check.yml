@@ -1,0 +1,38 @@
+name: img-check (diagnóstico)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ccr-a0b7bfcc-xpytrq]
+    paths:
+      - .github/workflows/img-check.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cabeceras de imágenes
+        run: |
+          B='santiago%2Fbanners%2F1787688450570_directorio-domercial-de-santiago-chile-region-metropilitana-servicios-negocios-empleo-donde-publicar-tu-negocio-agencia-de-marketing-en-santiago-360.jpg'
+          L='santiago%2Flogos%2F1%2F1788190364071_tapizado-de-vlolantes-en-santiago-monocromatico-tapizar-volante.jpeg'
+          for url in \
+            "https://en-santiago.com/api/serve?key=$B" \
+            "https://en-santiago.com/api/serve?key=$B&w=1200" \
+            "https://en-santiago.com/api/serve?key=$B&w=640" \
+            "https://en-santiago.com/api/serve?key=$L" \
+            "https://en-santiago.com/api/serve?key=$L&w=400" \
+            "https://en-santiago.com/api/img?key=$B&w=1200" \
+            "https://en-santiago.com/api/serve?key=$B&raw=1"; do
+            for acc in "image/avif,image/webp,*/*" "image/webp,*/*"; do
+              echo "== $url  [Accept: ${acc%%,*}]"
+              curl -s -o /dev/null -D - -H "Accept: $acc" "$url" | grep -iE '^(HTTP|content-type|content-length|x-cache|cf-cache-status|x-optimized|cf-resized|x-max-width|x-target-format)' || true
+              curl -s -o /dev/null -w "  bytes=%{size_download} t=%{time_total}s\n" -H "Accept: $acc" "$url"
+            done
+          done
+          echo "== Redirecciones"
+          for u in https://en-santiago.com/search.html https://en-santiago.com/blog/mejores-barberias-santiago.html https://www.en-santiago.com/ http://en-santiago.com/; do
+            curl -s -o /dev/null -w "$u -> %{http_code} %{redirect_url}\n" "$u"
+          done
