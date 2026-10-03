@@ -104,7 +104,7 @@
       if (b.category_slug && b.tipo_negocio_slug) return '/' + b.tipo_negocio_slug + '/' + b.category_slug + '/' + b.slug;
       return '/negocio/' + b.slug;
     }
-    return '/business.html?id=' + b.id;
+    return '/business?id=' + b.id;
   }
 
   function thumb(url, w) {
@@ -187,7 +187,7 @@
   }
 
   function searchUrl() {
-    return cfg.q ? '/search.html?q=' + encodeURIComponent(cfg.q) : '/search.html';
+    return cfg.q ? '/search?q=' + encodeURIComponent(cfg.q) : '/search';
   }
 
   function renderTop(el) {
@@ -215,7 +215,7 @@
       '<div class="bb-more">' +
         '<button type="button" class="bb-load-more"><i class="fas fa-plus"></i> Ver más</button>' +
         (cfg.q ? '<a href="' + searchUrl() + '" class="bb-see-related" style="background:#1a1a2e">Ver más ' + esc(cfg.label || 'relacionados') + '</a>' : '') +
-        '<a href="/search.html"><i class="fas fa-th"></i> Ver todas las fichas</a>' +
+        '<a href="/search"><i class="fas fa-th"></i> Ver todas las fichas</a>' +
       '</div>';
     var grid = el.querySelector('.bb-grid');
     var btn = el.querySelector('.bb-load-more');

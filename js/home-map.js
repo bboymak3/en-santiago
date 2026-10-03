@@ -218,7 +218,7 @@
                 var typeLabel = p.business_type || 'Negocio';
 
                 var imgTag = coverImage
-                    ? '<div class="map-popup-image"><img src="' + coverImage + '" alt="' + title + '" onerror="this.parentElement.style.display=\'none\'"></div>'
+                    ? '<div class="map-popup-image"><img src="' + (coverImage.indexOf('/api/serve?key=') !== -1 && !/[?&]w=/.test(coverImage) ? coverImage + '&w=320' : coverImage) + '" loading="lazy" alt="' + title + '" onerror="this.parentElement.style.display=\'none\'"></div>'
                     : '';
 
                 var address = p.city ? (p.state ? p.city + ', ' + p.state : p.city) : '';
@@ -256,7 +256,7 @@
                 var opLabel = (p.operation_type || '').replace('_', ' ');
 
                 var imgTag = coverImage
-                    ? '<div class="map-popup-image"><img src="' + coverImage + '" alt="' + title + '" onerror="this.parentElement.style.display=\'none\'"></div>'
+                    ? '<div class="map-popup-image"><img src="' + (coverImage.indexOf('/api/serve?key=') !== -1 && !/[?&]w=/.test(coverImage) ? coverImage + '&w=320' : coverImage) + '" loading="lazy" alt="' + title + '" onerror="this.parentElement.style.display=\'none\'"></div>'
                     : '';
 
                 var address = p.city ? (p.state ? p.city + ', ' + p.state : p.city) : '';
@@ -270,7 +270,7 @@
                     + (price ? '<span class="map-popup-badge" style="background:#006EE3;">' + price + '</span>' : '')
                     + '</div>'
                     + (address ? '<div class="map-popup-location">' + address + '</div>' : '')
-                    + '<a href="/property-detail.html?id=' + p.id + '" class="map-popup-link">Ver m\u00e1s <i class="fas fa-arrow-right"></i></a>'
+                    + '<a href="/property-detail?id=' + p.id + '" class="map-popup-link">Ver m\u00e1s <i class="fas fa-arrow-right"></i></a>'
                     + '</div>'
                     + '</div>';
 

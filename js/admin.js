@@ -219,7 +219,7 @@ if (!window._renderVideoList) {
     async function init() {
         // Check auth
         if (!isAuthenticated()) {
-            window.location.href = '/login.html';
+            window.location.href = '/login';
             return;
         }
 
@@ -6873,7 +6873,7 @@ if (!window._renderVideoList) {
                 }
                 html += '</td>';
                 html += '<td><div style="display:flex;gap:4px;flex-wrap:wrap;">';
-                html += '<a href="/perfil.html?id=' + u.id + '" target="_blank" style="background:none;border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#2563eb;text-decoration:none;" title="Ver Perfil"><i class="fas fa-external-link-alt"></i></a>';
+                html += '<a href="/perfil?id=' + u.id + '" target="_blank" style="background:none;border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#2563eb;text-decoration:none;" title="Ver Perfil"><i class="fas fa-external-link-alt"></i></a>';
                 if (!grad) {
                     html += '<button onclick="academyGraduateAgent(' + u.id + ',\'' + _esc(u.name).replace(/'/g, "\\\\'") + '\')" style="background:none;border:1px solid #fde68a;border-radius:6px;padding:3px 8px;cursor:pointer;font-size:0.72rem;color:#d97706;" title="Graduar"><i class="fas fa-graduation-cap"></i></button>';
                 }

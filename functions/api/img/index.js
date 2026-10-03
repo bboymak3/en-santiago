@@ -18,6 +18,11 @@ const corsHeaders = {
 };
 
 const CACHE_PREFIX = 'cache/img/';
+// Si Image Resizing no responde a tiempo se sirve el original. El original de
+// respaldo se cachea poco tiempo para que la variante optimizada pueda
+// generarse cuando Image Resizing esté activo (antes quedaba 1 año en caché).
+const RESIZE_TIMEOUT_MS = 3000;
+const FALLBACK_CACHE = 'public, max-age=3600';
 
 export async function onRequestOptions() {
   return new Response(null, { headers: corsHeaders });
@@ -100,6 +105,7 @@ export async function onRequestGet(context) {
       // volvía a entrar en esta misma función)
       const rawUrl = `${url.origin}/api/serve?key=${encodeURIComponent(key)}&raw=1`;
       const resized = await fetch(rawUrl, {
+        signal: AbortSignal.timeout(RESIZE_TIMEOUT_MS),
         cf: {
           image: {
             width: w || undefined,
@@ -149,7 +155,7 @@ export async function onRequestGet(context) {
 
     } catch (resizeError) {
       console.error('Resize error, serving original:', resizeError.message);
-      const response = await serveOriginalStream(original, key);
+      const response = await serveOriginalStream(original, key, FALLBACK_CACHE);
       context.waitUntil(cache.put(cacheKeyStr, response.clone()));
       return response;
     }
@@ -215,14 +221,14 @@ async function serveOriginal(env, request, key) {
   return response;
 }
 
-async function serveOriginalStream(object, key) {
+async function serveOriginalStream(object, key, cacheControl = 'public, max-age=31536000, immutable') {
   const contentType = object.httpMetadata?.contentType || getContentTypeFromKey(key);
   return new Response(object.body, {
     status: 200,
     headers: {
       ...corsHeaders,
       'Content-Type': contentType,
-      'Cache-Control': 'public, max-age=31536000, immutable',
+      'Cache-Control': cacheControl,
       'ETag': object.etag || '',
       'Last-Modified': object.uploaded.toUTCString(),
     },

@@ -72,14 +72,14 @@
             font-size: 0.9rem;
         }
     </style>
-<script src="/js/compress-image.js"></script>
-<script src="/js/compress-image-auto.js"></script>
+<script defer src="/js/compress-image.js"></script>
+<script defer src="/js/compress-image-auto.js"></script>
 </head>
 <body>
 <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <a href="/" class="nav-logo">
                 <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
                 <span class="brand-name"><span id="brandCity"></span> En Santiago</span>
             </a>
@@ -107,31 +107,31 @@
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="search.html" class="nav-link">Negocios</a></li>
-                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
-                <li><a href="map.html" class="nav-link">Mapa</a></li>
-                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
-                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/search" class="nav-link">Negocios</a></li>
+                <li><a href="/properties" class="nav-link">Inmuebles</a></li>
+                <li><a href="/map" class="nav-link">Mapa</a></li>
+                <li><a href="/entretenimiento" class="nav-link">Entretenimiento</a></li>
+                <li><a href="/empleo" class="nav-link">Empleo</a></li>
                 <li class="nav-dropdown">
                     <button class="nav-dropdown-toggle" aria-label="Más opciones">
                         Más <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="nav-dropdown-menu">
-                        <li><a href="planes.html" class="nav-link"><i class="fas fa-crown"></i> Nuestros Planes</a></li>
-                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
-                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li><a href="/planes" class="nav-link"><i class="fas fa-crown"></i> Nuestros Planes</a></li>
+                        <li><a href="/marketplace" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="/new-property" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
                         
-                        <li><a href="quienes-somos.html" class="nav-link"><i class="fas fa-info-circle"></i> Quiénes Somos</a></li>
-                        <li><a href="contacto.html" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a></li>
-                        <li><a href="privacidad.html" class="nav-link"><i class="fas fa-shield-halved"></i> Política de Privacidad</a></li>
+                        <li><a href="/quienes-somos" class="nav-link"><i class="fas fa-info-circle"></i> Quiénes Somos</a></li>
+                        <li><a href="/contacto" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a></li>
+                        <li><a href="/privacidad" class="nav-link"><i class="fas fa-shield-halved"></i> Política de Privacidad</a></li>
                         
-                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                        <li><a href="/emergencia" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
-                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navLoginItem"><a href="/login" class="nav-link nav-btn">Login</a></li>
                 <li id="navUserItem" class="nav-user hidden">
-                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                    <a href="/dashboard" class="nav-link" id="navUserName">
                         <i class="fas fa-user-circle"></i> Mi Cuenta
                     </a>
                     <button class="nav-link btn-logout" id="navLogout">
@@ -139,7 +139,7 @@
                     </button>
                 </li>
                 <li class="nav-mobile-cta">
-                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                    <a href="/marketplace" class="nav-mobile-cta-marketplace">
                         <i class="fas fa-shopping-bag"></i> Marketplace
                     </a>
                 </li>
@@ -233,7 +233,7 @@
                     <li><strong>Derecho de acceso:</strong> puede solicitar informacion sobre los datos personales que tenemos almacenados sobre usted.</li>
                     <li><strong>Derecho de rectificacion:</strong> puede solicitar la correccion de sus datos personales si estos son inexactos o estan incompletos.</li>
                     <li><strong>Derecho de eliminacion:</strong> puede solicitar la eliminacion de todos sus datos personales y de su cuenta en la plataforma. Para obtener instrucciones detalladas, visite nuestra pagina de
-                        <a href="eliminacion-datos.html">Eliminacion de Datos</a>.
+                        <a href="/eliminacion-datos">Eliminacion de Datos</a>.
                     </li>
                     <li><strong>Derecho de oposicion:</strong> puede oponerse al tratamiento de sus datos personales en determinadas circunstancias.</li>
                 </ul>
@@ -269,7 +269,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="index.html" class="footer-logo">
+                    <a href="/" class="footer-logo">
                         <img src="images/favicon.jpeg" alt="En Santiago" style="height:28px;width:auto;border-radius:6px;margin-right:6px;">
                         <span>En Santiago</span>
                     </a>
@@ -284,21 +284,21 @@
                 <div class="footer-col">
                     <h4>Navegación</h4>
                     <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="search.html">Negocios</a></li>
-                        <li><a href="map.html">Mapa</a></li>
-                        <li><a href="planes.html">Nuestros Planes</a></li>
-                        <li><a href="new-business.html">Registrar Negocio</a></li>
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/search">Negocios</a></li>
+                        <li><a href="/map">Mapa</a></li>
+                        <li><a href="/planes">Nuestros Planes</a></li>
+                        <li><a href="/new-business">Registrar Negocio</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Información</h4>
                     <ul>
-                        <li><a href="quienes-somos.html">Quiénes Somos</a></li>
-                        <li><a href="mision-vision.html">Misión y Visión</a></li>
-                        <li><a href="clientes-satisfechos.html">Clientes Satisfechos</a></li>
-                        <li><a href="privacidad.html">Política de Privacidad</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="/quienes-somos">Quiénes Somos</a></li>
+                        <li><a href="/mision-vision">Misión y Visión</a></li>
+                        <li><a href="/clientes-satisfechos">Clientes Satisfechos</a></li>
+                        <li><a href="/privacidad">Política de Privacidad</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -316,7 +316,7 @@
         </div>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=20261003"></script>
 
     <script>
     if ('serviceWorker' in navigator) {

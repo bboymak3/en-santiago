@@ -41,12 +41,14 @@
   Access-Control-Allow-Headers: Content-Type, Accept
 
 # Archivos estáticos - cache con revalidación
+# Los HTML piden css/js con ?v=N: al cambiar N se descarga la versión nueva.
+# stale-while-revalidate evita esperar la revalidación en visitas repetidas.
 /css/*.css
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /js/*.js
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /images/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
 # Service Worker - nunca cachear
 /sw.js

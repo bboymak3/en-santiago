@@ -736,7 +736,7 @@
                     } else {
                         var biz = allBusinesses.find(function(b) { return b.id === id; });
                         if (currentMapType === 'properties') {
-                            window.location.href = '/property-detail.html?id=' + id;
+                            window.location.href = '/property-detail?id=' + id;
                         } else {
                             window.location.href = (biz && biz.category_slug === 'medicina-servicio-medico' ? '/medicina-servicio-medico' : '/negocio') + '/' + (biz && biz.slug ? biz.slug : id);
                         }
@@ -961,7 +961,7 @@
             + (price ? '<span class="map-popup-badge" style="background:#006EE3;">' + price + '</span>' : '')
             + '</div>'
             + (address ? '<div class="map-popup-location">' + address + '</div>' : '')
-            + '<a href="/property-detail.html?id=' + property.id + '" class="map-popup-link">Ver más <i class="fas fa-arrow-right"></i></a>'
+            + '<a href="/property-detail?id=' + property.id + '" class="map-popup-link">Ver más <i class="fas fa-arrow-right"></i></a>'
             + '</div>'
             + '</div>';
 
@@ -1024,7 +1024,7 @@
                 if (!isNaN(lat) && !isNaN(lng) && map) {
                     flyToBusiness(id);
                 } else {
-                    window.location.href = '/property-detail.html?id=' + id;
+                    window.location.href = '/property-detail?id=' + id;
                 }
             });
         });

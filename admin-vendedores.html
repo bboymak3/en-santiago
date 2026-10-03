@@ -9,14 +9,14 @@
     <title>Vendedores - Administración En Santiago</title>
     <link rel="stylesheet" href="css/styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="/js/compress-image.js"></script>
-<script src="/js/compress-image-auto.js"></script>
+<script defer src="/js/compress-image.js"></script>
+<script defer src="/js/compress-image-auto.js"></script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-admin" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <a href="/" class="nav-logo">
                 <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
                 <span class="brand-name">En Santiago</span> <span class="admin-badge">Admin</span>
             </a>
@@ -24,13 +24,13 @@
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="admin.html" class="nav-link"><i class="fas fa-cogs"></i> Panel Admin</a></li>
-                <li><a href="admin-vendedores.html" class="nav-link active"><i class="fas fa-store"></i> Vendedores</a></li>
-                <li><a href="admin-chat.html" class="nav-link"><i class="fas fa-comments"></i> Chat</a></li>
-                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/admin" class="nav-link"><i class="fas fa-cogs"></i> Panel Admin</a></li>
+                <li><a href="/admin-vendedores" class="nav-link active"><i class="fas fa-store"></i> Vendedores</a></li>
+                <li><a href="/admin-chat" class="nav-link"><i class="fas fa-comments"></i> Chat</a></li>
+                <li id="navLoginItem"><a href="/login" class="nav-link nav-btn">Login</a></li>
                 <li id="navUserItem" class="nav-user">
-                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                    <a href="/dashboard" class="nav-link" id="navUserName">
                         <i class="fas fa-user-circle"></i> Mi Cuenta
                     </a>
                     <button class="nav-link btn-logout" id="navLogout">
@@ -50,15 +50,15 @@
                     <span>Vendedores</span>
                 </div>
                 <nav class="admin-nav">
-                    <a href="admin.html" class="admin-nav-link">
+                    <a href="/admin" class="admin-nav-link">
                         <i class="fas fa-arrow-left"></i>
                         <span>Volver al Panel</span>
                     </a>
-                    <a href="admin.html#tab=settings" class="admin-nav-link">
+                    <a href="/admin#tab=settings" class="admin-nav-link">
                         <i class="fas fa-sliders-h"></i>
                         <span>Configuración General</span>
                     </a>
-                    <a href="admin-chat.html" class="admin-nav-link">
+                    <a href="/admin-chat" class="admin-nav-link">
                         <i class="fas fa-comments"></i>
                         <span>Configuración Chat</span>
                     </a>
@@ -225,7 +225,7 @@
         </div>
     </div>
 
-    <script src="js/app.js?v=9"></script>
+    <script src="js/app.js?v=10"></script>
     <script>
     (function() {
         'use strict';

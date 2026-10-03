@@ -34,14 +34,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Leaflet for mini map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<script src="/js/compress-image.js"></script>
-<script src="/js/compress-image-auto.js"></script>
+<script defer src="/js/compress-image.js"></script>
+<script defer src="/js/compress-image-auto.js"></script>
 </head>
 <body>
 <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <a href="/" class="nav-logo">
                 <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
                 <span class="brand-name"><span id="brandCity"></span> En Santiago</span>
             </a>
@@ -69,24 +69,24 @@
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="search.html" class="nav-link active">Negocios</a></li>
-                <li><a href="map.html" class="nav-link">Mapa</a></li>
-                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
-                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/search" class="nav-link active">Negocios</a></li>
+                <li><a href="/map" class="nav-link">Mapa</a></li>
+                <li><a href="/entretenimiento" class="nav-link">Entretenimiento</a></li>
+                <li><a href="/empleo" class="nav-link">Empleo</a></li>
                 <li class="nav-dropdown">
                     <button class="nav-dropdown-toggle" aria-label="Más opciones">
                         Más <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="nav-dropdown-menu">
-                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="/marketplace" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
                         
-                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                        <li><a href="/emergencia" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
-                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navLoginItem"><a href="/login" class="nav-link nav-btn">Login</a></li>
                 <li id="navUserItem" class="nav-user hidden">
-                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                    <a href="/dashboard" class="nav-link" id="navUserName">
                         <i class="fas fa-user-circle"></i> Mi Cuenta
                     </a>
                     <button class="nav-link btn-logout" id="navLogout">
@@ -94,7 +94,7 @@
                     </button>
                 </li>
                 <li class="nav-mobile-cta">
-                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                    <a href="/marketplace" class="nav-mobile-cta-marketplace">
                         <i class="fas fa-shopping-bag"></i> Marketplace
                     </a>
                 </li>
@@ -301,8 +301,8 @@
                         <h2>No se encontraron negocios</h2>
                         <p>No hay resultados para tu búsqueda. Intenta con otros filtros o términos.</p>
                         <div class="no-results-actions">
-                            <a href="search.html" class="btn btn-primary">Ver todos los negocios</a>
-                            <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
+                            <a href="/search" class="btn btn-primary">Ver todos los negocios</a>
+                            <a href="/" class="btn btn-secondary">Volver al inicio</a>
                         </div>
                     </div>
 
@@ -354,7 +354,7 @@
     <!-- Toast Notification -->
     
 
-    <script src="js/app.js?v=11"></script>
+    <script src="js/app.js?v=12"></script>
     <script src="js/dynamic-categories.js?v=1"></script>
-    <script src="js/map.js?v=2"></script>
+    <script src="js/map.js?v=3"></script>
     <script src="js/chat.js"></script>

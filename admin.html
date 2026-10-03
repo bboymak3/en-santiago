@@ -25,14 +25,14 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
   display: none !important;
 }
 </style>
-<script src="/js/compress-image.js"></script>
-<script src="/js/compress-image-auto.js"></script>
+<script defer src="/js/compress-image.js"></script>
+<script defer src="/js/compress-image-auto.js"></script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-admin" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <a href="/" class="nav-logo">
                 <img src="images/favicon.jpeg" alt="En Santiago" style="height:32px;width:auto;border-radius:6px;margin-right:4px;">
                 <span class="brand-name">En Santiago</span> <span class="admin-badge">Admin</span>
             </a>
@@ -40,26 +40,26 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="search.html" class="nav-link">Negocios</a></li>
-                <li><a href="properties.html" class="nav-link">Inmuebles</a></li>
-                <li><a href="map.html" class="nav-link">Mapa</a></li>
-                <li><a href="entretenimiento.html" class="nav-link">Entretenimiento</a></li>
-                <li><a href="empleo.html" class="nav-link">Empleo</a></li>
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/search" class="nav-link">Negocios</a></li>
+                <li><a href="/properties" class="nav-link">Inmuebles</a></li>
+                <li><a href="/map" class="nav-link">Mapa</a></li>
+                <li><a href="/entretenimiento" class="nav-link">Entretenimiento</a></li>
+                <li><a href="/empleo" class="nav-link">Empleo</a></li>
                 <li class="nav-dropdown">
                     <button class="nav-dropdown-toggle" aria-label="Más opciones">
                         Más <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="nav-dropdown-menu">
-                        <li><a href="marketplace.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
-                        <li><a href="new-property.html" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
+                        <li><a href="/marketplace" class="nav-link"><i class="fas fa-shopping-bag"></i> Marketplace</a></li>
+                        <li><a href="/new-property" class="nav-link"><i class="fas fa-home"></i> Publicar Inmueble</a></li>
                         
-                        <li><a href="emergencia.html" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
+                        <li><a href="/emergencia" class="nav-link" style="color:#dc3545;"><i class="fas fa-exclamation-triangle"></i> Emergencias</a></li>
                     </ul>
                 </li>
-                <li id="navLoginItem"><a href="login.html" class="nav-link nav-btn">Login</a></li>
+                <li id="navLoginItem"><a href="/login" class="nav-link nav-btn">Login</a></li>
                 <li id="navUserItem" class="nav-user">
-                    <a href="dashboard.html" class="nav-link" id="navUserName">
+                    <a href="/dashboard" class="nav-link" id="navUserName">
                         <i class="fas fa-user-circle"></i> Mi Cuenta
                     </a>
                     <button class="nav-link btn-logout" id="navLogout">
@@ -67,7 +67,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                     </button>
                 </li>
                 <li class="nav-mobile-cta">
-                    <a href="marketplace.html" class="nav-mobile-cta-marketplace">
+                    <a href="/marketplace" class="nav-mobile-cta-marketplace">
                         <i class="fas fa-shopping-bag"></i> Marketplace
                     </a>
                 </li>
@@ -131,7 +131,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         <span>Pagos Premium</span>
                         <span class="badge badge-gold" id="adminPremiumBadge">0</span>
                     </a>
-                    <a href="admin-edit-business.html" class="admin-nav-link admin-nav-external">
+                    <a href="/admin-edit-business" class="admin-nav-link admin-nav-external">
                         <i class="fas fa-pen-to-square"></i>
                         <span>Editar Negocios</span>
                     </a>
@@ -165,11 +165,11 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         <i class="fas fa-video"></i>
                         <span>Carrusel</span>
                     </a>
-                    <a href="admin-vendedores.html" class="admin-nav-link admin-nav-external">
+                    <a href="/admin-vendedores" class="admin-nav-link admin-nav-external">
                         <i class="fas fa-store"></i>
                         <span>Vendedores</span>
                     </a>
-                    <a href="admin-chat.html" class="admin-nav-link admin-nav-external">
+                    <a href="/admin-chat" class="admin-nav-link admin-nav-external">
                         <i class="fas fa-comments"></i>
                         <span>Chat</span>
                     </a>
@@ -314,7 +314,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         <div class="admin-card-header">
                             <h3><i class="fas fa-building"></i> Gestión de Negocios</h3>
                             <div class="admin-card-actions">
-                                <a href="new-business.html" class="btn btn-primary btn-sm" style="background:linear-gradient(135deg,#006EE3,#3B9AFF);text-decoration:none;"><i class="fas fa-plus"></i> Crear Negocio</a>
+                                <a href="/new-business" class="btn btn-primary btn-sm" style="background:linear-gradient(135deg,#006EE3,#3B9AFF);text-decoration:none;"><i class="fas fa-plus"></i> Crear Negocio</a>
                                 <select id="adminPropStatusFilter" class="form-select-sm">
                                     <option value="">Todos los comunas</option>
                                     <option value="approved">Aprobados</option>
@@ -611,7 +611,7 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
                         <div class="admin-card-header">
                             <h3><i class="fas fa-home"></i> Gestión de Inmuebles</h3>
                             <div class="admin-card-actions">
-                                <a href="new-property.html" class="btn btn-primary btn-sm" style="background:linear-gradient(135deg,#006EE3,#3B9AFF);text-decoration:none;"><i class="fas fa-plus"></i> Crear Inmueble</a>
+                                <a href="/new-property" class="btn btn-primary btn-sm" style="background:linear-gradient(135deg,#006EE3,#3B9AFF);text-decoration:none;"><i class="fas fa-plus"></i> Crear Inmueble</a>
                                 <select id="propStatusFilter" class="form-select-sm">
                                     <option value="">Todos</option>
                                     <option value="pending">Pendientes</option>
@@ -2923,8 +2923,8 @@ li:has(> .admin-nav-link[data-tab="carousel"]) {
         </div>
     </div>
 
-    <script src="js/app.js?v=10"></script>
-    <script src="js/admin.js?v=13"></script>
+    <script src="js/app.js?v=11"></script>
+    <script src="js/admin.js?v=14"></script>
     <style>
     /* Editar Negocios styles */
     .aeb-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;}

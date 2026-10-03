@@ -311,8 +311,8 @@
       color: var(--primary);
     }
   </style>
-<script src="/js/compress-image.js"></script>
-<script src="/js/compress-image-auto.js"></script>
+<script defer src="/js/compress-image.js"></script>
+<script defer src="/js/compress-image-auto.js"></script>
 </head>
 <body>
 
@@ -338,7 +338,7 @@
   <section class="cta">
     <h2><i class="fa-solid fa-rocket" style="margin-right:8px;"></i>¿Quieres ser Partner?</h2>
     <p>Únete a AunClick Academy, certifica tus habilidades y forma parte de nuestra red de agentes digitales profesionales.</p>
-    <a href="/academia.html" class="btn-cta">
+    <a href="/academia" class="btn-cta">
       <i class="fa-solid fa-graduation-cap"></i> Ir a la Academia
     </a>
   </section>
@@ -404,7 +404,7 @@
                 ' &nbsp;|&nbsp; ' +
                 '<i class="fa-solid fa-medal"></i> ' + (p.total_badges || 0) + ' medallas' +
               '</div>' +
-              '<a href="/perfil.html?id=' + p.id + '" class="btn-profile">' +
+              '<a href="/perfil?id=' + p.id + '" class="btn-profile">' +
                 '<i class="fa-solid fa-arrow-right"></i> Ver Perfil' +
               '</a>' +
             '</div>'

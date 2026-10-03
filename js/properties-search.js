@@ -675,7 +675,7 @@
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         if (clearFiltersBtn) {
             clearFiltersBtn.addEventListener('click', () => {
-                window.location.href = '/properties.html';
+                window.location.href = '/properties';
             });
         }
 
